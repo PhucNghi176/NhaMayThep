@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Application.Common.Mappings;
-using NhaMapThep.Domain.Entities;
 
 
 namespace NhaMapThep.Application.Users

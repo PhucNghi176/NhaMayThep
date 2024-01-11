@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Infrastructure.Persistence.Configurations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Infrastructure.Persistence
 {
@@ -15,14 +10,14 @@ namespace NhaMayThep.Infrastructure.Persistence
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
         }
-         public DbSet<User> Users { get; set; }
+        public DbSet<User> Users { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
 
-             modelBuilder.ApplyConfiguration(new UserConfiguration());
+            modelBuilder.ApplyConfiguration(new UserConfiguration());
 
         }
         private void ConfigureModel(ModelBuilder modelBuilder)

@@ -25,7 +25,7 @@ namespace NhaMayThep.Infrastructure
             });
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<IUserRepository, UserRepository>();
-           
+
             return services;
         }
     }

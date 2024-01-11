@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Mvc.Filters;
+﻿using FluentValidation;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.Filters;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMayThep.Application.Common.Exceptions;
 using System.Diagnostics;
-using FluentValidation;
 
 namespace NhaMayThep.Api.Filters
 {

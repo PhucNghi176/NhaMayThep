@@ -38,7 +38,7 @@ namespace NhaMayThep.Application.Common.Behaviours
                 var userId = _currentUserService.UserId ?? string.Empty;
                 var userName = _currentUserService.UserName ?? string.Empty;
 
-                _logger.LogWarning("CleanArchitecture Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
+                _logger.LogWarning("Nha May Thep Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                     requestName, elapsedMilliseconds, userId, userName, request);
             }
 
