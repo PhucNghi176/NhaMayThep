@@ -25,23 +25,242 @@ namespace NhaMayThep.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("NhaMapThep.Domain.Entities.User", b =>
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.ChiTietNhanVienEntity", b =>
                 {
-                    b.Property<Guid>("Id")
-                        .ValueGeneratedOnAdd()
+                    b.Property<Guid>("ID")
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("MaSoNhanVien");
+
+                    b.Property<string>("CanCuocCongDan")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("DiaChiLienLac")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MaSoThue")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgayCapNhap")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayVaoCongTy")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("NguoiCapNhap")
                         .HasColumnType("uniqueidentifier");
 
-                    b.Property<string>("Password")
+                    b.Property<Guid>("NguoiTao")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("SoDienThoaiLienLac")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("Username")
+                    b.Property<int?>("SoNguoiPhuThuoc")
+                        .HasColumnType("int");
+
+                    b.Property<string>("SoTaiKhoan")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("Id");
+                    b.Property<string>("TenNganHang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
-                    b.ToTable("Users");
+                    b.HasKey("ID");
+
+                    b.HasIndex("NguoiCapNhap");
+
+                    b.HasIndex("NguoiTao");
+
+                    b.ToTable("ChiTietNhanVien");
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.BangChucVuEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TenMaChucVu");
+
+                    b.HasKey("ID")
+                        .HasName("MaChucVuID");
+
+                    b.ToTable("BangChucVu");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "HR"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "Manager"
+                        });
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.BangTinhTrangLamViecEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TenMaTinhTrangLamViec");
+
+                    b.HasKey("ID")
+                        .HasName("MaTinhTrangLamViecID");
+
+                    b.ToTable("BangTinhTrangLamViec");
+
+                    b.HasData(
+                        new
+                        {
+                            ID = 1,
+                            Name = "DangLamViec"
+                        },
+                        new
+                        {
+                            ID = 2,
+                            Name = "DaNghiViec"
+                        },
+                        new
+                        {
+                            ID = 3,
+                            Name = "DangThuViec"
+                        },
+                        new
+                        {
+                            ID = 4,
+                            Name = "DangNghiPhep"
+                        });
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.NhanVienEntity", b =>
+                {
+                    b.Property<Guid>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uniqueidentifier")
+                        .HasColumnName("MaSoNhanVien");
+
+                    b.Property<int>("ChucVuID")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Email")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("HoVaTen")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("MatKhau")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<DateTime?>("NgayCapNhap")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime>("NgayTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<Guid?>("NguoiCapNhap")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<Guid>("NguoiTao")
+                        .HasColumnType("uniqueidentifier");
+
+                    b.Property<string>("TaiKhoan")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("TinhTrangLamViecID")
+                        .HasColumnType("int");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("ChucVuID");
+
+                    b.HasIndex("NguoiCapNhap");
+
+                    b.HasIndex("NguoiTao");
+
+                    b.HasIndex("TinhTrangLamViecID");
+
+                    b.ToTable("User");
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.ChiTietNhanVienEntity", b =>
+                {
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", null)
+                        .WithMany()
+                        .HasForeignKey("ID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", null)
+                        .WithMany()
+                        .HasForeignKey("NguoiCapNhap")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", null)
+                        .WithMany()
+                        .HasForeignKey("NguoiTao")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.NhanVienEntity", b =>
+                {
+                    b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.BangChucVuEntity", "ChucVu")
+                        .WithMany()
+                        .HasForeignKey("ChucVuID")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", null)
+                        .WithMany()
+                        .HasForeignKey("NguoiCapNhap")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", null)
+                        .WithMany()
+                        .HasForeignKey("NguoiTao")
+                        .OnDelete(DeleteBehavior.Restrict)
+                        .IsRequired();
+
+                    b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.BangTinhTrangLamViecEntity", "TinhTrangLamViec")
+                        .WithMany()
+                        .HasForeignKey("TinhTrangLamViecID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("ChucVu");
+
+                    b.Navigation("TinhTrangLamViec");
                 });
 #pragma warning restore 612, 618
         }

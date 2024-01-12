@@ -1,5 +1,4 @@
-﻿using CleanArchitecture.Infrastructure;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using NhaMapThep.Domain.Common.Interfaces;
@@ -24,7 +23,7 @@ namespace NhaMayThep.Infrastructure
                 options.UseLazyLoadingProxies();
             });
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
-            services.AddTransient<IUserRepository, UserRepository>();
+            
 
             return services;
         }
