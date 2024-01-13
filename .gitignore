@@ -1,7 +1,7 @@
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudio,sonarqube
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,sonarqube
 
-
+NhaMayThep.Infrastructure\Migrations
 ### SonarQube ###
 # SonarQube ignore files.
 #
