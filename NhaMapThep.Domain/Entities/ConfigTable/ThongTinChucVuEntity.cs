@@ -3,8 +3,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NhaMapThep.Domain.Entities.ConfigTable
 {
-    [Table("BangChucVu")]
-    public class BangChucVuEntity : BangMaGocEntity
+    [Table("ThongTinChucVu")]
+    public class ThongTinChucVuEntity : BangMaGocEntity
     {
     }
 }
