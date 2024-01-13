@@ -15,12 +15,21 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<NhanVienEntity> NhanVien { get; set; }
         public DbSet<ThongTinChucVuEntity> ChucVu { get; set; }
         public DbSet<TinhTrangLamViecEntity> TinhTrangLamViec { get; set; }
-
         public DbSet<ThongTinGiamTruEntity> ThongTinGiamTru { get; set; }
         public DbSet<CanCuocCongDanEntity> CanCuocCongDan { get; set; }
-        public DbSet<ThongTinGiamTruGiaCanhEntity> ThongTinGiamTruGiaCanh { get; set; }
-
+        public DbSet<ThongTinGiamTruGiaCanhEntity> GiamTruGiaCanh { get; set; }
         public DbSet<LoaiHopDongEntity> LoaiHopDong { get; set; }
+        public DbSet<ThongTinChucDanhEntity> ChucDanh { get; set; }
+        public DbSet<TrinhDoHocVanEntity> TrinhDoHocVan { get; set; }
+        public DbSet<ThongTinDaoTaoEntity> ThongTinDaoTao { get; set; }
+        public DbSet<ThongTinCongDoanEntity> ThongTinCongDoan { get; set; }
+        public DbSet<ThongTinDangVienEntity> ThongTinDangVien { get; set; }
+        public DbSet<ThongTinPhuCapEntity> ThongTinPhuCap { get; set; }
+        public DbSet<ChiTietDangVienEntity> ChiTietDangVien { get; set; }
+        public DbSet<DonViCongTacEntity> DonViCongTac { get; set; }
+        public DbSet<CapBacLuongEntity> CapBacLuong { get; set; }
+        public DbSet<HopDongEntity> HopDong { get; set; }
+        
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -33,10 +42,18 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new CanCuocCongDanConfiguration());
             modelBuilder.ApplyConfiguration(new ThongTinGiamTruGiaCanhConfiguration());
             modelBuilder.ApplyConfiguration(new NhanVienConfiguration());
+            modelBuilder.ApplyConfiguration(new TrinhDoHocVanConfiguration());
+            modelBuilder.ApplyConfiguration(new HopDongConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<TrinhDoHocVanEntity>().HasData(
+                new TrinhDoHocVanEntity() { ID = 1, Name = "Tien Si" },
+                new TrinhDoHocVanEntity() { ID = 2, Name = "Thac Si" },
+                new TrinhDoHocVanEntity() { ID = 3, Name = "Dai Hoc" },
+                new TrinhDoHocVanEntity() { ID = 4, Name = "Cao Dang" },
+                new TrinhDoHocVanEntity() { ID = 5, Name = "Trung Cap" });
             modelBuilder.Entity<ThongTinChucVuEntity>().HasData(
                 new ThongTinChucVuEntity() { ID = 1, Name = "Admin" },
                 new ThongTinChucVuEntity() { ID = 2, Name = "Truong Phong Nhan Su" },

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
+namespace NhaMayThep.Infrastructure.Persistence.Configurations
 {
     public class ThongTinGiamTruGiaCanhConfiguration : IEntityTypeConfiguration<ThongTinGiamTruGiaCanhEntity>
     {

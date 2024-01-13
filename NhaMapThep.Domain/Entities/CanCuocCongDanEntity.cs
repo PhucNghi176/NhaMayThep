@@ -5,7 +5,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NhaMapThep.Domain.Entities
 {
-    [Table("ThongTinCanCuocCongDan")]
+    [Table("CanCuocCongDan")]
     public class CanCuocCongDanEntity : EntityWithoutID
     {
         [Key]
