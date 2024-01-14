@@ -12,6 +12,9 @@ namespace NhaMapThep.Domain.Entities
 
         [MaxLength(12)]
         public required string CanCuocCongDan { get; set; }
+        [ForeignKey(nameof(CanCuocCongDan))] 
+        public virtual NhanVienEntity NhanVienNavigation { get; set; }
+
 
         public required string HoVaTen { get; set; }
         public required DateTime NgaySinh { get; set; }

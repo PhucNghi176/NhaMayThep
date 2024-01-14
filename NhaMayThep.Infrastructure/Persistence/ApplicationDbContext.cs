@@ -2,8 +2,10 @@
 using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMapThep.Domain.Entities.Mapping;
 using NhaMayThep.Infrastructure.Persistence.Configurations;
 using NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable;
+using NhaMayThep.Infrastructure.Persistence.Configurations.Mapping;
 
 namespace NhaMayThep.Infrastructure.Persistence
 {
@@ -38,6 +40,7 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
         public DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
         public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
+        public DbSet<NhanVienMapThongTinCanCuocCongDan> nhanVienMapThongTinCanCuocCongDan { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -59,6 +62,7 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new QuaTrinhNhanSuConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuNghiPhepNhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiHoaDonConfiguration());
+            modelBuilder.ApplyConfiguration(new NhanVienMapThongTinCanCuocCongDanConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)

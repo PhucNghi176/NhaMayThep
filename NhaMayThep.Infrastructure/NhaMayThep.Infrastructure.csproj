@@ -28,8 +28,4 @@
     <ProjectReference Include="..\NhaMapThep.Domain\NhaMapThep.Domain.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Persistence\Configurations\Mapping\" />
-  </ItemGroup>
-
 </Project>

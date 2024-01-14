@@ -35,6 +35,6 @@ namespace NhaMapThep.Domain.Entities
         public required string CanCuocCongDan { get; set; }      
 
         public virtual ICollection<HopDongEntity> HopDongs { get; set; }
-
+        public virtual ICollection<NhanVienMapThongTinCanCuocCongDan> NhanVienMapThongTinCanCuocCongDans { get; set; }
     }
 }

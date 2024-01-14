@@ -1,6 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Entities.Mapping;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,7 +17,9 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
             builder.HasOne(x => x.SoCanCuoc)
                    .WithOne(c => c.ThongTinGiamTruGiaCanh)
                    .OnDelete(DeleteBehavior.Restrict);
-
+            builder.HasOne(t => t.NhanVienMapThongTinCanCuocCongDan)
+                    .WithOne(t => t.ThongTinGiamTruGiaCanhNavigation)
+                    .HasPrincipalKey<NhanVienMapThongTinCanCuocCongDan>(t => t.CanCuocCongDan);
         }
     }
 }
