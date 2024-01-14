@@ -4,6 +4,7 @@
 NhaMayThep.Infrastructure/Migrations/*
 /Migrations/
 Migrations/*
+ApplicationDbContextModelSnapshot.cs
 ### SonarQube ###
 # SonarQube ignore files.
 #
