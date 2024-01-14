@@ -2,8 +2,10 @@
 using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMapThep.Domain.Entities.Mapping;
 using NhaMayThep.Infrastructure.Persistence.Configurations;
 using NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable;
+using NhaMayThep.Infrastructure.Persistence.Configurations.Mapping;
 
 namespace NhaMayThep.Infrastructure.Persistence
 {
@@ -29,6 +31,7 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<DonViCongTacEntity> DonViCongTac { get; set; }
         public DbSet<CapBacLuongEntity> CapBacLuong { get; set; }
         public DbSet<HopDongEntity> HopDong { get; set; }
+        public DbSet<NhanVienMapThongTinCanCuocCongDan> nhanVienMapThongTinCanCuocCongDans { get; set; }
         
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -44,6 +47,7 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new NhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new TrinhDoHocVanConfiguration());
             modelBuilder.ApplyConfiguration(new HopDongConfiguration());
+            modelBuilder.ApplyConfiguration(new NhanVienMapThongTinCanCuocCongDanConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)

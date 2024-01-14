@@ -14,13 +14,13 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.Mapping
     {
         public void Configure(EntityTypeBuilder<NhanVienMapThongTinCanCuocCongDan> builder)
         {
-            builder.HasOne(nv => nv.MaSoNhanVien)
+            builder.HasOne(nv => nv.NhanVienNavigation)
                  .WithMany()
                  .HasForeignKey(nv => nv.MaSoNhanVien);
 
-            builder.HasOne(tt => tt.ThongTinGiamTruGiaCanh)
-                .WithOne()
-                .HasForeignKey<ThongTinGiamTruGiaCanhEntity>(tt => tt.CanCuocCongDan);
+            builder.HasOne(tt => tt.ThongTinGiamTruGiaCanhNavigation)
+            .WithOne()
+            .HasPrincipalKey<ThongTinGiamTruGiaCanhEntity>(tt => tt.CanCuocCongDan);
         }
     }
 }
