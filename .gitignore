@@ -2,7 +2,8 @@
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudio,sonarqube
 
 NhaMayThep.Infrastructure/Migrations
-Migrations/
+/Migrations/
+Migrations/*
 ### SonarQube ###
 # SonarQube ignore files.
 #

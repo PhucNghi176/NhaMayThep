@@ -6,13 +6,13 @@ namespace NhaMapThep.Domain.Entities.Base
     {
         protected EntityWithoutID()
         {
-            
+
             NgayTao = NgayCapNhatCuoi = DateTime.Now;
         }
-        public string? NguoiTaoID { get; set; }      
+        public string? NguoiTaoID { get; set; }
         public DateTime NgayTao { get; set; }
 
-        public string? NguoiCapNhatID { get; set; }     
+        public string? NguoiCapNhatID { get; set; }
         public DateTime NgayCapNhatCuoi { get; set; }
 
 

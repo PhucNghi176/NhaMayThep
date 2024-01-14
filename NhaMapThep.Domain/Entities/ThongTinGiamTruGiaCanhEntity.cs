@@ -20,8 +20,6 @@ namespace NhaMapThep.Domain.Entities
 
         [MaxLength(12)]
         public required string CanCuocCongDan { get; set; }
-        [ForeignKey(nameof(CanCuocCongDan))]
-        public virtual CanCuocCongDanEntity SoCanCuoc { get; set; }
         public required DateTime NgayXacNhanPhuThuoc { get; set; }
 
     }

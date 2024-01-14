@@ -1,5 +1,4 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
-using NhaMapThep.Domain.Entities.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -8,11 +7,11 @@ namespace NhaMapThep.Domain.Entities
     [Table("CanCuocCongDan")]
     public class CanCuocCongDanEntity : Entity
     {
-        
-
         [MaxLength(12)]
         public required string CanCuocCongDan { get; set; }
-
+        public required string NhanVienID { get; set; }
+        [ForeignKey(nameof(NhanVienID))]
+        public virtual NhanVienEntity? NhanVien { get; set; }
         public required string HoVaTen { get; set; }
         public required DateTime NgaySinh { get; set; }
         public required bool GioiTinh { get; set; }
@@ -23,8 +22,7 @@ namespace NhaMapThep.Domain.Entities
         public required string NoiCap { get; set; }
         [MaxLength(10)]
         public string DanToc { get; set; } = "Kinh";
-        public required string TonGiao { get; set; }       
-        public virtual ThongTinGiamTruGiaCanhEntity? ThongTinGiamTruGiaCanh { get; set; }
-      
+        public required string TonGiao { get; set; }
+
     }
 }

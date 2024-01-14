@@ -13,12 +13,12 @@ namespace NhaMapThep.Domain.Entities.Base
 
         [Key]
         public string ID { get; set; }
-        
 
-        public string? NguoiTaoID { get; set; }   
+
+        public string? NguoiTaoID { get; set; }
         public DateTime NgayTao { get; set; }
 
-        public string? NguoiCapNhatID { get; set; }       
+        public string? NguoiCapNhatID { get; set; }
         public DateTime NgayCapNhatCuoi { get; set; }
 
 

@@ -1,6 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Entities.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -11,7 +10,7 @@ namespace NhaMapThep.Domain.Entities
     {
         protected NhanVienEntity()
         {
-            NgayVaoCongTy =DateTime.Now;
+            NgayVaoCongTy = DateTime.Now;
         }
         public required string Email { get; set; }
         //public byte[] PasswordHash { get; set; } = new byte[32];
@@ -31,9 +30,6 @@ namespace NhaMapThep.Domain.Entities
         public required string TenNganHang { get; set; }
         public required string SoTaiKhoan { get; set; }
         public int? SoNguoiPhuThuoc { get; set; }
-        [MaxLength(12)]
-        public required string CanCuocCongDan { get; set; }      
-
         public virtual ICollection<HopDongEntity> HopDongs { get; set; }
 
     }
