@@ -24,8 +24,5 @@ namespace NhaMapThep.Domain.Entities
         [ForeignKey(nameof(CanCuocCongDan))]
         public virtual CanCuocCongDanEntity SoCanCuoc { get; set; }
         public required DateTime NgayXacNhanPhuThuoc { get; set; }
-
-        public NhanVienMapThongTinCanCuocCongDan NhanVienMapping {  get; set; }
-
     }
 }

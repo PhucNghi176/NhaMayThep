@@ -14,9 +14,9 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.Mapping
     {
         public void Configure(EntityTypeBuilder<NhanVienMapThongTinCanCuocCongDan> builder)
         {
-            builder.HasOne(nv => nv.NhanVien)
+            builder.HasOne(nv => nv.MaSoNhanVien)
                  .WithMany()
-                 .HasForeignKey(nv => nv.NhanVien);
+                 .HasForeignKey(nv => nv.MaSoNhanVien);
 
             builder.HasOne(tt => tt.ThongTinGiamTruGiaCanh)
                 .WithOne()
