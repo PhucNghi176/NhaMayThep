@@ -6,9 +6,10 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NhaMapThep.Domain.Entities
 {
     [Table("CanCuocCongDan")]
-    public class CanCuocCongDanEntity : EntityWithoutID
+    public class CanCuocCongDanEntity : Entity
     {
-        [Key]
+        
+
         [MaxLength(12)]
         public required string CanCuocCongDan { get; set; }
 
