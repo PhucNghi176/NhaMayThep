@@ -1224,7 +1224,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", "NhanVien")
-                        .WithMany()
+                        .WithMany("HopDongs")
                         .HasForeignKey("NhanVienID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -1419,6 +1419,11 @@ namespace NhaMayThep.Infrastructure.Migrations
             modelBuilder.Entity("NhaMapThep.Domain.Entities.CanCuocCongDanEntity", b =>
                 {
                     b.Navigation("ThongTinGiamTruGiaCanh");
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.NhanVienEntity", b =>
+                {
+                    b.Navigation("HopDongs");
                 });
 #pragma warning restore 612, 618
         }

@@ -34,5 +34,7 @@ namespace NhaMapThep.Domain.Entities
         [MaxLength(12)]
         public required string CanCuocCongDan { get; set; }      
 
+        public virtual ICollection<HopDongEntity> HopDongs { get; set; }
+
     }
 }
