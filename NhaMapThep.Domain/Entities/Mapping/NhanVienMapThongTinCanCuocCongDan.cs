@@ -13,6 +13,7 @@ namespace NhaMapThep.Domain.Entities.Mapping
         public int ID { get; set; }
         public string MaSoNhanVien { get; set; }
         public string CanCuocCongDan { get; set; }
-       
+        public virtual NhanVienEntity NhanVienNavigation { get; set; }
+        public virtual ThongTinGiamTruGiaCanhEntity ThongTinGiamTruGiaCanhNavigation { get; set; }
     }
 }

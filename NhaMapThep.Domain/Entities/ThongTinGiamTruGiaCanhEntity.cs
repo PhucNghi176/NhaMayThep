@@ -1,5 +1,6 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMapThep.Domain.Entities.Mapping;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
@@ -24,5 +25,6 @@ namespace NhaMapThep.Domain.Entities
         public virtual CanCuocCongDanEntity SoCanCuoc { get; set; }
         public required DateTime NgayXacNhanPhuThuoc { get; set; }
 
+        public virtual NhanVienMapThongTinCanCuocCongDan map { get; set; }
     }
 }
