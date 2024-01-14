@@ -29,10 +29,19 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<DonViCongTacEntity> DonViCongTac { get; set; }
         public DbSet<CapBacLuongEntity> CapBacLuong { get; set; }
         public DbSet<HopDongEntity> HopDong { get; set; }
-        
+        public DbSet<PhongBanEntity> PhongBan { get; set; }
+        public DbSet<ThongTinQuaTrinhNhanSuEntity> ThongTinQuaTrinhNhanSu { get; set; }
+        public DbSet<QuaTrinhNhanSuEntity> QuaTrinhNhanSu { get; set; }
+        public DbSet<LoaiNghiPhepEntity> LoaiNghiPhep { get; set; }
+        public DbSet<LichSuNghiPhepNhanVienEntity> LichSuNghiPhepNhanVien { get; set; }
+        public DbSet<LoaiCongTacEntity> LoaiCongTac { get; set; }
+        public DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
+        public DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
+        public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new LoaiCongTacConfiguration());
             modelBuilder.ApplyConfiguration(new ChucVuConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiHopDongConfiguration());
             modelBuilder.ApplyConfiguration(new ThongTinChucDanhConfiguration());
@@ -44,10 +53,43 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new NhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new TrinhDoHocVanConfiguration());
             modelBuilder.ApplyConfiguration(new HopDongConfiguration());
+            modelBuilder.ApplyConfiguration(new PhongBanConfiguration());
+            modelBuilder.ApplyConfiguration(new ThongTinQuaTrinhNhanSuConfiguration());
+            modelBuilder.ApplyConfiguration(new LoaiNghiPhepConfiguration());
+            modelBuilder.ApplyConfiguration(new QuaTrinhNhanSuConfiguration());
+            modelBuilder.ApplyConfiguration(new LichSuNghiPhepNhanVienConfiguration());
+            modelBuilder.ApplyConfiguration(new LoaiHoaDonConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
+            modelBuilder.Entity<LoaiHoaDonEntity>().HasData(
+                new LoaiHoaDonEntity() { ID = 1, Name = "ChiPhiDiLai" },
+                new LoaiHoaDonEntity() { ID = 2, Name = "ChiPhiChoO" },
+                new LoaiHoaDonEntity() { ID = 3, Name = "ChiPhiQuaBieuTang" },
+                new LoaiHoaDonEntity() { ID = 4, Name = "HoaDonKhac" });
+            modelBuilder.Entity<LoaiCongTacEntity>().HasData(
+                new LoaiCongTacEntity() { ID = 1, Name = "CongTacNoiBo" },
+                new LoaiCongTacEntity() { ID = 2, Name = "CongTacNuocNgoai" },
+                new LoaiCongTacEntity() { ID = 3, Name = "CongTacKyKetHopDong" },
+                new LoaiCongTacEntity() { ID = 4, Name = "CongTacKhaoSatDuAn" },
+                new LoaiCongTacEntity() { ID = 5, Name = "CongTacHoiThao" },
+                new LoaiCongTacEntity() { ID = 6, Name = "CongTacDaoTao" },
+                new LoaiCongTacEntity() { ID = 7, Name = "CongTacKiemTra" },
+                new LoaiCongTacEntity() { ID = 8, Name = "CongTacKhac" });
+
+            modelBuilder.Entity<LoaiNghiPhepEntity>().HasData(
+                new LoaiNghiPhepEntity() { ID = 1, Name = "NghiPhepNam", SoGioNghiPhep = 8 },
+                new LoaiNghiPhepEntity() { ID = 2, Name = "NghiOm", SoGioNghiPhep = 8 },
+                new LoaiNghiPhepEntity() { ID = 3, Name = "NghiKhongLuong", SoGioNghiPhep = 8 },
+                new LoaiNghiPhepEntity() { ID = 4, Name = "NghiThaiSan", SoGioNghiPhep = 8 },
+                new LoaiNghiPhepEntity() { ID = 5, Name = "NghiKhac", SoGioNghiPhep = 8 });
+            modelBuilder.Entity<ThongTinQuaTrinhNhanSuEntity>().HasData(
+                new ThongTinQuaTrinhNhanSuEntity() { ID = 1, Name = "ThangTien" },
+                new ThongTinQuaTrinhNhanSuEntity() { ID = 2, Name = "BoNhiem" },
+                new ThongTinQuaTrinhNhanSuEntity() { ID = 3, Name = "BaiNhiem" },
+                new ThongTinQuaTrinhNhanSuEntity() { ID = 4, Name = "DieuDong" },
+                new ThongTinQuaTrinhNhanSuEntity() { ID = 5, Name = "ThoiViec" });
             modelBuilder.Entity<TrinhDoHocVanEntity>().HasData(
                 new TrinhDoHocVanEntity() { ID = 1, Name = "Tien Si" },
                 new TrinhDoHocVanEntity() { ID = 2, Name = "Thac Si" },
