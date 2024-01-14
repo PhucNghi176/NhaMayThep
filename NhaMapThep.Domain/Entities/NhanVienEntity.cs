@@ -34,5 +34,6 @@ namespace NhaMapThep.Domain.Entities
         [MaxLength(12)]
         public required string CanCuocCongDan { get; set; }      
 
+        public ICollection<NhanVienMapThongTinCanCuocCongDan> NhanVienMappings { get; set; }
     }
 }
