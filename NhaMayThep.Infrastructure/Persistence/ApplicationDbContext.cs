@@ -31,6 +31,8 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<DonViCongTacEntity> DonViCongTac { get; set; }
         public DbSet<CapBacLuongEntity> CapBacLuong { get; set; }
         public DbSet<HopDongEntity> HopDong { get; set; }
+        public DbSet<NhanVienMapThongTinCanCuocCongDan> nhanVienMapThongTinCanCuocCongDans { get; set; }
+        
         public DbSet<PhongBanEntity> PhongBan { get; set; }
         public DbSet<ThongTinQuaTrinhNhanSuEntity> ThongTinQuaTrinhNhanSu { get; set; }
         public DbSet<QuaTrinhNhanSuEntity> QuaTrinhNhanSu { get; set; }
@@ -56,6 +58,7 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new NhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new TrinhDoHocVanConfiguration());
             modelBuilder.ApplyConfiguration(new HopDongConfiguration());
+            modelBuilder.ApplyConfiguration(new NhanVienMapThongTinCanCuocCongDanConfiguration());
             modelBuilder.ApplyConfiguration(new PhongBanConfiguration());
             modelBuilder.ApplyConfiguration(new ThongTinQuaTrinhNhanSuConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiNghiPhepConfiguration());

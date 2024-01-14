@@ -22,6 +22,7 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.Mapping
                 .WithOne(t => t.NhanVienMapThongTinCanCuocCongDan)
                 .HasForeignKey<ThongTinGiamTruGiaCanhEntity>(e => e.CanCuocCongDan);
 
+
         }
     }
 }

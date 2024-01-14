@@ -27,5 +27,6 @@ namespace NhaMapThep.Domain.Entities
 
         public virtual NhanVienMapThongTinCanCuocCongDan NhanVienMapThongTinCanCuocCongDan { get; set; }
 
+
     }
 }

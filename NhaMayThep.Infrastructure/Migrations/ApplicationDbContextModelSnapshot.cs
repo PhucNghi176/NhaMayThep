@@ -769,6 +769,15 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.ToTable("HopDong");
                 });
 
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.Mapping.NhanVienMapThongTinCanCuocCongDan", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("CanCuocCongDan")
             modelBuilder.Entity("NhaMapThep.Domain.Entities.LichSuCongTacNhanVienEntity", b =>
                 {
                     b.Property<string>("ID")
@@ -832,6 +841,23 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("NhanVienEntityID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<string>("ThongTinGiamTruGiaCanhNavigationCanCuocCongDan")
+                        .HasColumnType("nvarchar(12)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MaSoNhanVien");
+
+                    b.HasIndex("NhanVienEntityID");
+
+                    b.HasIndex("ThongTinGiamTruGiaCanhNavigationCanCuocCongDan")
+                        .IsUnique()
+                        .HasFilter("[ThongTinGiamTruGiaCanhNavigationCanCuocCongDan] IS NOT NULL");
+
+                    b.ToTable("nhanVienMapThongTinCanCuocCongDans");
                     b.Property<DateTime>("NgayBatDau")
                         .HasColumnType("datetime2");
 
@@ -1147,14 +1173,16 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasMaxLength(20)
                         .HasColumnType("nvarchar(20)");
 
-                    b.HasKey("ID");
+                    b.Property<int>("mapID")
+                        .HasColumnType("int");
 
-                    b.HasIndex("CanCuocCongDan")
-                        .IsUnique();
+                    b.HasKey("ID");
 
                     b.HasIndex("MaGiamTruID");
 
                     b.HasIndex("NhanVienID");
+
+                    b.HasIndex("mapID");
 
                     b.ToTable("ThongTinGiamTruGiaCanh");
                 });
@@ -1285,6 +1313,10 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Navigation("NhanVien");
                 });
 
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.Mapping.NhanVienMapThongTinCanCuocCongDan", b =>
+                {
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", "NhanVienNavigation")
+
             modelBuilder.Entity("NhaMapThep.Domain.Entities.LichSuCongTacNhanVienEntity", b =>
                 {
                     b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.LoaiCongTacEntity", "LoaiCongTac")
@@ -1294,10 +1326,25 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", "NhanVien")
+
                         .WithMany()
                         .HasForeignKey("MaSoNhanVien")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", null)
+                        .WithMany("NhanVienMappings")
+                        .HasForeignKey("NhanVienEntityID");
+
+                    b.HasOne("NhaMapThep.Domain.Entities.ThongTinGiamTruGiaCanhEntity", "ThongTinGiamTruGiaCanhNavigation")
+                        .WithOne()
+                        .HasForeignKey("NhaMapThep.Domain.Entities.Mapping.NhanVienMapThongTinCanCuocCongDan", "ThongTinGiamTruGiaCanhNavigationCanCuocCongDan")
+                        .HasPrincipalKey("NhaMapThep.Domain.Entities.ThongTinGiamTruGiaCanhEntity", "CanCuocCongDan");
+
+                    b.Navigation("NhanVienNavigation");
+
+                    b.Navigation("ThongTinGiamTruGiaCanhNavigation");
 
                     b.Navigation("LoaiCongTac");
 
@@ -1329,6 +1376,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Navigation("NguoiDuyetNhanVien");
 
                     b.Navigation("NhanVien");
+
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.Mapping.NhanVienMapThongTinCanCuocCongDan", b =>
@@ -1465,6 +1513,12 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("NhaMapThep.Domain.Entities.Mapping.NhanVienMapThongTinCanCuocCongDan", "map")
+                        .WithMany()
+                        .HasForeignKey("mapID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.Navigation("NhanVien");
 
                     b.Navigation("NhanVienMapThongTinCanCuocCongDan");
@@ -1472,6 +1526,8 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Navigation("SoCanCuoc");
 
                     b.Navigation("ThongTinGiamTru");
+
+                    b.Navigation("map");
                 });
 
             modelBuilder.Entity("NhaMayThep.Infrastructure.Persistence.ThongTinCongDoanEntity", b =>
@@ -1490,6 +1546,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Navigation("ThongTinGiamTruGiaCanh");
                 });
 
+
             modelBuilder.Entity("NhaMapThep.Domain.Entities.Mapping.NhanVienMapThongTinCanCuocCongDan", b =>
                 {
                     b.Navigation("ThongTinGiamTruGiaCanhNavigation")
@@ -1501,6 +1558,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Navigation("HopDongs");
 
                     b.Navigation("NhanVienMapThongTinCanCuocCongDans");
+
                 });
 #pragma warning restore 612, 618
         }
