@@ -8,20 +8,20 @@ namespace NhaMapThep.Domain.Entities
     [Table("NhanVien")]
     public class NhanVienEntity : Entity
     {
-        protected NhanVienEntity()
+        public NhanVienEntity()
         {
             NgayVaoCongTy = DateTime.Now;
         }
         public required string Email { get; set; }
-        //public byte[] PasswordHash { get; set; } = new byte[32];
-        // public byte[] PasswordSalt { get; set; } = new byte[32];
+        public byte[] PasswordHash { get; set; } = new byte[32];
+        public byte[] PasswordSalt { get; set; } = new byte[32];
         public required string HoVaTen { get; set; }
         public required int ChucVuID { get; set; }
         [ForeignKey(nameof(ChucVuID))]
-        public required virtual ThongTinChucVuEntity ChucVu { get; set; }
+        public virtual ThongTinChucVuEntity ChucVu { get; set; }
         public required int TinhTrangLamViecID { get; set; }
         [ForeignKey(nameof(TinhTrangLamViecID))]
-        public required virtual TinhTrangLamViecEntity TinhTrangLamViec { get; set; }
+        public virtual TinhTrangLamViecEntity TinhTrangLamViec { get; set; }
         public required DateTime NgayVaoCongTy { get; set; }
         public required string DiaChiLienLac { get; set; }
         [MaxLength(11)]
