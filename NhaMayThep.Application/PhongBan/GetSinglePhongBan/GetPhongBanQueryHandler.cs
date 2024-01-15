@@ -13,8 +13,8 @@ namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
 {
     public class GetPhongBanQueryHandler : IRequestHandler<GetPhongBanQuery, PhongBanDto>
     {
-        IMapper _mapper;
-        IPhongBanRepository _phongBanRepository;
+        private readonly IMapper _mapper;
+        private readonly IPhongBanRepository _phongBanRepository;
         public GetPhongBanQueryHandler(IMapper mapper, IPhongBanRepository phongBanRepository)
         {
             _mapper = mapper;
