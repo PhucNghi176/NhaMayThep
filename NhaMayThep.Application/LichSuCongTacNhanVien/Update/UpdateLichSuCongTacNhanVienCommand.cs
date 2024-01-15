@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,26 +8,23 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 {
-    public class UpdateLichSuCongTacNhanVienCommand : IRequest<LichSuCongTacNhanVienDto>
+    public class UpdateLichSuCongTacNhanVienCommand : IRequest, ICommand
     {
-        public UpdateLichSuCongTacNhanVienCommand(string id, string maSoNhanVien, int loaiCongTacID, DateTime ngayBatDau,
-       DateTime ngayKetThuc, string noiCongTac, string lydo)
+        public string Id { get; set; }
+        public int LoaiCongTacID { get; set; }
+        public DateTime BD { get; set; }
+        public DateTime KT { get; set; }
+        public string NoiCongTac {  get; set; }
+        public string LyDo { get; set; }
+
+        public UpdateLichSuCongTacNhanVienCommand(string id, int lct, DateTime bd, DateTime kt, string nct, string ld)
         {
             Id = id;
-            MaSoNhanVien = maSoNhanVien;
-            LoaiCongTacID = loaiCongTacID;
-            NgayBatDau = ngayBatDau;
-            NgayKetThuc = ngayKetThuc;
-            NoiCongTac = noiCongTac;
-            LyDo = lydo;
+            LoaiCongTacID = lct;
+            BD = bd;
+            KT = kt;
+            NoiCongTac = nct;
+            LyDo = ld;
         }
-
-        public string Id { get; set; }
-        public string MaSoNhanVien { get; set; }
-        public int LoaiCongTacID { get; set; }
-        public DateTime NgayBatDau { get; set; }
-        public DateTime? NgayKetThuc { get; set; }
-        public string NoiCongTac { get; set; }
-        public string LyDo { get; set; }
     }
 }

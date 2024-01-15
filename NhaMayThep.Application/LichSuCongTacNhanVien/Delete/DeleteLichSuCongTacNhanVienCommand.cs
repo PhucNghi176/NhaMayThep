@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
 {
-    public class DeleteLichSuCongTacNhanVienCommand: IRequest<bool>
+    public class DeleteLichSuCongTacNhanVienCommand: IRequest<string>
     {
         public DeleteLichSuCongTacNhanVienCommand(string id) 
         {

@@ -15,6 +15,8 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
     {
 
         public LichSuCongTacNhanVienDto() { }
+
+        public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
         public LoaiCongTacEntity  LoaiCongTac { get; set; }
         public  DateTime NgayBatDau { get; set; }
@@ -22,11 +24,12 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
         public  string NoiCongTac { get; set; }
         public  string LyDo { get; set; }
 
-        public static LichSuCongTacNhanVienDto Create(string maSoNhanVien, LoaiCongTacEntity loaiCongTac, DateTime ngaybatdau, 
-            DateTime ngayKetThuc, string noiCongTac,string Lydo)
+        public static LichSuCongTacNhanVienDto Create(string id,string maSoNhanVien, LoaiCongTacEntity loaiCongTac, DateTime ngaybatdau, 
+            DateTime? ngayKetThuc, string noiCongTac,string Lydo)
         {
             return new LichSuCongTacNhanVienDto()
             {
+                Id = id,
                 NgayBatDau = ngaybatdau,
                 NgayKetThuc = ngayKetThuc,
                 MaSoNhanVien = maSoNhanVien,

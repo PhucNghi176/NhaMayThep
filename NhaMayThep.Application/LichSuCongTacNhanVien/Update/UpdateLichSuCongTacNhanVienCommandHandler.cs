@@ -1,7 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
-using NhaMapThep.Application.Common.Mappings;
-using NhaMapThep.Domain.Common.Exceptions;
+﻿using MediatR;
 using NhaMapThep.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -11,35 +8,27 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 {
-    public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand, LichSuCongTacNhanVienDto>
+    public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand>
     {
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
-        private readonly IMapper _mapper;
 
-        public UpdateLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, IMapper mapper)
+        public UpdateLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository)
         {
             _lichSuCongTacNhanVienRepository = lichSuCongTacNhanVienRepository;
-            _mapper = mapper;
         }
 
-        public async Task<LichSuCongTacNhanVienDto> Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
+        public async Task Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(), cancellationToken);
-            if (lichSuCongTacNhanVien == null)
+            var lichSu = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
+            if (lichSu is null) 
             {
-                throw new NotFoundException("Does Not Exist!");
+                throw new DllNotFoundException(nameof(lichSu));
             }
-            
-            lichSuCongTacNhanVien.MaSoNhanVien = request.MaSoNhanVien;
-            lichSuCongTacNhanVien.NgayBatDau = request.NgayBatDau;
-            lichSuCongTacNhanVien.NgayKetThuc = request.NgayKetThuc;
-            lichSuCongTacNhanVien.NoiCongTac = request.NoiCongTac;
-            lichSuCongTacNhanVien.LoaiCongTacID = request.LoaiCongTacID;
-            lichSuCongTacNhanVien.LyDo = request.LyDo;
-            _lichSuCongTacNhanVienRepository.Update(lichSuCongTacNhanVien);
-            await _lichSuCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return lichSuCongTacNhanVien.MapToLichSuCongTacNhanVienDto(_mapper);
-
+            lichSu.LoaiCongTacID = request.LoaiCongTacID;
+            lichSu.NgayBatDau = request.BD;
+            lichSu.NgayKetThuc = request.KT;
+            lichSu.NoiCongTac = request.NoiCongTac;
+            lichSu.LyDo = request.LyDo;
         }
     }
 }

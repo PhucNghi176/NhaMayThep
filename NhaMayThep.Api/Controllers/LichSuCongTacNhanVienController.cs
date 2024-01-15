@@ -44,36 +44,39 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<LichSuCongTacNhanVienDto>(result));
         }
 
-        [HttpPost("update")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<LichSuCongTacNhanVienDto>), StatusCodes.Status201Created)]
+        [HttpPut("update/{id}")]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LichSuCongTacNhanVienDto>>> UpdateReview(
+        public async Task<ActionResult> UpdateLichSu(
+            [FromRoute] string id,
             [FromBody] UpdateLichSuCongTacNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            if(command.Id == default)
+            {
+                command.Id = id;
+            }
+            await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return (new JsonResponse<LichSuCongTacNhanVienDto>(result));
+            return Ok();
         }
 
         [HttpPost("delete")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<bool>>> DeleteReview(
+        public async Task<ActionResult<JsonResponse<string>>> DeleteReview(
             [FromBody] DeleteLichSuCongTacNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return (new JsonResponse<bool>(result));
+            return (new JsonResponse<string>(result));
         }
 
 

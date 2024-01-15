@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
 {
-    public class DeleteLichSuCongTacNhanVienCommandHandler : IRequestHandler<DeleteLichSuCongTacNhanVienCommand, bool>
+    public class DeleteLichSuCongTacNhanVienCommandHandler : IRequestHandler<DeleteLichSuCongTacNhanVienCommand, string>
     {
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
         private readonly IMapper _mapper;
@@ -21,16 +21,17 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(DeleteLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(),cancellationToken);
-            if(lichSuCongTacNhanVien == null) 
+            if(lichSuCongTacNhanVien == null || lichSuCongTacNhanVien.NgayXoa.HasValue) 
             {
-                throw new NotFoundException("Does Not Exist!");
+               return "Delete Failed";
             }
-            _lichSuCongTacNhanVienRepository.Remove(lichSuCongTacNhanVien);
+            lichSuCongTacNhanVien.NgayXoa = new DateTime();
+            _lichSuCongTacNhanVienRepository.Update(lichSuCongTacNhanVien);
             await _lichSuCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return true;
+            return "Delete success";
         }
     }
 }
