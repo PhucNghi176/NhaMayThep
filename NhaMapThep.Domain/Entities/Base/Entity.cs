@@ -21,6 +21,9 @@ namespace NhaMapThep.Domain.Entities.Base
         public string? NguoiCapNhatID { get; set; }
         public DateTime NgayCapNhatCuoi { get; set; }
 
+        public string? NguoiXoaID { get; set; }
+        public DateTime? NgayXoa {  get; set; }
+
 
         [NotMapped]
         private bool IsDisposed { get; set; }
