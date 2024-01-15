@@ -6,7 +6,7 @@ namespace NhaMapThep.Domain.Entities.Base
 {
     public abstract class BangMaGocEntity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.None)]
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public required int ID { get; set; }
         public required string Name { get; set; }
