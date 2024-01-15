@@ -6,9 +6,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
+namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
 {
-    public class CreateChiTietDangVienCommandValidator : AbstractValidator<CreateChiTietDangVienCommand>
+    public class DeleteChiTietDangVienCommandValidator : AbstractValidator<DeleteChiTietDangVienCommand>
     {
     }
 }

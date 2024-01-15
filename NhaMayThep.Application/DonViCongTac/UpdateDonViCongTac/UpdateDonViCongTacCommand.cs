@@ -6,16 +6,17 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
+namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
 {
-    public class CreateDonViCongTacCommand : IRequest<int>, ICommand
+    public class UpdateDonViCongTacCommand : IRequest<DonViCongTacDto>, ICommand
     {
-        public CreateDonViCongTacCommand(string name)
+        public UpdateDonViCongTacCommand(int id, string name)
         {
+            ID = id;
             Name = name;
         }
 
-        
+        public int ID { get; set; }
         public string Name { get; set; }
     }
 }

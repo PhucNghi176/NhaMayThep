@@ -44,7 +44,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
                 TrinhDoChinhTri = request.TrinhDoChinhTri,
               
                 NguoiTaoID = request.NguoiTaoID,
-                NgayTao = DateTime.Today
+                NgayTao = DateTime.Now
             };
 
             _chiTietDangVienRepository.Add(chiTietDangVien);
