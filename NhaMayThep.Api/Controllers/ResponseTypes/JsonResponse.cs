@@ -1,4 +1,6 @@
-﻿namespace NhaMapThep.Api.Controllers.ResponseTypes
+﻿using NhaMayThep.Application.LoaiCongTac;
+
+namespace NhaMapThep.Api.Controllers.ResponseTypes
 {
     /// <summary>
     /// Implicit wrapping of types that serialize to non-complex values.
@@ -9,6 +11,10 @@
         public JsonResponse(T value)
         {
             Value = value;
+        }
+
+        public JsonResponse(List<LoaiCongTacDto> result)
+        {
         }
 
         public T Value { get; set; }
