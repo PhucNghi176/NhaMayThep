@@ -5,6 +5,7 @@ using NhaMayThep.Application.QuaTrinhNhanSu;
 using System.Net.Mime;
 using NhaMayThep.Application.PhongBan;
 using NhaMayThep.Application.PhongBan.CreatePhongBan;
+using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -30,6 +31,21 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet("Get-by-ID/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<PhongBanDto>> GetByID(
+            [FromRoute] int id,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetPhongBanQuery(id : id), cancellationToken);
             return Ok(result);
         }
     }
