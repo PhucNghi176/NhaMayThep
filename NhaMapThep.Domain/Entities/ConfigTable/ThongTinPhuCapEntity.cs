@@ -11,7 +11,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     [Table("ThongTinPhuCap")]
     public class ThongTinPhuCapEntity : BangMaGocEntity
     {
-        [Column(TypeName = "decimal(18, 4)")]
-        public required decimal SoTienPhuCap { get; set; }
+        [Column(TypeName = "float")]
+        public required double SoTienPhuCap { get; set; }
     }
 }

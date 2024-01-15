@@ -5,6 +5,7 @@ using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Infrastructure.Persistence;
+using NhaMayThep.Infrastructure.Persistence.Configurations;
 using NhaMayThep.Infrastructure.Repositories;
 using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
 
@@ -30,6 +31,12 @@ namespace NhaMayThep.Infrastructure
             
             services.AddTransient<IChucVuRepository, BangChucVuRepository>();
             services.AddTransient<ITinhTrangLamViecRepository, TinhTrangLamViecRepository>();
+
+            services.AddTransient<IHopDongRepository, HopDongRepository>();
+            services.AddTransient<ILoaiHopDongReposity, LoaiHopDongRepository>();
+            services.AddTransient<IChucDanhRepository, ChucDanhRepository>();
+            services.AddTransient<ICapBacLuongRepository, CapBacLuongRepository>();
+
 
 
             return services;
