@@ -37,11 +37,11 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpGet("Get-by-ID/{id}")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<PhongBanDto>> GetByID(
             [FromRoute] int id,
