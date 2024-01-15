@@ -16,6 +16,8 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu
             
         }
 
+        public string ID { get; set; }
+        public DateTime NgayTao { get; set; }
         public string MaSoNhanVien {  get; set; }
         public int LoaiQuaTrinhID {  get; set; }
         public DateTime NgayBatDau {  get; set; }
