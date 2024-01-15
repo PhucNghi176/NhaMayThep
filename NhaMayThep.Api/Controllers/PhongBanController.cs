@@ -7,6 +7,7 @@ using NhaMayThep.Application.PhongBan;
 using NhaMayThep.Application.PhongBan.CreatePhongBan;
 using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
 using NhaMayThep.Application.PhongBan.UpdatePhongBan;
+using NhaMayThep.Application.PhongBan.DeletePhongBan;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -73,6 +74,18 @@ namespace NhaMayThep.Api.Controllers
 
             await _mediator.Send(command, cancellationToken);
             return NoContent();
+        }
+        [HttpDelete("Delete{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
+        {
+            await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
+            return Ok();
         }
     }
 }
