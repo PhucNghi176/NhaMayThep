@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Infrastructure",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Application", "NhaMayThep.Application\NhaMayThep.Application.csproj", "{82681108-62EA-4757-AC62-42D3807B4156}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhaMayThep.Api", "NhaMayThep.Api\NhaMayThep.Api.csproj", "{88CC32CD-C359-41C6-99C4-D8414CE63DD8}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Api", "NhaMayThep.Api\NhaMayThep.Api.csproj", "{88CC32CD-C359-41C6-99C4-D8414CE63DD8}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
