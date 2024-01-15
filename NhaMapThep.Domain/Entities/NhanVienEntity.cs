@@ -12,6 +12,7 @@ namespace NhaMapThep.Domain.Entities
         {
             NgayVaoCongTy = DateTime.Now;
         }
+        
         public required string Email { get; set; }
         public byte[] PasswordHash { get; set; } = new byte[32];
         public byte[] PasswordSalt { get; set; } = new byte[32];
