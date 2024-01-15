@@ -15,12 +15,15 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanVienRepository;
+        private readonly ICurrentUserService _currentUserService;
         public CreateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository, 
-            INhanVienRepository nhanVienRepository) 
+            INhanVienRepository nhanVienRepository, 
+            ICurrentUserService currentUserService) 
         {
             _nhanVienRepository = nhanVienRepository;
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<bool> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
@@ -35,6 +38,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             }
             var thongtincongdoan = new ThongTinCongDoanEntity
             {
+                NguoiTaoID= _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3",
                 ThuKiCongDoan = request.ThuKyCongDoan,
                 NgayGiaNhap = request.NgayGiaNhap,
                 NhanVien = nhanvien,

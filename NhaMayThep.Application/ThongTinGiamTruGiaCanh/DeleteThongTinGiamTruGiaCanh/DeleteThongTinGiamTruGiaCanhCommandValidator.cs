@@ -14,7 +14,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
             RuleFor(x => x.Id)
                .NotEmpty().WithMessage("Id must not be empty")
                .NotNull().WithMessage("Id must not be null")
-               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Invalid Id Format");
+               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("The ID is not correct");
         }
     }
 }

@@ -19,15 +19,19 @@ namespace NhaMayThep.Infrastructure.Repositories
         }
         public async Task<List<ThongTinGiamTruGiaCanhEntity>?> FindAll(CancellationToken cancellationToken = default)
         {
-            return await FindAllAsync(cancellationToken);
+            return await FindAllAsync(x=> x.NguoiXoaID == null,cancellationToken);
         }
         public async Task<ThongTinGiamTruGiaCanhEntity?> FindById(string Id, CancellationToken cancellationToken = default)
         {
-            return await FindAsync(x => x.ID.Equals(Id), cancellationToken);
+            return await FindAsync(x => x.ID.Equals(Id) && x.NguoiXoaID == null, cancellationToken);
         }
         public async Task<ThongTinGiamTruGiaCanhEntity?> FindByNhanVienId(string Id, CancellationToken cancellationToken = default)
         {
-            return await FindAsync(x => x.NhanVienID.Equals(Id), cancellationToken);
+            return await FindAsync(x => x.NhanVienID.Equals(Id) && x.NguoiXoaID == null, cancellationToken);
+        }
+        public async Task<ThongTinGiamTruGiaCanhEntity?> FindByCanCuocCongDan(string cccd, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.CanCuocCongDan.Equals(cccd) && x.NguoiXoaID == null, cancellationToken);
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,17 +12,14 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
 {
     public class DeleteThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<DeleteThongTinGiamTruGiaCanhCommand, bool>
     {
-        private readonly INhanVienRepository _nhanvienRepository;
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
-        private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
+        private readonly ICurrentUserService _currentUserService;
         public DeleteThongTinGiamTruGiaCanhCommandHandler(
-            INhanVienRepository nhanVienRepository,
-            IThongTinGiamTruRepository thongTinGiamTruRepository,
-            IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository)
+            IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
+            ICurrentUserService currentUserService)
         {
-            _nhanvienRepository = nhanVienRepository;
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
-            _thongTinGiamTruRepository = thongTinGiamTruRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<bool> Handle(DeleteThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
@@ -30,16 +28,18 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
             {
                 throw new NotFoundException("ThongTinGiamTruGiaCanh does not exists");
             }
-            _thongTinGiamTruGiaCanhRepository.Remove(thongtingiamtru);
-            var result = await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if(result> 0)
-            {
-                return true;
-            }
             else
             {
-                return false;
+                thongtingiamtru.NguoiXoaID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3"; //Not authorize
+                thongtingiamtru.NgayXoa = DateTime.Now;
+                _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
+                var result = await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                if (result > 0)
+                {
+                    return true;
+                }
             }
+            return false;
         }
     }
 }

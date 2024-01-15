@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
         public int MaGiamTruID { get; set; } = 1;
         public string? DiaChiLienLac { get; set; }
         public string? QuanHeVoiNhanVien { get; set; }
-        public string? CanCuocCongDan { get; set; }
+        public string CanCuocCongDan { get; set; }
         public DateTime NgayXacNhanPhuThuoc { get; set; } = DateTime.Now;
     }
 }

@@ -14,15 +14,13 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             RuleFor(x => x.NhanVienID)
                 .NotEmpty().WithMessage("NhanVienID must not be empty")
                 .NotNull().WithMessage("NhanVienID must not be null")
-                .Must(x => Guid.TryParseExact(x,"N",out _)).WithMessage("Invalid NhanVienID Format");
+                .Must(x => Guid.TryParseExact(x,"N",out _)).WithMessage("The NhanVienID is not correct");
             RuleFor(x => x.ThuKyCongDoan)
-                .NotEmpty().WithMessage("NhanVienID must not be empty")
-                .NotNull().WithMessage("NhanVienID must not be null")
                 .Must(x => x == true || x == false)
                 .WithMessage("ThuKyCongDoan must be either true or false");
-            RuleFor(x => x.NgayGiaNhap).NotEmpty().WithMessage("NgayGiaNhap must not emptty")
-                .NotNull().WithMessage("NgayGiaNhap must not null")
-                .Must(x => x.GetType() == typeof(DateTime)).WithMessage("NgayGiaNhap must datetime");
+            RuleFor(x => x.NgayGiaNhap)
+                .Must(ngayGiaNhap => ngayGiaNhap == DateTime.MinValue || ngayGiaNhap <= DateTime.Now)
+                .WithMessage("NgayGiaNhap cannot be in the future"); ;
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,10 +13,13 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
     public class DeleteThongTinCongDoanCommandHandler : IRequestHandler<DeleteThongTinCongDoanCommand, bool>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
+        private readonly ICurrentUserService _currentUserService;
         public DeleteThongTinCongDoanCommandHandler(
-            IThongTinCongDoanRepository thongTinCongDoanRepository)
+            IThongTinCongDoanRepository thongTinCongDoanRepository,
+            ICurrentUserService currentUserService)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<bool> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
@@ -24,16 +28,18 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
             {
                 throw new NotFoundException("ThongTinCongDoan does not exists");
             }
-            _thongtinCongDoanRepository.Remove(thongtincongdoan);
-            var result = await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if (result > 0)
-            {
-                return true;
-            }
             else
             {
-                return false;
+                thongtincongdoan.NguoiXoaID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3"; //Not authorize
+                thongtincongdoan.NgayXoa = DateTime.Now;
+                _thongtinCongDoanRepository.Update(thongtincongdoan);
+                var result = await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                if (result > 0)
+                {
+                    return true;
+                }
             }
+            return false;
         }
     }
 }

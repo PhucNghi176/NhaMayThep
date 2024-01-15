@@ -14,7 +14,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             RuleFor(x => x.Id)
               .NotEmpty().WithMessage("Id must not be empty")
               .NotNull().WithMessage("Id must not be null")
-              .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Invalid Id Format");
+              .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("The ID is not correct");
 
             RuleFor(x => x.MaGiamTruID)
                  .GreaterThan(0)
@@ -24,11 +24,14 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
              .MaximumLength(20).WithMessage("Maximun length is 20");
 
             RuleFor(x => x.CanCuocCongDan)
+             .NotEmpty().WithMessage("Id must not be empty")
+             .NotNull().WithMessage("Id must not be null")
              .MaximumLength(12).WithMessage("Maximun length is 12")
              .Must(x => long.TryParse(x, out long _)).WithMessage("CanCuocCongDan must an digit");
 
             RuleFor(x => x.NgayXacNhanPhuThuoc)
-               .Must(x => x is DateTime).WithMessage("NgayXacNhanPhuThuoc must be DateTime");
+                .Must(ngayGiaNhap => ngayGiaNhap == DateTime.MinValue || ngayGiaNhap <= DateTime.Now)
+                .WithMessage("NgayXacNhanPhuThuoc cannot be in the future");
         }
     }
 }

@@ -2,6 +2,7 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,14 +16,20 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         private readonly INhanVienRepository _nhanvienRepository;
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
+        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
+        private readonly ICurrentUserService _currentUserService;
         public CreateThongTinGiamTruGiaCanhCommandHandler(
             INhanVienRepository nhanVienRepository, 
             IThongTinGiamTruRepository thongTinGiamTruRepository,
-            IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository)
+            IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
+            ICanCuocCongDanRepository canCuocCongDanRepository,
+            ICurrentUserService currentUserService)
         {
             _nhanvienRepository = nhanVienRepository;
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
+            _canCuocCongDanRepository = canCuocCongDanRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<bool> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
@@ -36,27 +43,37 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             {
                 throw new NotFoundException("Giamtru does not exists");
             }
-            var giamtrugiacanh = new ThongTinGiamTruGiaCanhEntity
+            var cccd = await _canCuocCongDanRepository.FindById(request.CanCuocCongDan, cancellationToken);
+            if(cccd == null)
             {
-                NhanVienID = nhanvien.ID,
-                MaGiamTruID = giamtru.ID,
-                NhanVien = nhanvien,
-                ThongTinGiamTru = giamtru!,
-                DiaChiLienLac = request.DiaChiLienLac,
-                QuanHeVoiNhanVien = request.QuanHeVoiNhanVien,
-                CanCuocCongDan = request.CanCuocCongDan,
-                NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
-            };
-            _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-            var result= await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if(result> 0)
-            {
-                return true;
+                throw new NotFoundException("Can Cuoc Cong Dan does not exists");
             }
             else
             {
-                return false;
+                if(await _thongTinGiamTruGiaCanhRepository.FindByCanCuocCongDan(cccd.CanCuocCongDan, cancellationToken) != null)
+                {
+                    throw new NotFoundException("ThongTinMienTruGiaCanh with this Can Cuoc Cong Dan has exists");
+                }
+                var giamtrugiacanh = new ThongTinGiamTruGiaCanhEntity
+                {
+                    NguoiTaoID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3",
+                    NhanVienID = nhanvien.ID,
+                    MaGiamTruID = giamtru.ID,
+                    NhanVien = nhanvien,
+                    ThongTinGiamTru = giamtru!,
+                    DiaChiLienLac = request.DiaChiLienLac,
+                    QuanHeVoiNhanVien = request.QuanHeVoiNhanVien,
+                    CanCuocCongDan = cccd.CanCuocCongDan,
+                    NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
+                };
+                _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
+                var result = await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                if (result > 0)
+                {
+                    return true;
+                }
             }
+            return false;
         }
     }
 }
