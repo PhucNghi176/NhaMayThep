@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
             var result = await _hopdongRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Not found Hop dong{command.Id}");
-            result.NgayXoa = DateTime.UtcNow;
+            result.NgayXoa = DateTime.Now;
             if (await _hopdongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 status = "Remove Successfully";
             else 

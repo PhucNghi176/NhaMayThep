@@ -2,89 +2,88 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Domain.Entities;
-using NhaMayThep.Application.HopDong;
-using NhaMayThep.Application.HopDong.CreateNewHopDongCommand;
-using NhaMayThep.Application.HopDong.DeleteHopDongCommand;
-using NhaMayThep.Application.HopDong.GetAllHopDongQuery;
-using NhaMayThep.Application.HopDong.GetHopDongByIdQuery;
-using NhaMayThep.Application.HopDong.UpdateHopDongCommand;
 using System.Net.Mime;
+using NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh;
+using NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh;
+using NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh;
+using NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById;
+using NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh;
+using NhaMayThep.Application.ThongTinChucDanh;
 
-namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
+namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 {
     [ApiController]
-    public class HopDongController : ControllerBase
+    public class ChucDanhController : ControllerBase
     {
         private readonly ISender _mediator;
-        public HopDongController(ISender mediator)
+        public ChucDanhController(ISender mediator)
         {
             _mediator = mediator;
         }
 
-        [HttpPost("hop-dong")]
+        [HttpPost("chuc-danh")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> CreateNewHopDong([FromBody] CreateNewHopDongCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<int>>> CreateNewHopDong([FromBody] CreateNewChucDanhCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<string>(result));
+            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<int>(result));
         }
 
-        [HttpDelete("hop-dong/{id}")]
+        [HttpDelete("chuc-danh/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<string>> RemoveHopDong([FromRoute] string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<string>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteHopDongCommand(id: id), cancellationToken);
+            var result = await _mediator.Send(new DeleteChucDanhCommand(id: id), cancellationToken);
             return result == null ? BadRequest() : Ok(result);
         }
 
-        [HttpGet("hop-dong")]
+        [HttpGet("chuc-danh")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<HopDongDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<List<HopDongDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<List<ChucDanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<List<ChucDanhDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<HopDongDto>>>> GetAll(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<List<ChucDanhDto>>>> GetAll(CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetAllHopDongQuery(), cancellationToken);
+            var result = await _mediator.Send(new GetAllChucDanhQuery(), cancellationToken);
             return result == null ? BadRequest() : Ok(result);
         }
 
-        [HttpGet("hop-dong/{id}")]
+        [HttpGet("chuc-danh/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<HopDongDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<HopDongDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<HopDongDto>>> GetById([FromRoute] string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<ChucDanhDto>>> GetById([FromRoute] int id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetHopDongByIdQuery(id: id), cancellationToken);
+            var result = await _mediator.Send(new GetChucDanhByIdQuery(id: id), cancellationToken);
             return result == null ? BadRequest() : Ok(result);
         }
-        [HttpPut("hop-dong/{id}")]
+        [HttpPut("chuc-danh/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<HopDongDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<HopDongDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<HopDongDto>>> UpdateHopDong([FromRoute] string id, [FromBody] UpdateHopDongCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<ChucDanhDto>>> UpdateHopDong([FromRoute] int id, [FromBody] UpdateChucDanhCommand command, CancellationToken cancellationToken = default)
         {
             if (command.Id == default)
                 command.Id = id;
