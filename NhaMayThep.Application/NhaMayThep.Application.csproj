@@ -22,4 +22,9 @@
     <ProjectReference Include="..\NhaMapThep.Domain\NhaMapThep.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="ThongTinPhuCap\GetThongTinPhuCapById\" />
+    <Folder Include="ThongTinPhuCap\UpdateThongTinPhuCap\" />
+  </ItemGroup>
+
 </Project>
