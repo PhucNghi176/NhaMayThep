@@ -21,7 +21,8 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
         public async Task Handle(DeletePhongBanCommand command, CancellationToken cancellationToken)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == command.ID).Result;
-            _phongBanRepository.Remove(phongBan);
+            phongBan.NgayXoa = DateTime.UtcNow;
+            _phongBanRepository.Update(phongBan);
             await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
         }
     }
