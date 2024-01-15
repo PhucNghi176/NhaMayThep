@@ -10,5 +10,8 @@ namespace NhaMapThep.Domain.Entities.Base
         [Key]
         public required int ID { get; set; }
         public required string Name { get; set; }
+
+        public string? NguoiXoaID { get; set; }
+        public DateTime? NgayXoa {  get; set; }
     }
 }
