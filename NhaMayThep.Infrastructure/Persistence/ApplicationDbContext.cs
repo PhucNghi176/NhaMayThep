@@ -38,6 +38,8 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
         public DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
         public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
+        public DbSet<KhaiBaoTangLuongEntity> KhaiBaoTangLuong { get; set; }
+        public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -137,6 +139,14 @@ namespace NhaMayThep.Infrastructure.Persistence
                  new ThongTinChucDanhEntity() { ID = 3, Name = "TruongPhong" },
                  new ThongTinChucDanhEntity() { ID = 4, Name = "PhoPhong" },
                  new ThongTinChucDanhEntity() { ID = 5, Name = "NhanVien" });
+
+            modelBuilder.Entity<ThongTinLuongNhanVienEntity>().HasNoKey();
+
+            modelBuilder.Entity<NhanVienEntity>()
+            .HasOne(nv => nv.ThongTinLuong)
+            .WithOne(ttlnv => ttlnv.NhanVien)
+            .HasForeignKey<ThongTinLuongNhanVienEntity>(ttlnv => ttlnv.MaSoNhanVien)
+            .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

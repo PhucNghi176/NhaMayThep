@@ -32,5 +32,7 @@ namespace NhaMapThep.Domain.Entities
         public int? SoNguoiPhuThuoc { get; set; }
         public virtual ICollection<HopDongEntity> HopDongs { get; set; }
 
+        public ThongTinLuongNhanVienEntity ThongTinLuong {  get; set; }
+
     }
 }

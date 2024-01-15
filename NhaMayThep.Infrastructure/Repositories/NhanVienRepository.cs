@@ -11,5 +11,10 @@ namespace NhaMayThep.Infrastructure.Repositories
         public NhanVienRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
+
+        public async Task<NhanVienEntity?> FindByIdAsync(string id, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.ID == id, cancellationToken);
+        }
     }
 }

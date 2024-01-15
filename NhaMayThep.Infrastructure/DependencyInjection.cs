@@ -27,6 +27,9 @@ namespace NhaMayThep.Infrastructure
             });
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
+            services.AddTransient<IHopDongRepository,  HopDongRepository>();
+            services.AddTransient<IKhaiBaoTangLuongRepository, KhaiBaoTangLuongRepository>();
+            services.AddTransient<IThongTinLuongNhanVienRepository, ThongTinLuongNhanVienRepository>();
 
             services.AddTransient<IChucVuRepository, BangChucVuRepository>();
             services.AddTransient<ITinhTrangLamViecRepository, TinhTrangLamViecRepository>();
