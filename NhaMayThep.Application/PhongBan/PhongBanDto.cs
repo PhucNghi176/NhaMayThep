@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.PhongBan
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<QuaTrinhNhanSuEntity, QuaTrinhNhanSuDto>();
+            profile.CreateMap<PhongBanEntity, PhongBanDto>();
         }
     }
 }
