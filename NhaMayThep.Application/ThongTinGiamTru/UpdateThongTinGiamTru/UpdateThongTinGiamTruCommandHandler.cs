@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
@@ -24,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
         {
             var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.ID, cancellationToken);
             if (thongtingiamtru.NgayXoa != null)
-                throw new Exception("thông tin giảm trừ đã bị xóa");
+                throw new NotFoundException("thông tin giảm trừ đã bị xóa");
             thongtingiamtru.Name = request.TenMaGiamTru ?? thongtingiamtru.Name;
             thongtingiamtru.SoTienGiamTru = request.SoTienGiamTru;
             thongtingiamtru.NguoiCapNhatID = request.NguoiCapNhatID;
