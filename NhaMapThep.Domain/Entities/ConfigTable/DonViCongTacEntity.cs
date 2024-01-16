@@ -5,12 +5,8 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace NhaMapThep.Domain.Entities.ConfigTable
 {
     [Table("DonViCongTac")]
-    public class DonViCongTacEntity
+    public class DonViCongTacEntity : BangMaGocEntity
     {
-        [Key]
-        public int ID { get; set; }
 
-        [Required]
-        public required string Name { get; set; }
     }
 }

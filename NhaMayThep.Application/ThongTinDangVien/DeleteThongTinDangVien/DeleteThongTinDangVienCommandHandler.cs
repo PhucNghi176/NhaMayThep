@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
 {
-    public class DeleteThongTinDangVienCommandHandler : IRequestHandler<DeleteThongTinDangVienCommand, ThongTinDangVienDto>
+    public class DeleteThongTinDangVienCommandHandler : IRequestHandler<DeleteThongTinDangVienCommand, string>
     {
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _mapper = mapper;
         }
-        public async Task<ThongTinDangVienDto> Handle(DeleteThongTinDangVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
 
             var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID);
@@ -34,7 +34,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
             _thongTinDangVienRepository.Update(thongTinDangVien);
             await _thongTinDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return thongTinDangVien.MapToThongTinDangVienDto(_mapper);
+            return "Delete Successfully";
         }
     }
 }

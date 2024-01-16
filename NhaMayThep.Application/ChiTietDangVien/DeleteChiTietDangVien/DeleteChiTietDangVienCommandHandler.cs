@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
 {
-    public class DeleteChiTietDangVienCommandHandler : IRequestHandler<DeleteChiTietDangVienCommand, ChiTietDangVienDto>
+    public class DeleteChiTietDangVienCommandHandler : IRequestHandler<DeleteChiTietDangVienCommand, string>
     {
         private IChiTietDangVienRepository _chiTietDangVienRepository;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
             _chiTietDangVienRepository = chiTietDangVienRepository;
             _mapper = mapper;
         }
-        public async Task<ChiTietDangVienDto> Handle(DeleteChiTietDangVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
             var chiTietDangVien = await _chiTietDangVienRepository.FindAsync(x => x.ID == request.ID, cancellationToken: cancellationToken);
             if (chiTietDangVien == null)
@@ -33,7 +33,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
             _chiTietDangVienRepository.Update(chiTietDangVien);
             await _chiTietDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return chiTietDangVien.MapToChiTietDangVienDto(_mapper);
+            return "Delete Successfully";
         }
     }
 }

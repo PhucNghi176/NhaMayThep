@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
 {
-    public class DeleteDonViCongTacCommandHandler : IRequestHandler<DeleteDonViCongTacCommand, DonViCongTacDto>
+    public class DeleteDonViCongTacCommandHandler : IRequestHandler<DeleteDonViCongTacCommand, string>
     {
         private IDonViCongTacRepository _donViCongTacRepository;
         private readonly IMapper _mapper;
@@ -21,16 +21,19 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
             _donViCongTacRepository = donViCongTacRepository;
             _mapper = mapper;
         }
-        public async Task<DonViCongTacDto> Handle(DeleteDonViCongTacCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteDonViCongTacCommand request, CancellationToken cancellationToken)
         {
             var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID, cancellationToken: cancellationToken);
             if (donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
-            _donViCongTacRepository.Remove(donViCongTac);
+            donViCongTac.NguoiXoaID = request.NguoiXoaID;
+            donViCongTac.NgayXoa = DateTime.Now;
+
+            _donViCongTacRepository.Update(donViCongTac);
             await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return donViCongTac.MapToDonViCongTacDto(_mapper);
+            return "Delete Successfully";
         }
     }
 }

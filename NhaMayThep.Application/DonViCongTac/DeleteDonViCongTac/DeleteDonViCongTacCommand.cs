@@ -7,13 +7,15 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
 {
-    public class DeleteDonViCongTacCommand : IRequest<DonViCongTacDto>
+    public class DeleteDonViCongTacCommand : IRequest<string>
     {
-        public DeleteDonViCongTacCommand(int id)
+        public DeleteDonViCongTacCommand(int id, string? nguoiXoaID)
         {
             ID = id;
+            NguoiXoaID = nguoiXoaID;
         }
 
         public int ID { get; set; }
+        public string? NguoiXoaID { get; set; }
     }
 }

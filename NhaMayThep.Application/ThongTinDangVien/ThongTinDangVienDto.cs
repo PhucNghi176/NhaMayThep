@@ -23,15 +23,7 @@ namespace NhaMayThep.Application.ThongTinDangVien
         public DateTime NgayVaoDang { get; set; }
         public string CapDangVien { get; set; }
 
-        public string? NguoiTaoID { get; set; }
-        public DateTime? NgayTao { get; set; }
-
-        public string? NguoiCapNhatID { get; set; }
-        public DateTime? NgayCapNhatCuoi { get; set; }
-
-        public string? NguoiXoaID { get; set; }
-        public DateTime? NgayXoa { get; set; }
-        public static ThongTinDangVienDto Create(string id, string nhanVienId, DateTime ngayVaoDang, string capDangVien, string nguoiTaoId, DateTime ngayTao, string nguoiCapNhapId, DateTime ngayCapNhatCuoi, string nguoiXoaId, DateTime ngayXoa)
+        public static ThongTinDangVienDto Create(string id, string nhanVienId, DateTime ngayVaoDang, string capDangVien)
         {
             return new ThongTinDangVienDto
             {
@@ -39,12 +31,6 @@ namespace NhaMayThep.Application.ThongTinDangVien
                NhanVienID = nhanVienId,
                NgayVaoDang = ngayVaoDang,
                CapDangVien = capDangVien,
-               NguoiTaoID = nguoiTaoId,
-               NgayTao = ngayTao,
-               NguoiCapNhatID = nguoiCapNhapId,
-               NgayCapNhatCuoi = ngayCapNhatCuoi,
-               NguoiXoaID = nguoiXoaId,
-               NgayXoa = ngayXoa
             };
         }
 
