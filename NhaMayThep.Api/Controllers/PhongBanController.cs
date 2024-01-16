@@ -8,12 +8,14 @@ using NhaMayThep.Application.PhongBan.CreatePhongBan;
 using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
 using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class PhongBanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -32,6 +34,8 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] CreatePhongBanCommand command,
             CancellationToken cancellationToken = default)
         {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
+            command.nguoiTaoID = userId;
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(result);
         }
@@ -71,7 +75,8 @@ namespace NhaMayThep.Api.Controllers
             {
                 return BadRequest();
             }
-
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
+            command.NguoiCapNhatID = userId;
             await _mediator.Send(command, cancellationToken);
             return NoContent();
         }
@@ -84,7 +89,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;            
+            await _mediator.Send(new DeletePhongBanCommand(id: id, nguoiXoaID: userId), cancellationToken);
             return Ok();
         }
     }

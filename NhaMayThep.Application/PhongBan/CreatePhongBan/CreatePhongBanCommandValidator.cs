@@ -13,11 +13,9 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
     public class CreatePhongBanCommandValidator : AbstractValidator<CreatePhongBanCommand>
     {
         IPhongBanRepository _phongBanRepository;
-        INhanVienRepository _nhanVienRepository;
-        public CreatePhongBanCommandValidator(IPhongBanRepository phongBanRepository, INhanVienRepository nhanVienRepository)
+        public CreatePhongBanCommandValidator(IPhongBanRepository phongBanRepository)
         {
             _phongBanRepository = phongBanRepository;
-            _nhanVienRepository = nhanVienRepository;
             ConfigureValidationRules();
         }
 
@@ -30,23 +28,8 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
             RuleFor(v => v.Name)
                 .NotEmpty().WithMessage("Name is require")
                 //.MinimumLength(5).WithMessage("Name must be at least 5 character")
-                .Must(AvailableName).WithMessage("Phong ban is already exist");
-
-            RuleFor(v => v.NguoiTaoID)
-                .Must(ExistNguoiTao).WithMessage("Nguoi tao is not exist");
-                
+                .Must(AvailableName).WithMessage("Phong ban is already exist");             
         }
-
-        private bool ExistNguoiTao(string id)
-        {
-            var nguoiTao = _nhanVienRepository.FindAsync(x => x.ID == id).Result;
-            if (nguoiTao != null)
-            { 
-                return nguoiTao.NgayXoa == null ? true : false;
-            }
-            return false;
-        }
-
         private bool AvailableID(int id)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == id).Result;

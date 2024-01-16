@@ -12,11 +12,8 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
     public class DeletePhongBanCommandValidator : AbstractValidator<DeletePhongBanCommand>
     {
         IPhongBanRepository _phongBanRepository;
-        INhanVienRepository _nhanVienRepository;
-
-        public DeletePhongBanCommandValidator(IPhongBanRepository phongBanRepository, INhanVienRepository nhanVienRepository)
+        public DeletePhongBanCommandValidator(IPhongBanRepository phongBanRepository)
         {
-            _nhanVienRepository = nhanVienRepository;
             _phongBanRepository = phongBanRepository;
             ConfigureValidationRules();
         }
@@ -26,19 +23,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
             RuleFor(v => v.ID)
                 .NotNull().WithMessage("ID is require")
                 .Must(ExistId).WithMessage("ID is not exist");
-            RuleFor(v => v.NguoiXoaID)
-               .Must(ExistNguoiXoa).WithMessage("Nguoi tao is not exist");
         }
-        private bool ExistNguoiXoa(string id)
-        {
-            var nguoiXoa = _nhanVienRepository.FindAsync(x => x.ID == id).Result;
-            if (nguoiXoa != null)
-            {
-                return nguoiXoa.NgayXoa == null ? true : false;
-            }
-            return false;
-        }
-
         private bool ExistId(int id)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == id).Result;

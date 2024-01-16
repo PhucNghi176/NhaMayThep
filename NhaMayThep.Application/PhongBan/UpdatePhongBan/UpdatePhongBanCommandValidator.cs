@@ -13,11 +13,8 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
     public class UpdatePhongBanCommandValidator : AbstractValidator<UpdatePhongBanCommand>
     {
         IPhongBanRepository _phongBanRepository;
-        INhanVienRepository _nhanVienRepository;
-
-        public UpdatePhongBanCommandValidator(IPhongBanRepository phongBanRepository, INhanVienRepository nhanVienRepository)
+        public UpdatePhongBanCommandValidator(IPhongBanRepository phongBanRepository)
         {
-            _nhanVienRepository = nhanVienRepository;
             _phongBanRepository = phongBanRepository;
             ConfigureValidationRules();
         }
@@ -30,20 +27,7 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
             RuleFor(v => v.Name)
                 .NotEmpty().WithMessage("Name is require")
                 .Must(AvailableName).WithMessage("This name is already exist");
-            RuleFor(v => v.NguoiCapNhatID)
-               .Must(ExistNguoiCapNhat).WithMessage("Nguoi tao is not exist");
         }
-
-        private bool ExistNguoiCapNhat(string id)
-        {
-            var nguoiCapNhat = _nhanVienRepository.FindAsync(x => x.ID == id).Result;
-            if (nguoiCapNhat != null)
-            {
-                return nguoiCapNhat.NgayXoa == null ? true : false;
-            }
-            return false;
-        }
-
         private bool AvailableName(string name)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.Name == name).Result;

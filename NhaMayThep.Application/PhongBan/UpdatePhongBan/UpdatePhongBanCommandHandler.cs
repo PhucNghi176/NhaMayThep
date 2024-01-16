@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
 using System;
 using System.Collections.Generic;

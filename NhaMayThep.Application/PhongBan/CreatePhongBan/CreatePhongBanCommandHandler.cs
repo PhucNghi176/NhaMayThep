@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using AutoMapper;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
@@ -16,6 +17,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
     {
         private readonly IMapper _mapper;
         private readonly IPhongBanRepository _phongBanRepository;
+        
         public CreatePhongBanCommandHandler(IPhongBanRepository phongBanRepository, IMapper mapper)
         {
             _phongBanRepository = phongBanRepository;
@@ -27,7 +29,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
             {
                 ID = command.ID,
                 Name = command.Name,
-                NguoiTaoID = command.NguoiTaoID,
+                NguoiTaoID = command.nguoiTaoID,
                 NgayTao = DateTime.UtcNow              
             };
            _phongBanRepository.Add(entity);
