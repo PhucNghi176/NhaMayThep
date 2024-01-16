@@ -11,11 +11,11 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
     public class UpdateChiTietNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>,ICommand
     {
         public string Id { get; set; } // Use this as the primary key
-        
-        public int LoaiNghiPhep { get; set; }
-        public int TongSoGio { get; set; }
-        public int SoGioDaNghiPhep { get; set; }
-        public int SoGioConLai { get; set; }
-        public int NamHieuLuoc { get; set; }
+
+        public int LoaiNghiPhepID { get; set; }
+        public double TongSoGio { get; set; }
+        public double SoGioDaNghiPhep { get; set; }
+        public double SoGioConLai { get; set; }
+        public int NamHieuLuc { get; set; }
     }
 }

@@ -26,15 +26,15 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             {
                 throw new NotFoundException($"ChiTietNghiPhep with Id {request.Id} not found.");
             }
-         
+
 
             // Update properties
-           
-            existingLsnp.LoaiNghiPhep = request.LoaiNghiPhep;
+
+            existingLsnp.LoaiNghiPhepID = request.LoaiNghiPhepID;
             existingLsnp.TongSoGio = request.TongSoGio;
             existingLsnp.SoGioDaNghiPhep = request.SoGioDaNghiPhep;
             existingLsnp.SoGioConLai = request.SoGioConLai;
-            existingLsnp.NamHieuLuoc = request.NamHieuLuoc;
+            existingLsnp.NamHieuLuc = request.NamHieuLuc;
 
             _repo.Update(existingLsnp);
             await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);

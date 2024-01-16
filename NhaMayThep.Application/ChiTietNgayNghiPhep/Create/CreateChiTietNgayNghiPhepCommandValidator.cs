@@ -20,8 +20,8 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             .NotEmpty().WithMessage("Employee ID is required.")
             .Length(5, 10).WithMessage("Employee ID must be between 5 and 10 characters."); // Example length validation
 
-            RuleFor(cmd => cmd.LoaiNghiPhep)
-                .NotNull().WithMessage("Leave type is required.");
+            RuleFor(cmd => cmd.LoaiNghiPhepID)
+                .NotNull().WithMessage("Leave type ID is required.");
                 
 
             RuleFor(cmd => cmd.TongSoGio)
@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             .Must((cmd, soGioConLai) => soGioConLai == cmd.TongSoGio - cmd.SoGioDaNghiPhep)
             .WithMessage("Remaining hours must be equal to the difference between total hours and hours already taken.");
 
-            RuleFor(cmd => cmd.NamHieuLuoc)
+            RuleFor(cmd => cmd.NamHieuLuc)
        .    InclusiveBetween(DateTime.Now.Year - 5, DateTime.Now.Year + 5)
             .WithMessage("Effective year must be within a reasonable range from the current year.");
 

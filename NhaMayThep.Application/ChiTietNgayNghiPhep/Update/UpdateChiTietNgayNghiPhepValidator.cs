@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             RuleFor(cmd => cmd.Id)
             .NotEmpty().WithMessage("ID is required..");
 
-            RuleFor(cmd => cmd.LoaiNghiPhep)
+            RuleFor(cmd => cmd.LoaiNghiPhepID)
                 .NotNull().WithMessage("Leave type is required.");
 
             RuleFor(cmd => cmd.TongSoGio)
@@ -35,7 +35,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
                 .Must((cmd, soGioConLai) => soGioConLai == cmd.TongSoGio - cmd.SoGioDaNghiPhep)
                 .WithMessage("Remaining hours must be equal to the difference between total hours and hours already taken.");
 
-            RuleFor(cmd => cmd.NamHieuLuoc)
+            RuleFor(cmd => cmd.NamHieuLuc)
                 .InclusiveBetween(DateTime.Now.Year - 5, DateTime.Now.Year + 5)
                 .WithMessage("Effective year must be within a reasonable range from the current year");
         }

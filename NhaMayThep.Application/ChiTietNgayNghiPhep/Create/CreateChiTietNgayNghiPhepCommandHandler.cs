@@ -31,11 +31,11 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             var ctnp = new ChiTietNgayNghiPhepEntity()
             {
                 MaSoNhanVien = request.MaSoNhanVien,
-                LoaiNghiPhep = request.LoaiNghiPhep,
+                LoaiNghiPhepID = request.LoaiNghiPhepID,
                 TongSoGio = request.TongSoGio,
                 SoGioDaNghiPhep = request.SoGioDaNghiPhep,
                 SoGioConLai = request.SoGioConLai,
-                NamHieuLuoc = request.NamHieuLuoc
+                NamHieuLuc = request.NamHieuLuc
             };
 
             _repo.Add(ctnp);
