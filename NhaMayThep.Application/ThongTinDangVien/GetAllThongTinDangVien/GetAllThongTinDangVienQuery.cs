@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.DonViCongTac;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,11 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien
 {
-    public class GetAllThongTinDangVienQuery : IRequest<List<ThongTinDangVienDto>>
+    public class GetAllThongTinDangVienQuery : IRequest<List<ThongTinDangVienDto>>, IQuery
     {
+        public GetAllThongTinDangVienQuery()
+        {
+            
+        }
     }
 }
