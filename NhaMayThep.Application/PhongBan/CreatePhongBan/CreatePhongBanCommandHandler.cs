@@ -11,6 +11,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 
+
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
     public class CreatePhongBanCommandHandler : IRequestHandler<CreatePhongBanCommand, PhongBanDto>
@@ -25,6 +26,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
         }
         public async Task<PhongBanDto> Handle(CreatePhongBanCommand command, CancellationToken cancellationToken)
         {
+
             PhongBanEntity entity = new PhongBanEntity()
             {
                 ID = command.ID,

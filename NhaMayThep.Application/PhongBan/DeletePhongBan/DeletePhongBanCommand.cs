@@ -16,6 +16,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
             ID = id;
         }
         public string? NguoiXoaID { get; set; }
+
         public int ID { get; set; }
     }
 }

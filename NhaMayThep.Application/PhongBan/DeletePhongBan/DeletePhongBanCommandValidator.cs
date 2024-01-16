@@ -31,6 +31,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
             {
                 return false;
             }
+
             return phongBan == null ? false : true;
         }
     }

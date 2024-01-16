@@ -31,6 +31,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
             _chucDanhRepository = chucDanhRepository;
             _thongTinQuaTrinhNhanSu = thongTinQuaTrinhNhanSuRepository;
             ConfigureValidationRules();       
+
         }
         private void ConfigureValidationRules()
         {

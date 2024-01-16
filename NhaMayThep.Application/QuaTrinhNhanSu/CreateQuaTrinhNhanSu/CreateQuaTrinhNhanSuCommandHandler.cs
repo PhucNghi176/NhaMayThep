@@ -25,7 +25,6 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
         {
             QuaTrinhNhanSuEntity entity = new QuaTrinhNhanSuEntity()
             {
-
                 LoaiQuaTrinhID = command.LoaiQuaTrinhID,
                 MaSoNhanVien = command.MaSoNhanVien,
                 NgayBatDau = command.NgayBatDau,

@@ -30,6 +30,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
                 //.MinimumLength(5).WithMessage("Name must be at least 5 character")
                 .Must(AvailableName).WithMessage("Phong ban is already exist");             
         }
+
         private bool AvailableID(int id)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == id).Result;

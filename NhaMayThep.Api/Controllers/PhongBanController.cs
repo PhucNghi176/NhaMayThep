@@ -10,7 +10,6 @@ using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
 using Microsoft.AspNetCore.Authorization;
 
-
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
