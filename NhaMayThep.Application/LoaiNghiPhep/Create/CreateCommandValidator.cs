@@ -20,9 +20,6 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
 
         private void ConfigureValidationRules()
         {
-            RuleFor(command => command.Id)
-               .MustAsync(async (id, cancellation) => !await IdExists(id))
-               .WithMessage("The ID already exists.");
             RuleFor(command => command.Name)
             .NotEmpty().WithMessage("Name is required.")
             .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
@@ -31,10 +28,6 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
            .LessThanOrEqualTo(24).WithMessage("Number of leave hours must not exceed 24.");
         }
 
-        private async Task<bool> IdExists(int id)
-        {
-            var existingEntity = await _repository.FindByIdAsync(id);
-            return existingEntity != null;
-        }
+      
     }
 }

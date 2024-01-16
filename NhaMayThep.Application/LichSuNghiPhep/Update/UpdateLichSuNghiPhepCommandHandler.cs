@@ -32,7 +32,7 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
             throw new NotFoundException($"Nguoi Duyet with ID {request.NguoiDuyet} not found.");
         }
 
-        var existingLsnp = await _repo.FindByIdAsync(request.Id, cancellationToken);
+        var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (existingLsnp == null)
         {
             throw new NotFoundException($"LichSuNghiPhepNhanVienEntity with ID {request.Id} not found.");

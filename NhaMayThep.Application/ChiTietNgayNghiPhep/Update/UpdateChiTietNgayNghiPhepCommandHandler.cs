@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(UpdateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var existingLsnp = await _repo.FindByIdAsync(request.Id, cancellationToken);
+            var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (existingLsnp == null)
             {
                 throw new NotFoundException($"ChiTietNghiPhep with Id {request.Id} not found.");

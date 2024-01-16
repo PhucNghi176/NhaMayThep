@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
 
         public async Task<LoaiNghiPhepDto> Handle(UpdateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindByIdAsync(request.Id, cancellationToken);
+            var lnp = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (lnp == null)
             {
                 throw new NotFoundException("LoaiNghiPhep not found for the given ID");

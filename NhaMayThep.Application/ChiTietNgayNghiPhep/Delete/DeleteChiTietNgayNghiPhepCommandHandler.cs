@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(DeleteChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _repo.FindByIdAsync(request.Id, cancellationToken);
+            var entity = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException($"ChiTietNgayNghiPhep with ID {request.Id} not found.");

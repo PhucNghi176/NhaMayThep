@@ -15,15 +15,6 @@ namespace NhaMayThep.Infrastructure.Repositories
     {
         public ChiTietNgayNghiPhepRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper) { }
 
-        public async Task<ChiTietNgayNghiPhepEntity> FindByIdAsync(string id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID == id, cancellationToken);
-        }
-
-
-        public async Task<List<ChiTietNgayNghiPhepEntity>> FindByIdsAsync(string[] ids, CancellationToken cancellationToken = default)
-        {
-            return await FindAllAsync(x => ids.Contains(x.ID), cancellationToken);
-        }
+      
     }
 }

@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetById
 
         public async Task<LoaiNghiPhepDto> Handle(GetLoaiNghiPhepByIdQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindByIdAsync(request.id, cancellationToken);
+            var lnp = await _repository.FindAsync(x => x.ID == request.id, cancellationToken);
             if (lnp == null)
             {
                 throw new NotFoundException("LoaiNghiPhep Does not Exist");

@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
 
         public async Task<LoaiNghiPhepDto> Handle(DeleteLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var loaiNghiPhep = await _repository.FindByIdAsync(request.Id, cancellationToken);
+            var loaiNghiPhep = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiNghiPhep == null)
             {
                 throw new NotFoundException("LoaiNghiPhep not found for deletion");

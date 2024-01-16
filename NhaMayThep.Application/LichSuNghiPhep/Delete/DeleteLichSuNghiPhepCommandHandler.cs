@@ -17,7 +17,7 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
 
     public async Task<LichSuNghiPhepDto> Handle(DeleteLichSuNghiPhepCommand request, CancellationToken cancellationToken)
     {
-        var lsnp = await _repo.FindByIdAsync(request.Id, cancellationToken);
+        var lsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (lsnp == null)
         {
             throw new NotFoundException($"LichSuNghiPhep with ID {request.Id} not found.");

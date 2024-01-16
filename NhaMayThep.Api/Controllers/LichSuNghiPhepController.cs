@@ -1,19 +1,17 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Http;
-using System.Net.Mime;
-using System.Threading.Tasks;
+﻿using Microsoft.AspNetCore.Mvc;
+using MediatR;
 using NhaMayThep.Application.LichSuNghiPhep.Create;
 using NhaMayThep.Application.LichSuNghiPhep.Delete;
 using NhaMayThep.Application.LichSuNghiPhep.GetAll;
 using NhaMayThep.Application.LichSuNghiPhep.GetByID;
 using NhaMayThep.Application.LichSuNghiPhep.Update;
-using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Collections.Generic;
+using System.Threading.Tasks;
 using System.Threading;
-using NhaMapThep.Domain.Common.Exceptions;
-using System.Text.Json; // Import for CancellationToken
+using System.Net.Mime;
+using System.Collections.Generic;
+using Microsoft.AspNetCore.Http;
+using NhaMayThep.Application.LichSuNghiPhep;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -41,7 +39,20 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<LichSuNghiPhepDto>(result));
         }
 
-        [HttpPost("update")]
+        [HttpDelete("delete/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
+        {
+            await _mediator.Send(new DeleteLichSuNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>("Lich Su Nghi Phep deleted successfully"));
+        }
+
+        [HttpPut("update")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -76,46 +87,11 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<LichSuNghiPhepDto>> GetById(string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<LichSuNghiPhepDto>>> GetById(string id, CancellationToken cancellationToken = default)
         {
-            try
-            {
-                var query = new GetByIdQuery(id);
-                var result = await _mediator.Send(query, cancellationToken);
-                return Ok(result);
-            }
-            catch (NotFoundException ex)
-            {
-                return NotFound(ex.Message);
-            }
-        }
-        [HttpDelete("delete/{id}")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
-        {
-            try
-            {
-                var command = new DeleteLichSuNghiPhepCommand(id);
-                var result = await _mediator.Send(command, cancellationToken);
-
-                if (result == null)  // Check if the result is null, meaning record not found
-                {
-                    return NotFound(new JsonResponse<string>("Record not found"));
-                }
-
-                // If record is found and deleted successfully
-                return Ok(new JsonResponse<string>("Record deleted successfully"));
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions and log them
-                return StatusCode(StatusCodes.Status500InternalServerError, new JsonResponse<string>(ex.Message));
-            }
+            var query = new GetByIdQuery(id);
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<LichSuNghiPhepDto>(result));
         }
     }
 }
