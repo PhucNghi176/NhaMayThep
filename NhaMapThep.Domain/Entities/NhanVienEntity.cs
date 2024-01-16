@@ -8,14 +8,9 @@ namespace NhaMapThep.Domain.Entities
     [Table("NhanVien")]
     public class NhanVienEntity : Entity
     {
-        public NhanVienEntity()
-        {
-            NgayVaoCongTy = DateTime.Now;
-        }
         
         public required string Email { get; set; }
-        public byte[] PasswordHash { get; set; } = new byte[32];
-        public byte[] PasswordSalt { get; set; } = new byte[32];
+        public required string PasswordHash { get; set; } 
         public required string HoVaTen { get; set; }
         public required int ChucVuID { get; set; }
         [ForeignKey(nameof(ChucVuID))]
@@ -32,6 +27,8 @@ namespace NhaMapThep.Domain.Entities
         public required string SoTaiKhoan { get; set; }
         public int? SoNguoiPhuThuoc { get; set; }
         public virtual ICollection<HopDongEntity> HopDongs { get; set; }
+
+        public virtual ICollection<ThongTinLuongNhanVienEntity> ThongTinLuongNhanViens { get; set; }
 
     }
 }
