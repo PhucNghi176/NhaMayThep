@@ -1,15 +1,14 @@
-﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
-using NhaMapThep.Domain.Entities;
+﻿using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ChiTietNgayNghiPhep
+namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
 {
-    public class ChiTietNgayNghiPhepDto : IMapFrom<ChiTietNgayNghiPhepEntity>
+    public class CreateChiTietNgayNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>, ICommand
     {
         public string MaSoNhanVien { get; set; }
         public int LoaiNghiPhep { get; set; }
@@ -17,11 +16,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep
         public int SoGioDaNghiPhep { get; set; }
         public int SoGioConLai { get; set; }
         public int NamHieuLuoc { get; set; }
-      
-        public void Mapping(Profile profile)
-        {
-            profile.CreateMap<ChiTietNgayNghiPhepEntity, ChiTietNgayNghiPhepDto>();
 
-        }
+
     }
 }

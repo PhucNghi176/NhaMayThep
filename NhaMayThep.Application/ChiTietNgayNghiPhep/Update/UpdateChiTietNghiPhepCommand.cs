@@ -6,17 +6,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
+namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 {
-    public class CreateCommand : IRequest<ChiTietNgayNghiPhepDto>, ICommand
+    public class UpdateChiTietNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>,ICommand
     {
-        public string MaSoNhanVien { get; set; }
+        public string Id { get; set; } // Use this as the primary key
+        
         public int LoaiNghiPhep { get; set; }
         public int TongSoGio { get; set; }
         public int SoGioDaNghiPhep { get; set; }
         public int SoGioConLai { get; set; }
         public int NamHieuLuoc { get; set; }
-
-
     }
 }

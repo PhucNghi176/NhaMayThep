@@ -10,7 +10,7 @@ namespace NhaMapThep.Domain.Entities
     {
       
         [ForeignKey("NhanVien")]
-        public Guid MaSoNhanVien { get; set; }
+        public string MaSoNhanVien { get; set; }
 
         public int LoaiNghiPhep { get; set; }
         public int TongSoGio { get; set; }
