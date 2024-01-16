@@ -20,7 +20,6 @@ namespace NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong
         {
             var add = new LoaiHopDongEntity()
             {
-                ID = 0,
                 Name = command.TenHopDong
             };
             _loaiHopDongRepository.Add(add);

@@ -22,7 +22,6 @@ namespace NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu
         {
             var add = new ThongTinChucVuEntity()
             {
-                ID = 0,
                 Name = command.TenChucVu
             };
             _chucVuRepository.Add(add);

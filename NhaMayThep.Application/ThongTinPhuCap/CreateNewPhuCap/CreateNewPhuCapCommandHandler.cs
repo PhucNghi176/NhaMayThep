@@ -22,7 +22,6 @@ namespace NhaMayThep.Application.ThongTinPhuCap.CreateNewPhuCap
         {
             var add = new ThongTinPhuCapEntity()
             {
-                ID = 0,
                 Name = command.TenPhuCap,
                 PhanTramPhuCap = command.PhanTramPhuCap
             };

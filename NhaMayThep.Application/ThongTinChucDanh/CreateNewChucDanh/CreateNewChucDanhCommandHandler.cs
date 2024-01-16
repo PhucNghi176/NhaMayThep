@@ -21,7 +21,6 @@ namespace NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh
         {
             var add = new ThongTinChucDanhEntity()
             {
-                ID = 0,
                 Name = command.TenChucDanh
             };
             _chucDanhRepository.Add(add);

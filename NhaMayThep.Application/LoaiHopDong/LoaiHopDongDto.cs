@@ -16,12 +16,10 @@ namespace NhaMayThep.Application.LoaiHopDong
         {
             return new LoaiHopDongDto()
             {
-                ID = id,
                 Name = tenHopDong
             };
         }
 
-        public int ID { get; set; }
         public string Name {  get; set; }
         public void Mapping(Profile profile)
         {
