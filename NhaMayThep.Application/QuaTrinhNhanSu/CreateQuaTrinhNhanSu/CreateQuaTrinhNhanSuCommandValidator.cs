@@ -25,7 +25,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
             _chucDanhRepository = chucDanhRepository;
             _thongTinQuaTrinhNhanSu = thongTinQuaTrinhNhanSuRepository;
+<<<<<<< HEAD
             ConfigureValidationRules();
+=======
+            ConfigureValidationRules();          
+>>>>>>> 9616ee7 (Nam:Done Create phongBan, Create quaTrinhNhanSu)
         }
         private void ConfigureValidationRules()
         {

@@ -19,7 +19,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
         public async Task<QuaTrinhNhanSuDto> Handle(CreateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
             QuaTrinhNhanSuEntity entity = new QuaTrinhNhanSuEntity()
+<<<<<<< HEAD
     {
+=======
+            {
+>>>>>>> 9616ee7 (Nam:Done Create phongBan, Create quaTrinhNhanSu)
                 LoaiQuaTrinhID = command.LoaiQuaTrinhID,
                 MaSoNhanVien = command.MaSoNhanVien,
                 NgayBatDau = command.NgayBatDau,
