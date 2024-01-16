@@ -26,6 +26,10 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             {
                 throw new NotFoundException($"ChiTietNgayNghiPhep with ID {request.Id} not found.");
             }
+            if(entity.NgayXoa != null)
+            {
+                throw new InvalidOperationException("This Id is already deleted");
+            }
 
             entity.NguoiXoaID = request.NguoiXoaID;
             entity.NgayXoa = DateTime.Now;

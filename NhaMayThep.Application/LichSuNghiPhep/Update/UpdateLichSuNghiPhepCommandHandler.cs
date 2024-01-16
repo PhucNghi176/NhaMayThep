@@ -25,6 +25,10 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         {
             throw new NotFoundException($"Employee with ID {request.MaSoNhanVien} not found.");
         }
+        if(existingNhanVien.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This NhanVien has been deleted");
+        }
 
         var existingNhanVien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
         if(existingNhanVien2 == null)
@@ -32,11 +36,22 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
             throw new NotFoundException($"Nguoi Duyet with ID {request.NguoiDuyet} not found.");
         }
 
+        if(existingNhanVien2.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This NhanVien has been deleted");
+        }
+
         var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (existingLsnp == null)
         {
             throw new NotFoundException($"LichSuNghiPhepNhanVienEntity with ID {request.Id} not found.");
         }
+        if(existingLsnp.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This LichSuNghiPhep has been deleted");
+        }
+
+
 
         // Update the properties of existingLsnp
         existingLsnp.LoaiNghiPhepID = request.LoaiNghiPhepID;
