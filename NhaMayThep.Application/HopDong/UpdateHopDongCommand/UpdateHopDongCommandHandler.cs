@@ -70,6 +70,7 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
             checkingHopDong.CapBacLuong = CapBacLuong;
             checkingHopDong.PhuCapID = command.PhuCapId;
             checkingHopDong.GhiChu = command.GhiChu;
+            checkingHopDong.NgayCapNhatCuoi = DateTime.Now;
             _hopDongRepository.Update(checkingHopDong);
             await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return checkingHopDong.MapToHopDongDto(_mapper);

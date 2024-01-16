@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.HopDong.GetAllHopDongQuery
             List<HopDongDto> result = new List<HopDongDto>();
             foreach(var item in list)
             {
-                if(item.NgayXoa < DateTime.UtcNow) 
+                if(item.NgayXoa != null) 
                     continue;
                 var add = item.MapToHopDongDto(_mapper);
                 result.Add(add);

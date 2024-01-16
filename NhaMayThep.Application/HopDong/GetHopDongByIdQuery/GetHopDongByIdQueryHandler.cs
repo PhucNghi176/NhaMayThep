@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using System;
 using System.Collections.Generic;
@@ -18,9 +19,11 @@ namespace NhaMayThep.Application.HopDong.GetHopDongByIdQuery
             _hopdongRepository = hopdongRepository;
             _mapper = mapper;
         }
-        public async Task<HopDongDto> Handle(GetHopDongByIdQuery command, CancellationToken cancellationToken)
+        public async Task<HopDongDto> Handle(GetHopDongByIdQuery query, CancellationToken cancellationToken)
         {
-            var result = await _hopdongRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var result = await _hopdongRepository.FindAsync(x => x.ID == query.Id, cancellationToken);
+            if (result == null || result.NgayXoa != null)
+                throw new NotFoundException($"Not found hop dong {query.Id}");
             return result.MapToHopDongDto(_mapper);
         }
     }
