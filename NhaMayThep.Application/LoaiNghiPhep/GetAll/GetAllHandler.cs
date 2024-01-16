@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.GetAll
 {
-    public class GetAllHandler : IRequestHandler<GetAllQuery,List<LoaiNghiPhepDto>>
+    public class GetAllHandler : IRequestHandler<GetAllQuery, List<LoaiNghiPhepDto>>
     {
         private readonly ILoaiNghiPhepRepository _repository;
         private readonly IMapper _mapper;
@@ -18,15 +18,15 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetAll
         {
             _repository = repository;
             _mapper = mapper;
-        }   
+        }
 
         public async Task<List<LoaiNghiPhepDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
             var lnp = await _repository.FindAllAsync();
-            if(lnp == null)
+            if (lnp == null)
             {
                 throw new NotFoundException("The list is empty");
-                
+
             }
             return lnp.MapToLoaiNghiPhepDtoList(_mapper);
         }

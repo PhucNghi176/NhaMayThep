@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.GetAll
 {
-    public class GetAllQuery : IRequest<List<LoaiNghiPhepDto>>,IQuery
+    public class GetAllQuery : IRequest<List<LoaiNghiPhepDto>>, IQuery
     {
 
     }

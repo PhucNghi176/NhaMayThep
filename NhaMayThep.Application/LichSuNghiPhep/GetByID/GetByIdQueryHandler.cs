@@ -9,10 +9,10 @@ namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
 {
     public class GetByIdQueryHandler : IRequestHandler<GetByIdQuery, LichSuNghiPhepDto>
     {
-        private readonly ILichSuNghiPhepRepo _repo;
+        private readonly ILichSuNghiPhepRepository _repo;
         private readonly IMapper _mapper;
 
-        public GetByIdQueryHandler(ILichSuNghiPhepRepo repository, IMapper mapper)
+        public GetByIdQueryHandler(ILichSuNghiPhepRepository repository, IMapper mapper)
         {
             _repo = repository;
             _mapper = mapper;

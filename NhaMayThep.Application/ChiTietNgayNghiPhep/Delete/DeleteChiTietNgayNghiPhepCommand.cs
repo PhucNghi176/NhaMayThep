@@ -1,12 +1,17 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
 {
     public class DeleteChiTietNgayNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>, ICommand
     {
-        public string Id { get; set; } // This should be the GUID ID, not MaSoNhanVien
+        public string Id { get; set; } 
         public string NguoiXoaID { get; set; }
+
     }
 }

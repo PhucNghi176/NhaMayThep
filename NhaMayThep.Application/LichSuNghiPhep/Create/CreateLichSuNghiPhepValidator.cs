@@ -8,15 +8,13 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Create
 {
-    public class CreateLSNPValidator : AbstractValidator<CreateLSNPCommand>
+    public class CreateLichSuNghiPhepValidator : AbstractValidator<CreateLichSuNghiPhepCommand>
     {
-        private readonly ILichSuNghiPhepRepo _repo;
-
-        public CreateLSNPValidator(ILichSuNghiPhepRepo repo)
+        public CreateLichSuNghiPhepValidator()
         {
-            _repo = repo;
+           
             ConfigureValidationRules();
-        }       
+        }
 
         private void ConfigureValidationRules()
         {
@@ -42,7 +40,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
                 .NotEmpty().WithMessage("Approver is required.");
 
         }
+
+
     }
-
-
 }

@@ -1,32 +1,36 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using System.Threading;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 {
-    public class UpdateChiTietNgayNghiPhepCommandHandler : IRequestHandler<UpdateChiTietNghiPhepCommand, ChiTietNgayNghiPhepDto>
+    public class UpdateChiTietNgayNghiPhepCommandHandler : IRequestHandler<UpdateChiTietNgayNghiPhepCommand, ChiTietNgayNghiPhepDto>
     {
-        private readonly IChiTietNgayNghiPhepRepo _repo;
+        private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
-
-        public UpdateChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepo repo, IMapper mapper)
+        public UpdateChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
         }
 
-        public async Task<ChiTietNgayNghiPhepDto> Handle(UpdateChiTietNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<ChiTietNgayNghiPhepDto> Handle(UpdateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var existingLsnp = await _repo.FindByIdAsync(request.Id, cancellationToken);
             if (existingLsnp == null)
             {
                 throw new NotFoundException($"ChiTietNghiPhep with Id {request.Id} not found.");
             }
-
+            if(existingLsnp.NgayXoa != null)
+            {
+                throw new NotFoundException("This ID is deleted");
+            }
 
             // Update properties
 
@@ -41,5 +45,6 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 
             return _mapper.Map<ChiTietNgayNghiPhepDto>(existingLsnp);
         }
+
     }
 }

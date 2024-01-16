@@ -8,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Delete
 {
-    public class DeleteLSNPCommand : IRequest<string>,ICommand
+    public class DeleteLichSuNghiPhepCommand : IRequest<LichSuNghiPhepDto>, ICommand
     {
         public string Id { get; set; }
+        public string NguoiXoaID { get; set; }
 
-
-        public DeleteLSNPCommand(string id)
+        public DeleteLichSuNghiPhepCommand(string id)
         {
             Id = id;
         }

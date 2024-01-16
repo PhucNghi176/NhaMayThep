@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Infrastructure.Repositories
 {
-    public class ChiTietNgayNghiPhepRepository : RepositoryBase<ChiTietNgayNghiPhepEntity, ChiTietNgayNghiPhepEntity, ApplicationDbContext>, IChiTietNgayNghiPhepRepo
+    public class ChiTietNgayNghiPhepRepository : RepositoryBase<ChiTietNgayNghiPhepEntity, ChiTietNgayNghiPhepEntity, ApplicationDbContext>, IChiTietNgayNghiPhepRepository
     {
         public ChiTietNgayNghiPhepRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper) { }
 

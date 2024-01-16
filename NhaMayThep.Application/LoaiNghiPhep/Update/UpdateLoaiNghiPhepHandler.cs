@@ -10,11 +10,12 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
     {
         private readonly ILoaiNghiPhepRepository _repository;
         private readonly IMapper _mapper;
-
-        public UpdateLoaiNghiPhepHandler(ILoaiNghiPhepRepository repository, IMapper mapper)
+        private readonly INhanVienRepository _hanVienRepository;
+        public UpdateLoaiNghiPhepHandler(ILoaiNghiPhepRepository repository, IMapper mapper, INhanVienRepository hanVienRepository)
         {
             _repository = repository;
             _mapper = mapper;
+            _hanVienRepository = hanVienRepository;
         }
 
         public async Task<LoaiNghiPhepDto> Handle(UpdateLoaiNghiPhepCommand request, CancellationToken cancellationToken)

@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
         {
 
             Id = id;
-            Name = name; 
+            Name = name;
             SoGioNghiPhep = sgnp;
 
         }

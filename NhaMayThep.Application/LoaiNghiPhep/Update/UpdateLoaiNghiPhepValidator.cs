@@ -9,7 +9,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
 {
     public class UpdateLoaiNghiPhepValidator : AbstractValidator<UpdateLoaiNghiPhepCommand>
     {
-        public UpdateLoaiNghiPhepValidator() 
+        public UpdateLoaiNghiPhepValidator()
         {
             RuleFor(command => command.Id).GreaterThan(0);
             RuleFor(command => command.Name).NotEmpty().WithMessage("Name is required.");

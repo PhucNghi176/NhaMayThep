@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 {
-    public class UpdateChiTietNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>,ICommand
+    public class UpdateChiTietNgayNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>, ICommand
     {
         public string Id { get; set; } // Use this as the primary key
 
@@ -17,5 +17,6 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
         public double SoGioDaNghiPhep { get; set; }
         public double SoGioConLai { get; set; }
         public int NamHieuLuc { get; set; }
+
     }
 }

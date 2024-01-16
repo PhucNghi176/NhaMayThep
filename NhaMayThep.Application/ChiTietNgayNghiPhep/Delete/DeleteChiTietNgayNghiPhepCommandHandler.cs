@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using System;
 using System.Threading;
@@ -11,10 +10,10 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
 {
     public class DeleteChiTietNgayNghiPhepCommandHandler : IRequestHandler<DeleteChiTietNgayNghiPhepCommand, ChiTietNgayNghiPhepDto>
     {
-        private readonly IChiTietNgayNghiPhepRepo _repo;
+        private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
 
-        public DeleteChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepo repo, IMapper mapper)
+        public DeleteChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
@@ -22,7 +21,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(DeleteChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _repo.FindByIdAsync(request.Id, cancellationToken); // Use Id here
+            var entity = await _repo.FindByIdAsync(request.Id, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException($"ChiTietNgayNghiPhep with ID {request.Id} not found.");

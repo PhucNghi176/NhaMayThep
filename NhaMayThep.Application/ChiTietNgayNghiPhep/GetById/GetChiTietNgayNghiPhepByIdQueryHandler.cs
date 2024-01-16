@@ -12,10 +12,10 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
 {
     public class GetChiTietNgayNghiPhepByIdQueryHandler : IRequestHandler<GetChiTietNgayNghiPhepByIdQuery, ChiTietNgayNghiPhepDto>
     {
-        private readonly IChiTietNgayNghiPhepRepo _repository;
+        private readonly IChiTietNgayNghiPhepRepository _repository;
         private readonly IMapper _mapper;
 
-        public GetChiTietNgayNghiPhepByIdQueryHandler(IChiTietNgayNghiPhepRepo repository, IMapper mapper)
+        public GetChiTietNgayNghiPhepByIdQueryHandler(IChiTietNgayNghiPhepRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

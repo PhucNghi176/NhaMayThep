@@ -30,8 +30,9 @@ namespace NhaMayThep.Infrastructure
 
             services.AddTransient<IChucVuRepository, BangChucVuRepository>();
             services.AddTransient<ITinhTrangLamViecRepository, TinhTrangLamViecRepository>();
-
-
+            services.AddTransient<IChiTietNgayNghiPhepRepository, ChiTietNgayNghiPhepRepository>();
+            services.AddTransient<ILoaiNghiPhepRepository, LoaiNghiPhepRepository>();
+            services.AddTransient<ILichSuNghiPhepRepository, LichSuNghiPhepRepository>();
             return services;
         }
     }

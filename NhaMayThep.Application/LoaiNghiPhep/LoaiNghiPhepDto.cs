@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep
 {
-    public class LoaiNghiPhepDto :IMapFrom<LoaiNghiPhepEntity>
+    public class LoaiNghiPhepDto : IMapFrom<LoaiNghiPhepEntity>
     {
         public int ID { get; set; }
         public string Name { get; set; }
@@ -17,9 +17,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<LoaiNghiPhepEntity,LoaiNghiPhepDto>();
+            profile.CreateMap<LoaiNghiPhepEntity, LoaiNghiPhepDto>();
         }
-
-
     }
 }

@@ -7,13 +7,12 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.GetById
 {
-    public class GetLnpByIdValidator : AbstractValidator<GetLnpByIdQuery>
+    public class GetLoaiNghiPhepValidator : AbstractValidator<GetLoaiNghiPhepByIdQuery>
     {
-
-        public GetLnpByIdValidator() {
+        public GetLoaiNghiPhepValidator()
+        {
             ConfigureValidationRules();
         }
-
         private void ConfigureValidationRules()
         {
             RuleFor(x => x.id).NotEmpty().WithMessage("ID is required");

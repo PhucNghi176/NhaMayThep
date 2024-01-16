@@ -10,11 +10,11 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetAll
 {
-    public class GetAllChiTietNghiPhepQueryHandler : IRequestHandler<GetAllChiTietNghiPhepQuery,List<ChiTietNgayNghiPhepDto>>
+    public class GetAllChiTietNghiPhepQueryHandler : IRequestHandler<GetAllChiTietNghiPhepQuery, List<ChiTietNgayNghiPhepDto>>
     {
-        private readonly IChiTietNgayNghiPhepRepo _repo;
+        private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
-        public GetAllChiTietNghiPhepQueryHandler(IChiTietNgayNghiPhepRepo repo, IMapper mapper)
+        public GetAllChiTietNghiPhepQueryHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;

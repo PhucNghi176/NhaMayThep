@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Create
 {
-    public class CreateCommandHandler : IRequestHandler<CreateLoaiNghiPhepCommand,LoaiNghiPhepDto>
+    public class CreateCommandHandler : IRequestHandler<CreateLoaiNghiPhepCommand, LoaiNghiPhepDto>
 
     {
 
@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
         {
             _repository = repository;
             _mapper = mapper;
-        }   
+        }
 
         public async Task<LoaiNghiPhepDto> Handle(CreateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
                 Name = request.Name,
                 SoGioNghiPhep = request.SoGioNghiPhep
             };
-             _repository.Add(loaiNghiPhepEntity);
+            _repository.Add(loaiNghiPhepEntity);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return loaiNghiPhepEntity.MapToLoaiNghiPhepDto(_mapper);
 

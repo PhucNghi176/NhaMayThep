@@ -9,7 +9,8 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
 {
     public class GetChiTietNgayNghiPhepByIdQueryValidator : AbstractValidator<GetChiTietNgayNghiPhepByIdQuery>
     {
-        public GetChiTietNgayNghiPhepByIdQueryValidator() {
+        public GetChiTietNgayNghiPhepByIdQueryValidator()
+        {
             ConfigureValidationRules();
         }
 

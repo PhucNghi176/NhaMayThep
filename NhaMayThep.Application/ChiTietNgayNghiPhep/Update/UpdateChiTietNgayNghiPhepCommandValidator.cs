@@ -7,16 +7,15 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 {
-    public class UpdateChiTietNgayNghiPhepValidator : AbstractValidator<UpdateChiTietNghiPhepCommand>
+    public class UpdateChiTietNgayNghiPhepCommandValidator : AbstractValidator<UpdateChiTietNgayNghiPhepCommand>
     {
-        public UpdateChiTietNgayNghiPhepValidator()
+        public UpdateChiTietNgayNghiPhepCommandValidator()
         {
             ConfigureValidationRules();
         }
-
         private void ConfigureValidationRules()
         {
-           
+
             RuleFor(cmd => cmd.Id)
             .NotEmpty().WithMessage("ID is required..");
 

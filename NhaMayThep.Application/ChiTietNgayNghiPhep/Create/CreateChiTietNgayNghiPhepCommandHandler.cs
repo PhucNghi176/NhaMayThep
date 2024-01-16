@@ -4,31 +4,35 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
 {
     public class CreateChiTietNgayNghiPhepCommandHandler : IRequestHandler<CreateChiTietNgayNghiPhepCommand, ChiTietNgayNghiPhepDto>
     {
-        private readonly IChiTietNgayNghiPhepRepo _repo;
         private readonly IMapper _mapper;
+        private readonly IChiTietNgayNghiPhepRepository _repository;
+        private readonly INhanVienRepository _hanVienRepository;
 
-        public CreateChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepo repo, IMapper mapper)
+        public CreateChiTietNgayNghiPhepCommandHandler(IMapper mapper, IChiTietNgayNghiPhepRepository repository, INhanVienRepository hanVienRepository)
         {
-            _repo = repo;
             _mapper = mapper;
+            _repository = repository;
+            _hanVienRepository = hanVienRepository;
         }
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(CreateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _repo.FindByIdAsync(request.MaSoNhanVien);
-            if (nhanvien == null)
+            var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+            if (nhanVien == null)
             {
-                throw new NotFoundException("Nhan Vien not found");
+                throw new NotFoundException("Nhan Vien does not exist.");
             }
 
-            var ctnp = new ChiTietNgayNghiPhepEntity()
+            var ctnp = new ChiTietNgayNghiPhepEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,
                 LoaiNghiPhepID = request.LoaiNghiPhepID,
@@ -38,10 +42,9 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
                 NamHieuLuc = request.NamHieuLuc
             };
 
-            _repo.Add(ctnp);
-            await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
+            _repository.Add(ctnp);
+            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return ctnp.MapToChiTietNgayNghiPhepDto(_mapper);
-          
         }
     }
 }

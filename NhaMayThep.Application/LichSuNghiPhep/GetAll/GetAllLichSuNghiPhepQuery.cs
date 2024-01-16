@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LoaiNghiPhep;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.GetAll
 {
-    public class GetAllLSNPQuery : IRequest<List<LichSuNghiPhepDto>>, IQuery
+    public class GetAllLichSuNghiPhepQuery : IRequest<List<LichSuNghiPhepDto>>, IQuery
     {
 
     }

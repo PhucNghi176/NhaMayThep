@@ -12,12 +12,11 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep
     public class ChiTietNgayNghiPhepDto : IMapFrom<ChiTietNgayNghiPhepEntity>
     {
         public string MaSoNhanVien { get; set; }
-        // In ChiTietNgayNghiPhepDto, UpdateChiTietNghiPhepCommand, and CreateChiTietNgayNghiPhepCommand:
+        public int LoaiNghiPhepID { get; set; }
         public double TongSoGio { get; set; }
         public double SoGioDaNghiPhep { get; set; }
         public double SoGioConLai { get; set; }
-        public int NamHieuLuc { get; set; } // Note the name change from NamHieuLuoc to NamHieuLuc
-        public int LoaiNghiPhepID { get; set; }
+        public int NamHieuLuc { get; set; }
 
         public void Mapping(Profile profile)
         {

@@ -1,4 +1,4 @@
-﻿using MediatR;
+﻿﻿using MediatR;
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
 {
     public class GetChiTietNgayNghiPhepByIdQuery : IRequest<ChiTietNgayNghiPhepDto>

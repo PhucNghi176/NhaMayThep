@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Delete
 {
-    public class DeleteLoaiNghiPhepHandler : IRequestHandler<DeleteLoaiNghiPhepCommand,LoaiNghiPhepDto>
+    public class DeleteLoaiNghiPhepHandler : IRequestHandler<DeleteLoaiNghiPhepCommand, LoaiNghiPhepDto>
     {
-            private readonly ILoaiNghiPhepRepository _repository;
+        private readonly ILoaiNghiPhepRepository _repository;
         private readonly IMapper _mapper;
         public DeleteLoaiNghiPhepHandler(ILoaiNghiPhepRepository repository, IMapper mapper)
         {

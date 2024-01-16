@@ -7,9 +7,12 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Delete
 {
-    public class DeleteLSNPValidator : AbstractValidator<DeleteLSNPCommand>
+    public class DeleteLichSuNghiPhepValidator: AbstractValidator<DeleteLichSuNghiPhepCommand>
+
     {
-        public DeleteLSNPValidator() {
+
+        public DeleteLichSuNghiPhepValidator()
+        {
             ConfigureValidationRules();
         }
 
@@ -19,6 +22,8 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Delete
             RuleFor(x => x.Id)
                 .NotEmpty()
                 .WithMessage("Id is requied");
+
+            RuleFor(x => x.NguoiXoaID).NotEmpty().WithMessage("Nguoi xoa id is Required");
         }
     }
 }

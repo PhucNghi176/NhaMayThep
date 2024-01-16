@@ -17,6 +17,5 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
         public double SoGioConLai { get; set; }
         public int NamHieuLuc { get; set; }
 
-
     }
 }
