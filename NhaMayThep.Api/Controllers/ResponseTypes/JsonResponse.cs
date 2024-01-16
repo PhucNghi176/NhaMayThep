@@ -13,10 +13,6 @@ namespace NhaMapThep.Api.Controllers.ResponseTypes
             Value = value;
         }
 
-        public JsonResponse(List<LoaiCongTacDto> result)
-        {
-        }
-
         public T Value { get; set; }
     }
 }
