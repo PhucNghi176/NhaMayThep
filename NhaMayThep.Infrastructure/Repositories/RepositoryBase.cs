@@ -13,7 +13,7 @@ namespace NhaMapThep.Infrastructure.Repositories
        where TPersistence : class, TDomain
        where TDomain : class
     {
-        private readonly TDbContext _dbContext;
+        protected readonly TDbContext _dbContext;
         private readonly IMapper _mapper;
 
         public RepositoryBase(TDbContext dbContext, IMapper mapper)
@@ -23,6 +23,7 @@ namespace NhaMapThep.Infrastructure.Repositories
         }
 
         public IUnitOfWork UnitOfWork => _dbContext;
+
 
         public virtual void Remove(TDomain entity)
         {
@@ -254,5 +255,6 @@ namespace NhaMapThep.Infrastructure.Repositories
             var projection = queryable.ProjectTo<TProjection>(_mapper.ConfigurationProvider);
             return await projection.FirstOrDefaultAsync(cancellationToken);
         }
+
     }
 }

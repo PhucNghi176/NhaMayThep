@@ -4,6 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Domain.Repositories;
 using NhaMayThep.Infrastructure.Persistence;
 using NhaMayThep.Infrastructure.Repositories;
 using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
@@ -27,7 +28,8 @@ namespace NhaMayThep.Infrastructure
             });
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
-
+            services.AddTransient<ITrinhDoHocVanRepository, TrinhDoHocVanRepository>();
+            services.AddTransient<IThongTinDaoTaoRepository, ThongTinDaoTaoRepository>();
             services.AddTransient<IChucVuRepository, BangChucVuRepository>();
             services.AddTransient<ITinhTrangLamViecRepository, TinhTrangLamViecRepository>();
 
