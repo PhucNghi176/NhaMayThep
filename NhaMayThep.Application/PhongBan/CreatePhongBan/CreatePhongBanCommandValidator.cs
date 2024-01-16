@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
 using System.Collections.Generic;
@@ -12,9 +13,11 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
     public class CreatePhongBanCommandValidator : AbstractValidator<CreatePhongBanCommand>
     {
         IPhongBanRepository _phongBanRepository;
-        public CreatePhongBanCommandValidator(IPhongBanRepository phongBanRepository)
+        INhanVienRepository _nhanVienRepository;
+        public CreatePhongBanCommandValidator(IPhongBanRepository phongBanRepository, INhanVienRepository nhanVienRepository)
         {
             _phongBanRepository = phongBanRepository;
+            _nhanVienRepository = nhanVienRepository;
             ConfigureValidationRules();
         }
 
@@ -28,6 +31,20 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
                 .NotEmpty().WithMessage("Name is require")
                 //.MinimumLength(5).WithMessage("Name must be at least 5 character")
                 .Must(AvailableName).WithMessage("Phong ban is already exist");
+
+            RuleFor(v => v.NguoiTaoID)
+                .Must(ExistNguoiTao).WithMessage("Nguoi tao is not exist");
+                
+        }
+
+        private bool ExistNguoiTao(string id)
+        {
+            var nguoiTao = _nhanVienRepository.FindAsync(x => x.ID == id).Result;
+            if (nguoiTao != null)
+            { 
+                return nguoiTao.NgayXoa == null ? true : false;
+            }
+            return false;
         }
 
         private bool AvailableID(int id)

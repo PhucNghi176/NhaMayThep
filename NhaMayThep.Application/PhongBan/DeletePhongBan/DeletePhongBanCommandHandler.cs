@@ -22,6 +22,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == command.ID).Result;
             phongBan.NgayXoa = DateTime.UtcNow;
+            phongBan.NguoiXoaID = command.NguoiXoaID;
             _phongBanRepository.Update(phongBan);
             await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
         }

@@ -24,6 +24,8 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
         {
             var entity = _phongBanRepository.FindAsync(x => x.ID == command.ID).Result;
             entity.Name = command.Name;
+            entity.NguoiCapNhatID = command.NguoiCapNhatID;
+            entity.NgayCapNhat = DateTime.UtcNow;
             _phongBanRepository.Update(entity);
             await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return entity.MapToPhongBanDto(_mapper);

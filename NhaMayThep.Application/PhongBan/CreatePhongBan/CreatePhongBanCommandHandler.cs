@@ -23,10 +23,12 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
         }
         public async Task<PhongBanDto> Handle(CreatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            PhongBanEntity entity = new PhongBanEntity() 
-            { 
+            PhongBanEntity entity = new PhongBanEntity()
+            {
                 ID = command.ID,
                 Name = command.Name,
+                NguoiTaoID = command.NguoiTaoID,
+                NgayTao = DateTime.UtcNow              
             };
            _phongBanRepository.Add(entity);
             await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
