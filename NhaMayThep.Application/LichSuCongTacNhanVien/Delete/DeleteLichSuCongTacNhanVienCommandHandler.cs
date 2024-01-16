@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
             {
                return "Delete Failed";
             }
-            lichSuCongTacNhanVien.NgayXoa = new DateTime();
+            lichSuCongTacNhanVien.NgayXoa = DateTime.Now;
             _lichSuCongTacNhanVienRepository.Update(lichSuCongTacNhanVien);
             await _lichSuCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return "Delete success";
