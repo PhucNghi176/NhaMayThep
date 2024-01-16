@@ -16,13 +16,5 @@ namespace NhaMayThep.Infrastructure.Repositories
         public ThongTinGiamTruRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
-        public async Task<List<ThongTinGiamTruEntity>?> FindAll(CancellationToken cancellationToken = default)
-        {
-            return await FindAllAsync(cancellationToken);
-        }
-        public async Task<ThongTinGiamTruEntity?> FindById(int Id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID == Id, cancellationToken);
-        }
     }
 }

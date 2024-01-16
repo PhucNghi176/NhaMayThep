@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetThongTinCongDoan
+namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienId
 {
-    public class GetThongTinCongDoanQueryValidator: AbstractValidator<GetThongTinCongDoanQuery>
+    public class GetThongTinCongDoanByNhanVienIdQueryValidator: AbstractValidator<GetThongTinCongDoanByNhanVienIdQuery>
     {
-        public GetThongTinCongDoanQueryValidator()
+        public GetThongTinCongDoanByNhanVienIdQueryValidator()
         {
             RuleFor(x => x.Id)
                .NotEmpty().WithMessage("Id must not be empty")

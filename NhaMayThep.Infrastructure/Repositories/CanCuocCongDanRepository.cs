@@ -16,9 +16,5 @@ namespace NhaMayThep.Infrastructure.Repositories
         public CanCuocCongDanRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
-        public async Task<CanCuocCongDanEntity?> FindById(string cccd, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.CanCuocCongDan.Equals(cccd), cancellationToken);
-        }
     }
 }

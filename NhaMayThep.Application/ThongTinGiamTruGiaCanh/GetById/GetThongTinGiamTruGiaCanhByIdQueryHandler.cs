@@ -8,13 +8,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetThongTinGiamTruGiaCanh
+namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById
 {
-    public class GetThongTinGiamTruGiaCanhQueryHandler : IRequestHandler<GetThongTinGiamTruGiaCanhQuery, ThongTinGiamTruGiaCanhDto>
+    public class GetThongTinGiamTruGiaCanhByIdQueryHandler : IRequestHandler<GetThongTinGiamTruGiaCanhByIdQuery, ThongTinGiamTruGiaCanhDto>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IMapper _mapper;
-        public GetThongTinGiamTruGiaCanhQueryHandler(
+        public GetThongTinGiamTruGiaCanhByIdQueryHandler(
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             IMapper mapper)
@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetThongTinGiamTruGiaCan
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _mapper = mapper;
         }
-        public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhQuery request, CancellationToken cancellationToken)
+        public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhByIdQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindById(request.Id, cancellationToken);
             if (giamtrugiacanh == null)

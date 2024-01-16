@@ -8,26 +8,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetThongTinGiamTruGiaCanhs
+namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
 {
-    public class GetThongTinGiamTruGiaCanhsQueryHandler : IRequestHandler<GetThongTinGiamTruGiaCanhsQuery, List<ThongTinGiamTruGiaCanhDto>>
+    public class GetAllThongTinGiamTruGiaCanhQueryHandler : IRequestHandler<GetAllThongTinGiamTruGiaCanhQuery, List<ThongTinGiamTruGiaCanhDto>>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IMapper _mapper;
-        public GetThongTinGiamTruGiaCanhsQueryHandler(
-            IThongTinGiamTruRepository thongTinGiamTruRepository,
+        public GetAllThongTinGiamTruGiaCanhQueryHandler(
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             IMapper mapper)
         {
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _mapper = mapper;
         }
-        public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetThongTinGiamTruGiaCanhsQuery request, CancellationToken cancellationToken)
+        public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetAllThongTinGiamTruGiaCanhQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository.FindAll(cancellationToken);
             if (giamtrugiacanhs == null || !giamtrugiacanhs.Any())
             {
-                throw new NotFoundException("Does not any ThongTinCongDoan exists");
+                throw new NotFoundException("Does not any ThongTinGiamTruGiaCanh exists");
             }
             return giamtrugiacanhs.MapToThongTinGiamTruGiaCanhDtoList(_mapper);
         }

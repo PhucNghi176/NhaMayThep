@@ -16,10 +16,10 @@ namespace NhaMapThep.Domain.Entities.Base
 
 
         public string? NguoiTaoID { get; set; }
-        public DateTime NgayTao { get; set; }
+        public DateTime? NgayTao { get; set; }
 
         public string? NguoiCapNhatID { get; set; }
-        public DateTime NgayCapNhatCuoi { get; set; }
+        public DateTime? NgayCapNhatCuoi { get; set; }
 
         public string? NguoiXoaID { get; set; }
         public DateTime? NgayXoa {  get; set; }

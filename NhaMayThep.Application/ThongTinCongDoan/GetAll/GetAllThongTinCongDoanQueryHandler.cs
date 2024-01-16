@@ -8,20 +8,20 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetAllThongTinCongDoan
+namespace NhaMayThep.Application.ThongTinCongDoan.GetAll
 {
-    public class GetThongTinCongDoansQueryhandler : IRequestHandler<GetThongTinCongDoansQuery, List<ThongTinCongDoanDto>>
+    public class GetAllThongTinCongDoanQueryHandler : IRequestHandler<GetAllThongTinCongDoanQuery, List<ThongTinCongDoanDto>>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly IMapper _mapper;
-        public GetThongTinCongDoansQueryhandler(
+        public GetAllThongTinCongDoanQueryHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
             IMapper mapper)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _mapper = mapper;
         }
-        public async Task<List<ThongTinCongDoanDto>> Handle(GetThongTinCongDoansQuery request, CancellationToken cancellationToken)
+        public async Task<List<ThongTinCongDoanDto>> Handle(GetAllThongTinCongDoanQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoans = await _thongtinCongDoanRepository.FindAll(cancellationToken);
             if(thongtincongdoans == null || !thongtincongdoans.Any())

@@ -9,7 +9,5 @@ namespace NhaMapThep.Domain.Repositories
 {
     public interface IThongTinGiamTruRepository: IEFRepository<ThongTinGiamTruEntity, ThongTinGiamTruEntity>
     {
-        Task<List<ThongTinGiamTruEntity>?> FindAll(CancellationToken cancellationToken = default);
-        Task<ThongTinGiamTruEntity?> FindById(int Id, CancellationToken cancellationToken = default);
     }
 }

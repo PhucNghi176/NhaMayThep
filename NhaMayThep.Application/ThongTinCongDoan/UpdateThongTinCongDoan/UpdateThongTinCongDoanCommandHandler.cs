@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
@@ -10,21 +11,24 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
-    public class UpdateThongTinCongDoanCommandHandler : IRequestHandler<UpdateThongTinCongDoanCommand, bool>
+    public class UpdateThongTinCongDoanCommandHandler : IRequestHandler<UpdateThongTinCongDoanCommand, ThongTinCongDoanDto>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanvienRepository;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IMapper _mapper;
         public UpdateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
             ICurrentUserService currentUserService,
-            INhanVienRepository nhanvienRepository)
+            INhanVienRepository nhanvienRepository,
+            IMapper mapper)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _currentUserService = currentUserService;
             _nhanvienRepository = nhanvienRepository;
+            _mapper = mapper;
         }
-        public async Task<bool> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
+        public async Task<ThongTinCongDoanDto> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan= await _thongtinCongDoanRepository.FindById(request.Id, cancellationToken);
             if (thongtincongdoan == null) 
@@ -38,20 +42,16 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
             }
             else
             {
-                thongtincongdoan.NguoiCapNhatID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3";//Not authorize
+                thongtincongdoan.NguoiCapNhatID = request.NguoiCapNhatid;
                 thongtincongdoan.NhanVienID = nhanvien.ID;
                 thongtincongdoan.NhanVien = nhanvien;
                 thongtincongdoan.NgayCapNhatCuoi = DateTime.Now;
                 thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
                 thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
                 _thongtinCongDoanRepository.Update(thongtincongdoan);
-                var result = await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                if (result > 0)
-                {
-                    return true;
-                }
+                await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
             }
-            return false;
         }
     }
 }

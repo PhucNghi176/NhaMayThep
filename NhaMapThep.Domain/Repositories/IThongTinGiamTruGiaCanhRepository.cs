@@ -12,7 +12,7 @@ namespace NhaMapThep.Domain.Repositories
     {
         Task<List<ThongTinGiamTruGiaCanhEntity>?> FindAll(CancellationToken cancellationToken = default);
         Task<ThongTinGiamTruGiaCanhEntity?> FindById(string Id, CancellationToken cancellationToken = default);
-        Task<ThongTinGiamTruGiaCanhEntity?> FindByNhanVienId(string Id, CancellationToken cancellationToken = default);
+        Task<List<ThongTinGiamTruGiaCanhEntity>?> FindByNhanVienId(string Id, CancellationToken cancellationToken = default);
         Task<ThongTinGiamTruGiaCanhEntity?> FindByCanCuocCongDan(string cccd, CancellationToken cancellationToken = default);
 
     }

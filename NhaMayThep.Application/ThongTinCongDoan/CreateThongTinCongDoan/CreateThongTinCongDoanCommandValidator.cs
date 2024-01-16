@@ -14,7 +14,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             RuleFor(x => x.NhanVienID)
                 .NotEmpty().WithMessage("NhanVienID must not be empty")
                 .NotNull().WithMessage("NhanVienID must not be null")
-                .Must(x => Guid.TryParseExact(x,"N",out _)).WithMessage("The NhanVienID is not correct");
+                .Must(x => Guid.TryParseExact(x,"N",out _)).WithMessage("The NhanVienID is incorrect");
             RuleFor(x => x.ThuKyCongDoan)
                 .Must(x => x == true || x == false)
                 .WithMessage("ThuKyCongDoan must be either true or false");

@@ -9,6 +9,5 @@ namespace NhaMapThep.Domain.Repositories
 {
     public interface ICanCuocCongDanRepository: IEFRepository<CanCuocCongDanEntity, CanCuocCongDanEntity>
     {
-        Task<CanCuocCongDanEntity?> FindById(string cccd, CancellationToken cancellationToken = default);
     }
 }

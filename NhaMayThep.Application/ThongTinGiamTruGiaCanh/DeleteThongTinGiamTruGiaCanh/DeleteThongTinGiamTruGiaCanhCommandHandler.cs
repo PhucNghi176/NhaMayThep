@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh
 {
-    public class DeleteThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<DeleteThongTinGiamTruGiaCanhCommand, bool>
+    public class DeleteThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<DeleteThongTinGiamTruGiaCanhCommand, int>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _currentUserService = currentUserService;
         }
-        public async Task<bool> Handle(DeleteThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(DeleteThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository.FindById(request.Id, cancellationToken);
             if(thongtingiamtru == null)
@@ -33,13 +33,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
                 thongtingiamtru.NguoiXoaID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3"; //Not authorize
                 thongtingiamtru.NgayXoa = DateTime.Now;
                 _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-                var result = await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                if (result > 0)
-                {
-                    return true;
-                }
+                return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);  
             }
-            return false;
         }
     }
 }

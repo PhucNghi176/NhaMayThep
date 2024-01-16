@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
-    public class UpdateThongTinCongDoanCommand: IRequest<bool>, ICommand
+    public class UpdateThongTinCongDoanCommand: IRequest<ThongTinCongDoanDto>, ICommand
     {
         public UpdateThongTinCongDoanCommand(
             string id, 
@@ -21,6 +21,15 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
             ThuKyCongDoan = thukycongdoan;
             NgayGiaNhap= ngaygianhap;
         }
+        public void NguoiCapNhat(string value)
+        {
+            NguoiCapNhatId = value;
+        }
+        public string? NguoiCapNhatid
+        {
+            get { return NguoiCapNhatId; }
+        }
+        private string? NguoiCapNhatId;
         public string Id { get; set; }
         public string NhanVienId { get; set; }
         public bool ThuKyCongDoan { get; set; }

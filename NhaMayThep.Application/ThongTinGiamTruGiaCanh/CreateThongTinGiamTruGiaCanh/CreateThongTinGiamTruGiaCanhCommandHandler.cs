@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh
 {
-    public class CreateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<CreateThongTinGiamTruGiaCanhCommand, bool>
+    public class CreateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<CreateThongTinGiamTruGiaCanhCommand, int>
     {
         private readonly INhanVienRepository _nhanvienRepository;
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
@@ -31,32 +31,32 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             _canCuocCongDanRepository = canCuocCongDanRepository;
             _currentUserService = currentUserService;
         }
-        public async Task<bool> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await _nhanvienRepository.FindById(request.NhanVienID, cancellationToken);
             if(nhanvien == null)
             {
-                throw new NotFoundException("NhanVien does not exists");
+                throw new NotFoundException("NhanVien does not exists.");
             }
-            var giamtru = await _thongTinGiamTruRepository.FindById(request.MaGiamTruID, cancellationToken);
+            var giamtru = await _thongTinGiamTruRepository.FindAsync(x=> x.ID== request.MaGiamTruID, cancellationToken);
             if (giamtru == null)
             {
-                throw new NotFoundException("Giamtru does not exists");
+                throw new NotFoundException("GiamTruGiaCanh does not exists.");
             }
-            var cccd = await _canCuocCongDanRepository.FindById(request.CanCuocCongDan, cancellationToken);
+            var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
             if(cccd == null)
             {
-                throw new NotFoundException("Can Cuoc Cong Dan does not exists");
+                throw new NotFoundException("CanCuocCongDan does not exists.");
             }
             else
             {
                 if(await _thongTinGiamTruGiaCanhRepository.FindByCanCuocCongDan(cccd.CanCuocCongDan, cancellationToken) != null)
                 {
-                    throw new NotFoundException("ThongTinMienTruGiaCanh with this Can Cuoc Cong Dan has exists");
+                    throw new NotFoundException("ThongTinMienTruGiaCanh for this CanCuocCongDan already exists.");
                 }
                 var giamtrugiacanh = new ThongTinGiamTruGiaCanhEntity
                 {
-                    NguoiTaoID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3",
+                    NguoiTaoID = request.NguoiTaoId,
                     NhanVienID = nhanvien.ID,
                     MaGiamTruID = giamtru.ID,
                     NhanVien = nhanvien,
@@ -67,13 +67,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                     NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
                 };
                 _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-                var result = await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                if (result > 0)
-                {
-                    return true;
-                }
+                return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             }
-            return false;
         }
     }
 }

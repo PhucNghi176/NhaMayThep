@@ -6,12 +6,13 @@ using NhaMayThep.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
 {
-    public class CreateThongTinCongDoanCommandHandler : IRequestHandler<CreateThongTinCongDoanCommand, bool>
+    public class CreateThongTinCongDoanCommandHandler : IRequestHandler<CreateThongTinCongDoanCommand, int>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanVienRepository;
@@ -25,7 +26,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _currentUserService = currentUserService;
         }
-        public async Task<bool> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
+        public async Task<int> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await _nhanVienRepository.FindById(request.NhanVienID, cancellationToken);
             if(nhanvien == null)
@@ -38,21 +39,13 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             }
             var thongtincongdoan = new ThongTinCongDoanEntity
             {
-                NguoiTaoID= _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3",
+                NguoiTaoID= request.NguoiTaoId,
                 ThuKiCongDoan = request.ThuKyCongDoan,
                 NgayGiaNhap = request.NgayGiaNhap,
                 NhanVien = nhanvien,
             };
             _thongtinCongDoanRepository.Add(thongtincongdoan);
-            var result= await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if(result > 0)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);    
         }
     }
 }

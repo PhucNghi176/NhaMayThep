@@ -1,4 +1,5 @@
-﻿using MediatR;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
@@ -11,26 +12,29 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh
 {
-    public class UpdateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<UpdateThongTinGiamTruGiaCanhCommand, bool>
+    public class UpdateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<UpdateThongTinGiamTruGiaCanhCommand, ThongTinGiamTruGiaCanhDto>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
         private readonly ICurrentUserService _currentUserService;
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
+        private readonly IMapper _mapper;
         public UpdateThongTinGiamTruGiaCanhCommandHandler(
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             ICurrentUserService currentUserService,
-            ICanCuocCongDanRepository canCuocCongDanRepository)
+            ICanCuocCongDanRepository canCuocCongDanRepository,
+            IMapper mapper)
         {
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
             _currentUserService = currentUserService;
             _canCuocCongDanRepository = canCuocCongDanRepository;
+            _mapper = mapper;
         }
-        public async Task<bool> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
+        public async Task<ThongTinGiamTruGiaCanhDto> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
-            var giamtru = await _thongTinGiamTruRepository.FindById(request.MaGiamTruID, cancellationToken);
+            var giamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
             if (giamtru == null)
             {
                 throw new NotFoundException("Giamtru does not exists");
@@ -42,12 +46,12 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             }
             else
             {
-                var cccd = await _canCuocCongDanRepository.FindById(request.CanCuocCongDan, cancellationToken);
+                var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
                 if(cccd == null)
                 {
                     throw new NotFoundException($"Can Cuoc Cong Dan {request.CanCuocCongDan} does not exists");
                 }
-                thongtingiamtru.NguoiCapNhatID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3"; //Not authorize
+                thongtingiamtru.NguoiCapNhatID = request.NguoiCapNhatid;
                 thongtingiamtru.NgayCapNhatCuoi = DateTime.Now;
                 thongtingiamtru.MaGiamTruID = giamtru.ID;
                 thongtingiamtru.ThongTinGiamTru = giamtru;
@@ -56,13 +60,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
                 thongtingiamtru.CanCuocCongDan = cccd.CanCuocCongDan;
                 thongtingiamtru.NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc;
                 _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-                var result = await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                if (result > 0)
-                {
-                    return true;
-                }
+                await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return thongtingiamtru.MapToThongTinGiamTruGiaCanhDto(_mapper);
             }
-            return false;
         }
     }
 }

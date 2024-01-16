@@ -8,28 +8,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetThongTinCongDoan
+namespace NhaMayThep.Application.ThongTinCongDoan.GetById
 {
-    public class GetThongTinCongDoanQueryHandler : IRequestHandler<GetThongTinCongDoanQuery, ThongTinCongDoanDto>
+    public class GetThongTinCongDoanByIdQueryHandler : IRequestHandler<GetThongTinCongDoanByIdQuery, ThongTinCongDoanDto>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly IMapper _mapper;
-        public GetThongTinCongDoanQueryHandler(
+        public GetThongTinCongDoanByIdQueryHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
             IMapper mapper)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _mapper = mapper;
         }
-        public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanQuery request, CancellationToken cancellationToken)
+        public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByIdQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository.FindById(request.Id, cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException("ThongTinCongDoan does not exists");
             }
-            var result= thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
-            return result;
+            return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
         }
     }
 }
