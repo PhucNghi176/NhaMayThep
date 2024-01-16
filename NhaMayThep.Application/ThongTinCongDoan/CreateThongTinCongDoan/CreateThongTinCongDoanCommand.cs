@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
 {
-    public class CreateThongTinCongDoanCommand : IRequest<int>, ICommand
+    public class CreateThongTinCongDoanCommand : IRequest<string>, ICommand
     {
         public CreateThongTinCongDoanCommand(
             string nhanVienID, 

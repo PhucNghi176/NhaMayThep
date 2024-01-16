@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh
 {
-    public class CreateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<CreateThongTinGiamTruGiaCanhCommand, int>
+    public class CreateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<CreateThongTinGiamTruGiaCanhCommand, string>
     {
         private readonly INhanVienRepository _nhanvienRepository;
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             _canCuocCongDanRepository = canCuocCongDanRepository;
             _currentUserService = currentUserService;
         }
-        public async Task<int> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if(nhanvien == null)
@@ -67,7 +67,15 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                     NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
                 };
                 _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-                return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                var result= await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                if (result > 0)
+                {
+                    return "Delete Successfully!";
+                }
+                else
+                {
+                    return "Delete Failed!";
+                }
             }
         }
     }

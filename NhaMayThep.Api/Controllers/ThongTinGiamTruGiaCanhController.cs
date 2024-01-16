@@ -25,21 +25,19 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost("create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<int>>> Create(
+        public async Task<ActionResult<JsonResponse<string>>> Create(
           [FromBody] CreateThongTinGiamTruGiaCanhCommand command,
           CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value; //Only create when user is authentication and authorized
+            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
             command.NguoiTao(userid);
             var result = await _mediator.Send(command, cancellationToken);
-            return result > 0
-                ? Ok(new JsonResponse<string>("Create Successfully"))
-                : BadRequest(new JsonResponse<string>("Create Failed"));
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpPut("update")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -52,7 +50,7 @@ namespace NhaMayThep.Api.Controllers
            [FromBody] UpdateThongTinGiamTruGiaCanhCommand command,
            CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value; //Only create when user is authentication and authorized
+            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
             command.NguoiCapNhat(userid);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ThongTinGiamTruGiaCanhDto>(result));
@@ -68,12 +66,10 @@ namespace NhaMayThep.Api.Controllers
            [FromBody] DeleteThongTinGiamTruGiaCanhCommand command,
            CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value; //Only create when user is authentication and authorized
+            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
             command.NguoiXoa(userid);
             var result = await _mediator.Send(command, cancellationToken);
-            return result > 0
-               ? Ok(new JsonResponse<string>("Delete Successfully"))
-               : BadRequest(new JsonResponse<string>("Delete Failed"));
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpGet("getall")]
         [Produces(MediaTypeNames.Application.Json)]

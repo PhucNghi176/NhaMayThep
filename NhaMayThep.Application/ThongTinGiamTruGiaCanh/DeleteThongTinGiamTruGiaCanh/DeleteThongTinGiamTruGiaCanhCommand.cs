@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh
 {
-    public class DeleteThongTinGiamTruGiaCanhCommand: IRequest<int>, ICommand
+    public class DeleteThongTinGiamTruGiaCanhCommand: IRequest<string>, ICommand
     {
         public DeleteThongTinGiamTruGiaCanhCommand(string id) 
         {

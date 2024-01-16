@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
 {
-    public class DeleteThongTinCongDoanCommandHandler : IRequestHandler<DeleteThongTinCongDoanCommand, int>
+    public class DeleteThongTinCongDoanCommandHandler : IRequestHandler<DeleteThongTinCongDoanCommand, string>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _currentUserService = currentUserService;
         }
-        public async Task<int> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null)
@@ -33,7 +33,15 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
                 thongtincongdoan.NguoiXoaID = request.NguoiXoaid;
                 thongtincongdoan.NgayXoa = DateTime.Now;
                 _thongtinCongDoanRepository.Update(thongtincongdoan);
-                return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                var result = await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                if (result > 0)
+                {
+                    return "Delete Successfully!";
+                }
+                else
+                {
+                    return "Delete Failed!";
+                }
             }
         }
     }

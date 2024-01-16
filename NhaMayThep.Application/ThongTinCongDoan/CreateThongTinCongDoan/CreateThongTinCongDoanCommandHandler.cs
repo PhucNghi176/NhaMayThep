@@ -12,21 +12,18 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
 {
-    public class CreateThongTinCongDoanCommandHandler : IRequestHandler<CreateThongTinCongDoanCommand, int>
+    public class CreateThongTinCongDoanCommandHandler : IRequestHandler<CreateThongTinCongDoanCommand, string>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanVienRepository;
-        private readonly ICurrentUserService _currentUserService;
         public CreateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository, 
-            INhanVienRepository nhanVienRepository, 
-            ICurrentUserService currentUserService) 
+            INhanVienRepository nhanVienRepository) 
         {
             _nhanVienRepository = nhanVienRepository;
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
-            _currentUserService = currentUserService;
         }
-        public async Task<int> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await _nhanVienRepository.FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if(nhanvien == null)
@@ -45,7 +42,15 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
                 NhanVien = nhanvien,
             };
             _thongtinCongDoanRepository.Add(thongtincongdoan);
-            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);    
+            var result= await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            if (result > 0)
+            {
+                return "Delete Successfully!";
+            }
+            else
+            {
+                return "Delete Failed!";
+            }
         }
     }
 }
