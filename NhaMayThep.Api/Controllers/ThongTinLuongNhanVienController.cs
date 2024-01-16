@@ -51,29 +51,27 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
-        [Authorize(Roles = "Admin")]
         [ProducesResponseType(typeof(JsonResponse<ThongTinLuongNhanVienDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ThongTinLuongNhanVienDto>> DeleteUser(
-            [FromRoute] Guid id,
+            [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteThongTinLuongNhanVienCommand(id), cancellationToken);
             return result;
         }
 
-        [HttpGet("getByMSNV/{id}")]
-        [Authorize(Roles = "Admin")]
+        [HttpGet("getById/{id}")]
         [ProducesResponseType(typeof(JsonResponse<ThongTinLuongNhanVienDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<ThongTinLuongNhanVienDto>> GetUserById(
-            [FromRoute] Guid id,
+            [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetThongTinLuongNhanVienByMSNVQuery(id), cancellationToken);

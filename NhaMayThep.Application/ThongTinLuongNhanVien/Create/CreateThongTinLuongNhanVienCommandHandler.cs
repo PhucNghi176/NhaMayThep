@@ -3,14 +3,11 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.KhaiBaoTangLuong.Create;
-using NhaMayThep.Application.KhaiBaoTangLuong;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using NhaMapThep.Domain.Entities.ConfigTable;
 
 namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
 {
@@ -61,7 +58,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
                 MaSoHopDong = request.MaSoHopDong,
                 Loai = request.Loai,
                 LuongCu = request.LuongCu,
-                LuongHienTai = request.LuongHienTai,
+                LuongMoi = request.LuongMoi,
                 NgayHieuLuc = request.NgayHieuLuc
             };
 

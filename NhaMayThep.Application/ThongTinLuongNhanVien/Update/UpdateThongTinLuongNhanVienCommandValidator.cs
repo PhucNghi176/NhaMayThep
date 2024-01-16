@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
             RuleFor(x => x.LuongCu)
                 .GreaterThan(0).WithMessage("Luong Cu must be greater than 0");
 
-            RuleFor(x => x.LuongHienTai)
+            RuleFor(x => x.LuongMoi)
                 .GreaterThan(0).WithMessage("Luong Hien Tai must be greater than 0");
         }
     }

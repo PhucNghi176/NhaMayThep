@@ -25,8 +25,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
                 .ExclusiveBetween(0, 1).WithMessage("PhanTram must between 0 to 1");
 
             RuleFor(x => x.NgayApDung)
-                .NotEmpty().WithMessage("Ngay Ap Dung is Required")
-                .Must(x => x >= DateTime.Now).WithMessage("Ngay Ap Dung must be equal or greater than current date");
+                .NotEmpty().WithMessage("Ngay Ap Dung is Required");
 
             RuleFor(x => x.LyDo)
                 .NotEmpty().WithMessage("Ly do is Required")

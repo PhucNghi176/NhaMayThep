@@ -11,14 +11,14 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Infrastructure.Repositories
 {
-    public class ThongTinLuongNhanVienRepository : RepositoryBase<ThongTinLuongNhanVienEntity, ThongTinLuongNhanVienEntity, ApplicationDbContext>, IThongTinLuongNhanVienRepository
+    public class ChinhSachNhanSuRepository : RepositoryBase<ChinhSachNhanSuEntity, ChinhSachNhanSuEntity, ApplicationDbContext>, IChinhSachNhanSuRepository
     {
-        public ThongTinLuongNhanVienRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public ChinhSachNhanSuRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
 
         }
 
-        public async Task<ThongTinLuongNhanVienEntity?> FindByIdAsync(string id, CancellationToken cancellationToken = default)
+        public async Task<ChinhSachNhanSuEntity?> FindByIdAsync(int id, CancellationToken cancellationToken = default)
         {
             return await FindAsync(x => x.ID == id, cancellationToken);
         }

@@ -35,7 +35,6 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
                 throw new NotFoundException("Khai bao tang luong is not found");
             }
 
-            k.MaSoNhanVien = request.MaSoNhanVien != null ? request.MaSoNhanVien : k.MaSoNhanVien;
             k.NgayApDung = (DateTime)(request.NgayApDung != null ? request.NgayApDung : k.NgayApDung);
             k.LyDo = request.LyDo != null ? request.LyDo : k.LyDo;
             k.PhanTramTang = (double)(request.PhanTramTang != null ? request.PhanTramTang : k.PhanTramTang);

@@ -11,7 +11,9 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong
 {
     public class KhaiBaoTangLuongDto : IMapFrom<KhaiBaoTangLuongEntity>
     {
-        public static KhaiBaoTangLuongDto Create(string Id, Guid MaSoNhanVien, double PhanTramTang, DateTime NgayApDung, string LyDo)
+        public KhaiBaoTangLuongDto() { }
+
+        public static KhaiBaoTangLuongDto Create(string Id, string MaSoNhanVien, double PhanTramTang, DateTime NgayApDung, string LyDo)
         {
             return new KhaiBaoTangLuongDto
             {
@@ -23,7 +25,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong
             };
         }
         public string Id { get; set; }
-        public Guid MaSoNhanVien { get; set; }
+        public string MaSoNhanVien { get; set; }
         public double PhanTramTang { get; set; }
         public DateTime NgayApDung { get; set; }
         public string LyDo { get; set; }

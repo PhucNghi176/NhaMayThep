@@ -10,9 +10,9 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Delete
 {
     public class DeleteKhaiBaoTangLuongCommand : IRequest<KhaiBaoTangLuongDto>, ICommand
     {
-        public DeleteKhaiBaoTangLuongCommand(Guid Id)
+        public DeleteKhaiBaoTangLuongCommand(string Id)
         {
-            this.Id = Id.ToString();
+            this.Id = Id;
         }
         public string Id { get; set; }
     }

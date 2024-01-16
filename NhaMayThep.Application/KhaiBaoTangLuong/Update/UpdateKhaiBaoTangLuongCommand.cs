@@ -10,16 +10,16 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
 {
     public class UpdateKhaiBaoTangLuongCommand : IRequest<KhaiBaoTangLuongDto>, ICommand
     {
-        public UpdateKhaiBaoTangLuongCommand(Guid Id, Guid MaSoNhanVien, double PhanTramTang, DateTime NgayApDung, string LyDo)
+        public UpdateKhaiBaoTangLuongCommand() { }
+
+        public UpdateKhaiBaoTangLuongCommand(string Id, double PhanTramTang, DateTime NgayApDung, string LyDo)
         {
-            this.Id = Id.ToString();
-            this.MaSoNhanVien = MaSoNhanVien.ToString();
+            this.Id = Id;
             this.PhanTramTang = PhanTramTang;
             this.NgayApDung = NgayApDung;
             this.LyDo = LyDo;
         }
         public string Id { get; set; }
-        public string? MaSoNhanVien { get; set; }
         public double? PhanTramTang { get; set; }
         public DateTime? NgayApDung { get; set; }
         public string? LyDo { get; set; }

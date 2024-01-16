@@ -6,22 +6,25 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMapThep.Domain.Entities.ConfigTable
+namespace NhaMapThep.Domain.Entities
 {
     [Table("ThongTinLuongNhanVien")]
     public class ThongTinLuongNhanVienEntity : Entity
     {
-        public required string MaSoNhanVien { get; set; }
+        public string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
         public virtual NhanVienEntity NhanVien { get; set; }
-        public required string MaSoHopDong { get; set; }
+        public string MaSoHopDong { get; set; }
         [ForeignKey(nameof(MaSoHopDong))]
         public virtual HopDongEntity HopDong { get; set; }
-        public string Loai {  get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
-        public decimal LuongCu {  get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
-        public decimal LuongHienTai { get; set; }
-        public DateTime NgayHieuLuc { get; set; }
+        public required string Loai { get; set; }
+
+        [Column(TypeName = "decimal(18,4)")]
+        public required decimal LuongCu { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
+        public required decimal LuongMoi { get; set; }
+        public required DateTime NgayHieuLuc { get; set; }
+
+
     }
 }

@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
                 .NotEmpty().WithMessage("Luong Cu is Required")
                 .GreaterThan(0).WithMessage("Luong Cu must be greater than 0");
 
-            RuleFor(x => x.LuongHienTai)
+            RuleFor(x => x.LuongMoi)
                 .NotEmpty().WithMessage("Luong Hien Tai is Required")
                 .GreaterThan(0).WithMessage("Luong Hien Tai must be greater than 0");
 

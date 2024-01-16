@@ -1,9 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ThongTinLuongNhanVien.Create;
 using System;
 using System.Collections.Generic;
 using System.Linq;

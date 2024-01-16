@@ -30,7 +30,8 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.GetAll
             {
                 throw new NotFoundException("The list is empty");
             }
-            return ks.MapToKhaiBaoTangLuongDtoList(_mapper);
+            var ksReturn = ks.Where(x => x.NgayXoa == null).ToList();
+            return ksReturn.MapToKhaiBaoTangLuongDtoList(_mapper);
         }
     }
 }

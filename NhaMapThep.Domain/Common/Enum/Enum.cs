@@ -11,4 +11,30 @@ namespace NhaMapThep.Domain.Common.Enum
         TangLuong,
         GiamLuong
     }
+
+    public enum LoaiHinhThuc
+    {
+        KhenThuong,
+        KiLuat
+    }
+
+    public enum KhenThuong
+    {
+        TienThuong,
+        GiayKhen,
+        ThangTien,
+        NgayNghi,
+        QuaTang
+    }
+
+    public enum KiLuat
+    {
+        KhienTrach,
+        CanhCao,
+        HaLuong,
+        PhatTien,
+        GiangChuc,
+        CachChuc,
+        BuocThoiViec
+    }
 }

@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.KhaiBaoTangLuong.GetById
+namespace NhaMayThep.Application.ChinhSachNhanSu.Delete
 {
-    public class GetKhaiBaoTangLuongByIdQuery : IRequest<KhaiBaoTangLuongDto>, IQuery
+    public class DeleteChinhSachNhanSuCommand : IRequest<ChinhSachNhanSuDto>, ICommand
     {
-        public GetKhaiBaoTangLuongByIdQuery(string Id)
+        public int Id { get; set; }
+
+        public DeleteChinhSachNhanSuCommand(int Id)
         {
             this.Id = Id;
         }
-        public string Id { get; set; }
     }
 }

@@ -59,12 +59,12 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
             }
 
 
-            thongtin.MaSoNhanVien = request.MaSoNhanVien == null ? thongtin.MaSoNhanVien : request.MaSoNhanVien;
-            thongtin.MaSoHopDong = request.MaSoHopDong == null ? thongtin.MaSoHopDong : request.MaSoHopDong;
-            thongtin.Loai = request.Loai == null ? thongtin.Loai : request.Loai;
-            thongtin.LuongCu = request.LuongCu == null ? thongtin.LuongCu : request.LuongCu;
-            thongtin.LuongHienTai = request.LuongHienTai == null ? thongtin.LuongHienTai : request.LuongHienTai;
-            thongtin.NgayHieuLuc = request.NgayHieuLuc == null ? thongtin.NgayHieuLuc : request.NgayHieuLuc;
+            thongtin.MaSoNhanVien = string.IsNullOrEmpty(request.MaSoNhanVien) ? thongtin.MaSoNhanVien : request.MaSoNhanVien;
+            thongtin.MaSoHopDong = string.IsNullOrEmpty(request.MaSoHopDong) ? thongtin.MaSoHopDong : request.MaSoHopDong;
+            thongtin.Loai = string.IsNullOrEmpty(request.Loai) ? thongtin.Loai : request.Loai;
+            thongtin.LuongCu = request.LuongCu != default(decimal) ? request.LuongCu : thongtin.LuongCu;
+            thongtin.LuongMoi = request.LuongMoi != default(decimal) ? request.LuongMoi : thongtin.LuongMoi;
+            thongtin.NgayHieuLuc = request.NgayHieuLuc != default(DateTime) ? request.NgayHieuLuc : thongtin.NgayHieuLuc;
 
 
 

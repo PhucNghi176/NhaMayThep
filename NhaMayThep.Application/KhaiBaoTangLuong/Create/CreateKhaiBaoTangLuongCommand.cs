@@ -5,9 +5,9 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 {
     public class CreateKhaiBaoTangLuongCommand : IRequest<KhaiBaoTangLuongDto>, ICommand
     {
-        public CreateKhaiBaoTangLuongCommand(Guid MaSoNhanVien, double PhanTramTang, DateTime NgayApDung, string LyDo)
+        public CreateKhaiBaoTangLuongCommand(string MaSoNhanVien, double PhanTramTang, DateTime NgayApDung, string LyDo)
         { 
-            this.MaSoNhanVien = MaSoNhanVien.ToString();
+            this.MaSoNhanVien = MaSoNhanVien;
             this.PhanTramTang = PhanTramTang;
             this.NgayApDung = NgayApDung;
             this.LyDo = LyDo;

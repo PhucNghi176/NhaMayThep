@@ -10,9 +10,9 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Delete
 {
     public class DeleteThongTinLuongNhanVienCommand : IRequest<ThongTinLuongNhanVienDto>, ICommand
     {
-        public DeleteThongTinLuongNhanVienCommand(Guid Id)
+        public DeleteThongTinLuongNhanVienCommand(string Id)
         {
-            this.Id = Id.ToString();
+            this.Id = Id;
         }
         public string Id { get; set; }
     }

@@ -2,7 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ThongTinLuongNhanVien.Delete;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +32,9 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetAll
                 throw new NotFoundException("The list is empty");
             }
 
-            return k.MapToThongTinLuongNhanVienDtoList(_mapper);
+            var kReturn = k.Where(x => x.NgayXoa == null).ToList();
+
+            return kReturn.MapToThongTinLuongNhanVienDtoList(_mapper);
         }
     }
 }

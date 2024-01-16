@@ -10,9 +10,9 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetById
 {
     public class GetThongTinLuongNhanVienByMSNVQuery : IRequest<ThongTinLuongNhanVienDto>, IQuery
     {
-        public GetThongTinLuongNhanVienByMSNVQuery(Guid Id)
+        public GetThongTinLuongNhanVienByMSNVQuery(string Id)
         {
-            this.Id = Id.ToString();
+            this.Id = Id;
         }
         public string Id { get; set; }
     }

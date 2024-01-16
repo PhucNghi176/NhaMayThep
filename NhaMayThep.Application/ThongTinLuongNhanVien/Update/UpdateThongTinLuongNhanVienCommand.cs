@@ -9,14 +9,16 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
 {
     public class UpdateThongTinLuongNhanVienCommand : IRequest<ThongTinLuongNhanVienDto>
     {
-        public UpdateThongTinLuongNhanVienCommand(Guid Id, Guid MaSoNhanVien, Guid MaSoHopDong, string Loai, decimal LuongCu, decimal LuongHienTai, DateTime NgayHieuLuc)
+        public UpdateThongTinLuongNhanVienCommand() { }
+
+        public UpdateThongTinLuongNhanVienCommand(string Id, string MaSoNhanVien, string MaSoHopDong, string Loai, decimal LuongCu, decimal LuongMoi, DateTime NgayHieuLuc)
         {
-            this.Id = Id.ToString();
-            this.MaSoNhanVien = MaSoNhanVien.ToString();
-            this.MaSoHopDong = MaSoHopDong.ToString();
+            this.Id = Id;
+            this.MaSoNhanVien = MaSoNhanVien;
+            this.MaSoHopDong = MaSoHopDong;
             this.Loai = Loai;
             this.LuongCu = LuongCu;
-            this.LuongHienTai = LuongHienTai;
+            this.LuongMoi = LuongMoi;
             this.NgayHieuLuc = NgayHieuLuc;
         }
         public string Id { get; set; }
@@ -24,7 +26,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
         public string MaSoHopDong { get; set; }
         public string Loai { get; set; }
         public decimal LuongCu { get; set; }
-        public decimal LuongHienTai { get; set; }
+        public decimal LuongMoi { get; set; }
         public DateTime NgayHieuLuc { get; set; }
     }
 }

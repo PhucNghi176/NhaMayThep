@@ -6,14 +6,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.KhaiBaoTangLuong.GetById
+namespace NhaMayThep.Application.ChinhSachNhanSu.GetById
 {
-    public class GetKhaiBaoTangLuongByIdQuery : IRequest<KhaiBaoTangLuongDto>, IQuery
+    public class GetChinhSachNhanSuByIdQuery : IRequest<ChinhSachNhanSuDto>, IQuery
     {
-        public GetKhaiBaoTangLuongByIdQuery(string Id)
+        public int Id { get; set; }
+
+        public GetChinhSachNhanSuByIdQuery(int Id)
         {
             this.Id = Id;
         }
-        public string Id { get; set; }
     }
 }
