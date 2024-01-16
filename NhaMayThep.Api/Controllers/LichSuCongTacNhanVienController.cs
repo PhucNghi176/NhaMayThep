@@ -30,47 +30,47 @@ namespace NhaMayThep.Api.Controllers
 
         [HttpPost("create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<LichSuCongTacNhanVienDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LichSuCongTacNhanVienDto>>> CreateReview(
+        public async Task<ActionResult> CreateLichSuCongTacNhanVien(
            [FromBody] CreateLichSuCongTacNhanVienCommand command,
            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<LichSuCongTacNhanVienDto>(result));
+            return Ok(new JsonResponse<string>("create thành công"));
         }
 
         [HttpPut("update/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateLichSu(
+        public async Task<ActionResult> UpdateLichSuCongTacNhanVien(
             [FromRoute] string id,
             [FromBody] UpdateLichSuCongTacNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if(command.Id == default)
+            if(command.ID == default)
             {
-                command.Id = id;
+                command.ID = id;
             }
             await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok();
+            return Ok(new JsonResponse<string>("update thành công"));
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> DeleteReview(
+        public async Task<ActionResult<JsonResponse<string>>> DeleteLichSuCongTacNhanVien(
             [FromBody] DeleteLichSuCongTacNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
