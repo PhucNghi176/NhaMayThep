@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById
         }
         public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhByIdQuery request, CancellationToken cancellationToken)
         {
-            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindById(request.Id, cancellationToken);
+            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if (giamtrugiacanh == null)
             {
                 throw new NotFoundException("GiamTruGiaCanh does not exists");

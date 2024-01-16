@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienId
         }
         public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan = await _thongtinCongDoanRepository.FindByNhanVienId(request.Id, cancellationToken);
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x=> x.NhanVienID.Equals(request.Id) && x.NgayXoa== null && x.NguoiXoaID == null, cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException("ThongTinCongDoan for this nhanvien does not exists");

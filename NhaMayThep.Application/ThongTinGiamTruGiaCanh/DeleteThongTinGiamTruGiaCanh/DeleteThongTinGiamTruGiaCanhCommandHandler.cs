@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
         }
         public async Task<int> Handle(DeleteThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
-            var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository.FindById(request.Id, cancellationToken);
+            var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if(thongtingiamtru == null)
             {
                 throw new NotFoundException("ThongTinGiamTruGiaCanh does not exists");

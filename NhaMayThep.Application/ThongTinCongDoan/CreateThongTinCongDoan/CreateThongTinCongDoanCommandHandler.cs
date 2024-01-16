@@ -28,12 +28,12 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
         }
         public async Task<int> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindById(request.NhanVienID, cancellationToken);
+            var nhanvien = await _nhanVienRepository.FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if(nhanvien == null)
             {
                 throw new NotFoundException("NhanVien Does not exists");
             }
-            if(await _thongtinCongDoanRepository.FindByNhanVienId(request.NhanVienID, cancellationToken) != null)
+            if(await _thongtinCongDoanRepository.FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken) != null)
             {
                 throw new NotFoundException("ThongTinCongDoan for this NhanVien exists");
             }

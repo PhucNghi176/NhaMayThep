@@ -10,8 +10,5 @@ namespace NhaMapThep.Domain.Repositories
     public interface IThongTinCongDoanRepository: IEFRepository<ThongTinCongDoanEntity, ThongTinCongDoanEntity>,
         IRepository<ThongTinCongDoanEntity>
     {
-        Task<List<ThongTinCongDoanEntity>?> FindAll(CancellationToken cancellationToken = default);
-        Task<ThongTinCongDoanEntity?> FindById(string Id, CancellationToken cancellationToken = default);
-        Task<ThongTinCongDoanEntity?> FindByNhanVienId(string Id, CancellationToken cancellationToken = default);
     }
 }

@@ -33,24 +33,24 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         }
         public async Task<int> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanvienRepository.FindById(request.NhanVienID, cancellationToken);
+            var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if(nhanvien == null)
             {
                 throw new NotFoundException("NhanVien does not exists.");
             }
-            var giamtru = await _thongTinGiamTruRepository.FindAsync(x=> x.ID== request.MaGiamTruID, cancellationToken);
+            var giamtru = await _thongTinGiamTruRepository.FindAsync(x=> x.ID== request.MaGiamTruID && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
             if (giamtru == null)
             {
                 throw new NotFoundException("GiamTruGiaCanh does not exists.");
             }
-            var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+            var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
             if(cccd == null)
             {
                 throw new NotFoundException("CanCuocCongDan does not exists.");
             }
             else
             {
-                if(await _thongTinGiamTruGiaCanhRepository.FindByCanCuocCongDan(cccd.CanCuocCongDan, cancellationToken) != null)
+                if(await _thongTinGiamTruGiaCanhRepository.FindAsync(x=> x.CanCuocCongDan == cccd.CanCuocCongDan && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken) != null)
                 {
                     throw new NotFoundException("ThongTinMienTruGiaCanh for this CanCuocCongDan already exists.");
                 }

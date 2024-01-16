@@ -23,14 +23,14 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
         }
         public async Task<int> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan = await _thongtinCongDoanRepository.FindById(request.Id, cancellationToken);
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException("ThongTinCongDoan does not exists");
             }
             else
             {
-                thongtincongdoan.NguoiXoaID = _currentUserService.UserId ?? "0571cc1357c64e75a9907c37a366bfd3"; //Not authorize
+                thongtincongdoan.NguoiXoaID = request.NguoiXoaid;
                 thongtincongdoan.NgayXoa = DateTime.Now;
                 _thongtinCongDoanRepository.Update(thongtincongdoan);
                 return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);

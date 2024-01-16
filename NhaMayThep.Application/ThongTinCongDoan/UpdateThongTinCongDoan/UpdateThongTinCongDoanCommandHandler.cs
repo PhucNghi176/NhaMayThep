@@ -15,27 +15,24 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanvienRepository;
-        private readonly ICurrentUserService _currentUserService;
         private readonly IMapper _mapper;
         public UpdateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
-            ICurrentUserService currentUserService,
             INhanVienRepository nhanvienRepository,
             IMapper mapper)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
-            _currentUserService = currentUserService;
             _nhanvienRepository = nhanvienRepository;
             _mapper = mapper;
         }
         public async Task<ThongTinCongDoanDto> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan= await _thongtinCongDoanRepository.FindById(request.Id, cancellationToken);
+            var thongtincongdoan= await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if (thongtincongdoan == null) 
             {
                 throw new NotFoundException("ThongTinCongDoan does not exists");
             }
-            var nhanvien = await _nhanvienRepository.FindById(request.NhanVienId, cancellationToken);
+            var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienId) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if(nhanvien == null)
             {
                 throw new NotFoundException($"Nhan vien with Id {request.NhanVienId} does not exists");

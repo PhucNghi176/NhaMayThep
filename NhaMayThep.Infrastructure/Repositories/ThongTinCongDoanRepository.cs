@@ -16,17 +16,5 @@ namespace NhaMayThep.Infrastructure.Repositories
         public ThongTinCongDoanRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
-        public async Task<List<ThongTinCongDoanEntity>?> FindAll(CancellationToken cancellationToken = default)
-        {
-            return await FindAllAsync(x=> x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-        }
-        public async Task<ThongTinCongDoanEntity?> FindById(string Id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID.Equals(Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-        }
-        public async Task<ThongTinCongDoanEntity?> FindByNhanVienId(string Id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.NhanVienID.Equals(Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-        }
     }
 }

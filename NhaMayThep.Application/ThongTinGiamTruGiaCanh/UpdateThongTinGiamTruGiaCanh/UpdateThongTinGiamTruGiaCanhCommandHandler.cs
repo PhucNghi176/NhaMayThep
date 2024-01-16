@@ -16,37 +16,34 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
-        private readonly ICurrentUserService _currentUserService;
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
         private readonly IMapper _mapper;
         public UpdateThongTinGiamTruGiaCanhCommandHandler(
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
-            ICurrentUserService currentUserService,
             ICanCuocCongDanRepository canCuocCongDanRepository,
             IMapper mapper)
         {
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
-            _currentUserService = currentUserService;
             _canCuocCongDanRepository = canCuocCongDanRepository;
             _mapper = mapper;
         }
         public async Task<ThongTinGiamTruGiaCanhDto> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
-            var giamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
+            var giamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
             if (giamtru == null)
             {
                 throw new NotFoundException("Giamtru does not exists");
             }
-            var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository.FindById(request.Id, cancellationToken);
+            var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if (thongtingiamtru == null)
             {
                 throw new NotFoundException("ThongTinGiamTruGiaCanh does not exists");
             }
             else
             {
-                var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+                var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
                 if(cccd == null)
                 {
                     throw new NotFoundException($"Can Cuoc Cong Dan {request.CanCuocCongDan} does not exists");

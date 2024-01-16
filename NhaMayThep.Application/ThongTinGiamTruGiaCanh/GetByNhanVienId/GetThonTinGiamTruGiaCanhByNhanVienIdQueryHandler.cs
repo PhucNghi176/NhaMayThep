@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
         }
         public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetThonTinGiamTruGiaCanhByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
-            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindByNhanVienId(request.Id, cancellationToken);
+            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindAllAsync(x=> x.NhanVienID.Equals(request.Id) && x.NguoiXoaID== null && x.NgayXoa== null, cancellationToken);
             if (giamtrugiacanh == null)
             {
                 throw new NotFoundException($"No GiamTruGiaCanh found for the NhanVien with Id: {request.Id}");
