@@ -6,6 +6,7 @@ using NhaMapThep.Domain.Repositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -36,6 +37,14 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             if (nhanvien2 == null)
             {
                 throw new NotFoundException("Nguoi Duyet does not exist.");
+            }
+            if(nhanVien.NgayXoa != null)
+            {
+                throw new InvalidOperationException("This user has been deleted");
+            }
+            if(nhanvien2.NgayXoa != null)
+            {
+                throw new InvalidOperationException("This nhanvien has been deleted");
             }
        
             var lsnp = new LichSuNghiPhepNhanVienEntity

@@ -12,6 +12,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
         public DeleteLoaiNghiPhepValidator()
         {
             RuleFor(x => x.Id).NotEmpty().WithMessage("Id is required");
+            RuleFor(x => x.NguoiXoaID).NotEmpty().WithMessage("Nguoi xoa id is Required");
         }
     }
 }

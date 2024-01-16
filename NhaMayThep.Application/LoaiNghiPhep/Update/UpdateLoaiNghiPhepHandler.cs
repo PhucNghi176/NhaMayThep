@@ -25,6 +25,10 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             {
                 throw new NotFoundException("LoaiNghiPhep not found for the given ID");
             }
+            if(lnp.NgayXoa != null)
+            {
+                throw new InvalidOperationException("This LoaiNghiPhep has been deleted");
+            }
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;
             lnp.SoGioNghiPhep = request.SoGioNghiPhep;

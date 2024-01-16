@@ -22,6 +22,10 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         {
             throw new NotFoundException($"LichSuNghiPhep with ID {request.Id} not found.");
         }
+        if(lsnp.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This LichSuNghiPhep has been deleted");
+        }
 
         lsnp.NguoiXoaID = request.NguoiXoaID;
         lsnp.NgayXoa = DateTime.Now;

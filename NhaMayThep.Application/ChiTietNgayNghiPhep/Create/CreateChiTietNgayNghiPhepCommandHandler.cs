@@ -31,7 +31,10 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             {
                 throw new NotFoundException("Nhan Vien does not exist.");
             }
-
+            if (nhanVien.NgayXoa != null)
+            {
+                throw new InvalidOperationException("Cannot create ChiTietNgayNghiPhep as the NhanVien has been marked as deleted.");
+            }
             var ctnp = new ChiTietNgayNghiPhepEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,

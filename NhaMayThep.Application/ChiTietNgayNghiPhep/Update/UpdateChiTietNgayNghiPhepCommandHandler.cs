@@ -14,10 +14,12 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
     {
         private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
+       
         public UpdateChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper)
         {
             _repo = repo;
             _mapper = mapper;
+            
         }
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(UpdateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
@@ -31,7 +33,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             {
                 throw new NotFoundException("This ID is deleted");
             }
-
+            
             // Update properties
 
             existingLsnp.LoaiNghiPhepID = request.LoaiNghiPhepID;

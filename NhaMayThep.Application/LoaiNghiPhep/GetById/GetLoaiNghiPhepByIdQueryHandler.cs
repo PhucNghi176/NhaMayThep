@@ -30,6 +30,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetById
                 throw new NotFoundException("LoaiNghiPhep Does not Exist");
 
             }
+
             return lnp.MapToLoaiNghiPhepDto(_mapper);
         }
 
