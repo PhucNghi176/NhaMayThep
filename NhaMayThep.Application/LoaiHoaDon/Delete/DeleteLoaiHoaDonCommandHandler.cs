@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Delete
 {
-    public class DeleteLoaiHoaDonCommandHandler : IRequestHandler<DeleteLoaiHoaDonCommand, bool>
+    public class DeleteLoaiHoaDonCommandHandler : IRequestHandler<DeleteLoaiHoaDonCommand, string>
     {
         public readonly ILoaiHoaDonRepository _LoaiHoaDonRepository;
         public readonly IMapper _mapper;
@@ -21,21 +21,23 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(DeleteLoaiHoaDonCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon == null) 
             {
-                throw new NotFoundException("Loai Hoa Don list is empty");
+                throw new NotFoundException("Loai Hoa Don is not found");
             }
-            try{
-                _LoaiHoaDonRepository.Remove(loaiHoaDon);
-                await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return true;
-            }catch (Exception ex) 
+            if (loaiHoaDon.NgayXoa.HasValue)
             {
-                return false;
+                return "Delete Failed";
             }
+           
+                loaiHoaDon.NgayXoa = DateTime.Now;
+                _LoaiHoaDonRepository.Update(loaiHoaDon);
+                await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return "Delete Success";
+           
         }
     }
 }

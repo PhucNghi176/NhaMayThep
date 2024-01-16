@@ -23,14 +23,14 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
         public async Task Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var ct = await _loaiCongTacRepository.FindAsync(x => x.ID == request.LoaiCongTacID, cancellationToken);
-            if(ct is null) 
+            if(ct is null || ct.NgayXoa.HasValue) 
             {
-                throw new NotFoundException("Loại Công Tác trên không tồn tại");
+                throw new NotFoundException("Loai Cong Tac Is Not Exist");
             }
             var lichSu = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.ID, cancellationToken);
-            if (lichSu is null) 
+            if (lichSu is null || lichSu.NgayXoa.HasValue) 
             {
-                throw new NotFoundException("Lịch Sử Công Tác Của Nhân Viên không Tồn Tại");
+                throw new NotFoundException("Lich Su Cong Tac Nhan Vien Is Not Exist");
             }
             lichSu.ID = request.ID;
             lichSu.LoaiCongTacID = request.LoaiCongTacID;

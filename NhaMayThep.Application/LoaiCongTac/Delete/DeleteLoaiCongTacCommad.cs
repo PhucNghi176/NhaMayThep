@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Delete
 {
-    public class DeleteLoaiCongTacCommad : IRequest<bool>
+    public class DeleteLoaiCongTacCommad : IRequest<string>
     {
         public DeleteLoaiCongTacCommad(int id)
         {

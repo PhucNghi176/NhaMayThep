@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.GetAll
 
         public async Task<List<LoaiHoaDonDto>> Handle(GetAllLoaiHoaDonQuerry request, CancellationToken cancellationToken)
         {
-            var list = await _LoaiHoaDonRepository.FindAllAsync(cancellationToken);
+            var list = await _LoaiHoaDonRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if (list == null)
             {
                 throw new NotFoundException("LoaiCongTac list is empty");

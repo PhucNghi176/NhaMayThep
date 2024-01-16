@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Delete
 {
-    public class DeleteLoaiHoaDonCommand : IRequest<bool>
+    public class DeleteLoaiHoaDonCommand : IRequest<string>
     {
         public DeleteLoaiHoaDonCommand(int id) 
         {

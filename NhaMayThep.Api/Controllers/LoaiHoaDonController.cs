@@ -28,69 +28,65 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        //[HttpPost("create")]
-        //[Produces(MediaTypeNames.Application.Json)]
-        //[ProducesResponseType(typeof(JsonResponse<LoaiHoaDonDto>), StatusCodes.Status201Created)]
-        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
-        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
-        //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        //public async Task<ActionResult<JsonResponse<LoaiHoaDonDto>>> CreateReview(
-        //   [FromBody] CreateLoaiHoaDonCommand command,
-        //   CancellationToken cancellationToken = default)
-        //{
-        //    var result = await _mediator.Send(command, cancellationToken);
-        //    //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-        //    return Ok(new JsonResponse<LoaiHoaDonDto>(result));
-        //}
-
-        [HttpPost("update")]
+        [HttpPost("create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<LoaiHoaDonDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LoaiCongTacDto>>> UpdateReview(
+        public async Task<ActionResult> CreateLoaiHoaDon(
+           [FromBody] CreateLoaiHoaDonCommand command,
+           CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(command, cancellationToken);
+            //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
+            return Ok(new JsonResponse<string>("Create Success"));
+        }
+
+        [HttpPut("update")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> UpdateLoaiHoaDon(
             [FromBody] UpdateLoaiHoaDonCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<LoaiHoaDonDto>(result));
+            return Ok(new JsonResponse<string>("Update Success"));
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<bool>>> DeleteReview(
+        public async Task<ActionResult> DeleteLoaiHoaDon(
             [FromBody] DeleteLoaiHoaDonCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return (new JsonResponse<bool>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
 
 
         [HttpGet("getAll")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<LoaiHoaDonDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<LoaiHoaDonDto>>>> GetAllReview(
+        public async Task<ActionResult<List<LoaiCongTacDto>>> GetAllLoaiHoaDon(
            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllLoaiHoaDonQuerry(), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return (new JsonResponse<List<LoaiHoaDonDto>>(result));
+            return Ok(new JsonResponse<List<LoaiHoaDonDto>>(result));
         }
     }
 }

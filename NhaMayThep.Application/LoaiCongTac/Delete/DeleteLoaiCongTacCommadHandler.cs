@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Delete
 {
-    public class DeleteLoaiCongTacCommadHandler : IRequestHandler<DeleteLoaiCongTacCommad, bool>
+    public class DeleteLoaiCongTacCommadHandler : IRequestHandler<DeleteLoaiCongTacCommad, string>
     {
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
         public readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(DeleteLoaiCongTacCommad request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteLoaiCongTacCommad request, CancellationToken cancellationToken)
         {
             var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
 
@@ -29,18 +29,18 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
             {
                 throw new NotFoundException("Loai Cong Tac is not found");
             }
-
-            try
+            if(loaiCongtac.NgayXoa.HasValue) 
             {
-                _loaiCongTacRepository.Remove(loaiCongtac);
-                await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return true; // Trả về true nếu quá trình xóa thành công
+                return "Delete Failed";
             }
-            catch (Exception ex) 
-            {
-                return false;
+
+           
+                loaiCongtac.NgayXoa = DateTime.Now;
+                _loaiCongTacRepository.Update(loaiCongtac);
+                await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return "Delete Success"; // Trả về true nếu quá trình xóa thành công
             }
            
         }
     }
-}
+

@@ -13,15 +13,16 @@ namespace NhaMayThep.Application.LoaiHoaDon
     {
         public LoaiHoaDonDto() { }
 
-        public static LoaiHoaDonDto create (int id,string name) 
+        public static LoaiHoaDonDto create (int id ,string name) 
         {
             return new LoaiHoaDonDto
             {
+                Id = id ,
                 Name = name,
             };
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public void Mapping(Profile profile)

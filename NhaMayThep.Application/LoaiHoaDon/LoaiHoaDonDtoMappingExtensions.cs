@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMayThep.Application.LoaiCongTac;
 using System;
 using System.Collections.Generic;
 using System.Linq;

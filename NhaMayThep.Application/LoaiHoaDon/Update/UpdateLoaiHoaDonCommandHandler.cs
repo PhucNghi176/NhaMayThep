@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Update
 {
-    public class UpdateLoaiHoaDonCommandHandler : IRequestHandler<CreateLoaiHoaDonCommand, LoaiHoaDonDto>
+    public class UpdateLoaiHoaDonCommandHandler : IRequestHandler<UpdateLoaiHoaDonCommand, LoaiHoaDonDto>
     {
         public readonly ILoaiHoaDonRepository _LoaiHoaDonRepository;
         public readonly IMapper _mapper;
@@ -22,13 +22,15 @@ namespace NhaMayThep.Application.LoaiHoaDon.Update
             _mapper = mapper;
         }
 
-        public async Task<LoaiHoaDonDto> Handle(CreateLoaiHoaDonCommand request, CancellationToken cancellationToken)
+        public async Task<LoaiHoaDonDto> Handle(UpdateLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
-            if (loaiHoaDon == null)
+            if (loaiHoaDon == null || loaiHoaDon.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Loai Hoa Don list is empty");
+                throw new NotFoundException("Loai Hoa Don is not found");
             }
+            loaiHoaDon.Name = request.Name;
+            loaiHoaDon.NgayCapNhat = DateTime.Now;
             _LoaiHoaDonRepository.Update(loaiHoaDon);
             await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return loaiHoaDon.MapToLoaiHoaDonDto(_mapper);

@@ -25,7 +25,6 @@ namespace NhaMayThep.Application.LoaiHoaDon.Create
         {
             var loaiHoaDon = new LoaiHoaDonEntity() 
             {
-                ID = request.Id,
                 Name = request.Name,
             };
             

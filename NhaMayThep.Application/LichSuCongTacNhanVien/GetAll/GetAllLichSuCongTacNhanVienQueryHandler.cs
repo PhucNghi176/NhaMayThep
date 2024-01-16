@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetAll
 
         public async Task<List<LichSuCongTacNhanVienDto>> Handle(GetAllLichSuCongTacNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var list = await _lichSuCongTacNhanVienRepository.FindAllAsync(cancellationToken);
+            var list = await _lichSuCongTacNhanVienRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if(list == null)
             {
                 throw new NotFoundException("This list is empty");

@@ -14,9 +14,13 @@ namespace NhaMayThep.Application.LoaiCongTac
 
         public LoaiCongTacDto() { }
 
-        public static LoaiCongTacDto Create(string name, int id)
+        public static LoaiCongTacDto Create(int id, string name)
         {
-            return new LoaiCongTacDto() {  Name = name, Id = id };
+            return new LoaiCongTacDto
+            { 
+                Id = id,
+                Name = name,
+            };
         }
 
         public int Id { get; set; }

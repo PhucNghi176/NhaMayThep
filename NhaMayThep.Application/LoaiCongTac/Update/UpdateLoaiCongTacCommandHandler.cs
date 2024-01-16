@@ -25,11 +25,12 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
         public async Task<LoaiCongTacDto> Handle(UpdateLoaiCongTacCommad request, CancellationToken cancellationToken)
         {
             var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
-            if(loaiCongtac == null)
+            if(loaiCongtac == null || loaiCongtac.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Loai Cong Tac is not found");
+                throw new NotFoundException("Loai Cong Tac không tồn tại");
             }
             loaiCongtac.Name = request.Name;
+            loaiCongtac.NgayCapNhat = DateTime.Now;
             _loaiCongTacRepository.Update(loaiCongtac);
             await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return loaiCongtac.MapToLoaiCongTacDto(_mapper);

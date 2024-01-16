@@ -9,14 +9,10 @@ namespace NhaMayThep.Application.LoaiHoaDon.Create
 {
     public class CreateLoaiHoaDonCommand : IRequest<LoaiHoaDonDto>
     {
-        public CreateLoaiHoaDonCommand(int id, string name) 
+        public CreateLoaiHoaDonCommand(string name) 
         {
-            Id = id;
             Name = name;
         }
-
-
-        public int Id { get; set; }
         public string Name { get; set; }
     }
 }

@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Create
 {
-    public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand, LoaiCongTacDto>
+    public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand>
     {
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
         public readonly IMapper _mapper;
@@ -21,16 +21,15 @@ namespace NhaMayThep.Application.LoaiCongTac.Create
             _mapper = mapper;
         }
 
-        public async Task<LoaiCongTacDto> Handle(CreateLoaiCongTacCommand request, CancellationToken cancellationToken)
+        public async Task Handle(CreateLoaiCongTacCommand request, CancellationToken cancellationToken)
         {
             var loaiCongTac = new LoaiCongTacEntity()
             {
-                ID=request.Id, 
                 Name=request.Name
             };
             _loaiCongTacRepository.Add(loaiCongTac);
             await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return loaiCongTac.MapToLoaiCongTacDto(_mapper);
+            
         }
     }
 }

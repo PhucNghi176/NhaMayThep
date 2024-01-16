@@ -29,11 +29,15 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
 
         public async Task<LichSuCongTacNhanVienDto> Handle(CreateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
-            //var nhanVien = await _nhanVienRepository.FindAsync((x => x.Id == request.MaSoNhanVien, cancellationToken);
+            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+            if (nhanVien is null || nhanVien.NgayXoa.HasValue) 
+            {
+                throw new NotFoundException("Nhan vien is not Exist");
+            }
             var ct = await _loaiCongTacRepository.FindAsync(x => x.ID == request.LoaiCongTacID, cancellationToken);
             if (ct is null)
             {
-                throw new NotFoundException("Loại Công Tác trên không tồn tại");
+                throw new NotFoundException("Loai Cong Tac is Not Exist");
             }
 
             var lichSuCongTacNhanVien = new LichSuCongTacNhanVienEntity()
