@@ -27,13 +27,6 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetById
 
         public async Task<ThongTinLuongNhanVienDto> Handle(GetThongTinLuongNhanVienByMSNVQuery request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindByIdAsync(request.MaSoNhanVien.ToString(), cancellationToken);
-
-            if (nhanvien == null)
-            {
-                throw new NotFoundException("Nhan vien not found");
-            }
-
             var k = await _thongTinLuongNhanVienRepository.FindAllAsync(cancellationToken);
 
             if (k == null)
@@ -41,13 +34,18 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetById
                 throw new NotFoundException("The list is empty");
             }
 
-            var t = k.FirstOrDefault(x => x.MaSoNhanVien == request.MaSoNhanVien);
+            var thongtin = await _thongTinLuongNhanVienRepository.FindByIdAsync(request.Id.ToString(), cancellationToken);
 
-            if (t == null)
+            if (thongtin == null)
             {
-                throw new NotFoundException("Thong Tin Luong with MSNV is not exist");
+                throw new NotFoundException("Nhan vien not found");
             }
-            return t.MapToThongTinLuongNhanVienDto(_mapper);
+
+            if (thongtin.NgayXoa != null)
+            {
+                throw new NotFoundException("Thong Tin Luong is deleted");
+            }
+            return thongtin.MapToThongTinLuongNhanVienDto(_mapper);
         }
     }
 }

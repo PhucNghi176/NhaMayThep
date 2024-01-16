@@ -28,12 +28,6 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Delete
 
         public async Task<ThongTinLuongNhanVienDto> Handle(DeleteThongTinLuongNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindByIdAsync(request.MaSoNhanVien.ToString(), cancellationToken);
-
-            if (nhanvien == null)
-            {
-                throw new NotFoundException("Nhan vien not found");
-            }
 
             var k = await _thongTinLuongNhanVienRepository.FindAllAsync(cancellationToken);
 
@@ -41,12 +35,23 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Delete
             {
                 throw new NotFoundException("The list is empty");
             }
+            var thongtin = await _thongTinLuongNhanVienRepository.FindByIdAsync(request.Id, cancellationToken);
 
-            var t = k.FirstOrDefault(x => x.MaSoNhanVien ==  request.MaSoNhanVien);
+            if (thongtin == null)
+            {
+                throw new NotFoundException("Thong tin not found");
+            }
 
-            _thongTinLuongNhanVienRepository.Remove(t);
+            if (thongtin.NgayXoa != null)
+            {
+                throw new NotFoundException("Thong tin is deleted");
+            }
+
+            thongtin.NgayXoa = DateTime.Now;
+
+            _thongTinLuongNhanVienRepository.Update(thongtin);
             await _thongTinLuongNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return t.MapToThongTinLuongNhanVienDto(_mapper);
+            return thongtin.MapToThongTinLuongNhanVienDto(_mapper);
         }
     }
 }

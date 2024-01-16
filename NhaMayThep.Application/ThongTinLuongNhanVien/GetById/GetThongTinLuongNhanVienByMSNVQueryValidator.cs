@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetById
 
         private void ConfigureValidationRules()
         {
-            RuleFor(x => x.MaSoNhanVien)
+            RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("Ma So Nhan Vien is Required");
         }
     }

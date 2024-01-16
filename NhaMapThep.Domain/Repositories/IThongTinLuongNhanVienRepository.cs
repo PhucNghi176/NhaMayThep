@@ -10,6 +10,6 @@ namespace NhaMapThep.Domain.Repositories
 {
     public interface IThongTinLuongNhanVienRepository : IEFRepository<ThongTinLuongNhanVienEntity, ThongTinLuongNhanVienEntity>
     {
-        
+        Task<ThongTinLuongNhanVienEntity?> FindByIdAsync(string id, CancellationToken cancellationToken = default);
     }
 }

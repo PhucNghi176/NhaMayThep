@@ -28,12 +28,14 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Delete
         {
             var k = await _khaiBaoTangLuongRepository.FindByIdAsync(request.Id, cancellationToken);
 
-            if (k == null)
+            if (k == null || k.NgayXoa != null)
             {
                 throw new NotFoundException("Khai bao Tang Luong is not exist");
             }
 
-            _khaiBaoTangLuongRepository.Remove(k);
+            k.NgayXoa = DateTime.Now;
+
+            _khaiBaoTangLuongRepository.Update(k);
             await _khaiBaoTangLuongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return k.MapToKhaiBaoTangLuongDto(_mapper);
         }

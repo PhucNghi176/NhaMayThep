@@ -18,5 +18,10 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
 
         }
+
+        public async Task<ThongTinLuongNhanVienEntity?> FindByIdAsync(string id, CancellationToken cancellationToken = default)
+        {
+            return await FindAsync(x => x.ID == id, cancellationToken);
+        }
     }
 }

@@ -12,10 +12,11 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien
     public class ThongTinLuongNhanVienDto : IMapFrom<ThongTinLuongNhanVienEntity>
     {
 
-        public static ThongTinLuongNhanVienDto Create(Guid MaSoNhanVien, Guid MaSoHopDong, string Loai, decimal LuongCu, decimal LuongHienTai, DateTime NgayHieuLuc)
+        public static ThongTinLuongNhanVienDto Create(Guid Id, Guid MaSoNhanVien, Guid MaSoHopDong, string Loai, decimal LuongCu, decimal LuongHienTai, DateTime NgayHieuLuc)
         {
             return new ThongTinLuongNhanVienDto
             {
+                Id = Id,
                 MaSoNhanVien = MaSoNhanVien,
                 MaSoHopDong = MaSoHopDong,
                 Loai = Loai,
@@ -24,6 +25,8 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien
                 NgayHieuLuc = NgayHieuLuc
             };
         }
+
+        public Guid Id { get; set; }
         public Guid MaSoNhanVien { get; set; }
         public Guid MaSoHopDong { get; set; }
         public string Loai { get; set; }

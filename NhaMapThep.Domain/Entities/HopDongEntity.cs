@@ -14,8 +14,8 @@ namespace NhaMapThep.Domain.Entities
         [ForeignKey(nameof(LoaiHopDongID))]
         public virtual required LoaiHopDongEntity LoaiHopDong { get; set; }
         public required DateTime NgayKy { get; set; }
-        public required DateTime NgayKetThuc { get; set; }
-        public required int ThoiHanHopDong { get; set; }
+        public DateTime NgayKetThuc { get; set; }
+        public int ThoiHanHopDong { get; set; }
         public required string DiaDiemLamViec { get; set; }
         public required string BoPhanLamViec { get; set; }
 

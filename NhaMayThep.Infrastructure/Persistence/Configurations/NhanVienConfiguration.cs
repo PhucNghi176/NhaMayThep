@@ -8,7 +8,8 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<NhanVienEntity> builder)
         {
-
+            builder.HasIndex(x => x.Email)
+                 .IsUnique();
         }
 
     }

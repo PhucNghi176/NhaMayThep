@@ -30,6 +30,20 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
 
         public async Task<ThongTinLuongNhanVienDto> Handle(UpdateThongTinLuongNhanVienCommand request, CancellationToken cancellationToken)
         {
+            var k = await _thongTinLuongNhanVienRepository.FindAllAsync(cancellationToken);
+
+            if (k == null)
+            {
+                throw new NotFoundException("The list is empty");
+            }
+
+            var thongtin = await _thongTinLuongNhanVienRepository.FindByIdAsync(request.Id, cancellationToken);
+
+            if (thongtin == null || thongtin.NgayXoa != null)
+            {
+                throw new NotFoundException("Thong tin not found");
+            }
+
             var nhanvien = await _nhanVienRepository.FindByIdAsync(request.MaSoNhanVien.ToString(), cancellationToken);
 
             if (nhanvien == null)
@@ -44,31 +58,19 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
                 throw new NotFoundException("Hop dong not found");
             }
 
-            var k = await _thongTinLuongNhanVienRepository.FindAllAsync(cancellationToken);
 
-            if (k == null)
-            {
-                throw new NotFoundException("The list is empty");
-            }
-
-            var t = k.FirstOrDefault(x => x.MaSoNhanVien == request.MaSoNhanVien.ToString());
-
-            if (t == null)
-            {
-                throw new NotFoundException("Thong Tin Luong Nhan Vien With MSNV not exist");
-            }
-
-            t.MaSoHopDong = request.MaSoHopDong == null ? t.MaSoHopDong : request.MaSoHopDong;
-            t.Loai = request.Loai == null ? t.Loai : request.Loai;
-            t.LuongCu = request.LuongCu == null ? t.LuongCu : request.LuongCu;
-            t.LuongHienTai = request.LuongHienTai == null ? t.LuongHienTai : request.LuongHienTai;
-            t.NgayHieuLuc = request.NgayHieuLuc == null ? t.NgayHieuLuc : request.NgayHieuLuc;
+            thongtin.MaSoNhanVien = request.MaSoNhanVien == null ? thongtin.MaSoNhanVien : request.MaSoNhanVien;
+            thongtin.MaSoHopDong = request.MaSoHopDong == null ? thongtin.MaSoHopDong : request.MaSoHopDong;
+            thongtin.Loai = request.Loai == null ? thongtin.Loai : request.Loai;
+            thongtin.LuongCu = request.LuongCu == null ? thongtin.LuongCu : request.LuongCu;
+            thongtin.LuongHienTai = request.LuongHienTai == null ? thongtin.LuongHienTai : request.LuongHienTai;
+            thongtin.NgayHieuLuc = request.NgayHieuLuc == null ? thongtin.NgayHieuLuc : request.NgayHieuLuc;
 
 
 
-            _thongTinLuongNhanVienRepository.Update(t);
+            _thongTinLuongNhanVienRepository.Update(thongtin);
             await _thongTinLuongNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return t.MapToThongTinLuongNhanVienDto(_mapper);
+            return thongtin.MapToThongTinLuongNhanVienDto(_mapper);
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace NhaMapThep.Domain.Entities.ConfigTable
 {
     [Table("ThongTinLuongNhanVien")]
-    public class ThongTinLuongNhanVienEntity : EntityWithoutID
+    public class ThongTinLuongNhanVienEntity : Entity
     {
         public required string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
@@ -18,9 +18,9 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
         [ForeignKey(nameof(MaSoHopDong))]
         public virtual HopDongEntity HopDong { get; set; }
         public string Loai {  get; set; }
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongCu {  get; set; }
-        [Column(TypeName = "decimal(18, 2)")]
+        [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongHienTai { get; set; }
         public DateTime NgayHieuLuc { get; set; }
     }

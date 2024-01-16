@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
         {
             var k = await _khaiBaoTangLuongRepository.FindByIdAsync(request.Id, cancellationToken);
 
-            if (k == null)
+            if (k == null || k.NgayXoa != null)
             {
                 throw new NotFoundException("Khai bao tang luong is not found");
             }

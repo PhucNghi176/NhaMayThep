@@ -7,6 +7,6 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     public class ThongTinPhuCapEntity : BangMaGocEntity
     {
         [Column(TypeName = "decimal(18, 4)")]
-        public required decimal SoTienPhuCap { get; set; }
+        public required double PhanTramPhuCap { get; set; }
     }
 }
