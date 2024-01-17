@@ -10,6 +10,10 @@ namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
 {
     public class DeleteCanCuocCongDanCommand : IRequest<string>, ICommand
     {
+        public DeleteCanCuocCongDanCommand()
+        {
+            
+        }
         public DeleteCanCuocCongDanCommand(string canCuocCongDan)
         {
             CanCuocCongDan = canCuocCongDan;
