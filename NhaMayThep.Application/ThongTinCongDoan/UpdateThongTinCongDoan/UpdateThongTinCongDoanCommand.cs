@@ -21,15 +21,6 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
             ThuKyCongDoan = thukycongdoan;
             NgayGiaNhap= ngaygianhap;
         }
-        public void NguoiCapNhat(string value)
-        {
-            NguoiCapNhatId = value;
-        }
-        public string? NguoiCapNhatid
-        {
-            get { return NguoiCapNhatId; }
-        }
-        private string? NguoiCapNhatId;
         public string Id { get; set; }
         public string NhanVienId { get; set; }
         public bool ThuKyCongDoan { get; set; }

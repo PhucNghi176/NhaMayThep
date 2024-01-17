@@ -23,24 +23,26 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
         }
         public async Task<string> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
+            var thongtincongdoan = await _thongtinCongDoanRepository
+                .FindAsync(x=> x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa.HasValue, 
+                cancellationToken);
             if (thongtincongdoan == null)
             {
-                throw new NotFoundException("ThongTinCongDoan does not exists");
+                throw new NotFoundException("Thông tin công đoàn không tồn tại");
             }
             else
             {
-                thongtincongdoan.NguoiXoaID = request.NguoiXoaid;
+                thongtincongdoan.NguoiXoaID = _currentUserService.UserId;
                 thongtincongdoan.NgayXoa = DateTime.Now;
                 _thongtinCongDoanRepository.Update(thongtincongdoan);
-                var result = await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                if (result > 0)
+                try
                 {
-                    return "Delete Successfully!";
+                    await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                    return "Xóa thành công";
                 }
-                else
+                catch (Exception)
                 {
-                    return "Delete Failed!";
+                    return "Đã xảy ra lỗi trong quá trình xóa";
                 }
             }
         }

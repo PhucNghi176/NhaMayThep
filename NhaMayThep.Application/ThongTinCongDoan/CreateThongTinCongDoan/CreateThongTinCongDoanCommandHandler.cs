@@ -16,40 +16,47 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanVienRepository;
+        private readonly ICurrentUserService _currentUserService;
         public CreateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository, 
-            INhanVienRepository nhanVienRepository) 
+            INhanVienRepository nhanVienRepository,
+            ICurrentUserService currentUserService) 
         {
             _nhanVienRepository = nhanVienRepository;
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+            var nhanvien = await _nhanVienRepository
+                .FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, 
+                cancellationToken);
             if(nhanvien == null)
             {
-                throw new NotFoundException("NhanVien Does not exists");
+                throw new NotFoundException($"Không tồn tại nhân viên có Id {request.NhanVienID}");
             }
-            if(await _thongtinCongDoanRepository.FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken) != null)
+            if(await _thongtinCongDoanRepository
+                .FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, 
+                cancellationToken) != null)
             {
-                throw new NotFoundException("ThongTinCongDoan for this NhanVien exists");
+                throw new NotFoundException($"Thông tin công đoàn cho nhân viên với Id {request.NhanVienID} đã tồn tại");
             }
             var thongtincongdoan = new ThongTinCongDoanEntity
             {
-                NguoiTaoID= request.NguoiTaoId,
+                NguoiTaoID= _currentUserService.UserId,
                 ThuKiCongDoan = request.ThuKyCongDoan,
                 NgayGiaNhap = request.NgayGiaNhap,
                 NhanVien = nhanvien,
             };
             _thongtinCongDoanRepository.Add(thongtincongdoan);
-            var result= await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if (result > 0)
+            try
             {
-                return "Delete Successfully!";
+                await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return "Tạo thành công";
             }
-            else
+            catch (Exception)
             {
-                return "Delete Failed!";
+                return "Đã xảy ra lỗi trong quá trình tạo";
             }
         }
     }

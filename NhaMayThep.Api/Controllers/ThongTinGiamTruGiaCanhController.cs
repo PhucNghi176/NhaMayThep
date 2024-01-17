@@ -34,8 +34,6 @@ namespace NhaMayThep.Api.Controllers
           [FromBody] CreateThongTinGiamTruGiaCanhCommand command,
           CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
-            command.NguoiTao(userid);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
@@ -50,8 +48,6 @@ namespace NhaMayThep.Api.Controllers
            [FromBody] UpdateThongTinGiamTruGiaCanhCommand command,
            CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
-            command.NguoiCapNhat(userid);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ThongTinGiamTruGiaCanhDto>(result));
         }
@@ -66,8 +62,6 @@ namespace NhaMayThep.Api.Controllers
            [FromBody] DeleteThongTinGiamTruGiaCanhCommand command,
            CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
-            command.NguoiXoa(userid);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }

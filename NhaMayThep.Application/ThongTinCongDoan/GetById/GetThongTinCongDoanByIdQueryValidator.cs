@@ -12,9 +12,8 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetById
         public GetThongTinCongDoanByIdQueryValidator()
         {
             RuleFor(x => x.Id)
-               .NotEmpty().WithMessage("Id must not be empty")
-               .NotNull().WithMessage("Id must not be null")
-               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("The ID is not correct");
+                .NotEmpty().WithMessage("Mã thông tin công đoàn không được để trống")
+                .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã thông tin công đoàn không đúng định dạng");
         }
     }
 }

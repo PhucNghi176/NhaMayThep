@@ -12,17 +12,19 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         public CreateThongTinGiamTruGiaCanhCommandValidator()
         {
             RuleFor(x => x.NhanVienID)
-               .NotEmpty().WithMessage("NhanVienID must not be empty")
-               .NotNull().WithMessage("NhanVienID must not be null")
-               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("The NhanVienID is not correct");
+               .NotEmpty().WithMessage("Mã nhân viên không được bỏ trống")
+               .NotNull().WithMessage("Mã nhân viên không được rỗng")
+               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã nhân viên sai định dạng");
 
             RuleFor(x => x.MaGiamTruID)
                  .GreaterThan(0)
-                 .WithMessage("MaGiamTruID must be greater than or equal to 0");
+                 .WithMessage("Mã giảm trừ phải lớn hơn 0")
+                 .LessThan(int.MaxValue).WithMessage($"Mã giảm trừ phải bé hơn {int.MaxValue}");
+
 
             RuleFor(x => x.DiaChiLienLac)
-              .NotEmpty().WithMessage("NhanVienID must not be empty")
-              .NotNull().WithMessage("NhanVienID must not be null");
+              .NotEmpty().WithMessage("Mã nhân viên không được rỗng")
+              .NotNull().WithMessage("Mã nhân viên không được bỏ trống");
 
             RuleFor(x => x.QuanHeVoiNhanVien)
              .NotEmpty().WithMessage("QuanHeVoiNhanVien must not be empty")
