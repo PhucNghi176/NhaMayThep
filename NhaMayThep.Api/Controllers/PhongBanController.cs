@@ -21,17 +21,17 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost("Create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PhongBanDto>> Create(
+        public async Task<ActionResult> Create(
             [FromBody] CreatePhongBanCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return result == true ? Ok("Thêm thành công") : BadRequest("Thêm thất bại");
         }
 
         [HttpGet("Get-by-ID/{id}")]
@@ -50,13 +50,13 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Update(
+        public async Task<ActionResult<bool>> Update(
             [FromRoute] int id,
             [FromBody] UpdatePhongBanCommand command,
             CancellationToken cancellationToken = default)
@@ -70,20 +70,20 @@ namespace NhaMayThep.Api.Controllers
                 return BadRequest();
             }
 
-            await _mediator.Send(command, cancellationToken);
-            return NoContent();
+            var result = await _mediator.Send(command, cancellationToken);
+            return result == true ? Ok("Cập nhật thành công") : BadRequest("Cập nhật thất bại");
         }
         [HttpDelete("Delete{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<bool>> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
-            return Ok();
+            var result = await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
+            return result == true ? Ok("Xóa thành công") : BadRequest("Xóa thất bại");
         }
     }
 }

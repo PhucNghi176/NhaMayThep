@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.PhongBan.DeletePhongBan
@@ -6,6 +7,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
     public class DeletePhongBanCommandValidator : AbstractValidator<DeletePhongBanCommand>
     {
         IPhongBanRepository _phongBanRepository;
+
         public DeletePhongBanCommandValidator(IPhongBanRepository phongBanRepository)
         {
             _phongBanRepository = phongBanRepository;
@@ -22,6 +24,10 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
         private bool ExistId(int id)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == id).Result;
+            if (phongBan.NgayXoa != null)
+            {
+                return false;
+            }
             return phongBan == null ? false : true;
         }
     }

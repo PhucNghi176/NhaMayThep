@@ -31,6 +31,10 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
         private bool ExistID(int id)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.ID == id).Result;
+            if (phongBan.NgayXoa != null)
+            {
+                return false;
+            }
             return phongBan == null ? false : true;
         }
     }

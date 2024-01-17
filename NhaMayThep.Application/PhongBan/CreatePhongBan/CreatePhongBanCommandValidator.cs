@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
@@ -21,7 +22,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
             RuleFor(v => v.Name)
                 .NotEmpty().WithMessage("Name is require")
                 //.MinimumLength(5).WithMessage("Name must be at least 5 character")
-                .Must(AvailableName).WithMessage("Phong ban is already exist");
+                .Must(AvailableName).WithMessage("Phong ban is already exist");              
         }
 
         private bool AvailableID(int id)
