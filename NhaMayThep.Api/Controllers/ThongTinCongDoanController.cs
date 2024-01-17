@@ -43,31 +43,31 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost("restore")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> Restore(
+        public async Task<ActionResult<JsonResponse<string>>> Restore(
            [FromBody] RestoreThongTinCongDoanCommand command,
            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpPut("update")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> Update(
+        public async Task<ActionResult<JsonResponse<string>>> Update(
            [FromBody] UpdateThongTinCongDoanCommand command,
            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpDelete("delete")]
         [Produces(MediaTypeNames.Application.Json)]

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
-    public class UpdateThongTinCongDoanCommand: IRequest<ThongTinCongDoanDto>, ICommand
+    public class UpdateThongTinCongDoanCommand: IRequest<string>, ICommand
     {
         public UpdateThongTinCongDoanCommand(
             string id, 

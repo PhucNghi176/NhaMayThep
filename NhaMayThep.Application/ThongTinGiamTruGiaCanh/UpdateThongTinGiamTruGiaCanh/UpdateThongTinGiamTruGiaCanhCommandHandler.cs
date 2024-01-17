@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh
 {
-    public class UpdateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<UpdateThongTinGiamTruGiaCanhCommand, ThongTinGiamTruGiaCanhDto>
+    public class UpdateThongTinGiamTruGiaCanhCommandHandler : IRequestHandler<UpdateThongTinGiamTruGiaCanhCommand, string>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             _mapper = mapper;
             _currentUserService = currentUserService;
         }
-        public async Task<ThongTinGiamTruGiaCanhDto> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var giamtru = await _thongTinGiamTruRepository
                 .FindAsync(x => x.ID.Equals(request.MaGiamTruID), cancellationToken);
@@ -70,7 +70,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             try
             {
                 await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return thongtingiamtru.MapToThongTinGiamTruGiaCanhDto(_mapper);
+                return "Cập nhật thành công";
             }
             catch (Exception)
             {

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
 {
-    public class RestoreThongTinCongDoanCommandHandler : IRequestHandler<RestoreThongTinCongDoanCommand, ThongTinCongDoanDto>
+    public class RestoreThongTinCongDoanCommandHandler : IRequestHandler<RestoreThongTinCongDoanCommand, string>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
             _currentUserService = currentUserService;
             _mapper = mapper;
         }
-        public async Task<ThongTinCongDoanDto> Handle(RestoreThongTinCongDoanCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(RestoreThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository
                 .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
@@ -41,7 +41,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
             try
             {
                 await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
+                return "Phục hồi thành công";
             }
             catch (Exception)
             {
