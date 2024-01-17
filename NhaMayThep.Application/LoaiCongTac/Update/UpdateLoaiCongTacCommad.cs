@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiCongTac.Update
 {
-    public class UpdateLoaiCongTacCommad : IRequest<LoaiCongTacDto>, ICommand
+    public class UpdateLoaiCongTacCommad : IRequest<string>, ICommand
     {
         public UpdateLoaiCongTacCommad(int id, string name)
         {
