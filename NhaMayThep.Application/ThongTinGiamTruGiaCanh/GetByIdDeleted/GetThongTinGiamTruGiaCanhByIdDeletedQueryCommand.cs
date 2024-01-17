@@ -8,27 +8,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById
+namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted
 {
-    public class GetThongTinGiamTruGiaCanhByIdQueryHandler : IRequestHandler<GetThongTinGiamTruGiaCanhByIdQuery, ThongTinGiamTruGiaCanhDto>
+    public class GetThongTinGiamTruGiaCanhByIdDeletedQueryCommand : IRequestHandler<GetThongTinGiamTruGiaCanhByIdDeletedQuery, ThongTinGiamTruGiaCanhDto>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IMapper _mapper;
-        public GetThongTinGiamTruGiaCanhByIdQueryHandler(
+        public GetThongTinGiamTruGiaCanhByIdDeletedQueryCommand(
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             IMapper mapper)
         {
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _mapper = mapper;
         }
-        public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhByIdDeletedQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && !x.NgayXoa.HasValue, 
+                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue,
                 cancellationToken);
             if (giamtrugiacanh == null)
             {
-                throw new NotFoundException("Thông tin giảm trừ gia cảnh không tồn tại");
+                throw new NotFoundException("Thông tin giảm trừ gia cảnh này không bị xóa hoặc chưa  tồn tại");
             }
             return giamtrugiacanh.MapToThongTinGiamTruGiaCanhDto(_mapper);
         }

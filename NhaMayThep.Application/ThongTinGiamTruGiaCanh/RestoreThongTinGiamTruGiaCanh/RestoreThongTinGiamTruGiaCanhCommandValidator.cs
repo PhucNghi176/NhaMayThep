@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh
+namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCanh
 {
-    public class DeleteThongTinGiamTruGiaCanhCommandValidator: AbstractValidator<DeleteThongTinGiamTruGiaCanhCommand>
+    public class RestoreThongTinGiamTruGiaCanhCommandValidator: AbstractValidator<RestoreThongTinGiamTruGiaCanhCommand>
     {
-        public DeleteThongTinGiamTruGiaCanhCommandValidator()
+        public RestoreThongTinGiamTruGiaCanhCommandValidator()
         {
             RuleFor(x => x.Id)
                .NotEmpty().WithMessage("Id không được bỏ trống")

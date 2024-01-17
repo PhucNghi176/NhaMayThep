@@ -29,34 +29,33 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
         public async Task<string> Handle(CreateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await _nhanVienRepository
-                .FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, 
-                cancellationToken);
-            if(nhanvien == null)
+                .FindAsync(x=> x.ID.Equals(request.NhanVienID), cancellationToken);
+            if(nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
-                throw new NotFoundException($"Không tồn tại nhân viên có Id {request.NhanVienID}");
+                throw new NotFoundException($"Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            if(await _thongtinCongDoanRepository
-                .FindAsync(x=> x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, 
-                cancellationToken) != null)
+            var thongtincongdoan = await _thongtinCongDoanRepository
+                     .FindAsync(x => x.ID.Equals(request.NhanVienID), cancellationToken);
+            if (thongtincongdoan != null || (thongtincongdoan != null && thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
             {
-                throw new NotFoundException($"Thông tin công đoàn cho nhân viên với Id {request.NhanVienID} đã tồn tại");
+                throw new NotFoundException($"Thông tin công đoàn đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }
-            var thongtincongdoan = new ThongTinCongDoanEntity
+            var thongtincongdoanNew = new ThongTinCongDoanEntity
             {
-                NguoiTaoID= _currentUserService.UserId,
+                NguoiTaoID = _currentUserService.UserId,
                 ThuKiCongDoan = request.ThuKyCongDoan,
                 NgayGiaNhap = request.NgayGiaNhap,
                 NhanVien = nhanvien,
             };
-            _thongtinCongDoanRepository.Add(thongtincongdoan);
+            _thongtinCongDoanRepository.Add(thongtincongdoanNew);
             try
             {
                 await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Tạo thành công";
+                return "Tạo thông tin công đoàn thành công";
             }
             catch (Exception)
             {
-                return "Đã xảy ra lỗi trong quá trình tạo";
+                return "Đã xảy ra lỗi trong quá trình tạo thông tin công đoàn";
             }
         }
     }

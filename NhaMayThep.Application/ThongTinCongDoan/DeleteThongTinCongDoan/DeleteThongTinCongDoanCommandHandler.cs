@@ -24,26 +24,22 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
         public async Task<string> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository
-                .FindAsync(x=> x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa.HasValue, 
-                cancellationToken);
-            if (thongtincongdoan == null)
+                .FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
+            if (thongtincongdoan == null || (thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
             {
-                throw new NotFoundException("Thông tin công đoàn không tồn tại");
+                throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }
-            else
+            thongtincongdoan.NguoiXoaID = _currentUserService.UserId;
+            thongtincongdoan.NgayXoa = DateTime.Now;
+            _thongtinCongDoanRepository.Update(thongtincongdoan);
+            try
             {
-                thongtincongdoan.NguoiXoaID = _currentUserService.UserId;
-                thongtincongdoan.NgayXoa = DateTime.Now;
-                _thongtinCongDoanRepository.Update(thongtincongdoan);
-                try
-                {
-                    await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                    return "Xóa thành công";
-                }
-                catch (Exception)
-                {
-                    return "Đã xảy ra lỗi trong quá trình xóa";
-                }
+                await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return "Xóa thông tin công đoàn thành công";
+            }
+            catch (Exception)
+            {
+                throw new NotFoundException("Đã xảy ra lỗi trong quá trình xóa thông tin công đoàn");
             }
         }
     }

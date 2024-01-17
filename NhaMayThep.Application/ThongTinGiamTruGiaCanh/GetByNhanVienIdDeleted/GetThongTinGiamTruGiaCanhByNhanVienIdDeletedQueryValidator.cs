@@ -5,15 +5,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh
+namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted
 {
-    public class DeleteThongTinGiamTruGiaCanhCommandValidator: AbstractValidator<DeleteThongTinGiamTruGiaCanhCommand>
+    public class GetThongTinGiamTruGiaCanhByNhanVienIdDeletedQueryValidator : AbstractValidator<GetThongTinGiamTruGiaCanhByNhanVienIdDeletedQuery>
     {
-        public DeleteThongTinGiamTruGiaCanhCommandValidator()
+        public GetThongTinGiamTruGiaCanhByNhanVienIdDeletedQueryValidator()
         {
             RuleFor(x => x.Id)
                .NotEmpty().WithMessage("Id không được bỏ trống")
-               .NotNull().WithMessage("Id khong6 được rỗng")
+               .NotNull().WithMessage("Id không được rỗng")
                .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Id không đúng định dạng");
         }
     }

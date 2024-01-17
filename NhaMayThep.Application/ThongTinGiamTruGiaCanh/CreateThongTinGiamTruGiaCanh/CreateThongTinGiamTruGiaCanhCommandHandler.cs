@@ -33,49 +33,51 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         }
         public async Task<string> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienID) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-            if(nhanvien == null)
+            var nhanvien = await _nhanvienRepository
+                .FindAsync(x => x.ID.Equals(request.NhanVienID), cancellationToken);
+            if(nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
-                throw new NotFoundException("NhanVien does not exists.");
+                throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vố hiệu hóa");
             }
-            var giamtru = await _thongTinGiamTruRepository.FindAsync(x=> x.ID== request.MaGiamTruID && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
-            if (giamtru == null)
+            var giamtru = await _thongTinGiamTruRepository
+                   .FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
+            if (giamtru == null || (giamtru.NguoiXoaID != null && giamtru.NgayXoa.HasValue))
             {
-                throw new NotFoundException("GiamTruGiaCanh does not exists.");
+                throw new NotFoundException("Giảm trừ gia cảnh không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
-            if(cccd == null)
+            var cccd = await _canCuocCongDanRepository
+                   .FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+            if (cccd == null || (cccd.NguoiXoaID != null && cccd.NgayXoa.HasValue))
             {
-                throw new NotFoundException("CanCuocCongDan does not exists.");
+                throw new NotFoundException("Căn cước công dân không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            else
+            var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
+                    .FindAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);
+            if (thongtingiamtruCur != null || (thongtingiamtruCur !=null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
             {
-                if(await _thongTinGiamTruGiaCanhRepository.FindAsync(x=> x.CanCuocCongDan == cccd.CanCuocCongDan && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken) != null)
-                {
-                    throw new NotFoundException("ThongTinMienTruGiaCanh for this CanCuocCongDan already exists.");
-                }
-                var giamtrugiacanh = new ThongTinGiamTruGiaCanhEntity
-                {
-                    NguoiTaoID = request.NguoiTaoId,
-                    NhanVienID = nhanvien.ID,
-                    MaGiamTruID = giamtru.ID,
-                    NhanVien = nhanvien,
-                    ThongTinGiamTru = giamtru!,
-                    DiaChiLienLac = request.DiaChiLienLac,
-                    QuanHeVoiNhanVien = request.QuanHeVoiNhanVien,
-                    CanCuocCongDan = cccd.CanCuocCongDan,
-                    NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
-                };
-                _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-                var result= await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                if (result > 0)
-                {
-                    return "Delete Successfully!";
-                }
-                else
-                {
-                    return "Delete Failed!";
-                }
+                throw new NotFoundException("Thông tin miễn trừ gia cảnh đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
+            }
+            var giamtrugiacanh = new ThongTinGiamTruGiaCanhEntity
+            {
+                NguoiTaoID = _currentUserService.UserId,
+                NhanVienID = nhanvien.ID,
+                MaGiamTruID = giamtru.ID,
+                NhanVien = nhanvien,
+                ThongTinGiamTru = giamtru,
+                DiaChiLienLac = request.DiaChiLienLac,
+                QuanHeVoiNhanVien = request.QuanHeVoiNhanVien,
+                CanCuocCongDan = cccd.CanCuocCongDan,
+                NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
+            };
+            _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
+            try
+            {
+                await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return "Tạo thành công";
+            }
+            catch (Exception)
+            {
+                throw new NotFoundException("Đã xảy ra lỗi trong quá trình tạo");
             }
         }
     }

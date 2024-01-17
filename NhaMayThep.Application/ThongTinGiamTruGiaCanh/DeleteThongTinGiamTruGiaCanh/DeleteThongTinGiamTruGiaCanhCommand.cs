@@ -14,15 +14,6 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
         {
             this.Id = id;   
         }
-        public void NguoiXoa(string value)
-        {
-            NguoiXoaId = value;
-        }
-        public string? NguoiXoaid
-        {
-            get { return NguoiXoaId; }
-        }
-        private string? NguoiXoaId;
         public string Id { get;set; }
     }
 }

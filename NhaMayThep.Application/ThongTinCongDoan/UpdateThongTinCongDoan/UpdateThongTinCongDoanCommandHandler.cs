@@ -31,37 +31,32 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
         public async Task<ThongTinCongDoanDto> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan= await _thongtinCongDoanRepository
-                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa.HasValue, 
-                cancellationToken);
-            if (thongtincongdoan == null) 
+                .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
+            if (thongtincongdoan == null ||(thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue)) 
             {
-                throw new NotFoundException("Thông tin công đoàn không tồn tại");
+                throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var nhanvien = await _nhanvienRepository
-                .FindAsync(x => x.ID.Equals(request.NhanVienId) && x.NguoiXoaID == null && x.NgayXoa.HasValue, 
-                cancellationToken);
-            if(nhanvien == null)
+                .FindAsync(x => x.ID.Equals(request.NhanVienId), cancellationToken);
+            if (nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
-                throw new NotFoundException($"Không tồn tại nhân viên với Id {request.NhanVienId}");
+                throw new NotFoundException($"Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            else
+            thongtincongdoan.NguoiCapNhatID = _currentUserService.UserId;
+            thongtincongdoan.NgayCapNhatCuoi = DateTime.Now;
+            thongtincongdoan.NhanVienID = nhanvien.ID;
+            thongtincongdoan.NhanVien = nhanvien;
+            thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
+            thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
+            _thongtinCongDoanRepository.Update(thongtincongdoan);
+            try
             {
-                thongtincongdoan.NguoiCapNhatID = _currentUserService.UserId;
-                thongtincongdoan.NhanVienID = nhanvien.ID;
-                thongtincongdoan.NhanVien = nhanvien;
-                thongtincongdoan.NgayCapNhatCuoi = DateTime.Now;
-                thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
-                thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
-                _thongtinCongDoanRepository.Update(thongtincongdoan);
-                try
-                {
-                    await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                    return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
-                }
-                catch (Exception)
-                {
-                    throw new NotFoundException("Đã xảy ra lỗi trong quá trình cập nhật dữ liệu");
-                }
+                await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+                return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
+            }
+            catch (Exception)
+            {
+                throw new NotFoundException("Đã xảy ra lỗi trong quá trình cập nhật dữ liệu");
             }
         }
     }
