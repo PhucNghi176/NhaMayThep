@@ -1,8 +1,10 @@
 ﻿using NhaMapThep.Domain.Entities.ConfigTable;
 
+
 namespace NhaMapThep.Domain.Repositories.ConfigTable
+
 {
-    public interface ITinhTrangLamViecRepository : IEFRepository<TinhTrangLamViecEntity, TinhTrangLamViecEntity>
+    public interface IChucDanhRepository : IEFRepository<ThongTinChucDanhEntity, ThongTinChucDanhEntity>
     {
     }
 }

@@ -1,21 +1,19 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
 {
     public class DeleteCanCuocCongDanCommandHandler : IRequestHandler<DeleteCanCuocCongDanCommand, string>
     {
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
+        private readonly ICurrentUserService _currentUserService;
 
-        public DeleteCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository)
+        public DeleteCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository, ICurrentUserService currentUserService)
         {
             _canCuocCongDanRepository = canCuocCongDanRepository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(DeleteCanCuocCongDanCommand request, CancellationToken cancellationToken)
@@ -26,6 +24,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
               
                 
                     CanCuocCongDan.NgayXoa = DateTime.Now;
+                    CanCuocCongDan.NguoiXoaID = _currentUserService.UserId;
                     _canCuocCongDanRepository.Update(CanCuocCongDan);
                     return await 
                         _canCuocCongDanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? 
