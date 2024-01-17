@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
 {
-    public class CreateLichSuCongTacNhanVienCommand : IRequest<LichSuCongTacNhanVienDto>
+    public class CreateLichSuCongTacNhanVienCommand : IRequest<string>
     {
         public CreateLichSuCongTacNhanVienCommand(string maSoNhanVien, int loaiCongTacID, DateTime ngayBatDau, 
             DateTime ngayKetThuc, string noiCongTac, string lydo) 

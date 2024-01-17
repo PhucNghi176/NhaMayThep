@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Create
 {
-    public class CreateLoaiHoaDonCommandHandler : IRequestHandler<CreateLoaiHoaDonCommand, LoaiHoaDonDto>
+    public class CreateLoaiHoaDonCommandHandler : IRequestHandler<CreateLoaiHoaDonCommand, string>
     {
         public readonly ILoaiHoaDonRepository _LoaiHoaDonRepository;
         public readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Create
             _mapper = mapper;
         }
 
-        public async Task<LoaiHoaDonDto> Handle(CreateLoaiHoaDonCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
             var loaiHoaDon = new LoaiHoaDonEntity() 
             {
@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Create
             
             _LoaiHoaDonRepository.Add(loaiHoaDon);
             await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return loaiHoaDon.MapToLoaiHoaDonDto(_mapper);
+            return "Tạo Mới Thành Công";
         }
     }
 }

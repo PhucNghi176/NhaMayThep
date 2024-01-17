@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Create
 {
-    public class CreateLoaiCongTacCommand : IRequest, ICommand
+    public class CreateLoaiCongTacCommand : IRequest<string>, ICommand
     {
 
         public CreateLoaiCongTacCommand(string name) 

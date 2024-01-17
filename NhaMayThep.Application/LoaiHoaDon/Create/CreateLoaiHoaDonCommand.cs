@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Create
 {
-    public class CreateLoaiHoaDonCommand : IRequest<LoaiHoaDonDto>
+    public class CreateLoaiHoaDonCommand : IRequest<string>
     {
         public CreateLoaiHoaDonCommand(string name) 
         {

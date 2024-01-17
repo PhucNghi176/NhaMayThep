@@ -40,7 +40,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("Create Success"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpPut("update")]
@@ -55,7 +55,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("Update Success"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("delete")]

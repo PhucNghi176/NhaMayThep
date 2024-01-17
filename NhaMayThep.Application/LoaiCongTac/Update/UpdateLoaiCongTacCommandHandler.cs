@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Update
 {
-    public class UpdateLoaiCongTacCommandHandler : IRequestHandler<UpdateLoaiCongTacCommad, LoaiCongTacDto>
+    public class UpdateLoaiCongTacCommandHandler : IRequestHandler<UpdateLoaiCongTacCommad, string>
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
             _mapper = mapper;
         }
 
-        public async Task<LoaiCongTacDto> Handle(UpdateLoaiCongTacCommad request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLoaiCongTacCommad request, CancellationToken cancellationToken)
         {
             var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if(loaiCongtac == null || loaiCongtac.NgayXoa.HasValue)
@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
             loaiCongtac.NgayCapNhat = DateTime.Now;
             _loaiCongTacRepository.Update(loaiCongtac);
             await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return loaiCongtac.MapToLoaiCongTacDto(_mapper);
+            return "Cập Nhật Thành Công";
         }
     }
 }

@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
 {
-    public class CreateLichSuCongTacNhanVienCommandHandler : IRequestHandler<CreateLichSuCongTacNhanVienCommand, LichSuCongTacNhanVienDto>
+    public class CreateLichSuCongTacNhanVienCommandHandler : IRequestHandler<CreateLichSuCongTacNhanVienCommand, string>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
             _currentUserService = currentUserService;
         }
 
-        public async Task<LichSuCongTacNhanVienDto> Handle(CreateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
             if (nhanVien is null || nhanVien.NgayXoa.HasValue) 
@@ -55,7 +55,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
             };
             _lichSuCongTacNhanVienRepository.Add(lichSuCongTacNhanVien);
             await _lichSuCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return lichSuCongTacNhanVien.MapToLichSuCongTacNhanVienDto(_mapper);
+            return "Tạo mới thành công";
         }
     }
 }
