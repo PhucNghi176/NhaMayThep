@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
 
             if (loaiCongtac == null)
             {
-                throw new NotFoundException("Loai Cong Tac is not found");
+                throw new NotFoundException("Loại Công Tác không tồn tại");
             }
             if(loaiCongtac.NgayXoa.HasValue) 
             {

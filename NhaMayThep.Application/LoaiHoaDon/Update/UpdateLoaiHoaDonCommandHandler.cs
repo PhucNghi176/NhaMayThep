@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Update
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon == null || loaiHoaDon.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Loai Hoa Don is not found");
+                throw new NotFoundException("Loại Hóa Đơn không tồn tại");
             }
             loaiHoaDon.Name = request.Name;
             loaiHoaDon.NgayCapNhat = DateTime.Now;

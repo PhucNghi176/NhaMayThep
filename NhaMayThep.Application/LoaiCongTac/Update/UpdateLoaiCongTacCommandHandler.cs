@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
             var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if(loaiCongtac == null || loaiCongtac.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Loai Cong Tac is not found");
+                throw new NotFoundException("Loại Công Tác Không Tồn Tại");
             }
             loaiCongtac.Name = request.Name;
             loaiCongtac.NgayCapNhat = DateTime.Now;

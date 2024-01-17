@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon == null) 
             {
-                throw new NotFoundException("Loai Hoa Don is not found");
+                throw new NotFoundException("Loại Hóa Đơn Không Tồn Tại");
             }
             if (loaiHoaDon.NgayXoa.HasValue)
             {

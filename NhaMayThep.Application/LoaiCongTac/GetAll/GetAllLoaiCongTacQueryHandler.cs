@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.LoaiCongTac.GetAll
             var list = await _loaiCongTacRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if(list is null) 
             {
-                throw new NotFoundException("this list is empty");
+                throw new NotFoundException("Danh Sách Trống");
             }
             return list.MapToLoaiCongTacDtoList(_mapper);
         }
