@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
                 .NotEmpty().WithMessage("Mã thông tin công đoàn không được để trống")
                 .NotNull().WithMessage("Mã thông tin công đoàn không được rỗng")
                 .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã thông tin công đoàn không đúng định dạng");
-            RuleFor(x => x.Id)
+            RuleFor(x => x.NhanVienId)
                 .NotEmpty().WithMessage("Mã nhân viên không được để trống")
                 .NotNull().WithMessage("Mã nhân viên không được để rỗng")
                 .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã nhân viên không đúng định dạng");

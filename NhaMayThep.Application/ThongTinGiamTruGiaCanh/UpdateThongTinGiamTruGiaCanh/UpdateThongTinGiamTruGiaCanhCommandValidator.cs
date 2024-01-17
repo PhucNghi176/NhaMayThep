@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
                  .LessThan(int.MaxValue).WithMessage($"Mã giảm trừ phải bé hơn {int.MaxValue}");
 
             RuleFor(x => x.QuanHeVoiNhanVien)
-             .MaximumLength(20).WithMessage("Quan hê với nhân viên có tối đa 20 ký tự");
+             .MaximumLength(20).WithMessage("Quan hệ với nhân viên có tối đa 20 ký tự");
 
             RuleFor(x => x.CanCuocCongDan)
              .NotEmpty().WithMessage("Căn cước công dân không được bỏ trống")

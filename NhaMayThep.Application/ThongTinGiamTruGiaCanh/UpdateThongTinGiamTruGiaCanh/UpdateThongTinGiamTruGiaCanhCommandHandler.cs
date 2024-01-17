@@ -40,6 +40,12 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             {
                 throw new NotFoundException("Thông tin giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
             }
+            var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
+                .FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+            if (thongtingiamtruCur != null || (thongtingiamtruCur != null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
+            {
+                throw new NotFoundException("Căn cước công dân này đã có thông tin miễn trừ gia cảnh hoặc đã bị vô hiệu hóa trước đó");
+            }
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
                 .FindAsync(x => x.ID.Equals(request.Id),cancellationToken);
             if (thongtingiamtru == null ||(thongtingiamtru.NguoiXoaID != null && thongtingiamtru.NgayXoa.HasValue))

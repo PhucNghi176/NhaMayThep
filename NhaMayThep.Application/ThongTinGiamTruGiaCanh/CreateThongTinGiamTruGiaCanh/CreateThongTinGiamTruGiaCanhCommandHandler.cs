@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                 .FindAsync(x => x.ID.Equals(request.NhanVienID), cancellationToken);
             if(nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
-                throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vố hiệu hóa");
+                throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var giamtru = await _thongTinGiamTruRepository
                    .FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
@@ -55,7 +55,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                     .FindAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);
             if (thongtingiamtruCur != null || (thongtingiamtruCur !=null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
             {
-                throw new NotFoundException("Thông tin miễn trừ gia cảnh đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
+                throw new NotFoundException("Thông tin miễn trừ gia cảnh cho căn cước công dân này đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }
             var giamtrugiacanh = new ThongTinGiamTruGiaCanhEntity
             {
