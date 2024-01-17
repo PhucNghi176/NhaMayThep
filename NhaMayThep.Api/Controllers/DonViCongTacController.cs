@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
@@ -13,6 +14,7 @@ namespace NhaMayThep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class DonViCongTacController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -81,9 +83,9 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteDonViCongTac([FromRoute] int id, [FromBody] string nguoiXoaId, CancellationToken cancellationToken = default)
+        public async Task<ActionResult> DeleteDonViCongTac([FromRoute] int id , CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteDonViCongTacCommand(id: id, nguoiXoaID: nguoiXoaId), cancellationToken);
+            var result = await _mediator.Send(new DeleteDonViCongTacCommand(id), cancellationToken);
             return Ok(result);
         }
     }

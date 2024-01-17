@@ -10,6 +10,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
 {
@@ -19,13 +20,15 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private IDonViCongTacRepository _donViCongTacRepository;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
 
-        public UpdateChiTietDangVienCommandHandler(IChiTietDangVienRepository chiTietDangVienRepository, IThongTinDangVienRepository thongTinDangVienRepository, IDonViCongTacRepository donViCongTacRepository, IMapper mapper)
+        public UpdateChiTietDangVienCommandHandler(IChiTietDangVienRepository chiTietDangVienRepository, IThongTinDangVienRepository thongTinDangVienRepository, IDonViCongTacRepository donViCongTacRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _chiTietDangVienRepository = chiTietDangVienRepository;
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _donViCongTacRepository = donViCongTacRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
         public async Task<ChiTietDangVienDto> Handle(UpdateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
@@ -46,7 +49,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
             chiTietDangVien.DonViCongTac = donViCongTac;
             chiTietDangVien.ChucVuDang = request.ChucVuDang;
             chiTietDangVien.TrinhDoChinhTri = request.TrinhDoChinhTri;
-            chiTietDangVien.NguoiCapNhatID = request.NguoiCapNhatID;
+            chiTietDangVien.NguoiCapNhatID = _currentUserService.UserId;
             chiTietDangVien.NgayCapNhatCuoi = DateTime.Now;
 
             _chiTietDangVienRepository.Update(chiTietDangVien);

@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 {
@@ -18,11 +19,13 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private INhanVienRepository _nhanVienRepository;
         private readonly IMapper _mapper;
-        public UpdateThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, INhanVienRepository nhanVienRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdateThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, INhanVienRepository nhanVienRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _nhanVienRepository = nhanVienRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
         public async Task<ThongTinDangVienDto> Handle(UpdateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
@@ -39,7 +42,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
             thongTinDangVien.NhanVien = nhanVien;
             thongTinDangVien.NgayVaoDang = request.NgayVaoDang;
             thongTinDangVien.CapDangVien = request.CapDangVien;
-            thongTinDangVien.NguoiCapNhatID = request.NguoiCapNhatID;
+            thongTinDangVien.NguoiCapNhatID = _currentUserService.UserId;
             thongTinDangVien.NgayCapNhatCuoi = DateTime.Now;
 
             _thongTinDangVienRepository.Update(thongTinDangVien);

@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -14,9 +15,11 @@ namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
     public class CreateDonViCongTacCommandHandler : IRequestHandler<CreateDonViCongTacCommand, int>
     {
         private IDonViCongTacRepository _donViCongTacRepository;
-        public CreateDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public CreateDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository, ICurrentUserService currentUserService)
         {
             _donViCongTacRepository = donViCongTacRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<int> Handle(CreateDonViCongTacCommand request, CancellationToken cancellationToken)
         {
@@ -27,7 +30,7 @@ namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
             var donViCongTac = new DonViCongTacEntity()
             {
                 Name = request.Name,
-                NguoiTaoID = request.NguoiTaoID,
+                NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Now
             };
             _donViCongTacRepository.Add(donViCongTac);

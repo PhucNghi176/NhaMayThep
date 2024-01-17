@@ -9,13 +9,11 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
 {
     public class DeleteDonViCongTacCommand : IRequest<string>
     {
-        public DeleteDonViCongTacCommand(int id, string? nguoiXoaID)
+        public DeleteDonViCongTacCommand(int id)
         {
             ID = id;
-            NguoiXoaID = nguoiXoaID;
         }
 
         public int ID { get; set; }
-        public string? NguoiXoaID { get; set; }
     }
 }

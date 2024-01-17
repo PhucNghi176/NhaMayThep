@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
@@ -17,6 +18,7 @@ namespace NhaMayThep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ThongTinDangVienController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -42,7 +44,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpGet("GetAllThongTinDangVien")]
-        [ProducesResponseType(typeof(List<DonViCongTacDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(List<ThongTinDangVienDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -87,11 +89,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteThongTinDangVien(
             [FromRoute] string id,
-            [FromBody] string nguoiXoaId,
             CancellationToken cancellationToken = default)
         {
 
-            var result = await _mediator.Send(new DeleteThongTinDangVienCommand(id: id, nguoiXoaID: nguoiXoaId), cancellationToken);
+            var result = await _mediator.Send(new DeleteThongTinDangVienCommand(id), cancellationToken);
             return Ok(result);
         }
     }

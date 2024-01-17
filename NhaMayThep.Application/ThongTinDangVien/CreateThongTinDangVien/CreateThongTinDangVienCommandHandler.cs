@@ -4,6 +4,7 @@ using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
 using System;
 using System.Collections.Generic;
@@ -17,10 +18,12 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
     {
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private INhanVienRepository _nhanVienRepository;
-        public CreateThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, INhanVienRepository nhanVienRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public CreateThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService)
         {
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _nhanVienRepository = nhanVienRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(CreateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
@@ -36,7 +39,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
                 NhanVien = nhanVien,
                 NgayVaoDang = request.NgayVaoDang,
                 CapDangVien = request.CapDangVien,
-                NguoiTaoID = request.NguoiTaoID,
+                NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Today
             };
 

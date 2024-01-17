@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
 {
@@ -16,10 +17,12 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
     {
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private readonly IMapper _mapper;
-        public DeleteThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
@@ -28,7 +31,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
             if (thongTinDangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
 
-            thongTinDangVien.NguoiXoaID = request.NguoiXoaID; 
+            thongTinDangVien.NguoiXoaID = _currentUserService.UserId; 
             thongTinDangVien.NgayXoa = DateTime.Now;
 
             _thongTinDangVienRepository.Update(thongTinDangVien);

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
 {
@@ -17,11 +18,13 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
         private IChiTietDangVienRepository _chiTietDangVienRepository;
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private IDonViCongTacRepository _donViCongTacRepository;
-        public CreateChiTietDangVienCommandHandler(IChiTietDangVienRepository chiTietDangVienRepository, IThongTinDangVienRepository thongTinDangVienRepository, IDonViCongTacRepository donViCongTacRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public CreateChiTietDangVienCommandHandler(IChiTietDangVienRepository chiTietDangVienRepository, IThongTinDangVienRepository thongTinDangVienRepository, IDonViCongTacRepository donViCongTacRepository, ICurrentUserService currentUserService)
         {
             _chiTietDangVienRepository = chiTietDangVienRepository;
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _donViCongTacRepository = donViCongTacRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(CreateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
@@ -46,7 +49,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
                 ChucVuDang = request.ChucVuDang,
                 TrinhDoChinhTri = request.TrinhDoChinhTri,
               
-                NguoiTaoID = request.NguoiTaoID,
+                NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Now
             };
 

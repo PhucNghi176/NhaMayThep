@@ -10,15 +10,12 @@ namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
 {
     public class CreateDonViCongTacCommand : IRequest<int>, ICommand
     {
-        public CreateDonViCongTacCommand(string name, string nguoiTaoId)
+        public CreateDonViCongTacCommand(string name)
         {
             Name = name;
-            NguoiTaoID = nguoiTaoId;
-
         }
 
         
         public string Name { get; set; }
-        public string? NguoiTaoID { get; set; }
     }
 }

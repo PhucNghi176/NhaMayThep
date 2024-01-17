@@ -10,13 +10,11 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
 {
     public class DeleteChiTietDangVienCommand : IRequest<string>, ICommand
     {
-        public DeleteChiTietDangVienCommand(string id, string? nguoiXoaID)
+        public DeleteChiTietDangVienCommand(string id)
         {
             ID = id;
-            NguoiXoaID = nguoiXoaID;
         }
 
         public string ID { get; set; }
-        public string? NguoiXoaID { get; set; }
     }
 }

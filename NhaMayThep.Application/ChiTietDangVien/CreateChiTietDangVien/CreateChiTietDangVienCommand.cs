@@ -10,14 +10,13 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
 {
     public class CreateChiTietDangVienCommand : IRequest<string>, ICommand
     {
-        public CreateChiTietDangVienCommand(string id, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri, string nguoiTaoId)
+        public CreateChiTietDangVienCommand(string id, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri)
         {
             ID = id;
             DangVienID = dangVienId;
             DonViCongTacID = donViCongTacId;
             ChucVuDang = chucVuDang;
             TrinhDoChinhTri = trinhDoChinhTri;
-            NguoiTaoID = nguoiTaoId;
         }
 
         public string ID { get; set; }
@@ -27,6 +26,5 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
         public string ChucVuDang { get; set; }
         public string TrinhDoChinhTri { get; set; }
 
-        public string? NguoiTaoID { get; set; }
     }
 }

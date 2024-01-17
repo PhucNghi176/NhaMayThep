@@ -3,6 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
 using System;
 using System.Collections.Generic;
@@ -16,10 +17,13 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
     {
         private IDonViCongTacRepository _donViCongTacRepository;
         private readonly IMapper _mapper;
-        public DeleteDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        
+        public DeleteDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _donViCongTacRepository = donViCongTacRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteDonViCongTacCommand request, CancellationToken cancellationToken)
         {
@@ -27,7 +31,7 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
             if (donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
-            donViCongTac.NguoiXoaID = request.NguoiXoaID;
+            donViCongTac.NguoiXoaID = _currentUserService.UserId;
             donViCongTac.NgayXoa = DateTime.Now;
 
             _donViCongTacRepository.Update(donViCongTac);

@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
 {
@@ -16,10 +17,12 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
     {
         private IChiTietDangVienRepository _chiTietDangVienRepository;
         private readonly IMapper _mapper;
-        public DeleteChiTietDangVienCommandHandler(IChiTietDangVienRepository chiTietDangVienRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteChiTietDangVienCommandHandler(IChiTietDangVienRepository chiTietDangVienRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _chiTietDangVienRepository = chiTietDangVienRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
@@ -27,7 +30,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
             if (chiTietDangVien == null)
                 throw new NotFoundException("Chi Tiet Dang Vien is not found");
 
-            chiTietDangVien.NguoiXoaID = request.NguoiXoaID;
+            chiTietDangVien.NguoiXoaID = _currentUserService.UserId;
             chiTietDangVien.NgayXoa = DateTime.Now;
 
             _chiTietDangVienRepository.Update(chiTietDangVien);
