@@ -26,6 +26,7 @@ namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
             if (result == null)
                 throw new NotFoundException($"Loai hop dong with {command.Id} not found");
             result.NgayXoa = DateTime.Now;
+            result.NguoiXoaID = _currentUserService.UserId;
             if (await _loaiHopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 msg = "Remove Successfully";
             else
