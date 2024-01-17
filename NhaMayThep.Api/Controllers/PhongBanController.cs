@@ -33,6 +33,8 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] CreatePhongBanCommand command,
             CancellationToken cancellationToken = default)
         {
+            var userId = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
+            command.nguoiTaoID = userId;
             var result = await _mediator.Send(command, cancellationToken);
             return result == true ? Ok("Thêm thành công") : BadRequest("Thêm thất bại");
         }

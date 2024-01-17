@@ -5,6 +5,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 using System.Data;
 
+
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
     public class CreatePhongBanCommandHandler : IRequestHandler<CreatePhongBanCommand, bool>

@@ -2,7 +2,6 @@
 
 
 namespace NhaMapThep.Domain.Repositories.ConfigTable
-
 {
     public interface IChucDanhRepository : IEFRepository<ThongTinChucDanhEntity, ThongTinChucDanhEntity>
     {
