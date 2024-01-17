@@ -15,17 +15,14 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanvienRepository;
-        private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         public UpdateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
             INhanVienRepository nhanvienRepository,
-            IMapper mapper,
             ICurrentUserService currentUserService)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _nhanvienRepository = nhanvienRepository;
-            _mapper = mapper;
             _currentUserService = currentUserService;
         }
         public async Task<string> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
