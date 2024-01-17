@@ -29,10 +29,15 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         }
         public async Task<ThongTinDangVienDto> Handle(UpdateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
+            
 
             var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
+
+            var checkDuplicatoion = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.ID != request.ID, cancellationToken: cancellationToken);
+            if (checkDuplicatoion != null)
+                throw new NotFoundException("Nhan Vien" + request.NhanVienID + "da ton tai Thong Tin Dang Vien");
 
             var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.NhanVienID, cancellationToken: cancellationToken);
             if (nhanVien == null)

@@ -27,12 +27,12 @@ namespace NhaMayThep.Application.NhanVien.GetUser
             
             if (user != null)
             {
-                var chucvu = await _chucVuRepository.FindAsync(x => x.ID == user.ChucVuID);
-                user.ChucVu = chucvu.Name.ToString();
+                //var chucvu = await _chucVuRepository.FindAsync(x => x.ID == user.ChucVuID);
+                //user.ChucVu = chucvu.Name.ToString();
                 var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)
                 {
-                    user.MapToNhanVienDto(_mapper);
+                    return user.MapToNhanVienDto(_mapper);
                 }
             }
             throw new NotFoundException($"Email or password was incorrect.");
