@@ -42,12 +42,12 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LoaiNghiPhepDto>>> Delete(int id, CancellationToken cancellationToken)
+        public async Task<ActionResult<JsonResponse<string>>> Delete(int id, CancellationToken cancellationToken)
         {
-            var command = new DeleteLoaiNghiPhepCommand(id); 
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<LoaiNghiPhepDto>(result));
+            await _mediator.Send(new DeleteLoaiNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>("Loai Nghi Phep deleted successfully"));
         }
+
 
 
         [HttpPut("update")]
@@ -55,10 +55,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LoaiNghiPhepDto>>> Update(UpdateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
+        public async Task<ActionResult<JsonResponse<string>>> Update(UpdateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<LoaiNghiPhepDto>(result));
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Loai Nghi Phep updated successfully"));
         }
 
         [HttpGet("getAll")]
