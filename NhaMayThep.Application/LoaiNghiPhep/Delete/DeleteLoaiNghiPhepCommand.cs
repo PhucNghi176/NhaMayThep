@@ -11,9 +11,11 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
     public class DeleteLoaiNghiPhepCommand : IRequest<LoaiNghiPhepDto>, ICommand
     {
         public int Id { get; set; }
-        public DeleteLoaiNghiPhepCommand(int id = 0)
+        public string NguoiXoaID { get; set; }
+        public DeleteLoaiNghiPhepCommand(int id, string nguoiXoaID)
         {
             Id = id;
+            NguoiXoaID = nguoiXoaID;
         }
     }
 }
