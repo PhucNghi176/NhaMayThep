@@ -20,17 +20,17 @@ namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
 
         public async Task<string> Handle(DeleteCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa ==null, cancellationToken);
             if (CanCuocCongDan is not null)
             {
-                if (CanCuocCongDan.NgayXoa != null)
-                {
+              
+                
                     CanCuocCongDan.NgayXoa = DateTime.Now;
                     _canCuocCongDanRepository.Update(CanCuocCongDan);
                     return await 
                         _canCuocCongDanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? 
                         "Xoa Thanh Cong" : "Xoa That Bai";
-                }
+                
             }
             throw new NotFoundException($"Khong Tim Thay CanCuocCongDan {request.CanCuocCongDan}");
         }
