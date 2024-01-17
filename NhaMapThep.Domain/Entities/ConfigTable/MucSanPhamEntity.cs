@@ -13,7 +13,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     {
         public required int MucSanPhamToiThieu { get; set; }
         public required int MucSanPhamToiDa { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+        [Column(TypeName = "float")]
         public required double LuongMucSanPham { get; set; }
     }
 }
