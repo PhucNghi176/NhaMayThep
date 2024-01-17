@@ -2,10 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
@@ -26,7 +23,11 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
             var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
-                throw new NotFoundException("Entity not found");
+                throw new NotFoundException($"Entity with ID {request.Id} not found");
+            }
+            if (entity.NgayXoa != null)
+            {
+                throw new NotFoundException($"Entity with ID {request.Id} has been deleted");
             }
 
             return _mapper.Map<ChiTietNgayNghiPhepDto>(entity);

@@ -26,6 +26,10 @@ namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
             {
                 throw new NotFoundException($"LichSuNghiPhep with ID {request.Id} not found.");
             }
+            if(lsnp.NgayXoa != null)
+            {
+                throw new NotFoundException($"LichSuNghiPhepWith ID {request.Id} is deleted");
+            }
 
             return _mapper.Map<LichSuNghiPhepDto>(lsnp);
         }

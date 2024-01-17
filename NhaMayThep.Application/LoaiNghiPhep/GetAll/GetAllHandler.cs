@@ -22,12 +22,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetAll
 
         public async Task<List<LoaiNghiPhepDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAllAsync();
-            if (lnp == null)
-            {
-                throw new NotFoundException("The list is empty");
-
-            }
+            var lnp = await _repository.FindAllAsync(c => c.NgayXoa == null, cancellationToken);
             return lnp.MapToLoaiNghiPhepDtoList(_mapper);
         }
     }

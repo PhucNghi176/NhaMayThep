@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetAll
 {
@@ -14,6 +11,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetAll
     {
         private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
+
         public GetAllChiTietNghiPhepQueryHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper)
         {
             _repo = repo;
@@ -22,11 +20,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetAll
 
         public async Task<List<ChiTietNgayNghiPhepDto>> Handle(GetAllChiTietNghiPhepQuery request, CancellationToken cancellationToken)
         {
-            var ctnp = await _repo.FindAllAsync();
-            if (ctnp == null)
-            {
-                throw new NotFoundException("The list is empty");
-            }
+            var ctnp = await _repo.FindAllAsync(c => c.NgayXoa == null, cancellationToken);
             return ctnp.MapToChiTietNgayNghiPhepDtoList(_mapper);
         }
     }

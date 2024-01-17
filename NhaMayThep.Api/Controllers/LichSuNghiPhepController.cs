@@ -33,10 +33,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LichSuNghiPhepDto>>> Create([FromBody] CreateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<LichSuNghiPhepDto>(result));
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Lich Su Nghi Phep created successfully"));
         }
 
         [HttpDelete("delete/{id}")]
@@ -56,14 +56,13 @@ namespace NhaMayThep.Api.Controllers
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LichSuNghiPhepDto>>> Update([FromBody] UpdateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<LichSuNghiPhepDto>(result));
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Lich Su Nghi Phep updated successfully"));
         }
+
 
         [HttpGet("getAll")]
         [Produces(MediaTypeNames.Application.Json)]

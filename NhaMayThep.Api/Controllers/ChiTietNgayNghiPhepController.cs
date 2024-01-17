@@ -30,13 +30,11 @@ namespace NhaMayThep.Api.Controllers
         [HttpPost("create")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ChiTietNgayNghiPhepDto>>> Create([FromBody] CreateChiTietNgayNghiPhepCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateChiTietNgayNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ChiTietNgayNghiPhepDto>(result));
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep created successfully"));
         }
 
         [HttpDelete("delete/{id}")]
@@ -57,13 +55,11 @@ namespace NhaMayThep.Api.Controllers
         [HttpPut("update")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ChiTietNgayNghiPhepDto>>> Update([FromBody] UpdateChiTietNgayNghiPhepCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateChiTietNgayNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ChiTietNgayNghiPhepDto>(result));
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep updated successfully"));
         }
 
         [HttpGet("getAll")]
