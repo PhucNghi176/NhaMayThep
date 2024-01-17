@@ -8,9 +8,11 @@ namespace NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh
     public class DeleteChucDanhCommandHandler : IRequestHandler<DeleteChucDanhCommand, string>
     {
         private readonly IChucDanhRepository _chucDanhRepository;
-        public DeleteChucDanhCommandHandler(IChucDanhRepository chucDanhRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteChucDanhCommandHandler(IChucDanhRepository chucDanhRepository, ICurrentUserService currentUserService)
         {
             _chucDanhRepository = chucDanhRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteChucDanhCommand command, CancellationToken cancellationToken)
         {
@@ -19,6 +21,7 @@ namespace NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh
             if (result == null)
                 throw new NotFoundException($"Chuc danh with {command.Id} not found");
             result.NgayXoa = DateTime.Now;
+            result.NguoiXoaID = _currentUserService.UserId;
             if (await _chucDanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 msg = "Remove Successfully";
             else

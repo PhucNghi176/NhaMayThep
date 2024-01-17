@@ -40,7 +40,6 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
         public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
         public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
-
         public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {

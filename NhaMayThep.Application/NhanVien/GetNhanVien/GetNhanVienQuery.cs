@@ -8,7 +8,6 @@ namespace NhaMayThep.Application.NhanVien.GetUser
     {
         public GetNhanVienQuery()
         {
-
         }
 
 

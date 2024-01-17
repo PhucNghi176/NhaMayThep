@@ -7,7 +7,6 @@ namespace NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanById
     {
         public GetCanCuocCongDanByIdQuery()
         {
-
         }
         public GetCanCuocCongDanByIdQuery(string canCuocCongDan)
         {

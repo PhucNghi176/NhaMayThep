@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanById
 
         public async Task<CanCuocCongDanDto> Handle(GetCanCuocCongDanByIdQuery request, CancellationToken cancellationToken)
         {
-            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null, cancellationToken);
 
             if (CanCuocCongDan is not null && CanCuocCongDan.NgayXoa is null)
             {

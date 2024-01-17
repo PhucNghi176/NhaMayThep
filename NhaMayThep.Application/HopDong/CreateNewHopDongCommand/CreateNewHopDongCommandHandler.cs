@@ -14,8 +14,10 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
         private readonly IChucDanhRepository _chucDanhRepository;
         private readonly IChucVuRepository _chucVuRepository;
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;
+        private readonly ICurrentUserService _currentUserService;
         public CreateNewHopDongCommandHandler(IHopDongRepository hopDongRepository, INhanVienRepository nhanVienRepository, ICapBacLuongRepository capBacLuongRepository
-                                            , ILoaiHopDongReposity loaiHopDongRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepositoroy)
+                                            , ILoaiHopDongReposity loaiHopDongRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepositoroy,
+                                              ICurrentUserService currentUserService)
         {
             _hopDongRepository = hopDongRepository;
             _nhanVienRepository = nhanVienRepository;
@@ -23,6 +25,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             _loaiHopDongRepository = loaiHopDongRepository;
             _chucDanhRepository = chucDanhRepository;
             _chucVuRepository = chucVuRepositoroy;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken)
@@ -64,7 +67,9 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
                 HeSoLuongID = command.HeSoLuongId,
                 CapBacLuong = CapBacLuong,
                 PhuCapID = command.PhuCapId,
-                GhiChu = command.GhiChu
+                GhiChu = command.GhiChu,
+                NgayTao = DateTime.Now,
+                NguoiTaoID = _currentUserService.UserId
             };
 
             _hopDongRepository.Add(HopDong);

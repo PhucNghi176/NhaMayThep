@@ -6,11 +6,13 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 {
     public class UpdateCanCuocCongDanCommandHandler : IRequestHandler<UpdateCanCuocCongDanCommand, string>
     {
-        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
+        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;      
+        private readonly ICurrentUserService _currentUserService;
 
-        public UpdateCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository)
+        public UpdateCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository, ICurrentUserService currentUserService)
         {
             _canCuocCongDanRepository = canCuocCongDanRepository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(UpdateCanCuocCongDanCommand request, CancellationToken cancellationToken)
@@ -31,6 +33,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
             CanCuocCongDan.DanToc = request.DanToc;
             CanCuocCongDan.TonGiao = request.TonGiao;
             CanCuocCongDan.NgayCapNhatCuoi = DateTime.Now;
+            CanCuocCongDan.NguoiCapNhatID = _currentUserService.UserId;
             _canCuocCongDanRepository.Update(CanCuocCongDan);
             return await _canCuocCongDanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cap Nhat Thanh Cong" : "Cap Nhat That Bai";
         }
