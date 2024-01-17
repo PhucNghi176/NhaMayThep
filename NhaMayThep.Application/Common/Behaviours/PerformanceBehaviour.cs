@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.Common.Behaviours
             {
                 var requestName = typeof(TRequest).Name;
                 var userId = _currentUserService.UserId ?? string.Empty;
-                var userName = _currentUserService.UserName ?? string.Empty;
+                var userName = _currentUserService.Email ?? string.Empty;
 
                 _logger.LogWarning("Nha May Thep Long Running Request: {Name} ({ElapsedMilliseconds} milliseconds) {@UserId} {@UserName} {@Request}",
                     requestName, elapsedMilliseconds, userId, userName, request);

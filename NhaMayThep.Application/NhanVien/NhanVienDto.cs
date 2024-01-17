@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien
 {
@@ -17,7 +12,6 @@ namespace NhaMayThep.Application.NhanVien
         }
         public NhanVienDto()
         {
-            
         }
 
         public string Email { get; set; }

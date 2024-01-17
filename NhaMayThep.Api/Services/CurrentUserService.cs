@@ -17,7 +17,7 @@ namespace NhaMayThep.Api.Services
         }
 
         public string? UserId => _claimsPrincipal?.FindFirst(JwtClaimTypes.Subject)?.Value;
-        public string? UserName => _claimsPrincipal?.FindFirst(JwtClaimTypes.Name)?.Value;
+        public string? Email => _claimsPrincipal?.FindFirst(JwtClaimTypes.Email)?.Value;
 
         public async Task<bool> AuthorizeAsync(string policy)
         {
