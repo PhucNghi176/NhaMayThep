@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;

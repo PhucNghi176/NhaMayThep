@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Infrastructure.Repositories;
 using NhaMayThep.Infrastructure.Persistence;
 using System;
