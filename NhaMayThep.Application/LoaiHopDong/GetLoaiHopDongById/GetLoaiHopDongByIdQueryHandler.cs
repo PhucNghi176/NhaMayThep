@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById
 {
@@ -23,7 +18,7 @@ namespace NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById
         {
             var result = await _loaiHopDongReposity.FindAsync(x => x.ID == query.Id, cancellationToken);
             if (result == null || result.NgayXoa != null)
-                    throw new NotFoundException($"Not found loai hop dong {query.Id}");
+                throw new NotFoundException($"Not found loai hop dong {query.Id}");
             return result.MapToLoaiHopDongDto(_mapper);
         }
     }

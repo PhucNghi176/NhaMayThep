@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 {
@@ -20,7 +15,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
             _mapper = mapper;
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
         }
-        
+
         public async Task<QuaTrinhNhanSuDto> Handle(CreateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
             QuaTrinhNhanSuEntity entity = new QuaTrinhNhanSuEntity()

@@ -1,15 +1,10 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
 {
-    public class DeleteLichSuCongTacNhanVienCommand: IRequest<string>
+    public class DeleteLichSuCongTacNhanVienCommand : IRequest<string>
     {
-        public DeleteLichSuCongTacNhanVienCommand(string id) 
+        public DeleteLichSuCongTacNhanVienCommand(string id)
         {
             Id = id;
         }

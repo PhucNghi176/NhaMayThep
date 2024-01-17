@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
 {
@@ -27,10 +21,10 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
 
         public async Task<string> Handle(DeleteLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(),cancellationToken);
-            if(lichSuCongTacNhanVien == null || lichSuCongTacNhanVien.NgayXoa.HasValue) 
+            var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(), cancellationToken);
+            if (lichSuCongTacNhanVien == null || lichSuCongTacNhanVien.NgayXoa.HasValue)
             {
-               return "Xóa Thất Bại";
+                return "Xóa Thất Bại";
             }
             lichSuCongTacNhanVien.NguoiXoaID = _currentUserService.UserId;
             lichSuCongTacNhanVien.NgayXoa = DateTime.Now;

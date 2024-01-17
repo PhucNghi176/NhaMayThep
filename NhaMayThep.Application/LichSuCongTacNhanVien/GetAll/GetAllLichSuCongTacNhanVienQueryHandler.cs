@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetAll
 {
@@ -23,8 +18,8 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetAll
 
         public async Task<List<LichSuCongTacNhanVienDto>> Handle(GetAllLichSuCongTacNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var list = await _lichSuCongTacNhanVienRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
-            if(list == null)
+            var list = await _lichSuCongTacNhanVienRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
+            if (list == null)
             {
                 throw new NotFoundException("Danh Sách Rỗng");
             }

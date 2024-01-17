@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.VisualBasic;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.PhongBan.CreatePhongBan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
 {
@@ -22,7 +15,7 @@ namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
         }
         public async Task<PhongBanDto> Handle(GetPhongBanQuery request, CancellationToken cancellationToken)
         {
-            var phongBan =  _phongBanRepository.FindAsync(x => x.ID == request.ID).Result;
+            var phongBan = _phongBanRepository.FindAsync(x => x.ID == request.ID).Result;
             return phongBan.MapToPhongBanDto(_mapper);
         }
     }

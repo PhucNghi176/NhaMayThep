@@ -1,14 +1,7 @@
-﻿using MediatR;
-using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
@@ -23,12 +16,12 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
         }
         public async Task<PhongBanDto> Handle(CreatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            PhongBanEntity entity = new PhongBanEntity() 
-            { 
+            PhongBanEntity entity = new PhongBanEntity()
+            {
                 ID = command.ID,
                 Name = command.Name,
             };
-           _phongBanRepository.Add(entity);
+            _phongBanRepository.Add(entity);
             await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return entity.MapToPhongBanDto(_mapper);
         }

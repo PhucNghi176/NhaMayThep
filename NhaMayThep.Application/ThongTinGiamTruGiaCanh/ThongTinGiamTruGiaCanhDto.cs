@@ -1,16 +1,10 @@
 ﻿using AutoMapper;
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
 {
-    public class ThongTinGiamTruGiaCanhDto: IMapFrom<ThongTinGiamTruGiaCanhEntity>
+    public class ThongTinGiamTruGiaCanhDto : IMapFrom<ThongTinGiamTruGiaCanhEntity>
     {
         public string Id { get; set; } = null!;
         public string NhanVienID { get; set; } = null!;
@@ -21,8 +15,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
         public DateTime NgayXacNhanPhuThuoc { get; set; }
 
         public static ThongTinGiamTruGiaCanhDto CreateThongTinGiamTruGiaCanh(
-            string id, 
-            string nhanvienid, 
+            string id,
+            string nhanvienid,
             string magiamtru,
             string diachi,
             string quanhevoinhanvien,
@@ -35,9 +29,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
                 NhanVienID = nhanvienid,
                 MaGiamTruID = magiamtru,
                 DiaChiLienLac = diachi,
-                QuanHeVoiNhanVien= quanhevoinhanvien,
-                CanCuocCongDan= cancuoccongdan,
-                NgayXacNhanPhuThuoc= ngayxacnhan
+                QuanHeVoiNhanVien = quanhevoinhanvien,
+                CanCuocCongDan = cancuoccongdan,
+                NgayXacNhanPhuThuoc = ngayxacnhan
             };
         }
 

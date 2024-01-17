@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
 {
@@ -16,7 +10,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
         private readonly IHopDongRepository _hopdongRepository;
         public DeleteHopDongCommandHandler(IHopDongRepository hopdongRepository, IMapper mapper)
         {
-            _hopdongRepository = hopdongRepository; 
+            _hopdongRepository = hopdongRepository;
         }
         public async Task<string> Handle(DeleteHopDongCommand command, CancellationToken cancellationToken)
         {
@@ -27,7 +21,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
             result.NgayXoa = DateTime.Now;
             if (await _hopdongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 status = "Remove Successfully";
-            else 
+            else
                 status = "Remove Failed";
             return status;
         }

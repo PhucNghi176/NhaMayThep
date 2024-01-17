@@ -1,14 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Net.Mime;
-using NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong;
-using NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong;
-using NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong;
-using NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById;
+using NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong;
+using NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong;
+using NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById;
+using NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers.LoaiHopDong
 {

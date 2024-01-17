@@ -1,14 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.GetAll
 {
@@ -25,8 +18,8 @@ namespace NhaMayThep.Application.LoaiCongTac.GetAll
 
         public async Task<List<LoaiCongTacDto>> Handle(GetAllLoaiCongTacQuery request, CancellationToken cancellationToken)
         {
-            var list = await _loaiCongTacRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
-            if(list is null) 
+            var list = await _loaiCongTacRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
+            if (list is null)
             {
                 throw new NotFoundException("Danh Sách Trống");
             }

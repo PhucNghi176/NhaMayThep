@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.HopDong;
 using NhaMayThep.Application.HopDong.CreateNewHopDongCommand;
 using NhaMayThep.Application.HopDong.DeleteHopDongCommand;

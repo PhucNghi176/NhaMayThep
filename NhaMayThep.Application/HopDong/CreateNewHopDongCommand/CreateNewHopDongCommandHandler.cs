@@ -3,11 +3,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
 {
@@ -30,13 +25,13 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             _chucVuRepository = chucVuRepositoroy;
         }
 
-        public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken) 
+        public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken)
         {
             var NhanVien = await _nhanVienRepository.FindAsync(x => x.ID == command.MaSoNhanVien, cancellationToken);
             if (NhanVien == null)
                 throw new NotFoundException($"Invalid NhanVien {command.MaSoNhanVien}");
             var CapBacLuong = await _capBacLuongRepository.FindAsync(x => x.ID == command.HeSoLuongId, cancellationToken);
-            if(CapBacLuong == null)
+            if (CapBacLuong == null)
                 throw new NotFoundException($"Invalid CapBacLuong {command.HeSoLuongId}");
             var ChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhId, cancellationToken);
             if (ChucDanh == null)
