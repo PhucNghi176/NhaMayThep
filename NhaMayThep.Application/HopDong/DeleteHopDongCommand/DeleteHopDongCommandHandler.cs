@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
 {
