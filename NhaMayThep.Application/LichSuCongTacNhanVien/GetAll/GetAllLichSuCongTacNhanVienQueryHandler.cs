@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetAll
             var list = await _lichSuCongTacNhanVienRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if(list == null)
             {
-                throw new NotFoundException("This list is empty");
+                throw new NotFoundException("Danh Sách Rỗng");
             }
             return list.MapToLichSuCongTacNhanVienDtoList(_mapper);
         }

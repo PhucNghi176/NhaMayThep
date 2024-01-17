@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,11 +13,14 @@ namespace NhaMayThep.Application.LoaiCongTac.Create
 {
     public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand>
     {
+        private readonly ICurrentUserService _currentUserService;
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
         public readonly IMapper _mapper;
 
-        public CreateLoaiCongTacCommandHandler(ILoaiCongTacRepository loaiCongTacRepository, IMapper mapper)
+        public CreateLoaiCongTacCommandHandler(ILoaiCongTacRepository loaiCongTacRepository, IMapper mapper,
+            ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _loaiCongTacRepository = loaiCongTacRepository;
             _mapper = mapper;
         }
@@ -25,7 +29,9 @@ namespace NhaMayThep.Application.LoaiCongTac.Create
         {
             var loaiCongTac = new LoaiCongTacEntity()
             {
-                Name=request.Name
+                Name=request.Name,
+                NguoiTaoID = _currentUserService.UserId,
+                NgayTao = DateTime.Now,
             };
             _loaiCongTacRepository.Add(loaiCongTac);
             await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);

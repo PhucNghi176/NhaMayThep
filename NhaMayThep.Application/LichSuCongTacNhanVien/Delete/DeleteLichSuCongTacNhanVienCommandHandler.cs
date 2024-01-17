@@ -30,13 +30,13 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
             var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(),cancellationToken);
             if(lichSuCongTacNhanVien == null || lichSuCongTacNhanVien.NgayXoa.HasValue) 
             {
-               return "Delete Failed";
+               return "Xóa Thất Bại";
             }
             lichSuCongTacNhanVien.NguoiXoaID = _currentUserService.UserId;
             lichSuCongTacNhanVien.NgayXoa = DateTime.Now;
             _lichSuCongTacNhanVienRepository.Update(lichSuCongTacNhanVien);
             await _lichSuCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Delete success";
+            return "Xóa Thành Công";
         }
     }
 }

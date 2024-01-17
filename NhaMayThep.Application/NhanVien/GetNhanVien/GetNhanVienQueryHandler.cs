@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.NhanVien.GetUser
                 var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)
                 {
-                    user.MapToNhanVienDto(_mapper);
+                    return user.MapToNhanVienDto(_mapper);
                 }
             }
             throw new NotFoundException($"Email or password was incorrect.");

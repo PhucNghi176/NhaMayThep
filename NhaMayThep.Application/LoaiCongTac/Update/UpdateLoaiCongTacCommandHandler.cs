@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,14 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
 {
     public class UpdateLoaiCongTacCommandHandler : IRequestHandler<UpdateLoaiCongTacCommad, LoaiCongTacDto>
     {
-
+        private readonly ICurrentUserService _currentUserService;
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
         public readonly IMapper _mapper;
 
-        public UpdateLoaiCongTacCommandHandler(ILoaiCongTacRepository loaiCongTacRepository, IMapper mapper)
+        public UpdateLoaiCongTacCommandHandler(ILoaiCongTacRepository loaiCongTacRepository, 
+            IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _loaiCongTacRepository = loaiCongTacRepository;
             _mapper = mapper;
         }
@@ -30,6 +33,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
                 throw new NotFoundException("Loại Công Tác Không Tồn Tại");
             }
             loaiCongtac.Name = request.Name;
+            loaiCongtac.NguoiCapNhatID = _currentUserService.UserId;
             loaiCongtac.NgayCapNhat = DateTime.Now;
             _loaiCongTacRepository.Update(loaiCongtac);
             await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
