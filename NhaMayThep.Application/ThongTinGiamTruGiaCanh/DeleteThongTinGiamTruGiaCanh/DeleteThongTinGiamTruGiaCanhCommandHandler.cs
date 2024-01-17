@@ -1,13 +1,7 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Models;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh
 {
@@ -24,9 +18,14 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
         }
         public async Task<string> Handle(DeleteThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
                 .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if(thongtingiamtru == null || (thongtingiamtru.NguoiXoaID != null && thongtingiamtru.NgayXoa.HasValue))
+=======
+            var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+            if (thongtingiamtru == null)
+>>>>>>> origin/main
             {
                 throw new NotFoundException("Thông tin giảm trừ gia cảnh không tồn tại hoặc đã bị xóa trước đó");
             }

@@ -2,12 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
@@ -27,15 +21,25 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
         }
         public async Task<string> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var thongtincongdoan= await _thongtinCongDoanRepository
                 .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null ||(thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue)) 
+=======
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+            if (thongtincongdoan == null)
+>>>>>>> origin/main
             {
                 throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa");
             }
+<<<<<<< HEAD
             var nhanvien = await _nhanvienRepository
                 .FindAsync(x => x.ID.Equals(request.NhanVienId), cancellationToken);
             if (nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
+=======
+            var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienId) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+            if (nhanvien == null)
+>>>>>>> origin/main
             {
                 throw new NotFoundException($"Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }

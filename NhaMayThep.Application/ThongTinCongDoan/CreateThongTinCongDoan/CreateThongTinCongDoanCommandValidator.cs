@@ -1,20 +1,21 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
 {
-    public class CreateThongTinCongDoanCommandValidator: AbstractValidator<CreateThongTinCongDoanCommand>
+    public class CreateThongTinCongDoanCommandValidator : AbstractValidator<CreateThongTinCongDoanCommand>
     {
-        public CreateThongTinCongDoanCommandValidator() 
+        public CreateThongTinCongDoanCommandValidator()
         {
             RuleFor(x => x.NhanVienID)
+<<<<<<< HEAD
                 .NotEmpty().WithMessage("Mã nhân viên không được để trống")
                 .NotNull().WithMessage("Mã nhân viên không được rỗng")
                 .Must(x => Guid.TryParseExact(x,"N",out _)).WithMessage("Mã nhân viên không đúng định dạng");
+=======
+                .NotEmpty().WithMessage("NhanVienID must not be empty")
+                .NotNull().WithMessage("NhanVienID must not be null")
+                .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("The NhanVienID is incorrect");
+>>>>>>> origin/main
             RuleFor(x => x.ThuKyCongDoan)
                 .Must(x => x == true || x == false)
                 .WithMessage("Sai định dạng dữ liệu thư ký công đoàn");

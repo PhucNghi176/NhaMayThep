@@ -1,14 +1,9 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
 {
-    public class DeleteThongTinCongDoanCommand: IRequest<string> , ICommand
+    public class DeleteThongTinCongDoanCommand : IRequest<string>, ICommand
     {
         public DeleteThongTinCongDoanCommand(string id)
         {

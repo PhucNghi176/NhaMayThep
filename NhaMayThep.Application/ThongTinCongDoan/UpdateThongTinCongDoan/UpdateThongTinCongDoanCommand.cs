@@ -1,25 +1,24 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
+<<<<<<< HEAD
     public class UpdateThongTinCongDoanCommand: IRequest<string>, ICommand
+=======
+    public class UpdateThongTinCongDoanCommand : IRequest<ThongTinCongDoanDto>, ICommand
+>>>>>>> origin/main
     {
         public UpdateThongTinCongDoanCommand(
-            string id, 
+            string id,
             string nhanvienid,
-            bool thukycongdoan, 
+            bool thukycongdoan,
             DateTime? ngaygianhap)
         {
-            Id= id;
+            Id = id;
             NhanVienId = nhanvienid;
             ThuKyCongDoan = thukycongdoan;
-            NgayGiaNhap= ngaygianhap;
+            NgayGiaNhap = ngaygianhap;
         }
         public string Id { get; set; }
         public string NhanVienId { get; set; }

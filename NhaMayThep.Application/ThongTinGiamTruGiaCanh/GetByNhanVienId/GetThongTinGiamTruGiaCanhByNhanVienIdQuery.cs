@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
 {
+<<<<<<< HEAD:NhaMayThep.Application/ThongTinGiamTruGiaCanh/GetByNhanVienId/GetThongTinGiamTruGiaCanhByNhanVienIdQuery.cs
     public class GetThongTinGiamTruGiaCanhByNhanVienIdQuery: IRequest<List<ThongTinGiamTruGiaCanhDto>>, IQuery
+=======
+    public class GetThonTinGiamTruGiaCanhByNhanVienIdQuery : IRequest<List<ThongTinGiamTruGiaCanhDto>>, IQuery
+>>>>>>> origin/main:NhaMayThep.Application/ThongTinGiamTruGiaCanh/GetByNhanVienId/GetThonTinGiamTruGiaCanhByNhanVienIdQuery.cs
     {
         public GetThongTinGiamTruGiaCanhByNhanVienIdQuery(string id)
         {

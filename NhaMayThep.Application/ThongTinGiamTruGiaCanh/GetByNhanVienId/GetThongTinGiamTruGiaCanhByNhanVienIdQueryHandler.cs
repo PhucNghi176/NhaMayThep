@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
 {
@@ -23,8 +18,12 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
         }
         public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetThongTinGiamTruGiaCanhByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
+<<<<<<< HEAD:NhaMayThep.Application/ThongTinGiamTruGiaCanh/GetByNhanVienId/GetThongTinGiamTruGiaCanhByNhanVienIdQueryHandler.cs
             var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository
                 .FindAllAsync(x=> x.NhanVienID.Equals(request.Id) && x.NguoiXoaID== null && !x.NgayXoa.HasValue, cancellationToken);
+=======
+            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindAllAsync(x => x.NhanVienID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+>>>>>>> origin/main:NhaMayThep.Application/ThongTinGiamTruGiaCanh/GetByNhanVienId/GetThonTinGiamTruGiaCanhByNhanVienIdQueryHandler.cs
             if (giamtrugiacanh == null)
             {
                 throw new NotFoundException($"Không tìm thấy bất kì thông tin giảm trừ gia cảnh của nhân viên với Id: {request.Id}");

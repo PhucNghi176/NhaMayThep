@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
 {
@@ -23,9 +18,13 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
         }
         public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetAllThongTinGiamTruGiaCanhQuery request, CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository
                 .FindAllAsync(x=> x.NguoiXoaID == null && !x.NgayXoa.HasValue, 
                 cancellationToken);
+=======
+            var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository.FindAllAsync(x => x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+>>>>>>> origin/main
             if (giamtrugiacanhs == null || !giamtrugiacanhs.Any())
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin giảm trừ gia cảnh nào");

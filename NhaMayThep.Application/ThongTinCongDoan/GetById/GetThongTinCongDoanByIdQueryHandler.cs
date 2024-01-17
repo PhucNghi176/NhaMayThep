@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetById
 {
@@ -23,8 +18,12 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetById
         }
         public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByIdQuery request, CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var thongtincongdoan = await _thongtinCongDoanRepository
                 .FindAsync(x=> x.ID.Equals(request.Id) && x.NguoiXoaID== null && !x.NgayXoa.HasValue, cancellationToken);
+=======
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+>>>>>>> origin/main
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException($"Thông tin công đoàn với Id {request.Id} không tồn tại");

@@ -1,19 +1,22 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Net.Mime;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById;
-using Microsoft.AspNetCore.Authorization;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId;
+<<<<<<< HEAD
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCanh;
+=======
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
+using System.Net.Mime;
+>>>>>>> origin/main
 
 namespace NhaMayThep.Api.Controllers
 {

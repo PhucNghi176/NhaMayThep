@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetAll
 {
@@ -23,9 +18,14 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetAll
         }
         public async Task<List<ThongTinCongDoanDto>> Handle(GetAllThongTinCongDoanQuery request, CancellationToken cancellationToken)
         {
+<<<<<<< HEAD
             var thongtincongdoans = await _thongtinCongDoanRepository
                 .FindAllAsync(x=> !x.NgayXoa.HasValue && x.NguoiXoaID == null,cancellationToken);
             if(thongtincongdoans == null || !thongtincongdoans.Any())
+=======
+            var thongtincongdoans = await _thongtinCongDoanRepository.FindAllAsync(x => x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
+            if (thongtincongdoans == null || !thongtincongdoans.Any())
+>>>>>>> origin/main
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin công đoàn nào");
             }

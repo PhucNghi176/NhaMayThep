@@ -1,16 +1,10 @@
 ﻿using FluentValidation;
-using NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
-    public class UpdateThongTinCongDoanCommandValidator: AbstractValidator<UpdateThongTinCongDoanCommand>
+    public class UpdateThongTinCongDoanCommandValidator : AbstractValidator<UpdateThongTinCongDoanCommand>
     {
-        public UpdateThongTinCongDoanCommandValidator() 
+        public UpdateThongTinCongDoanCommandValidator()
         {
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("Mã thông tin công đoàn không được để trống")

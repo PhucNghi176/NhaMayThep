@@ -1,14 +1,13 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh
 {
+<<<<<<< HEAD
     public class UpdateThongTinGiamTruGiaCanhCommand :IRequest<string>, ICommand
+=======
+    public class UpdateThongTinGiamTruGiaCanhCommand : IRequest<ThongTinGiamTruGiaCanhDto>, ICommand
+>>>>>>> origin/main
     {
         public UpdateThongTinGiamTruGiaCanhCommand(
            string id,
