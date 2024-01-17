@@ -31,10 +31,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LoaiNghiPhepDto>>> Create(CreateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
+        public async Task<ActionResult<JsonResponse<string>>> Create(CreateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<LoaiNghiPhepDto>(result));
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Loai Nghi Phep created successfully"));
         }
 
         [HttpDelete("delete/{id}")]
