@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,11 +12,13 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 {
     public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
         private readonly ILoaiCongTacRepository _loaiCongTacRepository;
 
-        public UpdateLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, ILoaiCongTacRepository loaiCongTacRepository)
+        public UpdateLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, ILoaiCongTacRepository loaiCongTacRepository, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _lichSuCongTacNhanVienRepository = lichSuCongTacNhanVienRepository;
             _loaiCongTacRepository = loaiCongTacRepository;
         }
@@ -38,6 +41,8 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
             lichSu.NgayKetThuc = request.NgayKetThuc;
             lichSu.NoiCongTac = request.NoiCongTac;
             lichSu.LyDo = request.LyDo;
+            lichSu.NguoiCapNhatID = _currentUserService.UserId;
+            lichSu.NgayCapNhatCuoi = DateTime.Now;
 
             //lichSu.NhanVien = lichSu.NhanVien;
         }
