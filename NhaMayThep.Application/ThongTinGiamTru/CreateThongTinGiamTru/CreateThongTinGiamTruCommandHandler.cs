@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,22 +13,23 @@ namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
 {
     public class CreateThongTinGiamTruCommandHandler : IRequestHandler<CreateThongTinGiamTruCommand, ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTru _repository;
+        private readonly IThongTinGiamTruReposiyory _repository;
         private readonly IMapper _mapper;
-        public CreateThongTinGiamTruCommandHandler(IThongTinGiamTru repository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public CreateThongTinGiamTruCommandHandler(IThongTinGiamTruReposiyory repository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _repository = repository;
             _mapper = mapper;
         }
-
+        public CreateThongTinGiamTruCommandHandler() { }
         public async Task<ThongTinGiamTruDTO> Handle(CreateThongTinGiamTruCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = new ThongTinGiamTruEntity
             {
-                ID = request.Id,
                 Name = request.Name,
                 SoTienGiamTru = request.SoTienGiamTru,
-                NguoiTaoID = request.idUser,
+                NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.UtcNow,
             };
             _repository.Add(thongtingiamtru);

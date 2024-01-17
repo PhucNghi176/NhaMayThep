@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Repositories.ConfigTable
 {
-    public interface IThongTinGiamTru : IEFRepository<ThongTinGiamTruEntity,ThongTinGiamTruEntity>
+    public interface IThongTinGiamTruReposiyory : IEFRepository<ThongTinGiamTruEntity,ThongTinGiamTruEntity>
     {
         public Task<ThongTinGiamTruEntity?> GetThongTinGiamTruById(int id, CancellationToken cancellationToken);
     }

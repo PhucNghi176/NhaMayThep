@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,14 +8,13 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
 {
-    public class DeleteTinhTrangLamViecCommand : IRequest<TinhTrangLamViecDTO>
+    public class DeleteTinhTrangLamViecCommand : IRequest<bool>,ICommand
     {
         public int Id { get; set; }
-        public string NguoiXoaID {  get; set; }
-        public DeleteTinhTrangLamViecCommand(int id, string nguoiXoaID)
+        public DeleteTinhTrangLamViecCommand() { }
+        public DeleteTinhTrangLamViecCommand(int id)
         {
-            Id = id;
-            NguoiXoaID = nguoiXoaID;
+            this.Id = id;
         }
     }
 }

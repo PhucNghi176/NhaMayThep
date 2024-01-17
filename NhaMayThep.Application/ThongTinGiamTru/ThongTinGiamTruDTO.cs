@@ -1,5 +1,7 @@
 ﻿using AutoMapper;
+using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.NhanVien;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,21 +10,24 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru
 {
-    public class ThongTinGiamTruDTO
+    public class ThongTinGiamTruDTO : IMapFrom<ThongTinGiamTruEntity>
     {
         public int Id { get; set; }
-        public string TenMaGiamTru { get; set; }
+        public string Name { get; set; }
         public decimal SoTienGiamTru { get; set; }
-        public string NguoiTaoID { get; set; }
-        public DateTime NgayTao {  get; set; }
-        public string NguoiCapNhatID {  get; set; }
-        public DateTime NgayCapNhat { get; set; }
-        public string NguoiXoaID {  get; set; }
-        public DateTime NgayXoa { get; set; }
         public ThongTinGiamTruDTO() { }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<ThongTinGiamTruEntity,ThongTinGiamTruDTO>();
+        }
+        public static ThongTinGiamTruDTO Create(int id, string TenMaGiamTru, decimal SoTienGiamTru)
+        {
+            return new ThongTinGiamTruDTO
+            {
+                Id = id,
+                Name = TenMaGiamTru,
+                SoTienGiamTru = SoTienGiamTru,
+            };
         }
     }
 }

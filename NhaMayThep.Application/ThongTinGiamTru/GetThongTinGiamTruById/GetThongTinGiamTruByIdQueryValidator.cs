@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById
 {
-    public class GetThongTinGiamTruByIdCommandValidator : AbstractValidator<GetThongTinGiamTruByIdCommand>
+    public class GetThongTinGiamTruByIdQueryValidator : AbstractValidator<GetThongTinGiamTruByIdQuery>
     {
-        private readonly IThongTinGiamTru _repository;
-        public GetThongTinGiamTruByIdCommandValidator(IThongTinGiamTru repository)
+        private readonly IThongTinGiamTruReposiyory _repository;
+        public GetThongTinGiamTruByIdQueryValidator(IThongTinGiamTruReposiyory repository)
         {
             _repository = repository;
             ConfigureValidationRules();

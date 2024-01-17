@@ -8,13 +8,12 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
 {
-    public class DeleteThongTinGiamTruCommand : IRequest<ThongTinGiamTruDTO>,ICommand
+    public class DeleteThongTinGiamTruCommand : IRequest<bool>,ICommand
     {
         public int Id { get; set; }
-        public string NguoiXoaID {  get; set; }
-        public DeleteThongTinGiamTruCommand(string NguoiXoaID,int id)
+        public DeleteThongTinGiamTruCommand() { }
+        public DeleteThongTinGiamTruCommand(int id)
         {
-            this.NguoiXoaID = NguoiXoaID;
             this.Id = id;
         }
     }

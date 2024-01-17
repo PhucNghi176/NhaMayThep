@@ -11,9 +11,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
 {
-    public class ThongTinGiamTru : RepositoryBase<ThongTinGiamTruEntity, ThongTinGiamTruEntity, ApplicationDbContext>, IThongTinGiamTru
+    public class ThongTinGiamTruRepository : RepositoryBase<ThongTinGiamTruEntity, ThongTinGiamTruEntity, ApplicationDbContext>, IThongTinGiamTruReposiyory
     {
-        public ThongTinGiamTru(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public ThongTinGiamTruRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
 

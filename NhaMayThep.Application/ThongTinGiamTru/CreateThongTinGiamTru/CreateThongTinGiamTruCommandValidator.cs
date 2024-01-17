@@ -11,9 +11,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
 {
     public class CreateThongTinGiamTruCommandValidator : AbstractValidator<ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTru _repository;
+        private readonly IThongTinGiamTruReposiyory _repository;
         private readonly INhanVienRepository _nhanvien;
-        public CreateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien,IThongTinGiamTru repository)
+        public CreateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien,IThongTinGiamTruReposiyory repository)
         {
             _nhanvien = nhanvien;
             _repository = repository ?? throw new ArgumentNullException(nameof(repository));
@@ -21,14 +21,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
         }
         public void ConfiguireValidationRules()
         {
-            RuleFor(x => x.Id)
-                .NotEmpty()
-                .MustAsync(async (id, cancellationToken) => await _repository.GetThongTinGiamTruById(id, cancellationToken) != null)
-                .WithMessage("ID is not null or ID was exist.");
-            RuleFor(x => x.NguoiTaoID)
-                .NotNull()
-                .MustAsync(async (id, cancellationToken) => await _nhanvien.FindAsync(x => x.NguoiTaoID.Equals(id),cancellationToken) != null)
-                .WithMessage("Người tạo không được null hoặc không tồn tại.");
+            
         }
     }
 }

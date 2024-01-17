@@ -11,11 +11,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
 {
     public class DeleteThongTinGiamTruCommandValidator : AbstractValidator<DeleteThongTinGiamTruCommand>
     {
-        public readonly IThongTinGiamTru _repository;
-        public readonly INhanVienRepository _nhanvien;
-        public DeleteThongTinGiamTruCommandValidator(INhanVienRepository nhanvien,IThongTinGiamTru repository)
+        public readonly IThongTinGiamTruReposiyory _repository;
+        public DeleteThongTinGiamTruCommandValidator(IThongTinGiamTruReposiyory repository)
         {
-            _nhanvien = nhanvien;
             _repository = repository;
             ConfigureValidationRules();
         }
@@ -25,10 +23,6 @@ namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
                 .NotNull()
                 .MustAsync(async (id, cancellationToken) => await _repository.GetThongTinGiamTruById(id, cancellationToken) != null)
                 .WithMessage("ID is null or ID is not found");
-            RuleFor(x => x.NguoiXoaID)
-                .NotNull()
-                .MustAsync(async (id, cancellationToken) => await _nhanvien.FindAsync(x => x.NguoiXoaID.Equals(id), cancellationToken) != null)
-                .WithMessage("Người xóa không được null hoặc không tồn tại.");
         }
     }
 }

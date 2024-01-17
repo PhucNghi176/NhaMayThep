@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.GetTinhTrangLamViecByID
 {
-    public class GetTinhTrangLamViecByIDCommandValidator : AbstractValidator<GetTinhTrangLamViecByIDCommand>
+    public class GetTinhTrangLamViecByIDQueryValidator : AbstractValidator<GetTinhTrangLamViecByIDQuery>
     {
-        public GetTinhTrangLamViecByIDCommandValidator() 
+        public GetTinhTrangLamViecByIDQueryValidator() 
         {
             RuleFor(x => x.id)
                 .NotNull().WithMessage("Id không được null.");

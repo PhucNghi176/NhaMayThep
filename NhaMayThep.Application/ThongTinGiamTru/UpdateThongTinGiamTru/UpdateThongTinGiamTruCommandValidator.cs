@@ -11,9 +11,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
     public class UpdateThongTinGiamTruCommandValidator : AbstractValidator<UpdateThongTinGiamTruCommand>
     {
-        private readonly IThongTinGiamTru _repository;
+        private readonly IThongTinGiamTruReposiyory _repository;
         private readonly INhanVienRepository _nhanvien;
-        public UpdateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien, IThongTinGiamTru repository) 
+        public UpdateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien, IThongTinGiamTruReposiyory repository) 
         {
             _nhanvien = nhanvien;
             _repository = repository;
@@ -25,10 +25,6 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
                 .NotNull()
                 .MustAsync(async (id, cancellationToken) => await _repository.GetThongTinGiamTruById(id, cancellationToken) != null)
                 .WithMessage("ID is null or not found.");
-            RuleFor(x => x.NguoiCapNhatID)
-                .NotNull()
-                .MustAsync(async (id, cancellationToken) => await _nhanvien.FindAsync(x => x.NguoiCapNhatID.Equals(id), cancellationToken) != null)
-                .WithMessage("người cập nhật không được bỏ trống hoặc không tồn tại.");
         }
 
     }

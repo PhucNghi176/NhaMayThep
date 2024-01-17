@@ -11,12 +11,11 @@ namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
     {
         public int Id { get; set; }
         public string Name { get; set; }
-        public string NguoiCapNhatID { get; set; }
+        public UpdateTinhTrangLamViecCommand() { }
         public UpdateTinhTrangLamViecCommand(int id, string name, string nguoiCapNhatID)
         {
             Id = id;
             Name = name;
-            NguoiCapNhatID = nguoiCapNhatID;
         }
     }
 }

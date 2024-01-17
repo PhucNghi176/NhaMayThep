@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById
 {
-    public class GetThongTinGiamTruByIdCommandHandler : IRequestHandler<GetThongTinGiamTruByIdCommand, ThongTinGiamTruDTO>
+    public class GetThongTinGiamTruByIdQueryHandler : IRequestHandler<GetThongTinGiamTruByIdQuery, ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTru _repository;
+        private readonly IThongTinGiamTruReposiyory _repository;
         private readonly IMapper _mapper;
-        public GetThongTinGiamTruByIdCommandHandler(IThongTinGiamTru repository, IMapper mapper)
+        public GetThongTinGiamTruByIdQueryHandler(IThongTinGiamTruReposiyory repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
         }
 
-        public async Task<ThongTinGiamTruDTO> Handle(GetThongTinGiamTruByIdCommand request, CancellationToken cancellationToken)
+        public async Task<ThongTinGiamTruDTO> Handle(GetThongTinGiamTruByIdQuery request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.Id, cancellationToken);
             if (thongtingiamtru == null || thongtingiamtru.NgayXoa != null)

@@ -1,33 +1,40 @@
 ﻿using AutoMapper;
 using FluentValidation;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection.Metadata.Ecma335;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
 {
-    public class DeleteThongTinGiamTruCommandHandler : IRequestHandler<DeleteThongTinGiamTruCommand, ThongTinGiamTruDTO>
+    public class DeleteThongTinGiamTruCommandHandler : IRequestHandler<DeleteThongTinGiamTruCommand, bool>
     {
-        private readonly IThongTinGiamTru _repository;
+        private readonly IThongTinGiamTruReposiyory _repository;
         private readonly IMapper _mapper;
-        public DeleteThongTinGiamTruCommandHandler(IThongTinGiamTru repository, IMapper mapper)
+        private readonly ICurrentUserService _currenuserservice;
+        public DeleteThongTinGiamTruCommandHandler(IThongTinGiamTruReposiyory repository, IMapper mapper, ICurrentUserService currenuserservice)
         {
+            _currenuserservice = currenuserservice;
             _repository = repository;
             _mapper = mapper;
         }
-
-        public async Task<ThongTinGiamTruDTO> Handle(DeleteThongTinGiamTruCommand request, CancellationToken cancellationToken)
+        public DeleteThongTinGiamTruCommandHandler() { }
+        public async Task<bool> Handle(DeleteThongTinGiamTruCommand request, CancellationToken cancellationToken)
         {
-            var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.Id,cancellationToken);
-            thongtingiamtru.NguoiXoaID = request.NguoiXoaID ?? throw new Exception("fail to delete.");
+            var thongtingiamtru = await _repository.FindAsync(x => x.ID.Equals(request.Id),cancellationToken);
+            if (thongtingiamtru == null || thongtingiamtru.NgayXoa != null) 
+                return false;
+            thongtingiamtru.NguoiXoaID =  _currenuserservice.UserId;
             thongtingiamtru.NgayXoa = DateTime.UtcNow;
             _repository.Update(thongtingiamtru);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return thongtingiamtru.MapToThongTinGiamTruDTO(_mapper);
+            return true;
         }
     }
 }

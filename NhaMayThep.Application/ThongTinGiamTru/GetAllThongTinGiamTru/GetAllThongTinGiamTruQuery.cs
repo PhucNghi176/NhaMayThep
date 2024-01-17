@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.GetAllThongTinGiamTru
 {
-    public class GetAllThongTinGiamTruCommand : IRequest<List<ThongTinGiamTruDTO>>,ICommand
+    public class GetAllThongTinGiamTruQuery : IRequest<List<ThongTinGiamTruDTO>>,IQuery
     {
 
     }

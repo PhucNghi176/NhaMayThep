@@ -3,6 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,22 +14,24 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
     public class UpdateThongTinGiamTruCommandHandler : IRequestHandler<UpdateThongTinGiamTruCommand, ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTru _repository;
+        private readonly IThongTinGiamTruReposiyory _repository;
         private readonly IMapper _mapper;
-        public UpdateThongTinGiamTruCommandHandler(IThongTinGiamTru repository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdateThongTinGiamTruCommandHandler(IThongTinGiamTruReposiyory repository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _repository = repository;
             _mapper = mapper;
         }
-
+        public UpdateThongTinGiamTruCommandHandler() { }
         public async Task<ThongTinGiamTruDTO> Handle(UpdateThongTinGiamTruCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.ID, cancellationToken);
-            if (thongtingiamtru.NgayXoa != null)
-                throw new NotFoundException("thông tin giảm trừ đã bị xóa");
+            if (thongtingiamtru.NgayXoa != null || thongtingiamtru == null)
+                throw new NotFoundException("thông tin giảm trừ đã bị xóa hoặc không tồn tại");
             thongtingiamtru.Name = request.TenMaGiamTru ?? thongtingiamtru.Name;
             thongtingiamtru.SoTienGiamTru = request.SoTienGiamTru;
-            thongtingiamtru.NguoiCapNhatID = request.NguoiCapNhatID;
+            thongtingiamtru.NguoiCapNhatID = _currentUserService.UserId;
             thongtingiamtru.NgayCapNhat = DateTime.UtcNow;
             _repository.Update(thongtingiamtru);
             await _repository.UnitOfWork.SaveChangesAsync();

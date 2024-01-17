@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.GetAllThongTinGiamTru
 {
-    public class GetAllThongTinGiamTruCommandValidator : AbstractValidator<GetAllThongTinGiamTruCommand>
+    public class GetAllThongTinGiamTruQueryValidator : AbstractValidator<GetAllThongTinGiamTruQuery>
     {
     }
 }

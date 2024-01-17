@@ -30,5 +30,7 @@ namespace NhaMapThep.Domain.Entities
 
         public virtual ICollection<ThongTinLuongNhanVienEntity> ThongTinLuongNhanViens { get; set; }
 
+        public virtual ICollection<CanCuocCongDanEntity> CanCuocCongDans { get; set; }
+
     }
 }
