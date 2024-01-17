@@ -27,17 +27,10 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
              .MaximumLength(20).WithMessage("Quan hệ với nhân viên chứa tối đa 20 ký tự");
 
             RuleFor(x => x.CanCuocCongDan)
-<<<<<<< HEAD
              .NotEmpty().WithMessage("Căn cước công dân không được bỏ trống")
              .NotNull().WithMessage("Căn cước công dân không được bỏ rỗng")
              .MaximumLength(12).WithMessage("Căn cước công dân tối đa 20 ký tự")
              .Must(x=> long.TryParse(x, out long _)).WithMessage("Căn cước công dân phải là số");
-=======
-             .NotEmpty().WithMessage("CanCuocCongDan must not be empty")
-             .NotNull().WithMessage("CanCuocCongDan must not be null")
-             .MaximumLength(12).WithMessage("Maximun length is 12")
-             .Must(x => long.TryParse(x, out long _)).WithMessage("CanCuocCongDan must an digit");
->>>>>>> origin/main
 
             RuleFor(x => x.NgayXacNhanPhuThuoc)
                 .Must(ngayGiaNhap => ngayGiaNhap == DateTime.MinValue || ngayGiaNhap <= DateTime.Now)

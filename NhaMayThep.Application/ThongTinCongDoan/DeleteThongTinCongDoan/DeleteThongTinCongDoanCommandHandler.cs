@@ -18,14 +18,9 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
         }
         public async Task<string> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-<<<<<<< HEAD
             var thongtincongdoan = await _thongtinCongDoanRepository
                 .FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null || (thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
-=======
-            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
-            if (thongtincongdoan == null)
->>>>>>> origin/main
             {
                 throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }

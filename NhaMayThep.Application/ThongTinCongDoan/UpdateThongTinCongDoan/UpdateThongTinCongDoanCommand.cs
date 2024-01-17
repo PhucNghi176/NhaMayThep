@@ -3,11 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
-<<<<<<< HEAD
     public class UpdateThongTinCongDoanCommand: IRequest<string>, ICommand
-=======
-    public class UpdateThongTinCongDoanCommand : IRequest<ThongTinCongDoanDto>, ICommand
->>>>>>> origin/main
     {
         public UpdateThongTinCongDoanCommand(
             string id,

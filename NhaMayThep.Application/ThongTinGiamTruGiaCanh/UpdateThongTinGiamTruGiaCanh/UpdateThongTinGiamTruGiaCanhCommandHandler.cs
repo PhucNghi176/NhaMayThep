@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh
 {
@@ -62,23 +63,6 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
             try
             {
-<<<<<<< HEAD
-=======
-                var cccd = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
-                if (cccd == null)
-                {
-                    throw new NotFoundException($"Can Cuoc Cong Dan {request.CanCuocCongDan} does not exists");
-                }
-                thongtingiamtru.NguoiCapNhatID = request.NguoiCapNhatid;
-                thongtingiamtru.NgayCapNhatCuoi = DateTime.Now;
-                thongtingiamtru.MaGiamTruID = giamtru.ID;
-                thongtingiamtru.ThongTinGiamTru = giamtru;
-                thongtingiamtru.DiaChiLienLac = request.DiaChiLienLac ?? thongtingiamtru.DiaChiLienLac;
-                thongtingiamtru.QuanHeVoiNhanVien = request.QuanHeVoiNhanVien ?? thongtingiamtru.DiaChiLienLac;
-                thongtingiamtru.CanCuocCongDan = cccd.CanCuocCongDan;
-                thongtingiamtru.NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc;
-                _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
->>>>>>> origin/main
                 await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
                 return "Cập nhật thành công";
             }

@@ -3,11 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh
 {
-<<<<<<< HEAD
     public class UpdateThongTinGiamTruGiaCanhCommand :IRequest<string>, ICommand
-=======
-    public class UpdateThongTinGiamTruGiaCanhCommand : IRequest<ThongTinGiamTruGiaCanhDto>, ICommand
->>>>>>> origin/main
     {
         public UpdateThongTinGiamTruGiaCanhCommand(
            string id,

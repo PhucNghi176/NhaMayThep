@@ -14,20 +14,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             ThuKyCongDoan = thuKyCongDoan;
             NgayGiaNhap = ngaygianhap;
         }
-<<<<<<< HEAD
         public string NhanVienID { get;set; }
-=======
-        public void NguoiTao(string value)
-        {
-            nguoiTaoId = value;
-        }
-        public string? NguoiTaoId
-        {
-            get { return nguoiTaoId; }
-        }
-        private string? nguoiTaoId;
-        public string NhanVienID { get; set; }
->>>>>>> origin/main
         public bool ThuKyCongDoan { get; set; }
         public DateTime NgayGiaNhap { get; set; }
     }
