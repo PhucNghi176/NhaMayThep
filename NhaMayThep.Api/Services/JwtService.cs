@@ -1,4 +1,5 @@
-﻿using Microsoft.IdentityModel.Tokens;
+﻿using IdentityModel;
+using Microsoft.IdentityModel.Tokens;
 using NhaMayThep.Application.Common.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -13,8 +14,8 @@ namespace NhaMayThep.Api.Services
             var claims = new List<Claim>
             {
                 //new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtRegisteredClaimNames.NameId, ID),
-                new Claim(JwtRegisteredClaimNames.Email, email)
+                new Claim(JwtClaimTypes.Subject, ID),
+                new Claim(JwtClaimTypes.Email, email)
             };
 
             if (roles != null)

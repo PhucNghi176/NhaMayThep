@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanById
         {
             var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
 
-            if (CanCuocCongDan is not null && CanCuocCongDan.NgayXoa is not null)
+            if (CanCuocCongDan is not null && CanCuocCongDan.NgayXoa is null)
             {
                 return CanCuocCongDan.MapToCanCuocCongDanDto(_mapper);
             }
