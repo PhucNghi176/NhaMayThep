@@ -7,9 +7,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
         public DeleteThongTinGiamTruGiaCanhCommandValidator()
         {
             RuleFor(x => x.Id)
-               .NotEmpty().WithMessage("Id must not be empty")
-               .NotNull().WithMessage("Id must not be null")
-               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("The ID is not correct");
+               .NotEmpty().WithMessage("Id không được bỏ trống")
+               .NotNull().WithMessage("Id khong6 được rỗng")
+               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Id không đúng định dạng");
         }
     }
 }

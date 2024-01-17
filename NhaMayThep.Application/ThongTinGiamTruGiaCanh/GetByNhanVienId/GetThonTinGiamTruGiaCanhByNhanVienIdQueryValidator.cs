@@ -2,7 +2,7 @@
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
 {
-    public class GetThonTinGiamTruGiaCanhByNhanVienIdQueryValidator : AbstractValidator<GetThonTinGiamTruGiaCanhByNhanVienIdQuery>
+    public class GetThonTinGiamTruGiaCanhByNhanVienIdQueryValidator : AbstractValidator<GetThongTinGiamTruGiaCanhByNhanVienIdQuery>
     {
         public GetThonTinGiamTruGiaCanhByNhanVienIdQueryValidator()
         {

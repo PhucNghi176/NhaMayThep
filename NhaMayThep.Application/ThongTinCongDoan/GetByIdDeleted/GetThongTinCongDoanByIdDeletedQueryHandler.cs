@@ -2,24 +2,29 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetById
+namespace NhaMayThep.Application.ThongTinCongDoan.GetByIdDeleted
 {
-    public class GetThongTinCongDoanByIdQueryHandler : IRequestHandler<GetThongTinCongDoanByIdQuery, ThongTinCongDoanDto>
+    public class GetThongTinCongDoanByIdDeletedQueryHandler : IRequestHandler<GetThongTinCongDoanByIdDeletedQuery, ThongTinCongDoanDto>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly IMapper _mapper;
-        public GetThongTinCongDoanByIdQueryHandler(
+        public GetThongTinCongDoanByIdDeletedQueryHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
             IMapper mapper)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _mapper = mapper;
         }
-        public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByIdQuery request, CancellationToken cancellationToken)
+        public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByIdDeletedQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository
-                .FindAsync(x=> x.ID.Equals(request.Id) && x.NguoiXoaID== null && !x.NgayXoa.HasValue, cancellationToken);
+                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException($"Thông tin công đoàn với Id {request.Id} không tồn tại");
