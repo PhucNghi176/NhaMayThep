@@ -12,7 +12,6 @@ namespace NhaMayThep.Application.NhanVien
         }
         public NhanVienDto()
         {
-
         }
 
         public string Email { get; set; }

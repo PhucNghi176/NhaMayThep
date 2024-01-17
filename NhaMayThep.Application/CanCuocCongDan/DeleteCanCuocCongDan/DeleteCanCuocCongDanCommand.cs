@@ -7,7 +7,6 @@ namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
     {
         public DeleteCanCuocCongDanCommand()
         {
-
         }
         public DeleteCanCuocCongDanCommand(string canCuocCongDan)
         {

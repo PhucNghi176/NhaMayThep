@@ -1,4 +1,4 @@
-﻿using MediatR;
+using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.LoaiHopDong;
@@ -8,10 +8,13 @@ using NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById;
 using NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
+
 
 namespace NhaMayThep.Api.Controllers.LoaiHopDong
 {
     [ApiController]
+    [Authorize]
     public class LoaiHopDongController : ControllerBase
     {
         private readonly ISender _mediator;

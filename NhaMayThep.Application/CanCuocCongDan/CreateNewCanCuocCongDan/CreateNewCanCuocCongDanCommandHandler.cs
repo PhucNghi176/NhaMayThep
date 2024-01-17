@@ -18,8 +18,8 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
 
         public async Task<string> Handle(CreateNewCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var isExsisted = _canCuocCongDanRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa != null, cancellationToken);
-            if (isExsisted.Result != null)
+            var isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.NhanVienID == request.NhanVienID && ( request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa == null ), cancellationToken);
+            if (isExsisted)
             {
                 return ("CanCuocCongDan cua nhan vien da ton tai");
             }

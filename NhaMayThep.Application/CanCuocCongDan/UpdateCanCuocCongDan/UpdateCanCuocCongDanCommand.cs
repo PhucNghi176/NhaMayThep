@@ -21,7 +21,6 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
             TonGiao = tonGiao;
         }
 
-
         public string CanCuocCongDan { get; set; }
         public string HoVaTen { get; set; }
         public DateTime NgaySinh { get; set; }
