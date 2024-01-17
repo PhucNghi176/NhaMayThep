@@ -12,7 +12,6 @@ namespace NhaMapThep.Domain.Entities
     public class ChinhSachNhanSuEntity : BangMaGocEntity
     {
         public required string MucDo { get; set; }
-
         public DateTime NgayHieuLuc { get; set; }
         public string? NoiDung { get; set; }
     }
