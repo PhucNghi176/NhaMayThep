@@ -6,7 +6,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.PhongBan.DeletePhongBan
 {
-    public class DeletePhongBanCommandHandler : IRequestHandler<DeletePhongBanCommand, bool>
+    public class DeletePhongBanCommandHandler : IRequestHandler<DeletePhongBanCommand, string>
     {
         private readonly IPhongBanRepository _phongBanRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
             _currentUserService = currentUserService;
             _phongBanRepository = phongBanRepository;
         }
-        public async Task<bool> Handle(DeletePhongBanCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeletePhongBanCommand command, CancellationToken cancellationToken)
         {
             var phongBan = await _phongBanRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (phongBan == null)
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
             phongBan.NgayXoa = DateTime.UtcNow;
             phongBan.NguoiXoaID = _currentUserService.UserId;
             _phongBanRepository.Update(phongBan);
-            return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? true : false;
+            return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa thành công" : "Xóa thất bại";
         }
     }
 }

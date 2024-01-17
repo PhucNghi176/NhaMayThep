@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu
 {
-    public class DeleteQuaTrinhNhanSuCommand : IRequest<bool>, ICommand
+    public class DeleteQuaTrinhNhanSuCommand : IRequest<string>, ICommand
     {
         public DeleteQuaTrinhNhanSuCommand(string id)
         {

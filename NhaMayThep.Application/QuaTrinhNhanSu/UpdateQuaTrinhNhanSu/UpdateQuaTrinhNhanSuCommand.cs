@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
 {
-    public class UpdateQuaTrinhNhanSuCommand : IRequest<bool>, ICommand
+    public class UpdateQuaTrinhNhanSuCommand : IRequest<string>, ICommand
     {
         public UpdateQuaTrinhNhanSuCommand(string id
             , int loaiQuaTrinhID

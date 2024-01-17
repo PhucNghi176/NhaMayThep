@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
 {
-    public class UpdatePhongBanCommand : IRequest<bool>, ICommand
+    public class UpdatePhongBanCommand : IRequest<string>, ICommand
     {
         public UpdatePhongBanCommand(int id, string name)
         {

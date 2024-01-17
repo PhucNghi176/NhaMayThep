@@ -9,7 +9,7 @@ using System.Data;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 {
-    public class CreateQuaTrinhNhanSuCommandHandler : IRequestHandler<CreateQuaTrinhNhanSuCommand, bool>
+    public class CreateQuaTrinhNhanSuCommandHandler : IRequestHandler<CreateQuaTrinhNhanSuCommand, string>
     {
         IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
         IChucVuRepository _chucVuRepository;
@@ -35,34 +35,34 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
         }
 
-        public async Task<bool> Handle(CreateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var existPhongBan = await _phongBanRepository.FindAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null);
-            if (existPhongBan == null)
+            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null);
+            if (existPhongBan == false)
             {
                 throw new NotFoundException("ID phòng ban: " + command.PhongBanID + " không tồn tại");
             }
 
-            var existChucVu = await _chucVuRepository.FindAsync(x => x.ID == command.ChucVuID && x.NguoiXoaID == null);
-            if (existChucVu == null)
+            var existChucVu = await _chucVuRepository.AnyAsync(x => x.ID == command.ChucVuID && x.NguoiXoaID == null);
+            if (existChucVu == false)
             {
                 throw new NotFoundException("ID chức vụ: " + command.ChucVuID + " không tồn tại");
             }
 
-            var existChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhID && x.NguoiXoaID == null);
-            if (existChucDanh == null)
+            var existChucDanh = await _chucDanhRepository.AnyAsync(x => x.ID == command.ChucDanhID && x.NguoiXoaID == null);
+            if (existChucDanh == false)
             {
                 throw new NotFoundException("ID chức danh: " + command.ChucDanhID + " không tồn tại");
             }
 
-            var existLoaiQuaTrinh = await _thongTinQuaTrinhNhanSu.FindAsync(x => x.ID == command.LoaiQuaTrinhID && x.NguoiXoaID == null);
-            if (existLoaiQuaTrinh == null)
+            var existLoaiQuaTrinh = await _thongTinQuaTrinhNhanSu.AnyAsync(x => x.ID == command.LoaiQuaTrinhID && x.NguoiXoaID == null);
+            if (existLoaiQuaTrinh == false)
             {
                 throw new NotFoundException("ID loại quá trình: " + command.LoaiQuaTrinhID + " không tồn tại");
             }
 
-            var existNhanVien = await _nhanVienRepository.FindAsync(x => x.ID == command.MaSoNhanVien && x.NguoiXoaID == null);
-            if (existNhanVien == null)
+            var existNhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == command.MaSoNhanVien && x.NguoiXoaID == null);
+            if (existNhanVien == false)
             {
                 throw new NotFoundException("Mã số nhân viên: " + command.MaSoNhanVien + " không tồn tại");
             }
@@ -81,7 +81,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
                 NguoiTaoID = _currentUserService.UserId,
             };
             _quaTrinhNhanSuRepository.Add(entity);           
-            return await _quaTrinhNhanSuRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? true : false;
+            return await _quaTrinhNhanSuRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo thành công" : "Tạo thất bại";
         }
     }
 }

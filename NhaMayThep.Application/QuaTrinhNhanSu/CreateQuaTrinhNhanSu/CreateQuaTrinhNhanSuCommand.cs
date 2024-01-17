@@ -4,7 +4,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 {
-    public class CreateQuaTrinhNhanSuCommand : IRequest<bool>, ICommand
+    public class CreateQuaTrinhNhanSuCommand : IRequest<string>, ICommand
     {
         public CreateQuaTrinhNhanSuCommand(string maSoNhanVien
             , int loaiQuaTrinhID

@@ -8,7 +8,7 @@ using System.Data;
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
-    public class CreatePhongBanCommandHandler : IRequestHandler<CreatePhongBanCommand, bool>
+    public class CreatePhongBanCommandHandler : IRequestHandler<CreatePhongBanCommand, string>
     {
         private readonly IPhongBanRepository _phongBanRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -17,10 +17,10 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
             _currentUserService = currentUserService;
             _phongBanRepository = phongBanRepository;
         }
-        public async Task<bool> Handle(CreatePhongBanCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var existName = await _phongBanRepository.FindAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
-            if (existName != null)
+            var existName = await _phongBanRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
+            if (existName == true)
             {
                 throw new DuplicateNameException("Tên phòng ban: " + command.Name + " đã tồn tại");
             }
@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
                 NgayTao = DateTime.UtcNow              
             };
             _phongBanRepository.Add(entity);
-            return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? true : false;
+            return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Thêm thành công" : "Thêm thất bại";
         }
     }
 }

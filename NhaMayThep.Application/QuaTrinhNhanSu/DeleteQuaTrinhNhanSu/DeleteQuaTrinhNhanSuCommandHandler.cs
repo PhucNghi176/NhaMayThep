@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu
 {
-    public class DeleteQuaTrinhNhanSuCommandHandler : IRequestHandler<DeleteQuaTrinhNhanSuCommand, bool>
+    public class DeleteQuaTrinhNhanSuCommandHandler : IRequestHandler<DeleteQuaTrinhNhanSuCommand, string>
     {
         IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
         ICurrentUserService _currentUserService;
@@ -22,17 +22,17 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
         }
 
-        public async Task<bool> Handle(DeleteQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
             var entity = await _quaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (entity == null)
             {
-                throw new NotFoundException("ID quá trình nhân viên: " + command.ID + " không tồn tại");
+                throw new NotFoundException("Quá trình nhân viên: " + command.ID + " không tồn tại");
             }
             entity.NguoiXoaID = _currentUserService.UserId;
             entity.NgayXoa = DateTime.UtcNow;
             _quaTrinhNhanSuRepository.Update(entity);
-            return await _quaTrinhNhanSuRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? true : false;
+            return await _quaTrinhNhanSuRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa thành công" : "Xóa thất bại";
         }
     }
 }

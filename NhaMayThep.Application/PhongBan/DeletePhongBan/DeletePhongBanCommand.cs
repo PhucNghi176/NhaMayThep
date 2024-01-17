@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.PhongBan.DeletePhongBan
 {
-    public class DeletePhongBanCommand : IRequest<bool>, ICommand
+    public class DeletePhongBanCommand : IRequest<string>, ICommand
     {
         public DeletePhongBanCommand(int id)
         {
