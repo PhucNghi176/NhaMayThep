@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Common.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
                 .NotEmpty().WithMessage("Id is required");
 
             RuleFor(x => x.Loai)
-                .Must(x => Enum.GetNames(typeof(Loai)).Contains(x))
+                .Must(x => x == "TangLuong" || x == "GiamLuong")
                 .WithMessage("Invalid value for Loai. It should be either TangLuong or GiamLuong"); ;
 
             RuleFor(x => x.LuongCu)

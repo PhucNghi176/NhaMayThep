@@ -3,6 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,12 +15,14 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 {
     public class CreateKhaiBaoTangLuongCommandHandler : IRequestHandler<CreateKhaiBaoTangLuongCommand, KhaiBaoTangLuongDto>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly IKhaiBaoTangLuongRepository _khaiBaoTangLuongRepository;
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly IMapper _mapper;
 
-        public CreateKhaiBaoTangLuongCommandHandler(IKhaiBaoTangLuongRepository khaiBaoTangLuongRepository, IMapper mapper, INhanVienRepository nhanVienRepository)
+        public CreateKhaiBaoTangLuongCommandHandler(IKhaiBaoTangLuongRepository khaiBaoTangLuongRepository, IMapper mapper, INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _khaiBaoTangLuongRepository = khaiBaoTangLuongRepository;
             _nhanVienRepository = nhanVienRepository;
             _mapper = mapper;
@@ -28,7 +31,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 
         public async Task<KhaiBaoTangLuongDto> Handle(CreateKhaiBaoTangLuongCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindByIdAsync(request.MaSoNhanVien.ToString(), cancellationToken);
+            var nhanvien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
 
             if (nhanvien == null)
             {
@@ -41,7 +44,9 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
                 MaSoNhanVien = request.MaSoNhanVien,
                 NgayApDung = request.NgayApDung,
                 PhanTramTang = request.PhanTramTang,
-                LyDo = request.LyDo
+                LyDo = request.LyDo,
+                NgayTao = DateTime.Now,
+                NguoiTaoID = _currentUserService.UserId,
 
             };
 

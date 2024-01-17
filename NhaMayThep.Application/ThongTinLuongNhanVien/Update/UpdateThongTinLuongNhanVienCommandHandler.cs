@@ -44,7 +44,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
                 throw new NotFoundException("Thong tin not found");
             }
 
-            var nhanvien = await _nhanVienRepository.FindByIdAsync(request.MaSoNhanVien.ToString(), cancellationToken);
+            var nhanvien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
 
             if (nhanvien == null)
             {

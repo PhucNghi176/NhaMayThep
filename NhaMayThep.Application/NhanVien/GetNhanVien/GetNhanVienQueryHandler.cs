@@ -20,10 +20,10 @@ namespace NhaMayThep.Application.NhanVien.GetUser
         public async Task<NhanVienDto> Handle(GetNhanVienQuery request, CancellationToken cancellationToken)
         {
 
-            var user = await _repository.FindAsync(x => x.Email == request.Email);
+            var user = await _repository.FindAsync(x => x.Email == request.user.UserName);
             if (user != null)
             {
-                var samePassword = _repository.VerifyPassword(request.Password, user.PasswordHash);
+                var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)
                 {
                     return user.MapToNhanVienDto(_mapper);

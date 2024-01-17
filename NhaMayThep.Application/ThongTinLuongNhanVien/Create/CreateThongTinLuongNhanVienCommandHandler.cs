@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
 
         public async Task<ThongTinLuongNhanVienDto> Handle(CreateThongTinLuongNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindByIdAsync(request.MaSoNhanVien.ToString(), cancellationToken);
+            var nhanvien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
 
             if (nhanvien == null)
             {

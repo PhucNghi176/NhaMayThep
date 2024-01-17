@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Common.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -25,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
 
             RuleFor(x => x.Loai)
                 .NotEmpty().WithMessage("Loai is Required")
-                .Must(x => Enum.GetNames(typeof(Loai)).Contains(x))
+                .Must(x => x == "TangLuong" || x == "GiamLuong")
                 .WithMessage("Invalid value for Loai. It should be either TangLuong or GiamLuong"); ;
 
             RuleFor(x => x.LuongCu)

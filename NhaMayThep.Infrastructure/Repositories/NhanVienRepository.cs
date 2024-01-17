@@ -22,10 +22,5 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
             return BCrypt.Net.BCrypt.Verify(password, passwordHash);
         }
-
-        public async Task<NhanVienEntity?> FindByIdAsync(string id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID == id, cancellationToken);
-        }
     }
 }

@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Common.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,22 +18,22 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Create
         {
             RuleFor(x => x.LoaiHinhThuc)
                 .NotEmpty().WithMessage("Loai Hinh Thuc is Required")
-                .Must(x => Enum.GetNames(typeof(LoaiHinhThuc)).Contains(x))
+                .Must(x => x == "KhenThuong" || x == "KiLuat")
                 .WithMessage("Invalid value for Loai Hinh Thuc. It should be either KiLuat or KhenThuong");
 
-            When(x => x.LoaiHinhThuc == LoaiHinhThuc.KhenThuong.ToString(), () =>
+            When(x => x.LoaiHinhThuc == "KhenThuong", () =>
             {
                 RuleFor(x => x.MucDo)
                     .NotEmpty().WithMessage("Muc Do is Required")
-                    .Must(x => Enum.GetNames(typeof(KhenThuong)).Contains(x))
+                    .Must(x => x == "TienThuong" || x == "GiayKhen" || x == "ThangTien" || x == "NgayNghi" || x == "QuaTang")
                     .WithMessage("Invalid Muc Do value for KhenThuong");
             });
 
-            When(x => x.LoaiHinhThuc == LoaiHinhThuc.KiLuat.ToString(), () =>
+            When(x => x.LoaiHinhThuc == "KiLuat", () =>
             {
                 RuleFor(x => x.MucDo)
                     .NotEmpty().WithMessage("Muc Do is Required")
-                    .Must(x => Enum.GetNames(typeof(KiLuat)).Contains(x))
+                    .Must(x => x == "KhienTrach" || x == "CanhCao" || x == "HaLuong" || x == "PhatTien" || x == "GiangChuc" || x == "CachChuc" || x == "BuocThoiViec")
                     .WithMessage("Invalid Muc Do value for KiLuat");
             });
 

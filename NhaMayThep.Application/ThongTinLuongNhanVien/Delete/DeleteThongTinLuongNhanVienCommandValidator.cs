@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Common.Enum;
 using System;
 using System.Collections.Generic;
 using System.Linq;
