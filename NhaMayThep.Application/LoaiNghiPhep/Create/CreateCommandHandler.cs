@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
         {
             var loaiNghiPhepEntity = new LoaiNghiPhepEntity
             {
-                ID = request.Id,
+                
                 Name = request.Name,
                 SoGioNghiPhep = request.SoGioNghiPhep
             };

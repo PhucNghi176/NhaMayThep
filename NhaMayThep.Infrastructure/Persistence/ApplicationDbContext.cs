@@ -38,11 +38,15 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
         public DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
         public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
-
+        public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
         public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
+
+        public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ChinhSachNhanSuConfiguration());
+            modelBuilder.ApplyConfiguration(new ThongTinLuongNhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiCongTacConfiguration());
             modelBuilder.ApplyConfiguration(new ChucVuConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiHopDongConfiguration());

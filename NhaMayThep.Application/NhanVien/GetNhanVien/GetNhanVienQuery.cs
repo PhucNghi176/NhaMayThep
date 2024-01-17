@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -10,15 +11,18 @@ namespace NhaMayThep.Application.NhanVien.GetUser
 {
     public class GetNhanVienQuery : IRequest<NhanVienDto>, IQuery
     {
-
-
-        public GetNhanVienQuery(string email, string password)
+        public GetNhanVienQuery()
         {
-            Email = email;
-            Password = password;
+            
         }
 
-        public string Email { get; }
-        public string Password { get; }
+
+        public GetNhanVienQuery(LoginEntity loginEntity)
+        {
+            user.UserName = loginEntity.UserName;
+            user.Password = loginEntity.Password;
+        }
+
+       public required LoginEntity user { get; set; }
     }
 }
