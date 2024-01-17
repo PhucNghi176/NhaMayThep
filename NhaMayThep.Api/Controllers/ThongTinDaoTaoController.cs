@@ -1,16 +1,16 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMayThep.Application.ThongTinDaoTao.Create;
+using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ThongTinDaoTao.Delete;
-using NhaMayThep.Application.ThongTinDaoTao.GetAll;
-using NhaMayThep.Application.ThongTinDaoTao.GetById;
-using NhaMayThep.Application.ThongTinDaoTao.Update;
-using NhaMayThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
+using NhaMayThep.Application.ThongTinDaoTao;
+using System.Net.Mime;
 using System.Threading;
 using System.Threading.Tasks;
+using NhaMayThep.Application.ThongTinDaoTao.GetById;
+using NhaMayThep.Application.ThongTinDaoTao.GetAll;
+using NhaMayThep.Application.ThongTinDaoTao.Create;
+using NhaMayThep.Application.ThongTinDaoTao.Update;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -18,91 +18,92 @@ namespace NhaMayThep.Api.Controllers
     [ApiController]
     public class ThongTinDaoTaoController : ControllerBase
     {
-        private readonly IMediator _mediator;
-        private readonly IThongTinDaoTaoRepository _thongTinDaoTaoRepository;
+        private readonly ISender _mediator;
 
-        public ThongTinDaoTaoController(IMediator mediator, IThongTinDaoTaoRepository thongTinDaoTaoRepository)
+        public ThongTinDaoTaoController(ISender mediator)
         {
             _mediator = mediator;
-            _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
         }
 
         [HttpPost("create")]
-        [ProducesResponseType(StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> CreateThongTinDaoTao([FromBody] CreateThongTinDaoTaoCommand command, CancellationToken cancellationToken = default)
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> CreateThongTinDaoTao(
+            [FromBody] CreateThongTinDaoTaoCommand command,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(GetThongTinDaoTaoById), new { id = result }, null);
+            return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> DeleteThongTinDaoTao(string id, CancellationToken cancellationToken = default)
+        [HttpDelete("delete")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> DeleteThongTinDaoTao(
+            [FromBody] DeleteThongTinDaoTaoCommand command,
+            CancellationToken cancellationToken = default)
         {
-            var command = new DeleteThongTinDaoTaoCommand(id);
             var result = await _mediator.Send(command, cancellationToken);
+            return new JsonResponse<string>(result);
+        }
 
-            if (result)
+        [HttpPut("update")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> UpdateThongTinDaoTao(
+            [FromBody] UpdateThongTinDaoTaoCommand command,
+            CancellationToken cancellationToken = default)
+        {
+            try
             {
-                return Ok();
+                await _mediator.Send(command, cancellationToken);
+                return new JsonResponse<string>("Success");
             }
-            else
+            catch (Exception)
             {
-                return NotFound();
+                return BadRequest(new JsonResponse<string>("Fail"));
             }
         }
 
-        [HttpPut("update/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> UpdateThongTinDaoTao(string id, [FromBody] UpdateThongTinDaoTaoCommand command, CancellationToken cancellationToken = default)
+        [HttpGet("getBy/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<ThongTinDaoTaoDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<ThongTinDaoTaoDto>>> GetThongTinDaoTaoById(
+            [FromRoute] string id,
+            CancellationToken cancellationToken = default)
         {
-            command.Id = id;
-            var result = await _mediator.Send(command, cancellationToken);
-
-            if (result != null)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return NotFound();
-            }
-        }
-
-        [HttpGet("getById/{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetThongTinDaoTaoById(string id, CancellationToken cancellationToken = default)
-        {
-            var query = new GetByIdQuery(id);
-            var result = await _mediator.Send(query, cancellationToken);
-
-            if (result != null)
-            {
-                return Ok(result);
-            }
-            else
-            {
-                return NotFound();
-            }
+            var result = await _mediator.Send(new GetByIdQuery(id), cancellationToken);
+            return new JsonResponse<ThongTinDaoTaoDto>(result);
         }
 
         [HttpGet("getAll")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<IActionResult> GetAllThongTinDaoTao(CancellationToken cancellationToken = default)
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinDaoTaoDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<ThongTinDaoTaoDto>>>> GetThongTinDaoTaos(
+            CancellationToken cancellationToken = default)
         {
-            var query = new GetAllQuery();
-            var result = await _mediator.Send(query, cancellationToken);
-
-            return Ok(result);
+            var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
+            return new JsonResponse<List<ThongTinDaoTaoDto>>(result);
         }
     }
 }

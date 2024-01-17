@@ -3,7 +3,7 @@ using System;
 
 namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 {
-    public class CreateTrinhDoHocVanCommand : IRequest<int>
+    public class CreateTrinhDoHocVanCommand : IRequest<string>
     {
         public string TenTrinhDo { get; set; }
         public string NguoiTaoID { get; set; }

@@ -4,7 +4,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Delete
 {
-    public class DeleteThongTinDaoTaoCommand : IRequest<bool>, ICommand
+    public class DeleteThongTinDaoTaoCommand : IRequest<string>, ICommand
     {
         public DeleteThongTinDaoTaoCommand(string id)
         {

@@ -7,7 +7,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 {
-    public class CreateTrinhDoHocVanCommandHandler : IRequestHandler<CreateTrinhDoHocVanCommand, int>
+    public class CreateTrinhDoHocVanCommandHandler : IRequestHandler<CreateTrinhDoHocVanCommand, string>
     {
         private readonly ITrinhDoHocVanRepository _repository;
 
@@ -16,7 +16,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
             _repository = repository;
         }
 
-        public async Task<int> Handle(CreateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
         {
             var trinhDoHocVanEntity = new TrinhDoHocVanEntity
             {
@@ -39,7 +39,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
                 throw;
             }
 
-            return trinhDoHocVanEntity.ID;
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Success" : "Fail";
         }
     }
 }

@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Create
             RuleFor(x => x.TenTruong).NotEmpty().WithMessage("TenTruong is required");
             RuleFor(x => x.ChuyenNganh).NotEmpty().WithMessage("ChuyenNganh is required");
             RuleFor(x => x.NamTotNghiep).NotEmpty().WithMessage("NamTotNghiep is required");
-            RuleFor(x => x.TrinhDoVanHoa).GreaterThan(0).WithMessage("TrinhDoVanHoa must be greater than 0");
+            RuleFor(x => x.TrinhDoVanHoa).InclusiveBetween(1, 12).WithMessage("TrinhDoVanHoa must be between 1 and 12");
         }
     }
 }

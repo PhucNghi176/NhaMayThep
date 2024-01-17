@@ -9,8 +9,7 @@ namespace NhaMapThep.Domain.Entities.Base
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Key]
         public int ID { get; set; }
-        [Required]
-        public string Name { get; set; }
+        public required string Name { get; set; }
 
         public string? NguoiTaoID { get; set; }
         public DateTime? NgayTao { get; set; }

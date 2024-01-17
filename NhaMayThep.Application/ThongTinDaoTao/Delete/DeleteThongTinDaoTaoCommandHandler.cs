@@ -6,7 +6,7 @@ using NhaMayThep.Domain.Repositories;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Delete
 {
-    public class DeleteThongTinDaoTaoCommandHandler : IRequestHandler<DeleteThongTinDaoTaoCommand, bool>
+    public class DeleteThongTinDaoTaoCommandHandler : IRequestHandler<DeleteThongTinDaoTaoCommand, string>
     {
         private readonly IThongTinDaoTaoRepository _thongTinDaoTaoRepository;
         private readonly IMapper _mapper;
@@ -17,18 +17,18 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Delete
             _mapper = mapper;
         }
 
-        public async Task<bool> Handle(DeleteThongTinDaoTaoCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteThongTinDaoTaoCommand request, CancellationToken cancellationToken)
         {
             var thongTinDaoTao = await _thongTinDaoTaoRepository.FindByIdAsync(request.Id, cancellationToken);
             if (thongTinDaoTao == null)
             {
-                return false;
+                return "Fail";
             }
-
-            _thongTinDaoTaoRepository.Remove(thongTinDaoTao);
+            thongTinDaoTao.NgayXoa = DateTime.Now;
+            _thongTinDaoTaoRepository.Update(thongTinDaoTao);
             await _thongTinDaoTaoRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return true;
+            return "Success";
         }
     }
 }

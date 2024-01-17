@@ -27,53 +27,53 @@ namespace CleanArchitecture.Api.Controllers
 
         [HttpPost("create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<int>>> CreateTrinhDoHocVan(
+        public async Task<ActionResult<JsonResponse<string>>> CreateTrinhDoHocVan(
             [FromBody] CreateTrinhDoHocVanCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return new JsonResponse<int>(result);
+            return new JsonResponse<string>(result);
         }
 
-        [HttpPost("delete")]
+        [HttpDelete("delete")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<bool>>> DeleteTrinhDoHocVan(
+        public async Task<ActionResult<JsonResponse<string>>> DeleteTrinhDoHocVan(
             [FromBody] DeleteTrinhDoHocVanCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return new JsonResponse<bool>(result);
+            return new JsonResponse<string>(result);
         }
 
-        [HttpPost("update")]
+        [HttpPut("update")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<bool>>> UpdateTrinhDoHocVan(
+        public async Task<ActionResult<JsonResponse<string>>> UpdateTrinhDoHocVan(
         [FromBody] UpdateTrinhDoHocVanCommand command,
         CancellationToken cancellationToken = default)
         {
             try
             {
                 await _mediator.Send(command, cancellationToken);
-                return new JsonResponse<bool>(true);
+                return new JsonResponse<string>("Success");
             }
             catch (Exception)
             {
-                return BadRequest(new JsonResponse<bool>(false));
+                return BadRequest(new JsonResponse<string>("Fail"));
             }
         }
 

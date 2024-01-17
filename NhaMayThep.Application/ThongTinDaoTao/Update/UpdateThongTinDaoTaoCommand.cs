@@ -1,14 +1,14 @@
 ﻿using NhaMayThep.Application.Common.Interfaces;
 using MediatR;
 using System;
+using System.Text.Json.Serialization;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Update
 {
     public class UpdateThongTinDaoTaoCommand : IRequest<ThongTinDaoTaoDto>, ICommand
     {
-        public UpdateThongTinDaoTaoCommand(string id, string tenTruong, string chuyenNganh, DateTime namTotNghiep, int trinhDoVanHoa)
+        public UpdateThongTinDaoTaoCommand(string tenTruong, string chuyenNganh, DateTime namTotNghiep, int trinhDoVanHoa)
         {
-            Id = id;
             TenTruong = tenTruong;
             ChuyenNganh = chuyenNganh;
             NamTotNghiep = namTotNghiep;

@@ -52,9 +52,8 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
             };
 
             _thongTinDaoTaoRepository.Add(thongTinDaoTao);
-            await _thongTinDaoTaoRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return await _thongTinDaoTaoRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Success" : "Fail";
 
-            return thongTinDaoTao.ID;
         }
     }
 }
