@@ -1,7 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Application.PhongBan.DeletePhongBan;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
 using System.Net.Mime;
@@ -10,7 +13,7 @@ namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class QuaTrinhNhanVienController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -20,17 +23,17 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost("Create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(QuaTrinhNhanSuDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<QuaTrinhNhanSuDto>> Create(
+        public async Task<ActionResult<bool>> Create(
             [FromBody] CreateQuaTrinhNhanSuCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return result == true ? Ok("Thêm thành công") : BadRequest("Thêm thất bại");
         }
 
         [HttpGet("Get-by-ID/{id}")]
@@ -49,13 +52,13 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPut("Update/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Update(
+        public async Task<ActionResult<bool>> Update(
             [FromRoute] string id,
             [FromBody] UpdateQuaTrinhNhanSuCommand command,
             CancellationToken cancellationToken = default)
@@ -69,8 +72,21 @@ namespace NhaMayThep.Api.Controllers
                 return BadRequest();
             }
 
-            await _mediator.Send(command, cancellationToken);
-            return NoContent();
+            var result = await _mediator.Send(command, cancellationToken);
+            return result == true ? Ok("Cập nhật thành công") : BadRequest("Cập nhật thất bại");
+        }
+
+        [HttpDelete("Delete/{id}")]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<bool>> Delete([FromRoute] string id, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new DeleteQuaTrinhNhanSuCommand(id: id), cancellationToken);
+            return result == true ? Ok("Xóa thành công") : BadRequest("Xóa thất bại");
         }
 
     }

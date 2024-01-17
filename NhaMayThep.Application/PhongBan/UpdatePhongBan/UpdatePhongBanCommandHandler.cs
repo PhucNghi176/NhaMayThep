@@ -1,25 +1,36 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
+using System.Data;
 
 namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
 {
     public class UpdatePhongBanCommandHandler : IRequestHandler<UpdatePhongBanCommand, bool>
     {
-        private readonly IMapper _mapper;
         private readonly IPhongBanRepository _phongBanRepository;
         private readonly ICurrentUserService _currentUserService;
-        public UpdatePhongBanCommandHandler(IMapper mapper, IPhongBanRepository phongBanRepository, ICurrentUserService currentUserService)
+        public UpdatePhongBanCommandHandler(IPhongBanRepository phongBanRepository, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
-            _mapper = mapper;
             _phongBanRepository = phongBanRepository;
         }
 
         public async Task<bool> Handle(UpdatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var entity = _phongBanRepository.FindAsync(x => x.ID == command.ID).Result;
+            var entity = await _phongBanRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            if (entity == null)
+            {
+                throw new NotFoundException("ID: " + command.ID + " không tồn tại");
+            }
+
+            var otherE =  await _phongBanRepository.FindAsync(x => x.ID != command.ID && x.Name == command.Name && x.NguoiXoaID == null);
+            if (otherE != null)
+            {
+                throw new DuplicateNameException("Tên phòng ban: " + command.Name + " đã tồn tại");
+            }
+
             entity.Name = command.Name;
             entity.NguoiCapNhatID = _currentUserService.UserId;
             entity.NgayCapNhat = DateTime.UtcNow;

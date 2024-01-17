@@ -5,12 +5,10 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
     public class CreatePhongBanCommand : IRequest<bool>, ICommand
     {
-        public CreatePhongBanCommand(string name, int id)
+        public CreatePhongBanCommand(string name)
         {
             Name = name;
-            ID = id;
         }
-        public int ID { get; set; }
         public string Name { get; set; }
     }
 }

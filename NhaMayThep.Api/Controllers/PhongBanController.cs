@@ -49,7 +49,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetPhongBanQuery(id: id), cancellationToken);
-            return Ok(result);
+            return result != null ? Ok(result) : NotFound();
         }
 
         [HttpPut("Update/{id}")]
@@ -76,7 +76,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return result == true ? Ok("Cập nhật thành công") : BadRequest("Cập nhật thất bại");
         }
-        [HttpDelete("Delete{id}")]
+        [HttpDelete("Delete/{id}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
