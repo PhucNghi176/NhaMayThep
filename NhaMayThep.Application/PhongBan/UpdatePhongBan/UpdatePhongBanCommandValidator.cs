@@ -21,7 +21,6 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
                 .NotEmpty().WithMessage("Name is require")
                 .Must(AvailableName).WithMessage("This name is already exist");
         }
-
         private bool AvailableName(string name)
         {
             var phongBan = _phongBanRepository.FindAsync(x => x.Name == name).Result;

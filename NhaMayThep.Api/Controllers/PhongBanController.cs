@@ -5,13 +5,16 @@ using NhaMayThep.Application.PhongBan.CreatePhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
 using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
 using NhaMayThep.Application.PhongBan.UpdatePhongBan;
+using NhaMayThep.Application.PhongBan.DeletePhongBan;
+using Microsoft.AspNetCore.Authorization;
 using System.Net.Mime;
+
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class PhongBanController : ControllerBase
     {
         private readonly ISender _mediator;
