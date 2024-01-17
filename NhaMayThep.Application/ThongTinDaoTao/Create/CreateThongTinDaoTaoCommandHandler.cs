@@ -9,6 +9,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMayThep.Application.ThongTinDaoTao.Create;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 
 
 namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
@@ -17,13 +18,15 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
     {
         private readonly IMapper _mapper;
         private readonly IThongTinDaoTaoRepository _thongTinDaoTaoRepository;
+        private readonly ICurrentUserService _currentUserService;
         //private readonly INhanVienRepository _nhanVienRepository;
         //private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
 
-        public CreateThongTinDaoTaoCommandHandler(IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository/*, INhanVienRepository nhanVienRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository*/)
+        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository/*, INhanVienRepository nhanVienRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository*/)
         {
             _mapper = mapper;
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
+            _currentUserService = currentUserService;
             //_nhanVienRepository = nhanVienRepository;
             //_trinhDoHocVanRepository = trinhDoHocVanRepository;
         }
@@ -48,7 +51,8 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
                 TenTruong = request.TenTruong,
                 ChuyenNganh = request.ChuyenNganh,
                 NamTotNghiep = request.NamTotNghiep,
-                TrinhDoVanHoa = request.TrinhDoVanHoa
+                TrinhDoVanHoa = request.TrinhDoVanHoa,
+                NguoiTaoID = _currentUserService.UserId,
             };
 
             _thongTinDaoTaoRepository.Add(thongTinDaoTao);

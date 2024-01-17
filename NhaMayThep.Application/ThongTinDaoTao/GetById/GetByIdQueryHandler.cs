@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.GetById
         public async Task<ThongTinDaoTaoDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
             var thongTinDaoTao = await _thongTinDaoTaoRepository.FindByIdAsync(request.Id, cancellationToken);
-            if (thongTinDaoTao == null)
+            if (thongTinDaoTao == null || thongTinDaoTao.NgayXoa != null)
             {
                 throw new NotFoundException("ThongTinDaoTao Does not Exist");
             }

@@ -13,7 +13,6 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
             //RuleFor(x => x.Id).GreaterThan(0).Must(BeUnique).WithMessage("Id must be unique");
             RuleFor(x => x.TenTrinhDo).NotEmpty().MaximumLength(255);
-            RuleFor(x => x.NguoiCapNhatID).NotEmpty().MaximumLength(50);
         }
 
         //private bool BeUnique(int id)

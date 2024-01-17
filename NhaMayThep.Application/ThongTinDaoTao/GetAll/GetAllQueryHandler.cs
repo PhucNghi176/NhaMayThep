@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.GetAll
 
         public async Task<List<ThongTinDaoTaoDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var listThongTinDaoTao = await _thongTinDaoTaoRepository.FindAllAsync(cancellationToken);
+            var listThongTinDaoTao = await _thongTinDaoTaoRepository.FindAllAsync(x => x.NgayXoa ==null, cancellationToken);
             if (listThongTinDaoTao == null || listThongTinDaoTao.Count == 0)
             {
                 throw new NotFoundException("Does Not Have Any ThongTinDaoTao");

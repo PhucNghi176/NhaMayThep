@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.GetAll
 
         public async Task<List<TrinhDoHocVanDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var listTrinhDoHocVan = await _trinhDoHocVanRepository.FindAllAsync(cancellationToken);
+            var listTrinhDoHocVan = await _trinhDoHocVanRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             if (listTrinhDoHocVan == null || listTrinhDoHocVan.Count == 0)
             {
                 throw new NotFoundException("Does Not Have Any TrinhDoHocVan");

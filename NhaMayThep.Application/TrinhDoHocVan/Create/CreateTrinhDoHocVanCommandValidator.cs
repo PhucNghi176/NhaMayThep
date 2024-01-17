@@ -7,7 +7,6 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
         public CreateTrinhDoHocVanCommandValidator()
         {
             RuleFor(x => x.TenTrinhDo).NotEmpty().MaximumLength(255);
-            RuleFor(x => x.NguoiTaoID).NotEmpty().MaximumLength(50);
         }
     }
 }

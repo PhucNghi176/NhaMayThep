@@ -27,6 +27,6 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
             return await FindAllAsync(x => Ids.Contains(x.ID), cancellationToken);
         }
-        
+
     }
 }

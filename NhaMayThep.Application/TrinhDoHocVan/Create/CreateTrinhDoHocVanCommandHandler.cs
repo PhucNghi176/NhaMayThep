@@ -4,16 +4,19 @@ using System.Threading.Tasks;
 using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 {
     public class CreateTrinhDoHocVanCommandHandler : IRequestHandler<CreateTrinhDoHocVanCommand, string>
     {
         private readonly ITrinhDoHocVanRepository _repository;
+        private readonly ICurrentUserService _currentUserService;
 
-        public CreateTrinhDoHocVanCommandHandler(ITrinhDoHocVanRepository repository)
+        public CreateTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService ,ITrinhDoHocVanRepository repository)
         {
             _repository = repository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(CreateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
@@ -21,25 +24,16 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
             var trinhDoHocVanEntity = new TrinhDoHocVanEntity
             {
                 Name = request.TenTrinhDo,
-                NguoiTaoID = request.NguoiTaoID,
-                NgayTao = request.NgayTao
+                NguoiTaoID = _currentUserService.UserId,
+                NgayTao = DateTime.Now,
                 // Set other properties as needed
             };
 
             _repository.Add(trinhDoHocVanEntity);
 
-            try
-            {
-                await _repository.SaveChangesAsync(cancellationToken);
-            }
-            catch (Exception ex)
-            {
-                // Handle exceptions, log, or throw custom exceptions as needed
-                // Example: Log.Error($"Error saving TrinhDoHocVanEntity: {ex.Message}");
-                throw;
-            }
 
-            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Success" : "Fail";
+             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return "Success";
         }
     }
 }

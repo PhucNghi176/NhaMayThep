@@ -6,14 +6,12 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
     {
         public int Id { get; set; }
         public string TenTrinhDo { get; set; }
-        public string NguoiCapNhatID { get; set; }
 
         public static UpdateTrinhDoHocVanCommand Create( string tenTrinhDo, string nguoiCapNhatId)
         {
             return new UpdateTrinhDoHocVanCommand
             {
                 TenTrinhDo = tenTrinhDo,
-                NguoiCapNhatID = nguoiCapNhatId
             };
         }
     }
