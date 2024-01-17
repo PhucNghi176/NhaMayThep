@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
+namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
 {
-    public class GetThonTinGiamTruGiaCanhByNhanVienIdQuery: IRequest<List<ThongTinGiamTruGiaCanhDto>>, IQuery
+    public class RestoreThongTinCongDoanCommand : IRequest<string>, ICommand
     {
-        public GetThonTinGiamTruGiaCanhByNhanVienIdQuery(string id)
+        public RestoreThongTinCongDoanCommand(string id)
         {
             Id = id;
         }

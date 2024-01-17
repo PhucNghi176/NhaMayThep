@@ -3,11 +3,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
 {
@@ -19,8 +15,10 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
         private readonly IChucDanhRepository _chucDanhRepository;
         private readonly IChucVuRepository _chucVuRepository;
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;
+        private readonly ICurrentUserService _currentUserService;
         public CreateNewHopDongCommandHandler(IHopDongRepository hopDongRepository, INhanVienRepository nhanVienRepository, ICapBacLuongRepository capBacLuongRepository
-                                            , ILoaiHopDongReposity loaiHopDongRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepositoroy)
+                                            , ILoaiHopDongReposity loaiHopDongRepository, IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepositoroy,
+                                              ICurrentUserService currentUserService)
         {
             _hopDongRepository = hopDongRepository;
             _nhanVienRepository = nhanVienRepository;
@@ -28,15 +26,16 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             _loaiHopDongRepository = loaiHopDongRepository;
             _chucDanhRepository = chucDanhRepository;
             _chucVuRepository = chucVuRepositoroy;
+            _currentUserService = currentUserService;
         }
 
-        public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken) 
+        public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken)
         {
             var NhanVien = await _nhanVienRepository.FindAsync(x => x.ID == command.MaSoNhanVien, cancellationToken);
             if (NhanVien == null)
                 throw new NotFoundException($"Invalid NhanVien {command.MaSoNhanVien}");
             var CapBacLuong = await _capBacLuongRepository.FindAsync(x => x.ID == command.HeSoLuongId, cancellationToken);
-            if(CapBacLuong == null)
+            if (CapBacLuong == null)
                 throw new NotFoundException($"Invalid CapBacLuong {command.HeSoLuongId}");
             var ChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhId, cancellationToken);
             if (ChucDanh == null)
@@ -69,7 +68,9 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
                 HeSoLuongID = command.HeSoLuongId,
                 CapBacLuong = CapBacLuong,
                 PhuCapID = command.PhuCapId,
-                GhiChu = command.GhiChu
+                GhiChu = command.GhiChu,
+                NgayTao = DateTime.Now,
+                NguoiTaoID = _currentUserService.UserId
             };
 
             _hopDongRepository.Add(HopDong);

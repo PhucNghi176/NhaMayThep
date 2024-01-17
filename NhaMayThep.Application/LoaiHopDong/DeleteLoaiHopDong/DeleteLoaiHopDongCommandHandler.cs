@@ -1,20 +1,18 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
 {
     public class DeleteLoaiHopDongCommandHandler : IRequestHandler<DeleteLoaiHopDongCommand, string>
     {
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;
-        public DeleteLoaiHopDongCommandHandler(ILoaiHopDongReposity loaiHopDongRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteLoaiHopDongCommandHandler(ILoaiHopDongReposity loaiHopDongRepository, ICurrentUserService currentUserService)
         {
             _loaiHopDongRepository = loaiHopDongRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteLoaiHopDongCommand command, CancellationToken cancellationToken)
         {
@@ -23,11 +21,12 @@ namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
             if (result == null)
                 throw new NotFoundException($"Loai hop dong with {command.Id} not found");
             result.NgayXoa = DateTime.Now;
+            result.NguoiXoaID = _currentUserService.UserId;
             if (await _loaiHopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 msg = "Remove Successfully";
             else
                 msg = "Remove Failed";
             return msg;
-        } 
+        }
     }
 }

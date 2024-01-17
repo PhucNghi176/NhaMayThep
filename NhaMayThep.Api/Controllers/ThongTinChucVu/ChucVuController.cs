@@ -1,5 +1,5 @@
-﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ThongTinChucVu;
@@ -13,6 +13,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThongTinChucVu
 {
     [ApiController]
+    [Authorize]
     public class ChucVuController : ControllerBase
     {
         private readonly ISender _mediator;

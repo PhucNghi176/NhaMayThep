@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu
 {
@@ -14,6 +9,6 @@ namespace NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu
         {
             TenChucVu = tenChucVu;
         }
-        public string TenChucVu {  get; set; }
+        public string TenChucVu { get; set; }
     }
 }

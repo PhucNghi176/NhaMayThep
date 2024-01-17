@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
 {
     public class CreateLichSuCongTacNhanVienCommandValidator : AbstractValidator<CreateLichSuCongTacNhanVienCommand>
     {
-        public CreateLichSuCongTacNhanVienCommandValidator() 
+        public CreateLichSuCongTacNhanVienCommandValidator()
         {
             RuleFor(command => command.MaSoNhanVien).NotEmpty().WithMessage("Mã số nhân viên không được trống");
             RuleFor(command => command.LoaiCongTacID).GreaterThan(0).WithMessage("ID loại công tác phải là số dương");

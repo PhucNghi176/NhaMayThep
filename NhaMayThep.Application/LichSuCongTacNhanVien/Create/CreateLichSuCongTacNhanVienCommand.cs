@@ -1,19 +1,11 @@
 ﻿using MediatR;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
 {
     public class CreateLichSuCongTacNhanVienCommand : IRequest<string>
     {
-        public CreateLichSuCongTacNhanVienCommand(string maSoNhanVien, int loaiCongTacID, DateTime ngayBatDau, 
-            DateTime ngayKetThuc, string noiCongTac, string lydo) 
+        public CreateLichSuCongTacNhanVienCommand(string maSoNhanVien, int loaiCongTacID, DateTime ngayBatDau,
+            DateTime ngayKetThuc, string noiCongTac, string lydo)
         {
             MaSoNhanVien = maSoNhanVien;
             LoaiCongTacID = loaiCongTacID;

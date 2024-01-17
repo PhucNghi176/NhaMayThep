@@ -4,11 +4,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
 {
@@ -20,7 +15,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly IMapper _mapper;
 
-        public CreateLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, 
+        public CreateLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository,
             IMapper mapper, ILoaiCongTacRepository loaiCongTacRepository, INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService)
         {
             _lichSuCongTacNhanVienRepository = lichSuCongTacNhanVienRepository;
@@ -33,7 +28,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Create
         public async Task<string> Handle(CreateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
-            if (nhanVien is null || nhanVien.NgayXoa.HasValue) 
+            if (nhanVien is null || nhanVien.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Nhân Viên Không Tồn Tại");
             }

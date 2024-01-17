@@ -2,12 +2,6 @@
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien
 {
@@ -18,14 +12,14 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
 
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
-        public LoaiCongTacEntity  LoaiCongTac { get; set; }
-        public  DateTime NgayBatDau { get; set; }
+        public LoaiCongTacEntity LoaiCongTac { get; set; }
+        public DateTime NgayBatDau { get; set; }
         public DateTime? NgayKetThuc { get; set; }
-        public  string NoiCongTac { get; set; }
-        public  string LyDo { get; set; }
+        public string NoiCongTac { get; set; }
+        public string LyDo { get; set; }
 
-        public static LichSuCongTacNhanVienDto Create(string id,string maSoNhanVien, LoaiCongTacEntity loaiCongTac, DateTime ngaybatdau, 
-            DateTime? ngayKetThuc, string noiCongTac,string Lydo)
+        public static LichSuCongTacNhanVienDto Create(string id, string maSoNhanVien, LoaiCongTacEntity loaiCongTac, DateTime ngaybatdau,
+            DateTime? ngayKetThuc, string noiCongTac, string Lydo)
         {
             return new LichSuCongTacNhanVienDto()
             {
@@ -41,7 +35,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
 
         public void Mapping(Profile profile)
         {
-          profile.CreateMap<LichSuCongTacNhanVienEntity,LichSuCongTacNhanVienDto>();
+            profile.CreateMap<LichSuCongTacNhanVienEntity, LichSuCongTacNhanVienDto>();
         }
     }
 }

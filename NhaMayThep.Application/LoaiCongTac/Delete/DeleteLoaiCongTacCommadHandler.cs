@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Delete
 {
@@ -17,7 +11,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
         public readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
 
-        public DeleteLoaiCongTacCommadHandler(ILoaiCongTacRepository loaiCongTacRepository, 
+        public DeleteLoaiCongTacCommadHandler(ILoaiCongTacRepository loaiCongTacRepository,
             IMapper mapper, ICurrentUserService currentUserService)
         {
             _loaiCongTacRepository = loaiCongTacRepository;
@@ -29,19 +23,19 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
         {
             var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
 
-          
-            if(loaiCongtac is null ||loaiCongtac.NgayXoa.HasValue) 
+
+            if (loaiCongtac is null || loaiCongtac.NgayXoa.HasValue)
             {
                 return "Xóa Thất Bại";
             }
 
-                loaiCongtac.NguoiXoaID = _currentUserService.UserId;
-                loaiCongtac.NgayXoa = DateTime.Now;
-                _loaiCongTacRepository.Update(loaiCongtac);
-                await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Xóa Thành Công"; // Trả về true nếu quá trình xóa thành công
-            }
-           
+            loaiCongtac.NguoiXoaID = _currentUserService.UserId;
+            loaiCongtac.NgayXoa = DateTime.Now;
+            _loaiCongTacRepository.Update(loaiCongtac);
+            await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return "Xóa Thành Công"; // Trả về true nếu quá trình xóa thành công
         }
+
     }
+}
 

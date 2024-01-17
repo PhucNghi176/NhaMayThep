@@ -1,17 +1,11 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
 
 namespace NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh
 {
-    public class CreateNewChucDanhCommandHandler : IRequestHandler<CreateNewChucDanhCommand, int> 
+    public class CreateNewChucDanhCommandHandler : IRequestHandler<CreateNewChucDanhCommand, int>
     {
         private readonly IChucDanhRepository _chucDanhRepository;
         public CreateNewChucDanhCommandHandler(IChucDanhRepository chucDanhRepository)

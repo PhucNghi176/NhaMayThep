@@ -3,11 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Update
 {
@@ -17,7 +12,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
         public readonly IMapper _mapper;
 
-        public UpdateLoaiCongTacCommandHandler(ILoaiCongTacRepository loaiCongTacRepository, 
+        public UpdateLoaiCongTacCommandHandler(ILoaiCongTacRepository loaiCongTacRepository,
             IMapper mapper, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
@@ -28,7 +23,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
         public async Task<string> Handle(UpdateLoaiCongTacCommad request, CancellationToken cancellationToken)
         {
             var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
-            if(loaiCongtac == null || loaiCongtac.NgayXoa.HasValue)
+            if (loaiCongtac == null || loaiCongtac.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Loại Công Tác Không Tồn Tại");
             }

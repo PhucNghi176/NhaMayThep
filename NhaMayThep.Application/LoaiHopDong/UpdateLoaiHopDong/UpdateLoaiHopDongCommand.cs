@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong
 {
@@ -17,6 +12,6 @@ namespace NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong
         }
 
         public int Id { get; set; }
-        public string TenHopDong {  get; set; }
+        public string TenHopDong { get; set; }
     }
 }

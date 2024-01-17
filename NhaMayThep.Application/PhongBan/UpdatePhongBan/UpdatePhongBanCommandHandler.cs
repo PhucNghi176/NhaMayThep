@@ -1,32 +1,41 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
+using System.Data;
 
 namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
 {
-    public class UpdatePhongBanCommandHandler : IRequestHandler<UpdatePhongBanCommand, PhongBanDto>
+    public class UpdatePhongBanCommandHandler : IRequestHandler<UpdatePhongBanCommand, string>
     {
-        private readonly IMapper _mapper;
         private readonly IPhongBanRepository _phongBanRepository;
-        public UpdatePhongBanCommandHandler(IMapper mapper, IPhongBanRepository phongBanRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdatePhongBanCommandHandler(IPhongBanRepository phongBanRepository, ICurrentUserService currentUserService)
         {
-            _mapper = mapper;
+            _currentUserService = currentUserService;
             _phongBanRepository = phongBanRepository;
         }
 
-        public async Task<PhongBanDto> Handle(UpdatePhongBanCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var entity = _phongBanRepository.FindAsync(x => x.ID == command.ID).Result;
+            var entity = await _phongBanRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            if (entity == null)
+            {
+                throw new NotFoundException("ID: " + command.ID + " không tồn tại");
+            }
+
+            var otherE = await _phongBanRepository.AnyAsync(x => x.ID != command.ID && x.Name == command.Name && x.NguoiXoaID == null);
+            if (otherE == true)
+            {
+                throw new DuplicateNameException("Tên phòng ban: " + command.Name + " đã tồn tại");
+            }
+
             entity.Name = command.Name;
+            entity.NguoiCapNhatID = _currentUserService.UserId;
+            entity.NgayCapNhat = DateTime.UtcNow;
             _phongBanRepository.Update(entity);
-            await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return entity.MapToPhongBanDto(_mapper);
+            return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật thành công" : "Cập nhật thất bại";
         }
     }
 }

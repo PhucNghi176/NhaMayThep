@@ -11,5 +11,9 @@ namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
         public TinhTrangLamViecRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
+        public async Task<TinhTrangLamViecEntity?> GetTinhTrangLamViecById(int id, CancellationToken cancellationToken)
+        {
+            return await FindAsync(x => x.ID.Equals(id), cancellationToken);
+        }
     }
 }

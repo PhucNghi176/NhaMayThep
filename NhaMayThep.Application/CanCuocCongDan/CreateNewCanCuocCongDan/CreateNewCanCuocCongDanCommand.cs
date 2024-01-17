@@ -7,7 +7,6 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
     {
         public CreateNewCanCuocCongDanCommand()
         {
-            
         }
         public CreateNewCanCuocCongDanCommand(string canCuocCongDan, string nhanVienID, string hoVaTen, DateTime ngaySinh, bool gioiTinh, string quocTich, string queQuan, string diaChiThuongTru, DateTime ngayCap, string noiCap, string danToc, string tonGiao)
         {
