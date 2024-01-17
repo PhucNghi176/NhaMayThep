@@ -5,13 +5,10 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
 {
     public class DeletePhongBanCommand : IRequest<bool>, ICommand
     {
-        public DeletePhongBanCommand(int id, string nguoiXoaID)
+        public DeletePhongBanCommand(int id)
         {
-            NguoiXoaID = nguoiXoaID;
             ID = id;
         }
-        public string? NguoiXoaID { get; set; }
-
         public int ID { get; set; }
     }
 }
