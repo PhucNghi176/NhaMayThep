@@ -38,9 +38,14 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
         public DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
         public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
+        public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
+        public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
+        public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+            modelBuilder.ApplyConfiguration(new ChinhSachNhanSuConfiguration());
+            modelBuilder.ApplyConfiguration(new ThongTinLuongNhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiCongTacConfiguration());
             modelBuilder.ApplyConfiguration(new ChucVuConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiHopDongConfiguration());
@@ -63,69 +68,7 @@ namespace NhaMayThep.Infrastructure.Persistence
         }
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<NhanVienEntity>().HasData(
-                new NhanVienEntity()
-                {
-                    Email = "string1",
-                    PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-                    PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-                    HoVaTen = "Test User 1",
-                    ChucVuID = 1,
-                    TinhTrangLamViecID = 1,
-                    DiaChiLienLac = "TP.HCM",
-                    SoDienThoaiLienLac = "0912123456",
-                    MaSoThue = "1234567",
-                    TenNganHang = "TPBank",
-                    SoTaiKhoan = "03450126803",
-                    NgayVaoCongTy = DateTime.Now
-                },
-                 new NhanVienEntity()
-                 {
-                     Email = "string2",
-                     PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-                     PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-                     HoVaTen = "Test User 1",
-                     ChucVuID = 1,
-                     TinhTrangLamViecID = 1,
-                     DiaChiLienLac = "TP.HCM",
-                     SoDienThoaiLienLac = "0912123456",
-                     MaSoThue = "1234567",
-                     TenNganHang = "TPBank",
-                     SoTaiKhoan = "03450126803",
-                     NgayVaoCongTy = DateTime.Now
-                 },
-                  new NhanVienEntity()
-                  {
-                      Email = "string3",
-                      PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-                      PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-                      HoVaTen = "Test User 1",
-                      ChucVuID = 1,
-                      TinhTrangLamViecID = 1,
-                      DiaChiLienLac = "TP.HCM",
-                      SoDienThoaiLienLac = "0912123456",
-                      MaSoThue = "1234567",
-                      TenNganHang = "TPBank",
-                      SoTaiKhoan = "03450126803",
-                      NgayVaoCongTy = DateTime.Now
-                  }
-                  , new NhanVienEntity()
-                  {
-                      Email = "string4",
-                      PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-                      PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-                      HoVaTen = "Test User 1",
-                      ChucVuID = 1,
-                      TinhTrangLamViecID = 1,
-                      DiaChiLienLac = "TP.HCM",
-                      SoDienThoaiLienLac = "0912123456",
-                      MaSoThue = "1234567",
-                      TenNganHang = "TPBank",
-                      SoTaiKhoan = "03450126803",
-                      NgayVaoCongTy = DateTime.Now
-                  }
 
-                );
             modelBuilder.Entity<LoaiHoaDonEntity>().HasData(
                 new LoaiHoaDonEntity() { ID = 1, Name = "ChiPhiDiLai" },
                 new LoaiHoaDonEntity() { ID = 2, Name = "ChiPhiChoO" },

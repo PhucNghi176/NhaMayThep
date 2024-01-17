@@ -9,10 +9,12 @@ using NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById;
 using NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 {
     [ApiController]
+    [Authorize]
     public class ChucDanhController : ControllerBase
     {
         private readonly ISender _mediator;

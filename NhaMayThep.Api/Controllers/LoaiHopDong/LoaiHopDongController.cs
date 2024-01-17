@@ -9,10 +9,12 @@ using NhaMayThep.Application.LoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById;
 using NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers.LoaiHopDong
 {
     [ApiController]
+    [Authorize]
     public class LoaiHopDongController : ControllerBase
     {
         private readonly ISender _mediator;
