@@ -8,6 +8,8 @@ using NhaMayThep.Application.ThongTinLuongNhanVien.Delete;
 using NhaMayThep.Application.ThongTinLuongNhanVien.GetAll;
 using NhaMayThep.Application.ThongTinLuongNhanVien.GetById;
 using NhaMayThep.Application.ThongTinLuongNhanVien.Update;
+using System.Net.Mime;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -23,7 +25,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPost("create")]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinLuongNhanVienDto>), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -32,12 +34,12 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] CreateThongTinLuongNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return result;
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Create Success"));
         }
 
         [HttpPut("update")]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinLuongNhanVienDto>), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -46,12 +48,12 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateThongTinLuongNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return result;
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Update Success"));
         }
 
         [HttpDelete("delete/{id}")]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinLuongNhanVienDto>), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -60,8 +62,8 @@ namespace NhaMayThep.Api.Controllers
             [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteThongTinLuongNhanVienCommand(id), cancellationToken);
-            return result;
+            await _mediator.Send(new DeleteThongTinLuongNhanVienCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>("Delete Success"));
         }
 
         [HttpGet("getById/{id}")]

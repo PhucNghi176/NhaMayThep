@@ -17,10 +17,5 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
 
         }
-
-        public async Task<HopDongEntity?> FindByIdAsync(string id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID == id, cancellationToken);
-        }
     }
 }

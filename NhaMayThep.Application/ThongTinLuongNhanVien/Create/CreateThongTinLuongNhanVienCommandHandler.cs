@@ -3,6 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -13,13 +14,15 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
 {
     public class CreateThongTinLuongNhanVienCommandHandler : IRequestHandler<CreateThongTinLuongNhanVienCommand, ThongTinLuongNhanVienDto>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly IThongTinLuongNhanVienRepository _thongTinLuongNhanVienRepository;
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly IHopDongRepository _hopDongRepository;
         private readonly IMapper _mapper;
 
-        public CreateThongTinLuongNhanVienCommandHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, IMapper mapper, INhanVienRepository nhanVienRepository, IHopDongRepository hopDongRepository)
+        public CreateThongTinLuongNhanVienCommandHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, IMapper mapper, INhanVienRepository nhanVienRepository, IHopDongRepository hopDongRepository, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _thongTinLuongNhanVienRepository = thongTinLuongNhanVienRepository;
             _nhanVienRepository = nhanVienRepository;
             _hopDongRepository = hopDongRepository;
@@ -36,7 +39,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
                 throw new NotFoundException("Nhan vien not found");
             }
 
-            var hopdong = await _hopDongRepository.FindByIdAsync(request.MaSoHopDong.ToString(), cancellationToken);
+            var hopdong = await _hopDongRepository.FindAsync(x => x.ID == request.MaSoHopDong, cancellationToken);
 
             if (hopdong == null)
             {
@@ -59,7 +62,10 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
                 Loai = request.Loai,
                 LuongCu = request.LuongCu,
                 LuongMoi = request.LuongMoi,
-                NgayHieuLuc = request.NgayHieuLuc
+                NgayHieuLuc = request.NgayHieuLuc,
+
+                NgayTao = DateTime.Now,
+                NguoiTaoID = _currentUserService.UserId,
             };
 
             _thongTinLuongNhanVienRepository.Add(k);

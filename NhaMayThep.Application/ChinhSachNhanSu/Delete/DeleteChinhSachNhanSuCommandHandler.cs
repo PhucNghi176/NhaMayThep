@@ -4,6 +4,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.ChinhSachNhanSu.Create;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Delete
 {
     public class DeleteChinhSachNhanSuCommandHandler : IRequestHandler<DeleteChinhSachNhanSuCommand, ChinhSachNhanSuDto>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly IChinhSachNhanSuRepository _chinhSuRepository;
         private readonly IMapper _mapper;
 
-        public DeleteChinhSachNhanSuCommandHandler(IChinhSachNhanSuRepository chinhSachNhanSuRepository, IMapper mapper)
+        public DeleteChinhSachNhanSuCommandHandler(IChinhSachNhanSuRepository chinhSachNhanSuRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _chinhSuRepository = chinhSachNhanSuRepository;
             _mapper = mapper;
         }
@@ -33,6 +36,7 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Delete
                 throw new NotFoundException("Chinh sach is not found");
             }
 
+            chinhsach.NguoiXoaID = _currentUserService.UserId;
             chinhsach.NgayXoa = DateTime.Now;
 
             _chinhSuRepository.Update(chinhsach);

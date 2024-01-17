@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
         }
         public string Id { get; set; }
         public double? PhanTramTang { get; set; }
-        public DateTime? NgayApDung { get; set; }
+        public DateTime NgayApDung { get; set; }
         public string? LyDo { get; set; }
     }
 }

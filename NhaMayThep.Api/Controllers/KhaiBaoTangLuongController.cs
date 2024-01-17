@@ -8,6 +8,8 @@ using NhaMayThep.Application.KhaiBaoTangLuong.Delete;
 using NhaMayThep.Application.KhaiBaoTangLuong.GetAll;
 using NhaMayThep.Application.KhaiBaoTangLuong.GetById;
 using NhaMayThep.Application.KhaiBaoTangLuong.Update;
+using System.Net.Mime;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -23,45 +25,44 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPost("create")]
-        [ProducesResponseType(typeof(JsonResponse<KhaiBaoTangLuongDto>), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<KhaiBaoTangLuongDto>> Create(
+        public async Task<ActionResult> Create(
             [FromBody] CreateKhaiBaoTangLuongCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return result;
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Create Success"));
         }
 
         [HttpPut("update")]
-        [ProducesResponseType(typeof(JsonResponse<KhaiBaoTangLuongDto>), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<KhaiBaoTangLuongDto>> Update(
+        public async Task<ActionResult> Update(
             [FromBody] UpdateKhaiBaoTangLuongCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
-            return result;
+            await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Update Success"));
         }
 
         [HttpDelete("delete/{id}")]
-        [ProducesResponseType(typeof(JsonResponse<KhaiBaoTangLuongDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<KhaiBaoTangLuongDto>> Delete(
+        public async Task<ActionResult> Delete(
             [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteKhaiBaoTangLuongCommand(id), cancellationToken);
-            return result;
+            await _mediator.Send(new DeleteKhaiBaoTangLuongCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>("Delete Success"));
         }
 
         [HttpGet("getById/{id}")]

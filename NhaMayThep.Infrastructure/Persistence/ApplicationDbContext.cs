@@ -43,6 +43,8 @@ namespace NhaMayThep.Infrastructure.Persistence
 
         public DbSet<KhaiBaoTangLuongEntity> KhaiBaoTangLuong { get; set; }
         public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
+        public DbSet<KhenThuongEntity> KhenThuong {  get; set; }
+        public DbSet<KyLuatEntity> KyLuat { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -71,22 +73,22 @@ namespace NhaMayThep.Infrastructure.Persistence
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<NhanVienEntity>().HasData(
-                new NhanVienEntity()
-                {
-                    Email = "string1",
-                    PasswordHash = "123",
+            /*modelBuilder.Entity<NhanVienEntity>().HasData(*/
+            //new NhanVienEntity()
+            //{
+            //    Email = "string1",
+            //    PasswordHash = "123",
 
-                    HoVaTen = "Test User 1",
-                    ChucVuID = 1,
-                    TinhTrangLamViecID = 1,
-                    DiaChiLienLac = "TP.HCM",
-                    SoDienThoaiLienLac = "0912123456",
-                    MaSoThue = "1234567",
-                    TenNganHang = "TPBank",
-                    SoTaiKhoan = "03450126803",
-                    NgayVaoCongTy = DateTime.Now
-                });
+            //    HoVaTen = "Test User 1",
+            //    ChucVuID = 1,
+            //    TinhTrangLamViecID = 1,
+            //    DiaChiLienLac = "TP.HCM",
+            //    SoDienThoaiLienLac = "0912123456",
+            //    MaSoThue = "1234567",
+            //    TenNganHang = "TPBank",
+            //    SoTaiKhoan = "03450126803",
+            //    NgayVaoCongTy = DateTime.Now
+            //});
 
             //     new NhanVienEntity()
             //     {

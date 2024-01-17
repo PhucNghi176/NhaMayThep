@@ -4,6 +4,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.ChinhSachNhanSu.Create;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,13 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Update
 {
     public class UpdateChinhSachNhanSuCommandHandler : IRequestHandler<UpdateChinhSachNhanSuCommand, ChinhSachNhanSuDto>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly IChinhSachNhanSuRepository _chinhSuRepository;
         private readonly IMapper _mapper;
 
-        public UpdateChinhSachNhanSuCommandHandler(IChinhSachNhanSuRepository chinhSachNhanSuRepository, IMapper mapper)
+        public UpdateChinhSachNhanSuCommandHandler(IChinhSachNhanSuRepository chinhSachNhanSuRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _chinhSuRepository = chinhSachNhanSuRepository;
             _mapper = mapper;
         }
@@ -38,6 +41,9 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Update
             chinhsach.MucDo = string.IsNullOrEmpty(request.MucDo) ? chinhsach.MucDo : request.MucDo;
             chinhsach.NoiDung = string.IsNullOrEmpty(request.NoiDung) ? chinhsach.NoiDung : request.NoiDung;
             chinhsach.NgayHieuLuc = request.NgayHieuLuc != default(DateTime) ? request.NgayHieuLuc : chinhsach.NgayHieuLuc;
+
+            chinhsach.NgayCapNhat = DateTime.Now;
+            chinhsach.NguoiCapNhatID = _currentUserService.UserId;
 
             _chinhSuRepository.Update(chinhsach);
             await _chinhSuRepository.UnitOfWork.SaveChangesAsync(cancellationToken);

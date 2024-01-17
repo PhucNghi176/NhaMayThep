@@ -3,6 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.KhaiBaoTangLuong.Create;
 using System;
 using System.Collections.Generic;
@@ -14,11 +15,13 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Delete
 {
     public class DeleteKhaiBaoTangLuongCommandHandler : IRequestHandler<DeleteKhaiBaoTangLuongCommand, KhaiBaoTangLuongDto>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly IKhaiBaoTangLuongRepository _khaiBaoTangLuongRepository;
         private readonly IMapper _mapper;
 
-        public DeleteKhaiBaoTangLuongCommandHandler(IKhaiBaoTangLuongRepository khaiBaoTangLuongRepository, IMapper mapper)
+        public DeleteKhaiBaoTangLuongCommandHandler(IKhaiBaoTangLuongRepository khaiBaoTangLuongRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _khaiBaoTangLuongRepository = khaiBaoTangLuongRepository;
             _mapper = mapper;
         }
@@ -33,6 +36,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Delete
                 throw new NotFoundException("Khai bao Tang Luong is not exist");
             }
 
+            k.NguoiTaoID = _currentUserService.UserId;
             k.NgayXoa = DateTime.Now;
 
             _khaiBaoTangLuongRepository.Update(k);

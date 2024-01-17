@@ -10,16 +10,19 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.Create
 {
     public class CreateChinhSachNhanSuCommandHandler : IRequestHandler<CreateChinhSachNhanSuCommand, ChinhSachNhanSuDto>
     {
+        private readonly ICurrentUserService _currentUserService;
         private readonly IChinhSachNhanSuRepository _chinhSuRepository;
         private readonly IMapper _mapper;
 
-        public CreateChinhSachNhanSuCommandHandler(IChinhSachNhanSuRepository chinhSachNhanSuRepository, IMapper mapper)
+        public CreateChinhSachNhanSuCommandHandler(IChinhSachNhanSuRepository chinhSachNhanSuRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _chinhSuRepository = chinhSachNhanSuRepository;
             _mapper = mapper;
         }
@@ -34,8 +37,9 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Create
                 LoaiHinhThuc = request.LoaiHinhThuc,
                 MucDo = request.MucDo,
                 NgayHieuLuc = request.NgayHieuLuc,
-                NoiDung = request.NoiDung
-                
+                NoiDung = request.NoiDung,
+                NgayTao = DateTime.Now,
+                NguoiTaoID = _currentUserService.UserId,
             };
 
             _chinhSuRepository.Add(chinhsach);
