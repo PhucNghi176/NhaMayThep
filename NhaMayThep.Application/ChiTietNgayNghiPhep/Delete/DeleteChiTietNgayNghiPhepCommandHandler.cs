@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Threading;
 using System.Threading.Tasks;
@@ -12,15 +13,21 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
     {
         private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
-
-        public DeleteChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteChiTietNgayNghiPhepCommandHandler(IChiTietNgayNghiPhepRepository repo, IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _repo = repo;
             _mapper = mapper;
         }
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(DeleteChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
+            var userId = _currentUserService.UserId;
+            if (string.IsNullOrEmpty(userId))
+            {
+                throw new UnauthorizedAccessException("User ID not found.");
+            }
             var entity = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
@@ -31,7 +38,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
                 throw new InvalidOperationException("This Id is already deleted");
             }
 
-            entity.NguoiXoaID = request.NguoiXoaID;
+            entity.NguoiXoaID = userId;
             entity.NgayXoa = DateTime.Now;
 
             _repo.Update(entity);

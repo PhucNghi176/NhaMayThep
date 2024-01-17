@@ -40,6 +40,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpDelete("delete/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -47,9 +48,11 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeleteChiTietNgayNghiPhepCommand { Id = id }, cancellationToken);
+            var command = new DeleteChiTietNgayNghiPhepCommand(id); 
+            await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep deleted successfully"));
         }
+
 
         [HttpPut("update")]
         [ProducesResponseType(StatusCodes.Status200OK)]

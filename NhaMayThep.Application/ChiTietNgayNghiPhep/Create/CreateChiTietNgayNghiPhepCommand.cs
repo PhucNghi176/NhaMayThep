@@ -10,6 +10,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
 {
     public class CreateChiTietNgayNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>, ICommand
     {
+
         public string MaSoNhanVien { get; set; }
         public int LoaiNghiPhepID { get; set; }
         public double TongSoGio { get; set; }
@@ -17,5 +18,16 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
         public double SoGioConLai { get; set; }
         public int NamHieuLuc { get; set; }
 
+
+        public CreateChiTietNgayNghiPhepCommand( string maSoNhanVien, int loaiNghiPhepID, double tongSoGio, double soGioDaNghiPhep, double soGioConLai, int namHieuLuc)
+        {
+            
+            MaSoNhanVien = maSoNhanVien;
+            LoaiNghiPhepID = loaiNghiPhepID;
+            TongSoGio = tongSoGio;
+            SoGioDaNghiPhep = soGioDaNghiPhep;
+            SoGioConLai = soGioConLai;
+            NamHieuLuc = namHieuLuc;
+        }
     }
 }

@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Delete
                 .NotEmpty()
                 .WithMessage("Id is requied");
 
-            RuleFor(x => x.NguoiXoaID).NotEmpty().WithMessage("Nguoi xoa id is Required");
+          
         }
     }
 }

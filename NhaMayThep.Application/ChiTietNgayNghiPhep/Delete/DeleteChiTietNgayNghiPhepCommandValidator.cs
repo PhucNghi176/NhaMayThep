@@ -14,8 +14,7 @@ class DeleteChiTietNgayNghiPhepCommandValidator : AbstractValidator<DeleteChiTie
             RuleFor(command => command.Id)
                 .NotEmpty().WithMessage("ID is required for deletion.");
 
-            RuleFor(command => command.NguoiXoaID)
-                .NotEmpty().WithMessage("ID of the person performing the deletion is required.");
+          
         }
     }
 }
