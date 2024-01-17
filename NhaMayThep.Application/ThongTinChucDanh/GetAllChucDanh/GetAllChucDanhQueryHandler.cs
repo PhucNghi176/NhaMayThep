@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
+
 using NhaMapThep.Domain.Repositories.ConfigTable;
+
 
 namespace NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh
 {

@@ -2,6 +2,7 @@
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
+
 namespace NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh
 {
     public class CreateNewChucDanhCommandHandler : IRequestHandler<CreateNewChucDanhCommand, int>

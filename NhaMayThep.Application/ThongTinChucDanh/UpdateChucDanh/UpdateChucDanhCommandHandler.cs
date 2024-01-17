@@ -3,6 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
+
 namespace NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh
 {
     public class UpdateChucDanhCommandHandler : IRequestHandler<UpdateChucDanhCommand, ChucDanhDto>

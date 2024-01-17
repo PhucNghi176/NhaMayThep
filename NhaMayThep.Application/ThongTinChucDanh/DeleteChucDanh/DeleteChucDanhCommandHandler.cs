@@ -2,6 +2,7 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
+
 namespace NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh
 {
     public class DeleteChucDanhCommandHandler : IRequestHandler<DeleteChucDanhCommand, string>
