@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,9 +13,11 @@ namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
     public class DeleteLoaiHopDongCommandHandler : IRequestHandler<DeleteLoaiHopDongCommand, string>
     {
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;
-        public DeleteLoaiHopDongCommandHandler(ILoaiHopDongReposity loaiHopDongRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public DeleteLoaiHopDongCommandHandler(ILoaiHopDongReposity loaiHopDongRepository, ICurrentUserService currentUserService)
         {
             _loaiHopDongRepository = loaiHopDongRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteLoaiHopDongCommand command, CancellationToken cancellationToken)
         {
