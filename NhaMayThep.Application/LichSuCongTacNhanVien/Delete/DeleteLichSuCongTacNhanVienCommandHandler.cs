@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -14,11 +15,14 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
     {
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
 
-        public DeleteLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, IMapper mapper)
+        public DeleteLichSuCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository,
+            IMapper mapper, ICurrentUserService currentUserService)
         {
             _lichSuCongTacNhanVienRepository = lichSuCongTacNhanVienRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(DeleteLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
@@ -26,12 +30,13 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
             var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(),cancellationToken);
             if(lichSuCongTacNhanVien == null || lichSuCongTacNhanVien.NgayXoa.HasValue) 
             {
-               return "Delete Failed";
+               return "Xóa Thất Bại";
             }
+            lichSuCongTacNhanVien.NguoiXoaID = _currentUserService.UserId;
             lichSuCongTacNhanVien.NgayXoa = DateTime.Now;
             _lichSuCongTacNhanVienRepository.Update(lichSuCongTacNhanVien);
             await _lichSuCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Delete success";
+            return "Xóa Thành Công";
         }
     }
 }

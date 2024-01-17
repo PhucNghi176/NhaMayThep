@@ -11,7 +11,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
     {
         public DeleteLoaiHoaDonCommandValidator() 
         {
-            RuleFor(command => command.Id).NotEmpty().WithMessage("Id is required.");
+            RuleFor(command => command.Id).NotEmpty().WithMessage("Id Không Được Để Trống.");
         }
     }
 }

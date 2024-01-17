@@ -13,6 +13,7 @@ using NhaMayThep.Application.LichSuCongTacNhanVien.Create;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Delete;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetAll;
+using NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -83,17 +84,31 @@ namespace NhaMayThep.Api.Controllers
 
         [HttpGet("getAll")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<LichSuCongTacNhanVienDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<LichSuCongTacNhanVienDto>>>> GetAllReview(
+        public async Task<ActionResult<JsonResponse<List<LichSuCongTacNhanVienDto>>>> GetAllLichSuCongTacNhanVien(
           CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllLichSuCongTacNhanVienQuery(), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return (new JsonResponse<List<LichSuCongTacNhanVienDto>>(result));
+        }
+
+        [HttpGet("getByMasoNV")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetByMaSoNhanVien(
+            string maSoNhanVienId,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetByMaSoNhanVienQuery(maSoNhanVienId), cancellationToken);
+            //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
+            return Ok(new JsonResponse<List<LichSuCongTacNhanVienDto>>(result));
         }
     }
 }

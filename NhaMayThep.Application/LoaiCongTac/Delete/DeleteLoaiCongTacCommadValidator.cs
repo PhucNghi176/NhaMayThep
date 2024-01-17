@@ -11,7 +11,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
     {
        public DeleteLoaiCongTacCommadValidator()
         {
-            RuleFor(command => command.Id).NotEmpty().WithMessage("Id is required.");
+            RuleFor(command => command.Id).NotEmpty().WithMessage("Id không được để trống.");
         }
     }
 }

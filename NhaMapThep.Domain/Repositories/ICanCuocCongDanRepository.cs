@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Repositories
 {
-    public interface ICanCuocCongDanRepository: IEFRepository<CanCuocCongDanEntity, CanCuocCongDanEntity>
+    public interface ICanCuocCongDanRepository : IEFRepository<CanCuocCongDanEntity,CanCuocCongDanEntity>
     {
     }
 }

@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.GetAll
             var list = await _LoaiHoaDonRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if (list == null)
             {
-                throw new NotFoundException("LoaiCongTac list is empty");
+                throw new NotFoundException("Danh Sách Rỗng");
             }
             return list.MapToLoaiHoaDonDtoList(_mapper);
         }
