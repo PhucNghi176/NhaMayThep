@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac
 {
@@ -17,7 +12,7 @@ namespace NhaMayThep.Application.LoaiCongTac
         public static LoaiCongTacDto Create(int id, string name)
         {
             return new LoaiCongTacDto
-            { 
+            {
                 Id = id,
                 Name = name,
             };
@@ -28,7 +23,7 @@ namespace NhaMayThep.Application.LoaiCongTac
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<LoaiCongTacEntity,LoaiCongTacDto>();
+            profile.CreateMap<LoaiCongTacEntity, LoaiCongTacDto>();
         }
     }
 }

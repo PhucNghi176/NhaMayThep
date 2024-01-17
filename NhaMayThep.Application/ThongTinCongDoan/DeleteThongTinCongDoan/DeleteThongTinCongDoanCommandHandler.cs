@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
 {
@@ -23,7 +18,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
         }
         public async Task<string> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException("ThongTinCongDoan does not exists");

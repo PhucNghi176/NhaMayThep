@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh
 {
-    public class CreateThongTinGiamTruGiaCanhCommandValidator: AbstractValidator<CreateThongTinGiamTruGiaCanhCommand>
+    public class CreateThongTinGiamTruGiaCanhCommandValidator : AbstractValidator<CreateThongTinGiamTruGiaCanhCommand>
     {
         public CreateThongTinGiamTruGiaCanhCommandValidator()
         {
@@ -33,7 +28,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
              .NotEmpty().WithMessage("CanCuocCongDan must not be empty")
              .NotNull().WithMessage("CanCuocCongDan must not be null")
              .MaximumLength(12).WithMessage("Maximun length is 12")
-             .Must(x=> long.TryParse(x, out long _)).WithMessage("CanCuocCongDan must an digit");
+             .Must(x => long.TryParse(x, out long _)).WithMessage("CanCuocCongDan must an digit");
 
             RuleFor(x => x.NgayXacNhanPhuThuoc)
                 .Must(ngayGiaNhap => ngayGiaNhap == DateTime.MinValue || ngayGiaNhap <= DateTime.Now)

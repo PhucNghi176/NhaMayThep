@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
 {

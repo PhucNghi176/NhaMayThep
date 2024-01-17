@@ -1,19 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.LoaiCongTac.Create;
-using NhaMayThep.Application.LoaiCongTac.Delete;
-using NhaMayThep.Application.LoaiCongTac.GetAll;
-using NhaMayThep.Application.LoaiCongTac.Update;
-using NhaMayThep.Application.LoaiCongTac;
-using System.Net.Mime;
 using NhaMayThep.Application.LichSuCongTacNhanVien;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Create;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Delete;
-using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetAll;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien;
+using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -55,7 +49,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateLichSuCongTacNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if(command.ID == default)
+            if (command.ID == default)
             {
                 command.ID = id;
             }

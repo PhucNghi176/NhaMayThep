@@ -1,8 +1,5 @@
-﻿using IdentityModel;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.CanCuocCongDan;
@@ -11,7 +8,6 @@ using NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan;
 using NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanById;
 using NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Security.Claims;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -25,7 +21,7 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator;
 
-        }   
+        }
 
         [HttpGet]
         [Route("api/CanCuocCongDan/")]
@@ -48,7 +44,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<string>>> CreateNewCanCuocCongDan(
                        [FromBody] CreateNewCanCuocCongDanCommand command,
                                   CancellationToken cancellationToken = default)
-        { 
+        {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }

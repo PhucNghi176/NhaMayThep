@@ -27,8 +27,8 @@ namespace NhaMayThep.Api.Services
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-               // issuer: "test",
-               // audience: "api",
+                // issuer: "test",
+                // audience: "api",
                 claims: claims,
                 expires: DateTime.Now.AddHours(1),
                 signingCredentials: creds);

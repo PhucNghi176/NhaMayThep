@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 {
@@ -26,12 +21,12 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
         public async Task Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var ct = await _loaiCongTacRepository.FindAsync(x => x.ID == request.LoaiCongTacID, cancellationToken);
-            if(ct is null || ct.NgayXoa.HasValue) 
+            if (ct is null || ct.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Loại Công Tác không Tồn Tại");
             }
             var lichSu = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.ID, cancellationToken);
-            if (lichSu is null || lichSu.NgayXoa.HasValue) 
+            if (lichSu is null || lichSu.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Lịch Sử Công Tác Nhân Viên Không Tồn Tại");
             }

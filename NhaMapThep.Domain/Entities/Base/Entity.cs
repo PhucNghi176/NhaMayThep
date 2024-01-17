@@ -1,4 +1,4 @@
-﻿    using System.ComponentModel.DataAnnotations;
+﻿using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NhaMapThep.Domain.Entities.Base
@@ -22,7 +22,7 @@ namespace NhaMapThep.Domain.Entities.Base
         public DateTime? NgayCapNhatCuoi { get; set; }
 
         public string? NguoiXoaID { get; set; }
-        public DateTime? NgayXoa {  get; set; }
+        public DateTime? NgayXoa { get; set; }
 
 
         [NotMapped]

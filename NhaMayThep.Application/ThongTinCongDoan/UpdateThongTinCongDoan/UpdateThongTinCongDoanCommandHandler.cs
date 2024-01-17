@@ -2,12 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
@@ -27,13 +21,13 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
         }
         public async Task<ThongTinCongDoanDto> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan= await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-            if (thongtincongdoan == null) 
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
+            if (thongtincongdoan == null)
             {
                 throw new NotFoundException("ThongTinCongDoan does not exists");
             }
             var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienId) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-            if(nhanvien == null)
+            if (nhanvien == null)
             {
                 throw new NotFoundException($"Nhan vien with Id {request.NhanVienId} does not exists");
             }

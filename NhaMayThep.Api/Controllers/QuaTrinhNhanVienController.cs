@@ -1,13 +1,10 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
-using NhaMayThep.Application.PhongBan;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
-using System.Net.Mime;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu;
-using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -32,7 +29,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] CreateQuaTrinhNhanSuCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);            
+            var result = await _mediator.Send(command, cancellationToken);
             return Ok(result);
         }
 
@@ -47,7 +44,7 @@ namespace NhaMayThep.Api.Controllers
             [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetQuaTrinhNhanSuQuery(id : id), cancellationToken);
+            var result = await _mediator.Send(new GetQuaTrinhNhanSuQuery(id: id), cancellationToken);
             return result == null ? NotFound() : Ok(result);
         }
 

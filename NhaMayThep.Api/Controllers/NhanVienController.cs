@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.Common.Interfaces;
@@ -15,7 +14,7 @@ namespace NhaMayThep.Api.Controllers
     {
         private readonly IMediator _mediator;
         private readonly IJwtService _jwtService;
-        public NhanVienController(IMediator mediator , IJwtService jwtService)
+        public NhanVienController(IMediator mediator, IJwtService jwtService)
         {
             _mediator = mediator;
             _jwtService = jwtService;

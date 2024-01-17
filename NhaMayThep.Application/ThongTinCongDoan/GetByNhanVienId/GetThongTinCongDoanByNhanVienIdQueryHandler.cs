@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienId
 {
@@ -23,7 +18,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienId
         }
         public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x=> x.NhanVienID.Equals(request.Id) && x.NgayXoa== null && x.NguoiXoaID == null, cancellationToken);
+            var thongtincongdoan = await _thongtinCongDoanRepository.FindAsync(x => x.NhanVienID.Equals(request.Id) && x.NgayXoa == null && x.NguoiXoaID == null, cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException("ThongTinCongDoan for this nhanvien does not exists");

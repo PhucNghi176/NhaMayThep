@@ -1,14 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Net.Mime;
+using NhaMayThep.Application.ThongTinChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById;
 using NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh;
-using NhaMayThep.Application.ThongTinChucDanh;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 {

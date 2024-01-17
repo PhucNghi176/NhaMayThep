@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiCongTac.Update
 {
     public class UpdateLoaiCongTacValidator : AbstractValidator<UpdateLoaiCongTacCommad>
     {
-        public UpdateLoaiCongTacValidator() 
+        public UpdateLoaiCongTacValidator()
         {
             RuleFor(command => command.Id).NotEmpty().WithMessage("Id không được để trống.");
             RuleFor(command => command.Name)

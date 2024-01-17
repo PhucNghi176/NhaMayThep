@@ -1,14 +1,9 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh
 {
-    public class CreateThongTinGiamTruGiaCanhCommand: IRequest<string>, ICommand
+    public class CreateThongTinGiamTruGiaCanhCommand : IRequest<string>, ICommand
     {
         public CreateThongTinGiamTruGiaCanhCommand(
             string nhanvienid,
@@ -34,7 +29,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             get { return nguoiTaoId; }
         }
         private string? nguoiTaoId;
-        public string NhanVienID { get;set; }
+        public string NhanVienID { get; set; }
         public int MaGiamTruID { get; set; }
         public string DiaChiLienLac { get; set; }
         public string QuanHeVoiNhanVien { get; set; }

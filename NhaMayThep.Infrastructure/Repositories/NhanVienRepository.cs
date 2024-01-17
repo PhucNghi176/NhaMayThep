@@ -22,9 +22,9 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
             return BCrypt.Net.BCrypt.Verify(password, passwordHash);
         }
-        public async Task<NhanVienEntity?> FindById(string Id,CancellationToken cancellationToken = default)
+        public async Task<NhanVienEntity?> FindById(string Id, CancellationToken cancellationToken = default)
         {
-            return await FindAsync( x=> x.ID.Equals(Id),cancellationToken);
+            return await FindAsync(x => x.ID.Equals(Id), cancellationToken);
         }
     }
 }

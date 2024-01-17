@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
 {
@@ -23,7 +18,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
         }
         public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetThonTinGiamTruGiaCanhByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
-            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindAllAsync(x=> x.NhanVienID.Equals(request.Id) && x.NguoiXoaID== null && x.NgayXoa== null, cancellationToken);
+            var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository.FindAllAsync(x => x.NhanVienID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
             if (giamtrugiacanh == null)
             {
                 throw new NotFoundException($"No GiamTruGiaCanh found for the NhanVien with Id: {request.Id}");

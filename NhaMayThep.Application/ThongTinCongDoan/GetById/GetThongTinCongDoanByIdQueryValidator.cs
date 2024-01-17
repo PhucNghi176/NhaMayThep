@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetById
 {
-    public class GetThongTinCongDoanByIdQueryValidator: AbstractValidator<GetThongTinCongDoanByIdQuery>
+    public class GetThongTinCongDoanByIdQueryValidator : AbstractValidator<GetThongTinCongDoanByIdQuery>
     {
         public GetThongTinCongDoanByIdQueryValidator()
         {
