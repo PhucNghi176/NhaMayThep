@@ -36,7 +36,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateDonViCongTac), new JsonResponse<int>(result));
+            return Ok(new JsonResponse<int>(result));
         }
 
         [HttpGet("GetAllDonViCongTac")]
@@ -47,7 +47,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<List<DonViCongTacDto>>> GetAllDonViCongTac(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllDonViCongTacQuery(), cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<List<DonViCongTacDto>>(result));
         }
 
         [HttpPut("UpdateDonViCongTac/{id}")]
@@ -73,7 +73,7 @@ namespace NhaMayThep.Api.Controllers
             }
 
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<DonViCongTacDto>(result));
         }
 
         [HttpDelete("DeleteDonViCongTac/{id}")]
@@ -86,7 +86,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult> DeleteDonViCongTac([FromRoute] int id , CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteDonViCongTacCommand(id), cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }

@@ -31,22 +31,16 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         {
             
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
-
-            var checkDuplicatoion = await _thongTinDangVienRepository.FindAsync(x => (x.NhanVienID == request.NhanVienID && x.ID != request.ID) && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (checkDuplicatoion != null)
-                throw new NotFoundException("Nhan Vien" + request.NhanVienID + "da ton tai Thong Tin Dang Vien");
 
             var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (nhanVien == null)
                 throw new NotFoundException("Nhan Vien is not found");
 
-            thongTinDangVien.NhanVienID = nhanVien.ID;
-            thongTinDangVien.NhanVien = nhanVien;
             thongTinDangVien.NgayVaoDang = request.NgayVaoDang;
-            thongTinDangVien.CapDangVien = request.CapDangVien;
+            thongTinDangVien.CapDangVien = request.CapDangVien ;
             thongTinDangVien.NguoiCapNhatID = _currentUserService.UserId;
             thongTinDangVien.NgayCapNhatCuoi = DateTime.Now;
 

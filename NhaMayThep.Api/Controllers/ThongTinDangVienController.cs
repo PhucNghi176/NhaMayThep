@@ -40,7 +40,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateThongTinDangVien), new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("GetAllThongTinDangVien")]
@@ -51,10 +51,10 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<List<ThongTinDangVienDto>>> GetAllThongTinDangVien(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllThongTinDangVienQuery(), cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<List<ThongTinDangVienDto>>(result));
         }
 
-        [HttpPut("UpdateThongTinDangVien/{id}")]
+        [HttpPut("UpdateThongTinDangVien/{nhanVienId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -62,22 +62,22 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateThongTinDangVien(
-            [FromRoute] string id,
+            [FromRoute] string nhanVienId,
             [FromBody] UpdateThongTinDangVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.ID == default)
+            if (command.NhanVienID == default)
             {
-                command.ID = id;
+                command.NhanVienID = nhanVienId;
             }
 
-            if (id != command.ID)
+            if (nhanVienId != command.NhanVienID)
             {
                 return BadRequest("ID from route and from body are not matched");
             }
 
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<ThongTinDangVienDto>(result));
         }
 
         [HttpDelete("DeleteThongTinDangVien/{id}")]
@@ -93,7 +93,7 @@ namespace NhaMayThep.Api.Controllers
         {
 
             var result = await _mediator.Send(new DeleteThongTinDangVienCommand(id), cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }

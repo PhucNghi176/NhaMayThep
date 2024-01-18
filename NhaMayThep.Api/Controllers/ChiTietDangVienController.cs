@@ -42,7 +42,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateChiTietDangVien), new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
 
@@ -54,7 +54,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<List<ChiTietDangVienDto>>> GetAllChiTietDangVien(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllChiTietDangVienQuery(), cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<List<ChiTietDangVienDto>>(result));
         }
 
         [HttpPut("UpdateChiTietDangVien/{nhanVienId}")]
@@ -80,7 +80,7 @@ namespace NhaMayThep.Api.Controllers
             }
 
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<ChiTietDangVienDto>(result));
         }
 
         [HttpDelete("DeleteChiTietDangVien/{id}")]
@@ -96,7 +96,7 @@ namespace NhaMayThep.Api.Controllers
         {
 
             var result = await _mediator.Send(new DeleteChiTietDangVienCommand(id), cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }
