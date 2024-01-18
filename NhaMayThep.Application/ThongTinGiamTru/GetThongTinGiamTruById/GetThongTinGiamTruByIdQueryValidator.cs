@@ -10,8 +10,8 @@ namespace NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById
 {
     public class GetThongTinGiamTruByIdQueryValidator : AbstractValidator<GetThongTinGiamTruByIdQuery>
     {
-        private readonly IThongTinGiamTruReposiyory _repository;
-        public GetThongTinGiamTruByIdQueryValidator(IThongTinGiamTruReposiyory repository)
+        private readonly IThongTinGiamTruRepository _repository;
+        public GetThongTinGiamTruByIdQueryValidator(IThongTinGiamTruRepository repository)
         {
             _repository = repository;
             ConfigureValidationRules();

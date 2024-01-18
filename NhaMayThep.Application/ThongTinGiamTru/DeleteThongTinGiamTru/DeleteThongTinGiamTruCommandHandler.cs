@@ -15,10 +15,10 @@ namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
 {
     public class DeleteThongTinGiamTruCommandHandler : IRequestHandler<DeleteThongTinGiamTruCommand, bool>
     {
-        private readonly IThongTinGiamTruReposiyory _repository;
+        private readonly IThongTinGiamTruRepository _repository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currenuserservice;
-        public DeleteThongTinGiamTruCommandHandler(IThongTinGiamTruReposiyory repository, IMapper mapper, ICurrentUserService currenuserservice)
+        public DeleteThongTinGiamTruCommandHandler(IThongTinGiamTruRepository repository, IMapper mapper, ICurrentUserService currenuserservice)
         {
             _currenuserservice = currenuserservice;
             _repository = repository;

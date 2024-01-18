@@ -11,9 +11,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
     public class UpdateThongTinGiamTruCommandValidator : AbstractValidator<UpdateThongTinGiamTruCommand>
     {
-        private readonly IThongTinGiamTruReposiyory _repository;
+        private readonly IThongTinGiamTruRepository _repository;
         private readonly INhanVienRepository _nhanvien;
-        public UpdateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien, IThongTinGiamTruReposiyory repository) 
+        public UpdateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien, IThongTinGiamTruRepository repository) 
         {
             _nhanvien = nhanvien;
             _repository = repository;

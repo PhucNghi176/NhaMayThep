@@ -12,9 +12,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.GetAllThongTinGiamTru
 {
     public class GetAllThongTinGiamTruQueryHandler : IRequestHandler<GetAllThongTinGiamTruQuery, List<ThongTinGiamTruDTO>>
     {
-        private readonly IThongTinGiamTruReposiyory _repository;
+        private readonly IThongTinGiamTruRepository _repository;
         private readonly IMapper _mapper;
-        public GetAllThongTinGiamTruQueryHandler(IThongTinGiamTruReposiyory repository, IMapper mapper)
+        public GetAllThongTinGiamTruQueryHandler(IThongTinGiamTruRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;

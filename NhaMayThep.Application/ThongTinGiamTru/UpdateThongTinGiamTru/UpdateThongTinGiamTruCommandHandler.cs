@@ -14,10 +14,10 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
     public class UpdateThongTinGiamTruCommandHandler : IRequestHandler<UpdateThongTinGiamTruCommand, ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTruReposiyory _repository;
+        private readonly IThongTinGiamTruRepository _repository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-        public UpdateThongTinGiamTruCommandHandler(IThongTinGiamTruReposiyory repository, IMapper mapper, ICurrentUserService currentUserService)
+        public UpdateThongTinGiamTruCommandHandler(IThongTinGiamTruRepository repository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _repository = repository;

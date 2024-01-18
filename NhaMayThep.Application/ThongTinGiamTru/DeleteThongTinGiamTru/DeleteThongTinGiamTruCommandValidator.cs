@@ -11,8 +11,8 @@ namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
 {
     public class DeleteThongTinGiamTruCommandValidator : AbstractValidator<DeleteThongTinGiamTruCommand>
     {
-        public readonly IThongTinGiamTruReposiyory _repository;
-        public DeleteThongTinGiamTruCommandValidator(IThongTinGiamTruReposiyory repository)
+        public readonly IThongTinGiamTruRepository _repository;
+        public DeleteThongTinGiamTruCommandValidator(IThongTinGiamTruRepository repository)
         {
             _repository = repository;
             ConfigureValidationRules();

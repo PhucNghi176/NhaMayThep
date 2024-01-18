@@ -11,9 +11,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById
 {
     public class GetThongTinGiamTruByIdQueryHandler : IRequestHandler<GetThongTinGiamTruByIdQuery, ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTruReposiyory _repository;
+        private readonly IThongTinGiamTruRepository _repository;
         private readonly IMapper _mapper;
-        public GetThongTinGiamTruByIdQueryHandler(IThongTinGiamTruReposiyory repository, IMapper mapper)
+        public GetThongTinGiamTruByIdQueryHandler(IThongTinGiamTruRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
