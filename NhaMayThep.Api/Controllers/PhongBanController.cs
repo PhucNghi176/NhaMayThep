@@ -39,18 +39,18 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpGet("Get-by-ID/{id}")]
-        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<PhongBanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PhongBanDto>> GetByID(
+        public async Task<ActionResult<JsonResponse<PhongBanDto>>> GetByID(
             [FromRoute] int id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetPhongBanQuery(id: id), cancellationToken);
-            return result != null ? Ok(result) : NotFound();
+            return result != null ? Ok(new JsonResponse<PhongBanDto>(result)) : NotFound();
         }
 
         [HttpPut("Update/{id}")]

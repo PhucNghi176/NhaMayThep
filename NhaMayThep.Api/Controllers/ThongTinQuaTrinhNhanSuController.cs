@@ -1,24 +1,28 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.PhongBan.CreatePhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
-using NhaMayThep.Application.QuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
+using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
+using NhaMayThep.Application.PhongBan.UpdatePhongBan;
+using NhaMayThep.Application.PhongBan;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.UpdateThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.DeleteThongTinQuaTrinhNhanSu;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
     [Authorize]
-    public class QuaTrinhNhanVienController : ControllerBase
+    public class ThongTinQuaTrinhNhanSuController : ControllerBase
     {
         private readonly ISender _mediator;
-        public QuaTrinhNhanVienController(ISender mediator)
+        public ThongTinQuaTrinhNhanSuController(ISender mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
@@ -29,8 +33,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Create(
-            [FromBody] CreateQuaTrinhNhanSuCommand command,
+        public async Task<ActionResult> Create(
+            [FromBody] CreateThongTinQuaTrinhNhanSuCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
@@ -38,30 +42,30 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpGet("Get-by-ID/{id}")]
-        [ProducesResponseType(typeof(JsonResponse<QuaTrinhNhanSuDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<ThongTinQuaTrinhNhanSuDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<QuaTrinhNhanSuDto>>> GetByID(
-            [FromRoute] string id,
+        public async Task<ActionResult<JsonResponse<ThongTinQuaTrinhNhanSuDto>>> GetByID(
+            [FromRoute] int id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetQuaTrinhNhanSuQuery(id: id), cancellationToken);
-            return result == null ? NotFound() : Ok(new JsonResponse<QuaTrinhNhanSuDto>(result));
+            var result = await _mediator.Send(new GetSingleThongTinQuaTrinhNhanSuQuery(id: id), cancellationToken);
+            return result != null ? Ok(new JsonResponse<ThongTinQuaTrinhNhanSuDto>(result)) : NotFound();
         }
 
         [HttpPut("Update/{id}")]
-        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Update(
-            [FromRoute] string id,
-            [FromBody] UpdateQuaTrinhNhanSuCommand command,
+        public async Task<ActionResult<bool>> Update(
+            [FromRoute] int id,
+            [FromBody] UpdateThongTinQuaTrinhNhanSuCommand command,
             CancellationToken cancellationToken = default)
         {
             if (command.ID == default)
@@ -72,23 +76,20 @@ namespace NhaMayThep.Api.Controllers
             {
                 return BadRequest();
             }
-
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-
         [HttpDelete("Delete/{id}")]
-        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Delete([FromRoute] string id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteQuaTrinhNhanSuCommand(id: id), cancellationToken);
+            var result = await _mediator.Send(new DeleteThongTinQuaTrinhNhanSuCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-
     }
 }
