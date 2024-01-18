@@ -57,7 +57,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(result);
         }
 
-        [HttpPut("UpdateChiTietDangVien/{id}")]
+        [HttpPut("UpdateChiTietDangVien/{nhanVienId}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -65,16 +65,16 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateChiTietDangVien(
-            [FromRoute] string id,
+            [FromRoute] string nhanVienId,
             [FromBody] UpdateChiTietDangVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.ID == default)
+            if (command.NhanVienID == default)
             {
-                command.ID = id;
+                command.NhanVienID = nhanVienId;
             }
 
-            if (id != command.ID)
+            if (nhanVienId != command.NhanVienID)
             {
                 return BadRequest("ID from route and from body are not matched");
             }
