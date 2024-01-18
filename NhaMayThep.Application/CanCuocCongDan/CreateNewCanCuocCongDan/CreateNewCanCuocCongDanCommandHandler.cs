@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
 {
@@ -23,8 +18,8 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
 
         public async Task<string> Handle(CreateNewCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var isExsisted = _canCuocCongDanRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa != null, cancellationToken);
-            if (isExsisted != null)
+            var isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.NhanVienID == request.NhanVienID && ( request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa == null ), cancellationToken);
+            if (isExsisted)
             {
                 return ("CanCuocCongDan cua nhan vien da ton tai");
             }

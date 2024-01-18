@@ -11,8 +11,12 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(x => x.ID)
                 .HasName("MaSoCongDoan");
-
-
+            builder.Property(x => x.NhanVienID)
+                .HasColumnName("MaSoNhanVien");
+            builder.Property(x => x.ThuKiCongDoan)
+               .HasColumnName("ThuKyCongDoan");
+            builder.Property(x => x.NgayGiaNhap)
+               .HasColumnName("NgayGiaNhapCongDoan");
         }
     }
 }
