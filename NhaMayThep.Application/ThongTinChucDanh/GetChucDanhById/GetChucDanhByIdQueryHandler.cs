@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+
 using NhaMapThep.Domain.Repositories.ConfigTable;
+
 
 
 namespace NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById

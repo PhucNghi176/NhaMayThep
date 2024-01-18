@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon is null || loaiHoaDon.NgayXoa.HasValue)
             {
-                return "Xóa Thất Bạii";
+                return "Xóa Thất Bại";
             }
 
             loaiHoaDon.NguoiXoaID = _currentUserService.UserId;

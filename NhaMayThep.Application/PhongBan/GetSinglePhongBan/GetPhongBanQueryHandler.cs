@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
@@ -15,7 +16,12 @@ namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
         }
         public async Task<PhongBanDto> Handle(GetPhongBanQuery request, CancellationToken cancellationToken)
         {
-            var phongBan = _phongBanRepository.FindAsync(x => x.ID == request.ID).Result;
+            var existID = await _phongBanRepository.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null);
+            if (existID == null)
+            {
+                throw new NotFoundException("ID: " + request.ID + " không tồn tại");
+            }
+            var phongBan = await _phongBanRepository.FindAsync(x => x.ID == request.ID);
             return phongBan.MapToPhongBanDto(_mapper);
         }
     }

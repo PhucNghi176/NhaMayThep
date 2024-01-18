@@ -26,7 +26,7 @@ namespace NhaMayThep.Api
                 });
             services.AddApplication(Configuration);
             services.ConfigureApplicationSecurity(Configuration);
-            services.ConfigureHealthChecks(Configuration);
+          //  services.ConfigureHealthChecks(Configuration);
             services.ConfigureProblemDetails();
             services.ConfigureApiVersioning();
             services.AddInfrastructure(Configuration);
@@ -49,7 +49,7 @@ namespace NhaMayThep.Api
             app.UseAuthorization();
             app.UseEndpoints(endpoints =>
             {
-                endpoints.MapDefaultHealthChecks();
+                //endpoints.MapDefaultHealthChecks();
                 endpoints.MapControllers();
             });
             app.UseSwashbuckle(Configuration);

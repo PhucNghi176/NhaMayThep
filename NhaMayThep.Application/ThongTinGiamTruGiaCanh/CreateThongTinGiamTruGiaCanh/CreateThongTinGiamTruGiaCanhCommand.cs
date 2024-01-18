@@ -20,16 +20,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             CanCuocCongDan = cancuoccongdan;
             NgayXacNhanPhuThuoc = ngayxacnhanphuthuoc;
         }
-        public void NguoiTao(string value)
-        {
-            nguoiTaoId = value;
-        }
-        public string? NguoiTaoId
-        {
-            get { return nguoiTaoId; }
-        }
-        private string? nguoiTaoId;
-        public string NhanVienID { get; set; }
+        public string NhanVienID { get;set; }
         public int MaGiamTruID { get; set; }
         public string DiaChiLienLac { get; set; }
         public string QuanHeVoiNhanVien { get; set; }

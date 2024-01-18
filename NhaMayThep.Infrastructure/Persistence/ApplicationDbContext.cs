@@ -41,6 +41,14 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
         public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
         public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
+        public DbSet<ThongTinCongTyEntity> ThongTinCongTy {  get; set; }
+        public DbSet<ThueSuatEntity> ThueSuat {  get; set; }
+        public DbSet<MucSanPhamEntity> MucSanPham {  get; set; }
+        public DbSet<BaoHiemEntity> BaoHiem {  get; set; }
+        public DbSet<ChiTietBaoHiemEntity> ChiTietBaoHiem { get; set; }
+        public DbSet<BaoHiemNhanVienEntity> BaoHiemNhanVien { get; set; }
+        public DbSet<PhuCapEntity> PhuCap { get; set; }
+        public DbSet<PhuCapNhanVienEntity> PhuCapNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -64,6 +72,14 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new QuaTrinhNhanSuConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuNghiPhepNhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiHoaDonConfiguration());
+            modelBuilder.ApplyConfiguration(new ThongTinCongTyConfiguration());
+            modelBuilder.ApplyConfiguration(new ThueSatConfiguration());
+            modelBuilder.ApplyConfiguration(new MucSanPhamConfiguration());
+            modelBuilder.ApplyConfiguration(new BaoHiemConfiguration());
+            modelBuilder.ApplyConfiguration(new ChiTietBaoHiemConfiguration());
+            modelBuilder.ApplyConfiguration(new BaoHiemNhanVienConfiguration());
+            modelBuilder.ApplyConfiguration(new PhuCapConfiguration());
+            modelBuilder.ApplyConfiguration(new PhuCapNhanVienConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)
