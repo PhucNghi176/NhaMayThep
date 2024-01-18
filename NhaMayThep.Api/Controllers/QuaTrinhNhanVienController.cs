@@ -38,18 +38,18 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpGet("Get-by-ID/{id}")]
-        [ProducesResponseType(typeof(QuaTrinhNhanSuDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<QuaTrinhNhanSuDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<QuaTrinhNhanSuDto>> GetByID(
+        public async Task<ActionResult<JsonResponse<QuaTrinhNhanSuDto>>> GetByID(
             [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetQuaTrinhNhanSuQuery(id: id), cancellationToken);
-            return result == null ? NotFound() : Ok(result);
+            return result == null ? NotFound() : Ok(new JsonResponse<QuaTrinhNhanSuDto>(result));
         }
 
         [HttpPut("Update/{id}")]
