@@ -34,7 +34,9 @@ public static class Program
                 .ReadFrom.Configuration(context.Configuration)
                 .ReadFrom.Services(services)
                 .Enrich.FromLogContext()
+                .WriteTo.Console()
                 .WriteTo.File("Logs/logs.txt", rollingInterval: RollingInterval.Day))
+
             .ConfigureWebHostDefaults(webBuilder =>
             {
                 webBuilder.UseStartup<Startup>();

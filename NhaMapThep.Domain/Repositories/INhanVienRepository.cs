@@ -6,5 +6,6 @@ namespace NhaMapThep.Domain.Repositories
     {
         string HashPassword(string password);
         bool VerifyPassword(string password, string passwordHash);
+        string GeneratePassword();
     }
 }
