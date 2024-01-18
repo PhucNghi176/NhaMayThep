@@ -11,7 +11,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     [Table("BaoHiem")]
     public class BaoHiemEntity : BangMaGocEntity
     {
-        [Column(TypeName ="decimal"")]
+        [Column(TypeName ="decimal")]
         public required double PhanTramKhauTru {  get; set; }
     }
 }

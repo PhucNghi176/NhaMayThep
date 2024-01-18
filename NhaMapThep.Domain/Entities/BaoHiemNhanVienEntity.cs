@@ -15,8 +15,8 @@ namespace NhaMapThep.Domain.Entities
         public required string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
         public virtual NhanVienEntity NhanVien { get; set; }
-        public required int BaoHiem {  get; set; }
         [ForeignKey(nameof(BaoHiem))]
+        public required int BaoHiem {  get; set; }
         public virtual ICollection<BaoHiemEntity> BaoHiems { get; set; }
     }
 }
