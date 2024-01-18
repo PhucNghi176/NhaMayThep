@@ -6,7 +6,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Update
 {
-    public class UpdateLoaiHoaDonCommandHandler : IRequestHandler<UpdateLoaiHoaDonCommand, LoaiHoaDonDto>
+    public class UpdateLoaiHoaDonCommandHandler : IRequestHandler<UpdateLoaiHoaDonCommand, string>
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly ILoaiHoaDonRepository _LoaiHoaDonRepository;
@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Update
             _mapper = mapper;
         }
 
-        public async Task<LoaiHoaDonDto> Handle(UpdateLoaiHoaDonCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon == null || loaiHoaDon.NgayXoa.HasValue)
@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Update
             loaiHoaDon.NgayCapNhat = DateTime.Now;
             _LoaiHoaDonRepository.Update(loaiHoaDon);
             await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return loaiHoaDon.MapToLoaiHoaDonDto(_mapper);
+            return "Cập Nhật Thành Công";
         }
     }
 }

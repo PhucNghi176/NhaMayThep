@@ -14,8 +14,8 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
         }
         public async Task<QuaTrinhNhanSuDto?> Handle(GetQuaTrinhNhanSuQuery request, CancellationToken cancellationToken)
-        {
-            var entity = _quaTrinhNhanSuRepository.FindAsync(x => x.ID == request.ID).Result;
+        {            
+            var entity = await _quaTrinhNhanSuRepository.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null);           
             return entity.MapToQuaTrinhNhanSuDto(_mapper);
         }
     }
