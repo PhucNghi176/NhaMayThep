@@ -28,5 +28,7 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
             return BCrypt.Net.BCrypt.Verify(password, passwordHash);
         }
+
+
     }
 }

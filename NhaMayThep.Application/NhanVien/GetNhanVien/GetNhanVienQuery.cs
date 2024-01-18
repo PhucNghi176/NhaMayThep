@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.NhanVien.GetUser
             user.UserName = loginEntity.UserName;
             user.Password = loginEntity.Password;
         }
+       public required LoginEntity user { get; set; }
 
-        public required LoginEntity user { get; set; }
     }
 }

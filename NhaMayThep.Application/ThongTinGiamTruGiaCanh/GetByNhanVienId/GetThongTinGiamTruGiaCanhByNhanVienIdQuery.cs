@@ -3,9 +3,9 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
 {
-    public class GetThonTinGiamTruGiaCanhByNhanVienIdQuery : IRequest<List<ThongTinGiamTruGiaCanhDto>>, IQuery
+    public class GetThongTinGiamTruGiaCanhByNhanVienIdQuery: IRequest<List<ThongTinGiamTruGiaCanhDto>>, IQuery
     {
-        public GetThonTinGiamTruGiaCanhByNhanVienIdQuery(string id)
+        public GetThongTinGiamTruGiaCanhByNhanVienIdQuery(string id)
         {
             Id = id;
         }
