@@ -5,7 +5,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 {
-    public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand>
+    public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand,string>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
             _loaiCongTacRepository = loaiCongTacRepository;
         }
 
-        public async Task Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var ct = await _loaiCongTacRepository.FindAsync(x => x.ID == request.LoaiCongTacID, cancellationToken);
             if (ct is null || ct.NgayXoa.HasValue)
@@ -40,6 +40,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
             lichSu.NgayCapNhatCuoi = DateTime.Now;
 
             //lichSu.NhanVien = lichSu.NhanVien;
+            return "Cập Nhật Thành Công";
         }
     }
 }

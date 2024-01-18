@@ -2,7 +2,7 @@
 
 namespace NhaMayThep.Application.LoaiHoaDon.Update
 {
-    public class UpdateLoaiHoaDonCommand : IRequest<LoaiHoaDonDto>
+    public class UpdateLoaiHoaDonCommand : IRequest<string>
     {
         public UpdateLoaiHoaDonCommand(int id, string name)
         {

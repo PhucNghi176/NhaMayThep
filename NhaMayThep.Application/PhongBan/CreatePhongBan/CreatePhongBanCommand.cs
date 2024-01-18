@@ -3,14 +3,12 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
-    public class CreatePhongBanCommand : IRequest<PhongBanDto>, ICommand
+    public class CreatePhongBanCommand : IRequest<string>, ICommand
     {
-        public CreatePhongBanCommand(string name, int id)
+        public CreatePhongBanCommand(string name)
         {
             Name = name;
-            ID = id;
         }
-        public int ID { get; set; }
         public string Name { get; set; }
     }
 }

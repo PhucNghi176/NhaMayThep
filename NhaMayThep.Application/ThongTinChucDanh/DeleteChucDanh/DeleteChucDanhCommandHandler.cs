@@ -1,9 +1,8 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-
-
 namespace NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh
 {
     public class DeleteChucDanhCommandHandler : IRequestHandler<DeleteChucDanhCommand, string>

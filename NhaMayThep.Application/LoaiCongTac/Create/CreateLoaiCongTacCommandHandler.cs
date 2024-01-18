@@ -6,7 +6,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiCongTac.Create
 {
-    public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand>
+    public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand,string>
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Create
             _mapper = mapper;
         }
 
-        public async Task Handle(CreateLoaiCongTacCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateLoaiCongTacCommand request, CancellationToken cancellationToken)
         {
             var loaiCongTac = new LoaiCongTacEntity()
             {
@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Create
             };
             _loaiCongTacRepository.Add(loaiCongTac);
             await _loaiCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
+            return "Tạo Mới Thành Công";
         }
     }
 }
