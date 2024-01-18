@@ -11,7 +11,6 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     [Table("PhuCap")]
     public class PhuCapEntity : BangMaGocEntity
     {
-        [Column(TypeName = "float")]
         public required double KhoanPhuCap { get; set; }
     }
 }

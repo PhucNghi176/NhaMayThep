@@ -15,8 +15,13 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
         {
             builder.HasKey(x => x.ID)
                 .HasName("MaBaoHiem");
+            builder.Property(x => x.ID)
+                .HasColumnOrder(1);
             builder.Property(x => x.Name)
-                .HasColumnName("TenLoaiBaoHiem");
+                .HasColumnName("TenLoaiBaoHiem")
+                .HasColumnOrder(2);
+            builder.Property(x => x.PhanTramKhauTru)
+                .HasColumnOrder(6);
         }
     }
 }

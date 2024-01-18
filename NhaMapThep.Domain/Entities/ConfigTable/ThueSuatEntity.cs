@@ -13,10 +13,10 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     {
         public required int BacThue {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public required double ThuNhapTinhThueTrenNam {  get; set; }
+        public required decimal ThuNhapTinhThueTrenNam {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public required double ThuNhapTinhThueTrenThang {  get; set; }
+        public required decimal ThuNhapTinhThueTrenThang {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public required double PhanTramThueSuat { get; set; }
+        public required decimal PhanTramThueSuat { get; set; }
     }
 }
