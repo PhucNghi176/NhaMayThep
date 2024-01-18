@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Update
 
         public async Task<ThongTinDaoTaoDto> Handle(UpdateThongTinDaoTaoCommand request, CancellationToken cancellationToken)
         {
-            var thongTinDaoTao = await _thongTinDaoTaoRepository.FindByIdAsync(request.Id, cancellationToken);
+            var thongTinDaoTao = await _thongTinDaoTaoRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (thongTinDaoTao == null || thongTinDaoTao.NgayXoa != null)
             {
                 throw new NotFoundException("ThongTinDaoTao Does Not Exist");

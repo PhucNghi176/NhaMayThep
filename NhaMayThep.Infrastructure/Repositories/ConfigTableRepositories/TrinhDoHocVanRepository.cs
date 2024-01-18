@@ -18,20 +18,5 @@ namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
         public TrinhDoHocVanRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
-
-        public async Task<TrinhDoHocVanEntity?> FindByIdAsync(int id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID == id, cancellationToken);
-        }
-
-        public async Task<List<TrinhDoHocVanEntity>> FindByIdsAsync(int[] ids, CancellationToken cancellationToken = default)
-        {
-            return await FindAllAsync(x => ids.Contains(x.ID), cancellationToken);
-        }
-        //public async Task SaveChangesAsync(CancellationToken cancellationToken = default)
-        //{
-        //    await _dbContext.SaveChangesAsync(cancellationToken);
-        //}
-
     }
 }

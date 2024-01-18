@@ -19,7 +19,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
         public async Task Handle(UpdateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.FindByIdAsync(request.Id, cancellationToken);
+            var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
 
             if (entity == null || entity.NgayXoa != null)
             {

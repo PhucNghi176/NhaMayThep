@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.GetById
 
         public async Task<TrinhDoHocVanDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            var trinhDoHocVan = await _trinhDoHocVanRepository.FindByIdAsync(request.Id, cancellationToken);
+            var trinhDoHocVan = await _trinhDoHocVanRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (trinhDoHocVan == null || trinhDoHocVan.NgayXoa != null)
             {
                 throw new NotFoundException("TrinhDoHocVan Does not Exist");

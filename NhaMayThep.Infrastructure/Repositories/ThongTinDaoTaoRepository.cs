@@ -18,15 +18,7 @@ namespace NhaMayThep.Infrastructure.Repositories
         public ThongTinDaoTaoRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
         }
-        public async Task<ThongTinDaoTaoEntity?> FindByIdAsync(string Id, CancellationToken cancellationToken = default)
-        {
-            return await FindAsync(x => x.ID == Id, cancellationToken);
-        }
-
-        public async Task<List<ThongTinDaoTaoEntity>> FindByIdsAsync(string[] Ids, CancellationToken cancellationToken = default)
-        {
-            return await FindAllAsync(x => Ids.Contains(x.ID), cancellationToken);
-        }
+        
 
     }
 }
