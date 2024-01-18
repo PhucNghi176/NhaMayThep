@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Delete
         public async Task<string> Handle(DeleteThongTinDaoTaoCommand request, CancellationToken cancellationToken)
         {
             var thongTinDaoTao = await _thongTinDaoTaoRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
-            if (thongTinDaoTao == null)
+            if (thongTinDaoTao == null || thongTinDaoTao.NgayXoa != null)
             {
                 return "Fail";
             }
