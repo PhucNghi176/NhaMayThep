@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>net7.0</TargetFramework>
@@ -20,6 +20,13 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NhaMapThep.Domain\NhaMapThep.Domain.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="ThongTinQuaTrinhNhanSu\CreateThongTinQuaTrinhNhanSu\" />
+    <Folder Include="HoaDonCongTacNhanVien\Delete\" />
+    <Folder Include="HoaDonCongTacNhanVien\GetAll\" />
+    <Folder Include="HoaDonCongTacNhanVien\Update\" />
   </ItemGroup>
 
 </Project>

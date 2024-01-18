@@ -1,20 +1,14 @@
 ﻿using MediatR;
-using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
 {
     public class CreateNewNhanVienCommand : IRequest<string>, ICommand
     {
-        public CreateNewNhanVienCommand(string email, string password, string hoVaTen, int chucVuID, int tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChiLienLac, string soDienThoaiLienLac, string maSoThue, string tenNganHang, string soTaiKhoan, int? soNguoiPhuThuoc)
+        public CreateNewNhanVienCommand(string email/*, string password,*/ ,string hoVaTen, int chucVuID, int tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChiLienLac, string soDienThoaiLienLac, string maSoThue, string tenNganHang, string soTaiKhoan, int? soNguoiPhuThuoc)
         {
             Email = email;
-            Password = password;
+           // Password = password;
             HoVaTen = hoVaTen;
             ChucVuID = chucVuID;
             TinhTrangLamViecID = tinhTrangLamViecID;
@@ -28,7 +22,7 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
         }
 
         public string Email { get; set; }
-        public string Password { get; set; }
+      //  public string Password { get; set; }
         public string HoVaTen { get; set; }
         public int ChucVuID { get; set; }
         public int TinhTrangLamViecID { get; set; }

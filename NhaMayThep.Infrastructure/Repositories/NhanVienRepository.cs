@@ -13,6 +13,12 @@ namespace NhaMayThep.Infrastructure.Repositories
 
         }
 
+        public string GeneratePassword()
+        {
+            //gererate password that have 10 characters with number, uppercase, lowercase and special character
+            return BCrypt.Net.BCrypt.GenerateSalt(4);
+        }
+
         public string HashPassword(string password)
         {
             return BCrypt.Net.BCrypt.HashPassword(password);
@@ -22,5 +28,7 @@ namespace NhaMayThep.Infrastructure.Repositories
         {
             return BCrypt.Net.BCrypt.Verify(password, passwordHash);
         }
+
+
     }
 }

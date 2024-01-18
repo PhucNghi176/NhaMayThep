@@ -6,10 +6,11 @@ using NhaMayThep.Infrastructure.Persistence;
 
 namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
 {
-    public class TinhTrangLamViecRepository : RepositoryBase<TinhTrangLamViecEntity, TinhTrangLamViecEntity, ApplicationDbContext>, ITinhTrangLamViecRepository
+    public class PhongBanRepository : RepositoryBase<PhongBanEntity, PhongBanEntity, ApplicationDbContext>, IPhongBanRepository
     {
-        public TinhTrangLamViecRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
+        public PhongBanRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
+
         }
     }
 }
