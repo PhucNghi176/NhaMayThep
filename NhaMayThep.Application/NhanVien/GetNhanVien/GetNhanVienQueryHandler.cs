@@ -23,11 +23,11 @@ namespace NhaMayThep.Application.NhanVien.GetUser
         {
 
             var user = await _repository.FindAsync(x => x.Email == request.user.UserName);
-            
+
             if (user != null)
             {
                 var chucvu = await _chucVuRepository.FindAsync(x => x.ID == user.ChucVuID);
-               // user.ChucVu = chucvu.Name.ToString();
+                // user.ChucVu = chucvu.Name.ToString();
                 var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)
                 {
