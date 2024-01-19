@@ -47,7 +47,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         public async Task<ActionResult<JsonResponse<string>>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeletePhuCapCommand(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("phu-cap")]
@@ -61,7 +61,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         public async Task<ActionResult<JsonResponse<List<PhuCapDto>>>> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllPhuCapQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<List<PhuCapDto>>(result));
+            return Ok(new JsonResponse<List<PhuCapDto>>(result));
         }
 
         [HttpGet("phu-cap/{id}")]
@@ -75,7 +75,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         public async Task<ActionResult<JsonResponse<List<PhuCapDto>>>> GetById([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetPhuCapByIdQuery(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<PhuCapDto>(result));
+            return Ok(new JsonResponse<PhuCapDto>(result));
         }
         [HttpPut("phu-cap/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -92,7 +92,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
             if (id != command.Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(new JsonResponse<PhuCapDto>(result));
+            return Ok(new JsonResponse<PhuCapDto>(result));
         }
     }
 }
