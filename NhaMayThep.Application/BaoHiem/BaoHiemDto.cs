@@ -12,12 +12,14 @@ namespace NhaMayThep.Application.BaoHiem
     public class BaoHiemDto : IMapFrom<BaoHiemEntity>
     {
         public BaoHiemDto() { }
+        public int Id { get; set; }
         public string Name { get; set; }
         public double PhanTramKhauTru { get; set; }
-        public static BaoHiemDto Create(string name, double phanTramKhauTru)
+        public static BaoHiemDto Create(int id, string name, double phanTramKhauTru)
         {
             return new BaoHiemDto()
             {
+                Id = id,
                 Name = name,
                 PhanTramKhauTru = phanTramKhauTru
             };

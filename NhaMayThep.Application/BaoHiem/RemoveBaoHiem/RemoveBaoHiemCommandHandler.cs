@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.BaoHiem.RemoveBaoHiem
         }
         public async Task<string> Handle(RemoveBaoHiemCommand command, CancellationToken cancellationToken)
         {
-            var remove = await _baoHiemRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var remove = await _baoHiemRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (remove == null)
                 throw new NotFoundException($"Not found Bao hiem with id: {command.Id}");
             remove.NgayXoa = DateTime.Now;
