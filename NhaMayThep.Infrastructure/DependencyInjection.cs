@@ -53,10 +53,7 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<ILoaiHopDongReposity, LoaiHopDongRepository>();
             services.AddTransient<IHopDongRepository, HopDongRepository>();
             services.AddTransient<IPhuCapRepository, ThongTinPhuCapRepository>();
-            services.AddTransient<ILichSuNghiPhepRepository,LichSuNghiPhepRepository>();
-            services.AddTransient<IChiTietNgayNghiPhepRepository, ChiTietNgayNghiPhepRepository>();
-            services.AddTransient<ILoaiNghiPhepRepository, LoaiNghiPhepRepository>();
-            
+            services.AddTransient<IBaoHiemRepository, BaoHiemRepository>();
             return services;
         }
     }
