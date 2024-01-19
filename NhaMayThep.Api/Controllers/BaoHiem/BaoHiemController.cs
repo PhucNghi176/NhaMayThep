@@ -14,7 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.BaoHiem
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class BaoHiemController : ControllerBase
     {
         private ISender _mediator;
