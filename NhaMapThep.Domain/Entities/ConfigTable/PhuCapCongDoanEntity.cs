@@ -13,7 +13,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     {
         public int SoLuongDoanVien {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public decimal HeSoPhuCap { get; set; }
+        public float HeSoPhuCap { get; set; }
         public string DonVi {  get; set; }
 
     }

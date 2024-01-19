@@ -14,8 +14,7 @@ namespace NhaMapThep.Domain.Entities
         public required string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
         public virtual NhanVienEntity NhanVien { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
-        public decimal SoGioLam { get; set; }
+        public double SoGioLam { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal Luong1Gio { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
