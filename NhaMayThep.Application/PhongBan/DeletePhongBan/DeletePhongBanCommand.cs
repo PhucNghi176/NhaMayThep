@@ -1,14 +1,9 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.PhongBan.DeletePhongBan
 {
-    public class DeletePhongBanCommand : IRequest, ICommand
+    public class DeletePhongBanCommand : IRequest<string>, ICommand
     {
         public DeletePhongBanCommand(int id)
         {

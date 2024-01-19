@@ -1,19 +1,21 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
-using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu;
-using System.Net.Mime;
 using NhaMayThep.Application.PhongBan;
 using NhaMayThep.Application.PhongBan.CreatePhongBan;
+using NhaMayThep.Application.PhongBan.DeletePhongBan;
 using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
 using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
+using Microsoft.AspNetCore.Authorization;
+using System.Net.Mime;
+using NhaMapThep.Api.Controllers.ResponseTypes;
+
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Route("api/[controller]")]
-    //[Authorize]
+    [Authorize]
     public class PhongBanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -23,42 +25,42 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost("Create")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PhongBanDto>> Create(
+        public async Task<ActionResult> Create(
             [FromBody] CreatePhongBanCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("Get-by-ID/{id}")]
-        [ProducesResponseType(typeof(PhongBanDto), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<PhongBanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<PhongBanDto>> GetByID(
+        public async Task<ActionResult<JsonResponse<PhongBanDto>>> GetByID(
             [FromRoute] int id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetPhongBanQuery(id : id), cancellationToken);
-            return Ok(result);
+            var result = await _mediator.Send(new GetPhongBanQuery(id: id), cancellationToken);
+            return result != null ? Ok(new JsonResponse<PhongBanDto>(result)) : NotFound();
         }
 
         [HttpPut("Update/{id}")]
-        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Update(
+        public async Task<ActionResult<bool>> Update(
             [FromRoute] int id,
             [FromBody] UpdatePhongBanCommand command,
             CancellationToken cancellationToken = default)
@@ -71,21 +73,20 @@ namespace NhaMayThep.Api.Controllers
             {
                 return BadRequest();
             }
-
-            await _mediator.Send(command, cancellationToken);
-            return NoContent();
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
-        [HttpDelete("Delete{id}")]
-        [ProducesResponseType(StatusCodes.Status200OK)]
+        [HttpDelete("Delete/{id}")]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
-            return Ok();
+            var result = await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }

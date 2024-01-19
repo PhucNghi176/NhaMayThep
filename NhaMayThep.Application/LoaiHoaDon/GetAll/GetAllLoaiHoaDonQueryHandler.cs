@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHoaDon.GetAll
 {
@@ -23,13 +18,13 @@ namespace NhaMayThep.Application.LoaiHoaDon.GetAll
 
         public async Task<List<LoaiHoaDonDto>> Handle(GetAllLoaiHoaDonQuerry request, CancellationToken cancellationToken)
         {
-            var list = await _LoaiHoaDonRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
+            var list = await _LoaiHoaDonRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             if (list == null)
             {
-                throw new NotFoundException("LoaiCongTac list is empty");
+                throw new NotFoundException("Danh Sách Rỗng");
             }
             return list.MapToLoaiHoaDonDtoList(_mapper);
         }
-        
+
     }
 }

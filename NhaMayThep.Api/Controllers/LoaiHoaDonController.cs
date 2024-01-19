@@ -1,18 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.LoaiCongTac.Create;
-using NhaMayThep.Application.LoaiCongTac.Delete;
-using NhaMayThep.Application.LoaiCongTac.GetAll;
-using NhaMayThep.Application.LoaiCongTac.Update;
 using NhaMayThep.Application.LoaiCongTac;
-using System.Net.Mime;
 using NhaMayThep.Application.LoaiHoaDon;
 using NhaMayThep.Application.LoaiHoaDon.Create;
-using NhaMayThep.Application.LoaiHoaDon.Update;
 using NhaMayThep.Application.LoaiHoaDon.Delete;
 using NhaMayThep.Application.LoaiHoaDon.GetAll;
+using NhaMayThep.Application.LoaiHoaDon.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -40,7 +35,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("Create Success"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpPut("update")]
@@ -55,7 +50,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("Update Success"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("delete")]

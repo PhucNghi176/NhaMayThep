@@ -1,29 +1,31 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.PhongBan.DeletePhongBan
 {
-    public class DeletePhongBanCommandHandler : IRequestHandler<DeletePhongBanCommand>
+    public class DeletePhongBanCommandHandler : IRequestHandler<DeletePhongBanCommand, string>
     {
-        private readonly IMapper _mapper;
         private readonly IPhongBanRepository _phongBanRepository;
-        public DeletePhongBanCommandHandler(IPhongBanRepository phongBanRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public DeletePhongBanCommandHandler(IPhongBanRepository phongBanRepository, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _phongBanRepository = phongBanRepository;
-            _mapper = mapper;
         }
-        public async Task Handle(DeletePhongBanCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeletePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var phongBan = _phongBanRepository.FindAsync(x => x.ID == command.ID).Result;
+            var phongBan = await _phongBanRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            if (phongBan == null)
+            {
+                throw new NotFoundException("ID: " + command.ID + " không tồn tại");
+            }
             phongBan.NgayXoa = DateTime.UtcNow;
+            phongBan.NguoiXoaID = _currentUserService.UserId;
             _phongBanRepository.Update(phongBan);
-            await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa thành công" : "Xóa thất bại";
         }
     }
 }

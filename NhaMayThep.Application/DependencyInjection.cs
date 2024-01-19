@@ -23,6 +23,7 @@ namespace NhaMayThep.Application
             });
             services.AddAutoMapper(Assembly.GetExecutingAssembly());
             services.AddScoped<IValidatorProvider, ValidatorProvider>();
+
             return services;
         }
     }

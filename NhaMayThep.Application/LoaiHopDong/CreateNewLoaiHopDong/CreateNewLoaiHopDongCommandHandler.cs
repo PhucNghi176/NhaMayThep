@@ -1,15 +1,10 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong
 {
-    public class CreateNewLoaiHopDongCommandHandler : IRequestHandler<CreateNewLoaiHopDongCommand, int> 
+    public class CreateNewLoaiHopDongCommandHandler : IRequestHandler<CreateNewLoaiHopDongCommand, int>
     {
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;
         public CreateNewLoaiHopDongCommandHandler(ILoaiHopDongReposity loaiHopDongRepository)

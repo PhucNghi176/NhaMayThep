@@ -1,22 +1,18 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinPhuCap.DeletePhuCap
 {
     public class DeletePhuCapCommandHandler : IRequestHandler<DeletePhuCapCommand, string>
     {
         private readonly IPhuCapRepository _phuCapRepository;
-        public DeletePhuCapCommandHandler(IPhuCapRepository phuCapRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public DeletePhuCapCommandHandler(IPhuCapRepository phuCapRepository, ICurrentUserService currentUserService)
         {
             _phuCapRepository = phuCapRepository;
+            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeletePhuCapCommand command, CancellationToken cancellationToken)
         {
@@ -25,11 +21,12 @@ namespace NhaMayThep.Application.ThongTinPhuCap.DeletePhuCap
             if (result == null)
                 throw new NotFoundException($"Phu cap with {command.Id} not found");
             result.NgayXoa = DateTime.Now;
+            result.NguoiXoaID = _currentUserService.UserId;
             if (await _phuCapRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 msg = "Remove Successfully";
             else
                 msg = "Remove Failed";
             return msg;
-        } 
+        }
     }
 }

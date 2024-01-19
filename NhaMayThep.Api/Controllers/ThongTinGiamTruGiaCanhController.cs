@@ -1,15 +1,19 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Net.Mime;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById;
-using Microsoft.AspNetCore.Authorization;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCanh;
+using System.Net.Mime;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -34,26 +38,36 @@ namespace NhaMayThep.Api.Controllers
           [FromBody] CreateThongTinGiamTruGiaCanhCommand command,
           CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
-            command.NguoiTao(userid);
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
+        }
+        [HttpPost("restore")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Restore(
+          [FromBody] RestoreThongTinGiamTruGiaCanhCommand command,
+          CancellationToken cancellationToken = default)
+        {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
         [HttpPut("update")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinGiamTruGiaCanhDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ThongTinGiamTruGiaCanhDto>>> Update(
+        public async Task<ActionResult<JsonResponse<string>>> Update(
            [FromBody] UpdateThongTinGiamTruGiaCanhCommand command,
            CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
-            command.NguoiCapNhat(userid);
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ThongTinGiamTruGiaCanhDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpDelete("delete")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -66,8 +80,6 @@ namespace NhaMayThep.Api.Controllers
            [FromBody] DeleteThongTinGiamTruGiaCanhCommand command,
            CancellationToken cancellationToken = default)
         {
-            var userid = User.Claims.FirstOrDefault(x => x.Type == "nameid")!.Value;
-            command.NguoiXoa(userid);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
@@ -109,7 +121,48 @@ namespace NhaMayThep.Api.Controllers
           [FromRoute] string id,
           CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetThonTinGiamTruGiaCanhByNhanVienIdQuery(id: id), cancellationToken);
+            var result = await _mediator.Send(new GetThongTinGiamTruGiaCanhByNhanVienIdQuery(id: id), cancellationToken);
+            return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+        }
+        [HttpGet("getall_deleted")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<ThongTinGiamTruGiaCanhDto>>>> GetAllDeleted(
+           CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllThongTinGiamTruGiaCanhDeletedQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+        }
+        [HttpGet("get_by_id_deleted/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<ThongTinGiamTruGiaCanhDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<ThongTinGiamTruGiaCanhDto>>> GetByIdDeleted(
+          [FromRoute] string id,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetThongTinGiamTruGiaCanhByIdDeletedQuery(id: id), cancellationToken);
+            return Ok(new JsonResponse<ThongTinGiamTruGiaCanhDto>(result));
+        }
+        [HttpGet("getby_nhanvien_id_deleted/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<ThongTinGiamTruGiaCanhDto>>>> GetByNhanVienIdDeleted(
+          [FromRoute] string id,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetThongTinGiamTruGiaCanhByNhanVienIdDeletedQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
         }
     }

@@ -1,18 +1,20 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Net.Mime;
+using NhaMayThep.Application.ThongTinChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById;
 using NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh;
+using System.Net.Mime;
 using NhaMayThep.Application.ThongTinChucDanh;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 {
     [ApiController]
+    [Authorize]
     public class ChucDanhController : ControllerBase
     {
         private readonly ISender _mediator;

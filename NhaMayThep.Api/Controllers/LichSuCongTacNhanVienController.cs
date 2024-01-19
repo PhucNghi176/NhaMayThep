@@ -1,18 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.LoaiCongTac.Create;
-using NhaMayThep.Application.LoaiCongTac.Delete;
-using NhaMayThep.Application.LoaiCongTac.GetAll;
-using NhaMayThep.Application.LoaiCongTac.Update;
-using NhaMayThep.Application.LoaiCongTac;
-using System.Net.Mime;
 using NhaMayThep.Application.LichSuCongTacNhanVien;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Create;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Delete;
-using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetAll;
+using NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien;
+using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -40,7 +35,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("create thành công"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpPut("update/{id}")]
@@ -54,13 +49,13 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateLichSuCongTacNhanVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if(command.ID == default)
+            if (command.ID == default)
             {
                 command.ID = id;
             }
-            await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("update thành công"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("delete")]
@@ -83,17 +78,31 @@ namespace NhaMayThep.Api.Controllers
 
         [HttpGet("getAll")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<LichSuCongTacNhanVienDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<LichSuCongTacNhanVienDto>>>> GetAllReview(
+        public async Task<ActionResult<JsonResponse<List<LichSuCongTacNhanVienDto>>>> GetAllLichSuCongTacNhanVien(
           CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllLichSuCongTacNhanVienQuery(), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return (new JsonResponse<List<LichSuCongTacNhanVienDto>>(result));
+        }
+
+        [HttpGet("getByMasoNV")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetByMaSoNhanVien(
+            string maSoNhanVienId,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetByMaSoNhanVienQuery(maSoNhanVienId), cancellationToken);
+            //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
+            return Ok(new JsonResponse<List<LichSuCongTacNhanVienDto>>(result));
         }
     }
 }

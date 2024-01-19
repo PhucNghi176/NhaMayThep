@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
 {
@@ -20,8 +15,10 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
         private readonly IChucVuRepository _chucVuRepository;
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
         public UpdateHopDongCommandHandler(IHopDongRepository hopDongRepository, IMapper mapper, ICapBacLuongRepository capBacLuongRepository
-                                         , IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepository, ILoaiHopDongReposity loaiHopDongReposity)
+                                         , IChucDanhRepository chucDanhRepository, IChucVuRepository chucVuRepository, ILoaiHopDongReposity loaiHopDongReposity,
+                                            ICurrentUserService currentUserService)
         {
             _hopDongRepository = hopDongRepository;
             _mapper = mapper;
@@ -29,6 +26,7 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
             _chucDanhRepository = chucDanhRepository;
             _chucVuRepository = chucVuRepository;
             _loaiHopDongRepository = loaiHopDongReposity;
+            _currentUserService = currentUserService;
         }
 
         public async Task<HopDongDto> Handle(UpdateHopDongCommand command, CancellationToken cancellationToken)
@@ -71,6 +69,7 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
             checkingHopDong.PhuCapID = command.PhuCapId;
             checkingHopDong.GhiChu = command.GhiChu;
             checkingHopDong.NgayCapNhatCuoi = DateTime.Now;
+            checkingHopDong.NguoiCapNhatID = _currentUserService.UserId;
             _hopDongRepository.Update(checkingHopDong);
             await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return checkingHopDong.MapToHopDongDto(_mapper);

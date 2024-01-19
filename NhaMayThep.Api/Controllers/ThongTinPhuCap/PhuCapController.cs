@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
@@ -13,6 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
 {
     [ApiController]
+    [Authorize]
     public class PhuCapController : ControllerBase
     {
         private readonly ISender _mediator;

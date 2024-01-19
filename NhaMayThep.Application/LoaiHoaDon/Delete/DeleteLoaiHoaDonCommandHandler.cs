@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiHoaDon.Delete
 {
@@ -14,9 +9,12 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
     {
         public readonly ILoaiHoaDonRepository _LoaiHoaDonRepository;
         public readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
 
-        public DeleteLoaiHoaDonCommandHandler(ILoaiHoaDonRepository loaiHoaDonRepository, IMapper mapper)
+        public DeleteLoaiHoaDonCommandHandler(ILoaiHoaDonRepository loaiHoaDonRepository,
+            IMapper mapper, ICurrentUserService currentUserService)
         {
+            _currentUserService = currentUserService;
             _LoaiHoaDonRepository = loaiHoaDonRepository;
             _mapper = mapper;
         }
@@ -24,20 +22,17 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
         public async Task<string> Handle(DeleteLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
             var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
-            if (loaiHoaDon == null) 
+            if (loaiHoaDon is null || loaiHoaDon.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Loai Hoa Don is not found");
+                return "Xóa Thất Bại";
             }
-            if (loaiHoaDon.NgayXoa.HasValue)
-            {
-                return "Delete Failed";
-            }
-           
-                loaiHoaDon.NgayXoa = DateTime.Now;
-                _LoaiHoaDonRepository.Update(loaiHoaDon);
-                await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Delete Success";
-           
+
+            loaiHoaDon.NguoiXoaID = _currentUserService.UserId;
+            loaiHoaDon.NgayXoa = DateTime.Now;
+            _LoaiHoaDonRepository.Update(loaiHoaDon);
+            await _LoaiHoaDonRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return "Xóa Thành Công";
+
         }
     }
 }

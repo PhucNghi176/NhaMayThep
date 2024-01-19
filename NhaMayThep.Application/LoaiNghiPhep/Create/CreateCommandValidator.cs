@@ -23,9 +23,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             RuleFor(command => command.Name)
             .NotEmpty().WithMessage("Name is required.")
             .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
-            RuleFor(command => command.SoGioNghiPhep)
-           .GreaterThanOrEqualTo(0).WithMessage("Number of leave hours must be non-negative.")
-           .LessThanOrEqualTo(24).WithMessage("Number of leave hours must not exceed 24.");
+          
         }
 
       

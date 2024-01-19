@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.LoaiCongTac;
@@ -7,11 +6,7 @@ using NhaMayThep.Application.LoaiCongTac.Create;
 using NhaMayThep.Application.LoaiCongTac.Delete;
 using NhaMayThep.Application.LoaiCongTac.GetAll;
 using NhaMayThep.Application.LoaiCongTac.Update;
-using NhaMayThep.Application.LoaiHoaDon.Create;
-using NhaMayThep.Application.LoaiHoaDon;
 using System.Net.Mime;
-using NhaMayThep.Application.LoaiHoaDon.GetAll;
-using NhaMapThep.Domain.Entities.ConfigTable;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -20,7 +15,7 @@ namespace NhaMayThep.Api.Controllers
     public class LoaiCongTacController : ControllerBase
     {
         private readonly ISender _mediator;
-        
+
         public LoaiCongTacController(ISender mediator)
         {
             _mediator = mediator;
@@ -36,9 +31,9 @@ namespace NhaMayThep.Api.Controllers
                  [FromBody] CreateLoaiCongTacCommand command,
                  CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
+           var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("create success"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpPut("update")]
@@ -53,7 +48,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
-            return Ok(new JsonResponse<string>("update success"));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("delete")]

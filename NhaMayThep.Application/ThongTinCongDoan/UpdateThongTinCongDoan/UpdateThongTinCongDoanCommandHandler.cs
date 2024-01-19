@@ -3,51 +3,55 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
 {
-    public class UpdateThongTinCongDoanCommandHandler : IRequestHandler<UpdateThongTinCongDoanCommand, ThongTinCongDoanDto>
+    public class UpdateThongTinCongDoanCommandHandler : IRequestHandler<UpdateThongTinCongDoanCommand, string>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly INhanVienRepository _nhanvienRepository;
         private readonly IMapper _mapper;
+        private readonly ICurrentUserService _currentUserService;
         public UpdateThongTinCongDoanCommandHandler(
             IThongTinCongDoanRepository thongTinCongDoanRepository,
             INhanVienRepository nhanvienRepository,
-            IMapper mapper)
+            IMapper mapper,
+            ICurrentUserService currentUserService)
         {
             _thongtinCongDoanRepository = thongTinCongDoanRepository;
             _nhanvienRepository = nhanvienRepository;
             _mapper = mapper;
+            _currentUserService = currentUserService;
         }
-        public async Task<ThongTinCongDoanDto> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan= await _thongtinCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-            if (thongtincongdoan == null) 
+            var thongtincongdoan= await _thongtinCongDoanRepository
+                .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
+            if (thongtincongdoan == null ||(thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue)) 
             {
-                throw new NotFoundException("ThongTinCongDoan does not exists");
+                throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.NhanVienId) && x.NguoiXoaID == null && x.NgayXoa == null, cancellationToken);
-            if(nhanvien == null)
+            var nhanvien = await _nhanvienRepository
+                .FindAsync(x => x.ID.Equals(request.NhanVienId), cancellationToken);
+            if (nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
-                throw new NotFoundException($"Nhan vien with Id {request.NhanVienId} does not exists");
+                throw new NotFoundException($"Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            else
+            thongtincongdoan.NguoiCapNhatID = _currentUserService.UserId;
+            thongtincongdoan.NgayCapNhatCuoi = DateTime.Now;
+            thongtincongdoan.NhanVienID = nhanvien.ID;
+            thongtincongdoan.NhanVien = nhanvien;
+            thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
+            thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
+            _thongtinCongDoanRepository.Update(thongtincongdoan);
+            try
             {
-                thongtincongdoan.NguoiCapNhatID = request.NguoiCapNhatid;
-                thongtincongdoan.NhanVienID = nhanvien.ID;
-                thongtincongdoan.NhanVien = nhanvien;
-                thongtincongdoan.NgayCapNhatCuoi = DateTime.Now;
-                thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
-                thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
-                _thongtinCongDoanRepository.Update(thongtincongdoan);
                 await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
+                return "Cập nhật thành công";
+            }
+            catch (Exception)
+            {
+                throw new NotFoundException("Đã xảy ra lỗi trong quá trình cập nhật dữ liệu");
             }
         }
     }

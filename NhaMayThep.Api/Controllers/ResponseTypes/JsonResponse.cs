@@ -1,6 +1,4 @@
-﻿using NhaMayThep.Application.LoaiCongTac;
-
-namespace NhaMapThep.Api.Controllers.ResponseTypes
+﻿namespace NhaMapThep.Api.Controllers.ResponseTypes
 {
     /// <summary>
     /// Implicit wrapping of types that serialize to non-complex values.

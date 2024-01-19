@@ -1,15 +1,10 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 {
-    public class CreateQuaTrinhNhanSuCommand : IRequest<QuaTrinhNhanSuDto>, ICommand
+    public class CreateQuaTrinhNhanSuCommand : IRequest<string>, ICommand
     {
         public CreateQuaTrinhNhanSuCommand(string maSoNhanVien
             , int loaiQuaTrinhID

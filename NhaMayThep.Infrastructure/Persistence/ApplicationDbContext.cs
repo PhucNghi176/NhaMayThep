@@ -40,8 +40,15 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
         public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
         public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
-
         public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
+        public DbSet<ThongTinCongTyEntity> ThongTinCongTy {  get; set; }
+        public DbSet<ThueSuatEntity> ThueSuat {  get; set; }
+        public DbSet<MucSanPhamEntity> MucSanPham {  get; set; }
+        public DbSet<BaoHiemEntity> BaoHiem {  get; set; }
+        public DbSet<ChiTietBaoHiemEntity> ChiTietBaoHiem { get; set; }
+        public DbSet<BaoHiemNhanVienEntity> BaoHiemNhanVien { get; set; }
+        public DbSet<PhuCapEntity> PhuCap { get; set; }
+        public DbSet<PhuCapNhanVienEntity> PhuCapNhanVien { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -65,58 +72,19 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new QuaTrinhNhanSuConfiguration());
             modelBuilder.ApplyConfiguration(new LichSuNghiPhepNhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new LoaiHoaDonConfiguration());
+            modelBuilder.ApplyConfiguration(new ThongTinCongTyConfiguration());
+            modelBuilder.ApplyConfiguration(new ThueSatConfiguration());
+            modelBuilder.ApplyConfiguration(new MucSanPhamConfiguration());
+            modelBuilder.ApplyConfiguration(new BaoHiemConfiguration());
+            modelBuilder.ApplyConfiguration(new ChiTietBaoHiemConfiguration());
+            modelBuilder.ApplyConfiguration(new BaoHiemNhanVienConfiguration());
+            modelBuilder.ApplyConfiguration(new PhuCapConfiguration());
+            modelBuilder.ApplyConfiguration(new PhuCapNhanVienConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
-            //modelBuilder.Entity<NhanVienEntity>().HasData(
-            //    new NhanVienEntity()
-            //    {
-            //        ID = "0571cc1357c64e75a9907c37a366bfd3",
-            //        Email = "string",
-            //        PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-            //        PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-            //        HoVaTen = "Test User 1",
-            //        ChucVuID = 1,
-            //        TinhTrangLamViecID = 1,
-            //        DiaChiLienLac = "TP.HCM",
-            //        SoDienThoaiLienLac = "0912123456",
-            //        MaSoThue = "1234567",
-            //        TenNganHang = "TPBank",
-            //        SoTaiKhoan = "03450126803",
-            //        NgayVaoCongTy = DateTime.Now
-            //    },
-            //     new NhanVienEntity()
-            //     {
-            //         Email = "string",
-            //         PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-            //         PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-            //         HoVaTen = "Test User 2",
-            //         ChucVuID = 1,
-            //         TinhTrangLamViecID = 1,
-            //         DiaChiLienLac = "TP.HCM",
-            //         SoDienThoaiLienLac = "0912123456",
-            //         MaSoThue = "1234567",
-            //         TenNganHang = "TPBank",
-            //         SoTaiKhoan = "03450126803",
-            //         NgayVaoCongTy = DateTime.Now
-            //     },
-            //     new NhanVienEntity()
-            //     {
-            //         Email = "string",
-            //         PasswordHash = Convert.FromBase64String("ijEoDNRLLbgQ3nh+NEkEbMx89Irt9wJULnhZ32giyFpiJI1AlXSY+hrMAzeYeqlx3we3SvE8t1sN/sDv0wKJRA=="),
-            //         PasswordSalt = Convert.FromBase64String("b91ZoC1tDoZyQKUn63ZXepC/xChEZsZTvMYKZubeyOs8IMBJja0i9lcgdWpupwqkVDm0mb8eWlbXsXVKWLa89V+5QpjkC0KjVW+NCnTkOdWqa+vbJZpOzkxZF/OpocR/8EKhPhcQKBqBxcdXaFFSG5o5J6lL5xFZFonqv6QzlO4="),
-            //         HoVaTen = "Test User 3",
-            //         ChucVuID = 1,
-            //         TinhTrangLamViecID = 1,
-            //         DiaChiLienLac = "TP.HCM",
-            //         SoDienThoaiLienLac = "0912123456",
-            //         MaSoThue = "1234567",
-            //         TenNganHang = "TPBank",
-            //         SoTaiKhoan = "03450126803",
-            //         NgayVaoCongTy = DateTime.Now
-            //     }
-            //    );
+
             modelBuilder.Entity<LoaiHoaDonEntity>().HasData(
                 new LoaiHoaDonEntity() { ID = 1, Name = "ChiPhiDiLai" },
                 new LoaiHoaDonEntity() { ID = 2, Name = "ChiPhiChoO" },
@@ -133,11 +101,11 @@ namespace NhaMayThep.Infrastructure.Persistence
                 new LoaiCongTacEntity() { ID = 8, Name = "CongTacKhac" });
 
             modelBuilder.Entity<LoaiNghiPhepEntity>().HasData(
-                new LoaiNghiPhepEntity() { ID = 1, Name = "NghiPhepNam", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 2, Name = "NghiOm", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 3, Name = "NghiKhongLuong", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 4, Name = "NghiThaiSan", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 5, Name = "NghiKhac", SoGioNghiPhep = 8 });
+                new LoaiNghiPhepEntity() { ID = 1, Name = "NghiPhepNam"},
+                new LoaiNghiPhepEntity() { ID = 2, Name = "NghiOm"},
+                new LoaiNghiPhepEntity() { ID = 3, Name = "NghiKhongLuong" },
+                new LoaiNghiPhepEntity() { ID = 4, Name = "NghiThaiSan"},
+                new LoaiNghiPhepEntity() { ID = 5, Name = "NghiKhac"});
             modelBuilder.Entity<ThongTinQuaTrinhNhanSuEntity>().HasData(
                 new ThongTinQuaTrinhNhanSuEntity() { ID = 1, Name = "ThangTien" },
                 new ThongTinQuaTrinhNhanSuEntity() { ID = 2, Name = "BoNhiem" },
