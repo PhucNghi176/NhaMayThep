@@ -7,6 +7,8 @@ namespace NhaMapThep.Domain.Entities
     [Table("ChiTietNgayNghiPhep")]
     public class ChiTietNgayNghiPhepEntity : Entity
     {
+      
+        [ForeignKey("NhanVien")]
         public string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
         public virtual NhanVienEntity NhanVien { get; set; }
@@ -23,5 +25,6 @@ namespace NhaMapThep.Domain.Entities
         public required int NamHieuLuc { get; set; }
 
 
+  
     }
 }

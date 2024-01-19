@@ -38,15 +38,15 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
 
         [HttpDelete("chuc-vu/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<string>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteChucVuCommand(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("chuc-vu")]
@@ -60,7 +60,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         public async Task<ActionResult<JsonResponse<List<ChucVuDto>>>> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllChucVuQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<List<ChucVuDto>>(result));
         }
 
         [HttpGet("chuc-vu/{id}")]
@@ -74,7 +74,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         public async Task<ActionResult<JsonResponse<List<ChucVuDto>>>> GetById([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetChucVuByIdQuery(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<ChucVuDto>(result));
         }
         [HttpPut("chuc-vu/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -91,7 +91,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
             if (id != command.Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(result);
+            return Ok(new JsonResponse<ChucVuDto>(result));
         }
     }
 }
