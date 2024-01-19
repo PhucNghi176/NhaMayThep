@@ -39,15 +39,15 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
 
         [HttpDelete("loai-hop-dong/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<string>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteLoaiHopDongCommand(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return result == null ? BadRequest() : Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("loai-hop-dong")]
@@ -61,7 +61,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         public async Task<ActionResult<JsonResponse<List<LoaiHopDongDto>>>> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllLoaiHopDongQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return result == null ? BadRequest() : Ok(new JsonResponse<List<LoaiHopDongDto>>(result));
         }
 
         [HttpGet("loai-hop-dong/{id}")]
@@ -75,7 +75,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         public async Task<ActionResult<JsonResponse<LoaiHopDongDto>>> GetById([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetLoaiHopDongByIdQuery(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return result == null ? BadRequest() : Ok(new JsonResponse<LoaiHopDongDto>(result));
         }
         [HttpPut("loai-hop-dong/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -92,7 +92,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
             if (id != command.Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(result);
+            return result == null ? NotFound() : Ok(new JsonResponse<LoaiHopDongDto>(result));
         }
     }
 }
