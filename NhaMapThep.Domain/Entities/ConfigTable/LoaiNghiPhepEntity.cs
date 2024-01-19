@@ -6,6 +6,6 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     [Table("LoaiNghiPhep")]
     public class LoaiNghiPhepEntity : BangMaGocEntity
     {
-        public int SoGioNghiPhep { get; set; }
+
     }
 }
