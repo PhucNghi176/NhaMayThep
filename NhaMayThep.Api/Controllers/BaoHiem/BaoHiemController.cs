@@ -34,7 +34,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<List<BaoHiemDto>>> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllBaoHiemQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<List<BaoHiemDto>>(result));
+            return Ok(new JsonResponse<List<BaoHiemDto>>(result));
         }
 
         [HttpGet("bao-hiem/{id}")]
@@ -48,7 +48,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<BaoHiemDto>> GetId([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetBaoHiemByIdQuery(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<BaoHiemDto> (result));
+            return Ok(new JsonResponse<BaoHiemDto> (result));
         }
 
         [HttpPost("bao-hiem")]
@@ -76,7 +76,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<string>> Remove([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new RemoveBaoHiemCommand(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpPut("bao-hiem/{id}")]
@@ -94,7 +94,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
             if (id != command.Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(new JsonResponse<BaoHiemDto>(result));
+            return Ok(new JsonResponse<BaoHiemDto>(result));
         }
     }
 }

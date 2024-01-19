@@ -93,7 +93,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             if (id != command.Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(new JsonResponse<HopDongDto>(result));
+            return Ok(new JsonResponse<HopDongDto>(result));
         }
     }
 }
