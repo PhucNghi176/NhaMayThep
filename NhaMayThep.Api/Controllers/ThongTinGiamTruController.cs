@@ -1,8 +1,6 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Models;
 using NhaMayThep.Application.ThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru;

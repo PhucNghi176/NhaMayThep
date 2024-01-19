@@ -13,7 +13,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep
     {
         public int ID { get; set; }
         public string Name { get; set; }
-        public int SoGioNghiPhep { get; set; }
+       
 
         public void Mapping(Profile profile)
         {

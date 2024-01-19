@@ -8,12 +8,8 @@ using NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien;
 using NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien;
 using NhaMayThep.Application.ChiTietDangVien.GetAllChiTietDangVien;
 using NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien;
-using NhaMayThep.Application.DonViCongTac;
-using NhaMayThep.Application.ThongTinDangVien;
-using NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien;
-using NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien;
-using NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien;
-using NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien;
+
+
 using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers

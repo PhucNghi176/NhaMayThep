@@ -42,6 +42,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             {
                 throw new NotFoundException("LoaiNghiPhepId provided does not exist.");
             }
+            
             var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
             if (nhanVien == null)
             {
@@ -52,13 +53,17 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             {
                 throw new NotFoundException("Nguoi Duyet does not exist.");
             }
+            if(nhanVien == nhanvien2)
+            {
+                throw new NotFoundException("Nguoi Duyet can not be nguoi nghi");
+            }
             if(nhanVien.NgayXoa != null)
             {
-                throw new InvalidOperationException("This user has been deleted");
+                throw new NotFoundException("This user has been deleted");
             }
             if(nhanvien2.NgayXoa != null)
             {
-                throw new InvalidOperationException("This nhanvien has been deleted");
+                throw new NotFoundException("This nhanvien has been deleted");
             }
        
             var lsnp = new LichSuNghiPhepNhanVienEntity

@@ -30,5 +30,9 @@ namespace NhaMayThep.Infrastructure.Repositories
         }
 
 
+        public async Task<NhanVienEntity?> FindById(string Id,CancellationToken cancellationToken = default)
+        {
+            return await FindAsync( x=> x.ID.Equals(Id),cancellationToken);
+        }
     }
 }
