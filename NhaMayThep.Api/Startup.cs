@@ -26,11 +26,18 @@ namespace NhaMayThep.Api
                 });
             services.AddApplication(Configuration);
             services.ConfigureApplicationSecurity(Configuration);
-          //  services.ConfigureHealthChecks(Configuration);
+            //  services.ConfigureHealthChecks(Configuration);
             services.ConfigureProblemDetails();
             services.ConfigureApiVersioning();
             services.AddInfrastructure(Configuration);
             services.ConfigureSwagger(Configuration);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader());
+            });
 
         }
 
