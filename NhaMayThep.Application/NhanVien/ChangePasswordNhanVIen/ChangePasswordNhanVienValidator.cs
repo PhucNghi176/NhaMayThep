@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen
 {
-    public class ChangePasswordNhanVienvValidator : AbstractValidator<ChangePasswordNhanVienCommand>
+    public class ChangePasswordNhanVienValidator : AbstractValidator<ChangePasswordNhanVienCommand>
     {
-        public ChangePasswordNhanVienvValidator()
+        public ChangePasswordNhanVienValidator()
         {
             RuleFor(x => x.OldPassword).NotEmpty().WithMessage("Mật khẩu cũ không được để trống");
             RuleFor(x => x.NewPassword).NotEmpty().WithMessage("Mật khẩu mới không được để trống");
