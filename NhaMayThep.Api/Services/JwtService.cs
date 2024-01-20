@@ -15,13 +15,11 @@ namespace NhaMayThep.Api.Services
             {
                 //new Claim(JwtRegisteredClaimNames.Sub, userId),
                 new Claim(JwtClaimTypes.Subject, ID),
-                new Claim(JwtClaimTypes.Email, email)
+              //  new Claim(JwtClaimTypes.Email, email),
+                new Claim(JwtClaimTypes.Role, roles)
             };
 
-            if (roles != null)
-            {
-                claims.Add(new Claim(ClaimTypes.Role, roles));
-            }
+          
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRM Nh@ M@y Th3p!!!"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
