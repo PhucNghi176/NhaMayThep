@@ -30,7 +30,6 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVien
         {
             var nv = await _repository.FindAsync(x => x.Email == request.Predicate || x.ID == request.Predicate);
             //find chuc vu name by nv .ChucVuID and give me only chucvu name
-
             
             if (nv is null)
             {
