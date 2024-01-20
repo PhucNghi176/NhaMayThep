@@ -13,7 +13,7 @@ namespace NhaMayThep.Application.NhanVien.GetUser
 
         public GetNhanVienQuery(LoginEntity loginEntity)
         {
-            user.UserName = loginEntity.UserName;
+            user.Email = loginEntity.Email;
             user.Password = loginEntity.Password;
         }
        public required LoginEntity user { get; set; }
