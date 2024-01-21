@@ -6,7 +6,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.NhanVien.GetUser
 {
-    public class LoginQueryHandler : IRequestHandler<LoginQuery,NhanVienDtoLogin>
+    public class LoginQueryHandler : IRequestHandler<LoginQuery, NhanVienDtoLogin>
     {
         private readonly INhanVienRepository _repository;
         private readonly IMapper _mapper;
@@ -27,13 +27,13 @@ namespace NhaMayThep.Application.NhanVien.GetUser
             if (user != null)
             {
                 var chucvu = await _chucVuRepository.FindAsync(x => x.ID == user.ChucVuID);
-                 
+
                 var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)
                 {
-                   
+
                     return NhanVienDtoLogin.Create(user.Email, user.ID, chucvu.Name);
-                    
+
                 }
             }
 
