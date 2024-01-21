@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.NhanVien.GetUser
         public async Task<NhanVienDtoLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
 
-            var user = await _repository.FindAsync(x => x.Email == request.user.UserName);
+            var user = await _repository.FindAsync(x => x.Email == request.user.Email);
 
             if (user != null)
             {
