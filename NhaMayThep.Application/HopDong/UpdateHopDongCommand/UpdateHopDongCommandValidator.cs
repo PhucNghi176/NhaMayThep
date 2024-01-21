@@ -17,7 +17,6 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
         {
             RuleFor(x => x.LoaiHopDongId).NotEmpty().WithMessage("Loai hop dong must not empty");
             RuleFor(x => x.NgayKyHopDong).NotEmpty().WithMessage("Ngay ky hop dong must not empty");
-            RuleFor(x => x.NgayKetThucHopDong).NotEmpty().WithMessage("Ngay ket thuc hop dong must not empty");
             RuleFor(x => x.ThoiHanHopDong).NotEmpty().WithMessage("Thoi han hop dong must not empty");
             RuleFor(x => x.DiaDiemLamViec).NotEmpty().WithMessage("Dia diem lam viec must not empty");
             RuleFor(x => x.BoPhanLamViec).NotEmpty().WithMessage("Bo phan lam viec must not empty");
