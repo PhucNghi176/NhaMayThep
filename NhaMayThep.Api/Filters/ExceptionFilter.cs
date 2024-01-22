@@ -38,6 +38,7 @@ namespace NhaMayThep.Api.Filters
                     .AddContextInformation(context);
                     context.ExceptionHandled = true;
                     break;
+
             }
         }
     }

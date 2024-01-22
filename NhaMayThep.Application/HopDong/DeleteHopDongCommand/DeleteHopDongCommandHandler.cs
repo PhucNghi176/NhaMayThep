@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
 {
@@ -31,7 +25,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
             result.NguoiXoaID = _currentUserService.UserId;
             if (await _hopdongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 status = "Remove Successfully";
-            else 
+            else
                 status = "Remove Failed";
             return status;
         }

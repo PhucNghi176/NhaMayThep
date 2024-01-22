@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
 {
@@ -23,20 +18,18 @@ namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
 
         public async Task<string> Handle(DeleteCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa ==null, cancellationToken);
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null, cancellationToken);
             if (CanCuocCongDan is not null)
             {
-              
-                
-                    CanCuocCongDan.NgayXoa = DateTime.Now;
-                    CanCuocCongDan.NguoiXoaID = _currentUserService.UserId;
-                    _canCuocCongDanRepository.Update(CanCuocCongDan);
-                    return await 
-                        _canCuocCongDanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? 
-                        "Xoa Thanh Cong" : "Xoa That Bai";
-                
+                CanCuocCongDan.NgayXoa = DateTime.Now;
+                CanCuocCongDan.NguoiXoaID = _currentUserService.UserId;
+                _canCuocCongDanRepository.Update(CanCuocCongDan);
+                return await
+                    _canCuocCongDanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ?
+                    "Xoa Thanh Cong" : "Xoa That Bai";
             }
-            throw new NotFoundException($"Khong Tim Thay CanCuocCongDan {request.CanCuocCongDan}");
+            else
+                throw new NotFoundException($"Khong Tim Thay CanCuocCongDan {request.CanCuocCongDan}");
         }
     }
 }
