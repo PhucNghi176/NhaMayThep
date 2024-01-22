@@ -17,13 +17,11 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             ICanCuocCongDanRepository canCuocCongDanRepository,
-            IMapper mapper,
             ICurrentUserService currentUserService)
         {
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
             _canCuocCongDanRepository = canCuocCongDanRepository;
-            _mapper = mapper;
             _currentUserService = currentUserService;
         }
         public async Task<string> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
