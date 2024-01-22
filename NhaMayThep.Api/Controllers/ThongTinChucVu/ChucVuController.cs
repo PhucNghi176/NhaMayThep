@@ -2,11 +2,14 @@ using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.ThongTinChucVu;
 using NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu;
 using NhaMayThep.Application.ThongTinChucVu.DeleteChucVu;
 using NhaMayThep.Application.ThongTinChucVu.GetAllChucVu;
 using NhaMayThep.Application.ThongTinChucVu.GetChucVuById;
+using NhaMayThep.Application.ThongTinChucVu.GetPaginationChucVu;
 using NhaMayThep.Application.ThongTinChucVu.UpdateChucVu;
 using System.Net.Mime;
 
@@ -93,5 +96,19 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ChucVuDto>(result));
         }
+        [HttpGet("test/{pagenumber}/{pagesize}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucVuDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucVuDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ChucVuDto>>>> GetPagination([FromRoute]int pagenumber, [FromRoute] int pagesize, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetChucVuByPaginationQuery(pageNumber: pagenumber, pageSize: pagesize), cancellationToken); 
+            return Ok(result);
+        }
+
     }
 }
