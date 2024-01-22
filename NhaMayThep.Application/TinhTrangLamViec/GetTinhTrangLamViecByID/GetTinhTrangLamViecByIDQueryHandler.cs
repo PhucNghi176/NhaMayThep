@@ -23,8 +23,8 @@ namespace NhaMayThep.Application.TinhTrangLamViec.GetTinhTrangLamViecByID
         public async Task<TinhTrangLamViecDTO> Handle(GetTinhTrangLamViecByIDQuery request, CancellationToken cancellationToken)
         {
             var tinhtranglamviec = await _repository.GetTinhTrangLamViecById(request.id, cancellationToken);
-            if (tinhtranglamviec == null)
-                throw new NotFoundException($"Tình trạng làm việc với ID : {request.id} không tồn tại.");
+            if (tinhtranglamviec == null || tinhtranglamviec.NgayXoa != null)
+                throw new NotFoundException($"Tình trạng làm việc với ID : {request.id} không tồn tại hoặc đã xóa.");
             return tinhtranglamviec.MapToTinhTrangLamViecDTO(_mapper);
         }
     }

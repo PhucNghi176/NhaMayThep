@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.GetAllTinhTrangLamViec
 
         public async Task<List<TinhTrangLamViecDTO>> Handle(GetAllTinhTrangLamViecQuery request, CancellationToken cancellationToken)
         {
-            var tinhtranglamviec = await _repository.FindAllAsync(X => X.NgayXoa == null,cancellationToken);
+            var tinhtranglamviec = await _repository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if (tinhtranglamviec == null)
                 throw new Exception("Not found any tình trạng làm việc");
             
