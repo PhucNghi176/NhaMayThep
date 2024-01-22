@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
@@ -9,19 +10,26 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
     {
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
         private readonly ICurrentUserService _currentUserService;
+        private readonly INhanVienRepository _nhanVienRepository;
 
-        public CreateNewCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository, ICurrentUserService currentUserService)
+        public CreateNewCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository, ICurrentUserService currentUserService, INhanVienRepository nhanVienRepository)
         {
             _canCuocCongDanRepository = canCuocCongDanRepository;
             _currentUserService = currentUserService;
+            _nhanVienRepository = nhanVienRepository;
         }
 
         public async Task<string> Handle(CreateNewCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.NhanVienID == request.NhanVienID && ( request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa == null ), cancellationToken);
+            var isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.NhanVienID == request.NhanVienID && (request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa == null), cancellationToken);
             if (isExsisted)
             {
                 return ("CanCuocCongDan cua nhan vien da ton tai");
+            }
+            isExsisted = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null);
+            if (!isExsisted)
+            {
+                throw new NotFoundException($"Nhan Vien ID khong ton tai {request.NhanVienID}");
             }
             var CanCuocCongDan = new CanCuocCongDanEntity
             {
