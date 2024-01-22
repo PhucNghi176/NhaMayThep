@@ -31,7 +31,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllThongTinGiamTruQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<List<ThongTinGiamTruDTO>>(result));
+            return Ok(new JsonResponse<List<ThongTinGiamTruDTO>>(result));
         }
         [HttpGet]
         [Route("Thong-Tin-Giam-Tru/{Id}")]
@@ -45,7 +45,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetThongTinGiamTruByIdQuery(Id), cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<ThongTinGiamTruDTO>(result));
+            return Ok(new JsonResponse<ThongTinGiamTruDTO>(result));
         }
         [HttpPost]
         [Route("Thong-Tin-Giam-Tru")]
@@ -78,7 +78,7 @@ namespace NhaMayThep.Api.Controllers
             if (command.ID != Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<ThongTinGiamTruDTO>(result));
+            return Ok(new JsonResponse<ThongTinGiamTruDTO>(result));
 
         }
         [HttpDelete]
@@ -94,7 +94,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command,cancellationToken);
-            return result == null ? BadRequest() : Ok(new JsonResponse<bool>(result));
+            return Ok(new JsonResponse<bool>(result));
         }
     }
 }

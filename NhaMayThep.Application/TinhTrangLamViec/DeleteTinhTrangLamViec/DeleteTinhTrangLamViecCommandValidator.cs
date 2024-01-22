@@ -11,17 +11,15 @@ namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
 {
     public class DeleteTinhTrangLamViecCommandValidator : AbstractValidator<DeleteTinhTrangLamViecCommand>
     {
-        private readonly ITinhTrangLamViecRepository _repository;
-        public DeleteTinhTrangLamViecCommandValidator(ITinhTrangLamViecRepository repository)
+        public DeleteTinhTrangLamViecCommandValidator()
         {
-            _repository = repository;
             ConfigureValidationRules();
         }
         public void ConfigureValidationRules()
         {
             RuleFor(x => x.Id)
                 .NotNull()
-                .WithMessage("Id is not null");
+                .WithMessage("Id không được để trống!!!");
         }
     }
 }
