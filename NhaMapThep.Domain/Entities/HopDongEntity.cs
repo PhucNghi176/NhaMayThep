@@ -15,7 +15,7 @@ namespace NhaMapThep.Domain.Entities
         public virtual required LoaiHopDongEntity LoaiHopDong { get; set; }
         public required DateTime NgayKy { get; set; }
         public DateTime? NgayKetThuc { get; set; }
-        public int ThoiHanHopDong { get; set; }
+        public int? ThoiHanHopDong { get; set; }
         public required string DiaDiemLamViec { get; set; }
         public required string BoPhanLamViec { get; set; }
 
