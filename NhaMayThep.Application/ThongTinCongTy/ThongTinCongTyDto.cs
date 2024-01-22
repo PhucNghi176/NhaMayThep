@@ -6,8 +6,7 @@ namespace NhaMayThep.Application.ThongTinCongTy
 {
     public class ThongTinCongTyDto:IMapFrom<ThongTinCongTyEntity>
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int MaDoanhNghiep { get; set; }
         public string TenQuocTe {  get; set; }
         public string TenVietTat { get; set; }
         public int SoLuongNhanVien { get; set; }
@@ -19,12 +18,11 @@ namespace NhaMayThep.Application.ThongTinCongTy
         public string DonViQuanLi { get; set; }
         public string LoaiHinhDoanhNghiep { get; set; }
         public string TinhTrang { get; set; }
-        public static ThongTinCongTyDto Create(int id, string name, string tenQuocTe, string tenVietTat, int soLuongNhanVien, string diaChi, int maSoThue, string dienThoai, string nguoiDaiDien, DateTime ngayHoatDong, string donViQuanLi, string loaiHinhDoanhNghiep, string tinhTrang)
+        public static ThongTinCongTyDto Create(int maDoanhNghiep, string tenQuocTe, string tenVietTat, int soLuongNhanVien, string diaChi, int maSoThue, string dienThoai, string nguoiDaiDien, DateTime ngayHoatDong, string donViQuanLi, string loaiHinhDoanhNghiep, string tinhTrang)
         {
             return new ThongTinCongTyDto
             {
-                Id = id,
-                Name = name,
+                MaDoanhNghiep = maDoanhNghiep,
                 TenQuocTe = tenQuocTe,
                 TenVietTat = tenVietTat,
                 SoLuongNhanVien = soLuongNhanVien,

@@ -5,11 +5,11 @@ namespace NhaMayThep.Application.ThongTinCongTy.GetThongTinCongTyById
 {
     public class GetThongTinCongTyByIdQuery : IRequest<ThongTinCongTyDto>, IQuery
     {
-        public GetThongTinCongTyByIdQuery(int id)
+        public GetThongTinCongTyByIdQuery(int maDoanhNghiep)
         {
-            Id = id;
+            MaDoanhNghiep = maDoanhNghiep;
         }
 
-        public int Id { get; set; }
+        public int MaDoanhNghiep { get; set; }
     }
 }

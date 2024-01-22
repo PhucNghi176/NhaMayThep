@@ -5,8 +5,7 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
 {
     public class UpdateThongTinCongTyCommand : IRequest<string>, ICommand
     {
-        public int Id { get; set; }
-        public string Name { get; set; }
+        public int MaDoanhNghiep { get; set; }
         public string TenQuocTe { get; set; }
         public string TenVietTat { get; set; }
         public int SoLuongNhanVien { get; set; }

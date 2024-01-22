@@ -8,7 +8,6 @@ using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ThongTinCongTy;
 using NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy;
 using NhaMayThep.Application.ThongTinCongTy.DeleteThongTinCongTy;
-using NhaMayThep.Application.ThongTinCongTy.GetAllThongTinCongTy;
 using NhaMayThep.Application.ThongTinCongTy.GetThongTinCongTyById;
 using NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy;
 
@@ -33,17 +32,6 @@ namespace NhaMayThep.Api.Controllers.ThongTinCongTy
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
-        }
-        [HttpGet]
-        [ProducesResponseType(typeof(JsonResponse<List<ThongTinCongTyDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ThongTinCongTyDto>>> GetAllThongTinCongTy(
-    
-                                  CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetAllThongTinCongTyQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<ThongTinCongTyDto>>(result));
         }
         [HttpGet("{id}")]
         [ProducesResponseType(typeof(JsonResponse<ThongTinCongTyDto>), StatusCodes.Status200OK)]

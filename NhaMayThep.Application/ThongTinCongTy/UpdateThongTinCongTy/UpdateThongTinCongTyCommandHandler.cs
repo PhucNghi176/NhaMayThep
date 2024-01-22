@@ -8,20 +8,17 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
     public class UpdateThongTinCongTyCommandHandler : IRequestHandler<UpdateThongTinCongTyCommand, string>
     {
         private readonly IThongTinCongTyRepository _thongTinCongTyRepository;
-        private readonly ICurrentUserService _currentUserService;
 
-        public UpdateThongTinCongTyCommandHandler(IThongTinCongTyRepository thongTinCongTyRepository, ICurrentUserService currentUserService)
+        public UpdateThongTinCongTyCommandHandler(IThongTinCongTyRepository thongTinCongTyRepository)
         {
             _thongTinCongTyRepository = thongTinCongTyRepository;
-            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(UpdateThongTinCongTyCommand request, CancellationToken cancellationToken)
         {
-            var thongTinCongTy = await _thongTinCongTyRepository.FindAsync(t => t.ID == request.Id && t.NgayXoa == null, cancellationToken);
+            var thongTinCongTy = await _thongTinCongTyRepository.FindAsync(t => t.MaDoanhNghiep == request.MaDoanhNghiep, cancellationToken);
             if (thongTinCongTy is null)
-                throw new NotFoundException($"Khong tim thay Id {request.Id}");
-            thongTinCongTy.Name = request.Name;
+                throw new NotFoundException($"Khong tim thay Id {request.MaDoanhNghiep}");
             thongTinCongTy.TenQuocTe = request.TenQuocTe;
             thongTinCongTy.TenVietTat = request.TenVietTat;
             thongTinCongTy.SoLuongNhanVien = request.SoLuongNhanVien;
@@ -33,8 +30,6 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
             thongTinCongTy.DonViQuanLi = request.DonViQuanLi;
             thongTinCongTy.LoaiHinhDoanhNghiep = request.LoaiHinhDoanhNghiep;
             thongTinCongTy.TinhTrang = request.TinhTrang;
-            thongTinCongTy.NgayCapNhat = DateTime.Now;
-            thongTinCongTy.NguoiCapNhatID = _currentUserService.UserId;
 
             _thongTinCongTyRepository.Update(thongTinCongTy);
 

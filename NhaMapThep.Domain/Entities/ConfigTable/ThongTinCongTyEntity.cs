@@ -1,11 +1,15 @@
+using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using NhaMapThep.Domain.Entities.Base;
 
 namespace NhaMapThep.Domain.Entities
 {
     [Table("ThongTinCongty")]
-    public class ThongTinCongTyEntity : BangMaGocEntity
+    public class ThongTinCongTyEntity
     {
+        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
+        [Key]
+        public int MaDoanhNghiep {get;set;}
         public required string TenQuocTe {get; set;}
         public required string TenVietTat { get; set; }
         public required int SoLuongNhanVien { get; set; }

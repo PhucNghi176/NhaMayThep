@@ -18,10 +18,10 @@ namespace NhaMayThep.Application.ThongTinCongTy.GetThongTinCongTyById
 
         public async Task<ThongTinCongTyDto> Handle(GetThongTinCongTyByIdQuery request, CancellationToken cancellationToken)
         {
-            var thongTinCongTy = await _thongTinCongTyRepository.FindAsync(t => t.ID == request.Id,cancellationToken);
+            var thongTinCongTy = await _thongTinCongTyRepository.FindAsync(t => t.MaDoanhNghiep == request.MaDoanhNghiep, cancellationToken);
 
-            if (thongTinCongTy is null || thongTinCongTy.NgayXoa is not null)
-                throw new NotFoundException($"Khong tim thay Id {request.Id}");
+            if (thongTinCongTy is null)
+                throw new NotFoundException($"Khong tim thay MaDoanhNghiep {request.MaDoanhNghiep}");
 
             return thongTinCongTy.MapToThongTinCongTyDto(_mapper);
         }

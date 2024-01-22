@@ -5,11 +5,11 @@ namespace NhaMayThep.Application.ThongTinCongTy.DeleteThongTinCongTy
 {
     public class DeleteThongTinCongTyCommand : IRequest<string>, ICommand
     {
-        public DeleteThongTinCongTyCommand(int id)
+        public DeleteThongTinCongTyCommand(int maDoanhNghiep)
         {
-            Id = id;
+            MaDoanhNghiep = maDoanhNghiep;
         }
 
-        public int Id { get; set; }
+        public int MaDoanhNghiep { get; set; }
     }
 }

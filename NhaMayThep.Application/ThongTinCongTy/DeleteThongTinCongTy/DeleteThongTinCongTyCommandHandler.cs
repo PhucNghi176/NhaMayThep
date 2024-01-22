@@ -8,24 +8,20 @@ namespace NhaMayThep.Application.ThongTinCongTy.DeleteThongTinCongTy
     public class DeleteThongTinCongTyCommandHandler : IRequestHandler<DeleteThongTinCongTyCommand, string>
     {
         private readonly IThongTinCongTyRepository _thongTinCongTyRepository;
-        private readonly ICurrentUserService _currentUserService;
 
-        public DeleteThongTinCongTyCommandHandler(IThongTinCongTyRepository thongTinCongTyRepository, ICurrentUserService currentUserService)
+        public DeleteThongTinCongTyCommandHandler(IThongTinCongTyRepository thongTinCongTyRepository)
         {
             _thongTinCongTyRepository = thongTinCongTyRepository;
-            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(DeleteThongTinCongTyCommand request, CancellationToken cancellationToken)
         {
-            var thongTinCongTy = await _thongTinCongTyRepository.FindAsync(t => t.ID == request.Id && t.NgayXoa == null,cancellationToken);
+            var thongTinCongTy = await _thongTinCongTyRepository.FindAsync(t => t.MaDoanhNghiep == request.MaDoanhNghiep, cancellationToken);
 
             if (thongTinCongTy is null)
-                throw new NotFoundException($"Khong tim thay Id {request.Id}");
+                throw new NotFoundException($"Khong tim thay MaDoanhNghiep {request.MaDoanhNghiep}");
 
-            thongTinCongTy.NgayXoa = DateTime.Now;
-            thongTinCongTy.NguoiXoaID = _currentUserService.UserId;
-            _thongTinCongTyRepository.Update(thongTinCongTy);
+            _thongTinCongTyRepository.Remove(thongTinCongTy);
 
             return await _thongTinCongTyRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xoa thanh cong" : "Xoa that bai";
         }

@@ -9,8 +9,9 @@ namespace NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy
             ConfigureValidationRules();
         }
         private void ConfigureValidationRules()
-        {
-            RuleFor(t => t.Name).NotEmpty().NotNull().WithMessage("Ten cong ty must not be null or empty.");
+        {    
+            RuleFor(t => t.TenQuocTe).NotEmpty().NotNull().WithMessage("Ten quoc te must not be null or empty.");
+            RuleFor(t => t.TenVietTat).NotEmpty().NotNull().WithMessage("Ten viet tat must not be null or empty.");
             RuleFor(t => t.SoLuongNhanVien).NotEmpty().NotNull().WithMessage("So luong nhan vien must not be null or empty.");
             RuleFor(t => t.DiaChi).NotEmpty().NotNull().WithMessage("Dia chi must not be null or empty.");
             RuleFor(t => t.MaSoThue).NotEmpty().NotNull().WithMessage("Ma so thue must not be null or empty.");

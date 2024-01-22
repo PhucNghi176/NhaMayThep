@@ -11,8 +11,7 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
 
         private void ConfigureValidationRules()
         {
-            RuleFor(t => t.Id).NotEmpty().NotNull().WithMessage("Id must not be null or empty.");
-            RuleFor(t => t.Name).NotEmpty().NotNull().WithMessage("Ten cong ty must not be null or empty.");
+            RuleFor(t => t.MaDoanhNghiep).NotEmpty().NotNull().WithMessage("Id must not be null or empty.");
             RuleFor(t => t.SoLuongNhanVien).NotEmpty().NotNull().WithMessage("So luong nhan vien must not be null or empty.");
             RuleFor(t => t.DiaChi).NotEmpty().NotNull().WithMessage("Dia chi must not be null or empty.");
             RuleFor(t => t.MaSoThue).NotEmpty().NotNull().WithMessage("Ma so thue must not be null or empty.");

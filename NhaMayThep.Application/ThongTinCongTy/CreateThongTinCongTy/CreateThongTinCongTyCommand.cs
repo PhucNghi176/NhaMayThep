@@ -5,7 +5,6 @@ namespace NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy
 {
     public class CreateThongTinCongTyCommand : IRequest<string>, ICommand
     {
-        public string Name { get; set; }
         public string TenQuocTe { get; set; }
         public string TenVietTat { get; set; }
         public int SoLuongNhanVien { get; set; }
