@@ -12,9 +12,12 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
     {
         public int Id { get; set; }
         public string Name { get; set; }
-       
 
 
+        public UpdateLoaiNghiPhepCommand()
+        {
+            
+        }
         public UpdateLoaiNghiPhepCommand(int id, string name, int sgnp)
         {
 
