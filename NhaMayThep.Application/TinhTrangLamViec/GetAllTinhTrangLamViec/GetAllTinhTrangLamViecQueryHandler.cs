@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
@@ -24,7 +25,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.GetAllTinhTrangLamViec
         {
             var tinhtranglamviec = await _repository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if (tinhtranglamviec == null)
-                throw new Exception("Not found any tình trạng làm việc");
+                throw new NotFoundException("Not found any tình trạng làm việc");
             
             return tinhtranglamviec.MapToTinhTrangLamViecDTOList(_mapper).ToList();
         }

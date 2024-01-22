@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
 using System.Collections.Generic;
@@ -23,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById
         {
             var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.Id, cancellationToken);
             if (thongtingiamtru == null || thongtingiamtru.NgayXoa != null)
-                throw new ArgumentException($"Not Found any thong tin giam tru with ID : {request.Id} or it was deleted.");
+                throw new NotFoundException($"Not Found any thong tin giam tru with ID : {request.Id} or it was deleted.");
             return thongtingiamtru.MapToThongTinGiamTruDTO(_mapper);
         }
     }

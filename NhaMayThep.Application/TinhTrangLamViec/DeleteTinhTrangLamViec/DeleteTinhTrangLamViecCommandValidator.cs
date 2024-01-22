@@ -11,10 +11,8 @@ namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
 {
     public class DeleteTinhTrangLamViecCommandValidator : AbstractValidator<DeleteTinhTrangLamViecCommand>
     {
-        private readonly ITinhTrangLamViecRepository _repository;
-        public DeleteTinhTrangLamViecCommandValidator(ITinhTrangLamViecRepository repository)
+        public DeleteTinhTrangLamViecCommandValidator()
         {
-            _repository = repository;
             ConfigureValidationRules();
         }
         public void ConfigureValidationRules()
