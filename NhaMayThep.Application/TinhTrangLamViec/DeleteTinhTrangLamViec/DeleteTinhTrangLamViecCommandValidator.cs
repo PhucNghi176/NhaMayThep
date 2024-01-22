@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
         {
             RuleFor(x => x.Id)
                 .NotNull()
-                .WithMessage("Id is not null");
+                .WithMessage("Id không được để trống!!!");
         }
     }
 }

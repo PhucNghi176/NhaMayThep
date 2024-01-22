@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.GetAllThongTinGiamTru
         {
             var thongtingiamtru = await _repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             if (thongtingiamtru == null)
-                throw new NotFoundException("There're no thong tin giam tru");
+                throw new NotFoundException("Không tồn tại thông tin giảm trừ.");
             /*
              * List<ThongTinGiamTruEntity> list = new List<ThongTinGiamTruEntity>();
              *foreach(var items in thongtingiamtru)

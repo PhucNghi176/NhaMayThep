@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.GetAllTinhTrangLamViec
         {
             var tinhtranglamviec = await _repository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             if (tinhtranglamviec == null)
-                throw new NotFoundException("Not found any tình trạng làm việc");
+                throw new NotFoundException("Không tìm thấy tình trạng làm việc.");
             
             return tinhtranglamviec.MapToTinhTrangLamViecDTOList(_mapper).ToList();
         }

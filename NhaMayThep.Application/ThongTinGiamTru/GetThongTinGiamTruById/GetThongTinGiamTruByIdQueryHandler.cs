@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById
         {
             var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.Id, cancellationToken);
             if (thongtingiamtru == null || thongtingiamtru.NgayXoa != null)
-                throw new NotFoundException($"Not Found any thong tin giam tru with ID : {request.Id} or it was deleted.");
+                throw new NotFoundException($"Không tìm thấy Thông tin giảm trừ với ID : {request.Id} hoặc nó đã bị xóa.");
             return thongtingiamtru.MapToThongTinGiamTruDTO(_mapper);
         }
     }
