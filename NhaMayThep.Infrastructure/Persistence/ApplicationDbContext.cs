@@ -11,6 +11,7 @@ namespace NhaMayThep.Infrastructure.Persistence
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+
         }
         public DbSet<NhanVienEntity> NhanVien { get; set; }
         public DbSet<ThongTinChucVuEntity> ChucVu { get; set; }
