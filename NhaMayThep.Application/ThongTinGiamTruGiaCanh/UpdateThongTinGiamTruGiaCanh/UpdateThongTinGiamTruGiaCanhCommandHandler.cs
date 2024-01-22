@@ -12,7 +12,6 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
-        private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         public UpdateThongTinGiamTruGiaCanhCommandHandler(
             IThongTinGiamTruRepository thongTinGiamTruRepository,
@@ -37,7 +36,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             }
             var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
                 .FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
-            if (thongtingiamtruCur != null || (thongtingiamtruCur != null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
+            if (thongtingiamtruCur != null)
             {
                 throw new NotFoundException("Căn cước công dân này đã có thông tin miễn trừ gia cảnh hoặc đã bị vô hiệu hóa trước đó");
             }
