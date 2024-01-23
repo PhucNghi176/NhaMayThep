@@ -5,7 +5,7 @@ using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.LichSuNghiPhep.Update;
 using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.Common.Interfaces;
-
+namespace NhaMayThep.Application.LichSuNghiPhep.Update;
 public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNghiPhepCommand, LichSuNghiPhepDto>
 {
     private readonly ILichSuNghiPhepRepository _repo;
