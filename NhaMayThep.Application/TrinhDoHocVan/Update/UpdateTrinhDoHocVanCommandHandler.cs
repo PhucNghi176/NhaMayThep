@@ -23,7 +23,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
             if (entity == null || entity.NgayXoa != null)
             {
-                throw new NotFoundException("TrinhDoHocVan Does Not Exist");
+                throw new NotFoundException("Trình Độ Học Vấn Không Tồn Tại");
             }
             if (entity != null)
             {
