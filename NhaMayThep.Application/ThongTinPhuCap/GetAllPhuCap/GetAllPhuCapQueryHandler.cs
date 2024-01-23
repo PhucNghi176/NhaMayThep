@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.ThongTinPhuCap.GetAllPhuCap
         }
         public async Task<List<PhuCapDto>> Handle(GetAllPhuCapQuery query, CancellationToken cancellationToken)
         {
-            var list = await _phuCapRepository.FindAllAsync(cancellationToken);
+            var list = await _phuCapRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             List<PhuCapDto> result = new List<PhuCapDto>();
             foreach (var item in list)
             {

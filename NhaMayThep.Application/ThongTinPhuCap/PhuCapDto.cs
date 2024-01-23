@@ -12,10 +12,12 @@ namespace NhaMayThep.Application.ThongTinPhuCap
         {
             return new PhuCapDto()
             {
+                Id = id,
                 Name = name,
                 PhanTramPhuCap = phanTram
             };
         }
+        public int Id { get; set; }
 
         public string Name { get; set; }
         public double PhanTramPhuCap { get; set; }

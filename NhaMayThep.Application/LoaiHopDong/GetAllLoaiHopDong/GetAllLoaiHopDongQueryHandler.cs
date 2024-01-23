@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong
         }
         public async Task<List<LoaiHopDongDto>> Handle(GetAllLoaiHopDongQuery query, CancellationToken cancellationToken)
         {
-            var list = await _loaiHopDongReposity.FindAllAsync(cancellationToken);
+            var list = await _loaiHopDongReposity.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             List<LoaiHopDongDto> result = new List<LoaiHopDongDto>();
             foreach (var item in list)
             {

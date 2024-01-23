@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong
         {
             var result = await _loaiHopDongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
-                throw new NotFoundException($"Not found loai hop dong {command.Id}");
+                throw new NotFoundException($"Không tìm thấy loại hợp đồng với id: {command.Id}");
             result.Name = command.TenHopDong;
             _loaiHopDongRepository.Update(result);
             await _loaiHopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
