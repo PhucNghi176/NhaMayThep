@@ -10,13 +10,15 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
 {
     public class CreateThongTinDangVienCommand : IRequest<string>, ICommand
     {
-        public CreateThongTinDangVienCommand(string nhanVienId, DateTime ngayVaoDang, string capDangVien )
+        public CreateThongTinDangVienCommand(string id, string nhanVienId, DateTime ngayVaoDang, string capDangVien )
         {
+            ID = id;
             NhanVienID = nhanVienId;
             NgayVaoDang = ngayVaoDang;
             CapDangVien = capDangVien;
         }
 
+        public string ID { get; set; }
         public string NhanVienID { get; set; }
 
         public DateTime NgayVaoDang { get; set; }

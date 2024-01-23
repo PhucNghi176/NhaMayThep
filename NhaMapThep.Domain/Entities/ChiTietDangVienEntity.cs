@@ -9,10 +9,10 @@ namespace NhaMapThep.Domain.Entities
     {
         public string DangVienID { get; set; }
         [ForeignKey(nameof(DangVienID))]
-        public virtual ThongTinDangVienEntity ThongTinDangVien { get; set; }
+        public virtual required ThongTinDangVienEntity ThongTinDangVien { get; set; }
         public int DonViCongTacID { get; set; }
         [ForeignKey(nameof(DonViCongTacID))]
-        public virtual DonViCongTacEntity DonViCongTac { get; set; }
+        public virtual required DonViCongTacEntity DonViCongTac { get; set; }
         public required string ChucVuDang { get; set; }
         public required string TrinhDoChinhTri { get; set; }
     }

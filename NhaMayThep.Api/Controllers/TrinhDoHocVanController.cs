@@ -68,11 +68,11 @@ namespace CleanArchitecture.Api.Controllers
             try
             {
                 await _mediator.Send(command, cancellationToken);
-                return new JsonResponse<string>("Thành Công!");
+                return new JsonResponse<string>("Success");
             }
             catch (Exception)
             {
-                return BadRequest(new JsonResponse<string>("Thất Bại!"));
+                return BadRequest(new JsonResponse<string>("Fail"));
             }
         }
 

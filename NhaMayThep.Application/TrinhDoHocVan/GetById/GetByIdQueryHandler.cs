@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.GetById
             var trinhDoHocVan = await _trinhDoHocVanRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (trinhDoHocVan == null || trinhDoHocVan.NgayXoa != null)
             {
-                throw new NotFoundException("Trình Độ Học Vấn Không Tồn Tại!");
+                throw new NotFoundException("TrinhDoHocVan Does not Exist");
             }
             return trinhDoHocVan.MapToTrinhDoHocVanDto(_mapper);
         }

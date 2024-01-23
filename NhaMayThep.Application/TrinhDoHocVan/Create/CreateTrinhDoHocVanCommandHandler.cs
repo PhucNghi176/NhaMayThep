@@ -21,25 +21,19 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
         public async Task<string> Handle(CreateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
         {
-            var existingTrinhDoHocVan = await _repository.FindAsync(x => x.Name == request.TenTrinhDo, cancellationToken);
-
-            if (existingTrinhDoHocVan != null)
-            {
-                return "Đã tồn tại tên này!";
-            }
-
             var trinhDoHocVanEntity = new TrinhDoHocVanEntity
             {
                 Name = request.TenTrinhDo,
                 NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Now,
+                // Set other properties as needed
             };
 
             _repository.Add(trinhDoHocVanEntity);
 
 
              await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Thành Công!";
+            return "Success";
         }
     }
 }

@@ -8,7 +8,7 @@ namespace NhaMapThep.Domain.Entities
     {
         public string NhanVienID { get; set; }
         [ForeignKey(nameof(NhanVienID))]
-        public virtual NhanVienEntity NhanVien { get; set; }
+        public virtual required NhanVienEntity NhanVien { get; set; }
         public DateTime NgayVaoDang { get; set; }
         public string CapDangVien { get; set; }
     }

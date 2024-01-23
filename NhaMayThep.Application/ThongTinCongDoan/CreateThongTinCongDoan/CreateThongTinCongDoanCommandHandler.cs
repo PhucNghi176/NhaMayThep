@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             }
             var thongtincongdoan = await _thongtinCongDoanRepository
                      .FindAsync(x => x.NhanVienID.Equals(request.NhanVienID), cancellationToken);
-            if (thongtincongdoan != null)
+            if (thongtincongdoan != null || (thongtincongdoan != null && thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
             {
                 throw new NotFoundException($"Thông tin công đoàn đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }
