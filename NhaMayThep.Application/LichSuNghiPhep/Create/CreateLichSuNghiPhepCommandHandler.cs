@@ -5,7 +5,10 @@ using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
-using System.Threading;
+using System.Collections.Generic;
+using System.Linq;
+using System.Linq.Expressions;
+using System.Text;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Create
@@ -17,7 +20,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
         private readonly INhanVienRepository _hanVienRepository;
         private readonly ICurrentUserService _currentUserService;
         private readonly ILoaiNghiPhepRepository _loaiNghiPhepRepo;
-
         public CreateLichSuNghiPhepCommandHandler(IMapper mapper, ICurrentUserService currentUserService, ILichSuNghiPhepRepository repository, INhanVienRepository hanVienRepository, ILoaiNghiPhepRepository loaiNghiPhepRepo)
         {
             _mapper = mapper;
@@ -27,6 +29,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             _currentUserService = currentUserService;
         }
 
+
         public async Task<LichSuNghiPhepDto> Handle(CreateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
@@ -34,36 +37,38 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             {
                 throw new UnauthorizedAccessException("User ID not found.");
             }
-
-            // Validate LoaiNghiPhepID
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
             if (!loaiNghiPhepExists)
             {
                 throw new NotFoundException("LoaiNghiPhepId provided does not exist.");
             }
-
-            // Validate MaSoNhanVien
+            
             var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
-            if (nhanVien == null || nhanVien.NgayXoa != null)
+            if (nhanVien == null)
             {
-                throw new NotFoundException("Nhan Vien does not exist or has been deleted.");
+                throw new NotFoundException("Nhan Vien does not exist.");
             }
-
-            // Validate NguoiDuyet
-            var nhanvien2 = await _hanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
-            if (nhanvien2 == null || nhanvien2.NgayXoa != null)
+            var nhanvien2 = await _hanVienRepository.FindAsync(x=> x.ID == request.NguoiDuyet, cancellationToken);
+            if (nhanvien2 == null)
             {
-                throw new NotFoundException("Nguoi Duyet does not exist or has been deleted.");
+                throw new NotFoundException("Nguoi Duyet does not exist.");
             }
-
-            if (nhanVien.ID == nhanvien2.ID)
+            if(nhanVien == nhanvien2)
             {
-                throw new InvalidOperationException("Nguoi Duyet cannot be the same as the requesting employee.");
+                throw new NotFoundException("Nguoi Duyet can not be nguoi nghi");
             }
-
+            if(nhanVien.NgayXoa != null)
+            {
+                throw new NotFoundException("This user has been deleted");
+            }
+            if(nhanvien2.NgayXoa != null)
+            {
+                throw new NotFoundException("This nhanvien has been deleted");
+            }
+       
             var lsnp = new LichSuNghiPhepNhanVienEntity
             {
-                NguoiTaoID = userId,
+                NguoiTaoID = _currentUserService?.UserId,
                 MaSoNhanVien = request.MaSoNhanVien,
                 LoaiNghiPhepID = request.LoaiNghiPhepID,
                 NgayBatDau = request.NgayBatDau,
@@ -71,10 +76,11 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
                 LyDo = request.LyDo,
                 NguoiDuyet = request.NguoiDuyet
             };
-
             _repository.Add(lsnp);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return lsnp.MapToLichSuNghiPhepDto(_mapper);
+
         }
     }
+
 }

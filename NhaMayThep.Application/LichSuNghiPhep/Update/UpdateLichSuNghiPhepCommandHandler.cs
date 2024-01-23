@@ -2,10 +2,9 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.LichSuNghiPhep.Update;
 using NhaMayThep.Application.LichSuNghiPhep;
-
+using NhaMayThep.Application.Common.Interfaces;
 namespace NhaMayThep.Application.LichSuNghiPhep.Update;
 public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNghiPhepCommand, LichSuNghiPhepDto>
 {
@@ -14,7 +13,6 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
     private readonly INhanVienRepository _nhanVienRepository;
     private readonly ICurrentUserService _currentUserService;
     private readonly ILoaiNghiPhepRepository _loaiNghiPhepRepo;
-
     public UpdateLichSuNghiPhepCommandHandler(ICurrentUserService currentUserService, ILoaiNghiPhepRepository loaiNghiPhepRepository, ILichSuNghiPhepRepository repo, IMapper mapper, INhanVienRepository nhanVienRepository)
     {
         _repo = repo;
@@ -31,44 +29,52 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         {
             throw new UnauthorizedAccessException("User ID not found.");
         }
-
-        // Validation for LoaiNghiPhepID
         var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
         if (!loaiNghiPhepExists)
         {
             throw new NotFoundException("LoaiNghiPhepId provided does not exist.");
         }
-
-        // Validation for MaSoNhanVien
         var existingNhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
-        if (existingNhanVien == null || existingNhanVien.NgayXoa != null)
+        if (existingNhanVien == null)
         {
-            throw new InvalidOperationException("This NhanVien does not exist or has been deleted.");
+            throw new NotFoundException($"Employee with ID {request.MaSoNhanVien} not found.");
+        }
+        if(existingNhanVien.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This NhanVien has been deleted");
         }
 
-        // Validation for NguoiDuyet
         var existingNhanVien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
-        if (existingNhanVien2 == null || existingNhanVien2.NgayXoa != null)
+        if(existingNhanVien2 == null)
         {
-            throw new InvalidOperationException("Nguoi Duyet does not exist or has been deleted.");
+            throw new NotFoundException($"Nguoi Duyet with ID {request.NguoiDuyet} not found.");
         }
 
-        // Check if LichSuNghiPhep exists
+        if(existingNhanVien2.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This NhanVien has been deleted");
+        }
+
         var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
-        if (existingLsnp == null || existingLsnp.NgayXoa != null)
+        if (existingLsnp == null)
         {
-            throw new NotFoundException("LichSuNghiPhep does not exist or has been deleted.");
+            throw new NotFoundException($"LichSuNghiPhepNhanVienEntity with ID {request.Id} not found.");
+        }
+        if(existingLsnp.NgayXoa != null)
+        {
+            throw new InvalidOperationException("This LichSuNghiPhep has been deleted");
         }
 
-        // Update properties
+
+
+        // Update the properties of existingLsnp
         existingLsnp.NguoiCapNhatID = userId;
         existingLsnp.LoaiNghiPhepID = request.LoaiNghiPhepID;
         existingLsnp.NgayBatDau = request.NgayBatDau;
         existingLsnp.NgayKetThuc = request.NgayKetThuc;
         existingLsnp.LyDo = request.LyDo;
         existingLsnp.NguoiDuyet = request.NguoiDuyet;
-        existingLsnp.NgayCapNhatCuoi = DateTime.UtcNow;
-
+        existingLsnp.NgayCapNhatCuoi = DateTime.Now;
         _repo.Update(existingLsnp);
         await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
 
