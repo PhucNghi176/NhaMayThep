@@ -87,9 +87,9 @@ namespace NhaMayThep.Infrastructure.Persistence
         {
 
             modelBuilder.Entity<LoaiHoaDonEntity>().HasData(
-                new LoaiHoaDonEntity() { ID = 1, Name = "ChiPhiDiLai" },
-                new LoaiHoaDonEntity() { ID = 2, Name = "ChiPhiChoO" },
-                new LoaiHoaDonEntity() { ID = 3, Name = "ChiPhiQuaBieuTang" },
+                new LoaiHoaDonEntity() { ID = 1, Name = "HoaDonDiLai" },
+                new LoaiHoaDonEntity() { ID = 2, Name = "HoaDonChoO" },
+                new LoaiHoaDonEntity() { ID = 3, Name = "HoaDonQuaBieuTang" },
                 new LoaiHoaDonEntity() { ID = 4, Name = "HoaDonKhac" });
             modelBuilder.Entity<LoaiCongTacEntity>().HasData(
                 new LoaiCongTacEntity() { ID = 1, Name = "CongTacNoiBo" },
