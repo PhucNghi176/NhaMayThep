@@ -4,7 +4,8 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMayThep.Application.LichSuNghiPhep.Delete;
 using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.Common.Interfaces;
-
+using NhaMapThep.Domain.Repositories;
+namespace NhaMayThep.Application.LichSuNghiPhep.Delete;
 public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNghiPhepCommand, LichSuNghiPhepDto>
 {
     private readonly ILichSuNghiPhepRepository _repo;

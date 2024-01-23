@@ -18,7 +18,8 @@ namespace NhaMayThep.Infrastructure
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
                 options.UseSqlServer(
-                    configuration.GetConnectionString("local"),
+
+                    configuration.GetConnectionString("server"),
                     b =>
                     {
                         b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
@@ -26,6 +27,7 @@ namespace NhaMayThep.Infrastructure
                     });
                 options.UseLazyLoadingProxies();
             });
+            //
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<IThongTinDaoTaoRepository, ThongTinDaoTaoRepository>();

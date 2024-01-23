@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.BaoHiem.GetBaoHiemById
         {
             var result = await _baoHiemRepostory.FindAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
-                throw new NotFoundException($"Bao hiem with id: {query.Id} not found");
+                throw new NotFoundException($"Không tìm thấy bảo hiểm với id: {query.Id}");
             else
                 return result.MapToBaoHiemDto(_mapper);
         }

@@ -69,11 +69,11 @@ namespace NhaMayThep.Api.Controllers
             try
             {
                 await _mediator.Send(command, cancellationToken);
-                return new JsonResponse<string>("Success");
+                return new JsonResponse<string>("Thành Công!");
             }
             catch (Exception)
             {
-                return BadRequest(new JsonResponse<string>("Fail"));
+                return BadRequest(new JsonResponse<string>("Thất Bại!"));
             }
         }
 
