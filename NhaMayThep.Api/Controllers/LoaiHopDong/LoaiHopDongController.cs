@@ -14,7 +14,7 @@ using Microsoft.AspNetCore.Authorization;
 namespace NhaMayThep.Api.Controllers.LoaiHopDong
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class LoaiHopDongController : ControllerBase
     {
         private readonly ISender _mediator;

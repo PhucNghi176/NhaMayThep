@@ -80,7 +80,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
 
             _hopDongRepository.Add(HopDong);
             await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return HopDong.ID;
+            return "Tạo thành công";
         }
     }
 }

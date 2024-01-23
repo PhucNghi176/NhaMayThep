@@ -38,23 +38,23 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
         public async Task<HopDongDto> Handle(UpdateHopDongCommand command, CancellationToken cancellationToken)
         {
 
-            var checkingHopDong = await _hopDongRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var checkingHopDong = await _hopDongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (checkingHopDong == null)
                 throw new NotFoundException($"Invalid HopDong {command.Id}");
 
-            var CapBacLuong = await _capBacLuongRepository.FindAsync(x => x.ID == command.HeSoLuongId, cancellationToken);
+            var CapBacLuong = await _capBacLuongRepository.FindAsync(x => x.ID == command.HeSoLuongId && x.NgayXoa == null, cancellationToken);
             if (CapBacLuong == null)
                 throw new NotFoundException($"Invalid CapBacLuong {command.HeSoLuongId}");
 
-            var ChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhId, cancellationToken);
+            var ChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhId && x.NgayXoa == null, cancellationToken);
             if (ChucDanh == null)
                 throw new NotFoundException($"Invalid ChucDanh {command.ChucDanhId}");
 
-            var ChucVu = await _chucVuRepository.FindAsync(x => x.ID == command.ChucVuId, cancellationToken);
+            var ChucVu = await _chucVuRepository.FindAsync(x => x.ID == command.ChucVuId && x.NgayXoa == null, cancellationToken);
             if (ChucVu == null)
                 throw new NotFoundException($"Invalid ChucDanh {command.ChucVuId}");
 
-            var LoaiHopDong = await _loaiHopDongRepository.FindAsync(x => x.ID == command.LoaiHopDongId, cancellationToken);
+            var LoaiHopDong = await _loaiHopDongRepository.FindAsync(x => x.ID == command.LoaiHopDongId && x.NgayXoa == null, cancellationToken);
             if (LoaiHopDong == null)
                 throw new NotFoundException($"Invalid ChucDanh {command.LoaiHopDongId}");
 

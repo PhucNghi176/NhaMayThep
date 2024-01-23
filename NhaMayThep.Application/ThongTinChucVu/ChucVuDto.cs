@@ -15,11 +15,13 @@ namespace NhaMayThep.Application.ThongTinChucVu
         public static ChucVuDto Create(int id, string name)
         {
             return new ChucVuDto()
-            {
+            {   
+                Id = id,
                 Name = name,
             };
         }
 
+        public int Id { get; set; }
         public string Name { get; set; }
         public void Mapping(Profile profile)
         {
