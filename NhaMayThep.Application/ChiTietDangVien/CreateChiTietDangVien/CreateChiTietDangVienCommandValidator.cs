@@ -12,9 +12,6 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
     {
         public CreateChiTietDangVienCommandValidator()
         {
-            RuleFor(x => x.ID)
-                .NotEmpty().WithMessage("ID không được để trống.")
-                .MaximumLength(450).WithMessage("ID không vượt quá 450 kí tự.");
 
             RuleFor(x => x.DangVienID)
                 .NotEmpty().WithMessage("DangVienID không được để trống.")

@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.GetById
             var thongTinDaoTao = await _thongTinDaoTaoRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (thongTinDaoTao == null || thongTinDaoTao.NgayXoa != null)
             {
-                throw new NotFoundException("ThongTinDaoTao Does not Exist");
+                throw new NotFoundException("Thông Tin Đào Tạo không tồn tại!");
             }
             return thongTinDaoTao.MapToThongTinDaoTaoDto(_mapper);
         }
