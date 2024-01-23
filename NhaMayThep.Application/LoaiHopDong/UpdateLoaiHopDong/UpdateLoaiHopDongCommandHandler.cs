@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong
         }
         public async Task<LoaiHopDongDto> Handle(UpdateLoaiHopDongCommand command, CancellationToken cancellationToken)
         {
-            var result = await _loaiHopDongRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var result = await _loaiHopDongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Not found loai hop dong {command.Id}");
             result.Name = command.TenHopDong;
