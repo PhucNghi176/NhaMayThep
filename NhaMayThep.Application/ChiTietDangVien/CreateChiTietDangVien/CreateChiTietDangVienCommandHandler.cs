@@ -28,23 +28,23 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
         }
         public async Task<string> Handle(CreateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
-            var chiTietDangVienCheck = await _chiTietDangVienRepository.FindAsync(x => x.DangVienID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var chiTietDangVienCheck = await _chiTietDangVienRepository.FindAsync(x => x.ID == request.ID || x.DangVienID == request.DangVienID, cancellationToken: cancellationToken);
             if (chiTietDangVienCheck != null )
-                throw new Exception("Đã tồn tại Chi Tiết Đảng Viên " + request.DangVienID);
+                throw new Exception("Đã tồn tại ID " + request.ID + " hoặc Chi Tiết Về Đảng Viên " + request.DangVienID);
 
-            var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var dangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.DangVienID, cancellationToken: cancellationToken);
             if (dangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
 
-            var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.DonViCongTacID, cancellationToken: cancellationToken);
             if(donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
-
             var chiTietDangVien = new ChiTietDangVienEntity()
             {
-                DangVienID = request.DangVienID,
-                DonViCongTacID = request.DonViCongTacID,
+                ID = request.ID,
+                ThongTinDangVien = dangVien,
+                DonViCongTac = donViCongTac,
 
                 ChucVuDang = request.ChucVuDang,
                 TrinhDoChinhTri = request.TrinhDoChinhTri,

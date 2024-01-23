@@ -25,14 +25,14 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Delete
             var thongTinDaoTao = await _thongTinDaoTaoRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (thongTinDaoTao == null || thongTinDaoTao.NgayXoa != null)
             {
-                return "Xóa Thất Bại!";
+                return "Fail";
             }
             thongTinDaoTao.NgayXoa = DateTime.Now;
             thongTinDaoTao.NguoiXoaID = _currentUserService.UserId;
             _thongTinDaoTaoRepository.Update(thongTinDaoTao);
             await _thongTinDaoTaoRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Xóa Thành Công!";
+            return "Success";
         }
     }
 }

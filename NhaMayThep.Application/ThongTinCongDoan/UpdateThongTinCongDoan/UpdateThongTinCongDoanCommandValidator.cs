@@ -14,6 +14,9 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
                 .NotEmpty().WithMessage("Mã nhân viên không được để trống")
                 .NotNull().WithMessage("Mã nhân viên không được để rỗng")
                 .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã nhân viên không đúng định dạng");
+            RuleFor(x => x.ThuKyCongDoan)
+                .Must(x => x == true || x == false)
+                .WithMessage("Thư ký cộng đoàn không đúng định dạng");
             RuleFor(x => x.NgayGiaNhap)
                 .Must(ngayGiaNhap => ngayGiaNhap == DateTime.MinValue || ngayGiaNhap <= DateTime.Now)
                 .WithMessage("Ngày gia nhập không thể lớn hơn ngày hiện tại"); ;

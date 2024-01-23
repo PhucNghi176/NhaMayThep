@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.GetAll
             var listTrinhDoHocVan = await _trinhDoHocVanRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             if (listTrinhDoHocVan == null || listTrinhDoHocVan.Count == 0)
             {
-                throw new NotFoundException("Không có Trình Độ Học Vấn nào!");
+                throw new NotFoundException("Does Not Have Any TrinhDoHocVan");
             }
             return listTrinhDoHocVan.MapToTrinhDoHocVanDtoList(_mapper);
         }
