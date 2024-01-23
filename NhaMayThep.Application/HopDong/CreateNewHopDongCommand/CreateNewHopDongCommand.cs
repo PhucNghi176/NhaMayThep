@@ -24,6 +24,10 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             PhuCapId = phuCapId;
             GhiChu = ghiChu;
         }
+        public CreateNewHopDongCommand()
+        {
+            
+        }
 
         public string MaSoNhanVien { get; set; }
         public int LoaiHopDongId { get; set; }
