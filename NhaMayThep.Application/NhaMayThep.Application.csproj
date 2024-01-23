@@ -22,4 +22,10 @@
     <ProjectReference Include="..\NhaMapThep.Domain\NhaMapThep.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="HoaDonCongTacNhanVien\Delete\" />
+    <Folder Include="HoaDonCongTacNhanVien\GetAll\" />
+    <Folder Include="HoaDonCongTacNhanVien\Update\" />
+  </ItemGroup>
+
 </Project>

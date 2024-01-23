@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong
 {
@@ -24,7 +19,7 @@ namespace NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong
             List<LoaiHopDongDto> result = new List<LoaiHopDongDto>();
             foreach (var item in list)
             {
-                if(item.NgayXoa != null)
+                if (item.NgayXoa != null)
                     continue;
                 var add = item.MapToLoaiHopDongDto(_mapper);
                 result.Add(add);

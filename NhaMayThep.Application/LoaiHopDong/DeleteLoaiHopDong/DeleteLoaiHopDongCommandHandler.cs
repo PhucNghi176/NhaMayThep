@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
 {
@@ -32,6 +27,6 @@ namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
             else
                 msg = "Xóa thất bại";
             return msg;
-        } 
+        }
     }
 }

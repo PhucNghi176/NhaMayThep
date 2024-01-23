@@ -2,17 +2,12 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 {
     public class UpdateCanCuocCongDanCommandHandler : IRequestHandler<UpdateCanCuocCongDanCommand, string>
     {
-        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
+        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;      
         private readonly ICurrentUserService _currentUserService;
 
         public UpdateCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository, ICurrentUserService currentUserService)

@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinPhuCap.GetPhuCapById
 {
@@ -23,6 +17,7 @@ namespace NhaMayThep.Application.ThongTinPhuCap.GetPhuCapById
         public async Task<PhuCapDto> Handle(GetPhuCapByIdQuery query, CancellationToken cancellationToken)
         {
             var result = await _phuCapRepository.FindAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
+
             if (result == null || result.NgayXoa != null)
                 throw new NotFoundException($"Không tìm thấy phụ cấp với id: {query.ID}");
             return result.MapToPhuCapDto(_mapper);

@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh
 {
@@ -14,6 +9,6 @@ namespace NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh
         {
             TenChucDanh = tenChucDanh;
         }
-        public string TenChucDanh {  get; set; }
+        public string TenChucDanh { get; set; }
     }
 }

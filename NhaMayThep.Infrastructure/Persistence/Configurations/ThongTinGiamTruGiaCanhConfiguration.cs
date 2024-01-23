@@ -8,7 +8,7 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
     {
         public void Configure(EntityTypeBuilder<ThongTinGiamTruGiaCanhEntity> builder)
         {
-           
+
 
         }
     }

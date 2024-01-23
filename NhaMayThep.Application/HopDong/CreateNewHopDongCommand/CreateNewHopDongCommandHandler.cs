@@ -4,11 +4,6 @@ using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
 {
@@ -34,7 +29,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             _currentUserService = currentUserService;
         }
 
-        public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken) 
+        public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken)
         {
             var NhanVien = await _nhanVienRepository.FindAsync(x => x.ID == command.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
             if (NhanVien == null)
@@ -42,6 +37,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             var CapBacLuong = await _capBacLuongRepository.FindAsync(x => x.ID == command.HeSoLuongId && x.NgayXoa == null, cancellationToken);
             if(CapBacLuong == null)
                 throw new NotFoundException($"Cấp bậc lương không hợp lệ {command.HeSoLuongId}");
+
             var ChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhId && x.NgayXoa == null, cancellationToken);
             if (ChucDanh == null)
                 throw new NotFoundException($"Chức danh không hợp lệ {command.ChucDanhId}");
