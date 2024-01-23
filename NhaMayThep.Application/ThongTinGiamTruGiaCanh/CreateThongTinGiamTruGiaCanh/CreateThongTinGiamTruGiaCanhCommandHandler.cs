@@ -49,7 +49,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             }
             var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
                     .FindAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);
-            if (thongtingiamtruCur != null || (thongtingiamtruCur !=null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
+            if (thongtingiamtruCur != null)
             {
                 throw new NotFoundException("Thông tin miễn trừ gia cảnh cho căn cước công dân này đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }

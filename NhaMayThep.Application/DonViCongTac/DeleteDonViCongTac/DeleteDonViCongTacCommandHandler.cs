@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
         }
         public async Task<string> Handle(DeleteDonViCongTacCommand request, CancellationToken cancellationToken)
         {
-            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID, cancellationToken: cancellationToken);
+            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
