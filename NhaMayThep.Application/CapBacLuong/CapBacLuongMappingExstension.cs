@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.CapBacLuong
         public static CapbacLuongDto MaptoCapBacLuongDto(this CapBacLuongEntity projectFrom, IMapper mapper)
         => mapper.Map<CapbacLuongDto>(projectFrom);
 
-        public static List<ChiTietDangVienDto> MapToChiTietDangVienDtoList(this IEnumerable<ChiTietDangVienEntity> projectFrom, IMapper mapper)
-            => projectFrom.Select(x => x.MapToChiTietDangVienDto(mapper)).ToList();
+        public static List<CapbacLuongDto> MapToCapBacLuongDtoList(this IEnumerable<CapBacLuongEntity> projectFrom, IMapper mapper)
+            => projectFrom.Select(x => x.MaptoCapBacLuongDto(mapper)).ToList();
     }
 }

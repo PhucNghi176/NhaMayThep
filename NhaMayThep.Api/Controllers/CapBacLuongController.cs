@@ -11,11 +11,14 @@ using NhaMayThep.Application.CapBacLuong.UpdateCapBacLuong;
 using NhaMayThep.Application.CapBacLuong;
 using NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien;
 using NhaMayThep.Application.CapBacLuong.DeleteCapBacLuong;
+using NhaMayThep.Application.ChiTietDangVien.GetAllChiTietDangVien;
+using NhaMayThep.Application.CapBacLuong.GetAllCapBacLuong;
 
 namespace NhaMayThep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class CapBacLuongController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -76,6 +79,17 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeleteCapBacLuongCommand(BacLuongId), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("GetAllCapBacLuong")]
+        [ProducesResponseType(typeof(List<ChiTietDangVienDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<List<CapbacLuongDto>>> GetAllCapBacLuong(CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllCapBacLuongQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<CapbacLuongDto>>(result));
         }
     }
 }
