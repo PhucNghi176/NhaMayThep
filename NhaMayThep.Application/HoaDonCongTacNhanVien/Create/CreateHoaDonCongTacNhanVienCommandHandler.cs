@@ -38,7 +38,12 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
                 LichSuCongTacID = request.LichSuCongTacID,
                 LoaiHoaDonID = request.LoaiHoaDonID,
             
-            }; 
+            };
+            var exist = await _hoaDonCongTacNhanVienRepository.AnyAsync(x => x.DuongDanFile == hoaDon.DuongDanFile, cancellationToken);
+            if (exist)
+            {
+                return "Filepath đã tồn tại"; 
+            }
             _hoaDonCongTacNhanVienRepository.Add(hoaDon);
             await _hoaDonCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return "tạo mới thành công";
