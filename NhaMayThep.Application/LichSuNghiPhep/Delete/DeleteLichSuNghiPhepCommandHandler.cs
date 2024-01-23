@@ -31,7 +31,7 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         }
         if(lsnp.NgayXoa != null)
         {
-            throw new InvalidOperationException("This LichSuNghiPhep has been deleted");
+            throw new NotFoundException("This LichSuNghiPhep has been deleted");
         }
 
         lsnp.NguoiXoaID = userId;
