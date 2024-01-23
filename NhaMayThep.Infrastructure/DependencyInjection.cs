@@ -50,11 +50,11 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IThongTinQuaTrinhNhanSuRepository, ThongTinQuaTrinhNhanSuRepository>();
             services.AddTransient<IPhongBanRepository, PhongBanRepository>();
             services.AddTransient<ICapBacLuongRepository, CapBacLuongRepository>();
-            services.AddTransient<IChucDanhRepository, ChucDanhRepository>();
             services.AddTransient<ILoaiHopDongReposity, LoaiHopDongRepository>();
             services.AddTransient<IHopDongRepository, HopDongRepository>();
             services.AddTransient<IPhuCapRepository, ThongTinPhuCapRepository>();
-
+            services.AddTransient<IBaoHiemRepository, BaoHiemRepository>();
+            services.AddTransient<IChucDanhRepository, ChucDanhRepository>();   
             return services;
         }
     }

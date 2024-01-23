@@ -48,7 +48,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         public async Task<ActionResult<string>> RemoveHopDong([FromRoute] string id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteHopDongCommand(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("hop-dong")]
@@ -62,7 +62,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         public async Task<ActionResult<JsonResponse<List<HopDongDto>>>> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllHopDongQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<List<HopDongDto>>(result));
         }
 
         [HttpGet("hop-dong/{id}")]
@@ -76,7 +76,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         public async Task<ActionResult<JsonResponse<HopDongDto>>> GetById([FromRoute] string id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetHopDongByIdQuery(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<HopDongDto>(result));
         }
         [HttpPut("hop-dong/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -93,7 +93,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             if (id != command.Id)
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(result);
+            return Ok(new JsonResponse<HopDongDto>(result));
         }
     }
 }

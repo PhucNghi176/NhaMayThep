@@ -31,8 +31,6 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             }
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;
-            lnp.SoGioNghiPhep = request.SoGioNghiPhep;
-
             _repository.Update(lnp);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
 

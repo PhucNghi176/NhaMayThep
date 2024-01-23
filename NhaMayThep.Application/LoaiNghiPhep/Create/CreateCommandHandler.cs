@@ -39,7 +39,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             {
                 NguoiTaoID = _currentUserService?.UserId,
                 Name = request.Name,
-                SoGioNghiPhep = request.SoGioNghiPhep
+                
             };
             _repository.Add(loaiNghiPhepEntity);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);

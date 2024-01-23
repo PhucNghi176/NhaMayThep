@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
@@ -25,8 +26,8 @@ namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
         public async Task<TinhTrangLamViecDTO> Handle(UpdateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
         {
             var tinhtranglamviec = await _repository.GetTinhTrangLamViecById(request.Id,cancellationToken);
-            if (tinhtranglamviec == null)
-                throw new Exception($"Not found tình trạng làm việc với ID : {request.Id}");
+            if (tinhtranglamviec == null || tinhtranglamviec.NgayXoa != null)
+                throw new NotFoundException($"không tìm thấy tình trạng làm việc với ID : {request.Id} hoặc nó đã bị xóa.");
             tinhtranglamviec.Name = request.Name ?? tinhtranglamviec.Name;
             tinhtranglamviec.NguoiCapNhatID = _currentUserService.UserId;
             tinhtranglamviec.NgayCapNhat = DateTime.UtcNow;

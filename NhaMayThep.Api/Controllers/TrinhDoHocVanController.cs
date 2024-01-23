@@ -7,8 +7,7 @@ using NhaMapThep.Application.TrinhDoHocVan.Commands;
 using NhaMayThep.Application.TrinhDoHocVan.Delete;
 using NhaMayThep.Application.TrinhDoHocVan;
 using System.Net.Mime;
-using System.Threading;
-using System.Threading.Tasks;
+
 using NhaMayThep.Application.TrinhDoHocVan.GetById;
 using NhaMayThep.Application.TrinhDoHocVan.GetAll;
 

@@ -11,17 +11,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
 {
     public class CreateThongTinGiamTruCommandValidator : AbstractValidator<ThongTinGiamTruDTO>
     {
-        private readonly IThongTinGiamTruRepository _repository;
-        private readonly INhanVienRepository _nhanvien;
-        public CreateThongTinGiamTruCommandValidator(INhanVienRepository nhanvien,IThongTinGiamTruRepository repository)
+        
+        public CreateThongTinGiamTruCommandValidator()
         {
-            _nhanvien = nhanvien;
-            _repository = repository ?? throw new ArgumentNullException(nameof(repository));
-            ConfiguireValidationRules();
-        }
-        public void ConfiguireValidationRules()
-        {
-            
         }
     }
 }

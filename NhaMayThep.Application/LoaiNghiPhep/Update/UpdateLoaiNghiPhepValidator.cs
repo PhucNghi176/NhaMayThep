@@ -13,7 +13,6 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
         {
             RuleFor(command => command.Id).GreaterThan(0);
             RuleFor(command => command.Name).NotEmpty().WithMessage("Name is required.");
-            RuleFor(command => command.SoGioNghiPhep).GreaterThanOrEqualTo(0).WithMessage("SoGioNghiPhep Greater than 0");
 
         }
     }

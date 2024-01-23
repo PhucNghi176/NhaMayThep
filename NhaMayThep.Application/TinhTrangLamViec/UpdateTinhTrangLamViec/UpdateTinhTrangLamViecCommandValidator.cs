@@ -12,10 +12,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
     {
         public UpdateTinhTrangLamViecCommandValidator()
         {
-            ConfigureValidationRules();
         }
-        public void ConfigureValidationRules()
-        {
-        }
+        
     }
 }
