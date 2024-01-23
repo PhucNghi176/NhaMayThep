@@ -26,6 +26,19 @@
     <Folder Include="HoaDonCongTacNhanVien\Delete\" />
     <Folder Include="HoaDonCongTacNhanVien\GetAll\" />
     <Folder Include="HoaDonCongTacNhanVien\Update\" />
+    <Folder Include="KhenThuong\Create\" />
+    <Folder Include="KhenThuong\Delete\" />
+    <Folder Include="KhenThuong\GetAll\" />
+    <Folder Include="KhenThuong\Update\" />
+    <Folder Include="KiLuat\Create\" />
+    <Folder Include="KiLuat\Delete\" />
+    <Folder Include="KiLuat\GetAll\" />
+    <Folder Include="KiLuat\Update\" />
+    <Folder Include="LuongSanPham\" />
+    <Folder Include="PhuCap\Create\" />
+    <Folder Include="PhuCap\Delete\" />
+    <Folder Include="PhuCap\GetAll\" />
+    <Folder Include="PhuCap\Update\" />
   </ItemGroup>
 
 </Project>
