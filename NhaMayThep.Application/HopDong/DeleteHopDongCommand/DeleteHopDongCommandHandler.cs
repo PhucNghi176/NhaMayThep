@@ -26,13 +26,13 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
             var status = "";
             var result = await _hopdongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
-                throw new NotFoundException($"Not found Hop dong{command.Id}");
+                throw new NotFoundException($"Không tìm thấy hợp đồng với id: {command.Id}");
             result.NgayXoa = DateTime.Now;
             result.NguoiXoaID = _currentUserService.UserId;
             if (await _hopdongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
-                status = "Remove Successfully";
+                status = "Xóa thành công";
             else 
-                status = "Remove Failed";
+                status = "Xóa thất bại";
             return status;
         }
     }

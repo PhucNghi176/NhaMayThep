@@ -23,16 +23,16 @@ namespace NhaMayThep.Application.ThongTinPhuCap.DeletePhuCap
         }
         public async Task<string> Handle(DeletePhuCapCommand command, CancellationToken cancellationToken)
         {
-            var result = await _phuCapRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var result = await _phuCapRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             var msg = "";
             if (result == null)
-                throw new NotFoundException($"Phu cap with {command.Id} not found");
+                throw new NotFoundException($"Không tìm thấy phụ cấp với id: {command.Id}");
             result.NgayXoa = DateTime.Now;
             result.NguoiXoaID = _currentUserService.UserId;
             if (await _phuCapRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
-                msg = "Remove Successfully";
+                msg = "Xóa thành công";
             else
-                msg = "Remove Failed";
+                msg = "Xóa thất bại";
             return msg;
         } 
     }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu
 {
-    public class CreateNewChucVuCommand : IRequest<int>, ICommand
+    public class CreateNewChucVuCommand : IRequest<string>, ICommand
     {
         public CreateNewChucVuCommand(string tenChucVu)
         {

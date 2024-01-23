@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.HopDong.GetAllHopDongQuery
         }
         public async Task<List<HopDongDto>> Handle(GetAllHopDongQuery query, CancellationToken cancellationToken)
         {
-            var list = await _hopDongRepository.FindAllAsync(cancellationToken);
+            var list = await _hopDongRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             List<HopDongDto> result = new List<HopDongDto>();
             foreach(var item in list)
             {

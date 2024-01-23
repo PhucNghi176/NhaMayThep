@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh
         }
         public async Task<List<ChucDanhDto>> Handle(GetAllChucDanhQuery query, CancellationToken cancellationToken)
         {
-            var list = await _chucDanhRepository.FindAllAsync(cancellationToken);
+            var list = await _chucDanhRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
             List<ChucDanhDto> result = new List<ChucDanhDto>();
             foreach (var item in list)
             {

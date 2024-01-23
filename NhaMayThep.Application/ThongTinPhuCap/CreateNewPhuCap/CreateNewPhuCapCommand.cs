@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinPhuCap.CreateNewPhuCap
 {
-    public class CreateNewPhuCapCommand : IRequest<int>, ICommand
+    public class CreateNewPhuCapCommand : IRequest<string>, ICommand
     {
         public CreateNewPhuCapCommand(string tenPhuCap, double phanTramPhuCap)
         {
