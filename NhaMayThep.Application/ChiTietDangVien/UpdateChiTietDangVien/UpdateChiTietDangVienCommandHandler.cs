@@ -40,16 +40,16 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
             if(chiTietDangVien == null)
                 throw new NotFoundException("Chi Tiet Dang Vien is not found");
 
-            var dangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (dangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
 
-            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
-            chiTietDangVien.ThongTinDangVien = dangVien;
-            chiTietDangVien.DonViCongTac = donViCongTac;
+            chiTietDangVien.DangVienID = request.DangVienID;
+            chiTietDangVien.DonViCongTacID = request.DonViCongTacID;
             chiTietDangVien.ChucVuDang = request.ChucVuDang ;
             chiTietDangVien.TrinhDoChinhTri = request.TrinhDoChinhTri;
 

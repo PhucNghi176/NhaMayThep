@@ -31,14 +31,13 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.NhanVienID + "da ton tai Thong Tin Dang Vien");
 
-            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (nhanVien == null)
                 throw new NotFoundException("Nhan Vien is not found");
 
             var thongTinDangVien = new ThongTinDangVienEntity()
             {
-                NhanVienID =nhanVien.ID,
-                NhanVien = nhanVien,
+                NhanVienID =request.NhanVienID,
                 NgayVaoDang = request.NgayVaoDang,
                 CapDangVien = request.CapDangVien,
                 NguoiTaoID = _currentUserService.UserId,

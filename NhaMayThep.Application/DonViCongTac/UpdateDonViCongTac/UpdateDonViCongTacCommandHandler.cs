@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
             if (donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
-            var checkDuplication = await _donViCongTacRepository.FindAsync(x => x.Name == request.Name && x.NgayXoa == null, cancellationToken);
+            var checkDuplication = await _donViCongTacRepository.AnyAsync(x => x.Name == request.Name && x.NgayXoa == null, cancellationToken);
             if (checkDuplication != null)
                 throw new Exception("Tên đơn vị công tác đã tồn tại");
 

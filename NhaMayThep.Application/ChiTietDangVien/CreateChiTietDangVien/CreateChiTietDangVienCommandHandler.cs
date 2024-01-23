@@ -32,19 +32,19 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
             if (chiTietDangVienCheck != null )
                 throw new Exception("Đã tồn tại Chi Tiết Đảng Viên " + request.DangVienID);
 
-            var dangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (dangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
 
-            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if(donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
 
             var chiTietDangVien = new ChiTietDangVienEntity()
             {
-                ThongTinDangVien = dangVien,
-                DonViCongTac = donViCongTac,
+                DangVienID = request.DangVienID,
+                DonViCongTacID = request.DonViCongTacID,
 
                 ChucVuDang = request.ChucVuDang,
                 TrinhDoChinhTri = request.TrinhDoChinhTri,
