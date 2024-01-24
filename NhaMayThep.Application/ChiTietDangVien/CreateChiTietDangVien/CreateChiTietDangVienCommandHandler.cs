@@ -33,11 +33,11 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
                 throw new Exception("Đã tồn tại Chi Tiết Đảng Viên " + request.DangVienID);
 
             var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (dangVien == null)
+            if (!dangVien)
                 throw new NotFoundException("Dang Vien is not found");
 
             var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if(donViCongTac == null)
+            if(!donViCongTac)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
 
