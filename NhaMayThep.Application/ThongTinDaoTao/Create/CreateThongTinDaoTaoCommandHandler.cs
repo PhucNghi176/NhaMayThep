@@ -20,29 +20,29 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
         private readonly IThongTinDaoTaoRepository _thongTinDaoTaoRepository;
         private readonly ICurrentUserService _currentUserService;
         //private readonly INhanVienRepository _nhanVienRepository;
-        //private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
+        private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
 
-        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository/*, INhanVienRepository nhanVienRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository*/)
+        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository)
         {
             _mapper = mapper;
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
             _currentUserService = currentUserService;
             //_nhanVienRepository = nhanVienRepository;
-            //_trinhDoHocVanRepository = trinhDoHocVanRepository;
+            _trinhDoHocVanRepository = trinhDoHocVanRepository;
         }
 
         public async Task<string> Handle(CreateThongTinDaoTaoCommand request, CancellationToken cancellationToken)
         {
-            //var nhanVien = await _nhanVienRepository.FindByIdAsync(request.NhanVienId, cancellationToken);
-            //if (nhanVien == null)
-            //{
-            //    throw new NotFoundException("NhanVien Does Not Exist");
-            //}
-            //var maTrinhDo = await _trinhDoHocVanRepository.FindByIdAsync(request.MaTrinhDoHocVanId, cancellationToken);
-            //if (maTrinhDo == null)
-            //{
-            //    throw new NotFoundException("TrinhDoHocVan Does Not Exist");
-            //}
+            var trinhDoHocVan = await _trinhDoHocVanRepository.AnyAsync(x => x.ID == request.MaTrinhDoHocVanId && x.NgayXoa == null, cancellationToken);
+            if (!trinhDoHocVan)
+            {
+                return "Thất Bại! MaTrinhDoHocVanID không hợp lệ.";
+            }
+            var existingThongTinDaoTao = await _thongTinDaoTaoRepository.AnyAsync(x => x.NhanVienID == request.NhanVienId && x.NgayXoa == null,  cancellationToken);
+            if (existingThongTinDaoTao)
+            {
+                return "Thất Bại! Nhân viên đã có trình độ đào tạo.";
+            }
 
             var thongTinDaoTao = new ThongTinDaoTaoEntity
             {
