@@ -14,7 +14,7 @@ namespace NhaMayThep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DonViCongTacController : ControllerBase
     {
         private readonly ISender _mediator;

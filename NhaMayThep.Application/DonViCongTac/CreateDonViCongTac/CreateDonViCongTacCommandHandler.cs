@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
         public async Task<int> Handle(CreateDonViCongTacCommand request, CancellationToken cancellationToken)
         {
             var checkDuplication = await _donViCongTacRepository.AnyAsync(x => x.Name == request.Name && x.NgayXoa == null, cancellationToken);
-            if (checkDuplication != null)
+            if (checkDuplication)
                 throw new Exception("Tên đơn vị công tác đã tồn tại");
 
             var donViCongTac = new DonViCongTacEntity()
