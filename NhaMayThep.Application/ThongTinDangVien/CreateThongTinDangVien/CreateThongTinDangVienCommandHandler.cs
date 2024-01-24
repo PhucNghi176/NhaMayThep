@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
                 throw new NotFoundException("Nhan Vien" + request.NhanVienID + "da ton tai Thong Tin Dang Vien");
 
             var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (nhanVien == null)
+            if (!nhanVien)
                 throw new NotFoundException("Nhan Vien is not found");
 
             var thongTinDangVien = new ThongTinDangVienEntity()

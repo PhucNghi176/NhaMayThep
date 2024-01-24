@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
                 throw new NotFoundException("Dang Vien is not found");
 
             var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (nhanVien == null)
+            if (!nhanVien)
                 throw new NotFoundException("Nhan Vien is not found");
 
             thongTinDangVien.NgayVaoDang = request.NgayVaoDang;

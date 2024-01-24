@@ -8,6 +8,6 @@ public class LichSuNghiPhepRepository : RepositoryBase<LichSuNghiPhepNhanVienEnt
 {
     public LichSuNghiPhepRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper) { }
 
-   
+
 
 }
