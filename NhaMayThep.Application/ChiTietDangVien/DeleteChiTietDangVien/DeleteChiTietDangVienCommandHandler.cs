@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
         }
         public async Task<string> Handle(DeleteChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
-            var chiTietDangVien = await _chiTietDangVienRepository.FindAsync(x => x.ID == request.ID, cancellationToken: cancellationToken);
+            var chiTietDangVien = await _chiTietDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (chiTietDangVien == null)
                 throw new NotFoundException("Chi Tiet Dang Vien is not found");
 

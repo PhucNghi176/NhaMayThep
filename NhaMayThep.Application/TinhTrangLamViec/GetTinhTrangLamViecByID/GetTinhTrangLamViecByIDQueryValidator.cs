@@ -12,7 +12,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.GetTinhTrangLamViecByID
         public GetTinhTrangLamViecByIDQueryValidator() 
         {
             RuleFor(x => x.id)
-                .NotNull().WithMessage("Id không được null.");
+                .NotNull().WithMessage("Id không được để trống.");
         }
     }
 }

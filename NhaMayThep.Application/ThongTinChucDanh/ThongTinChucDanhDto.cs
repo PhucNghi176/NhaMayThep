@@ -12,10 +12,12 @@ namespace NhaMayThep.Application.ThongTinChucDanh
         {
             return new ChucDanhDto()
             {
+                Id = id,
                 Name = name
             };
         }
 
+        public int Id { get; set; }
         public string Name { get; set; }
 
         public void Mapping(Profile profile)
