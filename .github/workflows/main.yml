@@ -10,6 +10,7 @@ on:
 #       - main
 jobs:
   build:
+    if: github.ref == 'refs/heads/main'
     runs-on: ubuntu-latest
 
     steps:
@@ -26,6 +27,7 @@ jobs:
           run: docker push ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
           
   deploy:
+     if: github.ref == 'refs/heads/main'
      needs: build
      runs-on: ubuntu-latest
          
