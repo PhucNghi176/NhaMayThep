@@ -25,7 +25,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
             if (existingTrinhDoHocVan != null)
             {
-                return "Đã tồn tại tên này!";
+                return "Đã tồn tại Trình Độ Học Vấn này!";
             }
 
             var trinhDoHocVanEntity = new TrinhDoHocVanEntity
