@@ -25,10 +25,10 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator;
 
-        }   
+        }
 
         [HttpGet]
-        [Route("api/CanCuocCongDan/")]
+        [Route("CanCuocCongDan/")]
         [ProducesResponseType(typeof(JsonResponse<CanCuocCongDanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -41,20 +41,20 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/CanCuocCongDan/")]
+        [Route("CanCuocCongDan/")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> CreateNewCanCuocCongDan(
                        [FromBody] CreateNewCanCuocCongDanCommand command,
                                   CancellationToken cancellationToken = default)
-        { 
+        {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete]
-        [Route("api/CanCuocCongDan/")]
+        [Route("CanCuocCongDan/")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -66,7 +66,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
         [HttpPut]
-        [Route("api/CanCuocCongDan/")]
+        [Route("CanCuocCongDan/")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
