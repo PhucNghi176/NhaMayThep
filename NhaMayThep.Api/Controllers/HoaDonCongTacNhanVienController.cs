@@ -6,6 +6,7 @@ using NhaMayThep.Application.HoaDonCongTacNhanVien;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.Create;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.DowloadFile;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetAll;
+using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdNguoiTao;
 using System.Net.Mime;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
@@ -136,6 +137,19 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllHoaDonCongTacNhanVienQuery(), cancellationToken);
+            //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
+            return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
+        }
+
+        [HttpGet("getByNguoiTao")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetByNguoiTao(string idNguoiTao ,CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetByIdNguoiTaoQuery(idNguoiTao), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
         }
