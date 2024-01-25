@@ -14,7 +14,6 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class ChiTietDangVienController : ControllerBase
@@ -26,7 +25,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("CreateChiTietDangVien")]
+        [HttpPost("chi-tiet-dang-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -42,7 +41,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpGet("GetAllChiTietDangVien")]
+        [HttpGet("chi-tiet-dang-vien")]
         [ProducesResponseType(typeof(List<ChiTietDangVienDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -53,7 +52,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<ChiTietDangVienDto>>(result));
         }
 
-        [HttpPut("UpdateChiTietDangVien")]
+        [HttpPut("chi-tiet-dang-vien")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -68,7 +67,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<ChiTietDangVienDto>(result));
         }
 
-        [HttpDelete("DeleteChiTietDangVien/{id}")]
+        [HttpDelete("chi-tiet-dang-vien/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

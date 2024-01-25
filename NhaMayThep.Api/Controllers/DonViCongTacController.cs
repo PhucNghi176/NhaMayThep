@@ -12,7 +12,6 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class DonViCongTacController : ControllerBase
@@ -24,7 +23,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("CreateDonViCongTac")]
+        [HttpPost("don-vi-cong-tac")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,7 +38,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<int>(result));
         }
 
-        [HttpGet("GetAllDonViCongTac")]
+        [HttpGet("don-vi-cong-tac/getAll")]
         [ProducesResponseType(typeof(List<DonViCongTacDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -50,7 +49,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<DonViCongTacDto>>(result));
         }
 
-        [HttpPut("UpdateDonViCongTac")]
+        [HttpPut("don-vi-cong-tac")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -65,7 +64,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<DonViCongTacDto>(result));
         }
 
-        [HttpDelete("DeleteDonViCongTac/{id}")]
+        [HttpDelete("don-vi-cong-tac/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

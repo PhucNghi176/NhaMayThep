@@ -15,7 +15,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
 {
     [ApiController]
     [Authorize]
-    [Route("/api/")]
+    
     public class BaoHiemController : ControllerBase
     {
         private ISender _mediator;
