@@ -35,7 +35,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             }
             if(entity.NgayXoa != null)
             {
-                throw new InvalidOperationException("This Id is already deleted");
+                throw new NotFoundException("This Id is already deleted");
             }
 
             entity.NguoiXoaID = userId;

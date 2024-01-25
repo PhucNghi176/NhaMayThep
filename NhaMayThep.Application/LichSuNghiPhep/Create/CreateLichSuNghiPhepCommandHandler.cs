@@ -29,11 +29,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
         public async Task<LichSuNghiPhepDto> Handle(CreateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var userId = _currentUserService.UserId;
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("User ID not found.");
-            }
 
             // Validate LoaiNghiPhepID
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
@@ -50,20 +45,20 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             }
 
             // Validate NguoiDuyet
-            var nhanvien2 = await _hanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
-            if (nhanvien2 == null || nhanvien2.NgayXoa != null)
+            var nhanvien2 = await _hanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
+            if (nhanvien2 == null)
             {
                 throw new NotFoundException("Nguoi Duyet does not exist or has been deleted.");
             }
 
             if (nhanVien.ID == nhanvien2.ID)
             {
-                throw new NotFoundException("Nguoi Duyet cannot be the same as the requesting employee.");
+                throw new InvalidOperationException("Nguoi Duyet cannot be the same as the requesting employee.");
             }
 
             var lsnp = new LichSuNghiPhepNhanVienEntity
             {
-                NguoiTaoID = userId,
+                NguoiTaoID = _currentUserService.UserId,
                 MaSoNhanVien = request.MaSoNhanVien,
                 LoaiNghiPhepID = request.LoaiNghiPhepID,
                 NgayBatDau = request.NgayBatDau,

@@ -33,7 +33,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
         public int LoaiHopDongId { get; set; }
         public DateTime NgayKyHopDong { get; set; }
         public DateTime? NgayKetThucHopDong { get; set; }
-        public int ThoiHanHopDong { get; set; }
+        public int? ThoiHanHopDong { get; set; }
         public string DiaDiemLamViec { get; set; }
         public string BoPhanLamViec { get; set; }
         public int ChucDanhId { get; set; }
