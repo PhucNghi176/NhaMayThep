@@ -43,7 +43,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             }
             if (nhanVien.NgayXoa != null)
             {
-                throw new InvalidOperationException("Cannot create ChiTietNgayNghiPhep as the NhanVien has been marked as deleted.");
+                throw new NotFoundException("Cannot create ChiTietNgayNghiPhep as the NhanVien has been marked as deleted.");
             }
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
             if (!loaiNghiPhepExists)

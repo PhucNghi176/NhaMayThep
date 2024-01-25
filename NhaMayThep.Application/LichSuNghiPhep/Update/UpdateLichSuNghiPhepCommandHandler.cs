@@ -42,14 +42,14 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         var existingNhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
         if (existingNhanVien == null || existingNhanVien.NgayXoa != null)
         {
-            throw new InvalidOperationException("This NhanVien does not exist or has been deleted.");
+            throw new NotFoundException("This NhanVien does not exist or has been deleted.");
         }
 
         // Validation for NguoiDuyet
         var existingNhanVien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
         if (existingNhanVien2 == null || existingNhanVien2.NgayXoa != null)
         {
-            throw new InvalidOperationException("Nguoi Duyet does not exist or has been deleted.");
+            throw new NotFoundException("Nguoi Duyet does not exist or has been deleted.");
         }
 
         // Check if LichSuNghiPhep exists
@@ -65,7 +65,7 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         existingLsnp.NgayBatDau = request.NgayBatDau;
         existingLsnp.NgayKetThuc = request.NgayKetThuc;
         existingLsnp.LyDo = request.LyDo;
-        existingLsnp.NguoiDuyet = request.NguoiDuyet;
+        existingLsnp.NguoiDuyet = request.NguoiDuyet;                        
         existingLsnp.NgayCapNhatCuoi = DateTime.UtcNow;
 
         _repo.Update(existingLsnp);

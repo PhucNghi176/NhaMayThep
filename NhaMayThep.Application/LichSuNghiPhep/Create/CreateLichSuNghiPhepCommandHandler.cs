@@ -58,7 +58,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
             if (nhanVien.ID == nhanvien2.ID)
             {
-                throw new InvalidOperationException("Nguoi Duyet cannot be the same as the requesting employee.");
+                throw new NotFoundException("Nguoi Duyet cannot be the same as the requesting employee.");
             }
 
             var lsnp = new LichSuNghiPhepNhanVienEntity
