@@ -77,7 +77,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
             var result = await _mediator.Send(new GetPhuCapByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<PhuCapDto>(result));
         }
-        [HttpPut("phu-cap/{id}")]
+        [HttpPut("phu-cap")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PhuCapDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<PhuCapDto>), StatusCodes.Status200OK)]
@@ -85,12 +85,8 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PhuCapDto>>> UpdateHopDong([FromRoute] int id, [FromBody] UpdatePhuCapCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PhuCapDto>>> UpdateHopDong([FromBody] UpdatePhuCapCommand command, CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<PhuCapDto>(result));
         }
