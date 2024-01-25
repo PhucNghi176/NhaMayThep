@@ -35,6 +35,7 @@ namespace NhaMayThep.Api
             {
                 options.AddPolicy("CorsPolicy",
                 builder => builder.AllowAnyOrigin()
+                .WithOrigins("http://localhost:3000")
                 .AllowAnyMethod()
                 .AllowAnyHeader()
                 .AllowCredentials());
