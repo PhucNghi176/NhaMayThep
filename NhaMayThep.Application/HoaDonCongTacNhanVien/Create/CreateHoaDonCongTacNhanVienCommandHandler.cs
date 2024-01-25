@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
 {
@@ -11,13 +12,16 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
         private readonly ILoaiHoaDonRepository _loaiHoaDonRepository;
         private readonly IHoaDonCongTacNhanVienRepository _hoaDonCongTacNhanVienRepository;
+        private readonly ICurrentUserService _currentUserService;
 
         public CreateHoaDonCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, 
-            ILoaiHoaDonRepository loaiHoaDonRepository, IHoaDonCongTacNhanVienRepository hoaDonCongTacNhanVienRepository)
+            ILoaiHoaDonRepository loaiHoaDonRepository, IHoaDonCongTacNhanVienRepository hoaDonCongTacNhanVienRepository,
+            ICurrentUserService currentUserService)
         {
             _lichSuCongTacNhanVienRepository = lichSuCongTacNhanVienRepository;
             _loaiHoaDonRepository = loaiHoaDonRepository;
             _hoaDonCongTacNhanVienRepository = hoaDonCongTacNhanVienRepository;
+            _currentUserService = currentUserService;
         }
 
         public async Task<string> Handle(CreateHoaDonCongTacNhanVienCommand request, CancellationToken cancellationToken)
@@ -33,11 +37,10 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
                 throw new NotFoundException("Loại Hóa Đơn không tồn tại");
             }
             var hoaDon = new HoaDonCongTacNhanVienEntity() {
-
-                DuongDanFile = await WriteFile(request.formFile,request.NameForFile,loaihoadon.Name),
                 LichSuCongTacID = request.LichSuCongTacID,
                 LoaiHoaDonID = request.LoaiHoaDonID,
-            
+                NguoiTaoID = _currentUserService.UserId,
+                DuongDanFile = await WriteFile(request.formFile, request.NameForFile, loaihoadon.Name),
             };
             var exist = await _hoaDonCongTacNhanVienRepository.AnyAsync(x => x.DuongDanFile == hoaDon.DuongDanFile, cancellationToken);
             if (exist)
