@@ -79,7 +79,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
             var result = await _mediator.Send(new GetChucVuByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<ChucVuDto>(result));
         }
-        [HttpPut("chuc-vu/{id}")]
+        [HttpPut("chuc-vu")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<ChucVuDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<ChucVuDto>), StatusCodes.Status200OK)]
@@ -87,12 +87,8 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ChucVuDto>>> UpdateHopDong([FromRoute] int id, [FromBody] UpdateChucVuCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<ChucVuDto>>> UpdateHopDong([FromBody] UpdateChucVuCommand command, CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ChucVuDto>(result));
         }

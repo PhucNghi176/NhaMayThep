@@ -79,7 +79,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut("bao-hiem/{id}")]
+        [HttpPut("bao-hiem")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<BaoHiemDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<BaoHiemDto>), StatusCodes.Status200OK)]
@@ -87,12 +87,8 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<BaoHiemDto>> Update([FromRoute] int id,[FromBody] UpdateBaoHiemCommand command,CancellationToken cancellationToken = default)
+        public async Task<ActionResult<BaoHiemDto>> Update([FromBody] UpdateBaoHiemCommand command,CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<BaoHiemDto>(result));
         }

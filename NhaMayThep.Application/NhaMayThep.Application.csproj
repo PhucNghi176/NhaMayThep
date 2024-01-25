@@ -27,7 +27,6 @@
 
   <ItemGroup>
     <Folder Include="HoaDonCongTacNhanVien\Delete\" />
-    <Folder Include="HoaDonCongTacNhanVien\GetAll\" />
     <Folder Include="HoaDonCongTacNhanVien\Update\" />
   </ItemGroup>
 
