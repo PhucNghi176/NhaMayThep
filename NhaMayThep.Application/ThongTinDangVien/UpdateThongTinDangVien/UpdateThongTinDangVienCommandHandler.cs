@@ -31,11 +31,11 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         {
             
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienId && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Dang Vien is not found");
 
-            var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienId && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!nhanVien)
                 throw new NotFoundException("Nhan Vien is not found");
 

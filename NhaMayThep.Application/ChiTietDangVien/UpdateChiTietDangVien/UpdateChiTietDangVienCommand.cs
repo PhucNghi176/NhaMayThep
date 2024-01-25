@@ -10,16 +10,20 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
 {
     public class UpdateChiTietDangVienCommand : IRequest<ChiTietDangVienDto>, ICommand
     {
-        public UpdateChiTietDangVienCommand(string nhanVienId, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri )
+        public UpdateChiTietDangVienCommand(string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri )
         {
-            NhanVienID = nhanVienId;
             DangVienID = dangVienId;
             DonViCongTacID = donViCongTacId;
             ChucVuDang = chucVuDang;
             TrinhDoChinhTri = trinhDoChinhTri;
         }
+        public void RouteNhanVienID(string value)
+        {
+            NhanVienID = value;
+        }
 
-        public string NhanVienID { get; set; }
+        public string NhanVienId { get { return NhanVienID; } }
+        private string NhanVienID;
         public string DangVienID { get; set; } //ThongTinDangVien
         public int DonViCongTacID { get; set; }
 

@@ -5,19 +5,25 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 {
     public class UpdateThongTinDangVienCommand : IRequest<ThongTinDangVienDto>, ICommand
     {
-        public UpdateThongTinDangVienCommand(string nhanVienId, DateTime ngayVaoDang, string capDangVien )
+        public UpdateThongTinDangVienCommand(DateTime ngayVaoDang, string capDangVien )
         {
-            NhanVienID = nhanVienId;
             NgayVaoDang = ngayVaoDang;
             CapDangVien = capDangVien;
         }
 
-        public string NhanVienID { get; set; }
+        public void RouteNhanVienID(string value)
+        {
+            NhanVienID = value;
+        }
+
+        public string NhanVienId { get { return NhanVienID; } }
+        private string NhanVienID;
 
         public DateTime NgayVaoDang { get; set; }
         public string CapDangVien { get; set; }

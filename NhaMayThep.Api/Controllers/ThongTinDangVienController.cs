@@ -66,16 +66,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateThongTinDangVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.NhanVienID == default)
-            {
-                command.NhanVienID = nhanVienId;
-            }
-
-            if (nhanVienId != command.NhanVienID)
-            {
-                return BadRequest("ID from route and from body are not matched");
-            }
-
+            command.RouteNhanVienID(nhanVienId);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ThongTinDangVienDto>(result));
         }

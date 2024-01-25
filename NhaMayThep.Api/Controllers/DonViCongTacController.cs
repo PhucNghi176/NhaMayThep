@@ -62,15 +62,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateDonViCongTacCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.ID == default)
-            {
-                command.ID = id;
-            }
-
-            if (id != command.ID)
-            {
-                return BadRequest("ID from route and from body are not matched");
-            }
+            command.RouteId(id);
 
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<DonViCongTacDto>(result));
