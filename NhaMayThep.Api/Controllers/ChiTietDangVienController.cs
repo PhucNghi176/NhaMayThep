@@ -53,7 +53,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<ChiTietDangVienDto>>(result));
         }
 
-        [HttpPut("UpdateChiTietDangVien/{nhanVienId}")]
+        [HttpPut("UpdateChiTietDangVien")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -61,20 +61,9 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateChiTietDangVien(
-            [FromRoute] string nhanVienId,
             [FromBody] UpdateChiTietDangVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.NhanVienID == default)
-            {
-                command.NhanVienID = nhanVienId;
-            }
-
-            if (nhanVienId != command.NhanVienID)
-            {
-                return BadRequest("ID from route and from body are not matched");
-            }
-
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ChiTietDangVienDto>(result));
         }

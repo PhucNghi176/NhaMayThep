@@ -50,7 +50,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<DonViCongTacDto>>(result));
         }
 
-        [HttpPut("UpdateDonViCongTac/{id}")]
+        [HttpPut("UpdateDonViCongTac")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -58,20 +58,9 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateDonViCongTac(
-            [FromRoute] int id,
             [FromBody] UpdateDonViCongTacCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.ID == default)
-            {
-                command.ID = id;
-            }
-
-            if (id != command.ID)
-            {
-                return BadRequest("ID from route and from body are not matched");
-            }
-
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<DonViCongTacDto>(result));
         }
