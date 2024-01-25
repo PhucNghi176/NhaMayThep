@@ -54,7 +54,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<ThongTinDangVienDto>>(result));
         }
 
-        [HttpPut("UpdateThongTinDangVien/{nhanVienId}")]
+        [HttpPut("UpdateThongTinDangVien")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -62,11 +62,9 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateThongTinDangVien(
-            [FromRoute] string nhanVienId,
             [FromBody] UpdateThongTinDangVienCommand command,
             CancellationToken cancellationToken = default)
         {
-            command.RouteNhanVienID(nhanVienId);
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ThongTinDangVienDto>(result));
         }

@@ -10,18 +10,12 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
 {
     public class UpdateDonViCongTacCommand : IRequest<DonViCongTacDto>, ICommand
     {
-        public UpdateDonViCongTacCommand( string name )
+        public UpdateDonViCongTacCommand(int id, string name )
         { 
+            ID = id;
             Name = name;
         }
-
-        public void RouteId(int value)
-        {
-            ID = value;
-        }
-
-        public int Id { get { return ID; } }
-        private int ID;
+        public int ID { get; set; }
         public string Name { get; set; }
 
 

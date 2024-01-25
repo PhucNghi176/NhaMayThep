@@ -12,7 +12,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
     {
         public UpdateChiTietDangVienCommandValidator()
         {
-            RuleFor(x => x.NhanVienId)
+            RuleFor(x => x.NhanVienID)
                 .NotEmpty().WithMessage("ID không được để trống.")
                 .MaximumLength(450).WithMessage("ID không vượt quá 450 kí tự.");
 
