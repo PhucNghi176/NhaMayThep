@@ -78,7 +78,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             var result = await _mediator.Send(new GetHopDongByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<HopDongDto>(result));
         }
-        [HttpPut("hop-dong/{id}")]
+        [HttpPut("hop-dong")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<HopDongDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<HopDongDto>), StatusCodes.Status200OK)]
@@ -86,12 +86,8 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<HopDongDto>>> UpdateHopDong([FromRoute] string id, [FromBody] UpdateHopDongCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<HopDongDto>>> UpdateHopDong([FromBody] UpdateHopDongCommand command, CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<HopDongDto>(result));
         }
