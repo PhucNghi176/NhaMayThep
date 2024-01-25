@@ -30,9 +30,9 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
         {
 
 
-            var LuongCongNhat = await _LuongCongNhatRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var LuongCongNhat = await _LuongCongNhatRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (LuongCongNhat == null)
-                throw new NotFoundException("Dang Vien is not found");
+                throw new NotFoundException("Luong Cong Nhat is not found");
 
             var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (nhanVien == null)

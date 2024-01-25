@@ -19,6 +19,8 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
             Luong1Gio = luong1Gio;
             TongLuong = tongLuong;
         }
+
+        public string ID { get; set; }
         public string MaSoNhanVien { get; set; }
         public double SoGioLam { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
