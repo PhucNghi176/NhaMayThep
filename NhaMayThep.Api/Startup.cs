@@ -37,7 +37,7 @@ namespace NhaMayThep.Api
                 builder => builder.AllowAnyOrigin()
                 .AllowAnyMethod()
                 .AllowAnyHeader()
-                .AllowCredentials());
+                );
             });
 
 
