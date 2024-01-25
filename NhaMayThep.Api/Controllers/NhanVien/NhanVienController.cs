@@ -8,6 +8,7 @@ using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
+using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetUser;
 using System.Net.Mime;
 
@@ -80,6 +81,20 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<NhanVienDto>(result));
         }
+        [HttpGet]
+        [Route("api/nhan-vien/get-userID")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> GetUserID(
+                                  [FromQuery] GetNhanVienIDByEmailQuery query,
+                                                                   CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
+        }
+
 
     }
 }
