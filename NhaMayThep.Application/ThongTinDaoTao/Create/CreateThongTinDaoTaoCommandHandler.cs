@@ -19,20 +19,25 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
         private readonly IMapper _mapper;
         private readonly IThongTinDaoTaoRepository _thongTinDaoTaoRepository;
         private readonly ICurrentUserService _currentUserService;
-        //private readonly INhanVienRepository _nhanVienRepository;
+        private readonly INhanVienRepository _nhanVienRepository;
         private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
 
-        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository)
+        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository, INhanVienRepository nhanVienRepository)
         {
             _mapper = mapper;
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
             _currentUserService = currentUserService;
-            //_nhanVienRepository = nhanVienRepository;
+            _nhanVienRepository = nhanVienRepository;
             _trinhDoHocVanRepository = trinhDoHocVanRepository;
         }
 
         public async Task<string> Handle(CreateThongTinDaoTaoCommand request, CancellationToken cancellationToken)
         {
+            var existingNhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienId && x.NgayXoa == null, cancellationToken);
+            if (!existingNhanVien)
+            {
+                return "Thất Bại! Nhân viên ID không tồn tại.";
+            }
             var trinhDoHocVan = await _trinhDoHocVanRepository.AnyAsync(x => x.ID == request.MaTrinhDoHocVanId && x.NgayXoa == null, cancellationToken);
             if (!trinhDoHocVan)
             {
@@ -43,7 +48,6 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
             {
                 return "Thất Bại! Nhân viên đã có trình độ đào tạo.";
             }
-
             var thongTinDaoTao = new ThongTinDaoTaoEntity
             {
                 NhanVienID = request.NhanVienId,
