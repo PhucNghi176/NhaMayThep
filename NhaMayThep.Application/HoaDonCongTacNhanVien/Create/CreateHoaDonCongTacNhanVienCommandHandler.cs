@@ -36,6 +36,11 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
             {
                 throw new NotFoundException("Loại Hóa Đơn không tồn tại");
             }
+            // Kiểm tra loại tệp tin, chỉ chấp nhận PDF
+            if (request.formFile.ContentType != "application/pdf")
+            {
+                throw new NotFoundException("Chỉ chấp nhận tệp tin PDF.");
+            }
             var hoaDon = new HoaDonCongTacNhanVienEntity() {
                 LichSuCongTacID = request.LichSuCongTacID,
                 LoaiHoaDonID = request.LoaiHoaDonID,
