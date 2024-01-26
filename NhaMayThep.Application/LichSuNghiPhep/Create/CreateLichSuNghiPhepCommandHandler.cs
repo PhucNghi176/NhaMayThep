@@ -32,11 +32,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
         public async Task<LichSuNghiPhepDto> Handle(CreateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var userId = _currentUserService.UserId;
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("User ID not found.");
-            }
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
             if (!loaiNghiPhepExists)
             {
@@ -53,10 +48,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             {
                 throw new NotFoundException("Nguoi Duyet does not exist.");
             }
-            if(nhanVien == nhanvien2)
-            {
-                throw new NotFoundException("Nguoi Duyet can not be nguoi nghi");
-            }
             if(nhanVien.NgayXoa != null)
             {
                 throw new NotFoundException("This user has been deleted");
@@ -68,7 +59,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
        
             var lsnp = new LichSuNghiPhepNhanVienEntity
             {
-                NguoiTaoID = _currentUserService?.UserId,
+                NguoiTaoID = _currentUserService.UserId,
                 MaSoNhanVien = request.MaSoNhanVien,
                 LoaiNghiPhepID = request.LoaiNghiPhepID,
                 NgayBatDau = request.NgayBatDau,
