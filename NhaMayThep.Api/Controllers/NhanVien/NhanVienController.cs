@@ -7,6 +7,8 @@ using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
+using NhaMayThep.Application.NhanVien.GetAllNhanVien;
+using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetUser;
@@ -94,6 +96,32 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+        [HttpGet]
+        [Route("api/nhan-vien/get-all")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> GetAll(
+             CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllNhanVienQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<NhanVienDto>>(result));
+        }
+        [HttpGet]
+        [Route("api/nhan-vien/get-all-without-hopdong")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> GetAllNhanVienWithoutHopDong(
+                        CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllNhanVienWithoutHopDongQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<NhanVienDto>>(result));
+        }
+
+
 
 
     }
