@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.GetAllChiTietDangVien
         public async Task<List<ChiTietDangVienDto>> Handle(GetAllChiTietDangVienQuery request, CancellationToken cancellationToken)
         {
 
-            var chiTietDangVienList = await _chiTietDangVienRepository.FindAllAsync(cancellationToken);
+            var chiTietDangVienList = await _chiTietDangVienRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             return chiTietDangVienList.MapToChiTietDangVienDtoList(_mapper);
         }
     }

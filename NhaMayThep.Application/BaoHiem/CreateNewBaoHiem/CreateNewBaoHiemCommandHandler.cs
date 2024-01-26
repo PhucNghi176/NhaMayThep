@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.BaoHiem.CreateNewBaoHiem
             var isExisted = await _baoHiemRepository.AnyAsync(x => x.Name == command.TenLoaiBaoHiem && x.NgayXoa == null, cancellationToken);
             if(isExisted)
             {
-                return $"This {command.TenLoaiBaoHiem} is already existed";
+                return $"Loại bảo hiểm {command.TenLoaiBaoHiem} đã tồn tại";
             }
             var add = new BaoHiemEntity()
             {
@@ -30,9 +30,9 @@ namespace NhaMayThep.Application.BaoHiem.CreateNewBaoHiem
             };
             _baoHiemRepository.Add(add);
             if (await _baoHiemRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
-                return $"Add Successful, Bao hiem id is: {add.ID}";
+                return $"Tạo thành công";
             else
-                return "Add Failed";
+                return "Tạo thất bại";
         }
     }
 }
