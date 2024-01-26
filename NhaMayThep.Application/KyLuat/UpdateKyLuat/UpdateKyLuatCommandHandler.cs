@@ -13,7 +13,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
 {
-    public class UpdateKyLuatCommandHandler : IRequestHandler<UpdateKyLuatCommand, KyLuatDTO>
+    public class UpdateKyLuatCommandHandler : IRequestHandler<UpdateKyLuatCommand, string>
     {
         private readonly IKyLuatRepository _repository;
         private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
         }
 
         public UpdateKyLuatCommandHandler() { }
-        public async Task<KyLuatDTO> Handle(UpdateKyLuatCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateKyLuatCommand request, CancellationToken cancellationToken)
         {
             if(request.MaNhanVien != null)
             {
@@ -51,7 +51,7 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
             kyluat.MaSoNhanVien = request.MaNhanVien ?? kyluat.MaSoNhanVien;
             this._repository.Update(kyluat);
             await this._repository.UnitOfWork.SaveChangesAsync();
-            return kyluat.MapToKyLuatDTO(_mapper);
+            return $"Cập nhật thành công trường hợp kỷ luật với ID : {request.ID}";
         }
     }
 }

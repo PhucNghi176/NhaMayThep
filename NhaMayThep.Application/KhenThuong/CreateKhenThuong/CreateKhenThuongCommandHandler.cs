@@ -13,7 +13,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 
 namespace NhaMayThep.Application.KhenThuong.CreateKhenThuong
 {
-    public class CreateKhenThuongCommandHandler : IRequestHandler<CreateKhenThuongCommand, KhenThuongDTO>
+    public class CreateKhenThuongCommandHandler : IRequestHandler<CreateKhenThuongCommand, string>
     {
         private readonly IKhenThuongRepository _repository;
         private readonly IMapper _mapper;
@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.KhenThuong.CreateKhenThuong
             _currentUserService = currentUserService;
         }
         public CreateKhenThuongCommandHandler() { }
-        public async Task<KhenThuongDTO> Handle(CreateKhenThuongCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateKhenThuongCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
             if (nhanvien == null) 
@@ -48,7 +48,7 @@ namespace NhaMayThep.Application.KhenThuong.CreateKhenThuong
             };
             this._repository.Add(khenthuong);
             await this._repository.UnitOfWork.SaveChangesAsync();
-            return khenthuong.MapToKhenThuongDTO(_mapper);
+            return $"Tạo thành công hạng mục khen thưởng cho nhân viên có ID : {request.MaSoNhanVien}";
         }
     }
 }

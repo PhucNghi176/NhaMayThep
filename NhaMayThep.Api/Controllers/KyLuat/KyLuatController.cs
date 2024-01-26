@@ -22,18 +22,18 @@ namespace NhaMayThep.Api.Controllers.KyLuat
         }
         [HttpPost("KyLuat")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<KyLuatDTO>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<KyLuatDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<KyLuatDTO>>> createKyLuat(
+        public async Task<ActionResult<JsonResponse<string>>> createKyLuat(
             [FromBody] CreateKyLuatCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await this._mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(createKyLuat), new { id = result }, new JsonResponse<KyLuatDTO>(result));
+            return CreatedAtAction(nameof(createKyLuat), new { id = result }, new JsonResponse<string>(result));
         }
         [HttpGet("KyLuat")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -66,17 +66,17 @@ namespace NhaMayThep.Api.Controllers.KyLuat
         }
         [HttpPut("KyLuat")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<KyLuatDTO>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<KyLuatDTO>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        public async Task<ActionResult<JsonResponse<KyLuatDTO>>> updateKyLuat(
+        public async Task<ActionResult<JsonResponse<string>>> updateKyLuat(
             [FromBody] UpdateKyLuatCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await this._mediator.Send(command, cancellationToken);
-            return new JsonResponse<KyLuatDTO>(result);
+            return new JsonResponse<string>(result);
         }
         [HttpDelete("KyLuat")]
         [Produces(MediaTypeNames.Application.Json)]

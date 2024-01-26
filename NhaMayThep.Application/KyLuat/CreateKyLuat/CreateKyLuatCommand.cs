@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.CreateKyLuat
 {
-    public class CreateKyLuatCommand : IRequest<KyLuatDTO>,ICommand
+    public class CreateKyLuatCommand : IRequest<string>,ICommand
     {
         public string MaSoNhanVien { get; set; }
         public int ChinhSachNhanSuID { get; set; }

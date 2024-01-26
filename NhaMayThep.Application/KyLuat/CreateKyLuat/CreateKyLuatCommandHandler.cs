@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.CreateKyLuat
 {
-    public class CreateKyLuatCommandHandler : IRequestHandler<CreateKyLuatCommand, KyLuatDTO>
+    public class CreateKyLuatCommandHandler : IRequestHandler<CreateKyLuatCommand, string>
     {
         private readonly IKyLuatRepository _repository;
         private readonly IMapper _mapper;
@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.KyLuat.CreateKyLuat
         }
 
         public CreateKyLuatCommandHandler() { }
-        public async Task<KyLuatDTO> Handle(CreateKyLuatCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateKyLuatCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaSoNhanVien)&& x.NgayXoa == null, cancellationToken);
             if (nhanvien == null)
@@ -50,7 +50,7 @@ namespace NhaMayThep.Application.KyLuat.CreateKyLuat
             };
             this._repository.Add(kyluat);
             await this._repository.UnitOfWork.SaveChangesAsync();
-            return kyluat.MapToKyLuatDTO(_mapper);
+            return $"Tạo thành công trường hợp kỷ luật cho nhân viên có ID : {request.MaSoNhanVien}";
         }
     }
 }

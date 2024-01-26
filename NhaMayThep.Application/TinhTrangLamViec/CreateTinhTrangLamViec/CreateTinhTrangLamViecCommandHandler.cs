@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
 {
-    public class CreateTinhTrangLamViecCommandHandler : IRequestHandler<CreateTinhTrangLamViecCommand, TinhTrangLamViecDTO>
+    public class CreateTinhTrangLamViecCommandHandler : IRequestHandler<CreateTinhTrangLamViecCommand, string>
     {
         private readonly ITinhTrangLamViecRepository _repository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
             _mapper = mapper;
         }
         public CreateTinhTrangLamViecCommandHandler() { }
-        public async Task<TinhTrangLamViecDTO> Handle(CreateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
         {
             var tinhtranglamviec = new TinhTrangLamViecEntity
             {
@@ -34,7 +34,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
             };
             _repository.Add(tinhtranglamviec);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return tinhtranglamviec.MapToTinhTrangLamViecDTO(_mapper);
+            return "Tạo thành công tình trạng làm việc.";
         }
     }
 }

@@ -12,7 +12,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 
 namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
 {
-    public class UpdateKhenThuongCommandHandler : IRequestHandler<UpdateKhenThuongCommand, KhenThuongDTO>
+    public class UpdateKhenThuongCommandHandler : IRequestHandler<UpdateKhenThuongCommand, string>
     {
         private readonly IKhenThuongRepository _repository;
         private readonly IMapper _mapper;
@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
             _currentUserService = currentUserService;
         }
         public UpdateKhenThuongCommandHandler() { }
-        public async Task<KhenThuongDTO> Handle(UpdateKhenThuongCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateKhenThuongCommand request, CancellationToken cancellationToken)
         {
             if(request.MaSoNhanVien != null)
             {
@@ -51,7 +51,7 @@ namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
             khenthuong.ChinhSachNhanSuID = request.ChinhSachNhanSuID;
             this._repository.Update(khenthuong);
             await this._repository.UnitOfWork.SaveChangesAsync();
-            return khenthuong.MapToKhenThuongDTO(_mapper);
+            return $"Cập nhật thành công hạng mục khen thưởng có ID : {request.ID}";
         }
     }
 }

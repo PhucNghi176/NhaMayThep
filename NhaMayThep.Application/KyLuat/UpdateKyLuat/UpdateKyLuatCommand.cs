@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
 {
-    public class UpdateKyLuatCommand : IRequest<KyLuatDTO>,ICommand
+    public class UpdateKyLuatCommand : IRequest<string>,ICommand
     {
         public string ID {  get; set; }
         public string MaNhanVien {  get; set; }
