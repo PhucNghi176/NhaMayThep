@@ -10,7 +10,6 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     public class LoaiCongTacController : ControllerBase
     {
@@ -21,7 +20,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("create")]
+        [HttpPost("loai-cong-tac")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -36,7 +35,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut("update")]
+        [HttpPut("loai-cong-tac")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -51,24 +50,24 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("delete/{Id}")]
+        [HttpDelete("loai-cong-tac/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<string>> DeleteLoaiCongTac(
-            [FromRoute] int Id,
+            [FromRoute] int id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteLoaiCongTacCommad(id: Id), cancellationToken);
+            var result = await _mediator.Send(new DeleteLoaiCongTacCommad(id), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return Ok(new JsonResponse<string>(result));
         }
 
 
 
-        [HttpGet("getAll")]
+        [HttpGet("loai-cong-tac")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
