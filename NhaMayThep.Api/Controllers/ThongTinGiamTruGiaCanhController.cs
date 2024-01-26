@@ -69,7 +69,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -77,10 +77,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(
-           [FromBody] DeleteThongTinGiamTruGiaCanhCommand command,
+           [FromRoute] string Id,
            CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteThongTinGiamTruGiaCanhCommand(id: Id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
         [HttpGet("getall")]
