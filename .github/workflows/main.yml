@@ -1,13 +1,13 @@
 name: Build and Deploy NhaMayThep
 
-on:
-  pull_request:
-    types:
-      - closed
 # on:
-#   push:
-#     branches:
-#       - main
+#   pull_request:
+#     types:
+#       - closed
+on:
+  push:
+    branches:
+      - main
 jobs:
   build:
     if: github.ref == 'refs/heads/main'
@@ -44,7 +44,7 @@ jobs:
           docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}} || true
           
           docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
-          docker run -d -p 8070:80 --name ${{secrets.DOCKER_IMAGE}}-backend-api ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
+          docker run -d -p 8070:80 --name ${{secrets.DOCKER_IMAGE}}-backend-api -v pdf:/app/uploads ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
           "
          fi
 
