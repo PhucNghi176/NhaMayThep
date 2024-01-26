@@ -12,7 +12,7 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
+    [Route("[controller]")]
     [ApiController]
     public class HoaDonCongTacNhanVienController : ControllerBase
     {
@@ -141,13 +141,13 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
         }
 
-        [HttpGet("getByNguoiTao")]
+        [HttpGet("{idNguoiTao}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> GetByNguoiTao(string idNguoiTao ,CancellationToken cancellationToken = default)
+        public async Task<ActionResult> GetByNguoiTao([FromRoute] string idNguoiTao ,CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetByIdNguoiTaoQuery(idNguoiTao), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
