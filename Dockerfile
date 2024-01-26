@@ -21,5 +21,7 @@ RUN dotnet publish "NhaMayThep.Api.csproj" -c Release -o /app/publish /p:UseAppH
 
 FROM base AS final
 WORKDIR /app
+RUN mkdir -p /app/uploads
+VOLUME /app/uploads
 COPY --from=publish /app/publish .
 ENTRYPOINT ["dotnet", "NhaMayThep.Api.dll"]
