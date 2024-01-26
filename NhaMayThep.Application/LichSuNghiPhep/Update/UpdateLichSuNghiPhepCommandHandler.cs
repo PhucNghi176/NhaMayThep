@@ -29,35 +29,35 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         var userId = _currentUserService.UserId;
         if (string.IsNullOrEmpty(userId))
         {
-            throw new UnauthorizedAccessException("User ID not found.");
+            throw new UnauthorizedAccessException("User ID không tìm thấy .");
         }
 
         // Validation for LoaiNghiPhepID
         var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
         if (!loaiNghiPhepExists)
         {
-            throw new NotFoundException("LoaiNghiPhepId provided does not exist.");
+            throw new NotFoundException("LoaiNghiPhepId không tồn tại .");
         }
 
         // Validation for MaSoNhanVien
         var existingNhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
         if (existingNhanVien == null || existingNhanVien.NgayXoa != null)
         {
-            throw new InvalidOperationException("This NhanVien does not exist or has been deleted.");
+            throw new NotFoundException("This NhanVien không tồn tại hoặc đã xóa.");
         }
 
         // Validation for NguoiDuyet
         var existingNhanVien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
         if (existingNhanVien2 == null || existingNhanVien2.NgayXoa != null)
         {
-            throw new InvalidOperationException("Nguoi Duyet does not exist or has been deleted.");
+            throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã xóa.");
         }
 
         // Check if LichSuNghiPhep exists
         var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (existingLsnp == null || existingLsnp.NgayXoa != null)
         {
-            throw new NotFoundException("LichSuNghiPhep does not exist or has been deleted.");
+            throw new NotFoundException("LichSuNghiPhep không tồn tại hoặc đã xóa.");
         }
 
         // Update properties
@@ -66,7 +66,7 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         existingLsnp.NgayBatDau = request.NgayBatDau;
         existingLsnp.NgayKetThuc = request.NgayKetThuc;
         existingLsnp.LyDo = request.LyDo;
-        existingLsnp.NguoiDuyet = request.NguoiDuyet;
+        existingLsnp.NguoiDuyet = request.NguoiDuyet;                        
         existingLsnp.NgayCapNhatCuoi = DateTime.UtcNow;
 
         _repo.Update(existingLsnp);

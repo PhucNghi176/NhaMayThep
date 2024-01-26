@@ -35,7 +35,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
             await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep created successfully"));
+            return Ok(new JsonResponse<string>("Lich Su Nghi Phep tạo thành công "));
         }
 
         [HttpDelete("lich-su-nghi-phep/{id}")]
@@ -48,7 +48,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
             await _mediator.Send(new DeleteLichSuNghiPhepCommand(id), cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep deleted successfully"));
+            return Ok(new JsonResponse<string>("Lich Su Nghi Phep xóa thành công "));
         }
 
         [HttpPut("lich-su-nghi-phep")]
@@ -59,7 +59,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
             await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep updated successfully"));
+            return Ok(new JsonResponse<string>("Lich Su Nghi Phep cập nhật thành công"));
         }
 
 

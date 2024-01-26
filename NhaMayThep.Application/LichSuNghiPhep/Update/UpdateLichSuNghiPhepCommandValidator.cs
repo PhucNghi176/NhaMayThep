@@ -17,20 +17,20 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Update
         private void ConfigureValidationRules()
         {
             RuleFor(command => command.MaSoNhanVien)
-            .NotEmpty().WithMessage("MaSoNhanVien is required.");
+            .NotEmpty().WithMessage("MaSoNhanVien không để trống.");
 
             RuleFor(command => command.LoaiNghiPhepID)
-                .GreaterThan(0).WithMessage("LoaiNghiPhepID must be greater than 0.");
+                .GreaterThan(0).WithMessage("LoaiNghiPhepID lớn hơn 0.");
 
             RuleFor(command => command.NgayBatDau)
                 .NotEmpty().WithMessage("NgayBatDau is required.")
-                .LessThanOrEqualTo(command => command.NgayKetThuc).WithMessage("NgayBatDau must be less than or equal to NgayKetThuc.");
+                .LessThanOrEqualTo(command => command.NgayKetThuc).WithMessage("NgayBatDau phải bằng hoặc ngang NgayKetThuc.");
 
             RuleFor(command => command.LyDo)
-                .NotEmpty().WithMessage("LyDo is required.");
+                .NotEmpty().WithMessage("LyDo không để trống.");
 
             RuleFor(command => command.NguoiDuyet)
-                .NotEmpty().WithMessage("NguoiDuyet is required.");
+                .NotEmpty().WithMessage("NguoiDuyet không để trống.");
         }
     }
 }
