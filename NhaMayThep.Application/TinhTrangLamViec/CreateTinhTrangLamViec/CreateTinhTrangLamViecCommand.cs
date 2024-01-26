@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
 {
-    public class CreateTinhTrangLamViecCommand : IRequest<TinhTrangLamViecDTO>,ICommand
+    public class CreateTinhTrangLamViecCommand : IRequest<string>,ICommand
     {
         public string Name { get; set; }
         public CreateTinhTrangLamViecCommand() { }

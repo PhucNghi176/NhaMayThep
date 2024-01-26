@@ -31,10 +31,10 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> CreateNewHopDong([FromBody] CreateNewLoaiHopDongCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> CreateNewLoaiHopDong([FromBody] CreateNewLoaiHopDongCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<string>(result));
+            return CreatedAtAction(nameof(CreateNewLoaiHopDong), new { id = result }, new JsonResponse<string>(result));
         }
 
         [HttpDelete("loai-hop-dong/{id}")]
@@ -44,7 +44,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> RemoveLoaiHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteLoaiHopDongCommand(id: id), cancellationToken);
             return  Ok(new JsonResponse<string>(result));
@@ -77,7 +77,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
             var result = await _mediator.Send(new GetLoaiHopDongByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<LoaiHopDongDto>(result));
         }
-        [HttpPut("loai-hop-dong/{id}")]
+        [HttpPut("loai-hop-dong")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<LoaiHopDongDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<LoaiHopDongDto>), StatusCodes.Status200OK)]
@@ -85,12 +85,8 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LoaiHopDongDto>>> UpdateHopDong([FromRoute] int id, [FromBody] UpdateLoaiHopDongCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<LoaiHopDongDto>>> UpdateLoaiHopDong([FromBody] UpdateLoaiHopDongCommand command, CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<LoaiHopDongDto>(result));
         }

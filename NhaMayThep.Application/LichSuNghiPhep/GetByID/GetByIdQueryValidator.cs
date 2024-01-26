@@ -19,8 +19,8 @@ namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
         private void ConfigureValidationRules()
         {
             RuleFor(query => query.Id)
-                .NotEmpty().WithMessage("ID is required.")
-                .NotNull().WithMessage("ID cannot be null.");
+                .NotEmpty().WithMessage("ID không để trống")
+                .NotNull().WithMessage("ID không được rỗng");
         }
 
     }

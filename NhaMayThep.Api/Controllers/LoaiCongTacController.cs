@@ -51,17 +51,17 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<string>> DeleteLoaiCongTac(
-            [FromBody] DeleteLoaiCongTacCommad command,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteLoaiCongTacCommad(id: Id), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return Ok(new JsonResponse<string>(result));
         }

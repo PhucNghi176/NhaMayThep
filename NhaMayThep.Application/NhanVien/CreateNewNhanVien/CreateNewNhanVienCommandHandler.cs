@@ -49,7 +49,8 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
                 SoNguoiPhuThuoc = request.SoNguoiPhuThuoc,
                 SoTaiKhoan = request.SoTaiKhoan,
                 TenNganHang = request.TenNganHang,
-                TinhTrangLamViecID = request.TinhTrangLamViecID
+                TinhTrangLamViecID = request.TinhTrangLamViecID,
+                DaCoHopDong = false
             };
             _repository.Add(nv);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);

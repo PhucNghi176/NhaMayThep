@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new UnauthorizedAccessException("User ID not found.");
+                throw new NotFoundException("User ID not found.");
             }
 
             var loaiNghiPhep = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
@@ -39,7 +39,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
             }
             if (loaiNghiPhep.NgayXoa != null)
             {
-                throw new InvalidOperationException("This id has been deleted");
+                throw new NotFoundException("This id has been deleted");
             }
             // Soft delete: Set NguoiXoaID and NgayXoa
             loaiNghiPhep.NguoiXoaID = userId;

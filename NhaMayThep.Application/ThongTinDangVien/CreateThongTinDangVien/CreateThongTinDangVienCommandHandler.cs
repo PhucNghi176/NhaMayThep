@@ -29,11 +29,11 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
         {
             var checkDuplicatoion = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
-                throw new NotFoundException("Nhan Vien" + request.NhanVienID + "da ton tai Thong Tin Dang Vien");
+                throw new NotFoundException("Nhân Viên " + request.NhanVienID + " đã tồn tại Thông Tin Đảng Viên");
 
             var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!nhanVien)
-                throw new NotFoundException("Nhan Vien is not found");
+                throw new NotFoundException("Không tìm thấy Nhân Viên");
 
             var thongTinDangVien = new ThongTinDangVienEntity()
             {
