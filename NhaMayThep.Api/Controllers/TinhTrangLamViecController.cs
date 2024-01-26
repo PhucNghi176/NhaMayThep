@@ -63,40 +63,30 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<TinhTrangLamViecDTO>(result));
         }
         [HttpPut]
-        [Route("TinhTrangLamViec/{Id}")]
+        [Route("TinhTrangLamViec")]
         [ProducesResponseType(typeof(JsonResponse<TinhTrangLamViecDTO>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<TinhTrangLamViecDTO>> updateTinhTrangLamViec(
-            [FromRoute] int Id,
             [FromBody] UpdateTinhTrangLamViecCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = Id;
-            if (command.Id != Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return CreatedAtAction(nameof(updateTinhTrangLamViec), new { id = result }, new JsonResponse<TinhTrangLamViecDTO>(result));
         }
         [HttpDelete]
-        [Route("TinhTrangLamViec/{Id}")]
+        [Route("TinhTrangLamViec")]
         [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<bool>> deleteTinhTrangLamViec(
-            [FromRoute] int Id,
             [FromBody] DeleteTinhTrangLamViecCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = Id;
-            if (command.Id != Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<bool>(result));
         }
