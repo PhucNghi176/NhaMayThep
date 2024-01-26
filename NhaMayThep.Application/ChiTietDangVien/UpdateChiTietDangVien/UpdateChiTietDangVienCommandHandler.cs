@@ -34,19 +34,19 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
         {
             var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID ==  request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
-                throw new NotFoundException("Nhan Vien chua co Thong Tin Dang Vien");
+                throw new NotFoundException("Nhân Viên chưa có thông tin Đảng Viên");
 
             var chiTietDangVien = await _chiTietDangVienRepository.FindAsync( x => x.DangVienID == thongTinDangVien.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if(chiTietDangVien == null)
-                throw new NotFoundException("Chi Tiet Dang Vien is not found");
+                throw new NotFoundException("Không tìm thấy Chi Tiết Đàng Viên");
 
             var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!dangVien)
-                throw new NotFoundException("Dang Vien is not found");
+                throw new NotFoundException("Không tìm thấy Đảng Viên");
 
             var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!donViCongTac)
-                throw new NotFoundException("Don Vi Cong Tac is not found");
+                throw new NotFoundException("Không tìm thấy Đơn Vị Công Tác");
 
             chiTietDangVien.DangVienID = request.DangVienID; 
             chiTietDangVien.DonViCongTacID = request.DonViCongTacID;
