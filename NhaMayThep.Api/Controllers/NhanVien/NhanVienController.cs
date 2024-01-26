@@ -29,7 +29,7 @@ namespace NhaMayThep.Api.Controllers
             _jwtService = jwtService;
         }
         [HttpPost]
-        [Route("api/nhan-vien")]
+        [Route("nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,7 +43,7 @@ namespace NhaMayThep.Api.Controllers
         }
         [AllowAnonymous]
         [HttpPost]
-        [Route("api/nhan-vien/login")]
+        [Route("nhan-vien/login")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,7 +58,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPost]
-        [Route("api/nhan-vien/doi-mat-khau")]
+        [Route("nhan-vien/doi-mat-khau")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,7 +71,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
         [HttpGet]
-        [Route("api/nhan-vien")]
+        [Route("nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<NhanVienDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -84,7 +84,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<NhanVienDto>(result));
         }
         [HttpGet]
-        [Route("api/nhan-vien/get-userID")]
+        [Route("nhan-vien/get-userID")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -97,7 +97,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
         [HttpGet]
-        [Route("api/nhan-vien/get-all")]
+        [Route("nhan-vien/get-all")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -109,7 +109,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
         }
         [HttpGet]
-        [Route("api/nhan-vien/get-all-without-hopdong")]
+        [Route("nhan-vien/get-all-without-hopdong")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
