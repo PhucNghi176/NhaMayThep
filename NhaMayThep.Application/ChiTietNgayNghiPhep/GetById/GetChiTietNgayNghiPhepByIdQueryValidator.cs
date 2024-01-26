@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
         private void ConfigureValidationRules()
         {
             RuleFor(query => query.Id)
-            .NotEmpty().WithMessage("ID is required to retrieve the detail.");
+            .NotEmpty().WithMessage("ID không để trống.");
         }
     }
 }

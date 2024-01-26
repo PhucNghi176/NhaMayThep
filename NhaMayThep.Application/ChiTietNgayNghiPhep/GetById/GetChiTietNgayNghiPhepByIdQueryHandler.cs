@@ -23,11 +23,11 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
             var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
-                throw new NotFoundException($"Entity with ID {request.Id} not found");
+                throw new NotFoundException($"Entity với ID {request.Id} không tìm thấy");
             }
             if (entity.NgayXoa != null)
             {
-                throw new NotFoundException($"Entity with ID {request.Id} has been deleted");
+                throw new NotFoundException($"Entity với ID {request.Id} đã bị xóa");
             }
 
             return _mapper.Map<ChiTietNgayNghiPhepDto>(entity);
