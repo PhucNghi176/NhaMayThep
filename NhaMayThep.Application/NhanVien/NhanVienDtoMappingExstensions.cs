@@ -10,6 +10,9 @@ namespace NhaMayThep.Application.NhanVien
 
         public static NhanVienDto MapToNhanVienDto(this NhanVienEntity entity, IMapper mapper)
             => mapper.Map<NhanVienDto>(entity);
+
+        public static List<NhanVienDto> MapToNhanVienDtoList(this IEnumerable<NhanVienEntity> entities, IMapper mapper)
+            => entities.Select(x => x.MapToNhanVienDto(mapper)).ToList();
     }
 }
 

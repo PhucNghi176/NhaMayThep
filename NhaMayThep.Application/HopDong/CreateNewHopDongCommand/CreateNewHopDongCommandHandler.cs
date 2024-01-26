@@ -74,6 +74,8 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             };
 
             _hopDongRepository.Add(HopDong);
+            NhanVien.DaCoHopDong = true;
+            _nhanVienRepository.Update(NhanVien);
             await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return HopDong.ID;
         }
