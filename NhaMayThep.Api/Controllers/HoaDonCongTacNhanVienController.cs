@@ -6,7 +6,7 @@ using NhaMayThep.Application.HoaDonCongTacNhanVien;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.Create;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.DowloadFile;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetAll;
-using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiCongTac;
+using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdNguoiTao;
 using System.Net.Mime;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;

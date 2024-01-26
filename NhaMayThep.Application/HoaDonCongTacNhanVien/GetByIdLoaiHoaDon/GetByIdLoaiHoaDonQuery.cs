@@ -6,14 +6,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiCongTac
+namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
 {
-    public class GetByIdLoaiHoaDonQuery : IRequest<List<HoaDonCongTacNhanVienDto>>,IQuery
+    public class GetByIdLoaiHoaDonQuery : IRequest<List<HoaDonCongTacNhanVienDto>>, IQuery
     {
 
         public GetByIdLoaiHoaDonQuery()
         {
-            
+
         }
 
         public GetByIdLoaiHoaDonQuery(int idLoaiHoaDon, string year, int month)

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiCongTac
+namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
 {
     public class GetByIdLoaiHoaDonQueryHandler : IRequestHandler<GetByIdLoaiHoaDonQuery, List<HoaDonCongTacNhanVienDto>>
     {
@@ -32,14 +32,14 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiCongTac
              x.DuongDanFile.Contains($"/{request.year}/{request.month}/"),
              cancellationToken);
 
-            var loaiHoaDon = await _loaiHoaDonRepository.FindAsync(x => x.ID == request.idLoaiHoaDon,cancellationToken);
-            if(loaiHoaDon == null) 
+            var loaiHoaDon = await _loaiHoaDonRepository.FindAsync(x => x.ID == request.idLoaiHoaDon, cancellationToken);
+            if (loaiHoaDon == null)
             {
                 throw new NotFoundException("Loại Công Tác Trên không Tồn Tại");
             }
-            if(list == null || !list.Any())
+            if (list == null || !list.Any())
             {
-                throw new NotFoundException($"Không Tìm Thấy Tệp tin nào Tại Loại Hóa Đon :{loaiHoaDon.Name} vào năm :{request.year}, tháng : {request.month} ");
+                throw new NotFoundException($"Không Tìm Thấy Tệp tin nào Tại Loại Hóa Đon : {loaiHoaDon.Name} vào năm : {request.year}, tháng : {request.month} ");
             }
             return list.MapToHoaDonCongTacNhanVienDtoList(_mapper);
         }

@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiCongTac
+namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
 {
     public class GetByIdLoaiHoaDonQueryvalidator : AbstractValidator<GetByIdLoaiHoaDonQuery>
     {
