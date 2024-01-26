@@ -11,7 +11,7 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("[controller]")]
+    
     [ApiController]
     public class LoaiHoaDonController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("loai-hoa-don")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -38,7 +38,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut]
+        [HttpPut("loai-hoa-don")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -53,7 +53,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("loai-hoa-don/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -70,7 +70,7 @@ namespace NhaMayThep.Api.Controllers
 
 
 
-        [HttpGet]
+        [HttpGet("loai-hoa-don")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

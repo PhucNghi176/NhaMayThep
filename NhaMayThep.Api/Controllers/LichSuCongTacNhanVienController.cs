@@ -11,7 +11,7 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("[controller]")]
+    
     [ApiController]
     public class LichSuCongTacNhanVienController : ControllerBase
     {
@@ -23,7 +23,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpPost]
+        [HttpPost("lich-su-cong-tac-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -38,7 +38,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut]
+        [HttpPut("lich-su-cong-tac-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -53,7 +53,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("{id}")]
+        [HttpDelete("lich-su-cong-tac-nhan-vien/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -71,7 +71,7 @@ namespace NhaMayThep.Api.Controllers
 
 
 
-        [HttpGet]
+        [HttpGet("lich-su-cong-tac-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -85,7 +85,7 @@ namespace NhaMayThep.Api.Controllers
             return (new JsonResponse<List<LichSuCongTacNhanVienDto>>(result));
         }
 
-        [HttpGet("{maSoNhanVienId}")]
+        [HttpGet("lich-su-cong-tac-nhan-vien/{maSoNhanVienId}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
