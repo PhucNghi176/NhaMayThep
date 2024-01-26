@@ -13,7 +13,7 @@ namespace NhaMayThep.Application.KhenThuong.CreateKhenThuong
         {
             RuleFor(x => x.MaSoNhanVien)
                 .NotEmpty().NotNull()
-                .WithMessage("Mã số nnhnaan viên không được để trống.");
+                .WithMessage("Mã số nhân viên không được để trống.");
             RuleFor(x => x.ChinhSachNhanSuID)
                 .NotEmpty().NotNull()
                 .WithMessage("Chính sách nhân sự không được để trống.");
