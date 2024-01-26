@@ -21,8 +21,7 @@ namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
             {
                 throw new NotFoundException("ID: " + request.ID + " không tồn tại");
             }
-            var phongBan = await _phongBanRepository.FindAsync(x => x.ID == request.ID);
-            return phongBan.MapToPhongBanDto(_mapper);
+            return existID.MapToPhongBanDto(_mapper);
         }
     }
 }
