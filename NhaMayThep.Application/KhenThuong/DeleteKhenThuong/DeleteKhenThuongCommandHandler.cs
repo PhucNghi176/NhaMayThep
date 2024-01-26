@@ -12,7 +12,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 
 namespace NhaMayThep.Application.KhenThuong.DeleteKhenThuong
 {
-    public class DeleteKhenThuongCommandHandler : IRequestHandler<DeleteKhenThuongCommand, bool>
+    public class DeleteKhenThuongCommandHandler : IRequestHandler<DeleteKhenThuongCommand, string>
     {
         private readonly IKhenThuongRepository _repository;
         private readonly IMapper _mapper;
@@ -24,16 +24,16 @@ namespace NhaMayThep.Application.KhenThuong.DeleteKhenThuong
             _currentUserService = currentUserService;
         }
         public DeleteKhenThuongCommandHandler() { }
-        public async Task<bool> Handle(DeleteKhenThuongCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteKhenThuongCommand request, CancellationToken cancellationToken)
         {
             var khenthuong = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (khenthuong == null)
-                return false;
+                return $"Không tìm thấy mục khen thưởng với ID : {request.ID} hoặc mục này đã bị xóa.";
             khenthuong.NgayXoa = DateTime.UtcNow;
             khenthuong.NguoiXoaID = this._currentUserService.UserId;
             this._repository.Update(khenthuong);
             await this._repository.UnitOfWork.SaveChangesAsync();
-            return true;
+            return $"Xóa thành công mục khen thưởng với ID : {request.ID}.";
         }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.DeleteKyLuat
 {
-    public class DeleteKyLuatCommand : IRequest<bool>,ICommand
+    public class DeleteKyLuatCommand : IRequest<string>,ICommand
     {
         public string Id {  get; set; }
         public DeleteKyLuatCommand() { }

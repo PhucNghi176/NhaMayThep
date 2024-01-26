@@ -78,17 +78,17 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpDelete]
         [Route("Thong-Tin-Giam-Tru")]
-        [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<bool>> DeleteThongTinGiamTru(
+        public async Task<ActionResult<string>> DeleteThongTinGiamTru(
             [FromBody] DeleteThongTinGiamTruCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command,cancellationToken);
-            return Ok(new JsonResponse<bool>(result));
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }
