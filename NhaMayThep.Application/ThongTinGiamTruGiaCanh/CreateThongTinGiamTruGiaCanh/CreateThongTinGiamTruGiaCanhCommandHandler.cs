@@ -14,18 +14,21 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
         private readonly ICurrentUserService _currentUserService;
+        private readonly IThongTinGiamTruRepository _repository;
         public CreateThongTinGiamTruGiaCanhCommandHandler(
             INhanVienRepository nhanVienRepository,
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             ICanCuocCongDanRepository canCuocCongDanRepository,
-            ICurrentUserService currentUserService)
+            ICurrentUserService currentUserService,
+            IThongTinGiamTruRepository repository)
         {
             _nhanvienRepository = nhanVienRepository;
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
             _canCuocCongDanRepository = canCuocCongDanRepository;
             _currentUserService = currentUserService;
+            _repository = repository;
         }
         public async Task<string> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
@@ -34,6 +37,11 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             if(nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
+            }
+            var magiamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID);
+            if(magiamtru == null || (magiamtru.NguoiXoaID!= null && magiamtru.NgayXoa.HasValue))
+            {
+                throw new NotFoundException("Mã giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var giamtru = await _thongTinGiamTruRepository
                    .FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
@@ -46,6 +54,10 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             if (cccd == null || (cccd.NguoiXoaID != null && cccd.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Căn cước công dân không tồn tại hoặc đã bị vô hiệu hóa");
+            }
+            if (!cccd.NhanVienID.Equals(nhanvien.ID))
+            {
+                throw new NotFoundException("Không đúng số căn cước công dân của nhân viên");
             }
             var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
                     .FindAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);

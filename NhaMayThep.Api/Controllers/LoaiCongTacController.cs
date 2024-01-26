@@ -58,7 +58,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<string>> DeleteLoaiCongTac(
-            [FromRoute] string Id,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteLoaiCongTacCommad(id: Id), cancellationToken);
