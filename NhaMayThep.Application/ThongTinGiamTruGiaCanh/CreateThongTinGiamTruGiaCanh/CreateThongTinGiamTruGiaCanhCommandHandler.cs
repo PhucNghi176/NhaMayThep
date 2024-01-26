@@ -14,21 +14,18 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
         private readonly ICurrentUserService _currentUserService;
-        private readonly IThongTinGiamTruRepository _repository;
         public CreateThongTinGiamTruGiaCanhCommandHandler(
             INhanVienRepository nhanVienRepository,
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             ICanCuocCongDanRepository canCuocCongDanRepository,
-            ICurrentUserService currentUserService,
-            IThongTinGiamTruRepository repository)
+            ICurrentUserService currentUserService)
         {
             _nhanvienRepository = nhanVienRepository;
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
             _canCuocCongDanRepository = canCuocCongDanRepository;
             _currentUserService = currentUserService;
-            _repository = repository;
         }
         public async Task<string> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
