@@ -25,16 +25,16 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 
         [HttpPost("chuc-danh")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<int>>> CreateNewHopDong([FromBody] CreateNewChucDanhCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> CreateNewHopDong([FromBody] CreateNewChucDanhCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<int>(result));
+            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<string>(result));
         }
 
         [HttpDelete("chuc-danh/{id}")]
@@ -77,7 +77,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
             var result = await _mediator.Send(new GetChucDanhByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<ChucDanhDto>(result));
         }
-        [HttpPut("chuc-danh/{id}")]
+        [HttpPut("chuc-danh")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status200OK)]
@@ -85,12 +85,8 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ChucDanhDto>>> UpdateHopDong([FromRoute] int id, [FromBody] UpdateChucDanhCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<ChucDanhDto>>> UpdateHopDong([FromBody] UpdateChucDanhCommand command, CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ChucDanhDto>(result));
         }

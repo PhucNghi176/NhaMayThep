@@ -11,9 +11,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
     {
         public CreateThongTinDangVienCommandValidator()
         {
-            RuleFor(x => x.ID)
-                .NotEmpty().WithMessage("ID không được để trống.")
-                .MaximumLength(450).WithMessage("ID không vượt quá 450 kí tự.");
+
 
             RuleFor(x => x.NhanVienID)
                 .NotEmpty().WithMessage("NhanVienID không được để trống.")

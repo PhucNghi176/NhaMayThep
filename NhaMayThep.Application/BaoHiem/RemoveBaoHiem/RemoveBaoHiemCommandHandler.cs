@@ -23,13 +23,13 @@ namespace NhaMayThep.Application.BaoHiem.RemoveBaoHiem
         {
             var remove = await _baoHiemRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (remove == null)
-                throw new NotFoundException($"Not found Bao hiem with id: {command.Id}");
+                throw new NotFoundException($"Không tìm thấy bảo hiểm với id: {command.Id}");
             remove.NgayXoa = DateTime.Now;
             remove.NguoiXoaID = _currentUserService.UserId;
             if (await _baoHiemRepository.UnitOfWork.SaveChangesAsync() > 0)
-                return "Remove Successfully";
+                return "Xóa thành công";
             else
-                return "Remove Failed";
+                return "Xóa thất bại";
         }
     }
 }
