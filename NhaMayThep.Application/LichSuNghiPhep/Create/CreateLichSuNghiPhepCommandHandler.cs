@@ -29,7 +29,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
         public async Task<LichSuNghiPhepDto> Handle(CreateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
         {
-
             // Validate LoaiNghiPhepID
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
             if (!loaiNghiPhepExists)
@@ -48,6 +47,17 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             var nhanvien2 = await _hanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
             if (nhanvien2 == null)
             {
+                throw new NotFoundException("Nguoi Duyet does not exist.");
+            }
+            if(nhanVien.NgayXoa != null)
+            {
+                throw new NotFoundException("This user has been deleted");
+            }
+            if(nhanvien2.NgayXoa != null)
+            {
+                throw new NotFoundException("This nhanvien has been deleted");
+            }
+       
                 throw new NotFoundException("Nguoi Duyet does not exist or has been deleted.");
             }
 
