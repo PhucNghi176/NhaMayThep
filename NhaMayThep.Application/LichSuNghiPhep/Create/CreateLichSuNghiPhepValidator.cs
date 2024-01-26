@@ -19,25 +19,25 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
         private void ConfigureValidationRules()
         {
             RuleFor(cmd => cmd.MaSoNhanVien)
-            .NotEmpty().WithMessage("Employee ID is required.");
+            .NotEmpty().WithMessage("Employee ID phải điền .");
 
             RuleFor(cmd => cmd.LoaiNghiPhepID)
-                .GreaterThan(0).WithMessage("Leave Type ID must be a valid integer.");
+                .GreaterThan(0).WithMessage("Leave Type ID phải là con số.");
 
             RuleFor(cmd => cmd.NgayBatDau)
-                .NotEmpty().WithMessage("Start Date is required.")
-                .GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage("Start Date cannot be in the past.");
+                .NotEmpty().WithMessage("Start Date không được để trống.")
+                .GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage("Start Date không thể trong quá khứ .");
 
             RuleFor(cmd => cmd.NgayKetThuc)
-                .NotEmpty().WithMessage("End Date is required.")
-                .GreaterThanOrEqualTo(cmd => cmd.NgayBatDau).WithMessage("End Date cannot be before the Start Date.");
+                .NotEmpty().WithMessage("End Date không được để trống.")
+                .GreaterThanOrEqualTo(cmd => cmd.NgayBatDau).WithMessage("End Date không thể trước Start Date.");
 
             RuleFor(cmd => cmd.LyDo)
-                .NotEmpty().WithMessage("Reason is required.")
-                .MaximumLength(500).WithMessage("Reason cannot be more than 500 characters long.");
+                .NotEmpty().WithMessage("Lí do không được để trống .")
+                .MaximumLength(500).WithMessage("Lí do không được quá  500 từ.");
 
             RuleFor(cmd => cmd.NguoiDuyet)
-                .NotEmpty().WithMessage("Approver is required.");
+                .NotEmpty().WithMessage("Người duyệt không được để trống.");
 
         }
 
