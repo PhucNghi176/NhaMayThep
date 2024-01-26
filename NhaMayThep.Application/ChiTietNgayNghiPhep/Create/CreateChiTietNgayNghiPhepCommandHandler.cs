@@ -33,22 +33,22 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new UnauthorizedAccessException("User ID not found.");
+                throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
 
             var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
             if (nhanVien == null)
             {
-                throw new NotFoundException("Nhan Vien does not exist.");
+                throw new NotFoundException("Nhan Vien không tồn tại.");
             }
             if (nhanVien.NgayXoa != null)
             {
-                throw new NotFoundException("Cannot create ChiTietNgayNghiPhep as the NhanVien has been marked as deleted.");
+                throw new NotFoundException("Không thể tạo ChiTietNgayNghiPhep vì NhanVien này đã bị xóa.");
             }
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
             if (!loaiNghiPhepExists)
             {
-                throw new NotFoundException("LoaiNghiPhepId provided does not exist.");
+                throw new NotFoundException("LoaiNghiPhepId không tồn tại.");
             }
             var ctnp = new ChiTietNgayNghiPhepEntity
             {
