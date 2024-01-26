@@ -49,6 +49,11 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             {
                 throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
             }
+            if(nhanVien.NgayXoa != null)
+            {
+                throw new NotFoundException("This user has been deleted");
+            }
+           
 
             var lsnp = new LichSuNghiPhepNhanVienEntity
             {
