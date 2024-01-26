@@ -7,6 +7,7 @@ using NhaMayThep.Application.DonViCongTac;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac;
+using NhaMayThep.Application.DonViCongTac.GetByIDDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac;
 using System.Net.Mime;
 
@@ -47,6 +48,19 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllDonViCongTacQuery(), cancellationToken);
             return Ok(new JsonResponse<List<DonViCongTacDto>>(result));
+        }
+
+        [HttpGet("don-vi-cong-tac/{id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetByIDDonViCongTac([FromRoute] int id, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetByIDDonViCongTacCommand(id), cancellationToken);
+            return Ok(new JsonResponse<DonViCongTacDto>(result));
         }
 
         [HttpPut("don-vi-cong-tac")]

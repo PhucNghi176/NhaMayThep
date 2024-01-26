@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
         {
             var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (donViCongTac == null)
-                throw new NotFoundException("Don Vi Cong Tac is not found");
+                throw new NotFoundException("Không tìm thấy Đơn Vị Công Tác");
 
             donViCongTac.NguoiXoaID = _currentUserService.UserId;
             donViCongTac.NgayXoa = DateTime.Now;
@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
             _donViCongTacRepository.Update(donViCongTac);
             await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Delete Successfully";
+            return "Xóa thành công";
         }
     }
 }
