@@ -8,10 +8,11 @@ using NhaMayThep.Application.LoaiHoaDon.Delete;
 using NhaMayThep.Application.LoaiHoaDon.GetAll;
 using NhaMayThep.Application.LoaiHoaDon.Update;
 using System.Net.Mime;
+using System.Security;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
+    
     [ApiController]
     public class LoaiHoaDonController : ControllerBase
     {
@@ -23,7 +24,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpPost("create")]
+        [HttpPost("loai-hoa-don")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -38,7 +39,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut("update")]
+        [HttpPut("loai-hoa-don")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -53,24 +54,24 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("loai-hoa-don/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DeleteLoaiHoaDon(
-            [FromBody] DeleteLoaiHoaDonCommand command,
+            [FromRoute] int id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteLoaiHoaDonCommand(id), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return Ok(new JsonResponse<string>(result));
         }
 
 
 
-        [HttpGet("getAll")]
+        [HttpGet("loai-hoa-don")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

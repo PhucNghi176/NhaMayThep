@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.HopDong;
+using NhaMayThep.Application.HopDong.CreateHopDongWithExcel;
 using NhaMayThep.Application.HopDong.CreateNewHopDongCommand;
 using NhaMayThep.Application.HopDong.DeleteHopDongCommand;
 using NhaMayThep.Application.HopDong.GetAllHopDongQuery;
@@ -90,6 +91,22 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<HopDongDto>(result));
+        }
+        [HttpPost("hop-dong/file")]
+        [Produces("application/json")]
+        [Consumes("multipart/form-data")]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> ReadFile(IFormFile file, CancellationToken cancellationToken = default)
+        {
+            using (var memoryStream = new MemoryStream())
+            {
+                await file.CopyToAsync(memoryStream);
+                memoryStream.Position = 0;
+                var result = await _mediator.Send(new CreateHopDongWithExcelCommand(memoryStream, file.FileName), cancellationToken);
+                return Ok(new JsonResponse<string>(result));
+            }
         }
     }
 }

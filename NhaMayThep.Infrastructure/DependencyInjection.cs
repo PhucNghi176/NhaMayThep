@@ -18,6 +18,7 @@ namespace NhaMayThep.Infrastructure
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
                 options.UseSqlServer(
+
                     configuration.GetConnectionString("Server"),
                     b =>
                     {
@@ -56,6 +57,9 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IPhuCapRepository, ThongTinPhuCapRepository>();
             services.AddTransient<IBaoHiemRepository, BaoHiemRepository>();
             services.AddTransient<IChucDanhRepository, ChucDanhRepository>();   
+            services.AddTransient<IMucSanPhamRepository, MucSanPhamRepository>();
+            services.AddTransient<IKyLuatRepository, KyLuatRepository>();
+            services.AddTransient<IKhenThuongRepository, KhenThuongRepository>();
             return services;
         }
     }

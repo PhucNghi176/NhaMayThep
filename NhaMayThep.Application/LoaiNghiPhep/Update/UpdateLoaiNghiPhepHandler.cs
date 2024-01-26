@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             }
             if(lnp.NgayXoa != null)
             {
-                throw new InvalidOperationException("This LoaiNghiPhep has been deleted");
+                throw new NotFoundException("This LoaiNghiPhep has been deleted");
             }
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;

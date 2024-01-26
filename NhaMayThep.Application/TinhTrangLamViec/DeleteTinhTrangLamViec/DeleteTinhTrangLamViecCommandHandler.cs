@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
 {
-    public class DeleteTinhTrangLamViecCommandHandler : IRequestHandler<DeleteTinhTrangLamViecCommand, bool>
+    public class DeleteTinhTrangLamViecCommandHandler : IRequestHandler<DeleteTinhTrangLamViecCommand, string>
     {
         private readonly ITinhTrangLamViecRepository _repository;
         private readonly IMapper _mapper;
@@ -22,16 +22,16 @@ namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
             _userservicerepository = userservicerepository;
         }
         public DeleteTinhTrangLamViecCommandHandler() { }
-        public async Task<bool> Handle(DeleteTinhTrangLamViecCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteTinhTrangLamViecCommand request, CancellationToken cancellationToken)
         {
             var tinhtranglamviec = await _repository.FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (tinhtranglamviec == null || tinhtranglamviec.NgayXoa != null)
-                return false;
+                return $"Không tìm thấy tình trạng làm việc với ID : {request.Id} hoặc tình trạng làm việc này đã bị xóa.";
             tinhtranglamviec.NguoiXoaID = _userservicerepository.UserId;
             tinhtranglamviec.NgayXoa = DateTime.UtcNow;
             _repository.Update(tinhtranglamviec);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return true;
+            return $"Xóa thành công tình trạng làm việc với ID :{request.Id}";
         }
     }
 }

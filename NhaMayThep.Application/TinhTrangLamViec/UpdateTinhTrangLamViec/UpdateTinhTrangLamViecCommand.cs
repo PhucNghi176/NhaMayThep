@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
 {
-    public class UpdateTinhTrangLamViecCommand : IRequest<TinhTrangLamViecDTO>
+    public class UpdateTinhTrangLamViecCommand : IRequest<string>
     {
         public int Id { get; set; }
         public string Name { get; set; }

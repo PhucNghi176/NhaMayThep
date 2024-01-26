@@ -17,26 +17,27 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
         {
 
             RuleFor(cmd => cmd.Id)
-            .NotEmpty().WithMessage("ID is required..");
+            .NotEmpty().WithMessage("ID không để trống");
 
             RuleFor(cmd => cmd.LoaiNghiPhepID)
-                .NotNull().WithMessage("Leave type is required.");
+                .NotNull().WithMessage("Leave không để trống.");
 
             RuleFor(cmd => cmd.TongSoGio)
-                .GreaterThan(0).WithMessage("Total hours must be a positive number.");
+                .GreaterThan(0).WithMessage("Tổng số giờ phải là số dương.");
 
             RuleFor(cmd => cmd.SoGioDaNghiPhep)
-                .GreaterThanOrEqualTo(0).WithMessage("Hours already taken cannot be negative.")
-                .LessThanOrEqualTo(cmd => cmd.TongSoGio).WithMessage("Hours already taken cannot exceed total hours.");
+                .GreaterThanOrEqualTo(0).WithMessage("Số giờ đã nghĩ phép không được âm.")
+                .LessThanOrEqualTo(cmd => cmd.TongSoGio).WithMessage("Số giờ đã nghĩ không được lớn hơn tổng số giờ.");
 
             RuleFor(cmd => cmd.SoGioConLai)
-                .GreaterThanOrEqualTo(0).WithMessage("Remaining hours cannot be negative.")
+                .GreaterThanOrEqualTo(0).WithMessage("số giờ còn lại không âm.")
                 .Must((cmd, soGioConLai) => soGioConLai == cmd.TongSoGio - cmd.SoGioDaNghiPhep)
-                .WithMessage("Remaining hours must be equal to the difference between total hours and hours already taken.");
+                .WithMessage("Số giờ còn lại phải bằng hoặc khác tổng số giờ và số giờ nghỉ phép" +
+                ".");
 
             RuleFor(cmd => cmd.NamHieuLuc)
                 .InclusiveBetween(DateTime.Now.Year - 5, DateTime.Now.Year + 5)
-                .WithMessage("Effective year must be within a reasonable range from the current year");
+                .WithMessage("Năm hiệu lực phải trong khoảng hợp lí");
         }
     }
 }

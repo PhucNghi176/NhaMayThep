@@ -23,16 +23,16 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         var userId = _currentUserService.UserId;
         if (string.IsNullOrEmpty(userId))
         {
-            throw new UnauthorizedAccessException("User ID not found.");
+            throw new UnauthorizedAccessException("User ID không tồn tại .");
         }
         var lsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (lsnp == null)
         {
-            throw new NotFoundException($"LichSuNghiPhep with ID {request.Id} not found.");
+            throw new NotFoundException($"LichSuNghiPhep với Id  {request.Id} không tìm thấy .");
         }
         if(lsnp.NgayXoa != null)
         {
-            throw new NotFoundException("This LichSuNghiPhep has been deleted");
+            throw new NotFoundException("LichSuNghiPhep này đã bị xóa ");
         }
 
         lsnp.NguoiXoaID = userId;
