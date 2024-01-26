@@ -23,14 +23,14 @@ namespace NhaMayThep.Application.BaoHiem.UpdateBaoHiem
         {
             var update = await _baoHiemRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (update == null)
-                throw new NotFoundException($"Bao hiem with id: {command.Id} not found");
+                throw new NotFoundException($"Không tìm thấy bảo hiểm với id: {command.Id}");
             update.Name = command.TenLoaiBaoHiem;
             update.PhanTramKhauTru = command.PhanTramKhauTru;
             _baoHiemRepository.Update(update);
             if (await _baoHiemRepository.UnitOfWork.SaveChangesAsync() > 0)
                 return update.MapToBaoHiemDto(_mapper);
             else
-                throw new Exception("Update Failed");
+                throw new Exception("Cập nhật thất bại");
         }
     }
 }

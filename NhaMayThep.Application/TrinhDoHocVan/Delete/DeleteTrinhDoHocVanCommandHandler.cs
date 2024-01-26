@@ -26,14 +26,14 @@ namespace NhaMayThep.Application.TrinhDoHocVan.Delete
             var trinhDoHocVan = await _trinhDoHocVanRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (trinhDoHocVan == null || trinhDoHocVan.NgayXoa != null)
             {
-                return "Fail";
+                return "Xóa Thất Bại!";
             }
             trinhDoHocVan.NgayXoa = DateTime.Now;
             trinhDoHocVan.NguoiXoaID = _currentUserService.UserId;
             _trinhDoHocVanRepository.Update(trinhDoHocVan);
             await _trinhDoHocVanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Success";
+            return "Xóa Thành Công!";
         }
     }
 }

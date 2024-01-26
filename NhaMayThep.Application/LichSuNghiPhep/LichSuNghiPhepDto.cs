@@ -12,6 +12,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep
     public class LichSuNghiPhepDto : IMapFrom<LichSuNghiPhepNhanVienEntity>
     {
         
+        public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
         public int LoaiNghiPhepID { get; set; }
         public DateTime NgayBatDau { get; set; }

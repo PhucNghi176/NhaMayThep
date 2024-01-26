@@ -27,12 +27,12 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
         public async Task<DonViCongTacDto> Handle(UpdateDonViCongTacCommand request, CancellationToken cancellationToken)
         {
 
-            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID);
+            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken);
             if (donViCongTac == null)
                 throw new NotFoundException("Don Vi Cong Tac is not found");
 
-            var checkDuplication = await _donViCongTacRepository.FindAsync(x => x.Name == request.Name, cancellationToken);
-            if (checkDuplication != null)
+            var checkDuplication = await _donViCongTacRepository.AnyAsync(x => x.Name == request.Name && x.NgayXoa == null, cancellationToken);
+            if (checkDuplication)
                 throw new Exception("Tên đơn vị công tác đã tồn tại");
 
             donViCongTac.Name = request.Name;
