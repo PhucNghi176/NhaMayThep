@@ -59,7 +59,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             }
        
                 throw new NotFoundException("Nguoi Duyet does not exist or has been deleted.");
-            }
+            
 
 
             var lsnp = new LichSuNghiPhepNhanVienEntity
