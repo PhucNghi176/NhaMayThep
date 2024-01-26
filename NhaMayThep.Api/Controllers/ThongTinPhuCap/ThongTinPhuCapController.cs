@@ -15,10 +15,10 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
 {
     [ApiController]
     [Authorize]
-    public class PhuCapController : ControllerBase
+    public class ThongTinPhuCapController : ControllerBase
     {
         private readonly ISender _mediator;
-        public PhuCapController(ISender mediator)
+        public ThongTinPhuCapController(ISender mediator)
         {
             _mediator = mediator;
         }
@@ -31,10 +31,10 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> CreateNewHopDong([FromBody] CreateNewPhuCapCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> CreateNewThongTinPhuCap([FromBody] CreateNewPhuCapCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<string>(result));
+            return CreatedAtAction(nameof(CreateNewThongTinPhuCap), new { id = result }, new JsonResponse<string>(result));
         }
 
         [HttpDelete("phu-cap/{id}")]
@@ -44,7 +44,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> RemoveThongTinPhuCap([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeletePhuCapCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
@@ -85,7 +85,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PhuCapDto>>> UpdateHopDong([FromBody] UpdatePhuCapCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PhuCapDto>>> UpdateThongTinPhuCap([FromBody] UpdatePhuCapCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<PhuCapDto>(result));
