@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
 {
-    public class UpdateTinhTrangLamViecCommandHandler : IRequestHandler<UpdateTinhTrangLamViecCommand, TinhTrangLamViecDTO>
+    public class UpdateTinhTrangLamViecCommandHandler : IRequestHandler<UpdateTinhTrangLamViecCommand, string>
     {
         private readonly ITinhTrangLamViecRepository _repository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
             _mapper = mapper;
         }
         public UpdateTinhTrangLamViecCommandHandler() { }
-        public async Task<TinhTrangLamViecDTO> Handle(UpdateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
         {
             var tinhtranglamviec = await _repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
             if (tinhtranglamviec == null)
@@ -33,7 +33,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec
             tinhtranglamviec.NgayCapNhat = DateTime.UtcNow;
             _repository.Update(tinhtranglamviec);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return tinhtranglamviec.MapToTinhTrangLamViecDTO(_mapper);
+            return $"Cập nhật thành công tình trạng làm việc với ID : {request.Id}";
         }
     }
 }
