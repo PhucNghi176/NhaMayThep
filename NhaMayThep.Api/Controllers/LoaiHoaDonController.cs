@@ -8,6 +8,7 @@ using NhaMayThep.Application.LoaiHoaDon.Delete;
 using NhaMayThep.Application.LoaiHoaDon.GetAll;
 using NhaMayThep.Application.LoaiHoaDon.Update;
 using System.Net.Mime;
+using System.Security;
 
 namespace NhaMayThep.Api.Controllers
 {

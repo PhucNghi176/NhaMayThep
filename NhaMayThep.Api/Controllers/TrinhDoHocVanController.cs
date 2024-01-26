@@ -39,7 +39,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -47,10 +47,10 @@ namespace CleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> DeleteTrinhDoHocVan(
-            [FromBody] DeleteTrinhDoHocVanCommand command,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteTrinhDoHocVanCommand(id: Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 
