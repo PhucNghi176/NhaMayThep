@@ -11,17 +11,16 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
     {
         public GetByIdLoaiHoaDonQueryvalidator()
         {
-            RuleFor(command => command.idLoaiHoaDon)
-                .NotEmpty().WithMessage("idLoaiCongTac không được để trống.");
+            RuleFor(query => query.idLoaiHoaDon)
+             .GreaterThanOrEqualTo(0).WithMessage("IdLoaiHoaDon phải là số không âm");
 
-            RuleFor(command => command.year)
-                .NotEmpty().WithMessage("năm không được để trống.")
-                .Must(year => year.Length == 4 && int.TryParse(year, out _)).WithMessage("năm bạn nhập không hợp lệ");
+            RuleFor(query => query.year)
+                .GreaterThanOrEqualTo(0).WithMessage("Năm phải là số không âm")
+                .When(query => query.year < 0);
 
-
-            RuleFor(command => command.month)
-                .NotEmpty().WithMessage("tháng không được để trống.")
-                .Must(month => month >= 1 && month <= 12).WithMessage("tháng phải nằm trong khoảng từ 1 đến 12.");
+            RuleFor(query => query.month)
+                .GreaterThanOrEqualTo(0).WithMessage("Tháng phải là số không âm")
+                .When(query => query.month < 0);
         }
     }
 }

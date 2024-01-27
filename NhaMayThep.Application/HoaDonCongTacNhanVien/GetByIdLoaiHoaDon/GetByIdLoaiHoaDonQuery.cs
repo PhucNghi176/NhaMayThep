@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
 
         }
 
-        public GetByIdLoaiHoaDonQuery(int idLoaiHoaDon, string year, int month)
+        public GetByIdLoaiHoaDonQuery(int idLoaiHoaDon, int year, int month)
         {
             this.idLoaiHoaDon = idLoaiHoaDon;
             this.year = year;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
         }
 
         public int idLoaiHoaDon { get; set; }
-        public string year { get; set; }
+        public int year { get; set; }
         public int month { get; set; }
     }
 }
