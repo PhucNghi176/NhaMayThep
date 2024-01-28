@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.NhanVien;
@@ -12,6 +13,7 @@ using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetUser;
+using NhaMayThep.Application.NhanVien.Test;
 using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
@@ -119,6 +121,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllNhanVienWithoutHopDongQuery(), cancellationToken);
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
+        }
+
+        [HttpGet]
+        [Route("nhan-vien/get-user")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<NhanVienDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<NhanVienDto>>> GetUser(
+                                  [FromQuery] GetNhanVienPaged query,
+                                                                   CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
 
 
