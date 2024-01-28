@@ -12,6 +12,7 @@ using NhaMayThep.Application.NhanVien.GetAllNhanVien;
 using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
+using NhaMayThep.Application.NhanVien.GetNhanVienTest;
 using NhaMayThep.Application.NhanVien.GetUser;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
 using System.Net.Mime;
@@ -150,6 +151,12 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+        [HttpGet("nhan-vien/get-all-test")]
+        [Produces(MediaTypeNames.Application.Json)]
+        public async Task<ActionResult<List<NhanVienDto>>> Test(CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
     }
 }
