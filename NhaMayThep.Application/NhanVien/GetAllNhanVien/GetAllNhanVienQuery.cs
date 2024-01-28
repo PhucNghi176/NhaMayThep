@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -8,11 +9,19 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
 {
-    public class GetAllNhanVienQuery : IRequest<List<NhanVienDto>>,IQuery 
+    public class GetAllNhanVienQuery : IRequest<PagedResult<NhanVienDto>>, IQuery
     {
+        public int PageNumber { get; set; }
+        public int PageSize { get; set; }
+
+        public GetAllNhanVienQuery(int pageNumber, int pageSize)
+        {
+            PageNumber = pageNumber;
+            PageSize = pageSize;
+        }
         public GetAllNhanVienQuery()
         {
-            
+
         }
     }
 }

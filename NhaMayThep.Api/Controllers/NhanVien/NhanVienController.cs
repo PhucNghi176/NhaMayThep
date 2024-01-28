@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NhaMapThep.Api.Controllers.ResponseTypes;
@@ -14,9 +13,8 @@ using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetUser;
-using NhaMayThep.Application.NhanVien.Test;
-using System.Net.Mime;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -88,7 +86,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<NhanVienDto>(result));
         }
         [HttpGet]
-        [Route("nhan-vien/get-userID")]
+        [Route("nhan-vien/get-nhanvienID")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -103,41 +101,30 @@ namespace NhaMayThep.Api.Controllers
         [HttpGet]
         [Route("nhan-vien/get-all")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<JsonResponse<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> GetAll(
+        public async Task<ActionResult<JsonResponse<PageResult>>> GetAll(
+            [FromQuery] GetAllNhanVienQuery query,
              CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetAllNhanVienQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<NhanVienDto>>(result));
-        }
-        [HttpGet]
-        [Route("nhan-vien/get-all-without-hopdong")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> GetAllNhanVienWithoutHopDong(
-                        CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetAllNhanVienWithoutHopDongQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<NhanVienDto>>(result));
-        }
-
-        [HttpGet]
-        [Route("nhan-vien/get-user")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<NhanVienDto>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<NhanVienDto>>> GetUser(
-                                  [FromQuery] GetNhanVienPaged query,
-                                                                   CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
         }
+        [HttpGet]
+        [Route("nhan-vien/get-all-without-hopdong")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<JsonResponse<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> GetAllNhanVienWithoutHopDong([FromQuery] GetAllNhanVienWithoutHopDongQuery query,
+                        CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+
         [HttpDelete("nhan-vien/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
