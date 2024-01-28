@@ -27,7 +27,7 @@ namespace NhaMayThep.Infrastructure
                     });
                 options.UseLazyLoadingProxies();
             });
-            //
+            
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<IThongTinDaoTaoRepository, ThongTinDaoTaoRepository>();

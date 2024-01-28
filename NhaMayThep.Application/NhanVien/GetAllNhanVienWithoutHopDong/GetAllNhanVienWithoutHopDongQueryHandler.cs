@@ -15,25 +15,27 @@ namespace NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly IMapper _mapper;
         private readonly IChucVuRepository _chucVuRepository;
-        private readonly IHopDongRepository _hopDongRepository;
+        private readonly ITinhTrangLamViecRepository _tinhTrangLamViecRepository;
 
-        public GetAllNhanVienWithoutHopDongQueryHandler(INhanVienRepository nhanVienRepository, IMapper mapper, IChucVuRepository chucVuRepository, IHopDongRepository hopDongRepository)
+        public GetAllNhanVienWithoutHopDongQueryHandler(INhanVienRepository nhanVienRepository, IMapper mapper, IChucVuRepository chucVuRepository, ITinhTrangLamViecRepository tinhTrangLamViecRepository)
         {
             _nhanVienRepository = nhanVienRepository;
             _mapper = mapper;
             _chucVuRepository = chucVuRepository;
-            _hopDongRepository = hopDongRepository;
+            _tinhTrangLamViecRepository = tinhTrangLamViecRepository;
         }
 
         public async Task<List<NhanVienDto>> Handle(GetAllNhanVienWithoutHopDongQuery request, CancellationToken cancellationToken)
         {
-            var list = await _nhanVienRepository.FindAllAsync(x => x.NgayXoa == null && x.DaCoHopDong == false, cancellationToken);
+            var list = await _nhanVienRepository.FindAllAsync(_ => _.NgayXoa == null && !_.DaCoHopDong, cancellationToken);
+            var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var returnList = new List<NhanVienDto>();
             foreach (var item in list)
             {
-                var chucVu = await _chucVuRepository.FindAsync(x => x.ID == item.ChucVuID && x.NgayXoa == null, cancellationToken);
                 var nvDto = _mapper.Map<NhanVienDto>(item);
-                nvDto.ChucVu = chucVu.Name;
+                nvDto.ChucVu = chucvu.ContainsKey(item.ChucVuID) ? chucvu[item.ChucVuID] : "Lỗi";
+                nvDto.TinhTrangLamViec = tinhtranglamviec.ContainsKey(item.TinhTrangLamViecID) ? tinhtranglamviec[item.TinhTrangLamViecID] : "Lỗi";
                 returnList.Add(nvDto);
             }
             return returnList;
