@@ -123,7 +123,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
         }
 
-        [HttpDelete("api/nhan-vien/{id}")]
+        [HttpDelete("nhan-vien/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -137,7 +137,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpPut("api/nhan-vien")]
+        [HttpPut("nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]

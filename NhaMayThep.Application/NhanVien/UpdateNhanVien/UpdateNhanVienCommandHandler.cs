@@ -35,7 +35,6 @@ namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
             found.MaSoThue = command.MaSoThue;
             found.TenNganHang = command.TenNganHang;
             found.SoTaiKhoan = command.SoTaiKhoan;
-            found.SoNguoiPhuThuoc = command.SoNguoiPhuThuoc;
             found.NguoiCapNhatID = _currentUserService.UserId;
             found.NgayCapNhatCuoi = DateTime.Now;
             _nhanVienRepository.Update(found);

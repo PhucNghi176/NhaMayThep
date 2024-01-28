@@ -19,7 +19,7 @@ namespace NhaMayThep.Infrastructure
             {
                 options.UseSqlServer(
 
-                    configuration.GetConnectionString("local"),
+                    configuration.GetConnectionString("Sever"),
                     b =>
                     {
                         b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);

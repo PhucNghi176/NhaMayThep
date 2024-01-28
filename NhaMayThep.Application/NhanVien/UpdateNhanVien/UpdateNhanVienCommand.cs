@@ -11,7 +11,7 @@ namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
     public class UpdateNhanVienCommand : IRequest<string>, ICommand
     {
         public UpdateNhanVienCommand() { }
-        public UpdateNhanVienCommand(string id ,string email , string hoVaTen, int chucVuID, int tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChiLienLac, string soDienThoaiLienLac, string maSoThue, string tenNganHang, string soTaiKhoan, int? soNguoiPhuThuoc)
+        public UpdateNhanVienCommand(string id ,string email , string hoVaTen, int chucVuID, int tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChiLienLac, string soDienThoaiLienLac, string maSoThue, string tenNganHang, string soTaiKhoan)
         {
             Id = id;
             Email = email;
@@ -24,7 +24,6 @@ namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
             MaSoThue = maSoThue;
             TenNganHang = tenNganHang;
             SoTaiKhoan = soTaiKhoan;
-            SoNguoiPhuThuoc = soNguoiPhuThuoc;
         }
         public string Id { get; set; }
         public string Email { get; set; }
@@ -37,6 +36,5 @@ namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
         public string MaSoThue { get; set; }
         public string TenNganHang { get; set; }
         public string SoTaiKhoan { get; set; }
-        public int? SoNguoiPhuThuoc { get; set; }
     }
 }
