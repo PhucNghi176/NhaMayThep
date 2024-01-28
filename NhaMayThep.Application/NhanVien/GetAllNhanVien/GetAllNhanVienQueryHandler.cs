@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
 {
-    public class GetAllNhanVienQueryHandler : IRequestHandler<GetAllNhanVienQuery, List<NhanVienDto>>
+    public class GetAllNhanVienQueryHandler : IRequestHandler<GetAllNhanVienQuery, PagedResult<NhanVienDto>>
     {
         private readonly INhanVienRepository _nhanvienRepository;
         private readonly IMapper _mapper;
@@ -25,21 +26,19 @@ namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
             _tinhTrangLamViecRepository = tinhTrangLamViecRepository;
         }
 
-        public async Task<List<NhanVienDto>> Handle(GetAllNhanVienQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<NhanVienDto>> Handle(GetAllNhanVienQuery request, CancellationToken cancellationToken)
         {
 
-            var list = await _nhanvienRepository.FindAllAsync(_ => _.NgayXoa == null, cancellationToken);
+            var list = await _nhanvienRepository.FindAllAsync(_ => _.NgayXoa == null, request.PageNumber, request.PageSize, cancellationToken);
             var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var returnList = new List<NhanVienDto>();
-            foreach (var item in list)
-            {
-                var nvDto = _mapper.Map<NhanVienDto>(item);
-                nvDto.ChucVu = chucvu.ContainsKey(item.ChucVuID) ? chucvu[item.ChucVuID] : "Lỗi";
-                nvDto.TinhTrangLamViec = tinhtranglamviec.ContainsKey(item.TinhTrangLamViecID) ? tinhtranglamviec[item.TinhTrangLamViecID] : "Lỗi";
-                returnList.Add(nvDto);
-            }
-            return returnList;
+            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec);
+
+            return PagedResult<NhanVienDto>.Create(totalCount: list.TotalCount,
+                               pageCount: list.PageCount,
+                                              pageSize: list.PageSize,
+                                                             pageNumber: list.PageNo,
+                                                                            data: returnList);
 
         }
     }
