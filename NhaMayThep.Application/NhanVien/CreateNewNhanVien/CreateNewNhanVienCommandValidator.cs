@@ -17,6 +17,7 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
             RuleFor(x => x.MaSoThue).NotEmpty();
             RuleFor(x => x.TenNganHang).NotEmpty();
             RuleFor(x => x.SoTaiKhoan).NotEmpty();
+
         }
     }
 }
