@@ -76,7 +76,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
                 string filename = $"{userEnteredFileName}_{currentDate}{extension}";
 
                 // Đường dẫn đến thư mục lưu trữ tệp tin
-                string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), $"UploadFile\\File\\{savePlace}\\{currentYear}\\{currentMonth}");
+                string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), $"uploads/{savePlace}/{currentYear}/{currentMonth}");
                 
                 // Kiểm tra xem thư mục lưu trữ có tồn tại hay không, nếu không thì tạo mới
                 if (!Directory.Exists(directoryPath))

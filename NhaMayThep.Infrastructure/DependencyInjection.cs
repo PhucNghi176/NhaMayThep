@@ -27,7 +27,7 @@ namespace NhaMayThep.Infrastructure
                     });
                 options.UseLazyLoadingProxies();
             });
-            //
+            
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<IThongTinDaoTaoRepository, ThongTinDaoTaoRepository>();
@@ -57,6 +57,9 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IPhuCapRepository, ThongTinPhuCapRepository>();
             services.AddTransient<IBaoHiemRepository, BaoHiemRepository>();
             services.AddTransient<IChucDanhRepository, ChucDanhRepository>();   
+            services.AddTransient<IMucSanPhamRepository, MucSanPhamRepository>();
+            services.AddTransient<IKyLuatRepository, KyLuatRepository>();
+            services.AddTransient<IKhenThuongRepository, KhenThuongRepository>();
             return services;
         }
     }

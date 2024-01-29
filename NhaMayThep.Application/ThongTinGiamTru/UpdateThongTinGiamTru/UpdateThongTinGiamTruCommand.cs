@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
-    public class UpdateThongTinGiamTruCommand :IRequest<ThongTinGiamTruDTO>,ICommand
+    public class UpdateThongTinGiamTruCommand :IRequest<string>,ICommand
     {
         public int ID { get; set; }
         public string TenMaGiamTru {  get; set; }

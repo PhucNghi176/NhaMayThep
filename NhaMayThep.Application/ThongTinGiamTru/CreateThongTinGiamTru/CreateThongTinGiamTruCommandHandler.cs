@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
 {
-    public class CreateThongTinGiamTruCommandHandler : IRequestHandler<CreateThongTinGiamTruCommand, ThongTinGiamTruDTO>
+    public class CreateThongTinGiamTruCommandHandler : IRequestHandler<CreateThongTinGiamTruCommand, string>
     {
         private readonly IThongTinGiamTruRepository _repository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
             _mapper = mapper;
         }
         public CreateThongTinGiamTruCommandHandler() { }
-        public async Task<ThongTinGiamTruDTO> Handle(CreateThongTinGiamTruCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateThongTinGiamTruCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = new ThongTinGiamTruEntity
             {
@@ -34,7 +34,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
             };
             _repository.Add(thongtingiamtru);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return thongtingiamtru.MapToThongTinGiamTruDTO(_mapper);
+            return "Tạo thành công thông tim giảm trừ.";
         }
     }
 }
