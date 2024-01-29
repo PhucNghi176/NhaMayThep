@@ -11,17 +11,12 @@ namespace NhaMayThep.Application.HopDong
         public static HopDongDto Create(string id, string NhanVienID, int loaiHopDongId, DateTime ngayKyHopDong, DateTime ngayKetThucHopDong
                                                         , int thoiHanHopDong, string diaDiemLamViec, string boPhanLamViec, int chucDanhId
                                                         , int chucVuId, decimal luongCoBan, int heSoLuongId, string phuCapId
-                                                        , string ghiChu, string loaiHopDong, string tenNhanVien, string chucDanh, string chucVu, string phuCap)
+                                                        , string ghiChu)
         {
             return new HopDongDto()
             {
                 ID = id,
                 NhanVienID = NhanVienID,
-                LoaiHopDong = loaiHopDong,
-                TenNhanVien = tenNhanVien,
-                ChucDanh = chucDanh,
-                ChucVu = chucVu,
-                PhuCap = phuCap,
                 LoaiHopDongId = loaiHopDongId,
                 NgayKy = ngayKyHopDong,
                 NgayKetThuc = ngayKetThucHopDong,
@@ -36,12 +31,7 @@ namespace NhaMayThep.Application.HopDong
                 GhiChu = ghiChu
             };
         }
-        public string LoaiHopDong { get; set; }
-        public string TenNhanVien { get; set; }
-        public string ChucDanh { get; set; }
-        public string ChucVu { get; set; }
-        public string PhuCap { get; set; }
-        //public string HeSoLuong { get; set; }
+
         public string ID { get; set; }
         public string NhanVienID { get; set; }
         public int LoaiHopDongId { get; set; }
@@ -54,7 +44,12 @@ namespace NhaMayThep.Application.HopDong
         public int ChucVuID { get; set; }
         public decimal LuongCoBan { get; set; }
         public int HeSoLuongID { get; set; }
-        public string PhuCapID { get; set; }
+        public string PhuCapID
+        {
+            get;
+
+            set;
+        }
         public string GhiChu { get; set; }
 
         public void Mapping(Profile profile)

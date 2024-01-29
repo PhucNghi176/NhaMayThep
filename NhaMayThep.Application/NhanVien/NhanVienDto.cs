@@ -15,13 +15,13 @@ namespace NhaMayThep.Application.NhanVien
         {
 
         }
-        public NhanVienDto(string iD, string email, string hoTen, string chucVuID, string tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChi, string soDienThoai, string maSoThue, string soTaiKhoan, string tenNganHang, string soNguoiPhuThuoc,string chucVu,string tinhTrangLamViec)
+        public NhanVienDto(string iD, string email, string hoTen, string chucVu, string tinhTrangLamViec, DateTime ngayVaoCongTy, string diaChi, string soDienThoai, string maSoThue, string soTaiKhoan, string tenNganHang, string soNguoiPhuThuoc)
         {
             ID = iD;
             Email = email;
             HoVaTen = hoTen;
-            ChucVuID = chucVuID;
-            TinhTrangLamViecID = tinhTrangLamViecID;
+            ChucVu = chucVu;
+            TinhTrangLamViec = tinhTrangLamViec;
             NgayVaoCongTy = ngayVaoCongTy;
             DiaChiLienLac = diaChi;
             SoDienThoaiLienLac = soDienThoai;
@@ -29,8 +29,6 @@ namespace NhaMayThep.Application.NhanVien
             SoTaiKhoan = soTaiKhoan;
             TenNganHang = tenNganHang;
             SoNguoiPhuThuoc = soNguoiPhuThuoc;
-            ChucVu = chucVu;
-            TinhTrangLamViec = tinhTrangLamViec;
         }
 
         public void Mapping(Profile profile)
@@ -38,14 +36,11 @@ namespace NhaMayThep.Application.NhanVien
             profile.CreateMap<NhanVienEntity, NhanVienDto>();
         }
 
-
-        public string ChucVu {  get; set; }
-        public string TinhTrangLamViec {  get; set; }
         public string ID { get; set; }
         public string Email { get; set; }
         public string HoVaTen { get; set; }
-        public string ChucVuID { get; set; }
-        public string TinhTrangLamViecID { get; set; }
+        public string ChucVu { get; set; }
+        public string TinhTrangLamViec { get; set; }
         public DateTime NgayVaoCongTy { get; set; }
         public string DiaChiLienLac { get; set; }
         public string SoDienThoaiLienLac { get; set; }
