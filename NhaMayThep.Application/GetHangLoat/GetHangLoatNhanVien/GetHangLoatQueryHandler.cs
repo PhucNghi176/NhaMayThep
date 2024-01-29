@@ -1,9 +1,9 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
-namespace NhaMayThep.Application.GetHangLoat
+namespace NhaMayThep.Application.GetHangLoat.GetHangLoatNhanVien
 {
-    public class GetHangLoatQueryHandler : IRequestHandler<GetHangLoatQuery, Dictionary<string, Dictionary<int, string>>>
+    public class GetHangLoatQueryHandler : IRequestHandler<GetHangLoatNhanVienQuery, Dictionary<string, Dictionary<int, string>>>
     {
         private readonly IChucVuRepository _chucVuRepository;
         private readonly ITinhTrangLamViecRepository _tinhTrangLamViecRepository;
@@ -14,7 +14,7 @@ namespace NhaMayThep.Application.GetHangLoat
             _tinhTrangLamViecRepository = tinhTrangLamViecRepository;
         }
 
-        public async Task<Dictionary<string, Dictionary<int, string>>> Handle(GetHangLoatQuery request, CancellationToken cancellationToken)
+        public async Task<Dictionary<string, Dictionary<int, string>>> Handle(GetHangLoatNhanVienQuery request, CancellationToken cancellationToken)
         {
             // find all value in chuc vu and trinh trang lam viec then combine and return
             var chucVu = await _chucVuRepository.FindAllAsync(cancellationToken);
