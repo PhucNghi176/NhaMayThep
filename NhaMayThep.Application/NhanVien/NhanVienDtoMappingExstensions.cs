@@ -16,8 +16,8 @@ namespace NhaMayThep.Application.NhanVien
         public static NhanVienDto MapToNhanVienDto(this NhanVienEntity entity, IMapper mapper, string chucVu, string tinhTrangLamViec)
         {
             var dto = mapper.Map<NhanVienDto>(entity);
-            dto.ChucVuID = chucVu;
-            dto.TinhTrangLamViecID = tinhTrangLamViec;
+            dto.ChucVu = chucVu;
+            dto.TinhTrangLamViec = tinhTrangLamViec;
             return dto;
         }     
         public static List<NhanVienDto> MapToNhanVienDtoList(this IEnumerable<NhanVienEntity> entities, IMapper mapper, Dictionary<int, string> chucVu, Dictionary<int, string> tinhTrangLamViec)

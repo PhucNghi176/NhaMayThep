@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.NhanVien
         {
 
         }
-        public NhanVienDto(string iD, string email, string hoTen, string chucVuID, string tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChi, string soDienThoai, string maSoThue, string soTaiKhoan, string tenNganHang, string soNguoiPhuThuoc)
+        public NhanVienDto(string iD, string email, string hoTen, string chucVuID, string tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChi, string soDienThoai, string maSoThue, string soTaiKhoan, string tenNganHang, string soNguoiPhuThuoc,string chucVu,string tinhTrangLamViec)
         {
             ID = iD;
             Email = email;
@@ -29,6 +29,8 @@ namespace NhaMayThep.Application.NhanVien
             SoTaiKhoan = soTaiKhoan;
             TenNganHang = tenNganHang;
             SoNguoiPhuThuoc = soNguoiPhuThuoc;
+            ChucVu = chucVu;
+            TinhTrangLamViec = tinhTrangLamViec;
         }
 
         public void Mapping(Profile profile)
@@ -36,6 +38,9 @@ namespace NhaMayThep.Application.NhanVien
             profile.CreateMap<NhanVienEntity, NhanVienDto>();
         }
 
+
+        public string ChucVu {  get; set; }
+        public string TinhTrangLamViec {  get; set; }
         public string ID { get; set; }
         public string Email { get; set; }
         public string HoVaTen { get; set; }
