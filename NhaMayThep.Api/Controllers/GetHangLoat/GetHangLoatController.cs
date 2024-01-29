@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMayThep.Application.GetHangLoat;
+using NhaMayThep.Application.GetHangLoat.GetHangLoatHopDong;
+using NhaMayThep.Application.GetHangLoat.GetHangLoatNhanVien;
 
 namespace NhaMayThep.Api.Controllers.GetHangLoat
 {
@@ -19,12 +21,19 @@ namespace NhaMayThep.Api.Controllers.GetHangLoat
 
 
         [HttpGet]
-        [Route("get-hang-loat/nhan-vien")]
+        [Route("hang-loat/nhan-vien")]
         public async Task<IActionResult> GetHangLoat(CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetHangLoatQuery(), cancellationToken);
+            var result = await _mediator.Send(new GetHangLoatNhanVienQuery(), cancellationToken);
             return Ok(result);
         }
 
+        [HttpGet]
+        [Route("hang-loat/hop-dong")]
+        public async Task<IActionResult> GetHangLoatHopDong(CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetHangLoatHopDongQuery(), cancellationToken);
+            return Ok(result);
+        }
     }
 }
