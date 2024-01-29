@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Exceptions;
 using System.Net;
 
@@ -11,10 +12,12 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
     public class CreateNewNhanVienCommandHandler : IRequestHandler<CreateNewNhanVienCommand, string>
     {
         private readonly INhanVienRepository _repository;
+        private readonly IChucVuRepository _chucVuRepository;
 
-        public CreateNewNhanVienCommandHandler(INhanVienRepository repository)
+        public CreateNewNhanVienCommandHandler(INhanVienRepository repository, IChucVuRepository chucVuRepository)
         {
             _repository = repository;
+            _chucVuRepository = chucVuRepository;
         }
 
         public async Task<string> Handle(CreateNewNhanVienCommand request, CancellationToken cancellationToken)
@@ -40,6 +43,12 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
             {
                 throw new DuplicationException("Số tài khoản đã tồn tại");
             }
+            var chucVu = await _chucVuRepository.FindAsync(x => x.ID == request.ChucVuID && x.NgayXoa == null, cancellationToken);
+            if (chucVu == null)
+                throw new NotFoundException("Chức vụ không tồn tại");
+            if (chucVu.Name.ToLower().Equals("admin"))
+                throw new UnauthorizedException("Không thể tạo nhân viên với chức vụ Admin");
+
             var password = _repository.GeneratePassword();
             var nv = new NhanVienEntity
             {
