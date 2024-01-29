@@ -98,15 +98,10 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> ReadFile(IFormFile file, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> ReadFile(IFormFile[] file, CancellationToken cancellationToken = default)
         {
-            using (var memoryStream = new MemoryStream())
-            {
-                await file.CopyToAsync(memoryStream);
-                memoryStream.Position = 0;
-                var result = await _mediator.Send(new CreateHopDongWithExcelCommand(memoryStream, file.FileName), cancellationToken);
-                return Ok(new JsonResponse<string>(result));
-            }
+            var result = await _mediator.Send(new CreateHopDongWithExcelCommand(file), cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }
