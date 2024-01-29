@@ -43,7 +43,7 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
                 Email = request.Email,
                 HoVaTen = request.HoVaTen,
                 MaSoThue = request.MaSoThue,
-                NgayVaoCongTy = request.NgayVaoCongTy,
+                NgayVaoCongTy = request.NgayVaoCongTy.Date,
                 PasswordHash = _repository.HashPassword(password),
                 SoDienThoaiLienLac = request.SoDienThoaiLienLac,
                 SoNguoiPhuThuoc = request.SoNguoiPhuThuoc,
