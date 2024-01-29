@@ -30,9 +30,9 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVienTest
         public async Task<List<NhanVienDto>> Handle(GetNhanVienTestQuery request, CancellationToken cancellationToken)
         {
             var list = await _repository.FindAllAsync(_ => _.NgayXoa == null, cancellationToken);
-            // var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            //  var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var returnList = list.MapToNhanVienDtoList(_mapper/*, chucvu, tinhtranglamviec*/);
+            var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec);
             return returnList;
         }
     }
