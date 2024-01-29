@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using Newtonsoft.Json;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
@@ -25,6 +26,8 @@ namespace NhaMayThep.Application.HopDong.GetAllHopDongQuery
             _loaiHopDongReposity = loaiHopDongReposity;
             this.nhanVienRepository = nhanVienRepository;
         }
+
+
         public async Task<List<HopDongDto>> Handle(GetAllHopDongQuery query, CancellationToken cancellationToken)
         {
             var list = await _hopDongRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
