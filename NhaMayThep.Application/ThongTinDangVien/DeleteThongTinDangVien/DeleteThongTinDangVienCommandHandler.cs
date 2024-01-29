@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
 
             var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null);
             if (thongTinDangVien == null)
-                throw new NotFoundException("Dang Vien is not found");
+                throw new NotFoundException("Không tìm thấy Đảng Viên");
 
             thongTinDangVien.NguoiXoaID = _currentUserService.UserId; 
             thongTinDangVien.NgayXoa = DateTime.Now;
@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
             _thongTinDangVienRepository.Update(thongTinDangVien);
             await _thongTinDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Delete Successfully";
+            return "Xóa thành công";
         }
     }
 }

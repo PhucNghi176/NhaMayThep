@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru
 {
-    public class CreateThongTinGiamTruCommand : IRequest<ThongTinGiamTruDTO>,ICommand
+    public class CreateThongTinGiamTruCommand : IRequest<string>,ICommand
     {
         public string Name { get; set; }
         public decimal SoTienGiamTru { get; set; }

@@ -15,25 +15,25 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
 
         public async Task<string> Handle(CreateNewNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var isExist = await _repository.AnyAsync(x => x.Email == request.Email && x.NgayXoa != null);
+            var isExist = await _repository.AnyAsync(x => x.Email == request.Email && x.NgayXoa == null);
             if (isExist)
             {
-                throw new Exception("Email đã tồn tại");
+                return ("Email đã tồn tại");
             }
-            isExist = await _repository.AnyAsync(x => x.SoDienThoaiLienLac == request.SoDienThoaiLienLac && x.NgayXoa != null);
+            isExist = await _repository.AnyAsync(x => x.SoDienThoaiLienLac == request.SoDienThoaiLienLac && x.NgayXoa == null);
             if (isExist)
             {
-                throw new Exception("Số điện thoại đã tồn tại");
+                return ("Số điện thoại đã tồn tại");
             }
-            isExist = await _repository.AnyAsync(x => x.MaSoThue == request.MaSoThue && x.NgayXoa != null);
+            isExist = await _repository.AnyAsync(x => x.MaSoThue == request.MaSoThue && x.NgayXoa == null);
             if (isExist)
             {
-                throw new Exception("Mã số thuế đã tồn tại");
+                return ("Mã số thuế đã tồn tại");
             }
-            isExist = await _repository.AnyAsync(x => x.SoTaiKhoan == request.SoTaiKhoan && x.NgayXoa != null);
+            isExist = await _repository.AnyAsync(x => x.SoTaiKhoan == request.SoTaiKhoan && x.NgayXoa == null);
             if (isExist)
             {
-                throw new Exception("Số tài khoản đã tồn tại");
+                return ("Số tài khoản đã tồn tại");
             }
             var password = _repository.GeneratePassword();
             var nv = new NhanVienEntity
@@ -43,13 +43,14 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
                 Email = request.Email,
                 HoVaTen = request.HoVaTen,
                 MaSoThue = request.MaSoThue,
-                NgayVaoCongTy = request.NgayVaoCongTy,
+                NgayVaoCongTy = request.NgayVaoCongTy.Date,
                 PasswordHash = _repository.HashPassword(password),
                 SoDienThoaiLienLac = request.SoDienThoaiLienLac,
                 SoNguoiPhuThuoc = request.SoNguoiPhuThuoc,
                 SoTaiKhoan = request.SoTaiKhoan,
                 TenNganHang = request.TenNganHang,
-                TinhTrangLamViecID = request.TinhTrangLamViecID
+                TinhTrangLamViecID = request.TinhTrangLamViecID,
+                DaCoHopDong = false
             };
             _repository.Add(nv);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);

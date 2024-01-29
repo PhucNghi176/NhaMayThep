@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
-    public class UpdateThongTinGiamTruCommandHandler : IRequestHandler<UpdateThongTinGiamTruCommand, ThongTinGiamTruDTO>
+    public class UpdateThongTinGiamTruCommandHandler : IRequestHandler<UpdateThongTinGiamTruCommand, string>
     {
         private readonly IThongTinGiamTruRepository _repository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
             _mapper = mapper;
         }
         public UpdateThongTinGiamTruCommandHandler() { }
-        public async Task<ThongTinGiamTruDTO> Handle(UpdateThongTinGiamTruCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateThongTinGiamTruCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = await _repository.GetThongTinGiamTruById(request.ID, cancellationToken);
             if (thongtingiamtru.NgayXoa != null || thongtingiamtru == null)
@@ -35,7 +35,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
             thongtingiamtru.NgayCapNhat = DateTime.UtcNow;
             _repository.Update(thongtingiamtru);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return thongtingiamtru.MapToThongTinGiamTruDTO(_mapper);
+            return $"Cập nhật thành công thông tin giảm trừ với ID : {request.ID}";
         }
     }
 }

@@ -16,7 +16,6 @@ using NhaMayThep.Application.ChiTietNgayNghiPhep;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     [Produces(MediaTypeNames.Application.Json)]
     public class ChiTietNgayNghiPhepController : ControllerBase
     {
@@ -27,7 +26,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("create")]
+        [HttpPost("chi-tiet-ngay-nghi-phep")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -37,7 +36,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep tạo thành công "));
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("chi-tiet-ngay-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -52,7 +51,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpPut("update")]
+        [HttpPut("chi-tiet-ngay-nghi-phep")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -62,7 +61,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep cập nhật thành công"));
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("chi-tiet-ngay-nghi-phep/getAll")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -75,7 +74,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<List<ChiTietNgayNghiPhepDto>>(result));
         }
-        [HttpGet("getById/{id}")]
+        [HttpGet("chi-tiet-ngay-nghi-phep/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
