@@ -46,6 +46,15 @@ namespace NhaMayThep.Api.Filters
                         .AddContextInformation(context);
                     context.ExceptionHandled = true;
                     break;
+                case UnauthorizedException exception:
+                    context.Result = new UnauthorizedObjectResult(new ProblemDetails
+                    {
+                        Detail = exception.Message
+                    })
+                        .AddContextInformation(context);
+                    context.ExceptionHandled = true;
+                    break;
+
 
             }
         }
@@ -60,7 +69,7 @@ namespace NhaMayThep.Api.Filters
                 return objectResult;
             }
             problemDetails.Extensions.Add("traceId", Activity.Current?.Id ?? context.HttpContext.TraceIdentifier);
-            problemDetails.Type = "https://httpstatuses.io/" + (objectResult.StatusCode ?? problemDetails.Status);
+
             return objectResult;
         }
     }
