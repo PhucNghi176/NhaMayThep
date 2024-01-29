@@ -14,6 +14,8 @@ using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCanh;
 using System.Net.Mime;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.ThongTinCongDoan.GetAll;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -89,11 +91,12 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<ThongTinGiamTruGiaCanhDto>>>> GetAll(
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetAll(
+           [FromQuery] GetAllThongTinGiamTruGiaCanhQuery query,
            CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetAllThongTinGiamTruGiaCanhQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>(result));
         }
         [HttpGet("thong-tin-giam-tru-gia-canh/get-by-id/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -130,11 +133,12 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<ThongTinGiamTruGiaCanhDto>>>> GetAllDeleted(
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetAllDeleted(
+           [FromQuery] GetAllThongTinGiamTruGiaCanhDeletedQuery query,
            CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetAllThongTinGiamTruGiaCanhDeletedQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>(result));
         }
         [HttpGet("thong-tin-giam-tru-gia-canh/get-by-id-deleted/{id}")]
         [Produces(MediaTypeNames.Application.Json)]

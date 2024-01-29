@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
@@ -11,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted
 {
-    public class GetAllThongTinGiamTruGiaCanhDeletedQueryCommand : IRequestHandler<GetAllThongTinGiamTruGiaCanhDeletedQuery, List<ThongTinGiamTruGiaCanhDto>>
+    public class GetAllThongTinGiamTruGiaCanhDeletedQueryCommand : IRequestHandler<GetAllThongTinGiamTruGiaCanhDeletedQuery, PagedResult<ThongTinGiamTruGiaCanhDto>>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IMapper _mapper;
@@ -28,10 +29,11 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
             _nhanVienRepository = nhanVienRepository;
         }
-        public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetAllThongTinGiamTruGiaCanhDeletedQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<ThongTinGiamTruGiaCanhDto>> Handle(GetAllThongTinGiamTruGiaCanhDeletedQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository
                             .FindAllAsync(x => x.NguoiXoaID != null && x.NgayXoa.HasValue,
+                            request.PageNumber, request.PageSize,
                             cancellationToken);
             var thongtingiamtrus = await _thongTinGiamTruRepository
                .FindAllToDictionaryAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
@@ -41,7 +43,13 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin giảm trừ gia cảnh nào bị xóa");
             }
-            return giamtrugiacanhs.MapToThongTinGiamTruGiaCanhDtoList(_mapper, nhanviens, thongtingiamtrus);
+            var resultList= giamtrugiacanhs.MapToThongTinGiamTruGiaCanhDtoList(_mapper, nhanviens, thongtingiamtrus);
+            return PagedResult<ThongTinGiamTruGiaCanhDto>.Create(
+              totalCount: giamtrugiacanhs.TotalCount,
+              pageCount: giamtrugiacanhs.PageCount,
+              pageSize: giamtrugiacanhs.PageSize,
+              pageNumber: giamtrugiacanhs.PageNo,
+              data: resultList);
         }
     }
 }
