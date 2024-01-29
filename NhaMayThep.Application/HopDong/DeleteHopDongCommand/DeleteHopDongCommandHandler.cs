@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
         public async Task<string> Handle(DeleteHopDongCommand command, CancellationToken cancellationToken)
         {
             var status = "";
-            var result = await _hopdongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _hopdongRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy hợp đồng với id: {command.Id}");
             result.NgayXoa = DateTime.Now;

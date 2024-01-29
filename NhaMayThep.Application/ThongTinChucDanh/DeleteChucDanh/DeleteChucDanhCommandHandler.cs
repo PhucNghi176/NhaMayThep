@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh
         }
         public async Task<string> Handle(DeleteChucDanhCommand command, CancellationToken cancellationToken)
         {
-            var result = await _chucDanhRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _chucDanhRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             var msg = "";
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy chức danh với id: {command.Id}");

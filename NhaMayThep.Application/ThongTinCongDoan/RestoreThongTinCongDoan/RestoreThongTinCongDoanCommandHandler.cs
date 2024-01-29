@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
         public async Task<string> Handle(RestoreThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository
-                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
+                .FindAnyAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
             if (thongtincongdoan == null)
             {
                 throw new NotFoundException("Thông tin công đoàn không tồn tại");

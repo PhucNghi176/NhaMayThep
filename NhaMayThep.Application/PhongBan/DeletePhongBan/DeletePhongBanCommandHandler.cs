@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.PhongBan.DeletePhongBan
         }
         public async Task<string> Handle(DeletePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var phongBan = await _phongBanRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var phongBan = await _phongBanRepository.FindAnyAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (phongBan == null)
             {
                 throw new NotFoundException("ID: " + command.ID + " không tồn tại");

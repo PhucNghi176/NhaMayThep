@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.Delete
 
         public async Task<string> Handle(DeleteTrinhDoHocVanCommand request, CancellationToken cancellationToken)
         {
-            var trinhDoHocVan = await _trinhDoHocVanRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
+            var trinhDoHocVan = await _trinhDoHocVanRepository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
             if (trinhDoHocVan == null || trinhDoHocVan.NgayXoa != null)
             {
                 return "Xóa Thất Bại!";

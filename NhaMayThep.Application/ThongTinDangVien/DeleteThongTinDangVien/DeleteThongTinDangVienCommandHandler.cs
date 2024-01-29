@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
         public async Task<string> Handle(DeleteThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAnyAsync(x => x.ID == request.ID && x.NgayXoa == null);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Đảng Viên");
 

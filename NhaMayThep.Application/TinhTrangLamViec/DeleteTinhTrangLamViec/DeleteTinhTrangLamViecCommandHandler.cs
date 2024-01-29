@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
         public DeleteTinhTrangLamViecCommandHandler() { }
         public async Task<string> Handle(DeleteTinhTrangLamViecCommand request, CancellationToken cancellationToken)
         {
-            var tinhtranglamviec = await _repository.FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
+            var tinhtranglamviec = await _repository.FindAnyAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (tinhtranglamviec == null || tinhtranglamviec.NgayXoa != null)
                 return $"Không tìm thấy tình trạng làm việc với ID : {request.Id} hoặc tình trạng làm việc này đã bị xóa.";
             tinhtranglamviec.NguoiXoaID = _userservicerepository.UserId;

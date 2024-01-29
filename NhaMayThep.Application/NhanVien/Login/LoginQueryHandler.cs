@@ -22,11 +22,11 @@ namespace NhaMayThep.Application.NhanVien.GetUser
         public async Task<NhanVienDtoLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
 
-            var user = await _repository.FindAsync(x => x.Email == request.user.Email);
+            var user = await _repository.FindAnyAsync(x => x.Email == request.user.Email);
 
             if (user != null)
             {
-                var chucvu = await _chucVuRepository.FindAsync(x => x.ID == user.ChucVuID);
+                var chucvu = await _chucVuRepository.FindAnyAsync(x => x.ID == user.ChucVuID);
 
                 var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)

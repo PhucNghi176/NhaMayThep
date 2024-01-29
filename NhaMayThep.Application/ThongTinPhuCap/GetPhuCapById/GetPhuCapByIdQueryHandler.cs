@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinPhuCap.GetPhuCapById
         }
         public async Task<PhuCapDto> Handle(GetPhuCapByIdQuery query, CancellationToken cancellationToken)
         {
-            var result = await _phuCapRepository.FindAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
+            var result = await _phuCapRepository.FindAnyAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
 
             if (result == null || result.NgayXoa != null)
                 throw new NotFoundException($"Không tìm thấy phụ cấp với id: {query.ID}");

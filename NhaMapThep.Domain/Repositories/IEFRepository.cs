@@ -6,7 +6,7 @@ namespace NhaMapThep.Domain.Repositories
     public interface IEFRepository<TDomain, TPersistence> : IRepository<TDomain>
     {
         IUnitOfWork UnitOfWork { get; }
-        Task<TDomain?> FindAsync(Expression<Func<TPersistence, bool>> filterExpression, CancellationToken cancellationToken = default);
+        Task<TDomain?> FindAnyAsync(Expression<Func<TPersistence, bool>> filterExpression, CancellationToken cancellationToken = default);
         Task<TDomain?> FindAsync(Expression<Func<TPersistence, bool>> filterExpression, Func<IQueryable<TPersistence>, IQueryable<TPersistence>> queryOptions, CancellationToken cancellationToken = default);
         Task<TDomain?> FindAsync(Func<IQueryable<TPersistence>, IQueryable<TPersistence>> queryOptions, CancellationToken cancellationToken = default);
         Task<List<TDomain>> FindAllAsync(CancellationToken cancellationToken = default);

@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
         }
         public async Task<string> Handle(UpdateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var entity = await _quaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var entity = await _quaTrinhNhanSuRepository.FindAnyAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (entity == null)
             {
                 throw new NotFoundException("Quá trình nhân viên: " + command.ID + " không tồn tại");

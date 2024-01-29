@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById
         public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhByIdQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && !x.NgayXoa.HasValue, 
+                .FindAnyAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID == null && !x.NgayXoa.HasValue, 
                 cancellationToken);
             if (giamtrugiacanh == null)
             {

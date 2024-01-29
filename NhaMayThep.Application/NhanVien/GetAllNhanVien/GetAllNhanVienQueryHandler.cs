@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
             var returnList = new List<NhanVienDto>();
             foreach (var item in list)
             {
-                var chucVu = await _chucVuRepository.FindAsync(x => x.ID == item.ChucVuID && x.NgayXoa == null, cancellationToken);
+                var chucVu = await _chucVuRepository.FindAnyAsync(x => x.ID == item.ChucVuID && x.NgayXoa == null, cancellationToken);
                 var nvDto = _mapper.Map<NhanVienDto>(item);
                 nvDto.ChucVu = chucVu.Name;
                 returnList.Add(nvDto);

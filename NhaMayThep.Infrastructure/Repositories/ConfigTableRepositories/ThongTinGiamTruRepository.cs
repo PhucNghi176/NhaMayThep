@@ -19,7 +19,7 @@ namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
 
         public async Task<ThongTinGiamTruEntity?> GetThongTinGiamTruById(int id, CancellationToken cancellationToken)
         {
-            return await FindAsync(x => x.ID.Equals(id), cancellationToken);
+            return await FindAnyAsync(x => x.ID.Equals(id), cancellationToken);
         }
     }
 }

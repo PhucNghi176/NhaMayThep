@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.KhenThuong.GetKhenThuongById
         public GetKhenThuongByIDQueryHandler() { }
         public async Task<KhenThuongDTO> Handle(GetKhenThuongByIDQuery request, CancellationToken cancellationToken)
         {
-            var khenthuong = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            var khenthuong = await this._repository.FindAnyAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (khenthuong == null)
                 throw new NotFoundException($"không tìm thấy khen thưởng vơi ID : {request.ID} hoặc nó khen thưởng này đã bị xóa.");
             return khenthuong.MapToKhenThuongDTO(_mapper);

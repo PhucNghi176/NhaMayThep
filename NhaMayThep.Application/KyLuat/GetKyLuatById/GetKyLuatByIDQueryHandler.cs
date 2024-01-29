@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.KyLuat.GetKyLuatById
         private readonly IMapper _mapper;
         public async Task<KyLuatDTO> Handle(GetKyLuatByIDQuery request, CancellationToken cancellationToken)
         {
-            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null , cancellationToken);
+            var kyluat = await this._repository.FindAnyAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null , cancellationToken);
             if (kyluat == null)
                 throw new NotFoundException($"Không tìm thấy trường hợp kỷ luật nào với ID : {request.Id} hoặc trường hợp này đã bị xóa.");
             return kyluat.MapToKyLuatDTO(_mapper);

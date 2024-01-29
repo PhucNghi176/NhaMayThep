@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.HopDong.GetHopDongByIdQuery
         }
         public async Task<HopDongDto> Handle(GetHopDongByIdQuery query, CancellationToken cancellationToken)
         {
-            var result = await _hopdongRepository.FindAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _hopdongRepository.FindAnyAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
             if (result == null || result.NgayXoa != null)
                 throw new NotFoundException($"Không tìm thấy hợp đồng với id: {query.Id}");
             return result.MapToHopDongDto(_mapper);

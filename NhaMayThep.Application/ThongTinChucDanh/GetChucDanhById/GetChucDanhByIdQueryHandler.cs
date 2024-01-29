@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById
         public async Task<ChucDanhDto> Handle(GetChucDanhByIdQuery query, CancellationToken cancellationToken)
         {
 
-            var result = await _chucDanhRepository.FindAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
+            var result = await _chucDanhRepository.FindAnyAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
 
             if (result == null || result.NgayXoa != null)
                 throw new NotFoundException($"Không tìm thấy chức danh với id: {query.ID}");

@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.UpdateThongTinQuaTrinhNh
         }
         public async Task<string> Handle(UpdateThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAnyAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (entity == null)
             {
                 throw new NotFoundException("ID: " + command.ID + " không tồn tại");

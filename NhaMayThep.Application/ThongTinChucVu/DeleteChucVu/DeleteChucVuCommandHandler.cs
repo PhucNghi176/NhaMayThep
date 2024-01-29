@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.DeleteChucVu
         }
         public async Task<string> Handle(DeleteChucVuCommand command, CancellationToken cancellationToken)
         {
-            var result = await _chucVuRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _chucVuRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             var msg = "";
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy chức vự với id: {command.Id}");

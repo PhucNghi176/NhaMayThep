@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             {
                 throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
-            var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
+            var existingLsnp = await _repo.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
             if (existingLsnp == null)
             {
                 throw new NotFoundException($"ChiTietNghiPhep với Id {request.Id} không tìm thấy.");

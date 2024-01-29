@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.KyLuat.DeleteKyLuat
         private readonly ICurrentUserService _currentUserService;
         public async Task<string> Handle(DeleteKyLuatCommand request, CancellationToken cancellationToken)
         {
-            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
+            var kyluat = await this._repository.FindAnyAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
             if (kyluat == null)
                 return $"Không tìm thấy trường hợp kỷ luật với ID : {request.Id} hoặc trường hợp này đã bị xóa.";
             kyluat.NgayXoa = DateTime.UtcNow;

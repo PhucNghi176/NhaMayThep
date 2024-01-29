@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Create
 
         public async Task<string> Handle(CreateLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
-            var exist = await _LoaiHoaDonRepository.FindAsync(x => x.Name == request.Name && !x.NgayTao.HasValue, cancellationToken);
+            var exist = await _LoaiHoaDonRepository.FindAnyAsync(x => x.Name == request.Name && !x.NgayTao.HasValue, cancellationToken);
             if(exist != null) 
             {
                 throw new NotFoundException("Loại Hóa Đơn trên đã tồn tại!");

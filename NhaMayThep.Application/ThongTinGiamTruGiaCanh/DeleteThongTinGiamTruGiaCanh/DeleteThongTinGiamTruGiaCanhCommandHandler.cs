@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
         public async Task<string> Handle(DeleteThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
+                .FindAnyAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if(thongtingiamtru == null || (thongtingiamtru.NguoiXoaID != null && thongtingiamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin giảm trừ gia cảnh không tồn tại hoặc đã bị xóa trước đó");

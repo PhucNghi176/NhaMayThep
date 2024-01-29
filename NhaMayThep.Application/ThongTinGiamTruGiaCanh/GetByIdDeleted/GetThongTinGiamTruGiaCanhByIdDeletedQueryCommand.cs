@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted
         public async Task<ThongTinGiamTruGiaCanhDto> Handle(GetThongTinGiamTruGiaCanhByIdDeletedQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanh = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue,
+                .FindAnyAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue,
                 cancellationToken);
             if (giamtrugiacanh == null)
             {

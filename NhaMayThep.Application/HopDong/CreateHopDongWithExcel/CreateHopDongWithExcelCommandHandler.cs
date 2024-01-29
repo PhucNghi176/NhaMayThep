@@ -34,7 +34,7 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
             var dataTable = dataset.Tables[0];
             for (int i = 1; i < dataTable.Rows.Count; i++)
             {
-                var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == Convert.ToString(dataTable.Rows[i][0]) && x.NgayXoa == null, cancellationToken);
+                var nhanVien = await _nhanVienRepository.FindAnyAsync(x => x.ID == Convert.ToString(dataTable.Rows[i][0]) && x.NgayXoa == null, cancellationToken);
                 if (nhanVien.DaCoHopDong)
                     throw new NotFoundException("Nhân viên đã có hợp đồng");
                 var add = new HopDongEntity()

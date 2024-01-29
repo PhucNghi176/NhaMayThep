@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen
 
         public async Task<string> Handle(ChangePasswordNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var nv = await _nhanVienRepository.FindAsync(x => x.ID == _currentUserService.UserId && x.NgayXoa == null, cancellationToken);
+            var nv = await _nhanVienRepository.FindAnyAsync(x => x.ID == _currentUserService.UserId && x.NgayXoa == null, cancellationToken);
             if (nv == null)
             {
                 throw new NotFoundException("Không tìm thấy nhân viên");

@@ -29,14 +29,14 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVien
 
         public async Task<NhanVienDto> Handle(GetNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var nv = await _repository.FindAsync(x => x.Email == request.Predicate || x.ID == request.Predicate);
+            var nv = await _repository.FindAnyAsync(x => x.Email == request.Predicate || x.ID == request.Predicate);
             //find chuc vu name by nv .ChucVuID and give me only chucvu name
             
             if (nv is null)
             {
                 throw new NotFoundException($"Khong tim thay nhan vien voi thong tin - {request.Predicate}");
             }
-            var chucVuName = await _chucVuRepository.FindAsync(x => x.ID == nv.ChucVuID, cancellationToken);
+            var chucVuName = await _chucVuRepository.FindAnyAsync(x => x.ID == nv.ChucVuID, cancellationToken);
             // map chucvuName to the return object
             var nvDto = _mapper.Map<NhanVienDto>(nv);
             nvDto.ChucVu = chucVuName.Name;

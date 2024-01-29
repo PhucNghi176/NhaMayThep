@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Delete
 
         public async Task<string> Handle(DeleteLoaiCongTacCommad request, CancellationToken cancellationToken)
         {
-            var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
+            var loaiCongtac = await _loaiCongTacRepository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
 
 
             if (loaiCongtac is null || loaiCongtac.NgayXoa.HasValue)

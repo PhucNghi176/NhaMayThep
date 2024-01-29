@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Delete
 
         public async Task<string> Handle(DeleteLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.Id.ToString(), cancellationToken);
+            var lichSuCongTacNhanVien = await _lichSuCongTacNhanVienRepository.FindAnyAsync(x => x.ID == request.Id.ToString(), cancellationToken);
             if (lichSuCongTacNhanVien == null || lichSuCongTacNhanVien.NgayXoa.HasValue)
             {
                 return "Xóa Thất Bại";

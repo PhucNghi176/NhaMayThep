@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.BaoHiem.GetBaoHiemById
 
         public async Task<BaoHiemDto> Handle(GetBaoHiemByIdQuery query, CancellationToken cancellationToken)
         {
-            var result = await _baoHiemRepostory.FindAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _baoHiemRepostory.FindAnyAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy bảo hiểm với id: {query.Id}");
             else

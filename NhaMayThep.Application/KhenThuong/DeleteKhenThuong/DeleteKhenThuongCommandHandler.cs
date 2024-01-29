@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.KhenThuong.DeleteKhenThuong
         public DeleteKhenThuongCommandHandler() { }
         public async Task<string> Handle(DeleteKhenThuongCommand request, CancellationToken cancellationToken)
         {
-            var khenthuong = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            var khenthuong = await this._repository.FindAnyAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (khenthuong == null)
                 return $"Không tìm thấy mục khen thưởng với ID : {request.ID} hoặc mục này đã bị xóa.";
             khenthuong.NgayXoa = DateTime.UtcNow;

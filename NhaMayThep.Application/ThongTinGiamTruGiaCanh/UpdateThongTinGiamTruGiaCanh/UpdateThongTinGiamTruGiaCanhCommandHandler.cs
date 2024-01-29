@@ -27,19 +27,19 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
         public async Task<string> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var giamtru = await _thongTinGiamTruRepository
-                .FindAsync(x => x.ID.Equals(request.MaGiamTruID), cancellationToken);
+                .FindAnyAsync(x => x.ID.Equals(request.MaGiamTruID), cancellationToken);
             if (giamtru == null || (giamtru.NguoiXoaID != null && giamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.ID.Equals(request.Id),cancellationToken);
+                .FindAnyAsync(x => x.ID.Equals(request.Id),cancellationToken);
             if (thongtingiamtru == null ||(thongtingiamtru.NguoiXoaID != null && thongtingiamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin giảm trừ gia cảnh không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var cccd = await _canCuocCongDanRepository
-                    .FindAsync(x => x.CanCuocCongDan.Equals(request.CanCuocCongDan), cancellationToken);
+                    .FindAnyAsync(x => x.CanCuocCongDan.Equals(request.CanCuocCongDan), cancellationToken);
             if (cccd == null || (cccd.NguoiXoaID != null && cccd.NgayXoa.HasValue))
             {
                 throw new NotFoundException($"Căn cước công dân {request.CanCuocCongDan} không tồn tại hoặc đã bị vô hiệu hóa trước đó");

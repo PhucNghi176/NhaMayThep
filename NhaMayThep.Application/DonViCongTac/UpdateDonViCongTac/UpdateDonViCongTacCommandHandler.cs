@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
         public async Task<DonViCongTacDto> Handle(UpdateDonViCongTacCommand request, CancellationToken cancellationToken)
         {
 
-            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken);
+            var donViCongTac = await _donViCongTacRepository.FindAnyAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken);
             if (donViCongTac == null)
                 throw new NotFoundException("Không tìm thấy Đơn Vị Công Tác");
 

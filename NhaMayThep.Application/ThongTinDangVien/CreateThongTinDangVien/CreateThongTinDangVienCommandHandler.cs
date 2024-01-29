@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
         }
         public async Task<string> Handle(CreateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplicatoion = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var checkDuplicatoion = await _thongTinDangVienRepository.FindAnyAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhân Viên " + request.NhanVienID + " đã tồn tại Thông Tin Đảng Viên");
 

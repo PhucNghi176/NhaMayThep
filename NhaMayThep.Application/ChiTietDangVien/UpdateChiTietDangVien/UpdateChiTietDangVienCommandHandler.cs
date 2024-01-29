@@ -32,11 +32,11 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
         }
         public async Task<ChiTietDangVienDto> Handle(UpdateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID ==  request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAnyAsync(x => x.NhanVienID ==  request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Nhân Viên chưa có Thông Tin Đảng Viên");
 
-            var chiTietDangVien = await _chiTietDangVienRepository.FindAsync( x => x.DangVienID == thongTinDangVien.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var chiTietDangVien = await _chiTietDangVienRepository.FindAnyAsync( x => x.DangVienID == thongTinDangVien.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if(chiTietDangVien == null)
                 throw new NotFoundException("Không tìm thấy Chi Tiết Đàng Viên");
 

@@ -34,14 +34,14 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
         {
             if(request.MaNhanVien != null)
             {
-                var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaNhanVien) && x.NgayXoa == null, cancellationToken);
+                var nhanvien = await this._nhanvien.FindAnyAsync(x => x.ID.Equals(request.MaNhanVien) && x.NgayXoa == null, cancellationToken);
                 if (nhanvien == null)
                     throw new NotFoundException($"Mã số nhân viên : {request.MaNhanVien} không tồn tại hoặc đã xóa.");
             }
-            var chinhsach = await this._chinhsach.FindAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
+            var chinhsach = await this._chinhsach.FindAnyAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
             if (chinhsach == null)
                 throw new NotFoundException($"Chính sách nhân sự với ID : {request.ChinhSachNhanSuID} không tồn tại hoặc đã xóa.");
-            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null,cancellationToken);
+            var kyluat = await this._repository.FindAnyAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null,cancellationToken);
             if (kyluat == null)
                 throw new NotFoundException($"Không tìm thấy trường hợp kỷ luật với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
             kyluat.NguoiCapNhatID = this._currentUserService.UserId;

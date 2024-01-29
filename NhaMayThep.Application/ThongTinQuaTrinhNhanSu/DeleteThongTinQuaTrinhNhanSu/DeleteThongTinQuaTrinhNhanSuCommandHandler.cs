@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.DeleteThongTinQuaTrinhNh
         }
         public async Task<string> Handle(DeleteThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAnyAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (entity == null)
             {
                 throw new NotFoundException("Thông tin quá trình nhân sự không tồn tại");

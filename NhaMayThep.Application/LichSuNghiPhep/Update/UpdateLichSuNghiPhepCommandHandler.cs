@@ -40,21 +40,21 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         }
 
         // Validation for MaSoNhanVien
-        var existingNhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+        var existingNhanVien = await _nhanVienRepository.FindAnyAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
         if (existingNhanVien == null || existingNhanVien.NgayXoa != null)
         {
             throw new NotFoundException("This NhanVien không tồn tại hoặc đã xóa.");
         }
 
         // Validation for NguoiDuyet
-        var existingNhanVien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
+        var existingNhanVien2 = await _nhanVienRepository.FindAnyAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
         if (existingNhanVien2 == null || existingNhanVien2.NgayXoa != null)
         {
             throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã xóa.");
         }
 
         // Check if LichSuNghiPhep exists
-        var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
+        var existingLsnp = await _repo.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
         if (existingLsnp == null || existingLsnp.NgayXoa != null)
         {
             throw new NotFoundException("LichSuNghiPhep không tồn tại hoặc đã xóa.");
