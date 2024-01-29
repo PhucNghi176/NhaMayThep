@@ -1,6 +1,10 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Exceptions;
+using System.Net;
 
 namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
 {
@@ -18,22 +22,23 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
             var isExist = await _repository.AnyAsync(x => x.Email == request.Email && x.NgayXoa == null);
             if (isExist)
             {
-                return ("Email đã tồn tại");
+
+                throw new DuplicationException("Email đã tồn tại");
             }
             isExist = await _repository.AnyAsync(x => x.SoDienThoaiLienLac == request.SoDienThoaiLienLac && x.NgayXoa == null);
             if (isExist)
             {
-                return ("Số điện thoại đã tồn tại");
+                throw new DuplicationException("Số điện thoại đã tồn tại");
             }
             isExist = await _repository.AnyAsync(x => x.MaSoThue == request.MaSoThue && x.NgayXoa == null);
             if (isExist)
             {
-                return ("Mã số thuế đã tồn tại");
+                throw new DuplicationException("Mã số thuế đã tồn tại");
             }
             isExist = await _repository.AnyAsync(x => x.SoTaiKhoan == request.SoTaiKhoan && x.NgayXoa == null);
             if (isExist)
             {
-                return ("Số tài khoản đã tồn tại");
+                throw new DuplicationException("Số tài khoản đã tồn tại");
             }
             var password = _repository.GeneratePassword();
             var nv = new NhanVienEntity

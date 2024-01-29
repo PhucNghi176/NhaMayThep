@@ -38,6 +38,14 @@ namespace NhaMayThep.Api.Filters
                     .AddContextInformation(context);
                     context.ExceptionHandled = true;
                     break;
+                case DuplicationException exception:
+                    context.Result = new BadRequestObjectResult(new ProblemDetails
+                    {
+                        Detail = exception.Message
+                    })
+                        .AddContextInformation(context);
+                    context.ExceptionHandled = true;
+                    break;
 
             }
         }
