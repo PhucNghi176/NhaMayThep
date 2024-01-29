@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetById
         }
         private void ConfigureValidationRules()
         {
-            RuleFor(x => x.id).NotEmpty().WithMessage("ID is required");
+            RuleFor(x => x.id).NotEmpty().WithMessage("ID không để trống");
         }
     }
 }
