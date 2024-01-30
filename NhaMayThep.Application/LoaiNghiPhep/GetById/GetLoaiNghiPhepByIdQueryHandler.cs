@@ -27,12 +27,12 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetById
             var lnp = await _repository.FindAnyAsync(x => x.ID == request.id, cancellationToken);
             if (lnp == null)
             {
-                throw new NotFoundException("LoaiNghiPhep Does not Exist");
+                throw new NotFoundException("LoaiNghiPhep Không tồn tại");
 
             }
             if(lnp.NgayXoa != null)
             {
-                throw new NotFoundException("LoaiNghiPhep Is Deleted");
+                throw new NotFoundException("LoaiNghiPhep đã bị xóa");
             }
 
             return lnp.MapToLoaiNghiPhepDto(_mapper);

@@ -23,11 +23,11 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             var lnp = await _repository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
             if (lnp == null)
             {
-                throw new NotFoundException("LoaiNghiPhep not found for the given ID");
+                throw new NotFoundException("LoaiNghiPhep với id không tìm thấy");
             }
             if(lnp.NgayXoa != null)
             {
-                throw new NotFoundException("This LoaiNghiPhep has been deleted");
+                throw new InvalidOperationException("Loại nghỉ phép này đã bị xóa rồi");
             }
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;

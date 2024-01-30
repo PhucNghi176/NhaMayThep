@@ -30,7 +30,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted
             {
                 throw new NotFoundException("Thông tin giảm trừ gia cảnh này không bị xóa hoặc chưa  tồn tại");
             }
-            return giamtrugiacanh.MapToThongTinGiamTruGiaCanhDto(_mapper);
+            return giamtrugiacanh.MapToThongTinGiamTruGiaCanhDto(_mapper,
+                            giamtrugiacanh.NhanVien.HoVaTen ?? "Trống",
+                            giamtrugiacanh.ThongTinGiamTru.Name ?? "Trống");
         }
     }
 }

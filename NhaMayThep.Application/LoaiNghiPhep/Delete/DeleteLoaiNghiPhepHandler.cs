@@ -29,17 +29,17 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new NotFoundException("User ID not found.");
+                throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
 
             var loaiNghiPhep = await _repository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiNghiPhep == null)
             {
-                throw new NotFoundException("LoaiNghiPhep not found for deletion");
+                throw new NotFoundException("LoaiNghiPhep không tìm thấy để xóa");
             }
             if (loaiNghiPhep.NgayXoa != null)
             {
-                throw new NotFoundException("This id has been deleted");
+                throw new NotFoundException("Id này đã bị xóa rồi");
             }
             // Soft delete: Set NguoiXoaID and NgayXoa
             loaiNghiPhep.NguoiXoaID = userId;

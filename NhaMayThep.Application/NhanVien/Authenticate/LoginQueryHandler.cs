@@ -22,22 +22,36 @@ namespace NhaMayThep.Application.NhanVien.GetUser
         public async Task<NhanVienDtoLogin> Handle(LoginQuery request, CancellationToken cancellationToken)
         {
 
+<<<<<<< HEAD:NhaMayThep.Application/NhanVien/Login/LoginQueryHandler.cs
             var user = await _repository.FindAnyAsync(x => x.Email == request.user.Email);
 
             if (user != null)
             {
                 var chucvu = await _chucVuRepository.FindAnyAsync(x => x.ID == user.ChucVuID);
+=======
+            var user = await _repository.FindAsync(x => x.Email == request.user.Email && x.NgayXoa == null);
+            if (user == null)
+            {
+                throw new NotFoundException($"Không tìm thấy nhân viên với email - {request.user.Email}");
+            }
+
+            if (user != null)
+            {
+                var chucvu = await _chucVuRepository.FindAsync(x => x.ID == user.ChucVuID && x.NgayXoa == null);
+                if (chucvu == null)
+                {
+                    throw new NotFoundException($"Không tìm thấy nhân viên với chức vụ - {request.user.Email}");
+                }
+>>>>>>> 5d9b056a84cd2b73b3ff579895b75f4a5b0febe6:NhaMayThep.Application/NhanVien/Authenticate/LoginQueryHandler.cs
 
                 var samePassword = _repository.VerifyPassword(request.user.Password, user.PasswordHash);
                 if (samePassword)
                 {
-
                     return NhanVienDtoLogin.Create(user.Email, user.ID, chucvu.Name);
-
                 }
             }
 
-            throw new NotFoundException($"Email or password was incorrect.");
+            throw new NotFoundException("Tài khoản hoặc mật khẩu không đúng.");
         }
     }
 }

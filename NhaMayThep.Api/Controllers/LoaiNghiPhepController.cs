@@ -12,10 +12,12 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Net.Mime;
 using NhaMayThep.Application.LoaiNghiPhep;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class LoaiNghiPhepController : ControllerBase
     {
