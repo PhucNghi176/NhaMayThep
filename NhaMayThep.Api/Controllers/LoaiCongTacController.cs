@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.LoaiCongTac;
@@ -11,6 +12,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class LoaiCongTacController : ControllerBase
     {
         private readonly ISender _mediator;

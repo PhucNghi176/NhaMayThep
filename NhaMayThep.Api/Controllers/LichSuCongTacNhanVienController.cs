@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.LichSuCongTacNhanVien;
@@ -13,6 +14,7 @@ namespace NhaMayThep.Api.Controllers
 {
     
     [ApiController]
+    [Authorize]
     public class LichSuCongTacNhanVienController : ControllerBase
     {
         private readonly ISender _mediator;

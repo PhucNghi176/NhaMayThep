@@ -11,11 +11,13 @@ using NhaMayThep.Application.ThongTinDaoTao.GetById;
 using NhaMayThep.Application.ThongTinDaoTao.GetAll;
 using NhaMayThep.Application.ThongTinDaoTao.Create;
 using NhaMayThep.Application.ThongTinDaoTao.Update;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ThongTinDaoTaoController : ControllerBase
     {
         private readonly ISender _mediator;
