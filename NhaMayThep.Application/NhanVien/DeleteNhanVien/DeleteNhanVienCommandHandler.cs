@@ -21,15 +21,12 @@ namespace NhaMayThep.Application.NhanVien.DeleteNhanVien
         }
         public async Task<string> Handle(DeleteNhanVienCommand command, CancellationToken cancellationToken)
         {
-            var isFound = await _nhanVienRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
-            if (isFound == null)
+            var found = await _nhanVienRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            if (found == null)
                 throw new NotFoundException("Id nhân viên không tồn tại");
-            var userDelete = await _nhanVienRepository.FindAsync(x => x.ID == _currentUserService.UserId && x.NgayXoa == null, cancellationToken);
-            if (isFound.ChucVuID == 1 && userDelete.ChucVuID != 1)
-                throw new UnauthorizedException("Không thể xoá tài khoản Admin với tài khoản nhân sự");
-            isFound.NguoiXoaID = _currentUserService.UserId;
-            isFound.NgayXoa = DateTime.Now;
-            _nhanVienRepository.Update(isFound);
+            found.NguoiXoaID = _currentUserService.UserId;
+            found.NgayXoa = DateTime.Now;
+            _nhanVienRepository.Update(found);
             if (await _nhanVienRepository.UnitOfWork.SaveChangesAsync() > 0)
                 return "Xóa thành công";
             else

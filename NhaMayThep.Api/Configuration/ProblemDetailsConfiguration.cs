@@ -8,7 +8,8 @@ namespace CleanArchitecture.Configuration
         public static IServiceCollection ConfigureProblemDetails(this IServiceCollection services)
         {
             services.AddProblemDetails(conf => conf.CustomizeProblemDetails = context =>
-            {              
+            {
+                context.ProblemDetails.Type = $"https://httpstatuses.io/{context.ProblemDetails.Status}";
 
                 if (context.ProblemDetails.Status != 500) { return; }
                 context.ProblemDetails.Title = "Internal Server Error";
