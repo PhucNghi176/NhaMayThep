@@ -11,6 +11,10 @@ namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
 {
     public class CreateTinhTrangLamViecCommandValidator : AbstractValidator<CreateTinhTrangLamViecCommand>
     {
-        public CreateTinhTrangLamViecCommandValidator() { }
+        private readonly ITinhTrangLamViecRepository _repository;
+        public CreateTinhTrangLamViecCommandValidator(ITinhTrangLamViecRepository repository) 
+        {
+            _repository = repository;
+        }
     }
 }

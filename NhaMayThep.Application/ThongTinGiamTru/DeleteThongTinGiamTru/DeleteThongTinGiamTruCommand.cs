@@ -12,9 +12,9 @@ namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
     {
         public int Id { get; set; }
         public DeleteThongTinGiamTruCommand() { }
-        public DeleteThongTinGiamTruCommand(int id)
+        public DeleteThongTinGiamTruCommand(int Id)
         {
-            this.Id = id;
+            this.Id = Id;
         }
     }
 }
