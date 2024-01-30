@@ -20,5 +20,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.GetPaginationChucVu
             PageNumber = pageNumber;
             PageSize = pageSize;
         }
+
+        public GetChucVuByPaginationQuery() { }
     }
 }

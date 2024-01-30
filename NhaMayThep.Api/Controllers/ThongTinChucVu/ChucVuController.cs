@@ -92,7 +92,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<ChucVuDto>(result));
         }
-        [HttpGet("test/{pagenumber}/{pagesize}")]
+        [HttpGet("chuc-vu/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucVuDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucVuDto>>), StatusCodes.Status200OK)]
@@ -100,9 +100,9 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ChucVuDto>>>> GetPagination([FromRoute]int pagenumber, [FromRoute] int pagesize, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<ChucVuDto>>>> GetPagination([FromQuery] GetChucVuByPaginationQuery query,CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetChucVuByPaginationQuery(pageNumber: pagenumber, pageSize: pagesize), cancellationToken); 
+            var result = await _mediator.Send(query, cancellationToken); 
             return Ok(result);
         }
 
