@@ -22,25 +22,14 @@ namespace NhaMayThep.Application.ThongTinChucVu.GetPaginationChucVu
         }
         public async Task<PagedResult<ChucVuDto>> Handle(GetChucVuByPaginationQuery query, CancellationToken cancellationToken)
         {
-            var count = await _chucVuRepository.CountAsync(x => x.NgayXoa == null, cancellationToken);
-            var page = (int)Math.Ceiling((decimal)count / query.PageSize);
-
-            List<ThongTinChucVuEntity> allData = await _chucVuRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
-
-            var data = allData.Skip((query.PageNumber - 1) * query.PageSize).Take(query.PageSize).ToList();
-
-            List<ChucVuDto> result = new List<ChucVuDto>();
-            foreach (var item in data)
-            {
-                var add = item.MapToChucVuDto(_mapper);
-                result.Add(add);
-            }
-            PagedResult<ChucVuDto> paged = PagedResult<ChucVuDto>.Create(totalCount: count,
-                                                                         pageCount: page,
-                                                                         pageSize: query.PageSize,
-                                                                         pageNumber: query.PageNumber,
-                                                                         data: result);
-            return paged;
+            var list = await _chucVuRepository.FindAllAsync(x => x.NgayXoa == null, query.PageNumber, query.PageSize, cancellationToken);
+            return PagedResult<ChucVuDto>.Create(
+                    totalCount: list.TotalCount,
+                    pageCount: list.PageCount,
+                    pageSize: list.PageSize,
+                    pageNumber: list.PageNo,
+                    data: list.MapToChucVuDtoList(_mapper)
+                    );
         }
     }
 }
