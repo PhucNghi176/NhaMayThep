@@ -75,7 +75,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<DonViCongTacDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("don-vi-cong-tac/{id}")]
