@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienIdDeleted
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin công đoàn nào cho nhân viên này");
             }
-            return thongtincongdoan.MapToThongTinCongDoanDto(_mapper);
+            return thongtincongdoan.MapToThongTinCongDoanDto(_mapper, thongtincongdoan.NhanVien.HoVaTen ?? "Trống");
         }
     }
 }

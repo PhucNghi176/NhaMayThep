@@ -21,8 +21,8 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
         private void ConfigureValidationRules()
         {
             RuleFor(command => command.Name)
-            .NotEmpty().WithMessage("Name is required.")
-            .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
+            .NotEmpty().WithMessage("Tên không để trống")
+            .MaximumLength(100).WithMessage("Tên không vượt quá 100 chữ.");
           
         }
 

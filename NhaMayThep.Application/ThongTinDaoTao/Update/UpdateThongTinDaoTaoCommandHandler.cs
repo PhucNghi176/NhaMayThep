@@ -6,6 +6,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMayThep.Application.Common.Interfaces;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Update
 {
@@ -14,12 +15,13 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Update
         private readonly IThongTinDaoTaoRepository _thongTinDaoTaoRepository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-
-        public UpdateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IThongTinDaoTaoRepository thongTinDaoTaoRepository, IMapper mapper)
+        private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
+        public UpdateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IThongTinDaoTaoRepository thongTinDaoTaoRepository, IMapper mapper, ITrinhDoHocVanRepository trinhDoHocVanRepository)
         {
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
             _mapper = mapper;
             _currentUserService = currentUserService;
+            _trinhDoHocVanRepository = trinhDoHocVanRepository;
         }
 
         public async Task<ThongTinDaoTaoDto> Handle(UpdateThongTinDaoTaoCommand request, CancellationToken cancellationToken)
@@ -29,7 +31,13 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Update
             {
                 throw new NotFoundException("Thông Tin Đào Tạo không tồn tại!");
             }
+            var trinhDoHocVan = await _trinhDoHocVanRepository.AnyAsync(x => x.ID == request.MaTrinhDoHocVanId && x.NgayXoa == null, cancellationToken);
+            if (!trinhDoHocVan)
+            {
+                throw new NotFoundException("Mã Trình Độ Học Vấn không hợp lệ!");
+            }
 
+            thongTinDaoTao.MaTrinhDoHocVanID = request.MaTrinhDoHocVanId;
             thongTinDaoTao.TenTruong = request.TenTruong;
             thongTinDaoTao.ChuyenNganh = request.ChuyenNganh;
             thongTinDaoTao.NamTotNghiep = request.NamTotNghiep;

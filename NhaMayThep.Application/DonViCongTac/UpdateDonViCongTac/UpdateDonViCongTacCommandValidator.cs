@@ -12,6 +12,9 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
     {
         public UpdateDonViCongTacCommandValidator()
         {
+            RuleFor(x => x.ID)
+            .NotEmpty().WithMessage("ID không được để trống.");
+
             RuleFor(x => x.Name)
             .NotEmpty().WithMessage("Tên không được để trống.");
 

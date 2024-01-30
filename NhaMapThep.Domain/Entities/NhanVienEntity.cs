@@ -26,6 +26,7 @@ namespace NhaMapThep.Domain.Entities
         public required string TenNganHang { get; set; }
         public required string SoTaiKhoan { get; set; }
         public int? SoNguoiPhuThuoc { get; set; }
+        public required bool DaCoHopDong { get; set; } = false;
         public virtual ICollection<HopDongEntity> HopDongs { get; set; }
 
         public virtual ICollection<ThongTinLuongNhanVienEntity> ThongTinLuongNhanViens { get; set; }

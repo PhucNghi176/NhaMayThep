@@ -20,14 +20,14 @@ namespace NhaMapThep.Api.Configuration
                 {
                     options.SchemaFilter<RequireNonNullablePropertiesSchemaFilter>();
                     options.SupportNonNullableReferenceTypes();
-                    options.CustomSchemaIds(x => x.FullName);
+                     options.CustomSchemaIds(x => x.FullName);
 
-                    var apiXmlFile = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
-                    if (File.Exists(apiXmlFile))
-                    {
-                        options.IncludeXmlComments(apiXmlFile);
-                    }
-
+                     var apiXmlFile = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+                     if (File.Exists(apiXmlFile))
+                     {
+                         options.IncludeXmlComments(apiXmlFile);
+                     }
+                    
                     var applicationXmlFile = Path.Combine(AppContext.BaseDirectory, $"{typeof(DependencyInjection).Assembly.GetName().Name}.xml");
                     if (File.Exists(applicationXmlFile))
                     {
@@ -70,10 +70,10 @@ namespace NhaMapThep.Api.Configuration
                     options.OAuthAppName("HRM API");
                     options.EnableDeepLinking();
                     options.DisplayOperationId();
-                    options.DefaultModelsExpandDepth(2);
-                    options.DefaultModelRendering(ModelRendering.Model);
-                    options.DocExpansion(DocExpansion.List);
-                    options.ShowExtensions();
+                    options.DefaultModelsExpandDepth(-1);
+                    //options.DefaultModelRendering(ModelRendering.Model);
+                    //options.DocExpansion(DocExpansion.List);
+                 //  options.ShowExtensions();
                     options.EnableFilter(string.Empty);
                     AddSwaggerEndpoints(app, options);
                     options.OAuthScopeSeparator(" ");
