@@ -2,13 +2,13 @@
 using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.Common.Interfaces;
 
-namespace NhaMayThep.Application.NhanVien.GetUser
+namespace NhaMayThep.Application.NhanVien.Authenticate.Login
 {
     public class LoginQuery : IRequest<NhanVienDtoLogin>, IQuery
     {
         public LoginQuery()
         {
-            
+
         }
 
 

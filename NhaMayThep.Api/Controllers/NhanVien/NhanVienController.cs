@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.NhanVien;
+using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
@@ -13,7 +14,6 @@ using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVienTest;
-using NhaMayThep.Application.NhanVien.GetUser;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
 using System.Net.Mime;
 
@@ -158,5 +158,6 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
+        
     }
 }
