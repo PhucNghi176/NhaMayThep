@@ -34,7 +34,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
         public async Task<ActionResult<JsonResponse<string>>> CreateNewChucDanh([FromBody] CreateNewChucDanhCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewChucDanh), new { id = result }, new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("chuc-danh/{id}")]

@@ -34,7 +34,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         public async Task<ActionResult<JsonResponse<string>>> CreateNewLoaiHopDong([FromBody] CreateNewLoaiHopDongCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewLoaiHopDong), new { id = result }, new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("loai-hop-dong/{id}")]

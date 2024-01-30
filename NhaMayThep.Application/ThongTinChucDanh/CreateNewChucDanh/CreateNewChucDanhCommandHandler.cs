@@ -27,8 +27,10 @@ namespace NhaMayThep.Application.ThongTinChucDanh.CreateNewChucDanh
                 Name = command.TenChucDanh
             };
             _chucDanhRepository.Add(add);
-            await _chucDanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo thành công";
+            if (await _chucDanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }
