@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMayThep.Application.DowloadFileLogs;
@@ -9,6 +10,7 @@ namespace NhaMayThep.Api.Controllers
 {
     
     [ApiController]
+    [Authorize]
     public class LogsController : ControllerBase
     {
         private readonly ISender _mediator;
