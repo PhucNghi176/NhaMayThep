@@ -56,7 +56,7 @@ namespace NhaMayThep.Api.Controllers
                                   CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
-            var token = _jwtService.CreateToken(result.Email, result.ID, result.ChucVu);
+            var token = _jwtService.CreateToken(result.ID, result.ChucVu);
             return Ok(new JsonResponse<string>(token));
         }
 
@@ -158,6 +158,6 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
-        
+
     }
 }

@@ -26,7 +26,6 @@ namespace NhaMayThep.Api
                 });
             services.AddApplication(Configuration);
             services.ConfigureApplicationSecurity(Configuration);
-            //  services.ConfigureHealthChecks(Configuration);
             services.ConfigureProblemDetails();
             services.ConfigureApiVersioning();
             services.AddInfrastructure(Configuration);
