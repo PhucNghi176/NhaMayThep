@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
         {
             var chiTietDangVien = await _chiTietDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (chiTietDangVien == null)
-                throw new NotFoundException("Chi Tiet Dang Vien is not found");
+                throw new NotFoundException("Không tìm thấy Chi Tiết Đảng Viên");
 
             chiTietDangVien.NguoiXoaID = _currentUserService.UserId;
             chiTietDangVien.NgayXoa = DateTime.Now;
@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
             _chiTietDangVienRepository.Update(chiTietDangVien);
             await _chiTietDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Delete Successfully";
+            return "Xóa thành công";
         }
     }
 }

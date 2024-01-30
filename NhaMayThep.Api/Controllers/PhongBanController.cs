@@ -25,7 +25,7 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-        [HttpPost("Create")]
+        [HttpPost("phong-ban")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(bool), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -40,7 +40,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("Get-by-ID/{id}")]
+        [HttpGet("phong-ban/{id}")]
         [ProducesResponseType(typeof(JsonResponse<PhongBanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -54,6 +54,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new GetPhongBanQuery(id: id), cancellationToken);
             return result != null ? Ok(new JsonResponse<PhongBanDto>(result)) : NotFound();
         }
+        
         [HttpGet("Get-All")]
         [ProducesResponseType(typeof(JsonResponse<List<PhongBanDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -67,7 +68,8 @@ namespace NhaMayThep.Api.Controllers
             var result = await this._mediator.Send(new GetAllPhongBanQuery(), cancellationToken);
             return result != null ? Ok(new JsonResponse<List<PhongBanDto>>(result)) : NotFound();
         }
-        [HttpPut("Update/{id}")]
+
+        [HttpPut("phong-ban/{id}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -90,7 +92,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [HttpDelete("Delete/{id}")]
+        [HttpDelete("phong-ban/{id}")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

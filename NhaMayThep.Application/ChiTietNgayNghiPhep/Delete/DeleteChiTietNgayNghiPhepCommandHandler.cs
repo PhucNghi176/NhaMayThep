@@ -26,16 +26,16 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new UnauthorizedAccessException("User ID not found.");
+                throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
             var entity = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
-                throw new NotFoundException($"ChiTietNgayNghiPhep with ID {request.Id} not found.");
+                throw new NotFoundException($"ChiTietNgayNghiPhep với ID {request.Id} không tìm thấy.");
             }
             if(entity.NgayXoa != null)
             {
-                throw new InvalidOperationException("This Id is already deleted");
+                throw new NotFoundException("Id này đã xóa rồi ");
             }
 
             entity.NguoiXoaID = userId;

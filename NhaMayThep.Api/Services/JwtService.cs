@@ -19,16 +19,16 @@ namespace NhaMayThep.Api.Services
                 new Claim(JwtClaimTypes.Role, roles)
             };
 
-          
+
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRM Nh@ M@y Th3p!!!"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-               // issuer: "test",
-               // audience: "api",
+                // issuer: "test",
+                // audience: "api",
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
