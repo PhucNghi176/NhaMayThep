@@ -4,7 +4,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
-namespace NhaMayThep.Application.NhanVien.GetUser
+namespace NhaMayThep.Application.NhanVien.Authenticate.Login
 {
     public class LoginQueryHandler : IRequestHandler<LoginQuery, NhanVienDtoLogin>
     {
