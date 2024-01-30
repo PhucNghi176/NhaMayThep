@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru
         public DeleteThongTinGiamTruCommandHandler() { }
         public async Task<string> Handle(DeleteThongTinGiamTruCommand request, CancellationToken cancellationToken)
         {
-            var thongtingiamtru = await _repository.FindAnyAsync(x => x.ID.Equals(request.Id), cancellationToken);
+            var thongtingiamtru = await _repository.FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (thongtingiamtru == null || thongtingiamtru.NgayXoa != null)
                 return $"Không tìm thấy thông tim giảm trừ với ID : {request.Id} hoặc thông tim giảm trừ này đã bị xóa.";
             thongtingiamtru.NguoiXoaID = _currenuserservice.UserId;

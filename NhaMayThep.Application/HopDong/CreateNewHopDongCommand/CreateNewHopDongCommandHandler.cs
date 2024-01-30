@@ -31,23 +31,23 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
 
         public async Task<string> Handle(CreateNewHopDongCommand command, CancellationToken cancellationToken)
         {
-            var NhanVien = await _nhanVienRepository.FindAnyAsync(x => x.ID == command.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
+            var NhanVien = await _nhanVienRepository.FindAsync(x => x.ID == command.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
             if (NhanVien == null)
                 throw new NotFoundException($"Nhân viên không hợp lệ {command.MaSoNhanVien}");
-            var CapBacLuong = await _capBacLuongRepository.FindAnyAsync(x => x.ID == command.HeSoLuongId && x.NgayXoa == null, cancellationToken);
+            var CapBacLuong = await _capBacLuongRepository.FindAsync(x => x.ID == command.HeSoLuongId && x.NgayXoa == null, cancellationToken);
             if(CapBacLuong == null)
                 throw new NotFoundException($"Cấp bậc lương không hợp lệ {command.HeSoLuongId}");
 
-            var ChucDanh = await _chucDanhRepository.FindAnyAsync(x => x.ID == command.ChucDanhId && x.NgayXoa == null, cancellationToken);
+            var ChucDanh = await _chucDanhRepository.FindAsync(x => x.ID == command.ChucDanhId && x.NgayXoa == null, cancellationToken);
             if (ChucDanh == null)
                 throw new NotFoundException($"Chức danh không hợp lệ {command.ChucDanhId}");
-            var ChucVu = await _chucVuRepository.FindAnyAsync(x => x.ID == command.ChucVuId && x.NgayXoa == null, cancellationToken);
+            var ChucVu = await _chucVuRepository.FindAsync(x => x.ID == command.ChucVuId && x.NgayXoa == null, cancellationToken);
             if (ChucVu == null)
                 throw new NotFoundException($"Chức vụ không hợp lệ {command.ChucVuId}");
-            var LoaiHopDong = await _loaiHopDongRepository.FindAnyAsync(x => x.ID == command.LoaiHopDongId && x.NgayXoa == null, cancellationToken);
+            var LoaiHopDong = await _loaiHopDongRepository.FindAsync(x => x.ID == command.LoaiHopDongId && x.NgayXoa == null, cancellationToken);
             if (LoaiHopDong == null)
                 throw new NotFoundException($"Loại hợp đồng không hợp lệ {command.LoaiHopDongId}");
-            var checkingHopDong = await _hopDongRepository.FindAnyAsync(x => x.NhanVienID == command.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
+            var checkingHopDong = await _hopDongRepository.FindAsync(x => x.NhanVienID == command.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
             if (checkingHopDong != null && checkingHopDong.NgayKetThuc < DateTime.UtcNow)
                 throw new Exception("Hợp đồng cho nhân viên vẫn đang có hiệu lực");
             var HopDong = new HopDongEntity()

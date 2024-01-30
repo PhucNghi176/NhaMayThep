@@ -37,14 +37,14 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             }
 
             // Validate MaSoNhanVien
-            var nhanVien = await _nhanVienRepository.FindAnyAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
             if (nhanVien == null || nhanVien.NgayXoa != null)
             {
                 throw new NotFoundException("Nhan Vien không tồn tại hoặc đã bị xóa.");
             }
 
             // Validate NguoiDuyet
-            var nhanvien2 = await _nhanVienRepository.FindAnyAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
+            var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
             if (nhanvien2 == null)
             {
                 throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");

@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan
 
         public async Task<string> Handle(DeleteCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var CanCuocCongDan = await _canCuocCongDanRepository.FindAnyAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null, cancellationToken);
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null, cancellationToken);
             if (CanCuocCongDan is not null)
             {
                 CanCuocCongDan.NgayXoa = DateTime.Now;

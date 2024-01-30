@@ -27,8 +27,8 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
         public async Task<List<HoaDonCongTacNhanVienDto>> Handle(GetByIdLoaiHoaDonQuery request, CancellationToken cancellationToken)
         {
             int idLoaiHoaDon = request.idLoaiHoaDon;
-            int year = request.year ;
-            int month = request.month ;
+            int year = request.year;
+            int month = request.month;
 
             var list = await _hoaDonCongTacNhanVienRepository.FindAllAsync(x =>
                 (idLoaiHoaDon == 0 || x.LoaiHoaDonID == idLoaiHoaDon) &&
@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
                 && !x.NgayXoa.HasValue,
                 cancellationToken);
 
-            var exist = await _loaiHoaDonRepository.FindAnyAsync(x => x.ID == idLoaiHoaDon && !x.NgayXoa.HasValue, cancellationToken);
+            var exist = await _loaiHoaDonRepository.FindAsync(x => x.ID == idLoaiHoaDon && !x.NgayXoa.HasValue, cancellationToken);
             if (exist == null && idLoaiHoaDon != 0)
             {
                 throw new NotFoundException("Loại Hóa Đơn trên Không tồn Tại");

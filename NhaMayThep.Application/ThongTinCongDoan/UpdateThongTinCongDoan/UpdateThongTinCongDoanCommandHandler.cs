@@ -26,13 +26,13 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
         public async Task<string> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan= await _thongtinCongDoanRepository
-                .FindAnyAsync(x => x.ID.Equals(request.Id), cancellationToken);
+                .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null ||(thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue)) 
             {
                 throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var nhanvien = await _nhanvienRepository
-                .FindAnyAsync(x => x.ID.Equals(request.NhanVienId), cancellationToken);
+                .FindAsync(x => x.ID.Equals(request.NhanVienId), cancellationToken);
             if (nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
                 throw new NotFoundException($"Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");

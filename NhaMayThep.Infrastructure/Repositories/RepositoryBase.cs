@@ -39,7 +39,7 @@ namespace NhaMapThep.Infrastructure.Repositories
             GetSet().Update((TPersistence)entity);
         }
 
-        public virtual async Task<TDomain?> FindAnyAsync(
+        public virtual async Task<TDomain?> FindAsync(
             Expression<Func<TPersistence, bool>> filterExpression,
             CancellationToken cancellationToken = default)
         {

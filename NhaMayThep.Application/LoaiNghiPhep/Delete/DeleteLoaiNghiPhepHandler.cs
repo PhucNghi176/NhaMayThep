@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
                 throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
 
-            var loaiNghiPhep = await _repository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var loaiNghiPhep = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiNghiPhep == null)
             {
                 throw new NotFoundException("LoaiNghiPhep không tìm thấy để xóa");

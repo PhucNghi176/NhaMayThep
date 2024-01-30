@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinPhuCap.DeletePhuCap
         }
         public async Task<string> Handle(DeletePhuCapCommand command, CancellationToken cancellationToken)
         {
-            var result = await _phuCapRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _phuCapRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             var msg = "";
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy phụ cấp với id: {command.Id}");

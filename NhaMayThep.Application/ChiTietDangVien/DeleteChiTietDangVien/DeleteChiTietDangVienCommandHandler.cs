@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.DeleteChiTietDangVien
         }
         public async Task<string> Handle(DeleteChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
-            var chiTietDangVien = await _chiTietDangVienRepository.FindAnyAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var chiTietDangVien = await _chiTietDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (chiTietDangVien == null)
                 throw new NotFoundException("Không tìm thấy Chi Tiết Đảng Viên");
 

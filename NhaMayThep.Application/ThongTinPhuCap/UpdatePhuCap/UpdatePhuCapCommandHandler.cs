@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinPhuCap.UpdatePhuCap
         }
         public async Task<PhuCapDto> Handle(UpdatePhuCapCommand command, CancellationToken cancellationToken)
         {
-            var result = await _phuCapRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _phuCapRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy phụ cấp với id: {command.Id}");
             result.Name = command.Name;

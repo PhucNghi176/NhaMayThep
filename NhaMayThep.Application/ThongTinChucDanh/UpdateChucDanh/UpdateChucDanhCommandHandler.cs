@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh
         }
         public async Task<ChucDanhDto> Handle(UpdateChucDanhCommand command, CancellationToken cancellationToken)
         {
-            var result = await _chucDanhRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _chucDanhRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy chức danh với id: {command.Id}");
             result.Name = command.Name;

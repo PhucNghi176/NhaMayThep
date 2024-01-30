@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGi
         public async Task<string> Handle(RestoreThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
-                .FindAnyAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
+                .FindAsync(x => x.ID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
             if (thongtingiamtru == null)
             {
                 throw new NotFoundException("Không tìm thấy thông tin miễn trừ gia cảnh này");

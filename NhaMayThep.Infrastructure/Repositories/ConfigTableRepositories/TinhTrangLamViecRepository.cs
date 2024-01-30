@@ -13,7 +13,7 @@ namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
         }
         public async Task<TinhTrangLamViecEntity?> GetTinhTrangLamViecById(int id, CancellationToken cancellationToken)
         {
-            return await FindAnyAsync(x => x.ID.Equals(id), cancellationToken);
+            return await FindAsync(x => x.ID.Equals(id), cancellationToken);
         }
     }
 }

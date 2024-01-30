@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.UpdateChucVu
         }
         public async Task<ChucVuDto> Handle(UpdateChucVuCommand command, CancellationToken cancellationToken)
         {
-            var result = await _chucVuRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _chucVuRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy chức vụ với id: {command.Id}");
             result.Name = command.Name;

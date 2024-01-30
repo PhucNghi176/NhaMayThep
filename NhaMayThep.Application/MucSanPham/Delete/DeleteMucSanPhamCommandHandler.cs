@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.MucSanPham.Delete
         }
         public async Task<string> Handle(DeleteMucSanPhamCommand command, CancellationToken cancellationToken)
         {
-            var existEntity = await _mucSanPhamRepository.FindAnyAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var existEntity = await _mucSanPhamRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (existEntity == null)
             {
                 throw new NotFoundException("ID không tồn tại");

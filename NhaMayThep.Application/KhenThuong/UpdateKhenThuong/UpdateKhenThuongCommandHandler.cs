@@ -32,17 +32,17 @@ namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
         {
             if(request.MaSoNhanVien != null)
             {
-                var nhanvien = await this._nhanvien.FindAnyAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
+                var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
                 if (nhanvien == null)
                     throw new NotFoundException($"Không tìm thấy nhân viên với ID : {request.MaSoNhanVien} hoặc nhân viên này đã bị xóa.");
             }
             if(request.ChinhSachNhanSuID != null)
             {
-                var chinhsach = await this._chinhsach.FindAnyAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
+                var chinhsach = await this._chinhsach.FindAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
                 if (chinhsach == null)
                     throw new NotFoundException($"Không tìm thấy chính sách nhân sự với ID : {request.ChinhSachNhanSuID} hoặc chính sách nhân sự này đã bị xóa.");
             }
-            var khenthuong = await this._repository.FindAnyAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            var khenthuong = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (khenthuong == null)
                 throw new NotFoundException($"Không tìm thấy khen thưởng với ID : {request.ID} hoặc khen thưởng này đã bị xóa.");
             khenthuong.NguoiXoaID = this._currentUserService.UserId;

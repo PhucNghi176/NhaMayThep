@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
 
         public async Task<string> Handle(UpdateLoaiCongTacCommad request, CancellationToken cancellationToken)
         {
-            var loaiCongtac = await _loaiCongTacRepository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var loaiCongtac = await _loaiCongTacRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiCongtac == null || loaiCongtac.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Loại Công Tác Không Tồn Tại");

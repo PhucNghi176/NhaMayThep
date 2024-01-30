@@ -13,17 +13,13 @@ namespace NhaMayThep.Application.NhanVien
 
         public static List<NhanVienDto> MapToNhanVienDtoList(this IEnumerable<NhanVienEntity> entities, IMapper mapper)
             => entities.Select(x => x.MapToNhanVienDto(mapper)).ToList();
-
-        // i want to map the ChucVu and TinhTrangLamViec base on their ID retrive from database
         public static NhanVienDto MapToNhanVienDto(this NhanVienEntity entity, IMapper mapper, string chucVu, string tinhTrangLamViec)
         {
             var dto = mapper.Map<NhanVienDto>(entity);
             dto.ChucVu = chucVu;
             dto.TinhTrangLamViec = tinhTrangLamViec;
             return dto;
-        }
-
-        //aplly for the Map list too
+        }     
         public static List<NhanVienDto> MapToNhanVienDtoList(this IEnumerable<NhanVienEntity> entities, IMapper mapper, Dictionary<int, string> chucVu, Dictionary<int, string> tinhTrangLamViec)
             => entities.Select(x => x.MapToNhanVienDto(mapper, chucVu.ContainsKey(x.ChucVuID) ? chucVu[x.ChucVuID] : "Lỗi", tinhTrangLamViec.ContainsKey(x.TinhTrangLamViecID) ? tinhTrangLamViec[x.TinhTrangLamViecID] : "Lỗi")).ToList();
 

@@ -25,7 +25,7 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         {
             throw new UnauthorizedAccessException("User ID không tồn tại .");
         }
-        var lsnp = await _repo.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+        var lsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (lsnp == null)
         {
             throw new NotFoundException($"LichSuNghiPhep với Id  {request.Id} không tìm thấy .");

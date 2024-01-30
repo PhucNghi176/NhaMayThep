@@ -16,8 +16,8 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
 
             RuleFor(query => query.year)
                 .Must((query, year) => year <= DateTime.Now.Year).WithMessage("Năm phải lớn hơn hoặc bằng năm hiện tại")
-                .When(query => query.year > 0); 
-                
+                .When(query => query.year > 0);
+
             RuleFor(query => query.month)
                 .Must((query, month) => month >= 1 && month <= 12).WithMessage("Tháng phải từ 1 đến 12")
                 .When(query => query.month > 0);

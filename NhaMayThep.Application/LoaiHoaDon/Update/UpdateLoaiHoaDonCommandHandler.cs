@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Update
 
         public async Task<string> Handle(UpdateLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
-            var loaiHoaDon = await _LoaiHoaDonRepository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon == null || loaiHoaDon.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Loại Hóa Đơn không tồn tại");

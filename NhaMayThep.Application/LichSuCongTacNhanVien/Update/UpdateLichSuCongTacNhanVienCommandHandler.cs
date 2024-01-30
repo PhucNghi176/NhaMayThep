@@ -20,12 +20,12 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 
         public async Task<string> Handle(UpdateLichSuCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var ct = await _loaiCongTacRepository.FindAnyAsync(x => x.ID == request.LoaiCongTacID, cancellationToken);
+            var ct = await _loaiCongTacRepository.FindAsync(x => x.ID == request.LoaiCongTacID, cancellationToken);
             if (ct is null || ct.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Loại Công Tác không Tồn Tại");
             }
-            var lichSu = await _lichSuCongTacNhanVienRepository.FindAnyAsync(x => x.ID == request.ID, cancellationToken);
+            var lichSu = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.ID, cancellationToken);
             if (lichSu is null || lichSu.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Lịch Sử Công Tác Nhân Viên Không Tồn Tại");

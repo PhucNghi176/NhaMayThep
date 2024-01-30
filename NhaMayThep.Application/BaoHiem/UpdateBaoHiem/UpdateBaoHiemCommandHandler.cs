@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.BaoHiem.UpdateBaoHiem
         }
         public async Task<BaoHiemDto> Handle(UpdateBaoHiemCommand command, CancellationToken cancellationToken)
         {
-            var update = await _baoHiemRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var update = await _baoHiemRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (update == null)
                 throw new NotFoundException($"Không tìm thấy bảo hiểm với id: {command.Id}");
             update.Name = command.TenLoaiBaoHiem;

@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
         }
         public async Task<string> Handle(CreateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
-            var chiTietDangVienCheck = await _chiTietDangVienRepository.FindAnyAsync(x => x.DangVienID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var chiTietDangVienCheck = await _chiTietDangVienRepository.FindAsync(x => x.DangVienID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (chiTietDangVienCheck != null )
                 throw new Exception("Đã tồn tại Chi Tiết Đảng Viên " + request.DangVienID);
 

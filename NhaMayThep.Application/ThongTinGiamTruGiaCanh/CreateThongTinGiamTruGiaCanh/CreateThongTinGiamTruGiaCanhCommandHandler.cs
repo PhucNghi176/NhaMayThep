@@ -30,24 +30,24 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         public async Task<string> Handle(CreateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
         {
             var nhanvien = await _nhanvienRepository
-                .FindAnyAsync(x => x.ID.Equals(request.NhanVienID), cancellationToken);
+                .FindAsync(x => x.ID.Equals(request.NhanVienID), cancellationToken);
             if(nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            var magiamtru = await _thongTinGiamTruRepository.FindAnyAsync(x => x.ID == request.MaGiamTruID);
+            var magiamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID);
             if(magiamtru == null || (magiamtru.NguoiXoaID!= null && magiamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Mã giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var giamtru = await _thongTinGiamTruRepository
-                   .FindAnyAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
+                   .FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
             if (giamtru == null || (giamtru.NguoiXoaID != null && giamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Giảm trừ gia cảnh không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var cccd = await _canCuocCongDanRepository
-                   .FindAnyAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
+                   .FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
             if (cccd == null || (cccd.NguoiXoaID != null && cccd.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Căn cước công dân không tồn tại hoặc đã bị vô hiệu hóa");
@@ -57,7 +57,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                 throw new NotFoundException("Không đúng số căn cước công dân của nhân viên");
             }
             var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
-                    .FindAnyAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);
+                    .FindAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);
             if (thongtingiamtruCur != null)
             {
                 throw new NotFoundException("Thông tin miễn trừ gia cảnh cho căn cước công dân này đã tồn tại hoặc đã bị vô hiệu hóa trước đó");

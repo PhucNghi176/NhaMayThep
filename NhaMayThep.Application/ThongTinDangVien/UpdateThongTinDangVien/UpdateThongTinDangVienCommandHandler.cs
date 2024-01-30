@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         {
             
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAnyAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Đảng Viên");
 

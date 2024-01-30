@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail
 
         public async Task<string> Handle(GetNhanVienIDByEmailQuery request, CancellationToken cancellationToken)
         {
-            var ID = await _repository.FindAnyAsync(x => x.Email == request.Email && x.NgayXoa == null, cancellationToken);
+            var ID = await _repository.FindAsync(x => x.Email == request.Email && x.NgayXoa == null, cancellationToken);
             if (ID == null)
             {
                 throw new NotFoundException($"Khong tim thay nhan vien voi email {request.Email}");

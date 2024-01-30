@@ -31,19 +31,15 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVien
 
         public async Task<NhanVienDto> Handle(GetNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var nv = await _repository.FindAnyAsync(x => x.Email == request.Predicate || x.ID == request.Predicate);
+            var nv = await _repository.FindAsync(x => x.Email == request.Predicate || x.ID == request.Predicate);
             //find chuc vu name by nv .ChucVuID and give me only chucvu name
 
             if (nv is null)
             {
                 throw new NotFoundException($"Khong tim thay nhan vien voi thong tin - {request.Predicate}");
             }
-<<<<<<< HEAD
-            var chucVuName = await _chucVuRepository.FindAnyAsync(x => x.ID == nv.ChucVuID, cancellationToken);
-=======
             var chucVuName = await _chucVuRepository.FindAsync(x => x.ID == nv.ChucVuID && x.NgayXoa == null);
             var tinhTrangLamViec = await _tinhTrangLamViecRepository.FindAsync(x => x.ID == nv.TinhTrangLamViecID && x.NgayXoa == null);
->>>>>>> 4a42c6dbe295054f30a5fa8170df8aa4915eca03
             // map chucvuName to the return object
             var nvDto = nv.MapToNhanVienDto(_mapper, chucVuName.Name == null ? "Lỗi" : chucVuName.Name, tinhTrangLamViec.Name is null ? "Lỗi" : tinhTrangLamViec.Name);
             return nvDto;

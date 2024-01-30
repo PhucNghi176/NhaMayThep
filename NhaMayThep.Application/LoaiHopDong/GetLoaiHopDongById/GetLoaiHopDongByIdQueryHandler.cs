@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById
         }
         public async Task<LoaiHopDongDto> Handle(GetLoaiHopDongByIdQuery query, CancellationToken cancellationToken)
         {
-            var result = await _loaiHopDongReposity.FindAnyAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _loaiHopDongReposity.FindAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
             if (result == null || result.NgayXoa != null)
                     throw new NotFoundException($"Không tìm thấy loại hợp đồng với id: {query.Id}");
             return result.MapToLoaiHopDongDto(_mapper);

@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdNguoiTao
 
         public async Task<List<HoaDonCongTacNhanVienDto>> Handle(GetByIdNguoiTaoQuery request, CancellationToken cancellationToken)
         {
-            var userExist = await _nhanVienRepository.FindAnyAsync(x => x.ID == request.idNguoiTao && !x.NgayXoa.HasValue,cancellationToken);
+            var userExist = await _nhanVienRepository.FindAsync(x => x.ID == request.idNguoiTao && !x.NgayXoa.HasValue,cancellationToken);
             if (userExist == null) 
             {
                 throw new NotFoundException("Người dùng trên không hợp lệ");

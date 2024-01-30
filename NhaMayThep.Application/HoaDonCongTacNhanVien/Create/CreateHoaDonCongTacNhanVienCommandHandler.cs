@@ -26,12 +26,12 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
 
         public async Task<string> Handle(CreateHoaDonCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var lichsucongtac = await _lichSuCongTacNhanVienRepository.FindAnyAsync(x => x.ID == request.LichSuCongTacID, cancellationToken);
+            var lichsucongtac = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.LichSuCongTacID, cancellationToken);
             if(lichsucongtac == null || lichsucongtac.NgayXoa.HasValue) 
             {
                 throw new NotFoundException("lich sử công tác trên không tồn tại");
             }
-            var loaihoadon = await _loaiHoaDonRepository.FindAnyAsync(x => x.ID == request.LoaiHoaDonID, cancellationToken);
+            var loaihoadon = await _loaiHoaDonRepository.FindAsync(x => x.ID == request.LoaiHoaDonID, cancellationToken);
             if(loaihoadon == null || loaihoadon.NgayXoa.HasValue) 
             {
                 throw new NotFoundException("Loại Hóa Đơn không tồn tại");

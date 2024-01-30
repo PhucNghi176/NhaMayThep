@@ -157,16 +157,16 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
         }
 
-        [HttpGet("hoa-don-cong-tac-nhan-vien/searchByIdLoaiHoaDonYearMonth")]
+        [HttpGet("hoa-don-cong-tac-nhan-vien/{idLoaiHoaDon}/{year}/{month}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> GetByLoaiHoaDon(
-            int idLoaiHoaDon,
-            int year,
-            int month,
+            [FromRoute] int idLoaiHoaDon,
+            [FromRoute] int year,
+            [FromRoute] int month,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetByIdLoaiHoaDonQuery(idLoaiHoaDon,year,month), cancellationToken);

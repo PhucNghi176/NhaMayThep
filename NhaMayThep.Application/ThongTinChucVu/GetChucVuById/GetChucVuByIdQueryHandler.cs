@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.GetChucVuById
         }
         public async Task<ChucVuDto> Handle(GetChucVuByIdQuery query, CancellationToken cancellationToken)
         {
-            var result = await _chucVuRepository.FindAnyAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
+            var result = await _chucVuRepository.FindAsync(x => x.ID ==  query.ID && x.NgayXoa == null, cancellationToken);
 
             if (result == null || result.NgayXoa != null)
                 throw new NotFoundException($"Không tìm thấy chức vụ với id: {query.ID}");

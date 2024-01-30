@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
                 throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
 
-            var nhanVien = await _hanVienRepository.FindAnyAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+            var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
             if (nhanVien == null)
             {
                 throw new NotFoundException("Nhan Vien không tồn tại.");

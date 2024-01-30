@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.LoaiHoaDon.Delete
 
         public async Task<string> Handle(DeleteLoaiHoaDonCommand request, CancellationToken cancellationToken)
         {
-            var loaiHoaDon = await _LoaiHoaDonRepository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var loaiHoaDon = await _LoaiHoaDonRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (loaiHoaDon is null || loaiHoaDon.NgayXoa.HasValue)
             {
                 return "Xóa Thất Bại";

@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             {
                 throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
-            var entity = await _repo.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var entity = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException($"ChiTietNgayNghiPhep với ID {request.Id} không tìm thấy.");

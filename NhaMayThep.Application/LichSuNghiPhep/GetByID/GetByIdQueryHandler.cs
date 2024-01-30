@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
 
         public async Task<LichSuNghiPhepDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
         {
-            var lsnp = await _repo.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var lsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
 
             if (lsnp == null)
             {

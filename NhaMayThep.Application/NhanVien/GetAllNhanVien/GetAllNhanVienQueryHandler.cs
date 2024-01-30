@@ -28,24 +28,11 @@ namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
 
         public async Task<PagedResult<NhanVienDto>> Handle(GetAllNhanVienQuery request, CancellationToken cancellationToken)
         {
-<<<<<<< HEAD
-            var list = await _nhanvienRepository.FindAllAsync(_ => _.NgayXoa == null, cancellationToken);
-            var returnList = new List<NhanVienDto>();
-            foreach (var item in list)
-            {
-                var chucVu = await _chucVuRepository.FindAnyAsync(x => x.ID == item.ChucVuID && x.NgayXoa == null, cancellationToken);
-                var nvDto = _mapper.Map<NhanVienDto>(item);
-                nvDto.ChucVu = chucVu.Name;
-                returnList.Add(nvDto);
-            }
-            return returnList;
-=======
->>>>>>> 4a42c6dbe295054f30a5fa8170df8aa4915eca03
 
             var list = await _nhanvienRepository.FindAllAsync(_ => _.NgayXoa == null, request.PageNumber, request.PageSize, cancellationToken);
-            var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec);
+            // var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            // var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            var returnList = list.MapToNhanVienDtoList(_mapper/*, chucvu, tinhtranglamviec*/);
 
             return PagedResult<NhanVienDto>.Create(totalCount: list.TotalCount,
                                pageCount: list.PageCount,

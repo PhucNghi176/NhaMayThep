@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrin
         }
         public async Task<ThongTinQuaTrinhNhanSuDto> Handle(GetSingleThongTinQuaTrinhNhanSuQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _thongTinQuaTrinhNhanSu.FindAnyAsync(x => x.ID == request.ID && x.NguoiXoaID == null);
+            var entity = await _thongTinQuaTrinhNhanSu.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null);
             return entity.MapToThongTinQuaTrinhNhanSuDto(_mapper);
         }
     }

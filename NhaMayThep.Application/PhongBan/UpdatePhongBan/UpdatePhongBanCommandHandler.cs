@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
 
         public async Task<string> Handle(UpdatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var entity = await _phongBanRepository.FindAnyAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var entity = await _phongBanRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
             if (entity == null)
             {
                 throw new NotFoundException("ID: " + command.ID + " không tồn tại");

@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong
         }
         public async Task<string> Handle(DeleteLoaiHopDongCommand command, CancellationToken cancellationToken)
         {
-            var result = await _loaiHopDongRepository.FindAnyAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
+            var result = await _loaiHopDongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             var msg = "";
             if (result == null)
                 throw new NotFoundException($"Không tìm thấy loại hợp đồng với id: {command.Id}");

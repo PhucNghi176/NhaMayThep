@@ -32,10 +32,10 @@ namespace NhaMayThep.Application.KyLuat.CreateKyLuat
         public CreateKyLuatCommandHandler() { }
         public async Task<string> Handle(CreateKyLuatCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await this._nhanvien.FindAnyAsync(x => x.ID.Equals(request.MaSoNhanVien)&& x.NgayXoa == null, cancellationToken);
+            var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaSoNhanVien)&& x.NgayXoa == null, cancellationToken);
             if (nhanvien == null)
                 throw new NotFoundException($"Mã số nhân viên : {request.MaSoNhanVien} không tồn tại hoặc đã xóa.");
-            var chinhsach = await this._chinhsach.FindAnyAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken );
+            var chinhsach = await this._chinhsach.FindAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken );
             if (chinhsach == null)
                 throw new NotFoundException($"Chính sách nhân sự với ID : {request.ChinhSachNhanSuID} không tồn tại hoặc đã xóa.");
             var kyluat = new KyLuatEntity

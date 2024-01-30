@@ -10,11 +10,13 @@ using System.Net.Mime;
 
 using NhaMayThep.Application.TrinhDoHocVan.GetById;
 using NhaMayThep.Application.TrinhDoHocVan.GetAll;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitecture.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TrinhDoHocVanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -23,7 +25,7 @@ namespace CleanArchitecture.Api.Controllers
         {
             _mediator = mediator;
         }
-
+        
         [HttpPost("create")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]

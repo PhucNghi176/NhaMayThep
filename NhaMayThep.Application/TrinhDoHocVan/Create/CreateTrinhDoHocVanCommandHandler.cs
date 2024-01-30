@@ -21,7 +21,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
         public async Task<string> Handle(CreateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
         {
-            var existingTrinhDoHocVan = await _repository.FindAnyAsync(x => x.Name == request.TenTrinhDo, cancellationToken);
+            var existingTrinhDoHocVan = await _repository.FindAsync(x => x.Name == request.TenTrinhDo, cancellationToken);
 
             if (existingTrinhDoHocVan != null)
             {

@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVie
         public async Task<ThongTinDangVienDto> Handle(GetByNhanVienIDThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAnyAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
             if(thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Thông Tin Đảng Viên");
 

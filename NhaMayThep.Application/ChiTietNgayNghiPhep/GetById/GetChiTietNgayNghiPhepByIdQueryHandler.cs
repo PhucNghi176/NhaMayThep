@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.GetById
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(GetChiTietNgayNghiPhepByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.FindAnyAsync(x => x.ID == request.Id, cancellationToken);
+            var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException($"Entity với ID {request.Id} không tìm thấy");
