@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Security;
 using NhaMayThep.Application.ThongTinGiamTru;
 using NhaMayThep.Application.TinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec;
@@ -9,11 +10,13 @@ using NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.GetAllTinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.GetTinhTrangLamViecByID;
 using NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec;
+using System.Net.Mime;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class TinhTrangLamViecController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,7 +26,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpGet]
         [Route("TinhTrangLamViec")]
-        [ProducesResponseType(typeof(JsonResponse<TinhTrangLamViecDTO>), StatusCodes.Status201Created)]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<TinhTrangLamViecDTO>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<List<TinhTrangLamViecDTO>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -36,7 +41,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpGet]
         [Route("TinhTrangLamViec/{Id}")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<TinhTrangLamViecDTO>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<TinhTrangLamViecDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -50,7 +57,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost]
         [Route("TinhTrangLamViec")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -64,7 +73,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPut]
         [Route("TinhTrangLamViec")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -78,7 +89,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpDelete]
         [Route("TinhTrangLamViec")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]

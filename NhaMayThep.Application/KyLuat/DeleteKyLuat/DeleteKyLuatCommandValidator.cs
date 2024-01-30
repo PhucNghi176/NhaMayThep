@@ -11,7 +11,7 @@ namespace NhaMayThep.Application.KyLuat.DeleteKyLuat
     {
         public DeleteKyLuatCommandValidator() 
         {
-            
+            ConfigureValidasionRules();
         }
         public void ConfigureValidasionRules()
         {

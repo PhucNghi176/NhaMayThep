@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Security;
 using NhaMayThep.Application.KhenThuong;
 using NhaMayThep.Application.KhenThuong.CreateKhenThuong;
 using NhaMayThep.Application.KhenThuong.DeleteKhenThuong;
@@ -13,6 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.KhenThuong
 {
     [ApiController]
+    [Authorize]
     public class KhenThuongController : ControllerBase
     {
         private readonly ISender _mediator;

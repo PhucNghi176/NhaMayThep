@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Security;
 using NhaMayThep.Application.KyLuat;
 using NhaMayThep.Application.KyLuat.CreateKyLuat;
 using NhaMayThep.Application.KyLuat.DeleteKyLuat;
@@ -13,6 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.KyLuat
 {
     [ApiController]
+    [Authorize]
     public class KyLuatController : ControllerBase
     {
         private readonly ISender _mediator;
