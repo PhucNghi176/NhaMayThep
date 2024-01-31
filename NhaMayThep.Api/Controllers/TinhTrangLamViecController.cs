@@ -88,7 +88,7 @@ namespace NhaMayThep.Api.Controllers
             return CreatedAtAction(nameof(updateTinhTrangLamViec), new { id = result }, new JsonResponse<string>(result));
         }
         [HttpDelete]
-        [Route("TinhTrangLamViec")]
+        [Route("TinhTrangLamViec/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -97,10 +97,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<string>> deleteTinhTrangLamViec(
-            [FromBody] DeleteTinhTrangLamViecCommand command,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteTinhTrangLamViecCommand(Id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
     }
