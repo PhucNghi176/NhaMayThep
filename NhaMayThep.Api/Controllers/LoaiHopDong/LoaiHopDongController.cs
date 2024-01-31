@@ -9,7 +9,8 @@ using NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById;
 using NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
-
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.LoaiHopDong.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers.LoaiHopDong
 {
@@ -77,6 +78,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
             var result = await _mediator.Send(new GetLoaiHopDongByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<LoaiHopDongDto>(result));
         }
+
         [HttpPut("loai-hop-dong")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -89,6 +91,20 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("loai-hop-dong/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiHopDongDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiHopDongDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<LoaiHopDongDto>>>> GetPagination([FromQuery] GetLoaiHopDongByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

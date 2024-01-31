@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.HopDong;
 using NhaMayThep.Application.HopDong.CreateHopDongWithExcel;
 using NhaMayThep.Application.HopDong.CreateNewHopDongCommand;
 using NhaMayThep.Application.HopDong.DeleteHopDongCommand;
 using NhaMayThep.Application.HopDong.GetAllHopDongQuery;
+using NhaMayThep.Application.HopDong.GetByPagination;
 using NhaMayThep.Application.HopDong.GetHopDongByIdQuery;
 using NhaMayThep.Application.HopDong.UpdateHopDongCommand;
 using System.Net.Mime;
@@ -79,6 +81,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             var result = await _mediator.Send(new GetHopDongByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<HopDongDto>(result));
         }
+
         [HttpPut("hop-dong")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -92,6 +95,7 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+
         [HttpPost("hop-dong/file")]
         [Produces("application/json")]
         [Consumes("multipart/form-data")]
@@ -102,6 +106,20 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         {
             var result = await _mediator.Send(new CreateHopDongWithExcelCommand(file), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("hop-dong/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<HopDongDto>>>> GetPagination([FromQuery] GetHopDongByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

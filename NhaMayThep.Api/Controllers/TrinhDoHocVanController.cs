@@ -10,6 +10,8 @@ using System.Net.Mime;
 
 using NhaMayThep.Application.TrinhDoHocVan.GetById;
 using NhaMayThep.Application.TrinhDoHocVan.GetAll;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
 
 namespace CleanArchitecture.Api.Controllers
 {
@@ -104,6 +106,20 @@ namespace CleanArchitecture.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
             return new JsonResponse<List<TrinhDoHocVanDto>>(result);
+        }
+
+        [HttpGet("trinh-do-hoc-van/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<TrinhDoHocVanDto>>>> GetPagination([FromQuery] GetTrinhDoHocVanByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

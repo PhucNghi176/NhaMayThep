@@ -1,7 +1,9 @@
-﻿using MediatR;
+﻿using Humanizer;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinGiamTru;
 using NhaMayThep.Application.TinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec;
@@ -9,7 +11,10 @@ using NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.GetAllTinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.GetTinhTrangLamViecByID;
 using NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using System.Net.Mime;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
+using NhaMayThep.Application.TinhTrangLamViec.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -99,6 +104,19 @@ namespace NhaMayThep.Api.Controllers
                 return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<bool>(result));
+        }
+        [HttpGet("tinh-trang-lam-viec/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TinhTrangLamViecDTO>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TinhTrangLamViecDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<TinhTrangLamViecDTO>>>> GetPagination([FromQuery] GetTinhTrangLamViecByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
