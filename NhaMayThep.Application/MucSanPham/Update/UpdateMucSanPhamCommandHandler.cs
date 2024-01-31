@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
