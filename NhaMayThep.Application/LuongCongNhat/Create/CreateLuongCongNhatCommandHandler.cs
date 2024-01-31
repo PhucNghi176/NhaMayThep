@@ -25,17 +25,19 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
         }
         public async Task<string> Handle(CreateLuongCongNhatCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplicatoion = await _LuongCongNhatRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien, cancellationToken: cancellationToken);
+            var nhanVien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
+            if (nhanVien == null)
+                throw new NotFoundException($"Mã số nhân viên : {request.MaSoNhanVien} không tồn tại hoặc đã xóa.");
+
+            var checkDuplicatoion = await _LuongCongNhatRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Luong Cong Nhat");
 
-            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken: cancellationToken);
-            if (nhanVien == null)
-                throw new NotFoundException("Nhan Vien is not found");
+
 
             var LuongCongNhat = new LuongCongNhatEntity()
             {
-                ID = request.ID,
+
                 MaSoNhanVien = nhanVien.ID,
                 NhanVien = nhanVien,
                 Luong1Gio = request.Luong1Gio,
@@ -46,7 +48,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
 
             _LuongCongNhatRepository.Add(LuongCongNhat);
             await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return LuongCongNhat.ID;
+            return "Tạo Lương Công Nhật thành công";
         }
     }
 }

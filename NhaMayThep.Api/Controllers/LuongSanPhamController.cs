@@ -12,7 +12,7 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
+
     [ApiController]
     [Authorize]
     public class LuongSanPhamController : ControllerBase

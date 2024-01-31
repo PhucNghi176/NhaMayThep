@@ -10,11 +10,12 @@ using System.Net.Mime;
 using NhaMayThep.Application.LoaiTangCa.GetId;
 using NhaMayThep.Application.LoaiTangCa.Delete;
 using NhaMayThep.Application.KhenThuong.UpdateKhenThuong;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Authorize]
     public class LoaiTangCaController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -35,7 +36,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<string>>> CreateLoaiTangCa([FromBody] CreateLoaiTangCaCommand command, CancellationToken cancellationToken)
         {
             var result = await this._mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return new JsonResponse<string>(result);
         }
 
         [HttpDelete("delete/{id}")]
@@ -46,7 +47,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<string>>> DeleteLoaiTangCa(int id, CancellationToken cancellationToken)
         {
             var result = await _mediator.Send(new DeleteLoaiTangCaCommand(id), cancellationToken);
-            return Ok(result);
+            return new JsonResponse<string>(result);
         }
 
         [HttpPut("update")]
@@ -62,7 +63,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await this._mediator.Send(command, cancellationToken);
-            return Ok(result);
+            return new JsonResponse<string>(result);
         }
 
         [HttpGet("getAll")]

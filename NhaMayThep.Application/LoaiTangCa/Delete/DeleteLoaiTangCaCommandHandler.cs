@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiTangCa.Delete
 {
-    public class DeleteLoaiTangCaCommandHandler : IRequestHandler<DeleteLoaiTangCaCommand, LoaiTangCaDto>
+    public class DeleteLoaiTangCaCommandHandler : IRequestHandler<DeleteLoaiTangCaCommand, string>
     {
         private readonly ILoaiTangCaRepository _repository;
         private readonly IMapper _mapper;
@@ -27,31 +27,23 @@ namespace NhaMayThep.Application.LoaiTangCa.Delete
             _currentUserService = currentUserService;
         }
 
-        public async Task<LoaiTangCaDto> Handle(DeleteLoaiTangCaCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteLoaiTangCaCommand request, CancellationToken cancellationToken)
         {
-            var userId = _currentUserService.UserId;
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("User ID not found.");
-            }
 
-            var loaiTangCa = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
+
+            var loaiTangCa = await _repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
             if (loaiTangCa == null)
             {
-                throw new NotFoundException("LoaiTangCa not found for deletion");
+                return $"Không tìm thấy trường hợp Loại Tăng Ca với ID : {request.Id} hoặc trường hợp này đã bị xóa.";
             }
-            if (loaiTangCa.NgayXoa != null)
-            {
-                throw new InvalidOperationException("This id has been deleted");
-            }
-            // Soft delete: Set NguoiXoaID and NgayXoa
-            loaiTangCa.NguoiXoaID = userId;
+
+            loaiTangCa.NguoiXoaID = this._currentUserService.UserId;
             loaiTangCa.NgayXoa = DateTime.UtcNow;
 
             _repository.Update(loaiTangCa);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return loaiTangCa.MapToLoaiTangCaDto(_mapper);
+            return "Xóa Loại Tăng Ca thành công";
         }
     }
 }

@@ -26,9 +26,9 @@ namespace NhaMayThep.Application.LuongSanPham.Delete
         public async Task<string> Handle(DeleteLuongSanPhamCommand request, CancellationToken cancellationToken)
         {
 
-            var LuongSanPham = await _LuongSanPhamRepository.FindAsync(x => x.ID == request.ID);
+            var LuongSanPham = await _LuongSanPhamRepository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (LuongSanPham == null)
-                throw new NotFoundException("Luong San Pham is not found");
+                throw new NotFoundException($"Không tìm thấy Sản Phẩm với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
 
             LuongSanPham.NguoiXoaID = _currentUserService.UserId;
             LuongSanPham.NgayXoa = DateTime.Now;
@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.LuongSanPham.Delete
             _LuongSanPhamRepository.Update(LuongSanPham);
             await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Delete Successfully";
+            return "Xóa Lương Sản Phẩm thành công";
         }
     }
 }

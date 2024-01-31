@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongSanPham.Update
 {
-    public class UpdateLuongSanPhamCommand : IRequest<LuongSanPhamDto>, ICommand
+    public class UpdateLuongSanPhamCommand : IRequest<string>, ICommand
     {
         public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPham, int mucSanPhamID, decimal tongLuong)
         {

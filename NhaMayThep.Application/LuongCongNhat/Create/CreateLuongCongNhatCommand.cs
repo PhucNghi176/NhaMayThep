@@ -12,16 +12,16 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
 {
     public class CreateLuongCongNhatCommand : IRequest<string>, ICommand
     {
-        public CreateLuongCongNhatCommand(string id, string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong)
+        public CreateLuongCongNhatCommand( string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong)
         {
-            ID = id;
+
             MaSoNhanVien = maSoNhanVien;
             SoGioLam = soGioLam;
             Luong1Gio = luong1Gio;
             TongLuong = tongLuong;
         }
 
-        public string ID { get; set; }
+
         public string MaSoNhanVien { get; set; }
         public double SoGioLam { get; set; }
         [Column(TypeName = "decimal(18, 4)")]

@@ -29,24 +29,27 @@ namespace NhaMayThep.Application.LuongSanPham.Create
         }
         public async Task<string> Handle(CreateLuongSanPhamCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplicatoion = await _LuongSanPhamRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien, cancellationToken: cancellationToken);
+            var nhanVien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
+            if (nhanVien == null)
+                throw new NotFoundException($"Mã số nhân viên : {request.MaSoNhanVien} không tồn tại hoặc đã xóa.");
+
+            var checkDuplicatoion = await _LuongSanPhamRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Luong San Pham");
 
-            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken: cancellationToken);
-            if (nhanVien == null)
-                throw new NotFoundException("Nhan Vien is not found");
 
-            var mucSanPham = await _mucSanPhamRepository.FindAsync(x => x.ID == request.MucSanPhamID, cancellationToken: cancellationToken);
+
+            var mucSanPham = await _mucSanPhamRepository.FindAsync(x => x.ID == request.MucSanPhamID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (nhanVien == null)
-                throw new NotFoundException("Muc San Pham is not found");
+                throw new NotFoundException("Mức Sản Phẩm Id: " + request.MucSanPhamID + " không tìm thấy");
 
             var LuongSanPham = new LuongSanPhamEntity()
             {
-                ID = request.ID,
+
                 MaSoNhanVien = nhanVien.ID,
                 NhanVien = nhanVien,
                 MucSanPhamID = request.MucSanPhamID,
+                MucSanPham = mucSanPham,
                 TongLuong = request.TongLuong,
                 SoSanPhamLam = request.SoSanPhamLam,
                 NguoiTaoID = _currentUserService.UserId,
@@ -55,7 +58,7 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 
             _LuongSanPhamRepository.Add(LuongSanPham);
             await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return LuongSanPham.ID;
+            return "Tạo Lương Sản Phẩm thành công";
         }
     }
 }

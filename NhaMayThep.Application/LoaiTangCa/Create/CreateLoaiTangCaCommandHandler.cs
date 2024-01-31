@@ -10,33 +10,35 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhaMapThep.Domain.Common.Exceptions;
 
 namespace NhaMayThep.Application.LoaiTangCa.Create
 {
-    public class CreateCommandHandler : IRequestHandler<CreateLoaiTangCaCommand, LoaiTangCaDto>
+    public class CreateCommandHandler : IRequestHandler<CreateLoaiTangCaCommand, string>
 
     {
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly ICurrentUserService _currentUserService;
+        private readonly ILoaiTangCaRepository _loaiTangCaRepository;
         private readonly ILoaiTangCaRepository _repository;
         private readonly IMapper _mapper;
 
 
-        public CreateCommandHandler(INhanVienRepository hanVienRepository, ILoaiTangCaRepository repository, IMapper mapper, ICurrentUserService currentUserService)
+        public CreateCommandHandler(INhanVienRepository hanVienRepository, ILoaiTangCaRepository repository, IMapper mapper, ICurrentUserService currentUserService, ILoaiTangCaRepository loaiTangCaRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _currentUserService = currentUserService;
             _nhanVienRepository = hanVienRepository;
+            _loaiTangCaRepository = loaiTangCaRepository;
         }
 
-        public async Task<LoaiTangCaDto> Handle(CreateLoaiTangCaCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateLoaiTangCaCommand request, CancellationToken cancellationToken)
         {
-            var userId = _currentUserService.UserId;
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("User ID not found.");
-            }
+            var name = await this._loaiTangCaRepository.FindAsync(x => x.ID.Equals(request.Name) && x.NgayXoa == null, cancellationToken);
+            if (name != null)
+                throw new NotFoundException($"Name đã tồn tại");
+
             var loaiTangCaEntity = new LoaiTangCaEntity
             {
                 NguoiTaoID = _currentUserService?.UserId,
@@ -45,7 +47,7 @@ namespace NhaMayThep.Application.LoaiTangCa.Create
             };
             _repository.Add(loaiTangCaEntity);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return loaiTangCaEntity.MapToLoaiTangCaDto(_mapper);
+            return "Tạo Loại Tăng Ca thành công";
 
 
         }

@@ -9,38 +9,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiTangCa.Update
 {
-    public class UpdateLoaiTangCaHandler : IRequestHandler<UpdateLoaiTangCaCommand, LoaiTangCaDto>
+    public class UpdateLoaiTangCaHandler : IRequestHandler<UpdateLoaiTangCaCommand, string>
     {
         private readonly ILoaiTangCaRepository _repository;
         private readonly IMapper _mapper;
         private readonly INhanVienRepository _hanVienRepository;
-        public UpdateLoaiTangCaHandler(ILoaiTangCaRepository repository, IMapper mapper, INhanVienRepository hanVienRepository)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdateLoaiTangCaHandler(ILoaiTangCaRepository repository, IMapper mapper, INhanVienRepository hanVienRepository, ICurrentUserService currentUserService)
         {
             _repository = repository;
             _mapper = mapper;
             _hanVienRepository = hanVienRepository;
+            _currentUserService = currentUserService;
         }
 
-        public async Task<LoaiTangCaDto> Handle(UpdateLoaiTangCaCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLoaiTangCaCommand request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
-            if (lnp == null)
+            var loaiTangCa = await _repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
+            if (loaiTangCa == null)
             {
-                throw new NotFoundException("LoaiTangCa not found for the given ID");
+                return $"Không tìm thấy trường hợp Loại Tăng Ca với ID : {request.Id} hoặc trường hợp này đã bị xóa.";
             }
-            if (lnp.NgayXoa != null)
-            {
-                throw new NotFoundException("This LoaiTangCa has been deleted");
-            }
-            lnp.ID = request.Id;
-            lnp.Name = request.Name ?? lnp.Name;
-            _repository.Update(lnp);
+
+            loaiTangCa.NguoiCapNhatID = this._currentUserService.UserId;
+            loaiTangCa.NgayCapNhat = DateTime.UtcNow;
+            loaiTangCa.Name = request.Name;
+            _repository.Update(loaiTangCa);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<LoaiTangCaDto>(lnp);
+            return "Cập nhật thành công Loại Tăng Ca";
         }
     }
 }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiTangCa.Create
 {
-    public class CreateLoaiTangCaCommand : IRequest<LoaiTangCaDto>, ICommand
+    public class CreateLoaiTangCaCommand : IRequest<string>, ICommand
     {
 
         public string Name { get; set; }

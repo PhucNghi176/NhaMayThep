@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongCongNhat.Update
 {
-    public class UpdateLuongCongNhatCommandHandler : IRequestHandler<UpdateLuongCongNhatCommand, LuongCongNhatDto>
+    public class UpdateLuongCongNhatCommandHandler : IRequestHandler<UpdateLuongCongNhatCommand, string>
     {
         private ILuongCongNhatRepository _LuongCongNhatRepository;
         private INhanVienRepository _nhanVienRepository;
@@ -26,17 +26,18 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
             _mapper = mapper;
             _currentUserService = currentUserService;
         }
-        public async Task<LuongCongNhatDto> Handle(UpdateLuongCongNhatCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLuongCongNhatCommand request, CancellationToken cancellationToken)
         {
+            if (request.MaSoNhanVien != null)
+            {
+                var nhanvien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
+                if (nhanvien == null)
+                    throw new NotFoundException($"Mã số nhân viên : {request.MaSoNhanVien} không tồn tại hoặc đã xóa.");
+            }
 
-
-            var LuongCongNhat = await _LuongCongNhatRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var LuongCongNhat = await _LuongCongNhatRepository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (LuongCongNhat == null)
-                throw new NotFoundException("Dang Vien is not found");
-
-            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (nhanVien == null)
-                throw new NotFoundException("Nhan Vien is not found");
+                throw new NotFoundException($"Không tìm thấy Lương Công Nhật với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
 
             LuongCongNhat.SoGioLam = request.SoGioLam;
             LuongCongNhat.Luong1Gio = request.Luong1Gio;
@@ -47,7 +48,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
             _LuongCongNhatRepository.Update(LuongCongNhat);
             await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return LuongCongNhat.MapToLuongCongNhatDto(_mapper);
+            return "Cập nhật Lương Công Nhật thành công";
         }
     }
 }

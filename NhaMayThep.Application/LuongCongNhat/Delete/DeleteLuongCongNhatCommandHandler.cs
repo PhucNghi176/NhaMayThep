@@ -26,9 +26,9 @@ namespace NhaMayThep.Application.LuongCongNhat.Delete
         public async Task<string> Handle(DeleteLuongCongNhatCommand request, CancellationToken cancellationToken)
         {
 
-            var LuongCongNhat = await _LuongCongNhatRepository.FindAsync(x => x.ID == request.ID);
+            var LuongCongNhat = await _LuongCongNhatRepository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (LuongCongNhat == null)
-                throw new NotFoundException("Luong Cong Nhat is not found");
+                throw new NotFoundException($"Không tìm thấy Lương Công Nhật với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
 
             LuongCongNhat.NguoiXoaID = _currentUserService.UserId;
             LuongCongNhat.NgayXoa = DateTime.Now;
@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Delete
             _LuongCongNhatRepository.Update(LuongCongNhat);
             await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Delete Successfully";
+            return "Xóa Lương Công Nhật thành công";
         }
     }
 }
