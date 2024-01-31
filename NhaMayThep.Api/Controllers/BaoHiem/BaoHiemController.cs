@@ -63,7 +63,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<string>> CreateNew([FromBody] CreateNewBaoHiemCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNew), new { id = result }, new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("bao-hiem/{id}")]
