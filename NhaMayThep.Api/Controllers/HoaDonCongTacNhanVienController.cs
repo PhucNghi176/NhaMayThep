@@ -174,6 +174,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
+        }
         [HttpGet("hoa-don-cong-tac-nhan-vien/{idLoaiHoaDon}/{year}/{month}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

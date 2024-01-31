@@ -96,6 +96,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
+        }
         [HttpGet]
         [Route("can-cuoc-cong-dan/get-by-nhan-vien-id")]
         [ProducesResponseType(typeof(JsonResponse<CanCuocCongDanDto>), StatusCodes.Status200OK)]

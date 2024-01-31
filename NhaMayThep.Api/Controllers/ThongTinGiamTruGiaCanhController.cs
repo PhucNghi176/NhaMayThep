@@ -178,7 +178,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<Dto>>>> GetPagination([FromQuery] GetThongTinGiamTruGiaCanhByPaginationQuery query, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetPagination([FromQuery] GetThongTinGiamTruGiaCanhByPaginationQuery query, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
