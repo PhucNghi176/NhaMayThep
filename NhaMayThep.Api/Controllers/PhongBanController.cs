@@ -14,6 +14,7 @@ using NhaMayThep.Application.LoaiNghiPhep;
 using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.PhongBan.GetAllPhongBan;
+using NhaMayThep.Application.PhongBan.GetByPagination;
 
 
 namespace NhaMayThep.Api.Controllers
@@ -115,7 +116,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<LoaiNghiPhepDto>>>> GetPagination([FromQuery] GetLoaiNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<LoaiNghiPhepDto>>>> GetPagination([FromQuery] GetPhongBanByPaginationQuery query, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

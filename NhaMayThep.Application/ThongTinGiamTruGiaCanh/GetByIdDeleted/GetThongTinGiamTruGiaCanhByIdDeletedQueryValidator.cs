@@ -12,7 +12,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted
         public GetThongTinGiamTruGiaCanhByIdDeletedQueryValidator()
         {
             RuleFor(x => x.Id)
-              .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Id không đúng định dạng");
+                .NotNull().WithMessage("Id không được bỏ trống")
+                .NotEmpty().WithMessage("Id không được rỗng");
         }
     }
 }
