@@ -7,10 +7,11 @@ using NhaMapThep.Application.TrinhDoHocVan.Commands;
 using NhaMayThep.Application.TrinhDoHocVan.Delete;
 using NhaMayThep.Application.TrinhDoHocVan;
 using System.Net.Mime;
-using System.Threading;
-using System.Threading.Tasks;
+
 using NhaMayThep.Application.TrinhDoHocVan.GetById;
 using NhaMayThep.Application.TrinhDoHocVan.GetAll;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
 using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitecture.Api.Controllers
@@ -49,10 +50,10 @@ namespace CleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> DeleteTrinhDoHocVan(
-            [FromBody] DeleteTrinhDoHocVanCommand command,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteTrinhDoHocVanCommand(id: Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 
@@ -106,6 +107,20 @@ namespace CleanArchitecture.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
             return new JsonResponse<List<TrinhDoHocVanDto>>(result);
+        }
+
+        [HttpGet("trinh-do-hoc-van/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<TrinhDoHocVanDto>>>> GetPagination([FromQuery] GetTrinhDoHocVanByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

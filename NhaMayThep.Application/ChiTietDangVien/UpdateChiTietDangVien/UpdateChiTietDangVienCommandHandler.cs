@@ -32,24 +32,24 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
         }
         public async Task<ChiTietDangVienDto> Handle(UpdateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID ==  request.NhanVienID, cancellationToken: cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID ==  request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
-                throw new NotFoundException("Nhan Vien chua co Thong Tin Dang Vien");
+                throw new NotFoundException("Nhân Viên chưa có Thông Tin Đảng Viên");
 
-            var chiTietDangVien = await _chiTietDangVienRepository.FindAsync( x => x.DangVienID == thongTinDangVien.ID , cancellationToken: cancellationToken);
+            var chiTietDangVien = await _chiTietDangVienRepository.FindAsync( x => x.DangVienID == thongTinDangVien.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if(chiTietDangVien == null)
-                throw new NotFoundException("Chi Tiet Dang Vien is not found");
+                throw new NotFoundException("Không tìm thấy Chi Tiết Đàng Viên");
 
-            var dangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.DangVienID, cancellationToken: cancellationToken);
-            if (dangVien == null)
-                throw new NotFoundException("Dang Vien is not found");
+            var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            if (!dangVien)
+                throw new NotFoundException("Không tìm thấy Đảng Viên");
 
-            var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.DonViCongTacID, cancellationToken: cancellationToken);
-            if (donViCongTac == null)
-                throw new NotFoundException("Don Vi Cong Tac is not found");
+            var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            if (!donViCongTac)
+                throw new NotFoundException("Không tìm thấy Đơn Vị Công Tác");
 
-            chiTietDangVien.ThongTinDangVien = dangVien;
-            chiTietDangVien.DonViCongTac = donViCongTac;
+            chiTietDangVien.DangVienID = request.DangVienID; 
+            chiTietDangVien.DonViCongTacID = request.DonViCongTacID;
             chiTietDangVien.ChucVuDang = request.ChucVuDang ;
             chiTietDangVien.TrinhDoChinhTri = request.TrinhDoChinhTri;
 

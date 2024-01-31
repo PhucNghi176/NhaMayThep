@@ -12,19 +12,16 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly IThongTinGiamTruRepository _thongTinGiamTruRepository;
         private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
-        private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         public UpdateThongTinGiamTruGiaCanhCommandHandler(
             IThongTinGiamTruRepository thongTinGiamTruRepository,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanhRepository,
             ICanCuocCongDanRepository canCuocCongDanRepository,
-            IMapper mapper,
             ICurrentUserService currentUserService)
         {
             _thongTinGiamTruGiaCanhRepository = thongTinGiamTruGiaCanhRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
             _canCuocCongDanRepository = canCuocCongDanRepository;
-            _mapper = mapper;
             _currentUserService = currentUserService;
         }
         public async Task<string> Handle(UpdateThongTinGiamTruGiaCanhCommand request, CancellationToken cancellationToken)
@@ -34,12 +31,6 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             if (giamtru == null || (giamtru.NguoiXoaID != null && giamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
-            }
-            var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan, cancellationToken);
-            if (thongtingiamtruCur != null || (thongtingiamtruCur != null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
-            {
-                throw new NotFoundException("Căn cước công dân này đã có thông tin miễn trừ gia cảnh hoặc đã bị vô hiệu hóa trước đó");
             }
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
                 .FindAsync(x => x.ID.Equals(request.Id),cancellationToken);
@@ -52,6 +43,10 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             if (cccd == null || (cccd.NguoiXoaID != null && cccd.NgayXoa.HasValue))
             {
                 throw new NotFoundException($"Căn cước công dân {request.CanCuocCongDan} không tồn tại hoặc đã bị vô hiệu hóa trước đó");
+            }
+            if (!cccd.NhanVienID.Equals(thongtingiamtru.NhanVienID))
+            {
+                throw new NotFoundException($"Căn cước công dân không phải của nhân viên này");
             }
             thongtingiamtru.NguoiCapNhatID = _currentUserService.UserId;
             thongtingiamtru.NgayCapNhatCuoi = DateTime.Now;

@@ -33,13 +33,13 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new UnauthorizedAccessException("User ID not found.");
+                throw new UnauthorizedAccessException("User ID không tìm thấy");
             }
             var loaiNghiPhepEntity = new LoaiNghiPhepEntity
             {
                 NguoiTaoID = _currentUserService?.UserId,
                 Name = request.Name,
-                SoGioNghiPhep = request.SoGioNghiPhep
+                
             };
             _repository.Add(loaiNghiPhepEntity);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);

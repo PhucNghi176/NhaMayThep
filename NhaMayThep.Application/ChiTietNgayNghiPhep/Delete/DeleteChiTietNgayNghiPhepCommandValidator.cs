@@ -12,7 +12,7 @@ class DeleteChiTietNgayNghiPhepCommandValidator : AbstractValidator<DeleteChiTie
         private void ConfigureValidationRules()
         {
             RuleFor(command => command.Id)
-                .NotEmpty().WithMessage("ID is required for deletion.");
+                .NotEmpty().WithMessage("ID không để trống.");
 
           
         }

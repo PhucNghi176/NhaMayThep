@@ -6,13 +6,14 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
 {
-    public class CreateTinhTrangLamViecCommandHandler : IRequestHandler<CreateTinhTrangLamViecCommand, TinhTrangLamViecDTO>
+    public class CreateTinhTrangLamViecCommandHandler : IRequestHandler<CreateTinhTrangLamViecCommand, string>
     {
         private readonly ITinhTrangLamViecRepository _repository;
         private readonly IMapper _mapper;
@@ -24,8 +25,10 @@ namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
             _mapper = mapper;
         }
         public CreateTinhTrangLamViecCommandHandler() { }
-        public async Task<TinhTrangLamViecDTO> Handle(CreateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateTinhTrangLamViecCommand request, CancellationToken cancellationToken)
         {
+            if (await this._repository.FindAsync(x => x.Name.Equals(request.Name) && x.NgayXoa == null, cancellationToken) != null)
+                throw new DuplicateNameException($"Đã tồn tại tình trạng làm việc có tên : {request.Name}.");
             var tinhtranglamviec = new TinhTrangLamViecEntity
             {
                 Name = request.Name,
@@ -34,7 +37,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
             };
             _repository.Add(tinhtranglamviec);
             await _repository.UnitOfWork.SaveChangesAsync();
-            return tinhtranglamviec.MapToTinhTrangLamViecDTO(_mapper);
+            return $"Tạo thành công tình trạng làm việc có tên : {request.Name}.";
         }
     }
 }

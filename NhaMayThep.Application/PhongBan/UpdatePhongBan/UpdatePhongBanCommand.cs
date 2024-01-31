@@ -10,12 +10,6 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
             ID = id;
             Name = name;
         }
-        public void NguoiCapNhat(string? value)
-        {
-            NguoiCapNhatID = value;
-        }
-        
-        public string? NguoiCapNhatID {  get; set; }
         public int ID { get; set; }
         public string Name { get; set; }
     }

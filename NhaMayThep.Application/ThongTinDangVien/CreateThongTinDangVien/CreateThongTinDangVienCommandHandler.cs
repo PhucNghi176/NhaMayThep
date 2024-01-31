@@ -27,19 +27,17 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
         }
         public async Task<string> Handle(CreateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplicatoion = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID, cancellationToken: cancellationToken);
+            var checkDuplicatoion = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
-                throw new NotFoundException("Nhan Vien" + request.NhanVienID + "da ton tai Thong Tin Dang Vien");
+                throw new NotFoundException("Nhân Viên " + request.NhanVienID + " đã tồn tại Thông Tin Đảng Viên");
 
-            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.NhanVienID, cancellationToken: cancellationToken);
-            if (nhanVien == null)
-                throw new NotFoundException("Nhan Vien is not found");
+            var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            if (!nhanVien)
+                throw new NotFoundException("Không tìm thấy Nhân Viên");
 
             var thongTinDangVien = new ThongTinDangVienEntity()
             {
-                ID = request.ID,
-                NhanVienID =nhanVien.ID,
-                NhanVien = nhanVien,
+                NhanVienID =request.NhanVienID,
                 NgayVaoDang = request.NgayVaoDang,
                 CapDangVien = request.CapDangVien,
                 NguoiTaoID = _currentUserService.UserId,

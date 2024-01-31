@@ -10,6 +10,8 @@ using NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh;
 using System.Net.Mime;
 using NhaMayThep.Application.ThongTinChucDanh;
 using Microsoft.AspNetCore.Authorization;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.ThongTinChucDanh.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 {
@@ -25,29 +27,29 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
 
         [HttpPost("chuc-danh")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<int>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<int>>> CreateNewHopDong([FromBody] CreateNewChucDanhCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> CreateNewChucDanh([FromBody] CreateNewChucDanhCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewHopDong), new { id = result }, new JsonResponse<int>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("chuc-danh/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(string), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<string>> RemoveHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> RemoveChucDanh([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteChucDanhCommand(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("chuc-danh")]
@@ -61,7 +63,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
         public async Task<ActionResult<JsonResponse<List<ChucDanhDto>>>> GetAll(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllChucDanhQuery(), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<List<ChucDanhDto>>(result));
         }
 
         [HttpGet("chuc-danh/{id}")]
@@ -75,24 +77,35 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucDanh
         public async Task<ActionResult<JsonResponse<ChucDanhDto>>> GetById([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetChucDanhByIdQuery(id: id), cancellationToken);
-            return result == null ? BadRequest() : Ok(result);
+            return Ok(new JsonResponse<ChucDanhDto>(result));
         }
-        [HttpPut("chuc-danh/{id}")]
+
+        [HttpPut("chuc-danh")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<ChucDanhDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ChucDanhDto>>> UpdateHopDong([FromRoute] int id, [FromBody] UpdateChucDanhCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> UpdateChucDanh([FromBody] UpdateChucDanhCommand command, CancellationToken cancellationToken = default)
         {
-            if (command.Id == default)
-                command.Id = id;
-            if (id != command.Id)
-                return BadRequest();
             var result = await _mediator.Send(command, cancellationToken);
-            return result == null ? NotFound() : Ok(result);
+            return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("chuc-danh/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucDanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucDanhDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ChucDanhDto>>>> GetPagination([FromQuery] GetChucDanhByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

@@ -35,6 +35,11 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             {
                 throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
+            var magiamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID);
+            if(magiamtru == null || (magiamtru.NguoiXoaID!= null && magiamtru.NgayXoa.HasValue))
+            {
+                throw new NotFoundException("Mã giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
+            }
             var giamtru = await _thongTinGiamTruRepository
                    .FindAsync(x => x.ID == request.MaGiamTruID, cancellationToken);
             if (giamtru == null || (giamtru.NguoiXoaID != null && giamtru.NgayXoa.HasValue))
@@ -47,9 +52,13 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
             {
                 throw new NotFoundException("Căn cước công dân không tồn tại hoặc đã bị vô hiệu hóa");
             }
+            if (!cccd.NhanVienID.Equals(nhanvien.ID))
+            {
+                throw new NotFoundException("Không đúng số căn cước công dân của nhân viên");
+            }
             var thongtingiamtruCur = await _thongTinGiamTruGiaCanhRepository
                     .FindAsync(x => x.CanCuocCongDan == cccd.CanCuocCongDan, cancellationToken);
-            if (thongtingiamtruCur != null || (thongtingiamtruCur !=null && thongtingiamtruCur.NguoiXoaID != null && thongtingiamtruCur.NgayXoa.HasValue))
+            if (thongtingiamtruCur != null)
             {
                 throw new NotFoundException("Thông tin miễn trừ gia cảnh cho căn cước công dân này đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }

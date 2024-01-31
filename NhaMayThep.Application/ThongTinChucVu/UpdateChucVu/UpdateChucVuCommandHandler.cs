@@ -2,27 +2,39 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinChucVu.UpdateChucVu
 {
-    public class UpdateChucVuCommandHandler : IRequestHandler<UpdateChucVuCommand, ChucVuDto>
+    public class UpdateChucVuCommandHandler : IRequestHandler<UpdateChucVuCommand, string>
     {
         private readonly IChucVuRepository _chucVuRepository;
-        private readonly IMapper _mapper;
-        public UpdateChucVuCommandHandler(IChucVuRepository chucVuRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdateChucVuCommandHandler(IChucVuRepository chucVuRepository, ICurrentUserService currentUserService)
         {
             _chucVuRepository = chucVuRepository;
-            _mapper = mapper;
+            _currentUserService = currentUserService;
         }
-        public async Task<ChucVuDto> Handle(UpdateChucVuCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateChucVuCommand command, CancellationToken cancellationToken)
         {
-            var result = await _chucVuRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var duplicate = await _chucVuRepository.AnyAsync(x => x.Name == command.Name && x.NgayXoa == null, cancellationToken);
+            if (duplicate)
+                throw new NotFoundException("Đã có tên chức vụ này trong hệ thống");
+
+            var result = await _chucVuRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)
-                throw new NotFoundException($"Not found chuc vu {command.Id}");
+                throw new NotFoundException($"Không tìm thấy chức vụ với id: {command.Id}");
+
             result.Name = command.Name;
+            result.NguoiCapNhatID = _currentUserService.UserId;
+            result.NgayCapNhat = DateTime.Now;
             _chucVuRepository.Update(result);
-            await _chucVuRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return result.MapToChucVuDto(_mapper);
+
+            if (await _chucVuRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
+
         }
     }
 }
