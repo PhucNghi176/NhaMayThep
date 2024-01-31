@@ -22,8 +22,10 @@ namespace NhaMayThep.Application.LuongCongNhat.GetAll
 
         public async Task<List<LuongCongNhatDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAllAsync(c => c.NgayXoa == null, cancellationToken);
-            return lnp.MapToLuongCongNhatDtoList(_mapper);
+            var LuongCongNhat = await this._repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
+            if (LuongCongNhat == null)
+                throw new NotFoundException("Không tìm thấy bất kỳ Lương Công Nhật nào.");
+            return LuongCongNhat.MapToLuongCongNhatDtoList(_mapper).ToList();
         }
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.LuongSanPham;
 using System;
@@ -22,8 +23,11 @@ namespace NhaMayThep.Application.LuongSanPham.GetAll
 
         public async Task<List<LuongSanPhamDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAllAsync(c => c.NgayXoa == null, cancellationToken);
-            return lnp.MapToLuongSanPhamDtoList(_mapper);
+            var LuongSanPham = await this._repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
+            if (LuongSanPham == null)
+                throw new NotFoundException("Không tìm thấy bất kỳ Lương Sản Phẩm nào.");
+            return LuongSanPham.MapToLuongSanPhamDtoList(_mapper).ToList();
+
         }
     }
 }

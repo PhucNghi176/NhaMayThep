@@ -51,7 +51,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LuongCongNhatDto>>(result));
         }
 
-        [HttpPut("UpdateLuongCongNhat/{nhanVienId}")]
+        [HttpPut("UpdateLuongCongNhat")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -59,17 +59,14 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> UpdateLuongCongNhat(
-            [FromRoute] string nhanVienId,
+
             [FromBody] UpdateLuongCongNhatCommand command,
             CancellationToken cancellationToken = default)
-        {
-            if (command.MaSoNhanVien == default)
-            {
-                command.MaSoNhanVien = nhanVienId;
-            }
+        { 
+
 
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<LuongCongNhatDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("DeleteLuongCongNhat/{id}")]
@@ -88,7 +85,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("getLuongCongNhatById/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

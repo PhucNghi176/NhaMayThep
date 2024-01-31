@@ -12,9 +12,7 @@ namespace NhaMayThep.Application.LuongSanPham.Create
     {
         public CreateLuongSanPhamCommandValidator()
         {
-            RuleFor(x => x.ID)
-                .NotEmpty().WithMessage("ID không được để trống.")
-                .MaximumLength(450).WithMessage("ID không vượt quá 450 kí tự.");
+
 
             RuleFor(x => x.MaSoNhanVien)
                 .NotEmpty().WithMessage("NhanVienID không được để trống.")

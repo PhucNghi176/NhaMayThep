@@ -9,7 +9,7 @@ using NhaMayThep.Application.LoaiTangCa;
 using System.Net.Mime;
 using NhaMayThep.Application.LoaiTangCa.GetId;
 using NhaMayThep.Application.LoaiTangCa.Delete;
-using NhaMayThep.Application.KhenThuong.UpdateKhenThuong;
+
 using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
@@ -66,7 +66,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("getAllLoaiTangCa")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,7 +78,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<List<LoaiTangCaDto>>(result);
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("getLoaiTangCaById/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -61,6 +61,8 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IKhenThuongRepository, KhenThuongRepository>();
             services.AddTransient<ILoaiTangCaRepository, LoaiTangCaRepository>();
             services.AddTransient<ILuongCongNhatRepository, LuongCongNhatRepository>();
+            services.AddTransient<ILuongSanPhamRepository, LuongSanPhamRepository>();
+            services.AddTransient<IKhaiBaoTangLuongRepository, KhaiBaoTangLuongRepository>();
             return services;
         }
     }

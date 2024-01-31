@@ -22,8 +22,10 @@ namespace NhaMayThep.Application.LoaiTangCa.GetAll
 
         public async Task<List<LoaiTangCaDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAllAsync(c => c.NgayXoa == null, cancellationToken);
-            return lnp.MapToLoaiTangCaDtoList(_mapper);
+            var LoaiTangCa = await this._repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
+            if (LoaiTangCa == null)
+                throw new NotFoundException("Không tìm thấy bất kỳ Loại Tăng Ca nào.");
+            return LoaiTangCa.MapToLoaiTangCaDtoList(_mapper).ToList();
         }
     }
 }

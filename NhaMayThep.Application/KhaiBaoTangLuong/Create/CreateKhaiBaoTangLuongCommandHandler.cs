@@ -25,18 +25,12 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
         }
         public async Task<string> Handle(CreateKhaiBaoTangLuongCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplicatoion = await _KhaiBaoTangLuongRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien, cancellationToken: cancellationToken);
-            if (checkDuplicatoion != null)
-                throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Khai Bao Tang Luong");
-
-            var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken: cancellationToken);
-            
+            var nhanVien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
             if (nhanVien == null)
-                throw new NotFoundException("Nhan Vien is not found");
-
+                throw new NotFoundException($"Không tìm thấy nhân viên với ID : {request.MaSoNhanVien} hoặc nhân viên này đã bị xóa.");
             var KhaiBaoTangLuong = new KhaiBaoTangLuongEntity()
             {
-                ID = request.ID,
+
                 MaSoNhanVien = nhanVien.ID,
                 NhanVien = nhanVien,
                 PhanTramTang = request.PhanTramTang,
@@ -48,7 +42,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 
             _KhaiBaoTangLuongRepository.Add(KhaiBaoTangLuong);
             await _KhaiBaoTangLuongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return KhaiBaoTangLuong.ID;
+            return "Tạo Khai Báo Tăng Lương thành công";
         }
     }
 }
