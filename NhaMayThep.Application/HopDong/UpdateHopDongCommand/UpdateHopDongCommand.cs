@@ -24,6 +24,10 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
             PhuCapId = phuCapId;
             GhiChu = ghiChu;
         }
+        public UpdateHopDongCommand()
+        {
+            
+        }
 
         public string Id { get; set; }
         public int LoaiHopDongId { get; set; }
