@@ -13,6 +13,9 @@ using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrinhNha
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.UpdateThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.DeleteThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetAllThongTinQuaTrinhNhanSu;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -26,6 +29,20 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
+        [HttpGet("thong-tin-qua-trinh-nhan-su")]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinQuaTrinhNhanSuDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<ThongTinQuaTrinhNhanSuDto>>>> getAllPhongBan(
+            CancellationToken cancellationToken = default)
+        {
+            var result = await this._mediator.Send(new GetAllThongTinQuaTrinhNhanSuQuery(), cancellationToken);
+            return result != null ? Ok(new JsonResponse<List<ThongTinQuaTrinhNhanSuDto>>(result)) : NotFound();
+        }
+
         [HttpPost("qua-trinh-nhan-su")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
