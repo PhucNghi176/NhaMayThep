@@ -81,7 +81,7 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
             var result = await this._mediator.Send(command, cancellationToken);
             return new JsonResponse<string>(result);
         }
-        [HttpDelete("KhenThuong")]
+        [HttpDelete("KhenThuong/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -90,10 +90,10 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> deleteKhenThuong(
-            [FromBody] DeleteKhenThuongCommand command,
+            [FromRoute] string Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await this._mediator.Send(command, cancellationToken);
+            var result = await this._mediator.Send(new DeleteKhenThuongCommand(Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
     }
