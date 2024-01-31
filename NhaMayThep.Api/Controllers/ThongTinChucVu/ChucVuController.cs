@@ -79,6 +79,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
             var result = await _mediator.Send(new GetChucVuByIdQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<ChucVuDto>(result));
         }
+
         [HttpPut("chuc-vu")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -92,6 +93,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+
         [HttpGet("chuc-vu/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ChucVuDto>>), StatusCodes.Status201Created)]

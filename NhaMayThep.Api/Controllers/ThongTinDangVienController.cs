@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.DonViCongTac;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac;
@@ -12,6 +13,7 @@ using NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVien;
+using NhaMayThep.Application.ThongTinDangVien.GetByPagination;
 using NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien;
 using System.Net.Mime;
 
@@ -100,6 +102,20 @@ namespace NhaMayThep.Api.Controllers
 
             var result = await _mediator.Send(new DeleteThongTinDangVienCommand(id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("thong-tin-dang-vien/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinDangVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinDangVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinDangVienDto>>>> GetPagination([FromQuery] GetThongTinDangVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

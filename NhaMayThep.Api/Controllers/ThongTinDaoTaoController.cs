@@ -11,6 +11,8 @@ using NhaMayThep.Application.ThongTinDaoTao.GetById;
 using NhaMayThep.Application.ThongTinDaoTao.GetAll;
 using NhaMayThep.Application.ThongTinDaoTao.Create;
 using NhaMayThep.Application.ThongTinDaoTao.Update;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.ThongTinDaoTao.GetByPagination;
 using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
@@ -106,6 +108,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
             return new JsonResponse<List<ThongTinDaoTaoDto>>(result);
+        }
+
+        [HttpGet("thong-tin-dao-tao/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinDaoTaoDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinDaoTaoDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinDaoTaoDto>>>> GetPagination([FromQuery] GetThongTinDaoTaoByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
