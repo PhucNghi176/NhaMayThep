@@ -34,7 +34,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
         public async Task<ActionResult<JsonResponse<string>>> CreateNewThongTinPhuCap([FromBody] CreateNewPhuCapCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewThongTinPhuCap), new { id = result }, new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("thong-tin-phu-cap/{id}")]

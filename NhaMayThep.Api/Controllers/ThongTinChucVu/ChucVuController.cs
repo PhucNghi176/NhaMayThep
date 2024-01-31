@@ -16,7 +16,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThongTinChucVu
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ChucVuController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -36,7 +36,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         public async Task<ActionResult<JsonResponse<string>>> CreateNewChucVu([FromBody] CreateNewChucVuCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewChucVu), new { id = result }, new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("chuc-vu/{id}")]
@@ -81,16 +81,16 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         }
         [HttpPut("chuc-vu")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ChucVuDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<ChucVuDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ChucVuDto>>> UpdateChucVu([FromBody] UpdateChucVuCommand command, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> UpdateChucVu([FromBody] UpdateChucVuCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ChucVuDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
         [HttpGet("chuc-vu/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]

@@ -7,7 +7,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
 {
-    public class UpdateHopDongCommandHandler : IRequestHandler<UpdateHopDongCommand, HopDongDto>
+    public class UpdateHopDongCommandHandler : IRequestHandler<UpdateHopDongCommand, string>
     {
         private readonly IHopDongRepository _hopDongRepository;
         private readonly ICapBacLuongRepository _capBacLuongRepository;
@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
             _currentUserService = currentUserService;
         }
 
-        public async Task<HopDongDto> Handle(UpdateHopDongCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateHopDongCommand command, CancellationToken cancellationToken)
         {
 
             var checkingHopDong = await _hopDongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
@@ -71,8 +71,10 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
             checkingHopDong.NgayCapNhatCuoi = DateTime.Now;
             checkingHopDong.NguoiCapNhatID = _currentUserService.UserId;
             _hopDongRepository.Update(checkingHopDong);
-            await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return checkingHopDong.MapToHopDongDto(_mapper);
+            if (await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }

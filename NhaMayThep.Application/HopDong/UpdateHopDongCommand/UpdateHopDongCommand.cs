@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
 {
-    public class UpdateHopDongCommand : IRequest<HopDongDto>, ICommand
+    public class UpdateHopDongCommand : IRequest<string>, ICommand
     {
         public UpdateHopDongCommand(string id, int loaiHopDongId, DateTime ngayKyHopDong, DateTime ngayKetThucHopDong
                                                         , int thoiHanHopDong, string diaDiemLamViec, string boPhanLamViec, int chucDanhId
