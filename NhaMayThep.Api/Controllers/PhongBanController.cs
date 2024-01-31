@@ -9,12 +9,16 @@ using NhaMayThep.Application.PhongBan.DeletePhongBan;
 using Microsoft.AspNetCore.Authorization;
 using System.Net.Mime;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.LoaiNghiPhep;
+using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
+using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.PhongBan.GetAllPhongBan;
 
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     [Authorize]
     public class PhongBanController : ControllerBase
     {
@@ -52,6 +56,20 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new GetPhongBanQuery(id: id), cancellationToken);
             return result != null ? Ok(new JsonResponse<PhongBanDto>(result)) : NotFound();
         }
+        
+        [HttpGet("phong-ban")]
+        [ProducesResponseType(typeof(JsonResponse<List<PhongBanDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<PhongBanDto>>>> getAllPhongBan(
+            CancellationToken cancellationToken = default)
+        {
+            var result = await this._mediator.Send(new GetAllPhongBanQuery(), cancellationToken);
+            return result != null ? Ok(new JsonResponse<List<PhongBanDto>>(result)) : NotFound();
+        }
 
         [HttpPut("phong-ban/{id}")]
         [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
@@ -87,6 +105,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeletePhongBanCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("loai-nghi-phep/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiNghiPhepDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiNghiPhepDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<LoaiNghiPhepDto>>>> GetPagination([FromQuery] GetLoaiNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

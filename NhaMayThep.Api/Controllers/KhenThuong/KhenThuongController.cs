@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Security;
 using NhaMayThep.Application.KhenThuong;
 using NhaMayThep.Application.KhenThuong.CreateKhenThuong;
 using NhaMayThep.Application.KhenThuong.DeleteKhenThuong;
@@ -13,6 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.KhenThuong
 {
     [ApiController]
+    [Authorize]
     public class KhenThuongController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -79,7 +81,7 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
             var result = await this._mediator.Send(command, cancellationToken);
             return new JsonResponse<string>(result);
         }
-        [HttpDelete("KhenThuong")]
+        [HttpDelete("KhenThuong/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -88,10 +90,10 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> deleteKhenThuong(
-            [FromBody] DeleteKhenThuongCommand command,
+            [FromRoute] string Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await this._mediator.Send(command, cancellationToken);
+            var result = await this._mediator.Send(new DeleteKhenThuongCommand(Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
     }

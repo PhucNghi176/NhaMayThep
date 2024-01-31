@@ -1,10 +1,13 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMapThep.Application.Common.Security;
 using NhaMayThep.Application.ThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.GetAllThongTinGiamTru;
+using NhaMayThep.Application.ThongTinGiamTru.GetByPagination;
 using NhaMayThep.Application.ThongTinGiamTru.GetThongTinGiamTruById;
 using NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru;
 using System.Net.Mime;
@@ -12,6 +15,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class ThongTinGiamTruController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -23,6 +27,7 @@ namespace NhaMayThep.Api.Controllers
         [Route("Thong-Tin-Giam-Tru")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<ThongTinGiamTruDTO>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinGiamTruDTO>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -35,7 +40,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpGet]
         [Route("Thong-Tin-Giam-Tru/{Id}")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<ThongTinGiamTruDTO>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<ThongTinGiamTruDTO>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -49,7 +56,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPost]
         [Route("Thong-Tin-Giam-Tru")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -63,7 +72,9 @@ namespace NhaMayThep.Api.Controllers
         }
         [HttpPut]
         [Route("Thong-Tin-Giam-Tru")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -77,18 +88,34 @@ namespace NhaMayThep.Api.Controllers
 
         }
         [HttpDelete]
-        [Route("Thong-Tin-Giam-Tru")]
+        [Route("Thong-Tin-Giam-Tru/{Id}")]
+        [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<string>> DeleteThongTinGiamTru(
-            [FromBody] DeleteThongTinGiamTruCommand command,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command,cancellationToken);
+            var result = await _mediator.Send(new DeleteThongTinGiamTruCommand(Id),cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("thong-tin-giam-tru/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruDTO>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruDTO>>>> GetPagination([FromQuery] GetThongTinGiamTruByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

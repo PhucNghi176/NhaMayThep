@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.GetHangLoat;
 using NhaMayThep.Application.GetHangLoat.GetHangLoatHopDong;
 using NhaMayThep.Application.GetHangLoat.GetHangLoatNhanVien;

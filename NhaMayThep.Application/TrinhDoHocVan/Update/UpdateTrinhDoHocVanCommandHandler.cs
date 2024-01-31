@@ -19,6 +19,12 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
 
         public async Task Handle(UpdateTrinhDoHocVanCommand request, CancellationToken cancellationToken)
         {
+            var existingTrinhDoHocVan = await _repository.AnyAsync(x => x.ID != request.Id && x.Name == request.TenTrinhDo && x.NgayXoa == null, cancellationToken);
+
+            if (existingTrinhDoHocVan)
+            {
+                throw new NotFoundException("Trình Độ Học Vấn đã tồn tại.");
+            }
             var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
 
             if (entity == null || entity.NgayXoa != null)

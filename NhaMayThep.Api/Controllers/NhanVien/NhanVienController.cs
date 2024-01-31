@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.NhanVien;
+using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
@@ -13,8 +14,11 @@ using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVienTest;
-using NhaMayThep.Application.NhanVien.GetUser;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
+using Humanizer;
+using NhaMapThep.Application.Common.Pagination;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
@@ -56,7 +60,7 @@ namespace NhaMayThep.Api.Controllers
                                   CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
-            var token = _jwtService.CreateToken(result.Email, result.ID, result.ChucVu);
+            var token = _jwtService.CreateToken(result.ID, result.ChucVu);
             return Ok(new JsonResponse<string>(token));
         }
 
@@ -152,11 +156,26 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+
+        [HttpGet("nhan-vien/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> GetPagination([FromQuery] GetNhanVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
         [HttpGet("nhan-vien/get-all-test")]
         [Produces(MediaTypeNames.Application.Json)]
         public async Task<ActionResult<List<NhanVienDto>>> Test(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
+
     }
 }

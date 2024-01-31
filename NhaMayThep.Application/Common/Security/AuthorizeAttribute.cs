@@ -4,6 +4,7 @@
     /// Specifies the class this attribute is applied to requires authorization.
     /// </summary>
 
+    [AttributeUsage(AttributeTargets.All)]
     public class AuthorizeAttribute : Attribute
     {
         /// <summary>

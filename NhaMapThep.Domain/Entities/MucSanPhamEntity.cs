@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMapThep.Domain.Entities.ConfigTable
+namespace NhaMapThep.Domain.Entities
 {
     [Table("MucSanPham")]
     public class MucSanPhamEntity : BangMaGocEntity

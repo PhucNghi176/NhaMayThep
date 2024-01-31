@@ -10,11 +10,14 @@ using System.Net.Mime;
 
 using NhaMayThep.Application.TrinhDoHocVan.GetById;
 using NhaMayThep.Application.TrinhDoHocVan.GetAll;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitecture.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TrinhDoHocVanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -23,8 +26,8 @@ namespace CleanArchitecture.Api.Controllers
         {
             _mediator = mediator;
         }
-
-        [HttpPost("create")]
+        
+        [HttpPost("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,7 +42,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete/{Id}")]
+        [HttpDelete("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -54,7 +57,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpPut("update")]
+        [HttpPut("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -77,7 +80,7 @@ namespace CleanArchitecture.Api.Controllers
         }
 
 
-        [HttpGet("getBy/{id}")]
+        [HttpGet("trinh-do-hoc-van/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<TrinhDoHocVanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -92,7 +95,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<TrinhDoHocVanDto>(result);
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<TrinhDoHocVanDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -104,6 +107,20 @@ namespace CleanArchitecture.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
             return new JsonResponse<List<TrinhDoHocVanDto>>(result);
+        }
+
+        [HttpGet("trinh-do-hoc-van/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<TrinhDoHocVanDto>>>> GetPagination([FromQuery] GetTrinhDoHocVanByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

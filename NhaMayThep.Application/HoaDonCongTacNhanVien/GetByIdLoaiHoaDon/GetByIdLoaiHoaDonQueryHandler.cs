@@ -26,20 +26,26 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon
 
         public async Task<List<HoaDonCongTacNhanVienDto>> Handle(GetByIdLoaiHoaDonQuery request, CancellationToken cancellationToken)
         {
-            var list = await _hoaDonCongTacNhanVienRepository.FindAllAsync(x =>
-             x.LoaiHoaDonID == request.idLoaiHoaDon &&
-            !x.NgayXoa.HasValue &&
-             x.DuongDanFile.Contains($"/{request.year}/{request.month}/"),
-             cancellationToken);
+            int idLoaiHoaDon = request.idLoaiHoaDon;
+            int year = request.year;
+            int month = request.month;
 
-            var loaiHoaDon = await _loaiHoaDonRepository.FindAsync(x => x.ID == request.idLoaiHoaDon, cancellationToken);
-            if (loaiHoaDon == null)
+            var list = await _hoaDonCongTacNhanVienRepository.FindAllAsync(x =>
+                (idLoaiHoaDon == 0 || x.LoaiHoaDonID == idLoaiHoaDon) &&
+                (year == 0 || x.DuongDanFile.Contains($"/{year}/")) &&
+                (month == 0 || x.DuongDanFile.Contains($"/{month}/"))
+                && !x.NgayXoa.HasValue,
+                cancellationToken);
+
+            var exist = await _loaiHoaDonRepository.FindAsync(x => x.ID == idLoaiHoaDon && !x.NgayXoa.HasValue, cancellationToken);
+            if (exist == null && idLoaiHoaDon != 0)
             {
-                throw new NotFoundException("Loại Công Tác Trên không Tồn Tại");
+                throw new NotFoundException("Loại Hóa Đơn trên Không tồn Tại");
             }
+
             if (list == null || !list.Any())
             {
-                throw new NotFoundException($"Không Tìm Thấy Tệp tin nào Tại Loại Hóa Đon : {loaiHoaDon.Name} vào năm : {request.year}, tháng : {request.month} ");
+                throw new NotFoundException("Không Tìm Thấy Tệp tin nào");
             }
             return list.MapToHoaDonCongTacNhanVienDtoList(_mapper);
         }

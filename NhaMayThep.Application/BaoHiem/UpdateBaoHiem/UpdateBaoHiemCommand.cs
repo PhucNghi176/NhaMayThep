@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiem.UpdateBaoHiem
 {
-    public class UpdateBaoHiemCommand : IRequest<BaoHiemDto>
+    public class UpdateBaoHiemCommand : IRequest<string>
     {
         public int Id { get; set; }
         public string TenLoaiBaoHiem {  get; set; }

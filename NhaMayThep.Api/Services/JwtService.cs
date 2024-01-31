@@ -7,28 +7,27 @@ using System.Text;
 
 namespace NhaMayThep.Api.Services
 {
-    internal class JwtService : IJwtService
+    public class JwtService : IJwtService
     {
-        public string CreateToken(string email, string ID, string roles)
+        public string CreateToken(string ID, string roles)
         {
             var claims = new List<Claim>
             {
-                //new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtClaimTypes.Subject, ID),
-              //  new Claim(JwtClaimTypes.Email, email),
-                new Claim(JwtClaimTypes.Role, roles)
+
+                new(JwtRegisteredClaimNames.Sub, ID),
+                new(ClaimTypes.Role, roles)
             };
 
-          
+
 
             var key = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRM Nh@ M@y Th3p!!!"));
             var creds = new SigningCredentials(key, SecurityAlgorithms.HmacSha256);
 
             var token = new JwtSecurityToken(
-               // issuer: "test",
-               // audience: "api",
+                // issuer: "test",
+                // audience: "api",
                 claims: claims,
-                expires: DateTime.Now.AddHours(1),
+                expires: DateTime.Now.AddDays(1),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);
