@@ -1,5 +1,7 @@
 ﻿using Humanizer;
 using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
@@ -8,6 +10,7 @@ using NhaMayThep.Application.HoaDonCongTacNhanVien;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.Create;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.DowloadFile;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetAll;
+using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdNguoiTao;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByPagination;
 using System.Net.Mime;
@@ -16,8 +19,9 @@ using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
+   
     [ApiController]
+    [Authorize]
     public class HoaDonCongTacNhanVienController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -96,7 +100,7 @@ namespace NhaMayThep.Api.Controllers
         //    }
         //}
 
-        [HttpPost("uploadFile")]
+        [HttpPost("hoa-don-cong-tac-nhan-vien/uploadFile")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -117,7 +121,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("dowloadFile")]
+        [HttpGet("hoa-don-cong-tac-nhan-vien/dowloadFile")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -132,7 +136,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpGet("getAll")]
+        [HttpGet("hoa-don-cong-tac-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -145,13 +149,13 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
         }
 
-        [HttpGet("getByNguoiTao")]
+        [HttpGet("hoa-don-cong-tac-nhan-vien/{idNguoiTao}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> GetByNguoiTao(string idNguoiTao ,CancellationToken cancellationToken = default)
+        public async Task<ActionResult> GetByNguoiTao([FromRoute] string idNguoiTao ,CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetByIdNguoiTaoQuery(idNguoiTao), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
@@ -170,6 +174,21 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
+        [HttpGet("hoa-don-cong-tac-nhan-vien/{idLoaiHoaDon}/{year}/{month}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult> GetByLoaiHoaDon(
+            [FromRoute] int idLoaiHoaDon,
+            [FromRoute] int year,
+            [FromRoute] int month,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetByIdLoaiHoaDonQuery(idLoaiHoaDon,year,month), cancellationToken);
+            //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
+            return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
         }
     }
 }

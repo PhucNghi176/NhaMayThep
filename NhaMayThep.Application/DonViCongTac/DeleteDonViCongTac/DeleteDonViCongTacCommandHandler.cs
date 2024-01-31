@@ -29,15 +29,15 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
         {
             var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (donViCongTac == null)
-                throw new NotFoundException("Không tìm thấy Đơn Vị Công Tác");
-
+                throw new NotFoundException($"Không tìm thấy đơn vị công tác với ID : {request.ID}");
             donViCongTac.NguoiXoaID = _currentUserService.UserId;
             donViCongTac.NgayXoa = DateTime.Now;
 
             _donViCongTacRepository.Update(donViCongTac);
             await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return "Xóa thành công";
+            return $"Xóa thành công đơn vị công tác với ID : {request.ID}";
+
         }
     }
 }

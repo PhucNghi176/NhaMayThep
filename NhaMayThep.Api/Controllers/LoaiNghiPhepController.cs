@@ -14,10 +14,12 @@ using System.Net.Mime;
 using NhaMayThep.Application.LoaiNghiPhep;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     [Route("api/[controller]")]
     public class LoaiNghiPhepController : ControllerBase
     {

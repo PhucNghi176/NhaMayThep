@@ -253,6 +253,16 @@ namespace NhaMapThep.Infrastructure.Repositories
             var queryable = QueryInternal(queryOptions);
             var projection = queryable.ProjectTo<TProjection>(_mapper.ConfigurationProvider);
             return await projection.FirstOrDefaultAsync(cancellationToken);
+        }    
+        public async Task<Dictionary<TKey, TValue>> FindAllToDictionaryAsync<TKey, TValue>(
+            Expression<Func<TPersistence, bool>> filterExpression,
+            Expression<Func<TPersistence, TKey>> keySelector,
+            Expression<Func<TPersistence, TValue>> valueSelector,
+            CancellationToken cancellationToken = default)
+        {
+            IQueryable<TPersistence> query = _dbContext.Set<TPersistence>().Where(filterExpression);
+            return await query.ToDictionaryAsync(keySelector.Compile(), valueSelector.Compile(), cancellationToken);
         }
+
     }
 }

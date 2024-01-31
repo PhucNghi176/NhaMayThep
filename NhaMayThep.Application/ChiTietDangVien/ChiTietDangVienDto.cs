@@ -19,18 +19,18 @@ namespace NhaMayThep.Application.ChiTietDangVien
         }
 
         public string ID { get; set; }
-        public string DangVienID { get; set; } //ThongTinDangVien
-        public int DonViCongTacID { get; set; } 
+        public string HoVaTen { get; set; } 
+        public string DonViCongTacName { get; set; }
         public string ChucVuDang { get; set; }
         public string TrinhDoChinhTri { get; set; }
 
-        public static ChiTietDangVienDto Create(string id, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri)
+        public static ChiTietDangVienDto Create(string id, string hoVaTen, string donViCongTacName, string chucVuDang, string trinhDoChinhTri)
         {
             return new ChiTietDangVienDto
             {
                 ID = id,
-                DangVienID = dangVienId,
-                DonViCongTacID = donViCongTacId,
+                HoVaTen = hoVaTen,
+                DonViCongTacName = donViCongTacName,
                 ChucVuDang = chucVuDang,
                 TrinhDoChinhTri = trinhDoChinhTri,
             };
@@ -38,7 +38,9 @@ namespace NhaMayThep.Application.ChiTietDangVien
 
         public void Mapping(Profile profile)
         {
-            profile.CreateMap<ChiTietDangVienEntity, ChiTietDangVienDto>();
+            profile.CreateMap<ChiTietDangVienEntity, ChiTietDangVienDto>()
+                .ForMember(dest => dest.HoVaTen, opt => opt.MapFrom(src => src.ThongTinDangVien.NhanVien.HoVaTen))
+                .ForMember(dest => dest.DonViCongTacName, opt => opt.MapFrom(src => src.DonViCongTac.Name));
         }
     }
 }

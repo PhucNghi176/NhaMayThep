@@ -11,6 +11,7 @@ using NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan;
 using NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan;
 using NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanById;
 using NhaMayThep.Application.CanCuocCongDan.GetPagination;
+using NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanByNhanVienID;
 using NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan;
 using NhaMayThep.Application.Common.Interfaces;
 using System.Net.Mime;
@@ -31,7 +32,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpGet]
-        [Route("CanCuocCongDan/")]
+        [Route("can-cuoc-cong-dan")]
         [ProducesResponseType(typeof(JsonResponse<CanCuocCongDanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -44,7 +45,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPost]
-        [Route("CanCuocCongDan/")]
+        [Route("can-cuoc-cong-dan")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -57,7 +58,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpDelete]
-        [Route("CanCuocCongDan/")]
+        [Route("can-cuoc-cong-dan")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
@@ -70,14 +71,13 @@ namespace NhaMayThep.Api.Controllers
         }
 
         [HttpPut]
-        [Route("CanCuocCongDan/")]
+        [Route("can-cuoc-cong-dan")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> UpdateCanCuocCongDan(
-
-                                             [FromBody] UpdateCanCuocCongDanCommand command,
-                                                                                                               CancellationToken cancellationToken = default)
+            [FromBody] UpdateCanCuocCongDanCommand command,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
@@ -96,6 +96,17 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
+        [HttpGet]
+        [Route("can-cuoc-cong-dan/get-by-nhan-vien-id")]
+        [ProducesResponseType(typeof(JsonResponse<CanCuocCongDanDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<CanCuocCongDanDto>>> GetCanCuocCongDanByNhanVienID(
+                                  [FromQuery] GetCanCuocCongDanByNhanVienIDQuery query,
+                                                                   CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<CanCuocCongDanDto>(result));
         }
     }
 }

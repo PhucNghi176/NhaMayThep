@@ -13,11 +13,13 @@ using NhaMayThep.Application.ThongTinDaoTao.Create;
 using NhaMayThep.Application.ThongTinDaoTao.Update;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinDaoTao.GetByPagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class ThongTinDaoTaoController : ControllerBase
     {
         private readonly ISender _mediator;

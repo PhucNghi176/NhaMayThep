@@ -20,10 +20,9 @@ namespace NhaMapThep.Application.Common.Behaviours
         {
             var requestName = typeof(TRequest).Name;
             var userId = _currentUserService.UserId ?? string.Empty;
-            var userName = _currentUserService.Email ?? string.Empty;
 
-            _logger.LogInformation("NhaMayThep Request: {Name} {@UserId} {@UserName} {@Request}",
-                requestName, userId, userName, request);
+            _logger.LogInformation("NhaMayThep Request: {Name} {@UserId} {@Request}",
+                requestName, userId, request);
             return Task.CompletedTask;
         }
     }

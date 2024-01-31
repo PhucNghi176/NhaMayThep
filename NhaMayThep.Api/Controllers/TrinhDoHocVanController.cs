@@ -12,11 +12,13 @@ using NhaMayThep.Application.TrinhDoHocVan.GetById;
 using NhaMayThep.Application.TrinhDoHocVan.GetAll;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitecture.Api.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize]
     public class TrinhDoHocVanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -25,7 +27,7 @@ namespace CleanArchitecture.Api.Controllers
         {
             _mediator = mediator;
         }
-
+        
         [HttpPost("create")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -41,7 +43,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("delete/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -49,10 +51,10 @@ namespace CleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> DeleteTrinhDoHocVan(
-            [FromBody] DeleteTrinhDoHocVanCommand command,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(new DeleteTrinhDoHocVanCommand(id: Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 

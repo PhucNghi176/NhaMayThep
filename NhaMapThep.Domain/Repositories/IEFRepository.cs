@@ -25,5 +25,12 @@ namespace NhaMapThep.Domain.Repositories
         Task<List<TProjection>> FindAllProjectToAsync<TProjection>(Func<IQueryable<TPersistence>, IQueryable<TPersistence>>? queryOptions = default, CancellationToken cancellationToken = default);
         Task<IPagedResult<TProjection>> FindAllProjectToAsync<TProjection>(int pageNo, int pageSize, Func<IQueryable<TPersistence>, IQueryable<TPersistence>>? queryOptions = default, CancellationToken cancellationToken = default);
         Task<TProjection?> FindProjectToAsync<TProjection>(Func<IQueryable<TPersistence>, IQueryable<TPersistence>> queryOptions, CancellationToken cancellationToken = default);
+
+       Task<Dictionary<TKey,TValue>> FindAllToDictionaryAsync<TKey,TValue>(
+           Expression<Func<TPersistence, bool>> filterExpression,
+           Expression<Func<TPersistence, TKey>> keySelector,
+           Expression<Func<TPersistence, TValue>> valueSelector, 
+           CancellationToken cancellationToken = default);
+
     }
 }
