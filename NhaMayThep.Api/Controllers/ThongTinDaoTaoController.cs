@@ -17,7 +17,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class ThongTinDaoTaoController : ControllerBase
@@ -29,7 +28,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("create")]
+        [HttpPost("thong-tin-dao-tao")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -44,7 +43,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete")]
+        [HttpDelete("thong-tin-dao-tao")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -59,7 +58,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpPut("update")]
+        [HttpPut("thong-tin-dao-tao")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<bool>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -81,7 +80,7 @@ namespace NhaMayThep.Api.Controllers
             }
         }
 
-        [HttpGet("getBy/{id}")]
+        [HttpGet("thong-tin-dao-tao/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<ThongTinDaoTaoDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -96,7 +95,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<ThongTinDaoTaoDto>(result);
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("thong-tin-dao-tao")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<ThongTinDaoTaoDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

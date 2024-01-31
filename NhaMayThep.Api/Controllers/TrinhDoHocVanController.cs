@@ -16,7 +16,6 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace CleanArchitecture.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class TrinhDoHocVanController : ControllerBase
@@ -28,7 +27,7 @@ namespace CleanArchitecture.Api.Controllers
             _mediator = mediator;
         }
         
-        [HttpPost("create")]
+        [HttpPost("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -43,7 +42,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete/{Id}")]
+        [HttpDelete("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -58,7 +57,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpPut("update")]
+        [HttpPut("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -81,7 +80,7 @@ namespace CleanArchitecture.Api.Controllers
         }
 
 
-        [HttpGet("getBy/{id}")]
+        [HttpGet("trinh-do-hoc-van/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<TrinhDoHocVanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -96,7 +95,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<TrinhDoHocVanDto>(result);
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<TrinhDoHocVanDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
