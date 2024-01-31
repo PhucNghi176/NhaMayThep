@@ -63,7 +63,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpGet("getAll")]
+        [HttpGet("lich-su-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -77,7 +77,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LichSuNghiPhepDto>>(result));
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("lich-su-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

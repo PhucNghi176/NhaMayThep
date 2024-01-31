@@ -80,7 +80,7 @@ namespace NhaMayThep.Api.Controllers.KyLuat
             var result = await this._mediator.Send(command, cancellationToken);
             return new JsonResponse<string>(result);
         }
-        [HttpDelete("KyLuat")]
+        [HttpDelete("KyLuat/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -88,10 +88,10 @@ namespace NhaMayThep.Api.Controllers.KyLuat
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         public async Task<ActionResult<JsonResponse<string>>> deleteKyLuat(
-            [FromBody] DeleteKyLuatCommand command,
+            [FromRoute] string Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await this._mediator.Send(command, cancellationToken);
+            var result = await this._mediator.Send(new DeleteKyLuatCommand(Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 
