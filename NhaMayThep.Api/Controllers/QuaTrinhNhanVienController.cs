@@ -3,11 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.PhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
+using NhaMayThep.Application.PhongBan.GetAllPhongBan;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetByPagination;
+using NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
 using System.Net.Mime;
@@ -24,6 +27,20 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
+        [HttpGet("qua-trinh-nhan-vien")]
+        [ProducesResponseType(typeof(JsonResponse<List<QuaTrinhNhanSuDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<QuaTrinhNhanSuDto>>>> getAllPhongBan(
+            CancellationToken cancellationToken = default)
+        {
+            var result = await this._mediator.Send(new GetAllQuaTrinhNhanSuQuery(), cancellationToken);
+            return result != null ? Ok(new JsonResponse<List<QuaTrinhNhanSuDto>>(result)) : NotFound();
+        }
+
         [HttpPost("qua-trinh-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]

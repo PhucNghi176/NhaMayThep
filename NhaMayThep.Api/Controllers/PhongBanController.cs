@@ -58,7 +58,7 @@ namespace NhaMayThep.Api.Controllers
             return result != null ? Ok(new JsonResponse<PhongBanDto>(result)) : NotFound();
         }
         
-        [HttpGet("Get-All")]
+        [HttpGet("phong-ban")]
         [ProducesResponseType(typeof(JsonResponse<List<PhongBanDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
