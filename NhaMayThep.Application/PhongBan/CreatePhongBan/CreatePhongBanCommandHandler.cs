@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
@@ -22,7 +23,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
             var existName = await _phongBanRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
             if (existName == true)
             {
-                throw new DuplicateNameException("Tên phòng ban: " + command.Name + " đã tồn tại");
+                throw new DuplicationException("Tên phòng ban: " + command.Name + " đã tồn tại");
             }
 
             PhongBanEntity entity = new PhongBanEntity()
