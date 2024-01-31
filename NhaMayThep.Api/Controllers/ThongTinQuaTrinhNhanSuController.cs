@@ -13,6 +13,9 @@ using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrinhNha
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.UpdateThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.DeleteThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu;
+using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetAllThongTinQuaTrinhNhanSu;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -26,7 +29,21 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
-        [HttpPost("qua-trinh-nhan-su")]
+        [HttpGet("thong-tin-qua-trinh-nhan-su")]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinQuaTrinhNhanSuDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<ThongTinQuaTrinhNhanSuDto>>>> getAllPhongBan(
+            CancellationToken cancellationToken = default)
+        {
+            var result = await this._mediator.Send(new GetAllThongTinQuaTrinhNhanSuQuery(), cancellationToken);
+            return result != null ? Ok(new JsonResponse<List<ThongTinQuaTrinhNhanSuDto>>(result)) : NotFound();
+        }
+
+        [HttpPost("thong-tin-qua-trinh-nhan-su")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,7 +58,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("qua-trinh-nhan-su/{id}")]
+        [HttpGet("thong-tin-qua-trinh-nhan-su/{id}")]
         [ProducesResponseType(typeof(JsonResponse<ThongTinQuaTrinhNhanSuDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -56,7 +73,7 @@ namespace NhaMayThep.Api.Controllers
             return result != null ? Ok(new JsonResponse<ThongTinQuaTrinhNhanSuDto>(result)) : NotFound();
         }
 
-        [HttpPut("qua-trinh-nhan-su/{id}")]
+        [HttpPut("thong-tin-qua-trinh-nhan-su/{id}")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -79,7 +96,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [HttpDelete("qua-trinh-nhan-su/{id}")]
+        [HttpDelete("thong-tin-qua-trinh-nhan-su/{id}")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]

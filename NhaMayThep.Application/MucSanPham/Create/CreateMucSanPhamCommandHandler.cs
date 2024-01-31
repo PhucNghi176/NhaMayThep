@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
@@ -25,7 +26,7 @@ namespace NhaMayThep.Application.MucSanPham.Create
             var existName = await _mucSanPhamRepository.AnyAsync(x => x.Name.Equals(command.Name) && x.NguoiXoaID == null);
             if (existName)
             {
-                throw new DuplicateNameException("Name đã tồn tại");
+                throw new DuplicationException("Tên MucSanPham đã tồn tại");
             }
             MucSanPhamEntity entity = new MucSanPhamEntity()
             {
