@@ -24,7 +24,6 @@ using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetAllThongTinQuaTrinhNhanSu
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
     [Authorize]
     public class ThongTinQuaTrinhNhanSuController : ControllerBase
     {
