@@ -1,6 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMapThep.Domain.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;

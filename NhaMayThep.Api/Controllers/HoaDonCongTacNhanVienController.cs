@@ -1,15 +1,20 @@
+﻿using Humanizer;
+using MediatR;
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.HoaDonCongTacNhanVien;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.Create;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.DowloadFile;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetAll;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdLoaiHoaDon;
 using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByIdNguoiTao;
+using NhaMayThep.Application.HoaDonCongTacNhanVien.GetByPagination;
 using System.Net.Mime;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
 
 namespace NhaMayThep.Api.Controllers
@@ -157,6 +162,19 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<HoaDonCongTacNhanVienDto>>(result));
         }
 
+        [HttpGet("hoa-don-cong-tac-nhan-vien/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<HoaDonCongTacNhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<HoaDonCongTacNhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<HoaDonCongTacNhanVienDto>>>> GetPagination([FromQuery] GetHoaDonCongTacNhanVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
         [HttpGet("hoa-don-cong-tac-nhan-vien/{idLoaiHoaDon}/{year}/{month}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
