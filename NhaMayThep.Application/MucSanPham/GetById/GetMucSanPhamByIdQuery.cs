@@ -10,10 +10,10 @@ namespace NhaMayThep.Application.MucSanPham.GetById
 {
     public class GetMucSanPhamByIdQuery : IRequest<MucSanPhamDto>, IQuery
     {
-        public GetMucSanPhamByIdQuery(int id)
+        public GetMucSanPhamByIdQuery(string id)
         {
             ID = id;
         }
-        public int ID { get; set; }
+        public string ID { get; set; }
     }
 }

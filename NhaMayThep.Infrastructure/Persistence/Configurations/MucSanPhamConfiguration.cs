@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
+namespace NhaMayThep.Infrastructure.Persistence.Configurations
 {
     public class MucSanPhamConfiguration : IEntityTypeConfiguration<MucSanPhamEntity>
     {
@@ -15,7 +15,6 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
         {
             builder.HasKey(x => x.ID)
                 .HasName("MaMucSP");
-            builder.Ignore(x => x.Name);
         }
     }
 }

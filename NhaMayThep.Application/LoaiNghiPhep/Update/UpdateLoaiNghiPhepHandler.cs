@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             }
             if(lnp.NgayXoa != null)
             {
-                throw new InvalidOperationException("Loại nghỉ phép này đã bị xóa rồi");
+                throw new NotFoundException("Loại nghỉ phép này đã bị xóa rồi");
             }
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;

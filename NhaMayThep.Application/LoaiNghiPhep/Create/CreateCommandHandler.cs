@@ -1,10 +1,12 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -35,6 +37,15 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             {
                 throw new UnauthorizedAccessException("User ID không tìm thấy");
             }
+
+            var existingLoaiNghiPhep = await _repository.FindAllAsync(x => x.Name.ToLower() == request.Name.ToLower() && x.NgayXoa == null);
+            if (existingLoaiNghiPhep.Any())
+            {
+
+                throw new DuplicationException($"Loại Nghỉ Phép với tên này  '{request.Name}' đã có sẵn.");
+            }
+
+            
             var loaiNghiPhepEntity = new LoaiNghiPhepEntity
             {
                 NguoiTaoID = _currentUserService?.UserId,

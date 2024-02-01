@@ -27,9 +27,6 @@ namespace NhaMayThep.Application.MucSanPham.Create
             RuleFor(v => v.MucSanPhamToiDa)
                 .NotNull().WithMessage("MucSanPhamToiDa không được trống")
                 .GreaterThan(0).WithMessage("MucSanPhamToiDa phải lớn hơn 0");
-
-            RuleFor(v => v.Name)
-                .NotEmpty().WithMessage("Name không được trống");
         }
     }
 }

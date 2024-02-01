@@ -54,8 +54,10 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
             };
 
             _chiTietDangVienRepository.Add(chiTietDangVien);
-            await _chiTietDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return chiTietDangVien.ID;
+            if (await _chiTietDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }
