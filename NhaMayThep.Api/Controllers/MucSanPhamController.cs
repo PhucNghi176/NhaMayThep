@@ -20,7 +20,7 @@ using NhaMayThep.Application.MucSanPham.GetAll;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class MucSanPhamController : ControllerBase
     {
         private readonly ISender _mediator;
