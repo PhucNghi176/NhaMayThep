@@ -45,8 +45,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
             };
 
             _thongTinDangVienRepository.Add(thongTinDangVien);
-            await _thongTinDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return thongTinDangVien.ID;
+            if (await _thongTinDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }

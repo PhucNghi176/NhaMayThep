@@ -9,7 +9,7 @@ using System.Xml.Linq;
 
 namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 {
-    public class UpdateThongTinDangVienCommand : IRequest<ThongTinDangVienDto>, ICommand
+    public class UpdateThongTinDangVienCommand : IRequest<string>, ICommand
     {
         public UpdateThongTinDangVienCommand(string nhanvienId, DateTime ngayVaoDang, string capDangVien )
         {
