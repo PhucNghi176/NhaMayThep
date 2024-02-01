@@ -44,15 +44,8 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
             thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
             thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
             _thongtinCongDoanRepository.Update(thongtincongdoan);
-            try
-            {
-                await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Cập nhật thành công";
-            }
-            catch (Exception)
-            {
-                throw new NotFoundException("Đã xảy ra lỗi trong quá trình cập nhật dữ liệu");
-            }
+            await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return "Cập nhật thành công";
         }
     }
 }

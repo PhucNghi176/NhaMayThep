@@ -9,15 +9,8 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted
 {
-    public class GetAllThongTinCongDoanDeletedQuery: IRequest<PagedResult<ThongTinCongDoanDto>>, IQuery
+    public class GetAllThongTinCongDoanDeletedQuery: IRequest<List<ThongTinCongDoanDto>>, IQuery
     {
         public GetAllThongTinCongDoanDeletedQuery() { }
-        public GetAllThongTinCongDoanDeletedQuery(int pagenumber, int pagesize)
-        {
-            PageNumber = pagenumber;
-            PageSize = pagesize;
-        }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
     }
 }
