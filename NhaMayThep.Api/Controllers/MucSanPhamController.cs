@@ -65,7 +65,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<MucSanPhamDto>>> GetByID(
-            [FromRoute] int id,
+            [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetMucSanPhamByIdQuery(id: id), cancellationToken);
@@ -80,7 +80,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<bool>> Update(
-            [FromRoute] int id,
+            [FromRoute] string id,
             [FromBody] UpdateMucSanPhamCommand command,
             CancellationToken cancellationToken = default)
         {
@@ -102,7 +102,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Delete([FromRoute] int id, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Delete([FromRoute] string id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteMucSanPhamCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));

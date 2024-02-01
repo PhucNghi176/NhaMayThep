@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.MucSanPham.Delete
         private void ConfigureValidationRule()
         {
             RuleFor(v => v.ID)
-                .NotNull().WithMessage("ID không được để trống");
+                .NotEmpty().WithMessage("ID không được để trống");
         }
     }
 }

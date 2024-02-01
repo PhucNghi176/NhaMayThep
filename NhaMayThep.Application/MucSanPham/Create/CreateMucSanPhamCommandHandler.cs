@@ -1,6 +1,6 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -29,7 +29,6 @@ namespace NhaMayThep.Application.MucSanPham.Create
             }
             MucSanPhamEntity entity = new MucSanPhamEntity()
             {
-                Name = command.Name,
                 LuongMucSanPham = command.LuongMucSanPham,
                 MucSanPhamToiDa = command.MucSanPhamToiDa,
                 MucSanPhamToiThieu = command.MucSanPhamToiThieu,
