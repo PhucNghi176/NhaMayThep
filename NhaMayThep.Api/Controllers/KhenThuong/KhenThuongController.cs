@@ -13,7 +13,6 @@ using NhaMayThep.Application.KhenThuong.GetByPagination;
 using NhaMayThep.Application.KhenThuong.GetKhenThuongById;
 using NhaMayThep.Application.KhenThuong.UpdateKhenThuong;
 using System.Net.Mime;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NhaMayThep.Api.Controllers.KhenThuong
 {
