@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KhaiBaoTangLuong.GetId
 {
-    public class GetKhaiBaoTangLuongByIDQuery : IRequest<KhaiBaoTangLuongDto>, ICommand
+    public class GetKhaiBaoTangLuongByIdQuery : IRequest<KhaiBaoTangLuongDto>, ICommand
     {
         public string ID { get; set; }
-        public GetKhaiBaoTangLuongByIDQuery(string iD)
+        public GetKhaiBaoTangLuongByIdQuery(string iD)
         {
             ID = iD;
         }
-        public GetKhaiBaoTangLuongByIDQuery() { }
+        public GetKhaiBaoTangLuongByIdQuery() { }
     }
 }

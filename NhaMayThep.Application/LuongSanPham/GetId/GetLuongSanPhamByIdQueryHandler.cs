@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongSanPham.GetId
 {
-    public class GetLuongSanPhamByIdQueryHandler : IRequestHandler<GetLuongSanPhamByIDQuery, LuongSanPhamDto>
+    public class GetLuongSanPhamByIdQueryHandler : IRequestHandler<GetLuongSanPhamByIdQuery, LuongSanPhamDto>
     {
         private readonly ILuongSanPhamRepository _repository;
         private readonly IMapper _mapper;
@@ -24,20 +24,13 @@ namespace NhaMayThep.Application.LuongSanPham.GetId
             this._mapper = mapper;
         }
 
-        public async Task<LuongSanPhamDto> Handle(GetLuongSanPhamByIDQuery request, CancellationToken cancellationToken)
+        public async Task<LuongSanPhamDto> Handle(GetLuongSanPhamByIdQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAsync(x => x.ID == request.ID, cancellationToken);
-            if (lnp == null)
-            {
-                throw new NotFoundException("LuongSanPham Does not Exist");
+            var luongSanPham = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            if (luongSanPham == null)
+                throw new NotFoundException($"không tìm thấy lương sản phẩm với ID : {request.ID} hoặc đã bị xóa.");
 
-            }
-            if (lnp.NgayXoa != null)
-            {
-                throw new NotFoundException("LuongSanPham Is Deleted");
-            }
-
-            return lnp.MapToLuongSanPhamDto(_mapper);
+            return luongSanPham.MapToLuongSanPhamDto(_mapper);
         }
 
     }

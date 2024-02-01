@@ -1,16 +1,16 @@
 ﻿using FluentValidation;
-using NhaMayThep.Application.LuongCongNhat.GetId;
+using NhaMayThep.Application.PhiCongDoan.GetId;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.LuongCongNhat.GetId
+namespace NhaMayThep.Application.PhiCongDoan.GetId
 {
-    public class GetLuongCongNhatByIdQueryValidator : AbstractValidator<GetLuongCongNhatByIdQuery>
+    public class GetPhiCongDoanByIdQueryValidator : AbstractValidator<GetPhiCongDoanByIdQuery>
     {
-        public GetLuongCongNhatByIdQueryValidator()
+        public GetPhiCongDoanByIdQueryValidator()
         {
             ConfigureValidationRules();
         }

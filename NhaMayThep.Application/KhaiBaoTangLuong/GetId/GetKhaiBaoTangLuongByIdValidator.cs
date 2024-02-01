@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KhaiBaoTangLuong.GetId
 {
-    public class GetKhaiBaoTangLuongByIDQueryValidator : AbstractValidator<GetKhaiBaoTangLuongByIDQuery>
+    public class GetKhaiBaoTangLuongByIdQueryValidator : AbstractValidator<GetKhaiBaoTangLuongByIdQuery>
     {
-        public GetKhaiBaoTangLuongByIDQueryValidator()
+        public GetKhaiBaoTangLuongByIdQueryValidator()
         {
             RuleFor(x => x.ID)
                 .NotEmpty().NotNull()

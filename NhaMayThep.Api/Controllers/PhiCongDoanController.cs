@@ -1,100 +1,99 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.LuongCongNhat;
-using NhaMayThep.Application.LuongCongNhat.Create;
-using NhaMayThep.Application.LuongCongNhat.Delete;
-using NhaMayThep.Application.LuongCongNhat.GetAll;
-using NhaMayThep.Application.LuongCongNhat.GetId;
-using NhaMayThep.Application.LuongCongNhat.Update;
+using NhaMayThep.Application.PhiCongDoan.Create;
+using NhaMayThep.Application.PhiCongDoan.Delete;
+using NhaMayThep.Application.PhiCongDoan.GetId;
+using NhaMayThep.Application.PhiCongDoan.Update;
+using NhaMayThep.Application.PhiCongDoan.GetAll;
+using NhaMayThep.Application.PhiCongDoan;
 using System.Net.Mime;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
-
     [ApiController]
     [Authorize]
-    public class LuongCongNhatController : ControllerBase
+    public class PhiCongDoanController : ControllerBase
     {
         private readonly ISender _mediator;
 
-        public LuongCongNhatController(ISender mediator)
+        public PhiCongDoanController(ISender mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("CreateLuongCongNhat")]
+        [HttpPost("CreatePhiCongDoan")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<Guid>>> CreateLuongCongNhat(
-            [FromBody] CreateLuongCongNhatCommand command,
+        public async Task<ActionResult<JsonResponse<Guid>>> CreatePhiCongDoan(
+            [FromBody] CreatePhiCongDoanCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("GetAllLuongCongNhat")]
-        [ProducesResponseType(typeof(List<LuongCongNhatDto>), StatusCodes.Status200OK)]
+        [HttpGet("GetAllPhiCongDoan")]
+        [ProducesResponseType(typeof(List<PhiCongDoanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<List<LuongCongNhatDto>>> GetAllLuongCongNhat(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<List<PhiCongDoanDto>>> GetAllPhiCongDoan(CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<LuongCongNhatDto>>(result));
+            var result = await _mediator.Send(new GetAllPhiCongDoanQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<PhiCongDoanDto>>(result));
         }
 
-        [HttpPut("UpdateLuongCongNhat")]
+        [HttpPut("UpdatePhiCongDoan")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateLuongCongNhat(
+        public async Task<ActionResult> UpdatePhiCongDoan(
 
-            [FromBody] UpdateLuongCongNhatCommand command,
+            [FromBody] UpdatePhiCongDoanCommand command,
             CancellationToken cancellationToken = default)
-        { 
+        {
 
 
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("DeleteLuongCongNhat/{id}")]
+        [HttpDelete("DeletePhiCongDoan/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteLuongCongNhat(
+        public async Task<ActionResult> DeletePhiCongDoan(
             [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
 
-            var result = await _mediator.Send(new DeleteLuongCongNhatCommand(id), cancellationToken);
+            var result = await _mediator.Send(new DeletePhiCongDoanCommand(id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("getLuongCongNhatById/{id}")]
+        [HttpGet("getPhiCongDoanById/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LuongCongNhatDto>>> GetLuongCongNhatById(string id, CancellationToken cancellationToken)
+        public async Task<ActionResult<JsonResponse<PhiCongDoanDto>>> GetPhiCongDoanById(string id, CancellationToken cancellationToken)
         {
-            var query = new GetLuongCongNhatByIdQuery(id);
+            var query = new GetPhiCongDoanByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
-            return new JsonResponse<LuongCongNhatDto>(result);
+            return new JsonResponse<PhiCongDoanDto>(result);
         }
     }
 }

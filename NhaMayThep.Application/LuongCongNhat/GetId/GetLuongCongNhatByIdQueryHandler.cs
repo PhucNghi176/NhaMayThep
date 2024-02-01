@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongCongNhat.GetId
 {
-    public class GetLuongCongNhatByIdQueryHandler : IRequestHandler<GetLuongCongNhatByIDQuery, LuongCongNhatDto>
+    public class GetLuongCongNhatByIdQueryHandler : IRequestHandler<GetLuongCongNhatByIdQuery, LuongCongNhatDto>
     {
         private readonly ILuongCongNhatRepository _repository;
         private readonly IMapper _mapper;
@@ -24,20 +24,13 @@ namespace NhaMayThep.Application.LuongCongNhat.GetId
             this._mapper = mapper;
         }
 
-        public async Task<LuongCongNhatDto> Handle(GetLuongCongNhatByIDQuery request, CancellationToken cancellationToken)
+        public async Task<LuongCongNhatDto> Handle(GetLuongCongNhatByIdQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAsync(x => x.ID == request.ID, cancellationToken);
-            if (lnp == null)
-            {
-                throw new NotFoundException("LuongCongNhat Does not Exist");
+            var luongCongNhat = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            if (luongCongNhat == null)
+                throw new NotFoundException($"không tìm thấy lương công nhật vơi ID : {request.ID} hoặc đã bị xóa.");
 
-            }
-            if (lnp.NgayXoa != null)
-            {
-                throw new NotFoundException("LuongCongNhat Is Deleted");
-            }
-
-            return lnp.MapToLuongCongNhatDto(_mapper);
+            return luongCongNhat.MapToLuongCongNhatDto(_mapper);
         }
 
     }

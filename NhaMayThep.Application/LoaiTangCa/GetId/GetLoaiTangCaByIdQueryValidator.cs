@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiTangCa.GetId
 {
-    public class GetLoaiTangCaValidator : AbstractValidator<GetLoaiTangCaByIdQuery>
+    public class GetLoaiTangCaByIdQueryValidator : AbstractValidator<GetLoaiTangCaByIdQuery>
     {
-        public GetLoaiTangCaValidator()
+        public GetLoaiTangCaByIdQueryValidator()
         {
             ConfigureValidationRules();
         }

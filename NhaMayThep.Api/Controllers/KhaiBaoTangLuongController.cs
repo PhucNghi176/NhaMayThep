@@ -91,7 +91,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<KhaiBaoTangLuongDto>>> GetKhaiBaoTangLuongById(string id, CancellationToken cancellationToken)
         {
-            var query = new GetKhaiBaoTangLuongByIDQuery(id);
+            var query = new GetKhaiBaoTangLuongByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return new JsonResponse<KhaiBaoTangLuongDto>(result);
         }

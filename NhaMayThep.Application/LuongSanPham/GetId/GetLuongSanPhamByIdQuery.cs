@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongSanPham.GetId
 {
-    public class GetLuongSanPhamByIDQuery : IRequest<LuongSanPhamDto>, ICommand
+    public class GetLuongSanPhamByIdQuery : IRequest<LuongSanPhamDto>, ICommand
     {
         public string ID { get; set; }
-        public GetLuongSanPhamByIDQuery(string iD)
+        public GetLuongSanPhamByIdQuery(string iD)
         {
             ID = iD;
         }
-        public GetLuongSanPhamByIDQuery() { }
+        public GetLuongSanPhamByIdQuery() { }
     }
 }

@@ -25,18 +25,11 @@ namespace NhaMayThep.Application.LoaiTangCa.GetId
 
         public async Task<LoaiTangCaDto> Handle(GetLoaiTangCaByIdQuery request, CancellationToken cancellationToken)
         {
-            var lnp = await _repository.FindAsync(x => x.ID == request.id, cancellationToken);
-            if (lnp == null)
-            {
-                throw new NotFoundException("LoaiTangCa Does not Exist");
+            var loaiTangCa = await this._repository.FindAsync(x => x.ID.Equals(request.id) && x.NgayXoa == null, cancellationToken);
+            if (loaiTangCa == null)
+                throw new NotFoundException($"không tìm thấy Loại Tăng Ca với ID : {request.id} hoặc đã bị xóa.");
 
-            }
-            if (lnp.NgayXoa != null)
-            {
-                throw new NotFoundException("LoaiTangCa Is Deleted");
-            }
-
-            return lnp.MapToLoaiTangCaDto(_mapper);
+            return loaiTangCa.MapToLoaiTangCaDto(_mapper);
         }
 
     }

@@ -9,6 +9,8 @@ using NhaMayThep.Application.LuongSanPham.GetAll;
 using NhaMayThep.Application.LuongSanPham.Update;
 using NhaMayThep.Application.LuongSanPham;
 using System.Net.Mime;
+using NhaMayThep.Application.LuongSanPham.GetId;
+using NhaMayThep.Application.LuongSanPham;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -82,6 +84,18 @@ namespace NhaMayThep.Api.Controllers
 
             var result = await _mediator.Send(new DeleteLuongSanPhamCommand(id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("getLuongSanPhamById/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<LuongSanPhamDto>>> GetLuongSanPhamById(string id, CancellationToken cancellationToken)
+        {
+            var query = new GetLuongSanPhamByIdQuery(id);
+            var result = await _mediator.Send(query, cancellationToken);
+            return new JsonResponse<LuongSanPhamDto>(result);
         }
     }
 }

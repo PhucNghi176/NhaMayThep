@@ -8,9 +8,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongSanPham.GetId
 {
-    public class GetLuongSanPhamValidator : AbstractValidator<GetLuongSanPhamByIDQuery>
+    public class GetLuongSanPhamByIdQueryValidator : AbstractValidator<GetLuongSanPhamByIdQuery>
     {
-        public GetLuongSanPhamValidator()
+        public GetLuongSanPhamByIdQueryValidator()
         {
             ConfigureValidationRules();
         }
