@@ -14,7 +14,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 {
-    public class UpdateThongTinDangVienCommandHandler : IRequestHandler<UpdateThongTinDangVienCommand, ThongTinDangVienDto>
+    public class UpdateThongTinDangVienCommandHandler : IRequestHandler<UpdateThongTinDangVienCommand, string>
     {
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private INhanVienRepository _nhanVienRepository;
@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
             _mapper = mapper;
             _currentUserService = currentUserService;
         }
-        public async Task<ThongTinDangVienDto> Handle(UpdateThongTinDangVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
             
 
@@ -45,9 +45,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
             thongTinDangVien.NgayCapNhatCuoi = DateTime.Now;
 
             _thongTinDangVienRepository.Update(thongTinDangVien);
-            await _thongTinDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return thongTinDangVien.MapToThongTinDangVienDto(_mapper);
+            if (await _thongTinDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }

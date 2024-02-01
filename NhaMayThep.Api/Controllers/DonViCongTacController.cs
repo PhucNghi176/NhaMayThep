@@ -38,7 +38,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<int>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("don-vi-cong-tac/getAll")]
