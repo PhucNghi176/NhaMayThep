@@ -41,6 +41,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             var existingLoaiNghiPhep = await _repository.FindAllAsync(x => x.Name.ToLower() == request.Name.ToLower() && x.NgayXoa == null);
             if (existingLoaiNghiPhep.Any())
             {
+
                 throw new DuplicationException($"Loại Nghỉ Phép với tên này  '{request.Name}' đã có sẵn.");
             }
 
