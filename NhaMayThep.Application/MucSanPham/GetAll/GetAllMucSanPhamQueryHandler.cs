@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.MucSanPham.GetAll
             {
                 throw new NotFoundException("Không tìm thấy bất kỳ MucSanPham nào");
             }
-            return entity.MapToQuaTrinhNhanSuDtoList(_mapper);
+            return entity.MapToMucSanPhamDtoList(_mapper);
         }
     }
 }

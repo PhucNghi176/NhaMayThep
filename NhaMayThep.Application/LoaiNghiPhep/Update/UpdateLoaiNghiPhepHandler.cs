@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Update
 {
-    public class UpdateLoaiNghiPhepHandler : IRequestHandler<UpdateLoaiNghiPhepCommand, LoaiNghiPhepDto>
+    public class UpdateLoaiNghiPhepHandler : IRequestHandler<UpdateLoaiNghiPhepCommand, string>
     {
         private readonly ILoaiNghiPhepRepository _repository;
         private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             _hanVienRepository = hanVienRepository;
         }
 
-        public async Task<LoaiNghiPhepDto> Handle(UpdateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var lnp = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (lnp == null)
@@ -32,9 +32,10 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;
             _repository.Update(lnp);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return _mapper.Map<LoaiNghiPhepDto>(lnp);
+            if (await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }

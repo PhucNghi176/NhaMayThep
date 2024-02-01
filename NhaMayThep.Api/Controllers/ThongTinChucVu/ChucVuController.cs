@@ -16,7 +16,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThongTinChucVu
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class ChucVuController : ControllerBase
     {
         private readonly ISender _mediator;

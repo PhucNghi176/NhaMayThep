@@ -1,15 +1,16 @@
 ﻿using FluentValidation;
+using NhaMayThep.Application.KhenThuong.GetByPagination;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.LoaiNghiPhep.GetByPagination
+namespace NhaMayThep.Application.KhenThuong.GetByPagination
 {
-    public class GetLoaiNghiPhepByPaginationValidator : AbstractValidator<GetLoaiNghiPhepByPaginationQuery>
+    public class GetKhenThuongByPaginationValidator : AbstractValidator<GetKhenThuongByPaginationQuery>
     {
-        public GetLoaiNghiPhepByPaginationValidator()
+        public GetKhenThuongByPaginationValidator()
         {
             Configure();
         }
