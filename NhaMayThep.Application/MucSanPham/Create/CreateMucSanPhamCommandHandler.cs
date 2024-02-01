@@ -22,11 +22,6 @@ namespace NhaMayThep.Application.MucSanPham.Create
         }
         public async Task<string> Handle(CreateMucSanPhamCommand command, CancellationToken cancellationToken)
         {
-            var existName = await _mucSanPhamRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
-            if (existName == true)
-            {
-                throw new DuplicateNameException("Name đã tồn tại");
-            }
             MucSanPhamEntity entity = new MucSanPhamEntity()
             {
                 LuongMucSanPham = command.LuongMucSanPham,
