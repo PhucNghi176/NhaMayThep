@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.LoaiNghiPhep.GetByPagination
+namespace NhaMayThep.Application.MucSanPham.GetByPagination
 {
-    public class GetLoaiNghiPhepByPaginationValidator : AbstractValidator<GetLoaiNghiPhepByPaginationQuery>
+    public class GetMucSanPhamByPaginationValidator : AbstractValidator<GetMucSanPhamByPaginationQuery>
     {
-        public GetLoaiNghiPhepByPaginationValidator()
+        public GetMucSanPhamByPaginationValidator()
         {
             Configure();
         }

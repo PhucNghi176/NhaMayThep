@@ -112,7 +112,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("thong-tin-qua-trinh-lam-viec/phan-trang")]
+        [HttpGet("thong-tin-qua-trinh-nhan-su/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinQuaTrinhNhanSuDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinQuaTrinhNhanSuDto>>), StatusCodes.Status200OK)]

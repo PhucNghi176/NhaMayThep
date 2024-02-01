@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Delete
 {
-    public class DeleteLoaiNghiPhepHandler : IRequestHandler<DeleteLoaiNghiPhepCommand, LoaiNghiPhepDto>
+    public class DeleteLoaiNghiPhepHandler : IRequestHandler<DeleteLoaiNghiPhepCommand, string>
     {
         private readonly ILoaiNghiPhepRepository _repository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
             _currentUserService = currentUserService;
         }
 
-        public async Task<LoaiNghiPhepDto> Handle(DeleteLoaiNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -46,9 +46,10 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
             loaiNghiPhep.NgayXoa = DateTime.UtcNow;
 
             _repository.Update(loaiNghiPhep);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return loaiNghiPhep.MapToLoaiNghiPhepDto(_mapper);
+            if (await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Xóa thành công";
+            else
+                return "Xóa thất bại";
         }
     }
 }
