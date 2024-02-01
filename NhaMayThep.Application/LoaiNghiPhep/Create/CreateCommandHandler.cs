@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Create
 {
-    public class CreateCommandHandler : IRequestHandler<CreateLoaiNghiPhepCommand, LoaiNghiPhepDto>
+    public class CreateCommandHandler : IRequestHandler<CreateLoaiNghiPhepCommand, string>
 
     {
         private readonly INhanVienRepository _hanVienRepository;
@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             _hanVienRepository = hanVienRepository;
         }
 
-        public async Task<LoaiNghiPhepDto> Handle(CreateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -53,8 +53,10 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
                 
             };
             _repository.Add(loaiNghiPhepEntity);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return loaiNghiPhepEntity.MapToLoaiNghiPhepDto(_mapper);
+            if (await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
 
 
         }

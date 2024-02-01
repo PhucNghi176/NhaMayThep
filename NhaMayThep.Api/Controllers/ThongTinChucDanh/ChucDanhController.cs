@@ -8,7 +8,6 @@ using NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh;
 using NhaMayThep.Application.ThongTinChucDanh.GetChucDanhById;
 using NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh;
 using System.Net.Mime;
-using NhaMayThep.Application.ThongTinChucDanh;
 using Microsoft.AspNetCore.Authorization;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinChucDanh.GetByPagination;

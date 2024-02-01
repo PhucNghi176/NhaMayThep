@@ -17,6 +17,8 @@ using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByPagination;
 using NhaMayThep.Application.ThongTinCongDoan.GetAll;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPaginationDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -92,9 +94,22 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetAll(
-           [FromQuery] GetAllThongTinGiamTruGiaCanhQuery query,
+        public async Task<ActionResult<JsonResponse<List<ThongTinGiamTruGiaCanhDto>>>> GetAll(
            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllThongTinGiamTruGiaCanhQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+        }
+        [HttpGet("thong-tin-giam-tru-gia-canh/get-all/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetAllPagination(
+          [FromQuery] GetAllThongTinGiamTruGiaCanhPaginationQuery query,
+          CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>(result));
@@ -134,9 +149,22 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetAllDeleted(
-           [FromQuery] GetAllThongTinGiamTruGiaCanhDeletedQuery query,
+        public async Task<ActionResult<JsonResponse<List<ThongTinGiamTruGiaCanhDto>>>> GetAllDeleted(
            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllThongTinGiamTruGiaCanhDeletedQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+        }
+        [HttpGet("thong-tin-giam-tru-gia-canh/get-all-deleted/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetAllPaginationDeleted(
+          [FromQuery] GetAllThongTinGiamTruGiaCanhPaginationDeletedQuery query,
+          CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>(result));

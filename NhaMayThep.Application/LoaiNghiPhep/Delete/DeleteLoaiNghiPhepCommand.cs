@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.LoaiNghiPhep;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Delete;
-public class DeleteLoaiNghiPhepCommand : IRequest<LoaiNghiPhepDto>, ICommand
+public class DeleteLoaiNghiPhepCommand : IRequest<string>, ICommand
 {
     public int Id { get; set; }
     public string NguoiXoaID { get; set; }

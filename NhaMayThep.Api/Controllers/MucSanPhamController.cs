@@ -16,6 +16,10 @@ using NhaMayThep.Application.MucSanPham.Delete;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetAllThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.MucSanPham.GetAll;
+using Humanizer;
+using NhaMapThep.Application.Common.Pagination;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NhaMayThep.Application.MucSanPham.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -84,7 +88,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateMucSanPhamCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.ID == default)
+            if (int.Parse(command.ID) == default)
             {
                 command.ID = id;
             }
@@ -106,6 +110,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeleteMucSanPhamCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("muc-san-pham/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<MucSanPhamDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<MucSanPhamDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<MucSanPhamDto>>>> GetPagination([FromQuery] GetMucSanPhamByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
