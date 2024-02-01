@@ -84,7 +84,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] UpdateMucSanPhamCommand command,
             CancellationToken cancellationToken = default)
         {
-            if (command.ID == default)
+            if (int.Parse(command.ID) == default)
             {
                 command.ID = id;
             }

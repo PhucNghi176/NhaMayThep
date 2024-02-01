@@ -1,15 +1,16 @@
 ﻿using FluentValidation;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetAll
+namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination
 {
-    public class GetAllThongTinCongDoanQueryValidator: AbstractValidator<GetAllThongTinCongDoanQuery>
+    public class GetAllThongTinGiamTruGiaCanhPaginationQueryValidator : AbstractValidator<GetAllThongTinGiamTruGiaCanhPaginationQuery>
     {
-        public GetAllThongTinCongDoanQueryValidator()
+        public GetAllThongTinGiamTruGiaCanhPaginationQueryValidator()
         {
             Configure();
         }

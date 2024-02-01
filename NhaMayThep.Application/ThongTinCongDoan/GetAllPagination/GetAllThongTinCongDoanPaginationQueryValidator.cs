@@ -5,13 +5,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted
+namespace NhaMayThep.Application.ThongTinCongDoan.GetAllPagination
 {
-    public class GetAllThongTinGiamTruGiaCanhDeletedQueryValidator : AbstractValidator<GetAllThongTinGiamTruGiaCanhDeletedQuery>
+    public class GetAllThongTinCongDoanPaginationQueryValidator: AbstractValidator<GetAllThongTinCongDoanPaginationQuery>
     {
-        public GetAllThongTinGiamTruGiaCanhDeletedQueryValidator()
+        public GetAllThongTinCongDoanPaginationQueryValidator()
         {
-            Configure();        
+            Configure();
         }
         public void Configure()
         {

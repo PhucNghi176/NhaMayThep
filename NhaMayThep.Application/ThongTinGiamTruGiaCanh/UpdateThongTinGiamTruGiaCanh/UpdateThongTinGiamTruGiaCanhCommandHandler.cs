@@ -57,15 +57,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             thongtingiamtru.CanCuocCongDan = cccd.CanCuocCongDan;
             thongtingiamtru.NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc;
             _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-            try
-            {
-                await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Cập nhật thành công";
-            }
-            catch (Exception)
-            {
-                throw new NotFoundException("Đã xảy ra lỗi trong quá trình cập nhật");
-            }
+            await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return "Cập nhật thành công";
         }
     }
 }
