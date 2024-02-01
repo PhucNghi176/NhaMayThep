@@ -9,11 +9,13 @@ using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
+using NhaMayThep.Application.NhanVien.DeleteNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.GetAllNhanVien;
 using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVienTest;
+using NhaMayThep.Application.NhanVien.Test.TestTaoNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
 using System.Net.Mime;
 
@@ -157,6 +159,20 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<List<NhanVienDto>>> Test(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
+        }
+
+        [HttpGet("test/nhan-vien/tao-hang-loat")]
+        [Produces(MediaTypeNames.Application.Json)]
+        public async Task<ActionResult<List<string>>> TaoHangLoat(int id, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new TaoNhanVienHangLoat(id), cancellationToken);
+            return Ok(new JsonResponse<List<string>>(result));
+        }
+        [HttpPost("test/nhan-vien/xoa-hang-loat")]
+        [Produces(MediaTypeNames.Application.Json)]
+        public async Task<ActionResult<string>> XoaHangLoat(List<string> ids, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new DeleteNhanVienHangLoatCommand(ids), cancellationToken); return Ok(result);
         }
 
     }
