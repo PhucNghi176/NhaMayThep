@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMapThep.Domain.Repositories.ConfigTable
+namespace NhaMapThep.Domain.Repositories
 {
     public interface IMucSanPhamRepository : IEFRepository<MucSanPhamEntity, MucSanPhamEntity>
     {
