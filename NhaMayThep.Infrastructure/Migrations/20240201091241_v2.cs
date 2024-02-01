@@ -1,14 +1,13 @@
 ﻿using Microsoft.EntityFrameworkCore.Migrations;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+#nullable disable
 
 namespace NhaMayThep.Infrastructure.Migrations
 {
-    public partial class TriggerNPT : Migration
+    /// <inheritdoc />
+    public partial class v2 : Migration
     {
+        /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("CREATE TRIGGER tg_insert_npt\r\nON dbo.ThongTinGiamTruGiaCanh\r\nAFTER INSERT\r\nAS\r\nBEGIN\r\nUPDATE NhanVien\r\nSET SoNguoiPhuThuoc = SoNguoiPhuThuoc+1\r\nWHERE ID IN (SELECT NhanVienID FROM inserted)\r\nEND");
@@ -16,6 +15,7 @@ namespace NhaMayThep.Infrastructure.Migrations
             migrationBuilder.Sql("CREATE TRIGGER tg_update_npt\r\nON dbo.ThongTinGiamTruGiaCanh\r\nAFTER UPDATE\r\nAS  \r\nBEGIN\r\nUPDATE NhanVien\r\nSET SoNguoiPhuThuoc = SoNguoiPhuThuoc-1\r\nWHERE ID IN (SELECT NhanVienID FROM inserted)\r\nEND");
         }
 
+        /// <inheritdoc />
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.Sql("DROP TRIGGER tg_insert_npt");
