@@ -27,15 +27,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
             thongtingiamtru.NguoiXoaID = _currentUserService.UserId;
             thongtingiamtru.NgayXoa = DateTime.Now;
             _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-            try
-            {
-                await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Xóa thành công";
-            }
-            catch (Exception)
-            {
-                throw new NotFoundException("Đã xảy ra lỗi trong quá trình xóa");
-            }
+            await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return "Xóa thành công";
         }
     }
 }
