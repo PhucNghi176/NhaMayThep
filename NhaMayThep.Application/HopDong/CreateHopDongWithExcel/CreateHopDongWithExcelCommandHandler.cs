@@ -42,13 +42,13 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
                 var dataTable = dataset.Tables[0];
 
                 //check enough rows
-                if (dataTable.Rows.Count < 13)
+                if (dataTable.Rows.Count < 12)
                     continue;
 
                 //check null row
                 for (int i = 0; i < dataTable.Rows.Count; i++)
                 {
-                    if (i == 3 || i == 4 || i == 12)
+                    if (i == 3 || i == 11)
                         continue;
                     if (Convert.ToString(dataTable.Rows[i][1]) == "")
                     {
@@ -61,29 +61,38 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
                     continue;
 
                 //check this msnv is existance or not
-                var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == Convert.ToString(dataTable.Rows[0][1]) && x.NgayXoa == null, cancellationToken)
-                    ?? throw new NotFoundException("Nhân viên không hợp lệ");
+                var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == Convert.ToString(dataTable.Rows[0][1]) && x.NgayXoa == null, cancellationToken);
+                if (nhanVien == null || nhanVien.DaCoHopDong)
+                    continue;
 
-                //check nhanvien has hopdong or not
-                if (nhanVien.DaCoHopDong)
-                    throw new NotFoundException("Nhân viên đã có hợp đồng");
+                var ngayKy = Convert.ToDateTime(dataTable.Rows[2][1]);
+                DateTime? ngayKetThuc = Convert.ToString(dataTable.Rows[3][1]) == "" ? null : Convert.ToDateTime(dataTable.Rows[3][1]);
+
+                if (ngayKetThuc != null && ngayKy > ngayKetThuc)
+                    continue;
+
+                int? thoiHan = 0;
+                if (ngayKetThuc == null)
+                    thoiHan = null;
+                else
+                    thoiHan = (int)((ngayKetThuc - ngayKy).Value.Days / 30.436875);
 
                 //creating entity
                 var add = new HopDongEntity()
                 {
                     NhanVienID = Convert.ToString(dataTable.Rows[0][1]),
                     LoaiHopDongID = Convert.ToInt32(dataTable.Rows[1][1]),
-                    NgayKy = Convert.ToDateTime(dataTable.Rows[2][1]),
-                    NgayKetThuc = Convert.ToString(dataTable.Rows[3][1]) == "" ? null : Convert.ToDateTime(dataTable.Rows[3][1]),
-                    ThoiHanHopDong = Convert.ToString(dataTable.Rows[4][1]) == "" ? null : Convert.ToInt32(dataTable.Rows[4][1]),
-                    DiaDiemLamViec = Convert.ToString(dataTable.Rows[5][1]),
-                    BoPhanLamViec = Convert.ToString(dataTable.Rows[6][1]),
-                    ChucVuID = Convert.ToInt32(dataTable.Rows[7][1]),
-                    ChucDanhID = Convert.ToInt32(dataTable.Rows[8][1]),
-                    LuongCoBan = Convert.ToDecimal(dataTable.Rows[9][1]),
-                    HeSoLuongID = Convert.ToInt32(dataTable.Rows[10][1]),
-                    PhuCapID = Convert.ToString(dataTable.Rows[11][1]),
-                    GhiChu = Convert.ToString(dataTable.Rows[12][1]) == "" ? null : Convert.ToString(dataTable.Rows[12][1]),
+                    NgayKy = ngayKy,
+                    NgayKetThuc = ngayKetThuc,
+                    ThoiHanHopDong = thoiHan,
+                    DiaDiemLamViec = Convert.ToString(dataTable.Rows[4][1]),
+                    BoPhanLamViec = Convert.ToString(dataTable.Rows[5][1]),
+                    ChucVuID = Convert.ToInt32(dataTable.Rows[6][1]),
+                    ChucDanhID = Convert.ToInt32(dataTable.Rows[7][1]),
+                    LuongCoBan = Convert.ToDecimal(dataTable.Rows[8][1]),
+                    HeSoLuongID = Convert.ToInt32(dataTable.Rows[9][1]),
+                    PhuCapID = Convert.ToString(dataTable.Rows[10][1]),
+                    GhiChu = Convert.ToString(dataTable.Rows[11][1]) == "" ? null : Convert.ToString(dataTable.Rows[11][1]),
                     NguoiTaoID = _currentUserService.UserId,
                     NgayTao = DateTime.Now
                 };
