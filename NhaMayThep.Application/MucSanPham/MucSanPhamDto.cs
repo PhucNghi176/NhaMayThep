@@ -16,8 +16,7 @@ namespace NhaMayThep.Application.MucSanPham
         {
             
         }
-        public int ID {  get; set; }
-        public string Name { get; set; }
+        public string ID {  get; set; }
         public int MucSanPhamToiThieu {  get; set; }
         public int MucSanPhamToiDa {  get; set; }
         public decimal LuongMucSanPham {  get; set; }
