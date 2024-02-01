@@ -19,7 +19,6 @@ using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Route("api/[controller]")]
     [ApiController]
     [Authorize]
     public class ThongTinDangVienController : ControllerBase
@@ -85,7 +84,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<ThongTinDangVienDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("thong-tin-dang-vien/{id}")]

@@ -14,7 +14,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
 {
-    public class UpdateChiTietDangVienCommandHandler : IRequestHandler<UpdateChiTietDangVienCommand, ChiTietDangVienDto>
+    public class UpdateChiTietDangVienCommandHandler : IRequestHandler<UpdateChiTietDangVienCommand, string>
     {
         private IChiTietDangVienRepository _chiTietDangVienRepository;
         private IThongTinDangVienRepository _thongTinDangVienRepository;
@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
             _mapper = mapper;
             _currentUserService = currentUserService;
         }
-        public async Task<ChiTietDangVienDto> Handle(UpdateChiTietDangVienCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateChiTietDangVienCommand request, CancellationToken cancellationToken)
         {
             var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID ==  request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
@@ -57,9 +57,10 @@ namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
             chiTietDangVien.NgayCapNhatCuoi = DateTime.Now;
 
             _chiTietDangVienRepository.Update(chiTietDangVien);
-            await _chiTietDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return chiTietDangVien.MapToChiTietDangVienDto(_mapper);
+            if (await _chiTietDangVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }

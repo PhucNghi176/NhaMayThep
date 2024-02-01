@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace NhaMapThep.Domain.Entities
 {
     [Table("MucSanPham")]
-    public class MucSanPhamEntity : BangMaGocEntity
+    public class MucSanPhamEntity : Entity
     {
         public required int MucSanPhamToiThieu { get; set; }
         public required int MucSanPhamToiDa { get; set; }
