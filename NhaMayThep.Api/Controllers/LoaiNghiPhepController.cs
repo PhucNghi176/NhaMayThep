@@ -20,7 +20,6 @@ namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Authorize]
-    [Route("api/[controller]")]
     public class LoaiNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -30,7 +29,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("create")]
+        [HttpPost("loai-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,7 +40,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>("Loai Nghi Phep đã được tạo thành công"));
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("loai-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -54,7 +53,7 @@ namespace NhaMayThep.Api.Controllers
 
 
 
-        [HttpPut("update")]
+        [HttpPut("loai-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -65,7 +64,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>("Loai Nghi Phep cập nhật thành công "));
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("loai-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -77,7 +76,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LoaiNghiPhepDto>>(result));
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("loai-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
