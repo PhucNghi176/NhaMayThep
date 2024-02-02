@@ -6,11 +6,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted
+namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPaginition
 {
-    public class GetAllThongTinCongDoanDeletedQueryValidator : AbstractValidator<GetAllThongTinCongDoanDeletedQuery>
+    public class GetAllThongTinCongDoanPaginationDeletedQueryValidator : AbstractValidator<GetAllThongTinCongDoanPaginationDeletedQuery>
     {
-        public GetAllThongTinCongDoanDeletedQueryValidator()
+        public GetAllThongTinCongDoanPaginationDeletedQueryValidator()
         {
             Configure();
         }

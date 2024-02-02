@@ -89,7 +89,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LoaiHoaDonDto>>(result));
         }
 
-        [HttpGet("loai-hoa-dong/phan-trang")]
+        [HttpGet("loai-hoa-don/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiHoaDonDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiHoaDonDto>>), StatusCodes.Status200OK)]

@@ -36,8 +36,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create(CreateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Loai Nghi Phep đã được tạo thành công"));
+            var result =  await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("loai-nghi-phep/{id}")]
@@ -47,8 +47,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(int id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(new DeleteLoaiNghiPhepCommand(id), cancellationToken);
-            return Ok(new JsonResponse<string>("Loai Nghi Phep xóa thành công "));
+            var result = await _mediator.Send(new DeleteLoaiNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
 
@@ -60,8 +60,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update(UpdateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Loai Nghi Phep cập nhật thành công "));
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("loai-nghi-phep")]

@@ -7,9 +7,9 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.GetByPagination
 {
-    public class GetNhanVienByPaginationValidator : AbstractValidator<GetLoaiNghiPhepByPaginationQuery>
+    public class GetLoaiNghiPhepByPaginationValidator : AbstractValidator<GetLoaiNghiPhepByPaginationQuery>
     {
-        public GetNhanVienByPaginationValidator()
+        public GetLoaiNghiPhepByPaginationValidator()
         {
             Configure();
         }
