@@ -12,7 +12,7 @@ namespace NhaMayThep.Application.LuongSanPham.Update
 {
     public class UpdateLuongSanPhamCommand : IRequest<string>, ICommand
     {
-        public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPham, int mucSanPhamID, decimal tongLuong)
+        public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPham, string mucSanPhamID, decimal tongLuong)
         {
             ID = id;
             MaSoNhanVien = maSoNhanVien;
@@ -24,8 +24,7 @@ namespace NhaMayThep.Application.LuongSanPham.Update
         public string ID { get; set; }
         public required string MaSoNhanVien { get; set; }
         public int SoSanPhamLam { get; set; }
-        public required int MucSanPhamID { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+        public required string MucSanPhamID { get; set; }
         public decimal TongLuong { get; set; }
     }
 }

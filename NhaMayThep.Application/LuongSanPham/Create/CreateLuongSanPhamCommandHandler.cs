@@ -40,16 +40,16 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 
 
             var mucSanPham = await _mucSanPhamRepository.FindAsync(x => x.ID == request.MucSanPhamID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (nhanVien == null)
+            if (mucSanPham == null)
                 throw new NotFoundException("Mức Sản Phẩm Id: " + request.MucSanPhamID + " không tìm thấy");
 
             var LuongSanPham = new LuongSanPhamEntity()
             {
 
                 MaSoNhanVien = nhanVien.ID,
-                NhanVien = nhanVien,
+
                 MucSanPhamID = request.MucSanPhamID,
-                MucSanPham = mucSanPham,
+
                 TongLuong = request.TongLuong,
                 SoSanPhamLam = request.SoSanPhamLam,
                 NguoiTaoID = _currentUserService.UserId,
@@ -57,8 +57,7 @@ namespace NhaMayThep.Application.LuongSanPham.Create
             };
 
             _LuongSanPhamRepository.Add(LuongSanPham);
-            await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Lương Sản Phẩm thành công";
+            return await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Lương Sản Phẩm thành công" : "Tạo Lương Sản Phẩm thất bại";
         }
     }
 }

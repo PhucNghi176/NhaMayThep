@@ -34,9 +34,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Delete
             LuongCongNhat.NgayXoa = DateTime.Now;
 
             _LuongCongNhatRepository.Update(LuongCongNhat);
-            await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Xóa Lương Công Nhật thành công";
+            return await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Lương Công Nhật thành công" : "Xóa Lương Công Nhật thất bại";
         }
     }
 }

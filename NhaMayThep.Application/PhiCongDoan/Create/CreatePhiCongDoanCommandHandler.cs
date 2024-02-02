@@ -46,8 +46,7 @@ namespace NhaMayThep.Application.PhiCongDoan.Create
             };
 
             _PhiCongDoanRepository.Add(PhiCongDoan);
-            await _PhiCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Phí Công Đoàn thành công";
+            return await _PhiCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Phí Công Đoàn thành công" : "Tạo Phí Công Đoàn thất bại";
         }
     }
 }

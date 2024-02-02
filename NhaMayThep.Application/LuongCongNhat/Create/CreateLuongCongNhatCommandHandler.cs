@@ -39,7 +39,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
             {
 
                 MaSoNhanVien = nhanVien.ID,
-                NhanVien = nhanVien,
+
                 Luong1Gio = request.Luong1Gio,
                 TongLuong = request.TongLuong,
                 NguoiTaoID = _currentUserService.UserId,
@@ -47,8 +47,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
             };
 
             _LuongCongNhatRepository.Add(LuongCongNhat);
-            await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Lương Công Nhật thành công";
+            return await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Lương Công Nhật thành công" : "Tạo Lương Công Nhật thất bại";
         }
     }
 }

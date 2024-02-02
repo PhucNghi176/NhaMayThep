@@ -34,9 +34,7 @@ namespace NhaMayThep.Application.LuongSanPham.Delete
             LuongSanPham.NgayXoa = DateTime.Now;
 
             _LuongSanPhamRepository.Update(LuongSanPham);
-            await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Xóa Lương Sản Phẩm thành công";
+            return await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Lương Sản Phẩm thành công" : "Xóa Lương Sản Phẩm thất bại";
         }
     }
 }

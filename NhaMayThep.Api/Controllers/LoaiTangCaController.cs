@@ -25,7 +25,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("create")]
+        [HttpPost("loai-tang-ca")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -39,7 +39,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("loai-tang-ca/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -50,7 +50,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpPut("update")]
+        [HttpPut("loai-tang-ca")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
@@ -66,7 +66,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpGet("getAllLoaiTangCa")]
+        [HttpGet("loai-tang-ca")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,7 +78,7 @@ namespace NhaMayThep.Api.Controllers
             return new JsonResponse<List<LoaiTangCaDto>>(result);
         }
 
-        [HttpGet("getLoaiTangCaById/{id}")]
+        [HttpGet("loai-tang-ca/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

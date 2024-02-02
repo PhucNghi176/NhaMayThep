@@ -41,7 +41,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
             if (KhaiBaoTangLuong == null)
                 throw new NotFoundException($"Không tìm thấy Khai Báo Tăng Lương với ID : {request.ID} hoặc Khai Báo Tăng Lương này đã bị xóa.");
 
-            KhaiBaoTangLuong.NguoiXoaID = this._currentUserService.UserId;
+            KhaiBaoTangLuong.NguoiCapNhatID = this._currentUserService.UserId;
             KhaiBaoTangLuong.MaSoNhanVien = request.MaSoNhanVien ?? KhaiBaoTangLuong.MaSoNhanVien;
             KhaiBaoTangLuong.PhanTramTang = request.PhanTramTang;
             KhaiBaoTangLuong.NgayApDung = request.NgayApDung;
@@ -49,8 +49,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
             KhaiBaoTangLuong.NgayCapNhatCuoi = DateTime.UtcNow;
 
             this._repository.Update(KhaiBaoTangLuong);
-            await this._repository.UnitOfWork.SaveChangesAsync();
-            return $"Cập nhật thành công Khai Báo Tăng Lương có ID : {request.ID}";
+            return await this._repository.UnitOfWork.SaveChangesAsync() > 0 ? "Cập nhật Khai Báo Tăng Lương thành công" : "Cập nhật Khai Báo Tăng Lương thất bại";
         }
     }
 }

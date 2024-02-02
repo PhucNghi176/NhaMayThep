@@ -24,9 +24,9 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
 
         public string MaSoNhanVien { get; set; }
         public double SoGioLam { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+
         public decimal Luong1Gio { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+
         public decimal TongLuong { get; set; }
 
     }

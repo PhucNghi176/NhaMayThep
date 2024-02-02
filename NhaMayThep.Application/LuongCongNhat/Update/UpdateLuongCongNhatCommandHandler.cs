@@ -46,9 +46,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
             LuongCongNhat.NgayCapNhatCuoi = DateTime.Now;
 
             _LuongCongNhatRepository.Update(LuongCongNhat);
-            await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Cập nhật Lương Công Nhật thành công";
+            return await _LuongCongNhatRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Lương Công Nhật thành công" : "Cập nhật Lương Công Nhật thất bại";
         }
     }
 }

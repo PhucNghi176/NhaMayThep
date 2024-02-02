@@ -33,9 +33,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Delete
             KhaiBaoTangLuong.NgayXoa = DateTime.Now;
 
             _KhaiBaoTangLuongRepository.Update(KhaiBaoTangLuong);
-            await _KhaiBaoTangLuongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Xóa Khai Báo Tăng Lương thành công";
+            return await _KhaiBaoTangLuongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Khai Báo Tăng Lương thành công" : "Xóa Khai Báo Tăng Lương thất bại";
         }
     }
 }

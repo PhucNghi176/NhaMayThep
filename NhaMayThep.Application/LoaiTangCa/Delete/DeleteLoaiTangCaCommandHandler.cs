@@ -41,9 +41,7 @@ namespace NhaMayThep.Application.LoaiTangCa.Delete
             loaiTangCa.NgayXoa = DateTime.UtcNow;
 
             _repository.Update(loaiTangCa);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Xóa Loại Tăng Ca thành công";
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Loại Tăng Ca thành công" : "Xóa Loại Tăng Ca thất bại";
         }
     }
 }

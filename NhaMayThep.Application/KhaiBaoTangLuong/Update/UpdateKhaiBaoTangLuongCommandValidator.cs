@@ -13,9 +13,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
         public UpdateKhaiBaoTangLuongCommandValidator()
         {
 
-            RuleFor(x => x.MaSoNhanVien)
-                .NotEmpty().WithMessage("NhanVienID không được để trống.")
-                .MaximumLength(450).WithMessage("NhanVienID không vượt quá 450 kí tự.");
+
 
             RuleFor(x => x.PhanTramTang)
                 .NotEmpty().WithMessage("PhanTramTang không được để trống.")

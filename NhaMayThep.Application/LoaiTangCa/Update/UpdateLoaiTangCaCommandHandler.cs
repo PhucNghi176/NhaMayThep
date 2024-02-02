@@ -39,9 +39,7 @@ namespace NhaMayThep.Application.LoaiTangCa.Update
             loaiTangCa.NgayCapNhat = DateTime.UtcNow;
             loaiTangCa.Name = request.Name;
             _repository.Update(loaiTangCa);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Cập nhật thành công Loại Tăng Ca";
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Loại Tăng Ca thành công" : "Cập nhật Loại Tăng Ca thất bại";
         }
     }
 }

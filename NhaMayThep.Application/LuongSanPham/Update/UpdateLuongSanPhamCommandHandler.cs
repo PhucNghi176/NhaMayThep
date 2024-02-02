@@ -53,9 +53,7 @@ namespace NhaMayThep.Application.LuongSanPham.Update
             LuongSanPham.NgayCapNhatCuoi = DateTime.Now;
 
             _LuongSanPhamRepository.Update(LuongSanPham);
-            await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Cập nhật Lương Sản Phẩm thành công";
+            return await _LuongSanPhamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Lương Sản Phẩm thành công" : "Cập nhật Lương Sản Phẩm thất bại";
         }
     }
 }

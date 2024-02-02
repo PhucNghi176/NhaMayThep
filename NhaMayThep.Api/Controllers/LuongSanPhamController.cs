@@ -26,7 +26,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("CreateLuongSanPham")]
+        [HttpPost("luong-san-pham")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,7 +41,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("GetAllLuongSanPham")]
+        [HttpGet("luong-san-pham")]
         [ProducesResponseType(typeof(List<LuongSanPhamDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -52,7 +52,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LuongSanPhamDto>>(result));
         }
 
-        [HttpPut("UpdateLuongSanPham")]
+        [HttpPut("luong-san-pham")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -70,7 +70,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("DeleteLuongSanPham/{id}")]
+        [HttpDelete("luong-san-pham/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -86,7 +86,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("getLuongSanPhamById/{id}")]
+        [HttpGet("luong-san-pham/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

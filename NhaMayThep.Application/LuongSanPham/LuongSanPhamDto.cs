@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.LuongSanPham
         public required string MaSoNhanVien { get; set; }
         public int SoSanPhamLam { get; set; }
         public required int MucSanPhamID { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+
         public decimal TongLuong { get; set; }
 
         public static LuongSanPhamDto Create(string id, string maSoNhanVien, int soSanPham, int mucSanPhamID, decimal tongLuong)

@@ -24,7 +24,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("CreatePhiCongDoan")]
+        [HttpPost("phi-cong-doan")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,7 +39,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("GetAllPhiCongDoan")]
+        [HttpGet("phi-cong-doan")]
         [ProducesResponseType(typeof(List<PhiCongDoanDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -50,7 +50,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<PhiCongDoanDto>>(result));
         }
 
-        [HttpPut("UpdatePhiCongDoan")]
+        [HttpPut("phi-cong-doan")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -68,7 +68,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("DeletePhiCongDoan/{id}")]
+        [HttpDelete("phi-cong-doan/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -84,7 +84,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("getPhiCongDoanById/{id}")]
+        [HttpGet("phi-cong-doan/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

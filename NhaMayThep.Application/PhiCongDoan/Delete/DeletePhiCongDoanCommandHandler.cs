@@ -34,9 +34,7 @@ namespace NhaMayThep.Application.PhiCongDoan.Delete
             PhiCongDoan.NgayXoa = DateTime.Now;
 
             _PhiCongDoanRepository.Update(PhiCongDoan);
-            await _PhiCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Xóa Phí Công Đoàn thành công";
+            return await _PhiCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Phí Công Đoàn thành công" : "Xóa Phí Công Đoàn thất bại";
         }
     }
 }

@@ -11,9 +11,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
     {
         public UpdateLuongCongNhatCommandValidator()
         {
-            RuleFor(x => x.MaSoNhanVien)
-                .NotEmpty().WithMessage("MaSoNhanVien không được để trống.")
-                .MaximumLength(450).WithMessage("MaSoNhanVien không vượt quá 450 kí tự.");
+
 
             RuleFor(x => x.SoGioLam)
                 .NotEmpty().WithMessage("SoGioLam không được để trống.")

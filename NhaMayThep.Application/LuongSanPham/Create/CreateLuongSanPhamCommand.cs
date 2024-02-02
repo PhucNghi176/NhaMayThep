@@ -13,7 +13,7 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 {
     public class CreateLuongSanPhamCommand : IRequest<string>, ICommand
     {
-        public CreateLuongSanPhamCommand(string maSoNhanVien, int soSanPham, int mucSanPhamID, decimal tongLuong)
+        public CreateLuongSanPhamCommand(string maSoNhanVien, int soSanPham, string mucSanPhamID, decimal tongLuong)
         {
 
             MaSoNhanVien = maSoNhanVien;
@@ -25,8 +25,7 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 
         public required string MaSoNhanVien { get; set; }
         public int SoSanPhamLam { get; set; }
-        public required int MucSanPhamID { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+        public required string MucSanPhamID { get; set; }
         public decimal TongLuong { get; set; }
     }
 }

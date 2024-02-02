@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
             {
 
                 MaSoNhanVien = nhanVien.ID,
-                NhanVien = nhanVien,
+
                 PhanTramTang = request.PhanTramTang,
                 NgayApDung = request.NgayApDung,
                 LyDo = request.LyDo,
@@ -41,8 +41,8 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
             };
 
             _KhaiBaoTangLuongRepository.Add(KhaiBaoTangLuong);
-            await _KhaiBaoTangLuongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Khai Báo Tăng Lương thành công";
+            return await _KhaiBaoTangLuongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Khai Báo Tăng Lương thành công" : "Tạo Khai Báo Tăng Lương thất bại";
+
         }
     }
 }

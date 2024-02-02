@@ -44,9 +44,7 @@ namespace NhaMayThep.Application.PhiCongDoan.Update
             PhiCongDoan.NgayCapNhatCuoi = DateTime.Now;
 
             _PhiCongDoanRepository.Update(PhiCongDoan);
-            await _PhiCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return "Cập nhật Phí Công Đoàn thành công";
+            return await _PhiCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Phí Công Đoàn thành công" : "Cập nhật Phí Công Đoàn thất bại";
         }
     }
 }

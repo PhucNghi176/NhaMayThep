@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.PhiCongDoan.Update
         public string ID { get; set; }
         public required string MaSoNhanVien { get; set; }
         public double PhanTramLuongDongBH { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+
         public decimal LuongDongBH { get; set; }
     }
 }

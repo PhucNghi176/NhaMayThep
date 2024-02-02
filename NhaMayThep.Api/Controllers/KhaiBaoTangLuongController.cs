@@ -24,7 +24,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("CreateKhaiBaoTangLuong")]
+        [HttpPost("khai-bao-tang-luong")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -39,7 +39,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("GetAllKhaiBaoTangLuong")]
+        [HttpGet("khai-bao-tang-luong")]
         [ProducesResponseType(typeof(List<KhaiBaoTangLuongDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
@@ -50,7 +50,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<KhaiBaoTangLuongDto>>(result));
         }
 
-        [HttpPut("UpdateKhaiBaoTangLuong")]
+        [HttpPut("khai-bao-tang-luong")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -68,7 +68,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("DeleteKhaiBaoTangLuong/{id}")]
+        [HttpDelete("khai-bao-tang-luong/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -84,7 +84,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("GetKhaiBaoTangLuongById/{id}")]
+        [HttpGet("khai-bao-tang-luong/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
