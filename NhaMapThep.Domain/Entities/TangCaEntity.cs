@@ -21,7 +21,7 @@ namespace NhaMapThep.Domain.Entities
         public decimal LuongSanPham {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongCongNhat {  get; set; }
-        public required string LoaiTangCaID { get; set; }
+        public required int LoaiTangCaID { get; set; }
         [ForeignKey(nameof(LoaiTangCaID))]
         public virtual LoaiTangCaEntity LoaiTangCa { get; set; }
     }
