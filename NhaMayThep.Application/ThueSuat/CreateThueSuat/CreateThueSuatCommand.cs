@@ -14,8 +14,8 @@ namespace NhaMayThep.Application.ThueSuat.CreateThueSuat
         public int BacThue { get; set; }
         public decimal ThuNhapTinhThueTrenNam { get; set; }
         public decimal ThuNhapTinhThueTrenThang { get; set; }
-        public decimal PhanTramThueSuat { get; set; }
-        public CreateThueSuatCommand(string name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, decimal phanTramThueSuat)
+        public double PhanTramThueSuat { get; set; }
+        public CreateThueSuatCommand(string name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, double phanTramThueSuat)
         {
             this.name = name;
             this.BacThue = bacThue;

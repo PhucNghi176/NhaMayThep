@@ -15,8 +15,8 @@ namespace NhaMayThep.Application.ThueSuat.UpdateThueSuat
         public int BacThue { get; set; }
         public decimal ThuNhapTinhThueTrenNam { get; set; }
         public decimal ThuNhapTinhThueTrenThang { get; set; }
-        public decimal PhanTramThueSuat { get; set; }
-        public UpdateThueSuatCommand(int iD, string name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, decimal phanTramThueSuat)
+        public double PhanTramThueSuat { get; set; }
+        public UpdateThueSuatCommand(int iD, string name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, double phanTramThueSuat)
         {
             ID = iD;
             Name = name;
