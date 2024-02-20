@@ -23,8 +23,10 @@ namespace NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong
                 Name = command.TenHopDong
             };
             _loaiHopDongRepository.Add(add);
-            await _loaiHopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo thành công";
+            if (await _loaiHopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }

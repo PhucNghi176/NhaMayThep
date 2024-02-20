@@ -8,7 +8,7 @@ using NhaMayThep.Application.ThongTinCongDoan;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
 {
-    public class GetAllThongTinGiamTruGiaCanhQueryHandler : IRequestHandler<GetAllThongTinGiamTruGiaCanhQuery, PagedResult<ThongTinGiamTruGiaCanhDto>>
+    public class GetAllThongTinGiamTruGiaCanhQueryHandler : IRequestHandler<GetAllThongTinGiamTruGiaCanhQuery, List<ThongTinGiamTruGiaCanhDto>>
     {
         private readonly IThongTinGiamTruGiaCanhRepository _thongTinGiamTruGiaCanhRepository;
         private readonly INhanVienRepository _nhanVienRepository;
@@ -25,11 +25,10 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
             _nhanVienRepository = nhanVienRepository;
             _thongTinGiamTruRepository = thongTinGiamTruRepository;
         }
-        public async Task<PagedResult<ThongTinGiamTruGiaCanhDto>> Handle(GetAllThongTinGiamTruGiaCanhQuery request, CancellationToken cancellationToken)
+        public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetAllThongTinGiamTruGiaCanhQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository
-                .FindAllAsync(x=> x.NguoiXoaID == null && !x.NgayXoa.HasValue, 
-                request.PageNumber, request.PageSize,cancellationToken);
+                .FindAllAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
             var thongtingiamtrus = await _thongTinGiamTruRepository
                 .FindAllToDictionaryAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
             var nhanviens = await _nhanVienRepository
@@ -38,13 +37,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin giảm trừ gia cảnh nào");
             }
-            var resultList= giamtrugiacanhs.MapToThongTinGiamTruGiaCanhDtoList(_mapper, nhanviens,thongtingiamtrus);
-            return PagedResult<ThongTinGiamTruGiaCanhDto>.Create(
-               totalCount: giamtrugiacanhs.TotalCount,
-               pageCount: giamtrugiacanhs.PageCount,
-               pageSize: giamtrugiacanhs.PageSize,
-               pageNumber: giamtrugiacanhs.PageNo,
-               data: resultList);
+            return giamtrugiacanhs.MapToThongTinGiamTruGiaCanhDtoList(_mapper, nhanviens, thongtingiamtrus);
         }
     }
 }

@@ -2,6 +2,7 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,27 +11,34 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiem.UpdateBaoHiem
 {
-    public class UpdateBaoHiemCommandHandler : IRequestHandler<UpdateBaoHiemCommand, BaoHiemDto>
+    public class UpdateBaoHiemCommandHandler : IRequestHandler<UpdateBaoHiemCommand, string>
     {
         private readonly IBaoHiemRepository _baoHiemRepository;
-        private readonly IMapper _mapper;
-        public UpdateBaoHiemCommandHandler(IBaoHiemRepository baoHiemRepository, IMapper mapper)
+        private readonly ICurrentUserService _currentUserService;
+        public UpdateBaoHiemCommandHandler(IBaoHiemRepository baoHiemRepository, ICurrentUserService currentUserService)
         {
             _baoHiemRepository = baoHiemRepository;
-            _mapper = mapper;
+            _currentUserService = currentUserService;
         }
-        public async Task<BaoHiemDto> Handle(UpdateBaoHiemCommand command, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateBaoHiemCommand command, CancellationToken cancellationToken)
         {
+            var duplicate = await _baoHiemRepository.AnyAsync(x => x.Name == command.TenLoaiBaoHiem && x.NgayXoa == null, cancellationToken);
+            if (duplicate)
+                throw new NotFoundException("Đã có tên bảo hiểm này trong hệ thống");
+
             var update = await _baoHiemRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (update == null)
                 throw new NotFoundException($"Không tìm thấy bảo hiểm với id: {command.Id}");
+
             update.Name = command.TenLoaiBaoHiem;
             update.PhanTramKhauTru = command.PhanTramKhauTru;
+            update.NguoiCapNhatID = _currentUserService.UserId;
+            update.NgayCapNhat = DateTime.Now;
             _baoHiemRepository.Update(update);
             if (await _baoHiemRepository.UnitOfWork.SaveChangesAsync() > 0)
-                return update.MapToBaoHiemDto(_mapper);
+                return "Cập nhật thành công";
             else
-                throw new Exception("Cập nhật thất bại");
+                return "Cập nhật thất bại";
         }
     }
 }

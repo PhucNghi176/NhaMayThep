@@ -12,6 +12,8 @@ using System.Net.Mime;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using NhaMayThep.Application.LichSuNghiPhep;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -63,7 +65,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpGet("getAll")]
+        [HttpGet("lich-su-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -77,7 +79,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LichSuNghiPhepDto>>(result));
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("lich-su-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -90,6 +92,20 @@ namespace NhaMayThep.Api.Controllers
             var query = new GetByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<LichSuNghiPhepDto>(result));
+        }
+
+        [HttpGet("lich-su-nghi-phep/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LichSuNghiPhepDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LichSuNghiPhepDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<LichSuNghiPhepDto>>>> GetPagination([FromQuery] GetLichSuNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

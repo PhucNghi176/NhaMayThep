@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using System;
 using System.Collections.Generic;
@@ -15,7 +14,7 @@ namespace NhaMayThep.Application.MucSanPham
         public static MucSanPhamDto MapToMucSanPhamDto(this MucSanPhamEntity projectFrom, IMapper mapper)
             => mapper.Map<MucSanPhamDto>(projectFrom);
 
-        public static List<MucSanPhamDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<MucSanPhamEntity> projectFrom, IMapper mapper)
+        public static List<MucSanPhamDto> MapToMucSanPhamDtoList(this IEnumerable<MucSanPhamEntity> projectFrom, IMapper mapper)
             => projectFrom.Select(x => x.MapToMucSanPhamDto(mapper)).ToList();
     }
 }

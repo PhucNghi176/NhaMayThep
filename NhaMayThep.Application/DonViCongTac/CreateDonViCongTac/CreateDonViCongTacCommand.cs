@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
 {
-    public class CreateDonViCongTacCommand : IRequest<int>, ICommand
+    public class CreateDonViCongTacCommand : IRequest<string>, ICommand
     {
         public CreateDonViCongTacCommand(string name)
         {
