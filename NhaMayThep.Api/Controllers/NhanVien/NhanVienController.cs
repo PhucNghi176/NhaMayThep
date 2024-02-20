@@ -12,6 +12,7 @@ using NhaMayThep.Application.NhanVien.DeleteNhanVien;
 using NhaMayThep.Application.NhanVien.DeleteNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.GetAllNhanVien;
 using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
+using NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVienTest;
@@ -193,5 +194,18 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new DeleteNhanVienHangLoatCommand(ids), cancellationToken); return Ok(result);
         }
 
+        [HttpGet("nhan-vien/{request}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail([FromRoute] string request, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
+            return Ok(new JsonResponse<List<NhanVienDto>>(result));
+        }
     }
 }

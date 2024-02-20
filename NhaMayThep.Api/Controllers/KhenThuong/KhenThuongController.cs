@@ -66,7 +66,7 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
             [FromRoute] string Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await this._mediator.Send(new GetKhenThuongByIDQuery(Id), cancellationToken);
+            var result = await this._mediator.Send(new GetKhenThuongByIDQuery(iD:Id), cancellationToken);
             return new JsonResponse<KhenThuongDTO>(result);
         }
         [HttpPut("KhenThuong")]
@@ -96,7 +96,7 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
             [FromRoute] string Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await this._mediator.Send(new DeleteKhenThuongCommand(Id), cancellationToken);
+            var result = await this._mediator.Send(new DeleteKhenThuongCommand(iD:Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 
