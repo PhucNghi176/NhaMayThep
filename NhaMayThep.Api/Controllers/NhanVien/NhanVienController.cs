@@ -159,18 +159,18 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
-        [HttpGet("nhan-vien/{email}")]
+        [HttpGet("nhan-vien/{request}")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<string>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<List<string>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<string>>>> getHoVaTenNhanVienByEmail([FromRoute] string email, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail([FromRoute] string request, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetHoTenNhanVienByEmailQuery(Email: email), cancellationToken);
-            return Ok(new JsonResponse<List<string>>(result));
+            var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
+            return Ok(new JsonResponse<List<NhanVienDto>>(result));
         }
     }
 }

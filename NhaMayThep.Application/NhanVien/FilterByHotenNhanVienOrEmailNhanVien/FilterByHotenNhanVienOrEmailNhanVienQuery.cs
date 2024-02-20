@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
 {
-    public class GetHoTenNhanVienByEmailQuery : IRequest<List<string>>, IQuery
+    public class FilterByHotenNhanVienOrEmailNhanVienQuery : IRequest<List<NhanVienDto>>, IQuery
     {
-        public string Email { get; set; }
-        public GetHoTenNhanVienByEmailQuery(string Email)
+        public string request { get; set; }
+        public FilterByHotenNhanVienOrEmailNhanVienQuery(string request)
         {
-            this.Email = Email;
+            this.request = request;
         }
-        public GetHoTenNhanVienByEmailQuery() { }
+        public FilterByHotenNhanVienOrEmailNhanVienQuery() { }
     }
 }
