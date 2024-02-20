@@ -8,8 +8,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
         {
             RuleFor(x => x.NhanVienID)
                 .NotEmpty().WithMessage("Mã nhân viên không được để trống")
-                .NotNull().WithMessage("Mã nhân viên không được rỗng")
-                .Must(x => Guid.TryParseExact(x,"N",out _)).WithMessage("Mã nhân viên không đúng định dạng");
+                .NotNull().WithMessage("Mã nhân viên không được rỗng");
             RuleFor(x => x.NgayGiaNhap)
                 .Must(ngayGiaNhap => ngayGiaNhap == DateTime.MinValue || ngayGiaNhap <= DateTime.Now)
                 .WithMessage("Ngày gia nhập không thể lớn hơn ngày hiện tại"); ;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
 {
-    public class UpdateChiTietDangVienCommand : IRequest<ChiTietDangVienDto>, ICommand
+    public class UpdateChiTietDangVienCommand : IRequest<string>, ICommand
     {
         public UpdateChiTietDangVienCommand(string nhanvienId, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri )
         {

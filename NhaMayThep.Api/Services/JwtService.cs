@@ -7,16 +7,15 @@ using System.Text;
 
 namespace NhaMayThep.Api.Services
 {
-    internal class JwtService : IJwtService
+    public class JwtService : IJwtService
     {
-        public string CreateToken(string email, string ID, string roles)
+        public string CreateToken(string ID, string roles)
         {
             var claims = new List<Claim>
             {
-                //new Claim(JwtRegisteredClaimNames.Sub, userId),
-                new Claim(JwtClaimTypes.Subject, ID),
-              //  new Claim(JwtClaimTypes.Email, email),
-                new Claim(JwtClaimTypes.Role, roles)
+
+                new(JwtRegisteredClaimNames.Sub, ID),
+                new(ClaimTypes.Role, roles)
             };
 
 

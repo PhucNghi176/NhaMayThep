@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinChucDanh.UpdateChucDanh
 {
-    public class UpdateChucDanhCommand : IRequest<ChucDanhDto>, ICommand
+    public class UpdateChucDanhCommand : IRequest<string>, ICommand
     {
         public UpdateChucDanhCommand() { }
         public UpdateChucDanhCommand(int id, string tenChucDanh)

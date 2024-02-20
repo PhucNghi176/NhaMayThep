@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.MucSanPham.Update
         private void ConfigureValidationRules()
         {
             RuleFor(v => v.ID)
-                .NotNull().WithMessage("ID không được trống");
+                .NotEmpty().WithMessage("ID không được trống");
 
             RuleFor(v => v.LuongMucSanPham)
                 .NotNull().WithMessage("LuongMucSanPham không được trống")
@@ -30,9 +30,6 @@ namespace NhaMayThep.Application.MucSanPham.Update
             RuleFor(v => v.MucSanPhamToiDa)
                 .NotNull().WithMessage("MucSanPhamToiDa không được trống")
                 .GreaterThan(0).WithMessage("MucSanPhamToiDa phải lớn hơn 0");
-
-            RuleFor(v => v.Name)
-                .NotEmpty().WithMessage("Name không được trống");
         }
     }
 }

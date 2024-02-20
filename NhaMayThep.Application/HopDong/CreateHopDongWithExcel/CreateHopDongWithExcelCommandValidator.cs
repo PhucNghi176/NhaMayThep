@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
         }
         public void Configure()
         {
-            RuleFor(x => x.FileStream)
+            RuleFor(x => x.Files)
                 .NotEmpty()
                 .NotNull()
                 .WithMessage("Xin vui lòng nhập file");

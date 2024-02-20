@@ -12,13 +12,11 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
     public class CreateHopDongWithExcelCommand : IRequest<string>, ICommand
     {
 
-        public Stream FileStream { get; set; }
-        public string FileName { get; set; }
+        public IFormFile[] Files { get; set; }
 
-        public CreateHopDongWithExcelCommand(Stream fileStream, string fileName)
+        public CreateHopDongWithExcelCommand(IFormFile[] files)
         {
-            FileStream = fileStream;
-            FileName = fileName;
+            Files = files;
         }
     }
 }

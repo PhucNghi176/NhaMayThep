@@ -10,10 +10,10 @@ namespace NhaMayThep.Application.MucSanPham.Delete
 {
     public class DeleteMucSanPhamCommand : IRequest<string>, ICommand
     {
-        public DeleteMucSanPhamCommand(int id)
+        public DeleteMucSanPhamCommand(string id)
         {
             ID = id;
         }
-        public int ID {  get; set; }
+        public string ID {  get; set; }
     }
 }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
 {
-    public class UpdateDonViCongTacCommand : IRequest<DonViCongTacDto>, ICommand
+    public class UpdateDonViCongTacCommand : IRequest<string>, ICommand
     {
         public UpdateDonViCongTacCommand(int id, string name )
         { 

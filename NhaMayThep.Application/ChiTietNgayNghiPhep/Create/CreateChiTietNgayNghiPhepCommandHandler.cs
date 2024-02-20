@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
 {
-    public class CreateChiTietNgayNghiPhepCommandHandler : IRequestHandler<CreateChiTietNgayNghiPhepCommand, ChiTietNgayNghiPhepDto>
+    public class CreateChiTietNgayNghiPhepCommandHandler : IRequestHandler<CreateChiTietNgayNghiPhepCommand, string>
     {
         private readonly IMapper _mapper;
         private readonly IChiTietNgayNghiPhepRepository _repository;
@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             _loaiNghiPhepRepo = loaiNghiPhepRepo;
         }
 
-        public async Task<ChiTietNgayNghiPhepDto> Handle(CreateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -36,7 +36,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
                 throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
 
-            var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+            var nhanVien = await _hanVienRepository.FindAsync(x => x.ID == request.NhanVienID, cancellationToken);
             if (nhanVien == null)
             {
                 throw new NotFoundException("Nhan Vien không tồn tại.");
@@ -53,7 +53,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             var ctnp = new ChiTietNgayNghiPhepEntity
             {
                 NguoiTaoID = _currentUserService?.UserId,
-                MaSoNhanVien = request.MaSoNhanVien,
+                MaSoNhanVien = request.NhanVienID,
                 LoaiNghiPhepID = request.LoaiNghiPhepID,
                 TongSoGio = request.TongSoGio,
                 SoGioDaNghiPhep = request.SoGioDaNghiPhep,
@@ -62,8 +62,10 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
             };
 
             _repository.Add(ctnp);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return ctnp.MapToChiTietNgayNghiPhepDto(_mapper);
+            if (await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }

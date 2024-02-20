@@ -10,16 +10,14 @@ namespace NhaMayThep.Application.MucSanPham.Update
 {
     public class UpdateMucSanPhamCommand : IRequest<string>, ICommand
     {
-        public UpdateMucSanPhamCommand(int id, string name, int mucSanPhamToiThieu, int mucSanPhamToiDa, decimal luongMucSanPham)
+        public UpdateMucSanPhamCommand(string id, int mucSanPhamToiThieu, int mucSanPhamToiDa, decimal luongMucSanPham)
         {
             ID = id;
-            Name = name;
             MucSanPhamToiThieu = mucSanPhamToiThieu;
             MucSanPhamToiDa = mucSanPhamToiDa;
             LuongMucSanPham = luongMucSanPham;
         }
-        public int ID {  get; set; }
-        public string Name { get; set; }
+        public string ID {  get; set; }
         public int MucSanPhamToiThieu { get; set; }
         public int MucSanPhamToiDa { get; set; }
         public decimal LuongMucSanPham { get; set; }

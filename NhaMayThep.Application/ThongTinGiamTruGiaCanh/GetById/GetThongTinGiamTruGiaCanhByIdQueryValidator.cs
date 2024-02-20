@@ -7,7 +7,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById
         public GetThongTinGiamTruGiaCanhByIdQueryValidator()
         {
             RuleFor(x => x.Id)
-               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Id không đúng định dạng");
+                .NotNull().WithMessage("Id không được bỏ trống")
+                .NotEmpty().WithMessage("Id không được rỗng");
         }
     }
 }

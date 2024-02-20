@@ -13,18 +13,16 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
 {
-    public class UpdateDonViCongTacCommandHandler : IRequestHandler<UpdateDonViCongTacCommand, DonViCongTacDto>
+    public class UpdateDonViCongTacCommandHandler : IRequestHandler<UpdateDonViCongTacCommand, string>
     {
         private IDonViCongTacRepository _donViCongTacRepository;
-        private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-        public UpdateDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository, IMapper mapper, ICurrentUserService currentUserService)
+        public UpdateDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository, ICurrentUserService currentUserService)
         {
             _donViCongTacRepository = donViCongTacRepository;
-            _mapper = mapper;
             _currentUserService = currentUserService;
         }
-        public async Task<DonViCongTacDto> Handle(UpdateDonViCongTacCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateDonViCongTacCommand request, CancellationToken cancellationToken)
         {
 
             var donViCongTac = await _donViCongTacRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken);
@@ -40,9 +38,10 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
             donViCongTac.NgayCapNhat = DateTime.Now;
 
             _donViCongTacRepository.Update(donViCongTac);
-            await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return donViCongTac.MapToDonViCongTacDto(_mapper);
+            if (await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }
