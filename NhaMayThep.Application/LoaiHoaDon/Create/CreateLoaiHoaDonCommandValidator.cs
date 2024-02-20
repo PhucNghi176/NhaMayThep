@@ -2,9 +2,9 @@
 
 namespace NhaMayThep.Application.LoaiHoaDon.Create
 {
-    public class CreateLoaiHoaDonCommadValidator : AbstractValidator<CreateLoaiHoaDonCommand>
+    public class CreateLoaiHoaDonCommandValidator : AbstractValidator<CreateLoaiHoaDonCommand>
     {
-        public CreateLoaiHoaDonCommadValidator()
+        public CreateLoaiHoaDonCommandValidator()
         {
 
             RuleFor(command => command.Name)
