@@ -18,7 +18,7 @@ namespace NhaMayThep.Infrastructure
             services.AddDbContext<ApplicationDbContext>((sp, options) =>
             {
                 options.UseSqlServer(
-                    configuration.GetConnectionString("Server"),
+                    configuration.GetConnectionString("local"),
                     b =>
                     {
                         b.MigrationsAssembly(typeof(ApplicationDbContext).Assembly.FullName);
@@ -59,6 +59,14 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IMucSanPhamRepository, MucSanPhamRepository>();
             services.AddTransient<IKyLuatRepository, KyLuatRepository>();
             services.AddTransient<IKhenThuongRepository, KhenThuongRepository>();
+            services.AddTransient<IThueSuatRepository, ThueSuatRepository>();
+            services.AddTransient<ILoaiTangCaRepository, LoaiTangCaRepository>();
+            services.AddTransient<ILuongCongNhatRepository, LuongCongNhatRepository>();
+            services.AddTransient<ILuongSanPhamRepository, LuongSanPhamRepository>();
+            services.AddTransient<IKhaiBaoTangLuongRepository, KhaiBaoTangLuongRepository>();
+            services.AddTransient<IPhiCongDoanRepository, PhiCongDoanRepository>();
+            services.AddTransient<IPhuCapCongDoanRepository, PhuCapCongDoanRepository>();
+            services.AddTransient<ITangCaRepository, TangCaRepository>();
             return services;
         }
     }

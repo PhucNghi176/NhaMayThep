@@ -16,8 +16,8 @@ namespace NhaMapThep.Domain.Entities
         public virtual NhanVienEntity NhanVien { get; set; }
 
         public string TenCapBac { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
-        public decimal HeSoLuong { get; set; }
+
+        public double HeSoLuong { get; set; }
         public string TrinhDo {  get; set; }
 
     }
