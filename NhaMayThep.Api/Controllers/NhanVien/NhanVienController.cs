@@ -22,6 +22,7 @@ namespace NhaMayThep.Api.Controllers
 {
 
     [ApiController]
+    [Authorize]
     public class NhanVienController : ControllerBase
     {
         private readonly IMediator _mediator;
