@@ -42,7 +42,7 @@ namespace CleanArchitecture.Api.Controllers
             return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("trinh-do-hoc-van")]
+        [HttpDelete("trinh-do-hoc-van/{Id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -53,7 +53,7 @@ namespace CleanArchitecture.Api.Controllers
             [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteTrinhDoHocVanCommand(id: Id), cancellationToken);
+            var result = await _mediator.Send(new DeleteTrinhDoHocVanCommand(Id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 
