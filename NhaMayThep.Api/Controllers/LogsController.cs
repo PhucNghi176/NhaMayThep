@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using System.Net.Mime;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Logs.GetNewestLogs;
+using NhaMayThep.Application.Logs.DowloadFileLogs;
 
 namespace NhaMayThep.Api.Controllers
 {
