@@ -24,6 +24,7 @@ using NhaMapThep.Application.Common.Pagination;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
+using NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec;
 
 namespace NhaMayThep.Api.Controllers
 {
