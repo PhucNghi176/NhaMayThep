@@ -6,7 +6,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
     public class CreateNewHopDongCommand : IRequest<string>, ICommand
     {
         public CreateNewHopDongCommand(string maSoNhanVien, int loaiHopDongId, DateTime ngayKyHopDong, DateTime ngayKetThucHopDong
-                                                        , int thoiHanHopDong, string diaDiemLamViec, string boPhanLamViec, int chucDanhId
+                                                        , string diaDiemLamViec, string boPhanLamViec, int chucDanhId
                                                         , int chucVuId, decimal luongCoBan, int heSoLuongId, string phuCapId
                                                         , string ghiChu)
         {
@@ -14,7 +14,6 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             LoaiHopDongId = loaiHopDongId;
             NgayKyHopDong = ngayKyHopDong;
             NgayKetThucHopDong = ngayKetThucHopDong;
-            ThoiHanHopDong = thoiHanHopDong;
             DiaDiemLamViec = diaDiemLamViec;
             BoPhanLamViec = boPhanLamViec;
             ChucDanhId = chucDanhId;
@@ -24,12 +23,15 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
             PhuCapId = phuCapId;
             GhiChu = ghiChu;
         }
+        public CreateNewHopDongCommand()
+        {
+            
+        }
 
         public string MaSoNhanVien { get; set; }
         public int LoaiHopDongId { get; set; }
         public DateTime NgayKyHopDong { get; set; }
-        public DateTime NgayKetThucHopDong { get; set; }
-        public int ThoiHanHopDong { get; set; }
+        public DateTime? NgayKetThucHopDong { get; set; }
         public string DiaDiemLamViec { get; set; }
         public string BoPhanLamViec { get; set; }
         public int ChucDanhId { get; set; }

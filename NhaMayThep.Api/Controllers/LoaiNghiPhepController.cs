@@ -12,11 +12,14 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using System.Net.Mime;
 using NhaMayThep.Application.LoaiNghiPhep;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    [Authorize]
     public class LoaiNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -26,42 +29,42 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpPost("create")]
+        [HttpPost("loai-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create(CreateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Loai Nghi Phep created successfully"));
+            var result =  await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("delete/{id}")]
+        [HttpDelete("loai-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(int id, CancellationToken cancellationToken)
         {
-            await _mediator.Send(new DeleteLoaiNghiPhepCommand(id), cancellationToken);
-            return Ok(new JsonResponse<string>("Loai Nghi Phep deleted successfully"));
+            var result = await _mediator.Send(new DeleteLoaiNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
 
 
-        [HttpPut("update")]
+        [HttpPut("loai-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update(UpdateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Loai Nghi Phep updated successfully"));
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("getAll")]
+        [HttpGet("loai-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -73,7 +76,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<LoaiNghiPhepDto>>(result));
         }
 
-        [HttpGet("getById/{id}")]
+        [HttpGet("loai-nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -83,6 +86,20 @@ namespace NhaMayThep.Api.Controllers
             var query = new GetLoaiNghiPhepByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<LoaiNghiPhepDto>(result));
+        }
+
+        [HttpGet("loai-nghi-phep/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiNghiPhepDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LoaiNghiPhepDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<LoaiNghiPhepDto>>>> GetPagination([FromQuery] GetLoaiNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

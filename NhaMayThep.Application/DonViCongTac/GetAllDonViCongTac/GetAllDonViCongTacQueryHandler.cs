@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac
         public async Task<List<DonViCongTacDto>> Handle(GetAllDonViCongTacQuery request, CancellationToken cancellationToken)
         {
 
-            var donViCongTacList = await _donViCongTacRepository.FindAllAsync(cancellationToken);
+            var donViCongTacList = await _donViCongTacRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             return donViCongTacList.MapToDonViCongTacDtoList(_mapper);
         }
     }

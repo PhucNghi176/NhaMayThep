@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
 {
-    public class CreateDonViCongTacCommandHandler : IRequestHandler<CreateDonViCongTacCommand, int>
+    public class CreateDonViCongTacCommandHandler : IRequestHandler<CreateDonViCongTacCommand, string>
     {
         private IDonViCongTacRepository _donViCongTacRepository;
         private readonly ICurrentUserService _currentUserService;
@@ -21,10 +21,10 @@ namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
             _donViCongTacRepository = donViCongTacRepository;
             _currentUserService = currentUserService;
         }
-        public async Task<int> Handle(CreateDonViCongTacCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateDonViCongTacCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplication = await _donViCongTacRepository.FindAsync(x => x.Name == request.Name, cancellationToken);
-            if (checkDuplication != null)
+            var checkDuplication = await _donViCongTacRepository.AnyAsync(x => x.Name == request.Name && x.NgayXoa == null, cancellationToken);
+            if (checkDuplication)
                 throw new Exception("Tên đơn vị công tác đã tồn tại");
 
             var donViCongTac = new DonViCongTacEntity()
@@ -34,9 +34,10 @@ namespace NhaMayThep.Application.DonViCongTac.CreateDonViCongTac
                 NgayTao = DateTime.Now
             };
             _donViCongTacRepository.Add(donViCongTac);
-            await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return donViCongTac.ID;
+            if (await _donViCongTacRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }

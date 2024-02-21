@@ -11,6 +11,7 @@ namespace NhaMayThep.Infrastructure.Persistence
     {
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
         {
+
         }
         public DbSet<NhanVienEntity> NhanVien { get; set; }
         public DbSet<ThongTinChucVuEntity> ChucVu { get; set; }
@@ -85,10 +86,10 @@ namespace NhaMayThep.Infrastructure.Persistence
         private void ConfigureModel(ModelBuilder modelBuilder)
         {
 
-            modelBuilder.Entity<LoaiHoaDonEntity>().HasData(
-                new LoaiHoaDonEntity() { ID = 1, Name = "ChiPhiDiLai" },
-                new LoaiHoaDonEntity() { ID = 2, Name = "ChiPhiChoO" },
-                new LoaiHoaDonEntity() { ID = 3, Name = "ChiPhiQuaBieuTang" },
+           /* modelBuilder.Entity<LoaiHoaDonEntity>().HasData(
+                new LoaiHoaDonEntity() { ID = 1, Name = "HoaDonDiLai" },
+                new LoaiHoaDonEntity() { ID = 2, Name = "HoaDonChoO" },
+                new LoaiHoaDonEntity() { ID = 3, Name = "HoaDonQuaBieuTang" },
                 new LoaiHoaDonEntity() { ID = 4, Name = "HoaDonKhac" });
             modelBuilder.Entity<LoaiCongTacEntity>().HasData(
                 new LoaiCongTacEntity() { ID = 1, Name = "CongTacNoiBo" },
@@ -101,11 +102,11 @@ namespace NhaMayThep.Infrastructure.Persistence
                 new LoaiCongTacEntity() { ID = 8, Name = "CongTacKhac" });
 
             modelBuilder.Entity<LoaiNghiPhepEntity>().HasData(
-                new LoaiNghiPhepEntity() { ID = 1, Name = "NghiPhepNam", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 2, Name = "NghiOm", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 3, Name = "NghiKhongLuong", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 4, Name = "NghiThaiSan", SoGioNghiPhep = 8 },
-                new LoaiNghiPhepEntity() { ID = 5, Name = "NghiKhac", SoGioNghiPhep = 8 });
+                new LoaiNghiPhepEntity() { ID = 1, Name = "NghiPhepNam"},
+                new LoaiNghiPhepEntity() { ID = 2, Name = "NghiOm"},
+                new LoaiNghiPhepEntity() { ID = 3, Name = "NghiKhongLuong" },
+                new LoaiNghiPhepEntity() { ID = 4, Name = "NghiThaiSan"},
+                new LoaiNghiPhepEntity() { ID = 5, Name = "NghiKhac"});
             modelBuilder.Entity<ThongTinQuaTrinhNhanSuEntity>().HasData(
                 new ThongTinQuaTrinhNhanSuEntity() { ID = 1, Name = "ThangTien" },
                 new ThongTinQuaTrinhNhanSuEntity() { ID = 2, Name = "BoNhiem" },
@@ -142,6 +143,7 @@ namespace NhaMayThep.Infrastructure.Persistence
                  new ThongTinChucDanhEntity() { ID = 3, Name = "TruongPhong" },
                  new ThongTinChucDanhEntity() { ID = 4, Name = "PhoPhong" },
                  new ThongTinChucDanhEntity() { ID = 5, Name = "NhanVien" });
+           */
         }
     }
 }

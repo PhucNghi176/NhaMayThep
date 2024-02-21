@@ -26,6 +26,7 @@ namespace NhaMayThep.Infrastructure
                     });
                 options.UseLazyLoadingProxies();
             });
+            
             services.AddScoped<IUnitOfWork>(provider => provider.GetRequiredService<ApplicationDbContext>());
             services.AddTransient<INhanVienRepository, NhanVienRepository>();
             services.AddTransient<IThongTinDaoTaoRepository, ThongTinDaoTaoRepository>();
@@ -50,11 +51,22 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IThongTinQuaTrinhNhanSuRepository, ThongTinQuaTrinhNhanSuRepository>();
             services.AddTransient<IPhongBanRepository, PhongBanRepository>();
             services.AddTransient<ICapBacLuongRepository, CapBacLuongRepository>();
-            services.AddTransient<IChucDanhRepository, ChucDanhRepository>();
             services.AddTransient<ILoaiHopDongReposity, LoaiHopDongRepository>();
             services.AddTransient<IHopDongRepository, HopDongRepository>();
             services.AddTransient<IPhuCapRepository, ThongTinPhuCapRepository>();
-
+            services.AddTransient<IBaoHiemRepository, BaoHiemRepository>();
+            services.AddTransient<IChucDanhRepository, ChucDanhRepository>();   
+            services.AddTransient<IMucSanPhamRepository, MucSanPhamRepository>();
+            services.AddTransient<IKyLuatRepository, KyLuatRepository>();
+            services.AddTransient<IKhenThuongRepository, KhenThuongRepository>();
+            services.AddTransient<IThueSuatRepository, ThueSuatRepository>();
+            services.AddTransient<ILoaiTangCaRepository, LoaiTangCaRepository>();
+            services.AddTransient<ILuongCongNhatRepository, LuongCongNhatRepository>();
+            services.AddTransient<ILuongSanPhamRepository, LuongSanPhamRepository>();
+            services.AddTransient<IKhaiBaoTangLuongRepository, KhaiBaoTangLuongRepository>();
+            services.AddTransient<IPhiCongDoanRepository, PhiCongDoanRepository>();
+            services.AddTransient<IPhuCapCongDoanRepository, PhuCapCongDoanRepository>();
+            services.AddTransient<ITangCaRepository, TangCaRepository>();
             return services;
         }
     }

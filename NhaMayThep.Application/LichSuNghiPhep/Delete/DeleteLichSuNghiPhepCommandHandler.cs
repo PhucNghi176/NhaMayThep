@@ -4,7 +4,8 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMayThep.Application.LichSuNghiPhep.Delete;
 using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.Common.Interfaces;
-
+using NhaMapThep.Domain.Repositories;
+namespace NhaMayThep.Application.LichSuNghiPhep.Delete;
 public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNghiPhepCommand, LichSuNghiPhepDto>
 {
     private readonly ILichSuNghiPhepRepository _repo;
@@ -22,16 +23,16 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         var userId = _currentUserService.UserId;
         if (string.IsNullOrEmpty(userId))
         {
-            throw new UnauthorizedAccessException("User ID not found.");
+            throw new UnauthorizedAccessException("User ID không tồn tại .");
         }
         var lsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
         if (lsnp == null)
         {
-            throw new NotFoundException($"LichSuNghiPhep with ID {request.Id} not found.");
+            throw new NotFoundException($"LichSuNghiPhep với Id  {request.Id} không tìm thấy .");
         }
         if(lsnp.NgayXoa != null)
         {
-            throw new InvalidOperationException("This LichSuNghiPhep has been deleted");
+            throw new NotFoundException("LichSuNghiPhep này đã bị xóa ");
         }
 
         lsnp.NguoiXoaID = userId;

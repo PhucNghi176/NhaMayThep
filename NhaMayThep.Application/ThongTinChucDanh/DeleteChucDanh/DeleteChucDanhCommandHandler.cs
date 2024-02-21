@@ -1,5 +1,12 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
@@ -16,16 +23,16 @@ namespace NhaMayThep.Application.ThongTinChucDanh.DeleteChucDanh
         }
         public async Task<string> Handle(DeleteChucDanhCommand command, CancellationToken cancellationToken)
         {
-            var result = await _chucDanhRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var result = await _chucDanhRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             var msg = "";
             if (result == null)
-                throw new NotFoundException($"Chuc danh with {command.Id} not found");
+                throw new NotFoundException($"Không tìm thấy chức danh với id: {command.Id}");
             result.NgayXoa = DateTime.Now;
             result.NguoiXoaID = _currentUserService.UserId;
             if (await _chucDanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
-                msg = "Remove Successfully";
+                msg = "Xóa thành công";
             else
-                msg = "Remove Failed";
+                msg = "Xóa thất bại";
             return msg;
         }
     }

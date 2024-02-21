@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
@@ -25,7 +26,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNh
             var existName = await _thongTinQuaTrinhNhanSuRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
             if(existName == true)
             {
-                throw new DuplicateNameException("Thông tin quá trình nhân sự: " + command.Name + " đã tồn tại");
+                throw new DuplicationException("Thông tin quá trình nhân sự: " + command.Name + " đã tồn tại");
             }
             ThongTinQuaTrinhNhanSuEntity entity = new ThongTinQuaTrinhNhanSuEntity()
             {

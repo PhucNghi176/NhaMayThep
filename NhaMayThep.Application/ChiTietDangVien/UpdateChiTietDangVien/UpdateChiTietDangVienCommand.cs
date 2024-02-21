@@ -8,11 +8,11 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietDangVien.UpdateChiTietDangVien
 {
-    public class UpdateChiTietDangVienCommand : IRequest<ChiTietDangVienDto>, ICommand
+    public class UpdateChiTietDangVienCommand : IRequest<string>, ICommand
     {
-        public UpdateChiTietDangVienCommand(string nhanVienId, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri )
+        public UpdateChiTietDangVienCommand(string nhanvienId, string dangVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri )
         {
-            NhanVienID = nhanVienId;
+            NhanVienID = nhanvienId;
             DangVienID = dangVienId;
             DonViCongTacID = donViCongTacId;
             ChucVuDang = chucVuDang;

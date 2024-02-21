@@ -15,7 +15,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.GetAllChucVu
         }
         public async Task<List<ChucVuDto>> Handle(GetAllChucVuQuery query, CancellationToken cancellationToken)
         {
-            var list = await _chucVuRepository.FindAllAsync(cancellationToken);
+            var list = await _chucVuRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             List<ChucVuDto> result = new List<ChucVuDto>();
             foreach (var item in list)
             {

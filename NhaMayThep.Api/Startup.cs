@@ -26,11 +26,19 @@ namespace NhaMayThep.Api
                 });
             services.AddApplication(Configuration);
             services.ConfigureApplicationSecurity(Configuration);
-          //  services.ConfigureHealthChecks(Configuration);
             services.ConfigureProblemDetails();
             services.ConfigureApiVersioning();
             services.AddInfrastructure(Configuration);
             services.ConfigureSwagger(Configuration);
+            services.AddCors(options =>
+            {
+                options.AddPolicy("CorsPolicy",
+                builder => builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                );
+            });
+            System.Text.Encoding.RegisterProvider(System.Text.CodePagesEncodingProvider.Instance);
 
         }
 
@@ -41,6 +49,8 @@ namespace NhaMayThep.Api
             {
                 app.UseDeveloperExceptionPage();
             }
+            app.UseRouting();
+            app.UseCors("CorsPolicy");
             app.UseSerilogRequestLogging();
             app.UseExceptionHandler();
             app.UseHttpsRedirection();
