@@ -1,16 +1,13 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMayThep.Application.Logs.DowloadFileLogs;
-using NhaMayThep.Application.HoaDonCongTacNhanVien.DowloadFile;
 using System.Net.Mime;
-using NhaMayThep.Application.Logs.GetNewestLogs;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Logs.GetNewestLogs;
+using NhaMayThep.Application.Logs.DowloadFileLogs;
 
 namespace NhaMayThep.Api.Controllers
 {
-    
+
     [ApiController]
     //[Authorize]
     public class LogsController : ControllerBase
