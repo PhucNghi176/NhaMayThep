@@ -3,12 +3,14 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
+using NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec;
 using NhaMayThep.Application.NhanVien.GetAllNhanVien;
 using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail;
@@ -16,6 +18,7 @@ using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVienTest;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
+using NhaMayThep.Application.ThongTinChucVu;
 using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
@@ -103,10 +106,13 @@ namespace NhaMayThep.Api.Controllers
         [HttpGet]
         [Route("nhan-vien/get-all")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<JsonResponse<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PageResult>>> GetAll(
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> GetAll(
             [FromQuery] GetAllNhanVienQuery query,
              CancellationToken cancellationToken = default)
         {
@@ -171,6 +177,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
+        }
+        
+        [HttpGet]
+        [Route("nhan-vien/filter-chucvu-tinhtranglamviec")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByChucVuTinhTrangLamViec(
+            [FromQuery] FilterByChucDanhChucVuTinhTrangLamViecQuery query,
+             CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
