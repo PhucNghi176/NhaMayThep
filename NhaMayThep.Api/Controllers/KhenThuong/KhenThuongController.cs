@@ -1,12 +1,15 @@
-﻿using MediatR;
+﻿using Humanizer;
+using MediatR;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Application.Common.Security;
 using NhaMayThep.Application.KhenThuong;
 using NhaMayThep.Application.KhenThuong.CreateKhenThuong;
 using NhaMayThep.Application.KhenThuong.DeleteKhenThuong;
 using NhaMayThep.Application.KhenThuong.GetAllKhenThuong;
+using NhaMayThep.Application.KhenThuong.GetByPagination;
 using NhaMayThep.Application.KhenThuong.GetKhenThuongById;
 using NhaMayThep.Application.KhenThuong.UpdateKhenThuong;
 using System.Net.Mime;
@@ -95,6 +98,20 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
         {
             var result = await this._mediator.Send(new DeleteKhenThuongCommand(iD:Id), cancellationToken);
             return new JsonResponse<string>(result);
+        }
+
+        [HttpGet("khen-thuong/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<KhenThuongDTO>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<KhenThuongDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<KhenThuongDTO>>>> GetPagination([FromQuery] GetKhenThuongByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

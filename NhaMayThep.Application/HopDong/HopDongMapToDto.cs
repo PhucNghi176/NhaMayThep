@@ -7,6 +7,8 @@ namespace NhaMayThep.Application.HopDong
     {
         public static HopDongDto MapToHopDongDto(this HopDongEntity hopDong, IMapper mapper)
             => mapper.Map<HopDongDto>(hopDong);
+        public static List<HopDongDto> MapToListDto(this IEnumerable<HopDongEntity> entities, IMapper mapper)
+            => entities.Select(x => x.MapToHopDongDto(mapper)).ToList();
 
         public static HopDongDto MapToHopDongDto(this HopDongEntity hopDong, IMapper mapper, string chucDanh, string chucVu, string phuCap, string loaiHopDong, string hoVaTen)
         {
@@ -19,7 +21,7 @@ namespace NhaMayThep.Application.HopDong
             return dto;
         }
 
-        public static List<HopDongDto> MapToListHopDongDto(this List<HopDongEntity> entities, IMapper mapper, Dictionary<int, string> chucDanh, Dictionary<int, string> chucVu, Dictionary<int, string> phuCap, Dictionary<int, string> loaiHopDong, Dictionary<string, string> tenNhanVien)
+        public static List<HopDongDto> MapToListHopDongDto(this IEnumerable<HopDongEntity> entities, IMapper mapper, Dictionary<int, string> chucDanh, Dictionary<int, string> chucVu, Dictionary<int, string> phuCap, Dictionary<int, string> loaiHopDong, Dictionary<string, string> tenNhanVien)
         {
             return entities.Select(x =>
             {

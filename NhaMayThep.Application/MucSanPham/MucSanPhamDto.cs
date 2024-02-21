@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using System;
 using System.Collections.Generic;
@@ -17,8 +16,7 @@ namespace NhaMayThep.Application.MucSanPham
         {
             
         }
-        public int ID {  get; set; }
-        public string Name { get; set; }
+        public string ID {  get; set; }
         public int MucSanPhamToiThieu {  get; set; }
         public int MucSanPhamToiDa {  get; set; }
         public decimal LuongMucSanPham {  get; set; }

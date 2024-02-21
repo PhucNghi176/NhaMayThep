@@ -8,9 +8,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         {
             RuleFor(x => x.NhanVienID)
                .NotEmpty().WithMessage("Mã nhân viên không được bỏ trống")
-               .NotNull().WithMessage("Mã nhân viên không được rỗng")
-               .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã nhân viên sai định dạng");
-
+               .NotNull().WithMessage("Mã nhân viên không được rỗng");
             RuleFor(x => x.MaGiamTruID)
                  .GreaterThan(0)
                  .WithMessage("Mã giảm trừ phải lớn hơn 0")

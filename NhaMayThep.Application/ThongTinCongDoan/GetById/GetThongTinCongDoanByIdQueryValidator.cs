@@ -7,7 +7,8 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetById
         public GetThongTinCongDoanByIdQueryValidator()
         {
             RuleFor(x => x.Id)
-                .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Mã thông tin công đoàn không đúng định dạng");
+               .NotEmpty().WithMessage("Mã thông tin công đoàn không được để trống")
+               .NotNull().WithMessage("Mã thông tin công đoàn không được rỗng");
         }
     }
 }

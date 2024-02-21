@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted
 {
-    public class GetAllThongTinCongDoanDeletedQueryHandler : IRequestHandler<GetAllThongTinCongDoanDeletedQuery, PagedResult<ThongTinCongDoanDto>>
+    public class GetAllThongTinCongDoanDeletedQueryHandler : IRequestHandler<GetAllThongTinCongDoanDeletedQuery, List<ThongTinCongDoanDto>>
     {
         private readonly IThongTinCongDoanRepository _thongtinCongDoanRepository;
         private readonly IMapper _mapper;
@@ -25,23 +25,17 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted
             _mapper = mapper;
             _nhanVienRepository = nhanVienRepository;
         }
-        public async Task<PagedResult<ThongTinCongDoanDto>> Handle(GetAllThongTinCongDoanDeletedQuery request, CancellationToken cancellationToken)
+        public async Task<List<ThongTinCongDoanDto>> Handle(GetAllThongTinCongDoanDeletedQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoans = await _thongtinCongDoanRepository
-                .FindAllAsync(x => x.NgayXoa.HasValue && x.NguoiXoaID != null, request.PageNumber, request.PageSize, cancellationToken);
+                .FindAllAsync(x => x.NgayXoa.HasValue && x.NguoiXoaID != null,cancellationToken);
             var nhanviens = await _nhanVienRepository
                 .FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue && x.NguoiXoaID == null, x => x.ID, x => x.HoVaTen, cancellationToken);
             if (thongtincongdoans == null || !thongtincongdoans.Any())
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin công đoàn nào");
             }
-            var resultList = thongtincongdoans.MapToThongTinCongDoanDtoList(_mapper, nhanviens);
-            return PagedResult<ThongTinCongDoanDto>.Create(
-                totalCount: thongtincongdoans.TotalCount,
-                pageCount: thongtincongdoans.PageCount,
-                pageSize: thongtincongdoans.PageSize,
-                pageNumber: thongtincongdoans.PageNo,
-                data: resultList);
+            return thongtincongdoans.MapToThongTinCongDoanDtoList(_mapper, nhanviens);
         }
     }
 }
