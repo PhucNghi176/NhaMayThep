@@ -17,9 +17,9 @@ namespace NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy
         }
         public async Task<string> Handle(CreateThongTinCongTyCommand request, CancellationToken cancellationToken)
         {
-            var checkDuplicatoion = await _thongTinCongTyRepository.AnyAsync(x => x.MaDoanhNghiep == request.MaDoanhNghiep, cancellationToken: cancellationToken);
+            var checkDuplicatoion = await _thongTinCongTyRepository.FindAsync(x => x.MaDoanhNghiep == request.MaDoanhNghiep, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
-                throw new Exception("Doanh nghiệp này đã tồn tại");
+                return ("Thông Tin Công Ty đã tồn tại");
 
             var thongTinCongTy = new ThongTinCongTyEntity()
             {
