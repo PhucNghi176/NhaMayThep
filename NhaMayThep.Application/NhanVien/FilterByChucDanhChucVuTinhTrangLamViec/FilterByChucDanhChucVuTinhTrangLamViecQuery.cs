@@ -13,12 +13,12 @@ namespace NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public string request {  get; set; }
-        public FilterByChucDanhChucVuTinhTrangLamViecQuery(string request, int pageNumber, int pageSize)
+        public string ChucVuHoacTinhTrangLamViec {  get; set; }
+        public FilterByChucDanhChucVuTinhTrangLamViecQuery(string ChucVuHoacTinhTrangLamViec, int pageNumber, int pageSize)
         {
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
-            this.request = request;
+            this.ChucVuHoacTinhTrangLamViec = ChucVuHoacTinhTrangLamViec;
         }
         public FilterByChucDanhChucVuTinhTrangLamViecQuery() { }
     }

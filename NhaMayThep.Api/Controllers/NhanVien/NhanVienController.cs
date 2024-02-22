@@ -165,7 +165,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
-        [HttpGet("nhan-vien/{request}")]
+        [HttpGet("nhan-vien/{HoTenHoacEmail}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
@@ -173,23 +173,25 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail([FromRoute] string request, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail([FromRoute] string HoTenHoacEmail, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
+            var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(HoTenHoacEmail: HoTenHoacEmail), cancellationToken);
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
         }
         
         [HttpGet]
-        [Route("nhan-vien/filter-chucvu-tinhtranglamviec")]
+        [Route("nhan-vien/{no}/{pageSize}/{tenChucVuHoacTinhTrangLamViec}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByChucVuTinhTrangLamViec(
-            [FromQuery] FilterByChucDanhChucVuTinhTrangLamViecQuery query,
+            [FromRoute] int no,
+            [FromRoute] int pageSize,
+            [FromRoute] string tenChucVuHoacTinhTrangLamViec,
              CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(query, cancellationToken);
+            var result = await _mediator.Send(new FilterByChucDanhChucVuTinhTrangLamViecQuery(pageNumber : no, pageSize: pageSize, ChucVuHoacTinhTrangLamViec : tenChucVuHoacTinhTrangLamViec), cancellationToken);
             return Ok(result);
         }
     }

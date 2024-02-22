@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec
             RuleFor(x => x.PageSize)
                 .NotEmpty().NotNull()
                 .WithMessage("Nhập kích cỡ trang.");
-            RuleFor(x => x.request)
+            RuleFor(x => x.ChucVuHoacTinhTrangLamViec)
                 .NotEmpty().NotNull()
                 .WithMessage("Nhập chức danh hoặc chức vụ hoặc tình trạng làm việc.");
         }

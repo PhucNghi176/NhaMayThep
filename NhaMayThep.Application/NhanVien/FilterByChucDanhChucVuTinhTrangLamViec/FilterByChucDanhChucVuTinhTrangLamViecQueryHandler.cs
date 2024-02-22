@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Application.Common.Pagination;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
@@ -23,11 +24,13 @@ namespace NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec
         public FilterByChucDanhChucVuTinhTrangLamViecQueryHandler() { }
         public async Task<PagedResult<NhanVienDto>> Handle(FilterByChucDanhChucVuTinhTrangLamViecQuery request, CancellationToken cancellationToken)
         {
-            var result = await this._repository.FindAllAsync(x => (x.ChucVu.Name.Contains(request.request) || x.TinhTrangLamViec.Name.Contains(request.request)) && x.NgayXoa == null
+            var result = await this._repository.FindAllAsync(x => (x.ChucVu.Name.Contains(request.ChucVuHoacTinhTrangLamViec) || x.TinhTrangLamViec.Name.Contains(request.ChucVuHoacTinhTrangLamViec)) && x.NgayXoa == null
                                                             , request.PageNumber
                                                             , request.PageSize
                                                             , cancellationToken);
             //return result.MapToNhanVienDtoList(_mapper).ToList();
+            if (result.Count() == 0)
+                throw new NotFoundException("Không tìm thấy nhân viên");
             var list = result.MapToNhanVienDtoList(_mapper);
             return PagedResult<NhanVienDto>.Create(totalCount: result.TotalCount,
                                 pageCount: result.PageCount,

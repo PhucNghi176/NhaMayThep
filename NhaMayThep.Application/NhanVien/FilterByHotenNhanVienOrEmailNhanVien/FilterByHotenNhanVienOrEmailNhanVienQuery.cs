@@ -11,10 +11,10 @@ namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
 {
     public class FilterByHotenNhanVienOrEmailNhanVienQuery : IRequest<List<NhanVienDto>>, IQuery
     {
-        public string request { get; set; }
-        public FilterByHotenNhanVienOrEmailNhanVienQuery(string request)
+        public string HoTenHoacEmail { get; set; }
+        public FilterByHotenNhanVienOrEmailNhanVienQuery(string HoTenHoacEmail)
         {
-            this.request = request;
+            this.HoTenHoacEmail = HoTenHoacEmail;
         }
         public FilterByHotenNhanVienOrEmailNhanVienQuery() { }
     }

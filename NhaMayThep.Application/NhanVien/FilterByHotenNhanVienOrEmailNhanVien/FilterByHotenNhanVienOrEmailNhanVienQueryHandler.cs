@@ -25,9 +25,9 @@ namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
         public FilterByHotenNhanVienOrEmailNhanVienQueryHandler() { }
         public async Task<List<NhanVienDto>> Handle(FilterByHotenNhanVienOrEmailNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var result = await this._repository.FindAllAsync(x => (x.Email.Contains(request.request) && x.NgayXoa == null) || (x.HoVaTen.Contains(request.request) && x.NgayXoa == null), cancellationToken);    
-            if (result == null)
-                throw new NotFoundException("Không tìm nhân viên");
+            var result = await this._repository.FindAllAsync(x => (x.Email.Contains(request.HoTenHoacEmail) && x.NgayXoa == null) || (x.HoVaTen.Contains(request.HoTenHoacEmail) && x.NgayXoa == null), cancellationToken);    
+            if (result.Count == 0)
+                throw new NotFoundException("Không tìm thấy nhân viên");
             return result.MapToNhanVienDtoList(_mapper).ToList();
         }
     }
