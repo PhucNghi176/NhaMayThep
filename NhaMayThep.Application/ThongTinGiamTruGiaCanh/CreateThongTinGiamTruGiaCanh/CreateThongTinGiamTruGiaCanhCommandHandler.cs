@@ -75,15 +75,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                 NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
             };
             _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-            try
-            {
-                await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Tạo thành công";
-            }
-            catch (Exception)
-            {
-                throw new NotFoundException("Đã xảy ra lỗi trong quá trình tạo");
-            }
+            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken)>0 ? "Tạo thành công" : "Tạo thất bại";
         }
     }
 }

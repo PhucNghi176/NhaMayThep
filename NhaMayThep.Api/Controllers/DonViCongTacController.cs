@@ -3,11 +3,13 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.DonViCongTac;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.GetByIDDonViCongTac;
+using NhaMayThep.Application.DonViCongTac.GetByPagination;
 using NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac;
 using System.Net.Mime;
 
@@ -36,7 +38,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<int>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("don-vi-cong-tac/getAll")]
@@ -75,7 +77,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<DonViCongTacDto>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("don-vi-cong-tac/{id}")]
@@ -89,6 +91,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeleteDonViCongTacCommand(id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("don-vi-cong-tac/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<DonViCongTacDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<DonViCongTacDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<DonViCongTacDto>>>> GetPagination([FromQuery] GetDonVICongTacByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

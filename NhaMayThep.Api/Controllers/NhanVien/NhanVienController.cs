@@ -10,16 +10,21 @@ using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
-using NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec;
+using NhaMayThep.Application.NhanVien.DeleteNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.GetAllNhanVien;
 using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
 using NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
 using NhaMayThep.Application.NhanVien.GetNhanVienTest;
+using NhaMayThep.Application.NhanVien.Test.TestTaoNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
-using NhaMayThep.Application.ThongTinChucVu;
+using Humanizer;
+using NhaMapThep.Application.Common.Pagination;
+using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
+using NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -60,7 +65,7 @@ namespace NhaMayThep.Api.Controllers
                                   CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
-            var token = _jwtService.CreateToken(result.Email, result.ID, result.ChucVu);
+            var token = _jwtService.CreateToken(result.ID, result.ChucVu);
             return Ok(new JsonResponse<string>(token));
         }
 
@@ -159,11 +164,38 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+
+        [HttpGet("nhan-vien/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> GetPagination([FromQuery] GetNhanVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
         [HttpGet("nhan-vien/get-all-test")]
         [Produces(MediaTypeNames.Application.Json)]
         public async Task<ActionResult<List<NhanVienDto>>> Test(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
+        }
+        [HttpGet("test/nhan-vien/tao-hang-loat")]
+        [Produces(MediaTypeNames.Application.Json)]
+        public async Task<ActionResult<List<string>>> TaoHangLoat(int id, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new TaoNhanVienHangLoat(id), cancellationToken);
+            return Ok(new JsonResponse<List<string>>(result));
+        }
+        [HttpPost("test/nhan-vien/xoa-hang-loat")]
+        [Produces(MediaTypeNames.Application.Json)]
+        public async Task<ActionResult<string>> XoaHangLoat(List<string> ids, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new DeleteNhanVienHangLoatCommand(ids), cancellationToken); return Ok(result);
         }
         [HttpGet("nhan-vien/{HoTenHoacEmail}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -178,7 +210,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(HoTenHoacEmail: HoTenHoacEmail), cancellationToken);
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
         }
-        
         [HttpGet]
         [Route("nhan-vien/{no}/{pageSize}/{tenChucVuHoacTinhTrangLamViec}")]
         [Produces(MediaTypeNames.Application.Json)]

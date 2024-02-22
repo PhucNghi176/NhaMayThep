@@ -3,10 +3,12 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.BaoHiem;
 using NhaMayThep.Application.BaoHiem.CreateNewBaoHiem;
 using NhaMayThep.Application.BaoHiem.GetAllBaoHiem;
 using NhaMayThep.Application.BaoHiem.GetBaoHiemById;
+using NhaMayThep.Application.BaoHiem.GetPaginationBaoHiem;
 using NhaMayThep.Application.BaoHiem.RemoveBaoHiem;
 using NhaMayThep.Application.BaoHiem.UpdateBaoHiem;
 using System.Net.Mime;
@@ -63,7 +65,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<string>> CreateNew([FromBody] CreateNewBaoHiemCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNew), new { id = result }, new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("bao-hiem/{id}")]
@@ -82,16 +84,30 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
 
         [HttpPut("bao-hiem")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<BaoHiemDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<BaoHiemDto>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<BaoHiemDto>> Update([FromBody] UpdateBaoHiemCommand command,CancellationToken cancellationToken = default)
+        public async Task<ActionResult<string>> Update([FromBody] UpdateBaoHiemCommand command,CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<BaoHiemDto>(result));
+            return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet("bao-hiem/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<BaoHiemDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<BaoHiemDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<BaoHiemDto>>>> GetPagination([FromQuery] GetBaoHiemByPagination query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
