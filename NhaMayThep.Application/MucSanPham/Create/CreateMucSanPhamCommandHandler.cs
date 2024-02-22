@@ -1,6 +1,6 @@
 ﻿using MediatR;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
@@ -13,8 +13,8 @@ namespace NhaMayThep.Application.MucSanPham.Create
 {
     public class CreateMucSanPhamCommandHandler : IRequestHandler<CreateMucSanPhamCommand, string>
     {
-        ICurrentUserService _currentUserService;
-        IMucSanPhamRepository _mucSanPhamRepository;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMucSanPhamRepository _mucSanPhamRepository;
         public CreateMucSanPhamCommandHandler(ICurrentUserService currentUserService, IMucSanPhamRepository mucSanPhamRepository)
         {
             _currentUserService = currentUserService;
@@ -22,14 +22,8 @@ namespace NhaMayThep.Application.MucSanPham.Create
         }
         public async Task<string> Handle(CreateMucSanPhamCommand command, CancellationToken cancellationToken)
         {
-            var existName = await _mucSanPhamRepository.AnyAsync(x => x.Name.Equals(command.Name) && x.NguoiXoaID == null);
-            if (existName)
-            {
-                throw new DuplicateNameException("Name đã tồn tại");
-            }
             MucSanPhamEntity entity = new MucSanPhamEntity()
             {
-                Name = command.Name,
                 LuongMucSanPham = command.LuongMucSanPham,
                 MucSanPhamToiDa = command.MucSanPhamToiDa,
                 MucSanPhamToiThieu = command.MucSanPhamToiThieu,

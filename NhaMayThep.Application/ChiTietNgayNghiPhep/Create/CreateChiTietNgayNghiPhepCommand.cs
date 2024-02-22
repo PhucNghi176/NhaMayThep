@@ -8,10 +8,10 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
 {
-    public class CreateChiTietNgayNghiPhepCommand : IRequest<ChiTietNgayNghiPhepDto>, ICommand
+    public class CreateChiTietNgayNghiPhepCommand : IRequest<string>, ICommand
     {
 
-        public string MaSoNhanVien { get; set; }
+        public string NhanVienID { get; set; }
         public int LoaiNghiPhepID { get; set; }
         public double TongSoGio { get; set; }
         public double SoGioDaNghiPhep { get; set; }
@@ -19,10 +19,10 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
         public int NamHieuLuc { get; set; }
 
 
-        public CreateChiTietNgayNghiPhepCommand( string maSoNhanVien, int loaiNghiPhepID, double tongSoGio, double soGioDaNghiPhep, double soGioConLai, int namHieuLuc)
+        public CreateChiTietNgayNghiPhepCommand( string nhanVienId, int loaiNghiPhepID, double tongSoGio, double soGioDaNghiPhep, double soGioConLai, int namHieuLuc)
         {
             
-            MaSoNhanVien = maSoNhanVien;
+            NhanVienID = nhanVienId;
             LoaiNghiPhepID = loaiNghiPhepID;
             TongSoGio = tongSoGio;
             SoGioDaNghiPhep = soGioDaNghiPhep;

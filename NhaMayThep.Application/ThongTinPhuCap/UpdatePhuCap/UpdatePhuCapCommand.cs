@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinPhuCap.UpdatePhuCap
 {
-    public class UpdatePhuCapCommand : IRequest<PhuCapDto>, ICommand
+    public class UpdatePhuCapCommand : IRequest<string>, ICommand
     {
         public UpdatePhuCapCommand() { }
         public UpdatePhuCapCommand(int id, string tenPhuCap, double phanTramPhuCap)

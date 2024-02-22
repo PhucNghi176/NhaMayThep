@@ -1,5 +1,5 @@
 
-﻿using AutoMapper;
+using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 
@@ -8,7 +8,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.ThongTinPhuCap.CreateNewPhuCap
 {
-    public class CreateNewPhuCapCommandHandler : IRequestHandler<CreateNewPhuCapCommand, string> 
+    public class CreateNewPhuCapCommandHandler : IRequestHandler<CreateNewPhuCapCommand, string>
 
     {
         private readonly IPhuCapRepository _phuCapRepository;
@@ -27,8 +27,10 @@ namespace NhaMayThep.Application.ThongTinPhuCap.CreateNewPhuCap
                 PhanTramPhuCap = command.PhanTramPhuCap
             };
             _phuCapRepository.Add(add);
-            await _phuCapRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo thành công";
+            if (await _phuCapRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Tạo thành công";
+            else
+                return "Tạo thất bại";
         }
     }
 }

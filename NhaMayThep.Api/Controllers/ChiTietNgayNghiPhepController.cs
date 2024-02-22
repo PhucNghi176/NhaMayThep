@@ -12,6 +12,8 @@ using System.Net.Mime;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using NhaMayThep.Application.ChiTietNgayNghiPhep;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.ChiTietDangVien.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -32,8 +34,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateChiTietNgayNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep tạo thành công "));
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpDelete("chi-tiet-ngay-nghi-phep/{id}")]
@@ -74,6 +76,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<List<ChiTietNgayNghiPhepDto>>(result));
         }
+
         [HttpGet("chi-tiet-ngay-nghi-phep/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -86,6 +89,20 @@ namespace NhaMayThep.Api.Controllers
             var query = new GetChiTietNgayNghiPhepByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<ChiTietNgayNghiPhepDto>(result));
+        }
+
+        [HttpGet("chi-tiet-ngay-nghi-phep/phan-trang")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChiTietNgayNghiPhepDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChiTietNgayNghiPhepDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ChiTietNgayNghiPhepDto>>>> GetPagination([FromQuery] GetChiTietDangVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

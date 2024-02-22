@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Application.Common.Models;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
@@ -13,7 +14,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
 {
-    public class FilterByHotenNhanVienOrEmailNhanVienQueryHandler : IRequestHandler<FilterByHotenNhanVienOrEmailNhanVienQuery, List<NhanVienDto>>
+    public class FilterByHotenNhanVienOrEmailNhanVienQueryHandler : IRequestHandler<FilterByHotenNhanVienOrEmailNhanVienQuery, PagedResult<NhanVienDto>>
     {
         private readonly INhanVienRepository _repository;
         private readonly IMapper _mapper;
@@ -23,12 +24,17 @@ namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
             _repository = repository;
         }
         public FilterByHotenNhanVienOrEmailNhanVienQueryHandler() { }
-        public async Task<List<NhanVienDto>> Handle(FilterByHotenNhanVienOrEmailNhanVienQuery request, CancellationToken cancellationToken)
+        public async Task<PagedResult<NhanVienDto>> Handle(FilterByHotenNhanVienOrEmailNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var result = await this._repository.FindAllAsync(x => (x.Email.Contains(request.HoTenHoacEmail) && x.NgayXoa == null) || (x.HoVaTen.Contains(request.HoTenHoacEmail) && x.NgayXoa == null), cancellationToken);    
-            if (result.Count == 0)
-                throw new NotFoundException("Không tìm thấy nhân viên");
-            return result.MapToNhanVienDtoList(_mapper).ToList();
+            var result = await this._repository.FindAllAsync(x => (x.Email.Contains(request.request) && x.NgayXoa == null) || (x.HoVaTen.Contains(request.request) && x.NgayXoa == null), request.PageNumber, request.PageSize, cancellationToken);
+            if (result == null)
+                throw new NotFoundException("Không tìm nhân viên");
+            var list = result.MapToNhanVienDtoList(_mapper);
+            return PagedResult<NhanVienDto>.Create(totalCount: result.TotalCount,
+                               pageCount: result.PageCount,
+                                       pageSize: result.PageSize,
+                                               pageNumber: result.PageNo,
+                                                       data: list);
         }
     }
 }
