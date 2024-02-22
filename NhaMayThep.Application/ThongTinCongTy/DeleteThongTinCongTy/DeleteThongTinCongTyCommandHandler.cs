@@ -27,8 +27,10 @@ namespace NhaMayThep.Application.ThongTinCongTy.DeleteThongTinCongTy
             thongTinCongTy.NguoiXoaID = _currentUserService.UserId;
             thongTinCongTy.NgayXoa = DateTime.Now;
             _thongtinCongTyRepository.Update(thongTinCongTy);
-            await _thongtinCongTyRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Xóa thông tin công ty thành công";
+            if (await _thongtinCongTyRepository.UnitOfWork.SaveChangesAsync() > 0)
+                return "Xóa thành công";
+            else
+                return "Xóa thất bại";
         }
     }
 }

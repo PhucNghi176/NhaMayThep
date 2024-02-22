@@ -20,7 +20,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinCongTy
         {
             _mediator = mediator;
         }
-        [HttpPost("thong-tin-cong-ty/create")]
+        [HttpPost("thong-tin-cong-ty")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -49,7 +49,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinCongTy
             return Ok(new JsonResponse<List<ThongTinCongTyDto>>(result));
         }
 
-        [HttpPut("thong-tin-cong-ty/update")]
+        [HttpPut("thong-tin-cong-ty")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -64,7 +64,7 @@ namespace NhaMayThep.Api.Controllers.ThongTinCongTy
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("thong-tin-cong-ty/delete/{id}")]
+        [HttpDelete("thong-tin-cong-ty/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

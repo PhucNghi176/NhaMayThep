@@ -18,13 +18,13 @@ namespace NhaMayThep.Application.ThongTinCongTy.GetAll
         }
         public async Task<List<ThongTinCongTyDto>> Handle(GetAllThongTinCongTyQuery request, CancellationToken cancellationToken)
         {
-            var thongTinCongTy = await _thongTinCongTyRepository.FindAllAsync(x => !x.NgayXoa.HasValue && x.NguoiXoaID == null, cancellationToken);
+            var thongTinCongTyList = await _thongTinCongTyRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             
-            if (thongTinCongTy == null || !thongTinCongTy.Any())
+            if (thongTinCongTyList == null || !thongTinCongTyList.Any())
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin công ty nào");
             }
-            return thongTinCongTy.MapToThongTinCongTyDtoList(_mapper);
+            return thongTinCongTyList.MapToThongTinCongTyDtoList(_mapper);
         }
     }
 }
