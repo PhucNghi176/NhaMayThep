@@ -212,7 +212,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
             return Ok(new JsonResponse<List<NhanVienDto>>(result));
         }
-
         [HttpGet]
         [Route("nhan-vien/filter-chucvu-tinhtranglamviec")]
         [Produces(MediaTypeNames.Application.Json)]
