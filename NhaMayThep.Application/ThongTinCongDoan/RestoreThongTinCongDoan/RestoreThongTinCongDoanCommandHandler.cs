@@ -38,8 +38,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
             thongtincongdoan.NguoiCapNhatID = _currentUserService.UserId;
             thongtincongdoan.NgayCapNhatCuoi = DateTime.Now;
             _thongtinCongDoanRepository.Update(thongtincongdoan);
-            await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Phục hồi thành công";
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken)> 0 ?"Phục hồi thành công": "Phục hồi thất bại";
         }
     }
 }
