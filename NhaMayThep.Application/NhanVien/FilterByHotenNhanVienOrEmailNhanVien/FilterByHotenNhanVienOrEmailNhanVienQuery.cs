@@ -12,12 +12,13 @@ namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
 {
     public class FilterByHotenNhanVienOrEmailNhanVienQuery : IRequest<PagedResult<NhanVienDto>>, IQuery
     {
-        public string request { get; set; }
+
+        public string HoTenHoacEmail { get; set; }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public FilterByHotenNhanVienOrEmailNhanVienQuery(string request, int pageSize, int pageNumber)
+        public FilterByHotenNhanVienOrEmailNhanVienQuery(string HoTenHoacEmail, int pageSize, int pageNumber)
         {
-            this.request = request;
+            this.HoTenHoacEmail = HoTenHoacEmail;
             this.PageNumber = pageNumber;
             this.PageSize = pageSize;
         }
