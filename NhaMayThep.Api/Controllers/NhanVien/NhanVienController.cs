@@ -10,6 +10,8 @@ using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
 using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
+using NhaMayThep.Application.NhanVien.FilterByChucVu;
+using NhaMayThep.Application.NhanVien.FilterByTinhTrangLamViec;
 using NhaMayThep.Application.NhanVien.DeleteNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.GetAllNhanVien;
 using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
@@ -24,7 +26,6 @@ using NhaMapThep.Application.Common.Pagination;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
-using NhaMayThep.Application.NhanVien.FilterByChucDanhChucVuTinhTrangLamViec;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -184,7 +185,6 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
-
         [HttpGet("test/nhan-vien/tao-hang-loat")]
         [Produces(MediaTypeNames.Application.Json)]
         public async Task<ActionResult<List<string>>> TaoHangLoat(int id, CancellationToken cancellationToken = default)
@@ -198,8 +198,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeleteNhanVienHangLoatCommand(ids), cancellationToken); return Ok(result);
         }
-
-        [HttpGet("nhan-vien/{request}")]
+        [HttpGet("nhan-vien/Filter-by-hoTenHoacEmail")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
@@ -207,21 +206,68 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail([FromRoute] string request, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail(
+                            [FromQuery] FilterByHotenNhanVienOrEmailNhanVienQuery query, 
+                            CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
-            return Ok(new JsonResponse<List<NhanVienDto>>(result));
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
-        
+        /*
         [HttpGet]
-        [Route("nhan-vien/filter-chucvu-tinhtranglamviec")]
+        [Route("nhan-vien/{no}/{pageSize}/{ChucVuID}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByChucVuTinhTrangLamViec(
-            [FromQuery] FilterByChucDanhChucVuTinhTrangLamViecQuery query,
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByChucVu(
+            [FromRoute] int no,
+            [FromRoute] int pageSize,
+            [FromRoute] int ChucVuID,
              CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new FilterByChucVuQuery(pageNumber : no, pageSize: pageSize, chucvuID : ChucVuID), cancellationToken);
+            return Ok(result);
+        }
+        */
+        [HttpGet]
+        [Route("nhan-vien/filter-by-chucvuID")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByChucVu(
+            [FromQuery] FilterByChucVuQuery query,
+             CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+        /*[HttpGet]
+        [Route("nhan-vien/{no}/{pageSize}/{TinhTrnagLamViecID}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByTinhTrangLamViec(
+            [FromRoute] int no,
+            [FromRoute] int pageSize,
+            [FromRoute] int TinhTrnagLamViecID,
+             CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new FilterByTinhTrangLamViecQuery(pageNumber: no, pageSize: pageSize, tinhtranglamviecID: TinhTrnagLamViecID), cancellationToken);
+            return Ok(result);
+        }
+        */
+        [HttpGet]
+        [Route("nhan-vien/Filter-by-tinhtranglamviecID")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByTinhTrangLamViec(
+            [FromQuery] FilterByTinhTrangLamViecQuery query,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

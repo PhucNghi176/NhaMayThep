@@ -57,8 +57,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             thongtingiamtru.CanCuocCongDan = cccd.CanCuocCongDan;
             thongtingiamtru.NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc;
             _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-            await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Cập nhật thành công";
+            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken)> 0 ? "Cập nhật thành công" : "Cập nhậ thất bại";
         }
     }
 }
