@@ -33,11 +33,11 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
             Func<IQueryable<NhanVienEntity>, IQueryable<NhanVienEntity>> queryOptions = query =>
             {
                 query = query.Where(x => x.NgayXoa == null);
-                if (request.chucvuID is null)
+                if (request.chucvuID!=0)
                 {
                     query = query.Where(x => x.ChucVuID.Equals(request.chucvuID));
                 }
-                if (request.tinhtranglamviecID is null)
+                if ( request.tinhtranglamviecID!=0)
                 {
                     query = query.Where(x => x.TinhTrangLamViecID.Equals(request.tinhtranglamviecID));
                 }
