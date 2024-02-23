@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.LoaiCongTac.Update
             }
             if (loaiCongtac.Name.Equals(request.Name))
             {
-                throw new NotFoundException("Loại Công Tác Này Đã Tồn Tại");
+                throw new DuplicationException("Loại Công Tác Này Đã Tồn Tại");
             }
             loaiCongtac.Name = request.Name;
             loaiCongtac.NguoiCapNhatID = _currentUserService.UserId;
