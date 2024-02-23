@@ -32,5 +32,6 @@ namespace NhaMapThep.Domain.Repositories
             Expression<Func<TPersistence, TValue>> valueSelector,
             CancellationToken cancellationToken = default);
 
+
     }
 }
