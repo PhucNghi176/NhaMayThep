@@ -13,8 +13,8 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public int chucvuID { get; set; }
-        public int tinhtranglamviecID { get; set; }
+        public int? chucvuID { get; set; } = 0;
+        public int? tinhtranglamviecID { get; set; } = 0;
         public string? Email { get; set; }
         public string? HoVaTen { get; set; }
         public FilterNhanVienQuery() { }

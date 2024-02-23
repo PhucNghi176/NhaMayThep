@@ -3,7 +3,9 @@ using MediatR;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,10 +18,14 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
     {
         private readonly INhanVienRepository _repository;
         private readonly IMapper _mapper;
-        public FilterNhanVienQueryHandler(INhanVienRepository repository, IMapper mapper)
+        private readonly IChucVuRepository _chucVuRepository;
+        private readonly ITinhTrangLamViecRepository _tinhTrangLamViecRepository;
+        public FilterNhanVienQueryHandler(INhanVienRepository repository, IMapper mapper, IChucVuRepository chucVuRepository, ITinhTrangLamViecRepository tinhTrangLamViecRepository)
         {
             _repository = repository;
             _mapper = mapper;
+            _chucVuRepository = chucVuRepository;
+            _tinhTrangLamViecRepository = tinhTrangLamViecRepository;
         }
         public FilterNhanVienQueryHandler() { }
         public async Task<PagedResult<NhanVienDto>> Handle(FilterNhanVienQuery request, CancellationToken cancellationToken)
@@ -27,11 +33,11 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
 
             Func<IQueryable<NhanVienEntity>, IQueryable<NhanVienEntity>> queryOptions = query =>
             {
-                if (request.chucvuID != 0)
+                if (request.chucvuID is not null)
                 {
                     query = query.Where(x => x.ChucVuID.Equals(request.chucvuID));
                 }
-                if (request.tinhtranglamviecID != 0)
+                if (request.tinhtranglamviecID is not null)
                 {
                     query = query.Where(x => x.TinhTrangLamViecID.Equals(request.tinhtranglamviecID));
                 }
@@ -46,15 +52,25 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
                 return query;
             };
 
+
             var result = await _repository.FindAllAsync(request.PageNumber, request.PageSize, queryOptions);
             if (result.Count() == 0)
                 throw new NotFoundException("Không tìm thấy nhân viên.");
+
+            Func<IQueryable<ThongTinChucVuEntity>, Dictionary<int, string>> queryChucVu = query =>
+            {
+                return query
+                .Where(_ => _.NgayXoa == null)
+                .ToDictionary(_ => _.ID, _ => _.Name);
+            };
+            var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             return PagedResult<NhanVienDto>.Create(
                 totalCount: result.TotalCount,
                 pageCount: result.PageCount,
                 pageSize: result.PageSize,
                 pageNumber: result.PageNo,
-                data: result.MapToNhanVienDtoList(_mapper));
+                data: result.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec));
 
 
 
