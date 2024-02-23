@@ -214,13 +214,13 @@ namespace NhaMayThep.Api.Controllers
         }
         
         [HttpGet]
-        [Route("nhan-vien/Filter-by-tinhtranglamviecID-or-ChucVuID")]
+        [Route("nhan-vien/filter-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> getByTinhTrangLamViec(
-            [FromQuery] FillterByChucVuIDOrTinhTrangLamViecIDQuery query,
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> FilterNhanVien(
+            [FromQuery] FilterNhanVienQuery query,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
