@@ -30,7 +30,6 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
         public FilterNhanVienQueryHandler() { }
         public async Task<PagedResult<NhanVienDto>> Handle(FilterNhanVienQuery request, CancellationToken cancellationToken)
         {
-
             Func<IQueryable<NhanVienEntity>, IQueryable<NhanVienEntity>> queryOptions = query =>
             {
                 query = query.Where(x => x.NgayXoa == null);
