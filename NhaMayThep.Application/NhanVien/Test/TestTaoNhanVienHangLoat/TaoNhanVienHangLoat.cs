@@ -58,6 +58,7 @@ namespace NhaMayThep.Application.NhanVien.Test.TestTaoNhanVienHangLoat
                 nvs.Add(nv.ID);
                 _nhanVienRepository.Add(nv);
             }
+            await _nhanVienRepository.UnitOfWork.SaveChangesAsync();
             return nvs;
         }
     }

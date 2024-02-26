@@ -75,8 +75,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                 NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
             };
             _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-            await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo thành công";
+            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken)>0 ? "Tạo thành công" : "Tạo thất bại";
         }
     }
 }
