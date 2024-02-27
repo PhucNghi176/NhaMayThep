@@ -2,10 +2,12 @@
 using MediatR;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Infrastructure.Persistence;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,24 +22,28 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
         private readonly IMapper _mapper;
         private readonly IChucVuRepository _chucVuRepository;
         private readonly ITinhTrangLamViecRepository _tinhTrangLamViecRepository;
-        public FilterNhanVienQueryHandler(INhanVienRepository repository, IMapper mapper, IChucVuRepository chucVuRepository, ITinhTrangLamViecRepository tinhTrangLamViecRepository)
+        private readonly ApplicationDbContext _context;
+        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
+
+        public FilterNhanVienQueryHandler(INhanVienRepository repository, IMapper mapper, IChucVuRepository chucVuRepository, ITinhTrangLamViecRepository tinhTrangLamViecRepository, ApplicationDbContext context, ICanCuocCongDanRepository canCuocCongDanRepository)
         {
             _repository = repository;
             _mapper = mapper;
             _chucVuRepository = chucVuRepository;
             _tinhTrangLamViecRepository = tinhTrangLamViecRepository;
+            _context = context;
+            _canCuocCongDanRepository = canCuocCongDanRepository;
         }
-        public FilterNhanVienQueryHandler() { }
         public async Task<PagedResult<NhanVienDto>> Handle(FilterNhanVienQuery request, CancellationToken cancellationToken)
         {
             Func<IQueryable<NhanVienEntity>, IQueryable<NhanVienEntity>> queryOptions = query =>
             {
                 query = query.Where(x => x.NgayXoa == null);
-                if (request.chucvuID!=0)
+                if (request.chucvuID != 0)
                 {
                     query = query.Where(x => x.ChucVuID.Equals(request.chucvuID));
                 }
-                if ( request.tinhtranglamviecID!=0)
+                if (request.tinhtranglamviecID != 0)
                 {
                     query = query.Where(x => x.TinhTrangLamViecID.Equals(request.tinhtranglamviecID));
                 }
@@ -49,28 +55,34 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
                 {
                     query = query.Where(x => x.Email.Contains(request.Email));
                 }
+                if (!string.IsNullOrEmpty(request.CanCuocCongDan))
+                {
+                    query = query.Join(_context.CanCuocCongDan,
+                          nhanVien => nhanVien.ID,
+                          canCuoc => canCuoc.NhanVienID,
+                          (nhanVien, canCuoc) => new { NhanVien = nhanVien, CanCuocCongDan = canCuoc })
+                    .Where(x => x.CanCuocCongDan.CanCuocCongDan.Contains(request.CanCuocCongDan))
+                    .Select(x => x.NhanVien);
+                }
                 return query;
             };
 
 
-            var result = await _repository.FindAllAsync(request.PageNumber, request.PageSize, queryOptions);
-            if (result.Count() == 0)
+
+
+            var result = await _repository.FindAllAsync(request.PageNumber, request.PageSize, queryOptions, cancellationToken);
+            if (!result.Any())
                 throw new NotFoundException("Không tìm thấy nhân viên.");
 
-            Func<IQueryable<ThongTinChucVuEntity>, Dictionary<int, string>> queryChucVu = query =>
-            {
-                return query
-                .Where(_ => _.NgayXoa == null)
-                .ToDictionary(_ => _.ID, _ => _.Name);
-            };
             var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+            var CanCuocCongDan= await _canCuocCongDanRepository.FindAllToDictionaryAsync(x=>x.NgayXoa == null,x=>x.NhanVienID,x=>x.CanCuocCongDan, cancellationToken); 
             return PagedResult<NhanVienDto>.Create(
                 totalCount: result.TotalCount,
                 pageCount: result.PageCount,
                 pageSize: result.PageSize,
                 pageNumber: result.PageNo,
-                data: result.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec));
+                data: result.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec, CanCuocCongDan));
 
 
 
