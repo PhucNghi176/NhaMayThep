@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.ChiTietDangVien.CreateChiTietDangVien
         {
             var chiTietDangVienCheck = await _chiTietDangVienRepository.FindAsync(x => x.DangVienID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (chiTietDangVienCheck != null )
-                throw new Exception("Đã tồn tại Chi Tiết Đảng Viên " + request.DangVienID);
+                throw new NotFoundException("Đã tồn tại Chi Tiết Đảng Viên " + request.DangVienID);
 
             var dangVien = await _thongTinDangVienRepository.AnyAsync(x => x.ID == request.DangVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!dangVien)

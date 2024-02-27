@@ -16,7 +16,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class DonViCongTacController : ControllerBase
     {
         private readonly ISender _mediator;
