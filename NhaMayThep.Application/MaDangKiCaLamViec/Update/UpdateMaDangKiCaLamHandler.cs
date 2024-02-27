@@ -42,8 +42,7 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Update
             dangKi.NguoiCapNhatID = _currentUserService.UserId;
             dangKi.NgayCapNhat = DateTime.Now;
             _maDangKiCaLamRepository.Update(dangKi);
-            await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Cập Nhật Thành Công";
+            return await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập Nhật Thành Công" : "Cập Nhật Thất Bại";
         }
     }
 }

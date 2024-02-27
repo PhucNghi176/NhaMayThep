@@ -43,8 +43,7 @@ namespace NhaMayThep.Application.TrangThaiDangKiCaLamViec.CreateTrangThaiDangKiC
                 NgayTao = DateTime.Now,
             };
             _trangThaiDangKiCaLamViecRepository.Add(trangThai);
-            await _trangThaiDangKiCaLamViecRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Mới Thành Công";
+            return await _trangThaiDangKiCaLamViecRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Mới Thành Công" : "Tạo Mới Thất Bại";
         }
     }
 }

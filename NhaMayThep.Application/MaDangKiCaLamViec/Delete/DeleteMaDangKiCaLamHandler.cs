@@ -40,8 +40,8 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Delete
             dangKi.NguoiXoaID = _currentUserService.UserId;
             dangKi.NgayXoa = DateTime.Now;
             _maDangKiCaLamRepository.Update(dangKi);
-            await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Xóa Thành Công"; // Trả về true nếu quá trình xóa thành công
+            return await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Thành Công" : "Xóa Thất Bại";
+            
         }
     }
 }

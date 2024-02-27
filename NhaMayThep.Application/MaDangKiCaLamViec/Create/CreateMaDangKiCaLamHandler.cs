@@ -42,8 +42,7 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Create
                 NgayTao = DateTime.Now,
             };
             _maDangKiCaLamRepository.Add(dangKi);
-            await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo Mới Thành Công";
+            return await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Mới Thành Công" : "Tạo Mới Thất Bại";
         }
     }
 }

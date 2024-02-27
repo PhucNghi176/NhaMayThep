@@ -32,14 +32,13 @@ namespace NhaMayThep.Application.TrangThaiDangKiCaLamViec.UpdateTrangThaiDangKiC
             var trangThai = await _trangThaiDangKiCaLamViecRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (trangThai == null || trangThai.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Loại Công Tác Không Tồn Tại");
+                throw new NotFoundException("Loại Trạng Thái Trên Không Tồn Tại");
             }
             trangThai.Name = request.Name;
             trangThai.NguoiCapNhatID = _currentUserService.UserId;
             trangThai.NgayCapNhat = DateTime.Now;
             _trangThaiDangKiCaLamViecRepository.Update(trangThai);
-            await _trangThaiDangKiCaLamViecRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Cập Nhật Thành Công";
+            return await _trangThaiDangKiCaLamViecRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập Nhật Thành Công" : "Cập Nhật Thất Bại";
         }
     }
 }
