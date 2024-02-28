@@ -181,15 +181,14 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "MucSanPham",
                 columns: table => new
                 {
-                    ID = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MucSanPhamToiThieu = table.Column<int>(type: "int", nullable: false),
                     MucSanPhamToiDa = table.Column<int>(type: "int", nullable: false),
                     LuongMucSanPham = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -259,8 +258,8 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "ThongTinCongTy",
                 columns: table => new
                 {
-                    MaDoanhNghiep = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaDoanhNghiep = table.Column<int>(type: "int", nullable: false),
                     TenQuocTe = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenVietTat = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoLuongNhanVien = table.Column<int>(type: "int", nullable: false),
@@ -271,11 +270,17 @@ namespace NhaMayThep.Infrastructure.Migrations
                     NgayHoatDong = table.Column<DateTime>(type: "datetime2", nullable: false),
                     DonViQuanLi = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LoaiHinhDoanhNghiep = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    TinhTrang = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TinhTrang = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_ThongTinCongTy", x => x.MaDoanhNghiep);
+                    table.PrimaryKey("PK_ThongTinCongTy", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -1261,8 +1266,6 @@ namespace NhaMayThep.Infrastructure.Migrations
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
-               name: "CanCuocCongDan");
-            migrationBuilder.DropTable(
                 name: "CanCuocCongDanEntityNhanVienEntity");
 
             migrationBuilder.DropTable(
@@ -1313,6 +1316,8 @@ namespace NhaMayThep.Infrastructure.Migrations
             migrationBuilder.DropTable(
                 name: "ThueSuat");
 
+            migrationBuilder.DropTable(
+                name: "CanCuocCongDan");
 
             migrationBuilder.DropTable(
                 name: "BaoHiem");

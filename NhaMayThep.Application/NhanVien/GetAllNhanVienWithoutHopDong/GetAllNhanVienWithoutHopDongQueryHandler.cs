@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong
             var list = await _nhanVienRepository.FindAllAsync(_ => _.NgayXoa == null && !_.DaCoHopDong, request.PageNumber, request.PageSize, cancellationToken);
             var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec);
+            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec, null);
             return PagedResult<NhanVienDto>.Create(
                 totalCount: list.TotalCount,
                 pageCount: list.PageCount,

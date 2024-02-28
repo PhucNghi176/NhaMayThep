@@ -7,13 +7,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.DowloadFileLogs
+namespace NhaMayThep.Application.Logs.DowloadFileLogs
 {
-    public class DowloadFileLogsQuery : IRequest<FileContentResult>,IQuery
+    public class DowloadFileLogsQuery : IRequest<FileContentResult>, IQuery
     {
         public DowloadFileLogsQuery()
         {
-            
+
         }
     }
 }

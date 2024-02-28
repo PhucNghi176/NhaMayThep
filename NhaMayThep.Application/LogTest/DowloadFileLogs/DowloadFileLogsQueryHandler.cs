@@ -8,7 +8,7 @@ using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.DowloadFileLogs
+namespace NhaMayThep.Application.Logs.DowloadFileLogs
 {
     public class DowloadFileLogsQueryHandler : IRequestHandler<DowloadFileLogsQuery, FileContentResult>
     {
@@ -71,7 +71,7 @@ namespace NhaMayThep.Application.DowloadFileLogs
                 contentType = "application/octet-stream";
             }
 
-            var bytes = await System.IO.File.ReadAllBytesAsync(filePath);
+            var bytes = await File.ReadAllBytesAsync(filePath);
 
             // Xóa bản sao sau khi tải về
             File.Delete(filePath);

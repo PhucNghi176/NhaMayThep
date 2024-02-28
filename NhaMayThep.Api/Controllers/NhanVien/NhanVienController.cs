@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.NhanVien.Authenticate.Login;
@@ -23,6 +24,7 @@ using NhaMapThep.Application.Common.Pagination;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
+using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -109,10 +111,13 @@ namespace NhaMayThep.Api.Controllers
         [HttpGet]
         [Route("nhan-vien/get-all")]
         [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<JsonResponse<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PageResult>>> GetAll(
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> GetAll(
             [FromQuery] GetAllNhanVienQuery query,
              CancellationToken cancellationToken = default)
         {
@@ -179,7 +184,6 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetNhanVienTestQuery(), cancellationToken); return Ok(result);
         }
-
         [HttpGet("test/nhan-vien/tao-hang-loat")]
         [Produces(MediaTypeNames.Application.Json)]
         public async Task<ActionResult<List<string>>> TaoHangLoat(int id, CancellationToken cancellationToken = default)
@@ -193,8 +197,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeleteNhanVienHangLoatCommand(ids), cancellationToken); return Ok(result);
         }
-
-        [HttpGet("nhan-vien/{request}")]
+        [HttpGet("nhan-vien/Filter-by-hoTenHoacEmail")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(typeof(JsonResponse<List<NhanVienDto>>), StatusCodes.Status200OK)]
@@ -202,10 +205,26 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail([FromRoute] string request, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<List<NhanVienDto>>>> getHoVaTenNhanVienByEmail(
+                            [FromQuery] FilterByHotenNhanVienOrEmailNhanVienQuery query, 
+                            CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new FilterByHotenNhanVienOrEmailNhanVienQuery(request: request), cancellationToken);
-            return Ok(new JsonResponse<List<NhanVienDto>>(result));
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+        
+        [HttpGet]
+        [Route("nhan-vien/filter-nhan-vien")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NhanVienDto>>>> FilterNhanVien(
+            [FromQuery] FilterNhanVienQuery query,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
