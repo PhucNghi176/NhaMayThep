@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Application.Common.Pagination;
@@ -30,6 +31,7 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator;
         }
+        [Authorize(Policy = "Manager")]
         [HttpPost("thong-tin-cong-doan/create")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -44,6 +46,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+        [Authorize(Policy = "Manager")]
         [HttpPost("thong-tin-cong-doan/restore")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -58,6 +61,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+        [Authorize(Policy = "Manager")]
         [HttpPut("thong-tin-cong-doan/update")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -72,6 +76,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+        [Authorize(Policy = "Manager")]
         [HttpDelete("thong-tin-cong-doan/delete/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -196,7 +201,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new GetThongTinCongDoanByNhanVienIdDeletedQuery(id: id), cancellationToken);
             return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
         }
-
         [HttpGet("thong-tin-cong-doan/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinCongDoanDto>>), StatusCodes.Status201Created)]
