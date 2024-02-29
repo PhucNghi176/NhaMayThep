@@ -16,7 +16,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class DonViCongTacController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -49,6 +49,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<List<DonViCongTacDto>>> GetAllDonViCongTac(CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetAllDonViCongTacQuery(), cancellationToken);
+
             return Ok(new JsonResponse<List<DonViCongTacDto>>(result));
         }
 
