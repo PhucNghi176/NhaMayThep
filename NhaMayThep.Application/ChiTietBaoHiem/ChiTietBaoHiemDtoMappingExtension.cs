@@ -18,11 +18,11 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
         public static List<ChiTietBaoHiemDto> MapToChiTietBaoHiemDtoList(this IEnumerable<ChiTietBaoHiemEntity> entities, IMapper mapper)
             => entities.Select(x => x.MapToChiTietBaoHiemDto(mapper)).ToList();
 
-        public static ChiTietBaoHiemDto MapToChiTietBaoHiemDto(this ChiTietBaoHiemEntity entity, IMapper mapper, string nhanvien, string baohiem)
+        public static ChiTietBaoHiemDto MapToChiTietBaoHiemDto(this ChiTietBaoHiemEntity entity, IMapper mapper, string? nhanvien, string? baohiem)
         {
             var dto = mapper.Map<ChiTietBaoHiemDto>(entity);
-            dto.NhanVien = nhanvien;
-            dto.BaoHiem = baohiem;
+            dto.NhanVien = nhanvien ?? "Trống";
+            dto.BaoHiem = baohiem ?? "Trống";
             return dto;
         }
         public static List<ChiTietBaoHiemDto> MapToChiTietBaoHiemDtoList(this IEnumerable<ChiTietBaoHiemEntity> entities, IMapper mapper, Dictionary<string, string> nhanvien, Dictionary<int, string> baohiem)
