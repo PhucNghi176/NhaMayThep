@@ -24,6 +24,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\NhaMapThep.Domain\NhaMapThep.Domain.csproj" />
+    <ProjectReference Include="..\NhaMayThep.Infrastructure\NhaMayThep.Infrastructure.csproj" />
   </ItemGroup>
 
   <ItemGroup>
