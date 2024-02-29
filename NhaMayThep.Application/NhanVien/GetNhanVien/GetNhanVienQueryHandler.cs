@@ -41,7 +41,7 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVien
             var chucVuName = await _chucVuRepository.FindAsync(x => x.ID == nv.ChucVuID && x.NgayXoa == null);
             var tinhTrangLamViec = await _tinhTrangLamViecRepository.FindAsync(x => x.ID == nv.TinhTrangLamViecID && x.NgayXoa == null);
             // map chucvuName to the return object
-            var nvDto = nv.MapToNhanVienDto(_mapper, chucVuName.Name == null ? "Lỗi" : chucVuName.Name, tinhTrangLamViec.Name is null ? "Lỗi" : tinhTrangLamViec.Name);
+            var nvDto = nv.MapToNhanVienDto(_mapper, chucVuName.Name == null ? "Lỗi" : chucVuName.Name, tinhTrangLamViec.Name is null ? "Lỗi" : tinhTrangLamViec.Name,null);
             return nvDto;
 
         }

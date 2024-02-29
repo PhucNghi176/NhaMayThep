@@ -24,7 +24,6 @@ namespace NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien
 
         public async Task<List<ThongTinDangVienDto>> Handle(GetAllThongTinDangVienQuery request, CancellationToken cancellationToken)
         {
-
             var thongTinDangVienList = await _thongTinDangVienRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             return thongTinDangVienList.MapToThongTinDangVienDtoList(_mapper);
         }
