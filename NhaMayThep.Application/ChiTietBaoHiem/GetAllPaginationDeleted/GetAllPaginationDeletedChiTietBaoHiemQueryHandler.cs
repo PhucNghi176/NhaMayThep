@@ -38,9 +38,6 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPaginationDeleted
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào bị xóa");
             }
-            var timer = new Stopwatch();
-
-            timer.Start();
             var tasks = result.Select(async x =>
             {
                 var nhanvien = await _nhanvienRepository.FindAsync(_ => _.ID.Equals(x.MaSoNhanVien), cancellationToken);
