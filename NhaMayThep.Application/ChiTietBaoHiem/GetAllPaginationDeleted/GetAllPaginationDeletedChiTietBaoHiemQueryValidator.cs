@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPaginationDeleted
 {
-    public class GetAllPaginationDeletedChiTietBaoHiemQueryValidator: AbstractValidator<GetAllPaginationDeletedChiTietBaoHiemQuery>
+    public class GetAllPaginationDeletedChiTietBaoHiemQueryValidator : AbstractValidator<GetAllPaginationDeletedChiTietBaoHiemQuery>
     {
         public GetAllPaginationDeletedChiTietBaoHiemQueryValidator()
         {

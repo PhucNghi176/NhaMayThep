@@ -9,6 +9,12 @@ using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination;
 using NhaMayThep.Application.ChiTietBaoHiem.GetAllPaginationDeleted;
 using NhaMayThep.Application.ChiTietBaoHiem.GetAllDeleted;
+using NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.RestoreChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.DeleteChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.GetById;
+using NhaMayThep.Application.ChiTietBaoHiem.GetByIdDeleted;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -20,6 +26,94 @@ namespace NhaMayThep.Api.Controllers
         public ChiTietBaoHiemController(ISender mediator)
         {
             _mediator = mediator;
+        }
+        [Authorize(Policy = "Manager")]
+        [HttpPost("chi-tiet-bao-hiem/create")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Create(
+           [FromBody] CreateChiTietBaoHiemCommand command,
+           CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
+        }
+        [Authorize(Policy = "Manager")]
+        [HttpPost("chi-tiet-bao-hiem/restore")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Restore(
+           [FromBody] RestoreChiTietBaoHiemCommand command,
+           CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<string>(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
+        }
+        [Authorize(Policy = "Manager")]
+        [HttpPut("chi-tiet-bao-hiem/update")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Update(
+           [FromBody] UpdateChiTietBaoHiemCommand command,
+           CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<string>(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
+        }
+        [Authorize(Policy = "Manager")]
+        [HttpDelete("chi-tiet-bao-hiemn/delete/{id}")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Delete(
+           [FromRoute] string id,
+           CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<string>(new DeleteChiTietBaoHiemCommand(id: id), cancellationToken);
+            return Ok(new JsonResponse<string>(result));
+        }
+        [HttpGet("chi-tiet-bao-hiem/get-by-id")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<ChiTietBaoHiemDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<ChiTietBaoHiemDto>>> GetById(
+            [FromQuery] GetChiTietBaoHiemByIdQuery query,
+         CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<ChiTietBaoHiemDto>(query, cancellationToken);
+            return Ok(new JsonResponse<ChiTietBaoHiemDto>(result));
+        }
+        [HttpGet("chi-tiet-bao-hiem/get-by-id-deleted")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<ChiTietBaoHiemDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<ChiTietBaoHiemDto>>> GetByIdDeleted(
+            [FromQuery] GetChiTietBaoHiemByIdDeletedQuery query,
+         CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<ChiTietBaoHiemDto>(query, cancellationToken);
+            return Ok(new JsonResponse<ChiTietBaoHiemDto>(result));
         }
         [HttpGet("chi-tiet-bao-hiem/get-all")]
         [Produces(MediaTypeNames.Application.Json)]

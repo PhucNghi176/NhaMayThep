@@ -63,7 +63,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem
             }
             checkEntityExists.NgayHieuLuc = request.NgayHieuLuc ?? checkEntityExists.NgayHieuLuc;
             checkEntityExists.NgayKetThuc = request.NgayKetThuc ?? checkEntityExists.NgayKetThuc;
-            checkEntityExists.NoiCap = request.NoiCap ?? checkEntityExists.NoiCap;
+            checkEntityExists.NoiCap = request.NoiCap?.Length >0 ? request.NoiCap :checkEntityExists.NoiCap;
             checkEntityExists.NgayCapNhatCuoi = DateTime.Now;
             checkEntityExists.NguoiCapNhatID = _currentUser.UserId;
             _chitietbaohiemRepository.Update(checkEntityExists);
