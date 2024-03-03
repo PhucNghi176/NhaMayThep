@@ -89,11 +89,12 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<KhaiBaoTangLuongDto>>> GetKhaiBaoTangLuongById(string id, CancellationToken cancellationToken)
+        public async Task<ActionResult<JsonResponse<KhaiBaoTangLuongDto>>> GetKhaiBaoTangLuongById(
+        [FromRoute] string id,
+        CancellationToken cancellationToken = default)
         {
-            var query = new GetKhaiBaoTangLuongByIdQuery(id);
-            var result = await _mediator.Send(query, cancellationToken);
-            return new JsonResponse<KhaiBaoTangLuongDto>(result);
+            var result = await _mediator.Send(new GetKhaiBaoTangLuongByIdQuery(id), cancellationToken);
+            return result != null ? Ok(new JsonResponse<KhaiBaoTangLuongDto>(result)) : NotFound();
         }
     }
 }

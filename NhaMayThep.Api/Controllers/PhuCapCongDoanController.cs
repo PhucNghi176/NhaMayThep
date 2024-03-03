@@ -11,6 +11,8 @@ using NhaMayThep.Application.PhuCapCongDoan.Update;
 using NhaMayThep.Application.PhuCapCongDoan;
 using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.PhiCongDoan.GetId;
+using NhaMayThep.Application.PhiCongDoan;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -83,11 +85,12 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PhuCapCongDoanDto>>> GetPhuCapCongDoanById(string id, CancellationToken cancellationToken)
+        public async Task<ActionResult<JsonResponse<PhiCongDoanDto>>> GetPhiCongDoanById(
+        [FromRoute] string id,
+        CancellationToken cancellationToken = default)
         {
-            var query = new GetPhuCapCongDoanByIdQuery(id);
-            var result = await _mediator.Send(query, cancellationToken);
-            return new JsonResponse<PhuCapCongDoanDto>(result);
+            var result = await _mediator.Send(new GetPhiCongDoanByIdQuery(id), cancellationToken);
+            return result != null ? Ok(new JsonResponse<PhiCongDoanDto>(result)) : NotFound();
         }
     }
 }

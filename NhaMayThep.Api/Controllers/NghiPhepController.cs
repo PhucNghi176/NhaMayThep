@@ -1,67 +1,65 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.LuongSanPham.Create;
-using NhaMayThep.Application.LuongSanPham.Delete;
-using NhaMayThep.Application.LuongSanPham.GetAll;
-using NhaMayThep.Application.LuongSanPham.Update;
-using NhaMayThep.Application.LuongSanPham;
+using NhaMayThep.Application.NghiPhep.Create;
+using NhaMayThep.Application.NghiPhep.Delete;
+using NhaMayThep.Application.NghiPhep.GetById;
+using NhaMayThep.Application.NghiPhep.Update;
+using NhaMayThep.Application.NghiPhep;
 using System.Net.Mime;
-using NhaMayThep.Application.LuongSanPham.GetId;
-using NhaMayThep.Application.LuongSanPham;
+using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.NghiPhep.GetAll;
 
 namespace NhaMayThep.Api.Controllers
 {
-
     [ApiController]
     [Authorize]
-    public class LuongSanPhamController : ControllerBase
+    public class NghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
 
-        public LuongSanPhamController(ISender mediator)
+        public NghiPhepController(ISender mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
 
-        [HttpPost("luong-san-pham")]
+        [HttpPost("nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<Guid>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<Guid>>> CreateLuongSanPham(
-            [FromBody] CreateLuongSanPhamCommand command,
+        public async Task<ActionResult<JsonResponse<Guid>>> CreateNghiPhep(
+            [FromBody] CreateNghiPhepCommand command,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("luong-san-pham")]
-        [ProducesResponseType(typeof(List<LuongSanPhamDto>), StatusCodes.Status200OK)]
+        [HttpGet("nghi-phep")]
+        [ProducesResponseType(typeof(List<NghiPhepDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<List<LuongSanPhamDto>>> GetAllLuongSanPham(CancellationToken cancellationToken = default)
+        public async Task<ActionResult<List<NghiPhepDto>>> GetAllNghiPhep(CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<LuongSanPhamDto>>(result));
+            var result = await _mediator.Send(new GetAllNghiPhepQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<NghiPhepDto>>(result));
         }
 
-        [HttpPut("luong-san-pham")]
+        [HttpPut("nghi-phep")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> UpdateLuongSanPham(
+        public async Task<ActionResult> UpdateNghiPhep(
 
-            [FromBody] UpdateLuongSanPhamCommand command,
+            [FromBody] UpdateNghiPhepCommand command,
             CancellationToken cancellationToken = default)
         {
 
@@ -70,33 +68,33 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpDelete("luong-san-pham/{id}")]
+        [HttpDelete("nghi-phep/{id}")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> DeleteLuongSanPham(
+        public async Task<ActionResult> DeleteNghiPhep(
             [FromRoute] string id,
             CancellationToken cancellationToken = default)
         {
 
-            var result = await _mediator.Send(new DeleteLuongSanPhamCommand(id), cancellationToken);
+            var result = await _mediator.Send(new DeleteNghiPhepCommand(id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("luong-san-pham/{id}")]
+        [HttpGet("nghi-phep/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<LuongSanPhamDto>>> GetLuongSanPhamById(
+        public async Task<ActionResult<JsonResponse<NghiPhepDto>>> GetNghiPhepById(
         [FromRoute] string id,
         CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetLuongSanPhamByIdQuery(id), cancellationToken);
-            return result != null ? Ok(new JsonResponse<LuongSanPhamDto>(result)) : NotFound();
+            var result = await _mediator.Send(new GetNghiPhepByIdQuery(id), cancellationToken);
+            return result != null ? Ok(new JsonResponse<NghiPhepDto>(result)) : NotFound();
         }
 
     }

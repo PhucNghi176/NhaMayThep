@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.PhiCongDoan.Create
             if (nhanVien == null)
                 throw new NotFoundException($"Mã số nhân viên : {request.MaSoNhanVien} không tồn tại hoặc đã xóa.");
 
-            var checkDuplicatoion = await _PhiCongDoanRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var checkDuplicatoion = await _PhiCongDoanRepository.AnyAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Phi Cong Doan");
 

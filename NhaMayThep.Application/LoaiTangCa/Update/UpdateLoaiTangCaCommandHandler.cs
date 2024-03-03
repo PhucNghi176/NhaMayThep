@@ -10,6 +10,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using NhaMayThep.Application.Common.Interfaces;
+using System.Data;
 
 namespace NhaMayThep.Application.LoaiTangCa.Update
 {
@@ -33,6 +34,12 @@ namespace NhaMayThep.Application.LoaiTangCa.Update
             if (loaiTangCa == null)
             {
                 return $"Không tìm thấy trường hợp Loại Tăng Ca với ID : {request.Id} hoặc trường hợp này đã bị xóa.";
+            }
+
+            var dup = await _repository.AnyAsync(x => x.ID != request.Id && x.Name == request.Name && x.NguoiXoaID == null);
+            if (dup == true)
+            {
+                throw new DuplicateNameException("Tên Loại Tăng Ca: " + request.Name + " đã tồn tại");
             }
 
             loaiTangCa.NguoiCapNhatID = this._currentUserService.UserId;
