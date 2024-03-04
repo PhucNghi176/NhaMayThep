@@ -21,15 +21,16 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
 
         public async Task<string> Handle(CreateNewCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.NhanVienID == request.NhanVienID && (request.CanCuocCongDan == x.CanCuocCongDan && x.NgayXoa == null), cancellationToken);
+
+            var isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
             if (isExsisted)
             {
-                return ("CanCuocCongDan cua nhan vien da ton tai");
+                throw new DuplicationException("Nhân Viên đã có Căn Cước Công Dân");
             }
-            isExsisted = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null);
-            if (!isExsisted)
+            isExsisted = await _canCuocCongDanRepository.AnyAsync(x=>x.CanCuocCongDan==request.CanCuocCongDan&&x.NgayXoa==null, cancellationToken);
+            if (isExsisted)
             {
-                throw new NotFoundException($"Nhan Vien ID khong ton tai {request.NhanVienID}");
+                throw new DuplicationException("Mã số Căn Cước Công Dân này đã tồn tại");
             }
             var CanCuocCongDan = new CanCuocCongDanEntity
             {

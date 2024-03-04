@@ -52,6 +52,7 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<PhuCapNhanVienEntity> PhuCapNhanVien { get; set; }
         public DbSet<MaDangKiCaLamEntity> MaDangKiCaLam { get; set; }
         public DbSet<TrangThaiDangKiCaLamViecEntity> TrangThaiDangKiCaLamViec { get; set; }
+        public DbSet<LuongThoiGianEntity> LuongThoiGian { get; set; }
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
@@ -85,6 +86,7 @@ namespace NhaMayThep.Infrastructure.Persistence
             modelBuilder.ApplyConfiguration(new PhuCapNhanVienConfiguration());
             modelBuilder.ApplyConfiguration(new MaDangKiCaLamConfiguration());
             modelBuilder.ApplyConfiguration(new TrangThaiDangKiCaLamViecConfiguration());
+            modelBuilder.ApplyConfiguration(new LuongThoiGianConfiguration());
             ConfigureModel(modelBuilder);
         }
         private void ConfigureModel(ModelBuilder modelBuilder)

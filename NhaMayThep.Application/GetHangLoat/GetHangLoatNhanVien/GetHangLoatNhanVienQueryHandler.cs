@@ -20,9 +20,11 @@ namespace NhaMayThep.Application.GetHangLoat.GetHangLoatNhanVien
             var chucVu = await _chucVuRepository.FindAllAsync(cancellationToken);
             var trinhTrangLamViec = await _tinhTrangLamViecRepository.FindAllAsync(cancellationToken);
 
-            var result = new Dictionary<string, List<KeyValuePair<int, string>>>();
-            result.Add("ChucVu", chucVu.Select((x, i) => new KeyValuePair<int, string>(i + 1, x.Name)).ToList());
-            result.Add("TinhTrangLamViec", trinhTrangLamViec.Select((x, i) => new KeyValuePair<int, string>(i + 1, x.Name)).ToList());
+            var result = new Dictionary<string, List<KeyValuePair<int, string>>>
+            {
+                { "ChucVu", chucVu.Select((x, i) => new KeyValuePair<int, string>(i + 1, x.Name)).ToList() },
+                { "TinhTrangLamViec", trinhTrangLamViec.Select((x, i) => new KeyValuePair<int, string>(i + 1, x.Name)).ToList() }
+            };
 
 
             return result;
