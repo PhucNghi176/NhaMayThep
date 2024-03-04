@@ -14,6 +14,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetByIdDeleted
         {
             Id = id;
         }
+        public GetThongTinCongDoanByIdDeletedQuery() { }
         public string Id { get; set; }
     }
 }

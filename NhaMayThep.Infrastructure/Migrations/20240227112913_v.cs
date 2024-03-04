@@ -6,7 +6,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace NhaMayThep.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class v1 : Migration
+    public partial class v : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
@@ -665,6 +665,37 @@ namespace NhaMayThep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "LuongThoiGian",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSoNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaLuongThoiGian = table.Column<int>(type: "int", nullable: false),
+                    LuongNam = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    LuongThang = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    LuongTuan = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    LuongNgay = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    LuongGio = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    NgayApDungLuongThoiGian = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_LuongThoiGian", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_LuongThoiGian_NhanVien_MaSoNhanVien",
+                        column: x => x.MaSoNhanVien,
+                        principalTable: "NhanVien",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
                 name: "PhuCapNhanVien",
                 columns: table => new
                 {
@@ -1165,6 +1196,11 @@ namespace NhaMayThep.Infrastructure.Migrations
                 column: "NguoiDuyet");
 
             migrationBuilder.CreateIndex(
+                name: "IX_LuongThoiGian_MaSoNhanVien",
+                table: "LuongThoiGian",
+                column: "MaSoNhanVien");
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NhanVien_ChucVuID",
                 table: "NhanVien",
                 column: "ChucVuID");
@@ -1285,6 +1321,9 @@ namespace NhaMayThep.Infrastructure.Migrations
 
             migrationBuilder.DropTable(
                 name: "LichSuNghiPhepNhanVien");
+
+            migrationBuilder.DropTable(
+                name: "LuongThoiGian");
 
             migrationBuilder.DropTable(
                 name: "MucSanPham");
