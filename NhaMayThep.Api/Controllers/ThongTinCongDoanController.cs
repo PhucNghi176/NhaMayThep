@@ -31,7 +31,6 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator;
         }
-        [Authorize(Policy = "Manager")]
         [HttpPost("thong-tin-cong-doan/create")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -46,7 +45,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [Authorize(Policy = "Manager")]
         [HttpPost("thong-tin-cong-doan/restore")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -61,7 +59,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [Authorize(Policy = "Manager")]
         [HttpPut("thong-tin-cong-doan/update")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -76,7 +73,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [Authorize(Policy = "Manager")]
         [HttpDelete("thong-tin-cong-doan/delete/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]

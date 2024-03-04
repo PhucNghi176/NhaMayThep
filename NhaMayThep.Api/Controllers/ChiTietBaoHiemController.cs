@@ -15,6 +15,7 @@ using NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem;
 using NhaMayThep.Application.ChiTietBaoHiem.DeleteChiTietBaoHiem;
 using NhaMayThep.Application.ChiTietBaoHiem.GetById;
 using NhaMayThep.Application.ChiTietBaoHiem.GetByIdDeleted;
+using Asp.Versioning;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -27,7 +28,6 @@ namespace NhaMayThep.Api.Controllers
         {
             _mediator = mediator;
         }
-        [Authorize(Policy = "Manager")]
         [HttpPost("chi-tiet-bao-hiem/create")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -42,7 +42,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [Authorize(Policy = "Manager")]
         [HttpPost("chi-tiet-bao-hiem/restore")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -57,7 +56,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send<string>(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [Authorize(Policy = "Manager")]
         [HttpPut("chi-tiet-bao-hiem/update")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]
@@ -72,7 +70,6 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send<string>(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
-        [Authorize(Policy = "Manager")]
         [HttpDelete("chi-tiet-bao-hiemn/delete/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]

@@ -48,8 +48,6 @@ namespace NhaMapThep.Configuration
             //Configure policies and other authorization options here. For example:
             //options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("role", "employee"));
             //options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "Admin"));
-            options.AddPolicy("Admin", policy => policy.RequireRole("Admin"));
-            options.AddPolicy("Manager", policy => policy.RequireRole("Admin","Truong Phong Nhan Su","Quan Li"));
         }
     }
 }
