@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
                 .NotEmpty().WithMessage("MaSoNhanVien is not null or empty");
 
             RuleFor(v => v.NgayBatDau)
-                .GreaterThanOrEqualTo(DateTime.UtcNow).WithMessage("NgayBatDau is not available");
+                .NotEmpty().WithMessage("NgayBatDau is not null or empty");
 
             RuleFor(v => v.NgayKetThuc)
                 .GreaterThan(x => x.NgayBatDau).WithMessage("NgayKetThuc can't end before NgayBatDau");
