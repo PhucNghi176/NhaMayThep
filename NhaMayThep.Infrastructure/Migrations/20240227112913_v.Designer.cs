@@ -12,13 +12,8 @@ using NhaMayThep.Infrastructure.Persistence;
 namespace NhaMayThep.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-<<<<<<<< HEAD:NhaMayThep.Infrastructure/Migrations/20240117135101_v4.Designer.cs
-    [Migration("20240117135101_v4")]
-    partial class v4
-========
     [Migration("20240227112913_v")]
     partial class v
->>>>>>>> dev:NhaMayThep.Infrastructure/Migrations/20240227112913_v.Designer.cs
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -572,7 +567,6 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     b.ToTable("LoaiNghiPhep");
 
-<<<<<<<< HEAD:NhaMayThep.Infrastructure/Migrations/20240117135101_v4.Designer.cs
                     b.HasData(
                         new
                         {
@@ -606,8 +600,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                         });
                 });
 
-========
->>>>>>>> dev:NhaMayThep.Infrastructure/Migrations/20240227112913_v.Designer.cs
+
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.PhongBanEntity", b =>
                 {
                     b.Property<int>("ID")
@@ -1518,8 +1511,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.ToTable("QuaTrinhNhanSu");
                 });
 
-<<<<<<<< HEAD:NhaMayThep.Infrastructure/Migrations/20240117135101_v4.Designer.cs
-========
+
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ThongTinCongTyEntity", b =>
                 {
                     b.Property<string>("ID")
@@ -1593,7 +1585,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.ToTable("ThongTinCongTy");
                 });
 
->>>>>>>> dev:NhaMayThep.Infrastructure/Migrations/20240227112913_v.Designer.cs
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ThongTinDangVienEntity", b =>
                 {
                     b.Property<string>("ID")
