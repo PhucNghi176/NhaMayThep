@@ -14,6 +14,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted
         {
             Id = id;
         }
+        public GetThongTinGiamTruGiaCanhByNhanVienIdDeletedQuery() { }
         public string Id { get; set; }
     }
 }

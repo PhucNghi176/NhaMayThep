@@ -10,9 +10,8 @@ using System.Threading.Tasks;
 namespace NhaMapThep.Domain.Entities
 {
     [Table("ThongTinCongTy")]
-    public class ThongTinCongTyEntity
+    public class ThongTinCongTyEntity : Entity
     {
-        [Key]
         public int MaDoanhNghiep {  get; set; }
         public string TenQuocTe {  get; set; }
         public string TenVietTat {  get; set; }

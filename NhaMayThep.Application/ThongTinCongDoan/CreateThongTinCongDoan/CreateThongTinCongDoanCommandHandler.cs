@@ -42,8 +42,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
                 NhanVien = nhanvien,
             };
             _thongtinCongDoanRepository.Add(thongtincongdoanNew);
-            await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Tạo thông tin công đoàn thành công";
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) >0 ? "Tạo thông tin công đoàn thành công" : "Tạo thất bại";
         }
     }
 }

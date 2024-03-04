@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVienTest
             var list = await _repository.FindAllAsync(_ => _.NgayXoa == null, cancellationToken);
             var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec);
+            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec, null);
             return returnList;
         }
     }

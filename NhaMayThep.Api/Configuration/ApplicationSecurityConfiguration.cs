@@ -33,7 +33,7 @@ namespace NhaMapThep.Configuration
                         ValidateLifetime = true,
                         ValidIssuer = configuration.GetSection("Security.Bearer:Authority").Get<string>(),
                         ValidAudience = configuration.GetSection("Security.Bearer:Audience").Get<string>(),
-                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRM Nh@ M@y Th3p!!!"))
+                        IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("HRM Nh@ M@y Th3p!!!")),
                     };
                 });
 
@@ -47,7 +47,7 @@ namespace NhaMapThep.Configuration
         {
             //Configure policies and other authorization options here. For example:
             //options.AddPolicy("EmployeeOnly", policy => policy.RequireClaim("role", "employee"));
-            //options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "admin"));
+            //options.AddPolicy("AdminOnly", policy => policy.RequireClaim("role", "Admin"));
         }
     }
 }

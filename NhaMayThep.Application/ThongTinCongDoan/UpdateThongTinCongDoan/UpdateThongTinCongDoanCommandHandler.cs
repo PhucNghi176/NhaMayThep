@@ -44,8 +44,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
             thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
             thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
             _thongtinCongDoanRepository.Update(thongtincongdoan);
-            await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Cập nhật thành công";
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken)> 0 ? "Cập nhật thành công": "Cập nhật thất bại";
         }
     }
 }

@@ -9,6 +9,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
         {
             Id = id;
         }
+        public GetThongTinGiamTruGiaCanhByNhanVienIdQuery() { }
         public string Id { get; set; }
     }
 }

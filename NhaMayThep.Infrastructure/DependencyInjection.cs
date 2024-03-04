@@ -59,6 +59,8 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IMucSanPhamRepository, MucSanPhamRepository>();
             services.AddTransient<IKyLuatRepository, KyLuatRepository>();
             services.AddTransient<IKhenThuongRepository, KhenThuongRepository>();
+            services.AddTransient<IThongTinCongTyRepository, ThongTinCongTyRepository>();
+            services.AddTransient<ILuongThoiGianRepository, LuongThoiGianRepository>();
             services.AddTransient<IThueSuatRepository, ThueSuatRepository>();
             services.AddTransient<ILoaiTangCaRepository, LoaiTangCaRepository>();
             services.AddTransient<ILuongCongNhatRepository, LuongCongNhatRepository>();
@@ -67,6 +69,9 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IPhiCongDoanRepository, PhiCongDoanRepository>();
             services.AddTransient<IPhuCapCongDoanRepository, PhuCapCongDoanRepository>();
             services.AddTransient<ITangCaRepository, TangCaRepository>();
+            services.AddTransient<IChiTietBaoHiemRepository, ChiTietBaoHiemRepository>();
+            services.AddTransient<ITrangThaiDangKiCaLamViecRepository, TrangThaiDangKiCaLamViecRepository>();
+            services.AddTransient<IMaDangKiCaLamRepository, MaDangKiCaLamRepository>();
             return services;
         }
     }
