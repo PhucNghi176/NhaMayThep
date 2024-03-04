@@ -68,7 +68,7 @@ namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
             };
             _repository.Add(nv);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return password;
+            return nv.ID;
         }
     }
 }
