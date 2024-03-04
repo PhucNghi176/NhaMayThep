@@ -24,11 +24,11 @@ namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
 
             if (lsnp == null)
             {
-                throw new NotFoundException($"LichSuNghiPhep with ID {request.Id} not found.");
+                throw new NotFoundException($"LichSuNghiPhep với Id: {request.Id} không tìm thấy .");
             }
             if(lsnp.NgayXoa != null)
             {
-                throw new NotFoundException($"LichSuNghiPhepWith ID {request.Id} is deleted");
+                throw new NotFoundException($"LichSuNghiPhep với Id  {request.Id} đã xóa");
             }
 
             return _mapper.Map<LichSuNghiPhepDto>(lsnp);

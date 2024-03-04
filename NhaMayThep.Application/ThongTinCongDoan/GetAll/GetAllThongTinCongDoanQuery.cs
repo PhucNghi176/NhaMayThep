@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetAll

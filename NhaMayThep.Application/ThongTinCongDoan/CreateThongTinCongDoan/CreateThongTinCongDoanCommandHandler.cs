@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
             }
             var thongtincongdoan = await _thongtinCongDoanRepository
                      .FindAsync(x => x.NhanVienID.Equals(request.NhanVienID), cancellationToken);
-            if (thongtincongdoan != null || (thongtincongdoan != null && thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
+            if (thongtincongdoan != null)
             {
                 throw new NotFoundException($"Thông tin công đoàn đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }
@@ -42,15 +42,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
                 NhanVien = nhanvien,
             };
             _thongtinCongDoanRepository.Add(thongtincongdoanNew);
-            try
-            {
-                await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-                return "Tạo thông tin công đoàn thành công";
-            }
-            catch (Exception)
-            {
-                return "Đã xảy ra lỗi trong quá trình tạo thông tin công đoàn";
-            }
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) >0 ? "Tạo thông tin công đoàn thành công" : "Tạo thất bại";
         }
     }
 }

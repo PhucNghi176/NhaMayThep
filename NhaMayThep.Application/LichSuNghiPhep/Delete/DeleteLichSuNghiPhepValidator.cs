@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Delete
         {
             RuleFor(x => x.Id)
                 .NotEmpty()
-                .WithMessage("Id is requied");
+                .WithMessage("Id không được để trống ");
 
           
         }

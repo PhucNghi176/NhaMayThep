@@ -8,9 +8,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
         {
             RuleFor(x => x.Id)
               .NotEmpty().WithMessage("Id không được bỏ trống")
-              .NotNull().WithMessage("Id không được rỗng")
-              .Must(x => Guid.TryParseExact(x, "N", out _)).WithMessage("Id không đúng định dạng");
-
+              .NotNull().WithMessage("Id không được rỗng");
             RuleFor(x => x.MaGiamTruID)
                  .GreaterThan(0)
                  .WithMessage("Mã giảm trừ phải lớn hơn 0")
@@ -22,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             RuleFor(x => x.CanCuocCongDan)
              .NotEmpty().WithMessage("Căn cước công dân không được bỏ trống")
              .NotNull().WithMessage("Căn cước công dân không được rỗng")
-             .MaximumLength(12).WithMessage("Căn cước công dân có độ dài tối đa 20 ký tự")
+             .MaximumLength(12).WithMessage("Căn cước công dân có độ dài tối đa 12 ký tự")
              .Must(x => long.TryParse(x, out long _)).WithMessage("Căn cước công dân phải là số");
 
             RuleFor(x => x.NgayXacNhanPhuThuoc)

@@ -6,7 +6,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
     {
         public CreateChiTietNgayNghiPhepCommandValidator()
         {
-            RuleFor(command => command.MaSoNhanVien)
+            RuleFor(command => command.NhanVienID)
                 .NotEmpty().WithMessage("Employee ID is required.");
 
             RuleFor(command => command.LoaiNghiPhepID)

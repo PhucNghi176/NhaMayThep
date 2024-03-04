@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Update
 {
-    public class UpdateLoaiNghiPhepHandler : IRequestHandler<UpdateLoaiNghiPhepCommand, LoaiNghiPhepDto>
+    public class UpdateLoaiNghiPhepHandler : IRequestHandler<UpdateLoaiNghiPhepCommand, string>
     {
         private readonly ILoaiNghiPhepRepository _repository;
         private readonly IMapper _mapper;
@@ -18,25 +18,24 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             _hanVienRepository = hanVienRepository;
         }
 
-        public async Task<LoaiNghiPhepDto> Handle(UpdateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateLoaiNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var lnp = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (lnp == null)
             {
-                throw new NotFoundException("LoaiNghiPhep not found for the given ID");
+                throw new NotFoundException("LoaiNghiPhep với id không tìm thấy");
             }
             if(lnp.NgayXoa != null)
             {
-                throw new InvalidOperationException("This LoaiNghiPhep has been deleted");
+                throw new NotFoundException("Loại nghỉ phép này đã bị xóa rồi");
             }
             lnp.ID = request.Id;
             lnp.Name = request.Name ?? lnp.Name;
-            lnp.SoGioNghiPhep = request.SoGioNghiPhep;
-
             _repository.Update(lnp);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-
-            return _mapper.Map<LoaiNghiPhepDto>(lnp);
+            if (await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }

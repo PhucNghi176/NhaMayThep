@@ -30,21 +30,21 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new UnauthorizedAccessException("User ID not found.");
+                throw new UnauthorizedAccessException("User ID không tìm thấy.");
             }
             var existingLsnp = await _repo.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (existingLsnp == null)
             {
-                throw new NotFoundException($"ChiTietNghiPhep with Id {request.Id} not found.");
+                throw new NotFoundException($"ChiTietNghiPhep với Id {request.Id} không tìm thấy.");
             }
             if (existingLsnp.NgayXoa != null)
             {
-                throw new NotFoundException("This ID is deleted");
+                throw new NotFoundException("This ID đã bị xóa");
             }
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
             if (!loaiNghiPhepExists)
             {
-                throw new NotFoundException("LoaiNghiPhepId provided does not exist.");
+                throw new NotFoundException("LoaiNghiPhepId không tồn tại.");
             }
 
             // Update properties

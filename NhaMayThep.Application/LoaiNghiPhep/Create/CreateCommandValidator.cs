@@ -21,11 +21,9 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
         private void ConfigureValidationRules()
         {
             RuleFor(command => command.Name)
-            .NotEmpty().WithMessage("Name is required.")
-            .MaximumLength(100).WithMessage("Name must not exceed 100 characters.");
-            RuleFor(command => command.SoGioNghiPhep)
-           .GreaterThanOrEqualTo(0).WithMessage("Number of leave hours must be non-negative.")
-           .LessThanOrEqualTo(24).WithMessage("Number of leave hours must not exceed 24.");
+            .NotEmpty().WithMessage("Tên không để trống")
+            .MaximumLength(100).WithMessage("Tên không vượt quá 100 chữ.");
+          
         }
 
       

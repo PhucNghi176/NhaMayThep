@@ -12,8 +12,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
         public UpdateLoaiNghiPhepValidator()
         {
             RuleFor(command => command.Id).GreaterThan(0);
-            RuleFor(command => command.Name).NotEmpty().WithMessage("Name is required.");
-            RuleFor(command => command.SoGioNghiPhep).GreaterThanOrEqualTo(0).WithMessage("SoGioNghiPhep Greater than 0");
+            RuleFor(command => command.Name).NotEmpty().WithMessage("Tên không để trống.");
 
         }
     }

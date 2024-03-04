@@ -17,6 +17,6 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
         [Column(TypeName = "decimal(18, 4)")]
         public required decimal ThuNhapTinhThueTrenThang {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public required decimal PhanTramThueSuat { get; set; }
+        public required double PhanTramThueSuat { get; set; }
     }
 }
