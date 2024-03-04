@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Create
             var exist = await _maDangKiCaLamRepository.FindAsync(x => x.Name == request.Name && !x.NgayXoa.HasValue, cancellationToken);
             if (exist != null)
             {
-                throw new NotFoundException("Loại Đăng Kí trên đã tồn tại!");
+                return "Loại Đăng Kí trên đã tồn tại!";
             }
 
             var dangKi = new MaDangKiCaLamEntity()

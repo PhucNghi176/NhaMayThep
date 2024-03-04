@@ -33,7 +33,7 @@ namespace NhaMayThep.Application.TrangThaiDangKiCaLamViec.CreateTrangThaiDangKiC
             var exist = await _trangThaiDangKiCaLamViecRepository.FindAsync(x => x.Name == request.Name && !x.NgayXoa.HasValue, cancellationToken);
             if (exist != null)
             {
-                throw new NotFoundException("Loại Trạng Thái trên đã tồn tại!");
+                return "Loại Trạng Thái trên đã tồn tại!";
             }
 
             var trangThai = new TrangThaiDangKiCaLamViecEntity()
