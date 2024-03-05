@@ -53,6 +53,7 @@ namespace NhaMayThep.Infrastructure.Persistence
         public DbSet<MaDangKiCaLamEntity> MaDangKiCaLam { get; set; }
         public DbSet<TrangThaiDangKiCaLamViecEntity> TrangThaiDangKiCaLamViec { get; set; }
         public DbSet<LuongThoiGianEntity> LuongThoiGian { get; set; }
+
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
