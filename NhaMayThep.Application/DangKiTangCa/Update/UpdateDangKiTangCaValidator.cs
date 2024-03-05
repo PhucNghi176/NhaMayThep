@@ -7,39 +7,39 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
         public UpdateDangKiTangCaValidator()
         {
             RuleFor(v => v.Id)
-                .NotEmpty().WithMessage("ID is required for update.");
+                .NotEmpty().WithMessage("ID là bắt buộc để cập nhật.");
 
             RuleFor(v => v.MaSoNhanVien)
-                .NotEmpty().WithMessage("Employee ID is required.");
+                .NotEmpty().WithMessage("Mã số nhân viên là bắt buộc.");
 
             RuleFor(v => v.NgayLamTangCa)
-                .NotEmpty().WithMessage("Overtime work date is required.");
+                .NotEmpty().WithMessage("Ngày làm tăng ca là bắt buộc.");
 
             RuleFor(v => v.CaDangKi)
-                .GreaterThan(0).WithMessage("Shift registration must be greater than 0.");
+                .GreaterThan(0).WithMessage("Ca đăng kí phải lớn hơn 0.");
 
             RuleFor(v => v.LiDoTangCa)
-                .NotEmpty().WithMessage("Reason for overtime is required.")
-                .MaximumLength(500).WithMessage("Reason for overtime cannot be longer than 500 characters.");
+                .NotEmpty().WithMessage("Lý do làm tăng ca là bắt buộc.")
+                .MaximumLength(500).WithMessage("Lý do làm tăng ca không được dài hơn 500 ký tự.");
 
             RuleFor(v => v.ThoiGianCaLamBatDau)
-                .NotEmpty().WithMessage("Start time of the shift is required.");
+                .NotEmpty().WithMessage("Thời gian bắt đầu ca làm là bắt buộc.");
 
             RuleFor(v => v.ThoiGianCaLamKetThuc)
-                .NotEmpty().WithMessage("End time of the shift is required.")
-                .GreaterThan(v => v.ThoiGianCaLamBatDau).WithMessage("End time must be after start time.");
+                .NotEmpty().WithMessage("Thời gian kết thúc ca làm là bắt buộc.")
+                .GreaterThan(v => v.ThoiGianCaLamBatDau).WithMessage("Thời gian kết thúc phải sau thời gian bắt đầu.");
 
             RuleFor(v => v.SoGioTangCa)
-                .NotEmpty().WithMessage("Overtime hours are required.");
+                .NotEmpty().WithMessage("Số giờ tăng ca là bắt buộc.");
 
             RuleFor(v => v.HeSoLuongTangCa)
-                .GreaterThan(0).WithMessage("Overtime pay rate must be greater than 0.");
+                .GreaterThan(0).WithMessage("Hệ số lương tăng ca phải lớn hơn 0.");
 
             RuleFor(v => v.TrangThaiDuyet)
-                .InclusiveBetween(0, int.MaxValue).WithMessage("Approval status is invalid.");
+                .InclusiveBetween(0, int.MaxValue).WithMessage("Trạng thái duyệt không hợp lệ.");
 
             RuleFor(v => v.NguoiDuyet)
-                .NotEmpty().WithMessage("Approver is required.");
+                .NotEmpty().WithMessage("Người duyệt là bắt buộc.");
         }
     }
 }
