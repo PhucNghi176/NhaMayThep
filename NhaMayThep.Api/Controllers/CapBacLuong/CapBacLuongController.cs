@@ -12,7 +12,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.CapBacLuong
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class CapBacLuongController : ControllerBase
     {
         private readonly ISender _mediator;
