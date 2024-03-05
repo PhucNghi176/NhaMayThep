@@ -28,11 +28,7 @@ namespace NhaMayThep.Application.NghiPhep.Create
 
         public async Task<string> Handle(CreateNghiPhepCommand request, CancellationToken cancellationToken)
         {
-            var existingNghiPhep = await _nghiPhepRepository.AnyAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
-            if (existingNghiPhep)
-            {
-                return "Thất Bại! Nhân viên đã có nghỉ phép.";
-            }
+
 
             var existingNhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
             if (!existingNhanVien)

@@ -17,7 +17,7 @@ using NhaMayThep.Application.NghiPhep.Update;
 namespace NhaMapThep.Api.Controllers
 {
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class NghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -67,19 +67,8 @@ namespace NhaMapThep.Api.Controllers
             [FromBody] UpdateNghiPhepCommand command,
             CancellationToken cancellationToken = default)
         {
-            try
-            {
-                await _mediator.Send(command, cancellationToken);
-                return new JsonResponse<string>("Thành Công!");
-            }
-            catch (NotFoundException)
-            {
-                return NotFound(new JsonResponse<string>("Không tìm thấy nghỉ phép"));
-            }
-            catch (Exception)
-            {
-                return BadRequest(new JsonResponse<string>("Thất Bại!"));
-            }
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
 

@@ -4,7 +4,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.NghiPhep.Update
 {
-    public class UpdateNghiPhepCommand : IRequest<NghiPhepDto>, ICommand
+    public class UpdateNghiPhepCommand : IRequest<string>, ICommand
     {
         public UpdateNghiPhepCommand(string id, decimal luongNghiPhep, decimal khoanTruLuong, double soGioNghiPhep, int loaiNghiPhepId)
         {

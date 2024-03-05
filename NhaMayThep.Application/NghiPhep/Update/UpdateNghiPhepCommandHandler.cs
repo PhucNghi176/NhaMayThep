@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NghiPhep.Update
 {
-    public class UpdateNghiPhepCommandHandler : IRequestHandler<UpdateNghiPhepCommand, NghiPhepDto>
+    public class UpdateNghiPhepCommandHandler : IRequestHandler<UpdateNghiPhepCommand, string>
     {
         private readonly INghiPhepRepository _nghiPhepRepository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.NghiPhep.Update
             _currentUserService = currentUserService;
         }
 
-        public async Task<NghiPhepDto> Handle(UpdateNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var nghiPhep = await _nghiPhepRepository.FindAsync(x => x.ID == request.Id && x.NgayXoa == null, cancellationToken);
             if (nghiPhep == null)
@@ -40,9 +40,13 @@ namespace NhaMayThep.Application.NghiPhep.Update
             nghiPhep.NgayCapNhatCuoi = DateTime.Now;
 
             _nghiPhepRepository.Update(nghiPhep);
-            await _nghiPhepRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            //await _nghiPhepRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<NghiPhepDto>(nghiPhep);
+            //return _mapper.Map<NghiPhepDto>(nghiPhep);
+            if (await _nghiPhepRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công!";
+            else
+                return "Cập nhật thất bại!";
         }
     }
 }
