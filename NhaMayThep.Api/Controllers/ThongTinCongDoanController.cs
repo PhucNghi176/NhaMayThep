@@ -1,5 +1,6 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Application.Common.Pagination;
@@ -99,6 +100,19 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new GetAllThongTinCongDoanQuery(), cancellationToken);
             return Ok(new JsonResponse<List<ThongTinCongDoanDto>>(result));
         }
+        [HttpGet("thong-tin-cong-doan/get-all-deleted")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<List<ThongTinCongDoanDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<List<ThongTinCongDoanDto>>>> GetAllDeleted(
+         CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new GetAllThongTinCongDoanDeletedQuery(), cancellationToken);
+            return Ok(new JsonResponse<List<ThongTinCongDoanDto>>(result));
+        }
         [HttpGet("thong-tin-cong-doan/get-all/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinCongDoanDto>>), StatusCodes.Status201Created)]
@@ -112,47 +126,6 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<PagedResult<ThongTinCongDoanDto>>(result));
-        }
-        [HttpGet("thong-tin-cong-doan/get-by-id/{id}")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> GetById(
-          [FromRoute] string id,
-          CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetThongTinCongDoanByIdQuery(id: id), cancellationToken);
-            return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
-        }
-        [HttpGet("thong-tin-cong-doan/get-by-nhan-vien-id/{id}")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> GetBayNhanVienId(
-          [FromRoute] string id,
-          CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetThongTinCongDoanByNhanVienIdQuery(id: id), cancellationToken);
-            return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
-        }
-        [HttpGet("thong-tin-cong-doan/get-all-deleted")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<ThongTinCongDoanDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<ThongTinCongDoanDto>>>> GetAllDeleted(
-          CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetAllThongTinCongDoanDeletedQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<ThongTinCongDoanDto>>(result));
         }
         [HttpGet("thong-tin-cong-doan/get-all-deleted/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -168,7 +141,21 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<PagedResult<ThongTinCongDoanDto>>(result));
         }
-        [HttpGet("thong-tin-cong-doan/get-by-id-deleted/{id}")]
+        [HttpGet("thong-tin-cong-doan/get-by-id")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> GetById(
+          [FromQuery] GetThongTinCongDoanByIdQuery query,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
+        }
+        [HttpGet("thong-tin-cong-doan/get-by-id-deleted")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -176,13 +163,27 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> GetByIdDeleted(
-          [FromRoute] string id,
-          CancellationToken cancellationToken = default)
+         [FromQuery] GetThongTinCongDoanByIdDeletedQuery query,
+         CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetThongTinCongDoanByIdDeletedQuery(id: id), cancellationToken);
+            var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
         }
-        [HttpGet("thong-tin-cong-doan/get-by-nhan-vien-id-deleted/{id}")]
+        [HttpGet("thong-tin-cong-doan/get-by-nhan-vien-id")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> GetBayNhanVienId(
+          [FromQuery] GetThongTinCongDoanByNhanVienIdQuery query,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
+        }
+        [HttpGet("thong-tin-cong-doan/get-by-nhan-vien-id-deleted")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<ThongTinCongDoanDto>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -190,13 +191,12 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<ThongTinCongDoanDto>>> GetBayNhanVienIdDeleted(
-          [FromRoute] string id,
+          [FromQuery] GetThongTinCongDoanByNhanVienIdDeletedQuery query,
           CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetThongTinCongDoanByNhanVienIdDeletedQuery(id: id), cancellationToken);
+            var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<ThongTinCongDoanDto>(result));
         }
-
         [HttpGet("thong-tin-cong-doan/phan-trang")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinCongDoanDto>>), StatusCodes.Status201Created)]

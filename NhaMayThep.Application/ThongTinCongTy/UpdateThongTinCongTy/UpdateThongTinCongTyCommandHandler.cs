@@ -1,6 +1,7 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy;
 
@@ -40,8 +41,10 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
             thongTinCongTy.TinhTrang = request.TinhTrang;
             thongTinCongTy.NgayHoatDong = request.NgayHoatDong;
             _thongTinCongTyRepository.Update(thongTinCongTy);
-            await _thongTinCongTyRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return "Cập nhật thành công";
+            if (await _thongTinCongTyRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
+                return "Cập nhật thành công";
+            else
+                return "Cập nhật thất bại";
         }
     }
 }
