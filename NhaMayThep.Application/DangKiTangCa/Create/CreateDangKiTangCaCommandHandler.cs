@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
         private readonly ICurrentUserService _currentUserService;
         private readonly INhanVienRepository _nhanVienRepository;
 
-        public CreateDangKiTangCaCommandHandler(IMapper mapper, ICurrentUserService currentUserService, IDangKiTangCaRepository repository, INhanVienRepository nhanVienRepository,)
+        public CreateDangKiTangCaCommandHandler(IMapper mapper, ICurrentUserService currentUserService, IDangKiTangCaRepository repository, INhanVienRepository nhanVienRepository)
         {
             _mapper = mapper;
             _repository = repository;

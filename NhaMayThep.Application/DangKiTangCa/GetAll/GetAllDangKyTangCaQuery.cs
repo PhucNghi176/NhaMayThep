@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.GetAll
 {
-    public class GetAllDktcQuery : IRequest<List<DangKiTangCaDto>>, IQuery
+    public class GetAllDangKyTangCaQuery : IRequest<List<DangKiTangCaDto>>, IQuery
     {
     }
 }
