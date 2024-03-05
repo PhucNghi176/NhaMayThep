@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Update
         private readonly IKhaiBaoTangLuongRepository _repository;
         private readonly IMapper _mapper;
         private readonly INhanVienRepository _nhanvien;
-        private readonly NhaMapThep.Domain.Repositories.ConfigTable.IChinhSachNhanSuRepository _chinhsach;
+        private readonly IChinhSachNhanSuRepository _chinhsach;
         private readonly ICurrentUserService _currentUserService;
         public UpdateKhaiBaoTangLuongCommandHandler(IKhaiBaoTangLuongRepository repository, IMapper mapper, INhanVienRepository nhanvien, NhaMapThep.Domain.Repositories.ConfigTable.IChinhSachNhanSuRepository chinhsach, ICurrentUserService currentUserService)
         {

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Infrastructure.Repositories;
 using NhaMayThep.Infrastructure.Persistence;
 using System;
@@ -9,7 +9,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Infrastructure.Repositories
+namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
 {
     public class ChinhSachNhanSuRepository : RepositoryBase<ChinhSachNhanSuEntity, ChinhSachNhanSuEntity, ApplicationDbContext>, IChinhSachNhanSuRepository
     {

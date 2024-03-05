@@ -16,9 +16,12 @@ using NhaMayThep.Application.ChinhSachNhanSu.GetById;
 using NhaMayThep.Application.ChinhSachNhanSu.Update;
 using NhaMayThep.Application.ChinhSachNhanSu.Delete;
 using NhaMayThep.Application.ChinhSachNhanSu.GetAll;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
+    [ApiController]
+    [Authorize]
     public class ChinhSachNhanSuController : ControllerBase
     {
         private readonly ISender _mediator;
