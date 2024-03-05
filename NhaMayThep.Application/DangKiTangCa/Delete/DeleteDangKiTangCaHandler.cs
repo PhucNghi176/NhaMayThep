@@ -42,7 +42,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Delete
 
             if (lsnp.NgayXoa != null)
             {
-                throw new NotFoundException("LichSuNghiPhep này đã bị xóa ");
+                throw new NotFoundException("DangKiTangCA này đã bị xóa ");
             }
             lsnp.NguoiXoaID = userId;
             lsnp.NgayXoa = DateTime.Now;
