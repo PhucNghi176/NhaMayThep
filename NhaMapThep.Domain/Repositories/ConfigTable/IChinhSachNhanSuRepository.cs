@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Repositories.ConfigTable
 {
-    public interface IChinhSachNhanSuRepository : IEFRepository<ChinhSachNhanSuEntity,ChinhSachNhanSuEntity>
+    public interface IChinhSachNhanSuRepository : IEFRepository<ChinhSachNhanSuEntity, ChinhSachNhanSuEntity>
     {
     }
 }

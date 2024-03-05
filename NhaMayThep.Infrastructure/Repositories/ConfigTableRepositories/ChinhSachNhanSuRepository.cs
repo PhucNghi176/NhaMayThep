@@ -15,6 +15,7 @@ namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
     {
         public ChinhSachNhanSuRepository(ApplicationDbContext dbContext, IMapper mapper) : base(dbContext, mapper)
         {
+
         }
     }
 }
