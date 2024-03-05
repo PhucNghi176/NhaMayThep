@@ -18,9 +18,9 @@ namespace NhaMayThep.Application.TangCa.Update
         private readonly ITangCaRepository _repository;
         private readonly IMapper _mapper;
         private readonly INhanVienRepository _nhanvien;
-        private readonly IChinhSachNhanSuRepository _chinhsach;
+        private readonly NhaMapThep.Domain.Repositories.ConfigTable.IChinhSachNhanSuRepository _chinhsach;
         private readonly ICurrentUserService _currentUserService;
-        public UpdateTangCaCommandHandler(ITangCaRepository repository, IMapper mapper, INhanVienRepository nhanvien, IChinhSachNhanSuRepository chinhsach, ICurrentUserService currentUserService)
+        public UpdateTangCaCommandHandler(ITangCaRepository repository, IMapper mapper, INhanVienRepository nhanvien, NhaMapThep.Domain.Repositories.ConfigTable.IChinhSachNhanSuRepository chinhsach, ICurrentUserService currentUserService)
         {
             _repository = repository;
             _mapper = mapper;

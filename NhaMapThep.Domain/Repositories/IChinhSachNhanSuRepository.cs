@@ -5,9 +5,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMapThep.Domain.Repositories.ConfigTable
+namespace NhaMapThep.Domain.Repositories
 {
-    public interface IChinhSachNhanSuRepository : IEFRepository<ChinhSachNhanSuEntity,ChinhSachNhanSuEntity>
+    public interface IChinhSachNhanSuRepository : IEFRepository<ChinhSachNhanSuEntity, ChinhSachNhanSuEntity>
     {
     }
 }

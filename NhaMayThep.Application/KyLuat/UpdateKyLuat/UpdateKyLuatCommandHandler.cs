@@ -18,9 +18,9 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
         private readonly IKyLuatRepository _repository;
         private readonly IMapper _mapper;
         private readonly INhanVienRepository _nhanvien;
-        private readonly IChinhSachNhanSuRepository _chinhsach;
+        private readonly NhaMapThep.Domain.Repositories.ConfigTable.IChinhSachNhanSuRepository _chinhsach;
         private readonly ICurrentUserService _currentUserService;
-        public UpdateKyLuatCommandHandler(IKyLuatRepository repository, IMapper mapper, INhanVienRepository nhanvien, IChinhSachNhanSuRepository chinhsach, ICurrentUserService currentUserService)
+        public UpdateKyLuatCommandHandler(IKyLuatRepository repository, IMapper mapper, INhanVienRepository nhanvien, NhaMapThep.Domain.Repositories.ConfigTable.IChinhSachNhanSuRepository chinhsach, ICurrentUserService currentUserService)
         {
             _repository = repository;
             _mapper = mapper;
