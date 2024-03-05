@@ -24,15 +24,15 @@ namespace NhaMapThep.Domain.Functions
 
         //Không có tổng thu nhập theo tháng
 
-        public decimal TinhThuNhapTinhThueTheoNam(decimal thuNhapChiuThue, decimal tienGiamTruBT, int soNPT, decimal tienGiamTruNPT, decimal luongDongBH, decimal phiCongDoan)
+        public decimal TinhThuNhapTinhThueTheoNam(decimal thuNhapChiuThue, decimal tienGiamTruBanThan, int soNguoiPhuThuoc, decimal tienGiamTruNguoiPhuThuoc, decimal luongDongBaoHiem, decimal phiCongDoan)
         {
-            decimal thuNhapTinhThue = thuNhapChiuThue - ((tienGiamTruBT * 12) + (soNPT * tienGiamTruNPT * 12) + luongDongBH * 12 + phiCongDoan * 12);
+            decimal thuNhapTinhThue = thuNhapChiuThue - ((tienGiamTruBanThan * 12) + (soNguoiPhuThuoc * tienGiamTruNguoiPhuThuoc * 12) + luongDongBaoHiem * 12 + phiCongDoan * 12);
             return thuNhapTinhThue;
         }
 
-        public decimal TinhThuNhapTinhThueTheoThang(decimal thuNhapChiuThue, decimal tienGiamTruBT, int soNPT, decimal tienGiamTruNPT, decimal luongDongBH, decimal phiCongDoan)
+        public decimal TinhThuNhapTinhThueTheoThang(decimal thuNhapChiuThue, decimal tienGiamTruBanThan, int soNguoiPhuThuoc, decimal tienGiamTruNguoiPhuThuoc, decimal luongDongBaoHiem, decimal phiCongDoan)
         {
-            decimal thuNhapTinhThue = thuNhapChiuThue - (tienGiamTruBT + (soNPT * tienGiamTruNPT) + luongDongBH + phiCongDoan);
+            decimal thuNhapTinhThue = thuNhapChiuThue - (tienGiamTruBanThan + (soNguoiPhuThuoc * tienGiamTruNguoiPhuThuoc) + luongDongBaoHiem + phiCongDoan);
             return thuNhapTinhThue;
         }
 
