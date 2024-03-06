@@ -4,11 +4,8 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.DangKiTangCa;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.Create
@@ -38,19 +35,32 @@ namespace NhaMayThep.Application.DangKiCaLam.Create
             }
 
             // Validate MSNQL
-            var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNguoiQuanLy && x.NgayXoa == null, cancellationToken);
-            if (nhanvien2 == null)
+            var nhanvienQuanLy = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNguoiQuanLy && x.NgayXoa == null, cancellationToken);
+            if (nhanvienQuanLy == null)
             {
                 throw new NotFoundException("Nguoi Quan Ly không tồn tại hoặc đã bị xóa.");
             }
-            var dangKiCaLam = _mapper.Map<DangKiCaLamEntity>(request);
-            dangKiCaLam.NguoiTaoID = _currentUserService.UserId;
-            dangKiCaLam.NgayTao = DateTime.Now;
+
+            var dangKiCaLam = new DangKiCaLamEntity
+            {
+                MaSoNhanVien = request.MaSoNhanVien,
+                NgayDangKi = request.NgayDangKi,
+                CaDangKi = request.CaDangKi,
+                ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau,
+                ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc,
+                ThoiGianChamCongBatDau = request.ThoiGianChamCongBatDau,
+                ThoiGianChamCongKetThuc = request.ThoiGianChamCongKetThuc,
+                HeSoNgayCong = request.HeSoNgayCong,
+                MaSoNguoiQuanLy = request.MaSoNguoiQuanLy,
+                TrangThai = request.TrangThai,
+                GhiChu = request.GhiChu,
+                NguoiTaoID = _currentUserService.UserId,
+                NgayTao = DateTime.Now
+            };
 
             _repository.Add(dangKiCaLam);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return _mapper.Map<DangKiCaLamDto>(dangKiCaLam);
         }
-
     }
 }

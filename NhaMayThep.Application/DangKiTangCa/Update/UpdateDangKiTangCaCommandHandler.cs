@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
@@ -16,7 +17,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
         private readonly ICurrentUserService _currentUserService;
         private readonly INhanVienRepository _nhanVienRepository;
 
-        public UpdateDangKiTangCaCommandHandler(INhanVienRepository nhanVienRepository, IMapper mapper, ICurrentUserService currentUserService, IDangKiTangCaRepository repository)
+        public UpdateDangKiTangCaCommandHandler(IMapper mapper, IDangKiTangCaRepository repository, ICurrentUserService currentUserService, INhanVienRepository nhanVienRepository)
         {
             _mapper = mapper;
             _repository = repository;
@@ -32,29 +33,23 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
                 throw new UnauthorizedAccessException("User ID not found.");
             }
 
-            // Validate MaSoNhanVien
-            var nhanVienExists = await _nhanVienRepository.AnyAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
-            if (!nhanVienExists)
-            {
-                throw new NotFoundException("MaSoNhanVien does not exist or has been deleted.");
-            }
-
-            // Validate NguoiDuyet
-            var nguoiDuyetExists = await _nhanVienRepository.AnyAsync(x => x.ID == request.NguoiDuyet, cancellationToken);
-            if (!nguoiDuyetExists)
-            {
-                throw new NotFoundException("NguoiDuyet does not exist or has been deleted.");
-            }
-
-            // Validate DangKiTangCa exists
             var dangKiTangCa = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiTangCa == null)
             {
                 throw new NotFoundException("DangKiTangCa does not exist or has been deleted.");
             }
 
-            // Update entity
-            _mapper.Map(request, dangKiTangCa);
+           
+            dangKiTangCa.MaSoNhanVien = request.MaSoNhanVien;
+            dangKiTangCa.NgayLamTangCa = request.NgayLamTangCa;
+            dangKiTangCa.CaDangKi = request.CaDangKi;
+            dangKiTangCa.LiDoTangCa = request.LiDoTangCa;
+            dangKiTangCa.ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau;
+            dangKiTangCa.ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc;
+            dangKiTangCa.SoGioTangCa = request.SoGioTangCa;
+            dangKiTangCa.HeSoLuongTangCa = request.HeSoLuongTangCa;
+            dangKiTangCa.TrangThaiDuyet = request.TrangThaiDuyet;
+            dangKiTangCa.NguoiDuyet = request.NguoiDuyet;
             dangKiTangCa.NguoiCapNhatID = userId;
             dangKiTangCa.NgayCapNhatCuoi = DateTime.UtcNow;
 

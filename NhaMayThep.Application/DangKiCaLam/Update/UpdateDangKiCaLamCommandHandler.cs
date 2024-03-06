@@ -1,13 +1,11 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.DangKiTangCa;
 using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.Update
@@ -18,7 +16,6 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
         private readonly IDangKiCaLamRepository _repository;
         private readonly ICurrentUserService _currentUserService;
         private readonly INhanVienRepository _nhanVienRepository;
-
 
         public UpdateDangKiCaLamCommandHandler(IMapper mapper, IDangKiCaLamRepository repository, ICurrentUserService currentUserService, INhanVienRepository nhanVienRepository)
         {
@@ -36,33 +33,31 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
                 throw new UnauthorizedAccessException("User ID not found.");
             }
 
-
-            var nhanVienExists = await _nhanVienRepository.AnyAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
-            if (!nhanVienExists)
+            var dangKiCaLam = await _repository.FindAsync(x => x.MaCaLamViec == request.MaCaLamViec, cancellationToken);
+            if (dangKiCaLam == null)
             {
-                throw new NotFoundException("MaSoNhanVien does not exist or has been deleted.");
+                throw new NotFoundException("DangKiCaLam does not exist.");
             }
 
+            // Update properties directly
+            dangKiCaLam.MaSoNhanVien = request.MaSoNhanVien;
+            dangKiCaLam.NgayDangKi = request.NgayDangKi;
+            dangKiCaLam.CaDangKi = request.CaDangKi;
+            dangKiCaLam.ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau;
+            dangKiCaLam.ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc;
+            dangKiCaLam.ThoiGianChamCongBatDau = request.ThoiGianChamCongBatDau;
+            dangKiCaLam.ThoiGianChamCongKetThuc = request.ThoiGianChamCongKetThuc;
+            dangKiCaLam.HeSoNgayCong = request.HeSoNgayCong;
+            dangKiCaLam.MaSoNguoiQuanLy = request.MaSoNguoiQuanLy;
+            dangKiCaLam.TrangThai = request.TrangThai;
+            dangKiCaLam.GhiChu = request.GhiChu;
+            dangKiCaLam.NguoiCapNhatID = userId; 
+            dangKiCaLam.NgayCapNhatCuoi = DateTime.UtcNow;
 
-            var nguoiDuyetExists = await _nhanVienRepository.AnyAsync(x => x.ID == request.MaSoNguoiQuanLy, cancellationToken);
-            if (!nguoiDuyetExists)
-            {
-                throw new NotFoundException("NguoiDuyet does not exist or has been deleted.");
-            }
-            var dangKiTangCa = await _repository.FindAsync(x => x.MaCaLamViec == request.MaCaLamViec, cancellationToken);
-            if (dangKiTangCa == null)
-            {
-                throw new NotFoundException("MaCaLamViec does not exist or has been deleted.");
-            }
-
-            _mapper.Map(request, dangKiTangCa);
-            dangKiTangCa.NguoiCapNhatID = userId;
-            dangKiTangCa.NgayCapNhatCuoi = DateTime.UtcNow;
-
-            _repository.Update(dangKiTangCa);
+            _repository.Update(dangKiCaLam);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<DangKiCaLamDto>(dangKiTangCa);
+            return _mapper.Map<DangKiCaLamDto>(dangKiCaLam);
         }
     }
 }
