@@ -573,8 +573,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "DangKiCaLam",
                 columns: table => new
                 {
-                    MaCaLamViec = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     MaSoNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NgayDangKi = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CaDangKi = table.Column<int>(type: "int", nullable: false),
@@ -582,11 +581,10 @@ namespace NhaMayThep.Infrastructure.Migrations
                     ThoiGianCaLamKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     ThoiGianChamCongBatDau = table.Column<DateTime>(type: "datetime2", nullable: true),
                     ThoiGianChamCongKetThuc = table.Column<DateTime>(type: "datetime2", nullable: true),
-                    HeSoNgayCong = table.Column<int>(type: "int", nullable: false),
+                    HeSoNgayCong = table.Column<double>(type: "float", nullable: false),
                     MaSoNguoiQuanLy = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     TrangThai = table.Column<int>(type: "int", nullable: false),
                     GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    ID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
@@ -596,7 +594,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_DangKiCaLam", x => x.MaCaLamViec);
+                    table.PrimaryKey("PK_DangKiCaLam", x => x.ID);
                     table.ForeignKey(
                         name: "FK_DangKiCaLam_MaDangKiCaLam_CaDangKi",
                         column: x => x.CaDangKi,

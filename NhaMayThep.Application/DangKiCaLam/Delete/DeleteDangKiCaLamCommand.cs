@@ -10,11 +10,11 @@ namespace NhaMayThep.Application.DangKiCaLam.Delete
 {
     public class DeleteDangKiCaLamCommand : IRequest<DangKiCaLamDto>,ICommand
     {
-        public int MaCaLamViec { get; set; }
+        public string Id { get; set; }
 
-        public DeleteDangKiCaLamCommand(int maCaLamViec)
+        public DeleteDangKiCaLamCommand(string id)
         {
-            MaCaLamViec = maCaLamViec;
+            Id = id;
         }
     }
 }

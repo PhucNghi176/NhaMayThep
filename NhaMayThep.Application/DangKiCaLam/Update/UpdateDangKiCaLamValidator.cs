@@ -6,8 +6,8 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
     {
         public UpdateDangKiCaLamValidator()
         {
-            RuleFor(x => x.MaCaLamViec)
-                .GreaterThan(0).WithMessage("MaCaLamViec must be greater than 0.");
+            RuleFor(x => x.Id)
+                .NotEmpty().WithMessage("ID không để trống.");
 
             RuleFor(x => x.NgayDangKi)
                  .NotEmpty().WithMessage("NgayDangKi is required.")

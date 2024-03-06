@@ -12,7 +12,7 @@ using NhaMayThep.Infrastructure.Persistence;
 namespace NhaMayThep.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240306094111_v1")]
+    [Migration("20240306182457_v1")]
     partial class v1
     {
         /// <inheritdoc />
@@ -442,11 +442,8 @@ namespace NhaMayThep.Infrastructure.Migrations
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.DangKiCaLamEntity", b =>
                 {
-                    b.Property<int>("MaCaLamViec")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaCaLamViec"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<int>("CaDangKi")
                         .HasColumnType("int")
@@ -457,12 +454,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasColumnType("nvarchar(max)")
                         .HasColumnName("GhiChu");
 
-                    b.Property<int>("HeSoNgayCong")
-                        .HasColumnType("int")
+                    b.Property<double>("HeSoNgayCong")
+                        .HasColumnType("float")
                         .HasColumnName("HeSoNgayCong");
-
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MaSoNguoiQuanLy")
                         .IsRequired()
@@ -516,8 +510,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasColumnType("int")
                         .HasColumnName("TrangThai");
 
-                    b.HasKey("MaCaLamViec")
-                        .HasName("PK_DangKiCaLam");
+                    b.HasKey("ID");
 
                     b.HasIndex("CaDangKi");
 

@@ -12,7 +12,7 @@ namespace NhaMayThep.Application.DangKiCaLam.Delete
     {
         public DeleteDangKiCaLamCommandValidator()
         {
-            RuleFor(x => x.MaCaLamViec)
+            RuleFor(x => x.Id)
               .NotEmpty()
               .WithMessage("Id không được để trống ");
         }

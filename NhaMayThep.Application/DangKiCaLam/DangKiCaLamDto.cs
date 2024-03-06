@@ -12,7 +12,6 @@ namespace NhaMayThep.Application.DangKiCaLam
     public class DangKiCaLamDto : IMapFrom<DangKiCaLamEntity>
     {
 
-        public int MaCaLamViec { get; set; }
         public string MaSoNhanVien { get; set; }
         public DateTime NgayDangKi { get; set; }
         public int CaDangKi { get; set; }

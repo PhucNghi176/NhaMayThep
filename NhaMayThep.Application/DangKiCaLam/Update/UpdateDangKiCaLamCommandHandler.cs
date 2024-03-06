@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 using System;
@@ -33,25 +32,23 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
                 throw new UnauthorizedAccessException("User ID not found.");
             }
 
-            var dangKiCaLam = await _repository.FindAsync(x => x.MaCaLamViec == request.MaCaLamViec, cancellationToken);
+            var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null)
             {
                 throw new NotFoundException("DangKiCaLam does not exist.");
             }
 
-            // Update properties directly
+            // Update properties directly, except for ThoiGianChamCongBatDau, ThoiGianChamCongKetThuc, and HeSoNgayCong
             dangKiCaLam.MaSoNhanVien = request.MaSoNhanVien;
             dangKiCaLam.NgayDangKi = request.NgayDangKi;
             dangKiCaLam.CaDangKi = request.CaDangKi;
             dangKiCaLam.ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau;
             dangKiCaLam.ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc;
-            dangKiCaLam.ThoiGianChamCongBatDau = request.ThoiGianChamCongBatDau;
-            dangKiCaLam.ThoiGianChamCongKetThuc = request.ThoiGianChamCongKetThuc;
-            dangKiCaLam.HeSoNgayCong = request.HeSoNgayCong;
+            
             dangKiCaLam.MaSoNguoiQuanLy = request.MaSoNguoiQuanLy;
             dangKiCaLam.TrangThai = request.TrangThai;
             dangKiCaLam.GhiChu = request.GhiChu;
-            dangKiCaLam.NguoiCapNhatID = userId; 
+            dangKiCaLam.NguoiCapNhatID = userId;
             dangKiCaLam.NgayCapNhatCuoi = DateTime.UtcNow;
 
             _repository.Update(dangKiCaLam);

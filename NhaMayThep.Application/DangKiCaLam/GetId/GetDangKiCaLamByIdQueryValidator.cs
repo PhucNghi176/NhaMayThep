@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.DangKiCaLam.GetId
 
         private void ConfigureValidationRules()
         {
-            RuleFor(query => query.MaCaLamViec).NotEmpty().WithMessage("MaCaLamViec khong de trong");
+            RuleFor(query => query.Id).NotEmpty().WithMessage("MaCaLamViec khong de trong");
         }
     }
 }

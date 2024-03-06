@@ -41,6 +41,8 @@ namespace NhaMayThep.Application.DangKiCaLam.Create
                 throw new NotFoundException("Nguoi Quan Ly không tồn tại hoặc đã bị xóa.");
             }
 
+            // HeSoNgayCong and ThoiGianChamCongBatDau/KetThuc handling moved to Check-in/Check-out
+
             var dangKiCaLam = new DangKiCaLamEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,
@@ -48,9 +50,11 @@ namespace NhaMayThep.Application.DangKiCaLam.Create
                 CaDangKi = request.CaDangKi,
                 ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau,
                 ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc,
-                ThoiGianChamCongBatDau = request.ThoiGianChamCongBatDau,
-                ThoiGianChamCongKetThuc = request.ThoiGianChamCongKetThuc,
-                HeSoNgayCong = request.HeSoNgayCong,
+                // Initial values for check-in and check-out times
+                ThoiGianChamCongBatDau = null,
+                ThoiGianChamCongKetThuc = null,
+                
+                HeSoNgayCong = 0, 
                 MaSoNguoiQuanLy = request.MaSoNguoiQuanLy,
                 TrangThai = request.TrangThai,
                 GhiChu = request.GhiChu,

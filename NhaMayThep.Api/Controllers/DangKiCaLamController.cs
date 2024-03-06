@@ -11,6 +11,8 @@ using NhaMayThep.Application.DangKiCaLam.Queries.GetDangKiCaLamById;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.DangKiCaLam.GetAll;
 using NhaMayThep.Application.DangKiCaLam;
+using NhaMayThep.Application.DangKiCaLam.CheckIn;
+using NhaMayThep.Application.DangKiCaLam.CheckOut;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -59,9 +61,9 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Delete(int maCaLamViec, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeleteDangKiCaLamCommand(maCaLamViec), cancellationToken);
+            await _mediator.Send(new DeleteDangKiCaLamCommand(id), cancellationToken);
             return Ok(new JsonResponse<string>("Đăng kí ca làm xóa thành công."));
         }
 
@@ -84,11 +86,36 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<DangKiCaLamDto>>> GetById(int maCaLamViec, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<DangKiCaLamDto>>> GetById(string id, CancellationToken cancellationToken = default)
         {
-            var query = new GetDangKiCaLamByIdQuery (maCaLamViec);
+            var query = new GetDangKiCaLamByIdQuery (id);
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<DangKiCaLamDto>(result));
+        }
+
+        [HttpPost("CheckIn/{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CheckIn(string id, CancellationToken cancellationToken)
+        {
+            var command = new CheckInCommand { Id = id };
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Check-in successful."));
+        }
+
+
+        [HttpPost("CheckOut/{Id}")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status404NotFound)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<IActionResult> CheckOut(string id, CancellationToken cancellationToken)
+        {
+            var command = new CheckOutCommand { Id = id };
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>("Check-out successful."));
         }
     }
 }

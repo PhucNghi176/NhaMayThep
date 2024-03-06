@@ -11,9 +11,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
 {
     public class DangKiCaLamEntity : Entity
     {
-        [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Key]
-        public int MaCaLamViec { get; set; }
+       
 
         [Required]
         [ForeignKey(nameof(NhanVien))]
@@ -34,7 +32,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
         public DateTime? ThoiGianChamCongKetThuc { get; set; }
 
         [Required]
-        public int HeSoNgayCong { get; set; }
+        public double HeSoNgayCong { get; set; }
 
         [ForeignKey(nameof(MaSoNguoiQuanLy))]
         public string MaSoNguoiQuanLy { get; set; }

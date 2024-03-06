@@ -20,10 +20,10 @@ namespace NhaMayThep.Application.DangKiCaLam.Queries.GetDangKiCaLamById
 
         public async Task<DangKiCaLamDto> Handle(GetDangKiCaLamByIdQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _repository.FindAsync(x => x.MaCaLamViec == request.MaCaLamViec, cancellationToken);
+            var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
-                throw new NotFoundException($"DangKiCaLam with MaCaLamViec: {request.MaCaLamViec} not found.");
+                throw new NotFoundException($"DangKiCaLam with MaCaLamViec: {request.Id} not found.");
             }
 
             return _mapper.Map<DangKiCaLamDto>(entity);

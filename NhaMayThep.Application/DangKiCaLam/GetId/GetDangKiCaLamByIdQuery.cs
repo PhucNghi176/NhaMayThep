@@ -4,11 +4,11 @@ namespace NhaMayThep.Application.DangKiCaLam.Queries.GetDangKiCaLamById
 {
     public class GetDangKiCaLamByIdQuery : IRequest<DangKiCaLamDto>
     {
-        public int MaCaLamViec { get; set; }
+        public string Id { get; set; }
 
-        public GetDangKiCaLamByIdQuery(int maCaLamViec)
+        public GetDangKiCaLamByIdQuery(string id)
         {
-            MaCaLamViec = maCaLamViec;
+            Id = id;
         }
     }
 }

@@ -30,15 +30,15 @@ namespace NhaMayThep.Application.DangKiCaLam.Delete
                 throw new UnauthorizedAccessException("User ID không tồn tại.");
             }
 
-            var entity = await _repository.FindAsync(x => x.MaCaLamViec == request.MaCaLamViec, cancellationToken);
+            var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
-                throw new NotFoundException($"MaCaLamViec with Id {request.MaCaLamViec} không tìm thấy.");
+                throw new NotFoundException($"DangKiCaLam with Id {request.Id} không tìm thấy.");
             }
 
             if (entity.NgayXoa != null)
             {
-                throw new NotFoundException("MaCaLamViec này đã bị xóa.");
+                throw new NotFoundException("DangKiCaLam này đã bị xóa.");
             }
             entity.NguoiXoaID = userId;
             entity.NgayXoa = DateTime.UtcNow; 

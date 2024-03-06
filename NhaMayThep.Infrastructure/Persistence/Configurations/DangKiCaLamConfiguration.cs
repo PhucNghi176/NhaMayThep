@@ -8,8 +8,7 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
     {
         public void Configure(EntityTypeBuilder<DangKiCaLamEntity> builder)
         {
-            builder.HasKey(x => x.MaCaLamViec)
-                .HasName("PK_DangKiCaLam");
+      
 
             builder.Property(x => x.MaSoNhanVien)
                 .IsRequired()
