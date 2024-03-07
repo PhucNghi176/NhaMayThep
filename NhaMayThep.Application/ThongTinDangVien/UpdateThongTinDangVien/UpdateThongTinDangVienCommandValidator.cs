@@ -13,8 +13,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         public UpdateThongTinDangVienCommandValidator()
         {
             RuleFor(x => x.NhanVienID)
-               .NotEmpty().WithMessage("ID không được để trống.")
-               .MaximumLength(450).WithMessage("ID không vượt quá 450 kí tự.");
+               .NotEmpty().WithMessage("ID không được để trống.");
+
+            RuleFor(x => x.DonViCongTacID)
+                .GreaterThanOrEqualTo(1).WithMessage("DonViCongTacID phải lớn hơn hoặc bằng 1.");
 
             RuleFor(x => x.NgayVaoDang)
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("NgayVaoDang không được là ngày trong tương lai.");
