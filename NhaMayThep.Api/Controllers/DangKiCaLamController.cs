@@ -93,7 +93,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<DangKiCaLamDto>(result));
         }
 
-        [HttpPost("CheckIn/{Id}")]
+        [HttpPost("CheckIn/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -106,7 +106,7 @@ namespace NhaMayThep.Api.Controllers
         }
 
 
-        [HttpPost("CheckOut/{Id}")]
+        [HttpPost("CheckOut/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]

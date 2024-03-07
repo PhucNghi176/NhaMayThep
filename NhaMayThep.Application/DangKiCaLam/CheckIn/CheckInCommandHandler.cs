@@ -26,6 +26,12 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckIn
 
         public async Task<DangKiCaLamDto> Handle(CheckInCommand request, CancellationToken cancellationToken)
         {
+            var allRecords = await _repository.FindAllAsync(cancellationToken); // Assuming this method exists to fetch all records
+            var recordExists = allRecords.Any(x => x.ID == request.Id);
+            if (!recordExists)
+            {
+                throw new NotFoundException($"Record not found for Id {request.Id}. Available records: {string.Join(", ", allRecords.Select(x => x.ID))}");
+            }
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null || dangKiCaLam.NgayXoa.HasValue)
             {
