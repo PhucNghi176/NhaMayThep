@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Functions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac
         private readonly IDonViCongTacRepository _donViCongTacRepository;
         private readonly IMapper _mapper;
 
-        public GetAllDonViCongTacQueryHandler(IDonViCongTacRepository donViCongTacRepository, IMapper mapper)
+        public GetAllDonViCongTacQueryHandler(IDonViCongTacRepository donViCongTacRepository, IMapper mapper )
         {
             _donViCongTacRepository = donViCongTacRepository;
             _mapper = mapper;
