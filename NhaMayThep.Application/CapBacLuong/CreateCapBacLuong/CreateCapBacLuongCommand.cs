@@ -12,10 +12,12 @@ namespace NhaMayThep.Application.CapBacLuong.CreateCapBacLuong
     {
         public string TenCapBac { get; set; }
         public float HeSoLuong { get; set; }
-        public CreateCapBacLuongCommand(string tenCapBac, float heSoLuong)
+        public string TrinhDo {  get; set; }
+        public CreateCapBacLuongCommand(string tenCapBac, float heSoLuong, string trinhDo)
         {
             TenCapBac = tenCapBac;
             HeSoLuong = heSoLuong;
+            TrinhDo = trinhDo;
         }
     }
 }

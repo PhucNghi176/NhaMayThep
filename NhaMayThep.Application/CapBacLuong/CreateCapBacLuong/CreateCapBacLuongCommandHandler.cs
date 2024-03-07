@@ -27,7 +27,8 @@ namespace NhaMayThep.Application.CapBacLuong.CreateCapBacLuong
             var capBacLuong = new CapBacLuongEntity()
             {
                 Name = request.TenCapBac,
-                HeSoLuong = request.HeSoLuong
+                HeSoLuong = request.HeSoLuong,
+                TrinhDo = request.TrinhDo
             };
 
             _capBacLuongRepository.Add(capBacLuong);

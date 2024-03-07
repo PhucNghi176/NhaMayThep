@@ -33,6 +33,7 @@ namespace NhaMayThep.Application.CapBacLuong.UpdateCapBacLuong
 
             capBacLuong.Name = request.TenCapBac;
             capBacLuong.HeSoLuong = request.HeSoLuong;
+            capBacLuong.TrinhDo = request.TrinhDo;
             capBacLuong.NguoiCapNhatID = _currentUserService.UserId;
             capBacLuong.NgayCapNhat = DateTime.Now;
             _capBacLuongRepository.Update(capBacLuong);
