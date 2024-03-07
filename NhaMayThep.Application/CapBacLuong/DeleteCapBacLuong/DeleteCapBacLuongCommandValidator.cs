@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.CapBacLuong.DeleteCapBacLuong
 {
-    internal class DeleteCapBacLuongCommandValidator : AbstractValidator<DeleteCapBacLuongCommand>
+    public class DeleteCapBacLuongCommandValidator : AbstractValidator<DeleteCapBacLuongCommand>
     {
         public DeleteCapBacLuongCommandValidator()
         {
