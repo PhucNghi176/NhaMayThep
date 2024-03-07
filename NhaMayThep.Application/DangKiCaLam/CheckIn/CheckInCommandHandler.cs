@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckIn
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null || dangKiCaLam.NgayXoa.HasValue)
             {
-                throw new NotFoundException($"Record not found for Id {request.Id}.");
+                throw new NotFoundException($"Không tìm thấy đăng kí ca làm với Id {request.Id}.");
             }
 
             var now = DateTime.UtcNow; 

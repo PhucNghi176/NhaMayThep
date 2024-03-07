@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckOut
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null || dangKiCaLam.NgayXoa.HasValue)
             {
-                throw new NotFoundException($"Record not found for MaCaLamViec {request.Id}.");
+                throw new NotFoundException($"Không tìm thấy Đăng Kí Ca LÀm  {request.Id}.");
             }
 
             var now = DateTime.UtcNow; // Consider using a specific timezone if needed

@@ -17,7 +17,7 @@ using NhaMayThep.Application.DangKiCaLam.CheckOut;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Route("api/[controller]")]
+    
     public class DangKiCaLamController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -27,7 +27,7 @@ namespace NhaMayThep.Api.Controllers
             _mediator = mediator;
         }
 
-        [HttpGet]
+        [HttpGet("dang-ki-ca-lam")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<DangKiCaLamDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -41,7 +41,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<List<DangKiCaLamDto>>(result));
         }
 
-        [HttpPost]
+        [HttpPost("dang-ki-ca-lam")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -50,11 +50,11 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateDangKiCaLamCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Đăng kí ca làm tạo thành công."));
+          var result =  await _mediator.Send(command, cancellationToken);
+            return new JsonResponse<string>(result);
         }
 
-        [HttpDelete("{maCaLamViec}")]
+        [HttpDelete("dang-ki-ca-lam/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -67,7 +67,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>("Đăng kí ca làm xóa thành công."));
         }
 
-        [HttpPut]
+        [HttpPut("dang-ki-ca-lam")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -78,7 +78,7 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<string>("Đăng kí ca làm cập nhật thành công."));
         }
 
-        [HttpGet("{maCaLamViec}")]
+        [HttpGet("dang-ki-ca-lam/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<DangKiCaLamDto>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
@@ -102,7 +102,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var command = new CheckInCommand { Id = id };
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Check-in successful."));
+            return Ok(new JsonResponse<string>("Check-in thành công ."));
         }
 
 
@@ -115,7 +115,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var command = new CheckOutCommand { Id = id };
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Check-out successful."));
+            return Ok(new JsonResponse<string>("Check-out thành công."));
         }
     }
 }

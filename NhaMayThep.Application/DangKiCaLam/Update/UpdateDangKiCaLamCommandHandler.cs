@@ -29,13 +29,13 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
             {
-                throw new UnauthorizedAccessException("User ID not found.");
+                throw new UnauthorizedAccessException("User ID không thấy.");
             }
 
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null)
             {
-                throw new NotFoundException("DangKiCaLam does not exist.");
+                throw new NotFoundException("DangKiCaLam không tồn tại.");
             }
 
             // Update properties directly, except for ThoiGianChamCongBatDau, ThoiGianChamCongKetThuc, and HeSoNgayCong

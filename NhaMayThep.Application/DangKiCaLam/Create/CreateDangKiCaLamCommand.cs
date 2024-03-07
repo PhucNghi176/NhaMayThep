@@ -4,7 +4,7 @@ using System;
 
 namespace NhaMayThep.Application.DangKiCaLam.Create
 {
-    public class CreateDangKiCaLamCommand : IRequest<DangKiCaLamDto>, ICommand
+    public class CreateDangKiCaLamCommand : IRequest<string>,ICommand
     {
         public string MaSoNhanVien { get; set; }
         public DateTime NgayDangKi { get; set; }
