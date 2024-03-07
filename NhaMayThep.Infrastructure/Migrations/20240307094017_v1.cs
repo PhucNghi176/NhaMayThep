@@ -3,16 +3,43 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 #nullable disable
 
-#pragma warning disable CA1814 // Prefer jagged arrays over multidimensional
-
 namespace NhaMayThep.Infrastructure.Migrations
 {
     /// <inheritdoc />
-    public partial class v : Migration
+    public partial class v1 : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
         {
+            migrationBuilder.CreateTable(
+                name: "CanCuocCongDan",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    CanCuocCongDan = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
+                    NhanVienID = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    HoVaTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    GioiTinh = table.Column<bool>(type: "bit", nullable: false),
+                    QuocTich = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    QueQuan = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DiaChiThuongTru = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NgayCap = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NoiCap = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    DanToc = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
+                    TonGiao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CanCuocCongDan", x => x.ID);
+                });
+
             migrationBuilder.CreateTable(
                 name: "CapBacLuong",
                 columns: table => new
@@ -20,11 +47,39 @@ namespace NhaMayThep.Infrastructure.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     HeSoLuong = table.Column<float>(type: "real", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_CapBacLuong", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChinhSachNhanSu",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MucDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NgayHieuLuc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NoiDung = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    LoaiHinhThuc = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("ChinhSachNhanSuID", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -33,7 +88,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -46,7 +107,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenLoaiCongTac = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenLoaiCongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -59,7 +126,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenLoaiHoaDon = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenLoaiHoaDon = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -72,7 +145,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenHopDong = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -85,12 +164,38 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SoGioNghiPhep = table.Column<int>(type: "int", nullable: false),
-                    TenLoaiNghiPhep = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenLoaiNghiPhep = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("MaLoaiNghiPhep", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "MaDangKiCaLam",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    ThoiGianCaLamBatDau = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    ThoiGianCaLamKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    TenMaDangKi = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("MaDangKi", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -119,7 +224,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenPhongBan = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenPhongBan = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -132,7 +243,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenChucDanh = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenChucDanh = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -145,7 +262,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenChucVu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -188,7 +311,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     SoTienGiamTru = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    TenMaGiamTru = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenMaGiamTru = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -201,8 +330,14 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    SoTienPhuCap = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
-                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    PhanTramPhuCap = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -215,7 +350,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenMaQuaTrinhNhanSu = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenMaQuaTrinhNhanSu = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -228,11 +369,58 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenMaTinhTrangLamViec = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenMaTinhTrangLamViec = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("MaTinhTrangLamViecID", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ThueSuat",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    BacThue = table.Column<int>(type: "int", nullable: false),
+                    ThuNhapTinhThueTrenNam = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    ThuNhapTinhThueTrenThang = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    PhanTramThueSuat = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("MaThueSuat", x => x.ID);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "TrangThaiDangKiCaLamViec",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenTrangThai = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("MaTrangThai", x => x.ID);
                 });
 
             migrationBuilder.CreateTable(
@@ -241,7 +429,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TenTrinhDo = table.Column<string>(type: "nvarchar(max)", nullable: false)
+                    TenTrinhDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
@@ -253,9 +447,8 @@ namespace NhaMayThep.Infrastructure.Migrations
                 columns: table => new
                 {
                     ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    Email = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    PasswordHash = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
-                    PasswordSalt = table.Column<byte[]>(type: "varbinary(max)", nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    PasswordHash = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     HoVaTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChucVuID = table.Column<int>(type: "int", nullable: false),
                     TinhTrangLamViecID = table.Column<int>(type: "int", nullable: false),
@@ -266,10 +459,11 @@ namespace NhaMayThep.Infrastructure.Migrations
                     TenNganHang = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoTaiKhoan = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     SoNguoiPhuThuoc = table.Column<int>(type: "int", nullable: true),
+                    DaCoHopDong = table.Column<bool>(type: "bit", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -291,35 +485,85 @@ namespace NhaMayThep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "CanCuocCongDan",
+                name: "BaoHiemNhanVien",
                 columns: table => new
                 {
-                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    CanCuocCongDan = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
-                    NhanVienID = table.Column<string>(type: "nvarchar(450)", nullable: false),
-                    HoVaTen = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NgaySinh = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    GioiTinh = table.Column<bool>(type: "bit", nullable: false),
-                    QuocTich = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    QueQuan = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DiaChiThuongTru = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    NgayCap = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NoiCap = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                    DanToc = table.Column<string>(type: "nvarchar(10)", maxLength: 10, nullable: false),
-                    TonGiao = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    MaSoNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    BaoHiem = table.Column<int>(type: "int", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_CanCuocCongDan", x => x.ID);
+                    table.PrimaryKey("MaBHNV", x => x.ID);
                     table.ForeignKey(
-                        name: "FK_CanCuocCongDan_NhanVien_NhanVienID",
+                        name: "FK_BaoHiemNhanVien_NhanVien_MaSoNhanVien",
+                        column: x => x.MaSoNhanVien,
+                        principalTable: "NhanVien",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "CanCuocCongDanEntityNhanVienEntity",
+                columns: table => new
+                {
+                    NhanVienID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    NhanVienID1 = table.Column<string>(type: "nvarchar(450)", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_CanCuocCongDanEntityNhanVienEntity", x => new { x.NhanVienID, x.NhanVienID1 });
+                    table.ForeignKey(
+                        name: "FK_CanCuocCongDanEntityNhanVienEntity_CanCuocCongDan_NhanVienID",
                         column: x => x.NhanVienID,
+                        principalTable: "CanCuocCongDan",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_CanCuocCongDanEntityNhanVienEntity_NhanVien_NhanVienID1",
+                        column: x => x.NhanVienID1,
+                        principalTable: "NhanVien",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ChiTietNgayNghiPhep",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSoNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoaiNghiPhepID = table.Column<int>(type: "int", nullable: false),
+                    TongSoGio = table.Column<double>(type: "float", nullable: false),
+                    SoGioDaNghiPhep = table.Column<double>(type: "float", nullable: false),
+                    SoGioConLai = table.Column<double>(type: "float", nullable: false),
+                    NamHieuLuc = table.Column<int>(type: "int", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ChiTietNgayNghiPhep", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ChiTietNgayNghiPhep_LoaiNghiPhep_LoaiNghiPhepID",
+                        column: x => x.LoaiNghiPhepID,
+                        principalTable: "LoaiNghiPhep",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChiTietNgayNghiPhep_NhanVien_MaSoNhanVien",
+                        column: x => x.MaSoNhanVien,
                         principalTable: "NhanVien",
                         principalColumn: "ID",
                         onDelete: ReferentialAction.Cascade);
@@ -333,8 +577,8 @@ namespace NhaMayThep.Infrastructure.Migrations
                     NhanVienID = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     LoaiHopDongID = table.Column<int>(type: "int", nullable: false),
                     NgayKy = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    ThoiHanHopDong = table.Column<int>(type: "int", nullable: false),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    ThoiHanHopDong = table.Column<int>(type: "int", nullable: true),
                     DiaDiemLamViec = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     BoPhanLamViec = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     ChucVuID = table.Column<int>(type: "int", nullable: false),
@@ -344,9 +588,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     PhuCapID = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -397,9 +641,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     NoiCongTac = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -432,9 +676,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     LyDo = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiDuyet = table.Column<string>(type: "nvarchar(450)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -531,9 +775,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     ChucDanhID = table.Column<int>(type: "int", nullable: false),
                     GhiChu = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -581,9 +825,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     ThuKiCongDoan = table.Column<bool>(type: "bit", nullable: false),
                     NgayGiaNhap = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -607,9 +851,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     NgayVaoDang = table.Column<DateTime>(type: "datetime2", nullable: false),
                     CapDangVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -636,9 +880,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     NamTotNghiep = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TrinhDoVanHoa = table.Column<int>(type: "int", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -671,9 +915,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     CanCuocCongDan = table.Column<string>(type: "nvarchar(12)", maxLength: 12, nullable: false),
                     NgayXacNhanPhuThuoc = table.Column<DateTime>(type: "datetime2", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -695,6 +939,73 @@ namespace NhaMayThep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "BaoHiem",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    TenLoaiBaoHiem = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    PhanTramKhauTru = table.Column<double>(type: "float", nullable: false),
+                    BaoHiem = table.Column<int>(type: "int", nullable: true),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("MaBaoHiem", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_BaoHiem_BaoHiemNhanVien_BaoHiem",
+                        column: x => x.BaoHiem,
+                        principalTable: "BaoHiemNhanVien",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
+                name: "ThongTinLuongNhanVien",
+                columns: table => new
+                {
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSoNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSoHopDong = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    Loai = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    LuongCu = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    LuongMoi = table.Column<decimal>(type: "decimal(18,4)", nullable: false),
+                    NgayHieuLuc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NhanVienEntityID = table.Column<string>(type: "nvarchar(450)", nullable: true),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_ThongTinLuongNhanVien", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ThongTinLuongNhanVien_HopDong_MaSoHopDong",
+                        column: x => x.MaSoHopDong,
+                        principalTable: "HopDong",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ThongTinLuongNhanVien_NhanVien_MaSoNhanVien",
+                        column: x => x.MaSoNhanVien,
+                        principalTable: "NhanVien",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
+                        name: "FK_ThongTinLuongNhanVien_NhanVien_NhanVienEntityID",
+                        column: x => x.NhanVienEntityID,
+                        principalTable: "NhanVien",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "HoaDonCongTacNhanVien",
                 columns: table => new
                 {
@@ -703,9 +1014,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     LoaiHoaDonID = table.Column<int>(type: "int", nullable: false),
                     DuongDanFile = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -727,6 +1038,32 @@ namespace NhaMayThep.Infrastructure.Migrations
                 });
 
             migrationBuilder.CreateTable(
+                name: "PhuCap",
+                columns: table => new
+                {
+                    ID = table.Column<int>(type: "int", nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    KhoanPhuCap = table.Column<double>(type: "float", nullable: false),
+                    PhuCap = table.Column<int>(type: "int", nullable: true),
+                    TenPhuCap = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhat = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("MaPhuCap", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_PhuCap_PhuCapNhanVien_PhuCap",
+                        column: x => x.PhuCap,
+                        principalTable: "PhuCapNhanVien",
+                        principalColumn: "ID");
+                });
+
+            migrationBuilder.CreateTable(
                 name: "ChiTietDangVien",
                 columns: table => new
                 {
@@ -736,9 +1073,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                     ChucVuDang = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TrinhDoChinhTri = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
                     NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
                 },
@@ -759,130 +1096,64 @@ namespace NhaMayThep.Infrastructure.Migrations
                         onDelete: ReferentialAction.Cascade);
                 });
 
-            migrationBuilder.InsertData(
-                table: "LoaiCongTac",
-                columns: new[] { "ID", "TenLoaiCongTac" },
-                values: new object[,]
+            migrationBuilder.CreateTable(
+                name: "ChiTietBaoHiem",
+                columns: table => new
                 {
-                    { 1, "CongTacNoiBo" },
-                    { 2, "CongTacNuocNgoai" },
-                    { 3, "CongTacKyKetHopDong" },
-                    { 4, "CongTacKhaoSatDuAn" },
-                    { 5, "CongTacHoiThao" },
-                    { 6, "CongTacDaoTao" },
-                    { 7, "CongTacKiemTra" },
-                    { 8, "CongTacKhac" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "LoaiHoaDon",
-                columns: new[] { "ID", "TenLoaiHoaDon" },
-                values: new object[,]
+                    ID = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    MaSoNhanVien = table.Column<string>(type: "nvarchar(450)", nullable: false),
+                    LoaiBaoHiem = table.Column<int>(type: "int", nullable: false),
+                    NgayHieuLuc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NgayKetThuc = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    NoiCap = table.Column<string>(type: "nvarchar(max)", nullable: false),
+                    NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiCapNhatID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayCapNhatCuoi = table.Column<DateTime>(type: "datetime2", nullable: true),
+                    NguoiXoaID = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    NgayXoa = table.Column<DateTime>(type: "datetime2", nullable: true)
+                },
+                constraints: table =>
                 {
-                    { 1, "ChiPhiDiLai" },
-                    { 2, "ChiPhiChoO" },
-                    { 3, "ChiPhiQuaBieuTang" },
-                    { 4, "HoaDonKhac" }
+                    table.PrimaryKey("MaSo", x => x.ID);
+                    table.ForeignKey(
+                        name: "FK_ChiTietBaoHiem_BaoHiem_LoaiBaoHiem",
+                        column: x => x.LoaiBaoHiem,
+                        principalTable: "BaoHiem",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_ChiTietBaoHiem_NhanVien_MaSoNhanVien",
+                        column: x => x.MaSoNhanVien,
+                        principalTable: "NhanVien",
+                        principalColumn: "ID",
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.InsertData(
-                table: "LoaiHopDong",
-                columns: new[] { "ID", "TenHopDong" },
-                values: new object[,]
-                {
-                    { 1, "HopDongThuViec" },
-                    { 2, "HopDongCoThoiHan" },
-                    { 3, "HopDongKhongThoiHan" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "LoaiNghiPhep",
-                columns: new[] { "ID", "TenLoaiNghiPhep", "SoGioNghiPhep" },
-                values: new object[,]
-                {
-                    { 1, "NghiPhepNam", 8 },
-                    { 2, "NghiOm", 8 },
-                    { 3, "NghiKhongLuong", 8 },
-                    { 4, "NghiThaiSan", 8 },
-                    { 5, "NghiKhac", 8 }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ThongTinChucDanh",
-                columns: new[] { "ID", "TenChucDanh" },
-                values: new object[,]
-                {
-                    { 1, "GiamDoc" },
-                    { 2, "PhoGiamDoc" },
-                    { 3, "TruongPhong" },
-                    { 4, "PhoPhong" },
-                    { 5, "NhanVien" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ThongTinChucVu",
-                columns: new[] { "ID", "TenChucVu" },
-                values: new object[,]
-                {
-                    { 1, "Admin" },
-                    { 2, "Truong Phong Nhan Su" },
-                    { 3, "Quan Li" },
-                    { 4, "Nhan Vien" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ThongTinGiamTru",
-                columns: new[] { "ID", "TenMaGiamTru", "SoTienGiamTru" },
-                values: new object[,]
-                {
-                    { 1, "GiamTruBanThan", 11000000m },
-                    { 2, "GiamTruNguoiPhuThuoc", 4400000m }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ThongTinQuaTrinhNhanSu",
-                columns: new[] { "ID", "TenMaQuaTrinhNhanSu" },
-                values: new object[,]
-                {
-                    { 1, "ThangTien" },
-                    { 2, "BoNhiem" },
-                    { 3, "BaiNhiem" },
-                    { 4, "DieuDong" },
-                    { 5, "ThoiViec" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "ThongTinTinhTrangLamViec",
-                columns: new[] { "ID", "TenMaTinhTrangLamViec" },
-                values: new object[,]
-                {
-                    { 1, "DangLamViec" },
-                    { 2, "DaNghiViec" },
-                    { 3, "DangThuViec" },
-                    { 4, "DangNghiPhep" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "TrinhDoHocVan",
-                columns: new[] { "ID", "TenTrinhDo" },
-                values: new object[,]
-                {
-                    { 1, "Tien Si" },
-                    { 2, "Thac Si" },
-                    { 3, "Dai Hoc" },
-                    { 4, "Cao Dang" },
-                    { 5, "Trung Cap" }
-                });
-
-            migrationBuilder.InsertData(
-                table: "NhanVien",
-                columns: new[] { "ID", "ChucVuID", "DiaChiLienLac", "Email", "HoVaTen", "MaSoThue", "NgayCapNhatCuoi", "NgayTao", "NgayVaoCongTy", "NgayXoa", "NguoiCapNhatID", "NguoiTaoID", "NguoiXoaID", "PasswordHash", "PasswordSalt", "SoDienThoaiLienLac", "SoNguoiPhuThuoc", "SoTaiKhoan", "TenNganHang", "TinhTrangLamViecID" },
-                values: new object[] { "845f021510784efcb3e39b314c178e6f", 1, "TP.HCM", "string", "Test User 1", "1234567", new DateTime(2024, 1, 15, 11, 35, 18, 148, DateTimeKind.Local).AddTicks(9056), new DateTime(2024, 1, 15, 11, 35, 18, 148, DateTimeKind.Local).AddTicks(9056), new DateTime(2024, 1, 15, 11, 35, 18, 148, DateTimeKind.Local).AddTicks(9089), null, null, null, null, new byte[] { 138, 49, 40, 12, 212, 75, 45, 184, 16, 222, 120, 126, 52, 73, 4, 108, 204, 124, 244, 138, 237, 247, 2, 84, 46, 120, 89, 223, 104, 34, 200, 90, 98, 36, 141, 64, 149, 116, 152, 250, 26, 204, 3, 55, 152, 122, 169, 113, 223, 7, 183, 74, 241, 60, 183, 91, 13, 254, 192, 239, 211, 2, 137, 68 }, new byte[] { 111, 221, 89, 160, 45, 109, 14, 134, 114, 64, 165, 39, 235, 118, 87, 122, 144, 191, 196, 40, 68, 102, 198, 83, 188, 198, 10, 102, 230, 222, 200, 235, 60, 32, 192, 73, 141, 173, 34, 246, 87, 32, 117, 106, 110, 167, 10, 164, 84, 57, 180, 153, 191, 30, 90, 86, 215, 177, 117, 74, 88, 182, 188, 245, 95, 185, 66, 152, 228, 11, 66, 163, 85, 111, 141, 10, 116, 228, 57, 213, 170, 107, 235, 219, 37, 154, 78, 206, 76, 89, 23, 243, 169, 161, 196, 127, 240, 66, 161, 62, 23, 16, 40, 26, 129, 197, 199, 87, 104, 81, 82, 27, 154, 57, 39, 169, 75, 231, 17, 89, 22, 137, 234, 191, 164, 51, 148, 238 }, "0912123456", null, "03450126803", "TPBank", 1 });
 
             migrationBuilder.CreateIndex(
-                name: "IX_CanCuocCongDan_NhanVienID",
-                table: "CanCuocCongDan",
-                column: "NhanVienID");
+                name: "IX_BaoHiem_BaoHiem",
+                table: "BaoHiem",
+                column: "BaoHiem");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_BaoHiemNhanVien_MaSoNhanVien",
+                table: "BaoHiemNhanVien",
+                column: "MaSoNhanVien");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_CanCuocCongDanEntityNhanVienEntity_NhanVienID1",
+                table: "CanCuocCongDanEntityNhanVienEntity",
+                column: "NhanVienID1");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietBaoHiem_LoaiBaoHiem",
+                table: "ChiTietBaoHiem",
+                column: "LoaiBaoHiem");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietBaoHiem_MaSoNhanVien",
+                table: "ChiTietBaoHiem",
+                column: "MaSoNhanVien");
 
             migrationBuilder.CreateIndex(
                 name: "IX_ChiTietDangVien_DangVienID",
@@ -893,6 +1164,16 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "IX_ChiTietDangVien_DonViCongTacID",
                 table: "ChiTietDangVien",
                 column: "DonViCongTacID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietNgayNghiPhep_LoaiNghiPhepID",
+                table: "ChiTietNgayNghiPhep",
+                column: "LoaiNghiPhepID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ChiTietNgayNghiPhep_MaSoNhanVien",
+                table: "ChiTietNgayNghiPhep",
+                column: "MaSoNhanVien");
 
             migrationBuilder.CreateIndex(
                 name: "IX_HoaDonCongTacNhanVien_LichSuCongTacID",
@@ -952,8 +1233,7 @@ namespace NhaMayThep.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_LichSuNghiPhepNhanVien_NguoiDuyet",
                 table: "LichSuNghiPhepNhanVien",
-                column: "NguoiDuyet",
-                unique: true);
+                column: "NguoiDuyet");
 
             migrationBuilder.CreateIndex(
                 name: "IX_LuongThoiGian_MaSoNhanVien",
@@ -966,9 +1246,25 @@ namespace NhaMayThep.Infrastructure.Migrations
                 column: "ChucVuID");
 
             migrationBuilder.CreateIndex(
+                name: "IX_NhanVien_Email",
+                table: "NhanVien",
+                column: "Email",
+                unique: true);
+
+            migrationBuilder.CreateIndex(
                 name: "IX_NhanVien_TinhTrangLamViecID",
                 table: "NhanVien",
                 column: "TinhTrangLamViecID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhuCap_PhuCap",
+                table: "PhuCap",
+                column: "PhuCap");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_PhuCapNhanVien_MaSoNhanVien",
+                table: "PhuCapNhanVien",
+                column: "MaSoNhanVien");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuaTrinhNhanSu_ChucDanhID",
@@ -978,8 +1274,7 @@ namespace NhaMayThep.Infrastructure.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_QuaTrinhNhanSu_ChucVuID",
                 table: "QuaTrinhNhanSu",
-                column: "ChucVuID",
-                unique: true);
+                column: "ChucVuID");
 
             migrationBuilder.CreateIndex(
                 name: "IX_QuaTrinhNhanSu_LoaiQuaTrinhID",
@@ -1025,6 +1320,21 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "IX_ThongTinGiamTruGiaCanh_NhanVienID",
                 table: "ThongTinGiamTruGiaCanh",
                 column: "NhanVienID");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThongTinLuongNhanVien_MaSoHopDong",
+                table: "ThongTinLuongNhanVien",
+                column: "MaSoHopDong");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThongTinLuongNhanVien_MaSoNhanVien",
+                table: "ThongTinLuongNhanVien",
+                column: "MaSoNhanVien");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_ThongTinLuongNhanVien_NhanVienEntityID",
+                table: "ThongTinLuongNhanVien",
+                column: "NhanVienEntityID");
         }
 
         /// <inheritdoc />
@@ -1043,17 +1353,19 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "ChiTietDangVien");
 
             migrationBuilder.DropTable(
-                name: "HoaDonCongTacNhanVien");
+                name: "ChiTietNgayNghiPhep");
 
             migrationBuilder.DropTable(
-                name: "HopDong");
+                name: "HoaDonCongTacNhanVien");
 
             migrationBuilder.DropTable(
                 name: "LichSuNghiPhepNhanVien");
 
             migrationBuilder.DropTable(
-
                 name: "LuongThoiGian");
+
+            migrationBuilder.DropTable(
+                name: "MaDangKiCaLam");
 
             migrationBuilder.DropTable(
                 name: "MucSanPham");
@@ -1068,17 +1380,25 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "ThongTinCongDoan");
 
             migrationBuilder.DropTable(
+                name: "ThongTinCongTy");
+
+            migrationBuilder.DropTable(
                 name: "ThongTinDaoTao");
 
             migrationBuilder.DropTable(
                 name: "ThongTinGiamTruGiaCanh");
 
             migrationBuilder.DropTable(
+                name: "ThongTinLuongNhanVien");
+
+            migrationBuilder.DropTable(
                 name: "ThongTinPhuCap");
 
             migrationBuilder.DropTable(
-
                 name: "ThueSuat");
+
+            migrationBuilder.DropTable(
+                name: "TrangThaiDangKiCaLamViec");
 
             migrationBuilder.DropTable(
                 name: "CanCuocCongDan");
@@ -1099,19 +1419,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "LoaiHoaDon");
 
             migrationBuilder.DropTable(
-                name: "CapBacLuong");
-
-            migrationBuilder.DropTable(
-                name: "LoaiHopDong");
-
-            migrationBuilder.DropTable(
                 name: "LoaiNghiPhep");
 
             migrationBuilder.DropTable(
-                name: "PhongBan");
+                name: "PhuCapNhanVien");
 
             migrationBuilder.DropTable(
-                name: "ThongTinChucDanh");
+                name: "PhongBan");
 
             migrationBuilder.DropTable(
                 name: "ThongTinQuaTrinhNhanSu");
@@ -1123,7 +1437,22 @@ namespace NhaMayThep.Infrastructure.Migrations
                 name: "ThongTinGiamTru");
 
             migrationBuilder.DropTable(
+                name: "HopDong");
+
+            migrationBuilder.DropTable(
+                name: "BaoHiemNhanVien");
+
+            migrationBuilder.DropTable(
                 name: "LoaiCongTac");
+
+            migrationBuilder.DropTable(
+                name: "CapBacLuong");
+
+            migrationBuilder.DropTable(
+                name: "LoaiHopDong");
+
+            migrationBuilder.DropTable(
+                name: "ThongTinChucDanh");
 
             migrationBuilder.DropTable(
                 name: "NhanVien");

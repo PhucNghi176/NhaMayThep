@@ -12,8 +12,8 @@ using NhaMayThep.Infrastructure.Persistence;
 namespace NhaMayThep.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240123074544_v1")]
-    partial class v1
+    [Migration("20240307070249_DeleteChiTietDangVien")]
+    partial class DeleteChiTietDangVien
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -207,53 +207,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.HasIndex("MaSoNhanVien");
 
                     b.ToTable("ChiTietBaoHiem");
-                });
-
-            modelBuilder.Entity("NhaMapThep.Domain.Entities.ChiTietDangVienEntity", b =>
-                {
-                    b.Property<string>("ID")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("ChucVuDang")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("DangVienID")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<int>("DonViCongTacID")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime?>("NgayCapNhatCuoi")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("NgayTao")
-                        .HasColumnType("datetime2");
-
-                    b.Property<DateTime?>("NgayXoa")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("NguoiCapNhatID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NguoiTaoID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("NguoiXoaID")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("TrinhDoChinhTri")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ID");
-
-                    b.HasIndex("DangVienID");
-
-                    b.HasIndex("DonViCongTacID");
-
-                    b.ToTable("ChiTietDangVien");
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ChiTietNgayNghiPhepEntity", b =>
@@ -510,48 +463,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaLoaiCongTac");
 
                     b.ToTable("LoaiCongTac");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "CongTacNoiBo"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "CongTacNuocNgoai"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "CongTacKyKetHopDong"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "CongTacKhaoSatDuAn"
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Name = "CongTacHoiThao"
-                        },
-                        new
-                        {
-                            ID = 6,
-                            Name = "CongTacDaoTao"
-                        },
-                        new
-                        {
-                            ID = 7,
-                            Name = "CongTacKiemTra"
-                        },
-                        new
-                        {
-                            ID = 8,
-                            Name = "CongTacKhac"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.LoaiHoaDonEntity", b =>
@@ -589,28 +500,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaLoaiHoaDon");
 
                     b.ToTable("LoaiHoaDon");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "ChiPhiDiLai"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "ChiPhiChoO"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "ChiPhiQuaBieuTang"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "HoaDonKhac"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.LoaiHopDongEntity", b =>
@@ -648,23 +537,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaHopDong");
 
                     b.ToTable("LoaiHopDong");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "HopDongThuViec"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "HopDongCoThoiHan"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "HopDongKhongThoiHan"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.LoaiNghiPhepEntity", b =>
@@ -702,36 +574,9 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaLoaiNghiPhep");
 
                     b.ToTable("LoaiNghiPhep");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "NghiPhepNam"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "NghiOm"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "NghiKhongLuong"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "NghiThaiSan"
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Name = "NghiKhac"
-                        });
                 });
 
-            modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.MucSanPhamEntity", b =>
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.MaDangKiCaLamEntity", b =>
                 {
                     b.Property<int>("ID")
                         .ValueGeneratedOnAdd()
@@ -739,14 +584,10 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<decimal>("LuongMucSanPham")
-                        .HasColumnType("decimal(18,4)");
-
-                    b.Property<int>("MucSanPhamToiDa")
-                        .HasColumnType("int");
-
-                    b.Property<int>("MucSanPhamToiThieu")
-                        .HasColumnType("int");
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TenMaDangKi");
 
                     b.Property<DateTime?>("NgayCapNhat")
                         .HasColumnType("datetime2");
@@ -766,10 +607,16 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Property<string>("NguoiXoaID")
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("ID")
-                        .HasName("MaMucSP");
+                    b.Property<DateTime>("ThoiGianCaLamBatDau")
+                        .HasColumnType("datetime2");
 
-                    b.ToTable("MucSanPham");
+                    b.Property<DateTime>("ThoiGianCaLamKetThuc")
+                        .HasColumnType("datetime2");
+
+                    b.HasKey("ID")
+                        .HasName("MaDangKi");
+
+                    b.ToTable("MaDangKiCaLam");
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.PhongBanEntity", b =>
@@ -889,33 +736,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaChucDanh");
 
                     b.ToTable("ThongTinChucDanh");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "GiamDoc"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "PhoGiamDoc"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "TruongPhong"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "PhoPhong"
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Name = "NhanVien"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.ThongTinChucVuEntity", b =>
@@ -953,28 +773,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaChucVu");
 
                     b.ToTable("ThongTinChucVu");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "Admin"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "Truong Phong Nhan Su"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "Quan Li"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "Nhan Vien"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.ThongTinGiamTruEntity", b =>
@@ -1015,20 +813,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaGiamTru");
 
                     b.ToTable("ThongTinGiamTru");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "GiamTruBanThan",
-                            SoTienGiamTru = 11000000m
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "GiamTruNguoiPhuThuoc",
-                            SoTienGiamTru = 4400000m
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.ThongTinPhuCapEntity", b =>
@@ -1104,33 +888,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaQuaTrinhNhanSu");
 
                     b.ToTable("ThongTinQuaTrinhNhanSu");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "ThangTien"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "BoNhiem"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "BaiNhiem"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "DieuDong"
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Name = "ThoiViec"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.ThueSuatEntity", b =>
@@ -1212,28 +969,43 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaTinhTrangLamViecID");
 
                     b.ToTable("ThongTinTinhTrangLamViec");
+                });
 
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "DangLamViec"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "DaNghiViec"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "DangThuViec"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "DangNghiPhep"
-                        });
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.TrangThaiDangKiCaLamViecEntity", b =>
+                {
+                    b.Property<int>("ID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)")
+                        .HasColumnName("TenTrangThai");
+
+                    b.Property<DateTime?>("NgayCapNhat")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayXoa")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NguoiCapNhatID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiTaoID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiXoaID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID")
+                        .HasName("MaTrangThai");
+
+                    b.ToTable("TrangThaiDangKiCaLamViec");
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ConfigTable.TrinhDoHocVanEntity", b =>
@@ -1271,33 +1043,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasName("MaTrinhDoHocVan");
 
                     b.ToTable("TrinhDoHocVan");
-
-                    b.HasData(
-                        new
-                        {
-                            ID = 1,
-                            Name = "Tien Si"
-                        },
-                        new
-                        {
-                            ID = 2,
-                            Name = "Thac Si"
-                        },
-                        new
-                        {
-                            ID = 3,
-                            Name = "Dai Hoc"
-                        },
-                        new
-                        {
-                            ID = 4,
-                            Name = "Cao Dang"
-                        },
-                        new
-                        {
-                            ID = 5,
-                            Name = "Trung Cap"
-                        });
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.HoaDonCongTacNhanVienEntity", b =>
@@ -1527,10 +1272,103 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     b.HasIndex("MaSoNhanVien");
 
-                    b.HasIndex("NguoiDuyet")
-                        .IsUnique();
+                    b.HasIndex("NguoiDuyet");
 
                     b.ToTable("LichSuNghiPhepNhanVien");
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.LuongThoiGianEntity", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("LuongGio")
+                        .HasColumnType("decimal(18, 4)");
+
+                    b.Property<decimal>("LuongNam")
+                        .HasColumnType("decimal(18, 4)");
+
+                    b.Property<decimal>("LuongNgay")
+                        .HasColumnType("decimal(18, 4)");
+
+                    b.Property<decimal>("LuongThang")
+                        .HasColumnType("decimal(18, 4)");
+
+                    b.Property<decimal>("LuongTuan")
+                        .HasColumnType("decimal(18, 4)");
+
+                    b.Property<int>("MaLuongThoiGian")
+                        .HasColumnType("int");
+
+                    b.Property<string>("MaSoNhanVien")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<DateTime>("NgayApDung")
+                        .HasColumnType("datetime2")
+                        .HasColumnName("NgayApDungLuongThoiGian");
+
+                    b.Property<DateTime?>("NgayCapNhatCuoi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayXoa")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NguoiCapNhatID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiTaoID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiXoaID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID");
+
+                    b.HasIndex("MaSoNhanVien");
+
+                    b.ToTable("LuongThoiGian");
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.MucSanPhamEntity", b =>
+                {
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
+
+                    b.Property<decimal>("LuongMucSanPham")
+                        .HasColumnType("decimal(18,4)");
+
+                    b.Property<int>("MucSanPhamToiDa")
+                        .HasColumnType("int");
+
+                    b.Property<int>("MucSanPhamToiThieu")
+                        .HasColumnType("int");
+
+                    b.Property<DateTime?>("NgayCapNhatCuoi")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayXoa")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NguoiCapNhatID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiTaoID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiXoaID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("ID")
+                        .HasName("MaMucSP");
+
+                    b.ToTable("MucSanPham");
                 });
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.NhanVienEntity", b =>
@@ -1540,6 +1378,9 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     b.Property<int>("ChucVuID")
                         .HasColumnType("int");
+
+                    b.Property<bool>("DaCoHopDong")
+                        .HasColumnType("bit");
 
                     b.Property<string>("DiaChiLienLac")
                         .IsRequired()
@@ -1720,11 +1561,8 @@ namespace NhaMayThep.Infrastructure.Migrations
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ThongTinCongTyEntity", b =>
                 {
-                    b.Property<int>("MaDoanhNghiep")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("MaDoanhNghiep"));
+                    b.Property<string>("ID")
+                        .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("DiaChi")
                         .IsRequired()
@@ -1743,14 +1581,35 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int>("MaDoanhNghiep")
+                        .HasColumnType("int");
+
                     b.Property<int>("MaSoThue")
                         .HasColumnType("int");
+
+                    b.Property<DateTime?>("NgayCapNhatCuoi")
+                        .HasColumnType("datetime2");
 
                     b.Property<DateTime>("NgayHoatDong")
                         .HasColumnType("datetime2");
 
+                    b.Property<DateTime?>("NgayTao")
+                        .HasColumnType("datetime2");
+
+                    b.Property<DateTime?>("NgayXoa")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("NguoiCapNhatID")
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("NguoiDaiDien")
                         .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiTaoID")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("NguoiXoaID")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("SoLuongNhanVien")
@@ -1768,7 +1627,7 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.HasKey("MaDoanhNghiep");
+                    b.HasKey("ID");
 
                     b.ToTable("ThongTinCongTy");
                 });
@@ -1781,6 +1640,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Property<string>("CapDangVien")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ChucVuDang")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<int>("DonViCongTacID")
+                        .HasColumnType("int");
 
                     b.Property<DateTime?>("NgayCapNhatCuoi")
                         .HasColumnType("datetime2");
@@ -1807,7 +1673,13 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(450)");
 
+                    b.Property<string>("TrinhDoChinhTri")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ID");
+
+                    b.HasIndex("DonViCongTacID");
 
                     b.HasIndex("NhanVienID");
 
@@ -2066,25 +1938,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                     b.Navigation("NhanVien");
                 });
 
-            modelBuilder.Entity("NhaMapThep.Domain.Entities.ChiTietDangVienEntity", b =>
-                {
-                    b.HasOne("NhaMapThep.Domain.Entities.ThongTinDangVienEntity", "ThongTinDangVien")
-                        .WithMany()
-                        .HasForeignKey("DangVienID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.DonViCongTacEntity", "DonViCongTac")
-                        .WithMany()
-                        .HasForeignKey("DonViCongTacID")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("DonViCongTac");
-
-                    b.Navigation("ThongTinDangVien");
-                });
-
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ChiTietNgayNghiPhepEntity", b =>
                 {
                     b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.LoaiNghiPhepEntity", "LoaiNghiPhep")
@@ -2214,14 +2067,25 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", "NguoiDuyetNhanVien")
-                        .WithOne()
-                        .HasForeignKey("NhaMapThep.Domain.Entities.LichSuNghiPhepNhanVienEntity", "NguoiDuyet")
+                        .WithMany()
+                        .HasForeignKey("NguoiDuyet")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
                     b.Navigation("LoaiNghiPhep");
 
                     b.Navigation("NguoiDuyetNhanVien");
+
+                    b.Navigation("NhanVien");
+                });
+
+            modelBuilder.Entity("NhaMapThep.Domain.Entities.LuongThoiGianEntity", b =>
+                {
+                    b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", "NhanVien")
+                        .WithMany()
+                        .HasForeignKey("MaSoNhanVien")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
                     b.Navigation("NhanVien");
                 });
@@ -2301,11 +2165,19 @@ namespace NhaMayThep.Infrastructure.Migrations
 
             modelBuilder.Entity("NhaMapThep.Domain.Entities.ThongTinDangVienEntity", b =>
                 {
+                    b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.DonViCongTacEntity", "DonViCongTac")
+                        .WithMany()
+                        .HasForeignKey("DonViCongTacID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("NhaMapThep.Domain.Entities.NhanVienEntity", "NhanVien")
                         .WithMany()
                         .HasForeignKey("NhanVienID")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.Navigation("DonViCongTac");
 
                     b.Navigation("NhanVien");
                 });
