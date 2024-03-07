@@ -12,8 +12,8 @@ using NhaMayThep.Infrastructure.Persistence;
 namespace NhaMayThep.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240307070249_DeleteChiTietDangVien")]
-    partial class DeleteChiTietDangVien
+    [Migration("20240307095149_v1")]
+    partial class v1
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -1547,8 +1547,7 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     b.HasIndex("ChucDanhID");
 
-                    b.HasIndex("ChucVuID")
-                        .IsUnique();
+                    b.HasIndex("ChucVuID");
 
                     b.HasIndex("LoaiQuaTrinhID");
 
@@ -2129,8 +2128,8 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .IsRequired();
 
                     b.HasOne("NhaMapThep.Domain.Entities.ConfigTable.ThongTinChucVuEntity", "ChucVu")
-                        .WithOne()
-                        .HasForeignKey("NhaMapThep.Domain.Entities.QuaTrinhNhanSuEntity", "ChucVuID")
+                        .WithMany()
+                        .HasForeignKey("ChucVuID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
