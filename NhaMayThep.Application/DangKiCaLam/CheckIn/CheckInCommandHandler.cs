@@ -26,32 +26,22 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckIn
 
         public async Task<DangKiCaLamDto> Handle(CheckInCommand request, CancellationToken cancellationToken)
         {
-            var allRecords = await _repository.FindAllAsync(cancellationToken); // Assuming this method exists to fetch all records
-            var recordExists = allRecords.Any(x => x.ID == request.Id);
-            if (!recordExists)
-            {
-                throw new NotFoundException($"Record not found for Id {request.Id}. Available records: {string.Join(", ", allRecords.Select(x => x.ID))}");
-            }
+           
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null || dangKiCaLam.NgayXoa.HasValue)
             {
                 throw new NotFoundException($"Record not found for Id {request.Id}.");
             }
 
-            var now = DateTime.UtcNow; // Consider using a specific timezone if needed
+            var now = DateTime.UtcNow; 
             dangKiCaLam.ThoiGianChamCongBatDau = now;
 
-            // Assuming ThoiGianCaLamBatDau is the scheduled start time
             if (now > dangKiCaLam.ThoiGianCaLamBatDau)
             {
                 // Late check-in
                 dangKiCaLam.GhiChu += " Check-in trễ.";
             }
-            else
-            {
-                // On-time check-in, if needed
-            }
-
+        
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
             // Return updated DangKiCaLamDto
