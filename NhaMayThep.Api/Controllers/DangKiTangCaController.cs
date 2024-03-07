@@ -15,11 +15,13 @@ using NhaMayThep.Application.DangKiTangCa.GetId;
 using NhaMayThep.Application.LichSuNghiPhep.GetAll;
 using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.DangKiTangCa.GetAll;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    
+    [Authorize]
+
     public class DangKiTangCaController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -51,8 +53,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateDangKiTangCaCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Đăng kí tăng ca tạo thành công."));
+            var result = await _mediator.Send(command, cancellationToken);
+            return new JsonResponse<string>(result);
         }
 
         [HttpDelete("dang-ki-tang-ca/{id}")]
@@ -64,8 +66,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeleteDangKiTangCaCommand (id), cancellationToken);
-            return Ok(new JsonResponse<string>("Đăng kí tăng ca xóa thành công."));
+            var result = await _mediator.Send(new DeleteDangKiTangCaCommand (id), cancellationToken);
+            return new JsonResponse<string>(result);
         }
 
         [HttpPut("dang-ki-tang-ca")]
@@ -75,8 +77,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateDangKiTangCaCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Đăng kí tăng ca cập nhật thành công."));
+            var result = await _mediator.Send(command, cancellationToken);
+            return new JsonResponse<string>(result);
         }
 
         [HttpGet("dang-ki-tang-ca/{id}")]

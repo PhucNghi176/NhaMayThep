@@ -4,7 +4,7 @@ using System;
 
 namespace NhaMayThep.Application.DangKiTangCa.Update
 {
-    public class UpdateDangKiTangCaCommand : IRequest<DangKiTangCaDto>, ICommand
+    public class UpdateDangKiTangCaCommand : IRequest<string>, ICommand
     {
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }

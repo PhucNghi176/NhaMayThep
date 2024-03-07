@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Update
 {
-    public class UpdateDangKiTangCaCommandHandler : IRequestHandler<UpdateDangKiTangCaCommand, DangKiTangCaDto>
+    public class UpdateDangKiTangCaCommandHandler : IRequestHandler<UpdateDangKiTangCaCommand, string>
     {
         private readonly IMapper _mapper;
         private readonly IDangKiTangCaRepository _repository;
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
             _nhanVienRepository = nhanVienRepository;
         }
 
-        public async Task<DangKiTangCaDto> Handle(UpdateDangKiTangCaCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateDangKiTangCaCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -54,9 +54,9 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
             dangKiTangCa.NgayCapNhatCuoi = DateTime.UtcNow;
 
             _repository.Update(dangKiTangCa);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+           
 
-            return _mapper.Map<DangKiTangCaDto>(dangKiTangCa);
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Đăng Kí Tăng Ca thành công" : "Cập nhật Đăng Kí Tăng Ca thất bại";
         }
     }
 }

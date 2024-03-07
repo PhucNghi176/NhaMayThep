@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.CheckOut
 {
-    public class CheckOutCommandHandler : IRequestHandler<CheckOutCommand, DangKiCaLamDto>
+    public class CheckOutCommandHandler : IRequestHandler<CheckOutCommand, string>
     {
         private readonly IDangKiCaLamRepository _repository;
         private readonly IMapper _mapper;
@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckOut
             _currentUserService = currentUserService;
         }
 
-        public async Task<DangKiCaLamDto> Handle(CheckOutCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CheckOutCommand request, CancellationToken cancellationToken)
         {
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (dangKiCaLam == null || dangKiCaLam.NgayXoa.HasValue)
@@ -45,17 +45,10 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckOut
                 dangKiCaLam.GhiChu += " Check-out sớm.";
                 dangKiCaLam.ThoiGianChamCongKetThuc = now;
             }
-            else
-            {
-                // On-time or late check-out
-                dangKiCaLam.GhiChu += now > dangKiCaLam.ThoiGianCaLamKetThuc ? " Check-out muộn." : "";
-                dangKiCaLam.ThoiGianChamCongKetThuc = now;
-            }
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Check-out thành công" : "Check-out thất bại";
 
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+           
 
-            // Return updated DangKiCaLamDto
-            return _mapper.Map<DangKiCaLamDto>(dangKiCaLam);
         }
     }
 }

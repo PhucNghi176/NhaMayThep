@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Delete
 {
-    public class DeleteDangKiTangCaHandler : IRequestHandler<DeleteDangKiTangCaCommand,DangKiTangCaDto>
+    public class DeleteDangKiTangCaHandler : IRequestHandler<DeleteDangKiTangCaCommand,string>
     {
         private readonly IDangKiTangCaRepository _repo;
         private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Delete
             _currentUserService = currentUserService;
         }
 
-        public async Task<DangKiTangCaDto> Handle(DeleteDangKiTangCaCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteDangKiTangCaCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -48,8 +48,8 @@ namespace NhaMayThep.Application.DangKiTangCa.Delete
             lsnp.NgayXoa = DateTime.Now;
 
             _repo.Update(lsnp);
-            await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return _mapper.Map<DangKiTangCaDto>(lsnp);
+            
+            return await _repo.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Đăng Kí Tăng Ca thành công" : "Xóa Đăng Kí Tăng Ca  thất bại";
         }
     }
 }

@@ -3,7 +3,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.DangKiCaLam.Update
 {
-    public class UpdateDangKiCaLamCommand : IRequest<DangKiCaLamDto>, ICommand
+    public class UpdateDangKiCaLamCommand : IRequest<string>, ICommand
     {
         public string Id { get; set; }  
         public string MaSoNhanVien { get; set; }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.CheckIn
 {
-    public class CheckInCommandHandler : IRequestHandler<CheckInCommand, DangKiCaLamDto>
+    public class CheckInCommandHandler : IRequestHandler<CheckInCommand, string>
     {
         private readonly IDangKiCaLamRepository _repository;
         private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckIn
             _currentUserService = currentUserService;
         }
 
-        public async Task<DangKiCaLamDto> Handle(CheckInCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CheckInCommand request, CancellationToken cancellationToken)
         {
            
             var dangKiCaLam = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
@@ -42,10 +42,9 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckIn
                 dangKiCaLam.GhiChu += " Check-in trễ.";
             }
         
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+          
 
-            // Return updated DangKiCaLamDto
-            return _mapper.Map<DangKiCaLamDto>(dangKiCaLam);
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Check-in thành công" : "Check-in thất bại";
         }
     }
 

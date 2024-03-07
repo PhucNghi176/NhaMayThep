@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.Delete
 {
-    public class DeleteDangKiCaLamCommandHandler : IRequestHandler<DeleteDangKiCaLamCommand, DangKiCaLamDto>
+    public class DeleteDangKiCaLamCommandHandler : IRequestHandler<DeleteDangKiCaLamCommand, string>
     {
         private readonly IDangKiCaLamRepository _repository;
         private readonly IMapper _mapper;
@@ -22,14 +22,9 @@ namespace NhaMayThep.Application.DangKiCaLam.Delete
             _currentUserService = currentUserService;
         }
 
-        public async Task<DangKiCaLamDto> Handle(DeleteDangKiCaLamCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteDangKiCaLamCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
-            if (string.IsNullOrEmpty(userId))
-            {
-                throw new UnauthorizedAccessException("User ID không tồn tại.");
-            }
-
             var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)
             {
@@ -41,11 +36,11 @@ namespace NhaMayThep.Application.DangKiCaLam.Delete
                 throw new NotFoundException("DangKiCaLam này đã bị xóa.");
             }
             entity.NguoiXoaID = userId;
-            entity.NgayXoa = DateTime.UtcNow; 
+            entity.NgayXoa = DateTime.UtcNow;
             _repository.Update(entity);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Đăng Kí Ca Làm thành công" : "Xóa Đăng Kí Ca Làm thất bại";
 
-            return _mapper.Map<DangKiCaLamDto>(entity);
+
         }
     }
 }

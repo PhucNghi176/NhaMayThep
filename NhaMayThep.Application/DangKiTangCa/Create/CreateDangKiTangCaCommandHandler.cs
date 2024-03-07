@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Create
 {
-    public class CreateDangKiTangCaCommandHandler : IRequestHandler<CreateDangKiTangCaCommand, DangKiTangCaDto>
+    public class CreateDangKiTangCaCommandHandler : IRequestHandler<CreateDangKiTangCaCommand, string>
     {
         private readonly IMapper _mapper;
         private readonly IDangKiTangCaRepository _repository;
@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
         }
 
 
-        public async Task<DangKiTangCaDto> Handle(CreateDangKiTangCaCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateDangKiTangCaCommand request, CancellationToken cancellationToken)
         {
             // Validate MaSoNhanVien
             var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
@@ -61,7 +61,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
 
             _repository.Add(dangKiTangCa);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return _mapper.Map<DangKiTangCaDto>(dangKiTangCa);
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Dang Tang Ca thành công" : "Dang Tang Ca  thất bại";
         }
     }
 }

@@ -13,11 +13,12 @@ using NhaMayThep.Application.DangKiCaLam.GetAll;
 using NhaMayThep.Application.DangKiCaLam;
 using NhaMayThep.Application.DangKiCaLam.CheckIn;
 using NhaMayThep.Application.DangKiCaLam.CheckOut;
+using Microsoft.AspNetCore.Authorization;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    
+    [Authorize]
     public class DangKiCaLamController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -63,8 +64,9 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeleteDangKiCaLamCommand(id), cancellationToken);
-            return Ok(new JsonResponse<string>("Đăng kí ca làm xóa thành công."));
+           var result= await _mediator.Send(new DeleteDangKiCaLamCommand(id), cancellationToken);
+             return new JsonResponse<string>(result);
+
         }
 
         [HttpPut("dang-ki-ca-lam")]
@@ -74,8 +76,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateDangKiCaLamCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Đăng kí ca làm cập nhật thành công."));
+            var result = await _mediator.Send(command, cancellationToken);
+            return new JsonResponse<string>(result);
         }
 
         [HttpGet("dang-ki-ca-lam/{id}")]
@@ -102,9 +104,8 @@ namespace NhaMayThep.Api.Controllers
         {
             var command = new CheckInCommand { Id = id };
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Check-in thành công ."));
+            return Ok(new JsonResponse<string>(result)); 
         }
-
 
         [HttpPost("CheckOut/{id}")]
         [ProducesResponseType(StatusCodes.Status200OK)]
@@ -115,7 +116,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var command = new CheckOutCommand { Id = id };
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Check-out thành công."));
+            return Ok(new JsonResponse<string>(result));
         }
     }
 }

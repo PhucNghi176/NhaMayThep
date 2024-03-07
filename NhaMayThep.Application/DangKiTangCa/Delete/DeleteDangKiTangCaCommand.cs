@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Delete
 {
-    public class DeleteDangKiTangCaCommand : IRequest<DangKiTangCaDto>, ICommand
+    public class DeleteDangKiTangCaCommand : IRequest<string>, ICommand
 
     {
         public string Id { get; set; }

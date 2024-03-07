@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.Update
 {
-    public class UpdateDangKiCaLamCommandHandler : IRequestHandler<UpdateDangKiCaLamCommand, DangKiCaLamDto>
+    public class UpdateDangKiCaLamCommandHandler : IRequestHandler<UpdateDangKiCaLamCommand, string>
     {
         private readonly IMapper _mapper;
         private readonly IDangKiCaLamRepository _repository;
@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
             _nhanVienRepository = nhanVienRepository;
         }
 
-        public async Task<DangKiCaLamDto> Handle(UpdateDangKiCaLamCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateDangKiCaLamCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -44,7 +44,7 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
             dangKiCaLam.CaDangKi = request.CaDangKi;
             dangKiCaLam.ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau;
             dangKiCaLam.ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc;
-            
+
             dangKiCaLam.MaSoNguoiQuanLy = request.MaSoNguoiQuanLy;
             dangKiCaLam.TrangThai = request.TrangThai;
             dangKiCaLam.GhiChu = request.GhiChu;
@@ -52,9 +52,8 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
             dangKiCaLam.NgayCapNhatCuoi = DateTime.UtcNow;
 
             _repository.Update(dangKiCaLam);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<DangKiCaLamDto>(dangKiCaLam);
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Đăng Kí Ca Làm thành công" : "Cập nhật Đăng Kí Ca Làm thất bại";
         }
     }
 }
