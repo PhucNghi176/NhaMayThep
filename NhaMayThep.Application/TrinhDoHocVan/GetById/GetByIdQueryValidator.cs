@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.GetById
 
         private void ConfigureValidationRules()
         {
-            RuleFor(x => x.Id).NotEmpty().WithMessage("ID is required");
+            RuleFor(x => x.Id).NotEmpty().WithMessage("ID là bắt buộc");
         }
     }
 }
