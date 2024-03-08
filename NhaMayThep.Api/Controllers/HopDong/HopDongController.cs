@@ -57,19 +57,19 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("hop-dong")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<List<HopDongDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<List<HopDongDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<List<HopDongDto>>>> GetAll(CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(new GetAllHopDongQuery(), cancellationToken);
-            return Ok(new JsonResponse<List<HopDongDto>>(result));
-        }
+        //[HttpGet("hop-dong")]
+        //[Produces(MediaTypeNames.Application.Json)]
+        //[ProducesResponseType(typeof(JsonResponse<List<HopDongDto>>), StatusCodes.Status201Created)]
+        //[ProducesResponseType(typeof(JsonResponse<List<HopDongDto>>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
+        //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<JsonResponse<List<HopDongDto>>>> GetAll(CancellationToken cancellationToken = default)
+        //{
+        //    var result = await _mediator.Send(new GetAllHopDongQuery(), cancellationToken);
+        //    return Ok(new JsonResponse<List<HopDongDto>>(result));
+        //}
 
         [HttpGet("hop-dong/{id}")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -111,19 +111,19 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
             return Ok(new JsonResponse<string>(result));
         }
 
-        [HttpGet("hop-dong/phan-trang")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<HopDongDto>>>> GetPagination([FromQuery] GetHopDongByPaginationQuery query, CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(query, cancellationToken);
-            return Ok(result);
-        }
+        //[HttpGet("hop-dong/phan-trang")]
+        //[Produces(MediaTypeNames.Application.Json)]
+        //[ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status201Created)]
+        //[ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status200OK)]
+        //[ProducesResponseType(StatusCodes.Status400BadRequest)]
+        //[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        //[ProducesResponseType(StatusCodes.Status403Forbidden)]
+        //[ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        //public async Task<ActionResult<JsonResponse<PagedResult<HopDongDto>>>> GetPagination([FromQuery] GetHopDongByPaginationQuery query, CancellationToken cancellationToken = default)
+        //{
+        //    var result = await _mediator.Send(query, cancellationToken);
+        //    return Ok(result);
+        //}
         [HttpGet]
         [Route("hop-dong/filter-hop-dong")]
         [Produces(MediaTypeNames.Application.Json)]
