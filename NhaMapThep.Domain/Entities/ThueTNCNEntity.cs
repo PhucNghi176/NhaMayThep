@@ -1,4 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -16,9 +17,9 @@ namespace NhaMapThep.Domain.Entities
         public virtual NhanVienEntity NhanVien { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongCoBan { get; set; }
-        //public required string PhuCapNhanVienID { get; set; }
-        //[ForeignKey(nameof(PhuCapNhanVienID))]
-        //public virtual PhuCapNhanVienEntity PhuCapNhanVien { get; set; }
+        public required string PhuCapNhanVienID { get; set; }
+        [ForeignKey(nameof(PhuCapNhanVienID))]
+        public virtual PhuCapNhanVienEntity PhuCapNhanVien { get; set; }
 
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongThuNhap {  get; set; }
@@ -27,17 +28,17 @@ namespace NhaMapThep.Domain.Entities
         [Column(TypeName = "decimal(18, 4)")]
         public decimal ThuNhapTinhThue { get; set; }
 
-        //public required string BaoHiemNhanVienID { get; set; }
-        //[ForeignKey(nameof(BaoHiemNhanVienID))]
-        //public virtual BaoHiemNhanVienEntity BaoHiemNhanVien { get; set; }
+        public required string BaoHiemNhanVienID { get; set; }
+        [ForeignKey(nameof(BaoHiemNhanVienID))]
+        public virtual BaoHiemNhanVienEntity BaoHiemNhanVien { get; set; }
 
         public required string GiamTruNhanVienID { get; set; }
         [ForeignKey(nameof(GiamTruNhanVienID))]
         public virtual GiamTruNhanVienEntity GiamTruNhanVien { get; set; }
 
-        //public required string ThueSuatID { get; set; }
-        //[ForeignKey(nameof(ThueSuatID))]
-        //public virtual ThueSuatEntity ThueSuat { get; set; }
+        public required string ThueSuatID { get; set; }
+        [ForeignKey(nameof(ThueSuatID))]
+        public virtual ThueSuatEntity ThueSuat { get; set; }
 
         [Column(TypeName = "decimal(18, 4)")]
         public decimal ThueTNCNPhaiNop {  get; set; }

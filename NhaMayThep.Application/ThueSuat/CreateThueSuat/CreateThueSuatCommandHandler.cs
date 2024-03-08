@@ -29,8 +29,10 @@ namespace NhaMayThep.Application.ThueSuat.CreateThueSuat
             {
                 Name = request.name,
                 BacThue = request.BacThue,
-                ThuNhapTinhThueTrenNam = request.ThuNhapTinhThueTrenNam,
-                ThuNhapTinhThueTrenThang = request.ThuNhapTinhThueTrenThang,
+                DauThuNhapTinhThueTrenNam = request.DauThuNhapTinhThueTrenNam,
+                CuoiThuNhapTinhThueTrenNam = request.CuoiThuNhapTinhThueTrenNam,
+                DauThuNhapTinhThueTrenThang = request.DauThuNhapTinhThueTrenThang,
+                CuoiThuNhapTinhThueTrenThang = request.CuoiThuNhapTinhThueTrenThang,
                 PhanTramThueSuat = request.PhanTramThueSuat,
                 NguoiTaoID = this._currentUserService?.UserId,
                 NgayTao = DateTime.UtcNow,
