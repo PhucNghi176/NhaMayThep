@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
+using NhaMayThep.Application.NhanVien;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu
 {
@@ -10,5 +11,24 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu
 
         public static List<QuaTrinhNhanSuDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<QuaTrinhNhanSuEntity> projectFrom, IMapper mapper)
             => projectFrom.Select(x => x.MapToQuaTrinhNhanSuDto(mapper)).ToList();
+
+        public static QuaTrinhNhanSuDto MapToQuaTrinhNhanSuDto(this QuaTrinhNhanSuEntity entity, IMapper mapper, string loaiQuaTrinh, string phongBan, string chucVu, string chucDanh)
+        {
+            var dto = mapper.Map<QuaTrinhNhanSuDto>(entity);
+            dto.LoaiQuaTrinh = loaiQuaTrinh;
+            dto.PhongBan = phongBan;
+            dto.ChucVu = chucVu;
+            dto.ChucDanh = chucDanh;
+            return dto;
+        }
+
+        public static List<QuaTrinhNhanSuDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<QuaTrinhNhanSuEntity> entities, IMapper mapper, Dictionary<int, string> loaiQuaTrinh, Dictionary<int, string> phongBan, Dictionary<int, string> chucVu, Dictionary<int, string> chucDanh)
+            => entities.Select(x =>
+            x.MapToQuaTrinhNhanSuDto(mapper,
+                loaiQuaTrinh.ContainsKey(x.LoaiQuaTrinhID) ? loaiQuaTrinh[x.LoaiQuaTrinhID] : "Lỗi",
+                phongBan.ContainsKey(x.PhongBanID) ? phongBan[x.PhongBanID] : "Lỗi",
+                chucVu.ContainsKey(x.ChucVuID) ? chucVu[x.ChucVuID] : "Lỗi",
+                chucDanh.ContainsKey(x.ChucDanhID) ? chucDanh[x.ChucDanhID] : "Lỗi"               
+            )).ToList();
     }
 }
