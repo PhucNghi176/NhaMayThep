@@ -13,16 +13,20 @@ namespace NhaMayThep.Application.ThueSuat.UpdateThueSuat
         public int ID { get; set; }
         public string Name { get; set; }
         public int BacThue { get; set; }
-        public decimal ThuNhapTinhThueTrenNam { get; set; }
-        public decimal ThuNhapTinhThueTrenThang { get; set; }
+        public decimal DauThuNhapTinhThueTrenNam { get; set; }
+        public decimal CuoiThuNhapTinhThueTrenNam { get; set; }
+        public decimal DauThuNhapTinhThueTrenThang { get; set; }
+        public decimal CuoiThuNhapTinhThueTrenThang { get; set; }
         public double PhanTramThueSuat { get; set; }
-        public UpdateThueSuatCommand(int iD, string name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, double phanTramThueSuat)
+        public UpdateThueSuatCommand(int iD, string name, int bacThue, decimal dauThuNhapTinhThueTrenNam, decimal cuoiThuNhapTinhThueTrenNam, decimal dauthuNhapTinhThueTrenThang, decimal cuoithuNhapTinhThueTrenThang, double phanTramThueSuat)
         {
             ID = iD;
             Name = name;
             BacThue = bacThue;
-            ThuNhapTinhThueTrenNam = thuNhapTinhThueTrenNam;
-            ThuNhapTinhThueTrenThang = thuNhapTinhThueTrenThang;
+            DauThuNhapTinhThueTrenNam = dauThuNhapTinhThueTrenNam;
+            CuoiThuNhapTinhThueTrenNam = cuoiThuNhapTinhThueTrenNam;
+            DauThuNhapTinhThueTrenThang = dauthuNhapTinhThueTrenThang;
+            CuoiThuNhapTinhThueTrenThang = cuoithuNhapTinhThueTrenThang;
             PhanTramThueSuat = phanTramThueSuat;
         }
         public UpdateThueSuatCommand() { }

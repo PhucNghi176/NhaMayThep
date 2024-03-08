@@ -12,15 +12,19 @@ namespace NhaMayThep.Application.ThueSuat.CreateThueSuat
     {
         public string name {  get; set; }
         public int BacThue { get; set; }
-        public decimal ThuNhapTinhThueTrenNam { get; set; }
-        public decimal ThuNhapTinhThueTrenThang { get; set; }
+        public decimal DauThuNhapTinhThueTrenNam { get; set; }
+        public decimal CuoiThuNhapTinhThueTrenNam { get; set; }
+        public decimal DauThuNhapTinhThueTrenThang { get; set; }
+        public decimal CuoiThuNhapTinhThueTrenThang { get; set; }
         public double PhanTramThueSuat { get; set; }
-        public CreateThueSuatCommand(string name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, double phanTramThueSuat)
+        public CreateThueSuatCommand(string name, int bacThue, decimal dauThuNhapTinhThueTrenNam, decimal cuoiThuNhapTinhThueTrenNam, decimal dauthuNhapTinhThueTrenThang, decimal cuoithuNhapTinhThueTrenThang, double phanTramThueSuat)
         {
             this.name = name;
             this.BacThue = bacThue;
-            this.ThuNhapTinhThueTrenNam = thuNhapTinhThueTrenNam;
-            this.ThuNhapTinhThueTrenThang = thuNhapTinhThueTrenThang;
+            this.DauThuNhapTinhThueTrenNam = dauThuNhapTinhThueTrenNam;
+            this.CuoiThuNhapTinhThueTrenNam = cuoiThuNhapTinhThueTrenNam;
+            this.DauThuNhapTinhThueTrenThang = dauthuNhapTinhThueTrenThang;
+            this.CuoiThuNhapTinhThueTrenThang = cuoithuNhapTinhThueTrenThang;
             this.PhanTramThueSuat = phanTramThueSuat;
         }
         public CreateThueSuatCommand() { }
