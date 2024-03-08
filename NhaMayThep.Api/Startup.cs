@@ -64,6 +64,7 @@ namespace NhaMayThep.Api
                 endpoints.MapControllers();
             });
             app.UseSwashbuckle(Configuration);
+
         }
     }
 }

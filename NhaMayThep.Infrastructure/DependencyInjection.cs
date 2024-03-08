@@ -75,6 +75,8 @@ namespace NhaMayThep.Infrastructure
             services.AddTransient<IThongTinChucVuDangRepository, ThongTinChucVuDangRepository>();
             services.AddTransient<IThongTinTrinhDoChinhTriRepository, ThongTinTrinhDoChinhTriRepository>();
             services.AddTransient<IChinhSachNhanSuRepository, ChinhSachNhanSuRepository>();
+            services.AddTransient<IDangKiCaLamRepository, DangKiCaLamRepository>();
+            services.AddTransient<IDangKiTangCaRepository, DangKiTangCaRepository>();
             return services;
         }
     }
