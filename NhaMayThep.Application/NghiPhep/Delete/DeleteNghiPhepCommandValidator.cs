@@ -1,11 +1,11 @@
 ﻿using FluentValidation;
-using NhaMayThep.Application.ThongTinDaoTao.GetById;
 
-namespace NhaMayThep.Application.ThongTinDaoTao.GetById
+
+namespace NhaMayThep.Application.NghiPhep.Delete
 {
-    public class GetByIdQueryValidator : AbstractValidator<GetByIdQuery>
+    public class DeleteNghiPhepCommandValidator : AbstractValidator<DeleteNghiPhepCommand>
     {
-        public GetByIdQueryValidator()
+        public DeleteNghiPhepCommandValidator()
         {
             ConfigureValidationRules();
         }
