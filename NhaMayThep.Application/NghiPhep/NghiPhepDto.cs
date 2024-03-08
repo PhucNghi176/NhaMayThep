@@ -8,6 +8,7 @@ namespace NhaMayThep.Application.NghiPhep
     public class NghiPhepDto : IMapFrom<NghiPhepEntity>
     {
         public NghiPhepDto() { }
+        public string ID { get; set; }
         public string MaSoNhanVien { get; set; }
         public decimal LuongNghiPhep { get; set; }
         public decimal KhoanTruLuong { get; set; }
@@ -15,10 +16,11 @@ namespace NhaMayThep.Application.NghiPhep
         public int LoaiNghiPhepID { get; set; }
 
 
-        public static NghiPhepDto CreateNghiPhep(string maSoNhanVien, decimal luongNghiPhep, decimal khoanTruLuong, double soGioNghiPhep, int loaiNghiPhepID)
+        public static NghiPhepDto CreateNghiPhep(string Id ,string maSoNhanVien, decimal luongNghiPhep, decimal khoanTruLuong, double soGioNghiPhep, int loaiNghiPhepID)
         {
             return new NghiPhepDto()
             {
+                ID = Id ,
                 MaSoNhanVien = maSoNhanVien,
                 LuongNghiPhep = luongNghiPhep,
                 KhoanTruLuong = khoanTruLuong,
