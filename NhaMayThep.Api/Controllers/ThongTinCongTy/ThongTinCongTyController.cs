@@ -12,7 +12,7 @@ using NhaMayThep.Application.ThongTinCongTy.GetAll;
 namespace NhaMayThep.Api.Controllers.ThongTinCongTy
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class ThongTinCongTyController : ControllerBase
     {
         private readonly ISender _mediator;

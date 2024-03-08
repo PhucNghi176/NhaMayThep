@@ -24,6 +24,7 @@ namespace NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy
             var thongTinCongTy = new ThongTinCongTyEntity()
             {
                 NguoiTaoID = _currentUserService.UserId,
+                MaDoanhNghiep = request.MaDoanhNghiep,
                 TenQuocTe = request.TenQuocTe,
                 TenVietTat = request.TenVietTat,
                 SoLuongNhanVien = request.SoLuongNhanVien,
