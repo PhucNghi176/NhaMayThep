@@ -17,6 +17,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
                 .NotEmpty().WithMessage("NhanVienID không được để trống.")
                 .MaximumLength(450).WithMessage("NhanVienID không vượt quá 450 kí tự.");
 
+            RuleFor(x => x.DonViCongTacID)
+                .NotEmpty().WithMessage("DonViCongTacID không được để trống.")
+                .GreaterThanOrEqualTo(1).WithMessage("DonViCongTacID phải lớn hơn hoặc bằng 1.");
+
             RuleFor(x => x.NgayVaoDang)
                 .NotEmpty().WithMessage("NgayVaoDang không được để trống.")
                 .LessThanOrEqualTo(DateTime.Now).WithMessage("NgayVaoDang không được là ngày trong tương lai.");

@@ -19,10 +19,10 @@ namespace NhaMayThep.Application.HopDong.FilterHopDong
         public int PageSize { get; set; }
         public int? LoaiHopDongID { get; set; } = 0;
         public  DateTime? NgayKy { get; set; }
-        public string BoPhanLamViec { get; set; }
+        public string? BoPhanLamViec { get; set; }
         public int? ChucVuID { get; set; } = 0;
         public int? ChucDanhID { get; set; } = 0;
-        public string PhuCapID { get; set; }
+        public string? PhuCapID { get; set; }
 
         public FilterHopDongQuery() { }
 
