@@ -14,16 +14,19 @@ namespace NhaMayThep.Application.NhanVien.DeleteNhanVien
     {
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly ICurrentUserService _currentUserService;
-        public DeleteNhanVienCommandHandler(INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService)
+        private readonly IHopDongRepository _hopDongRepository;
+        public DeleteNhanVienCommandHandler(INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService, IHopDongRepository hopDongRepository)
         {
             _nhanVienRepository = nhanVienRepository;
             _currentUserService = currentUserService;
+            _hopDongRepository = hopDongRepository;
         }
         public async Task<string> Handle(DeleteNhanVienCommand command, CancellationToken cancellationToken)
         {
-            var isFound = await _nhanVienRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
-            if (isFound == null)
-                throw new NotFoundException("Id nhân viên không tồn tại");
+            var isFound = await _nhanVienRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken) ?? throw new NotFoundException("Id nhân viên không tồn tại");
+            var isHopDongConHieuLuc = await _hopDongRepository.AnyAsync(x => x.NhanVienID == command.Id && x.NgayXoa == null, cancellationToken);
+            if (isHopDongConHieuLuc)
+                return "Hợp đồng của nhân viên vẫn còn hiệu lực";
             var userDelete = await _nhanVienRepository.FindAsync(x => x.ID == _currentUserService.UserId && x.NgayXoa == null, cancellationToken);
             if (isFound.ChucVuID == 1 && userDelete.ChucVuID != 1)
                 throw new UnauthorizedException("Không thể xoá tài khoản Admin với tài khoản nhân sự");

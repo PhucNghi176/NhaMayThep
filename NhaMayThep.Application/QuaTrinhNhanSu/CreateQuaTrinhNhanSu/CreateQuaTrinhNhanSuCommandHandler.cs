@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 
         public async Task<string> Handle(CreateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null);
+            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null, cancellationToken);
             if (existPhongBan == false)
             {
                 throw new NotFoundException("ID phòng ban: " + command.PhongBanID + " không tồn tại");

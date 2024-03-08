@@ -28,8 +28,10 @@ namespace NhaMayThep.Application.ThueSuat.UpdateThueSuat
             var thuesuat = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (thuesuat == null)
                 throw new NotFoundException($"Không tìm thấy mục thuế với ID : {request.ID}");
-            thuesuat.ThuNhapTinhThueTrenThang = request.ThuNhapTinhThueTrenThang;
-            thuesuat.ThuNhapTinhThueTrenNam = request.ThuNhapTinhThueTrenNam;
+            thuesuat.DauThuNhapTinhThueTrenThang = request.DauThuNhapTinhThueTrenThang;
+            thuesuat.CuoiThuNhapTinhThueTrenThang = request.CuoiThuNhapTinhThueTrenThang;
+            thuesuat.DauThuNhapTinhThueTrenNam = request.DauThuNhapTinhThueTrenNam;
+            thuesuat.CuoiThuNhapTinhThueTrenNam = request.CuoiThuNhapTinhThueTrenNam;
             thuesuat.BacThue = request.BacThue;
             thuesuat.Name = request.Name;
             thuesuat.PhanTramThueSuat = request.PhanTramThueSuat;
