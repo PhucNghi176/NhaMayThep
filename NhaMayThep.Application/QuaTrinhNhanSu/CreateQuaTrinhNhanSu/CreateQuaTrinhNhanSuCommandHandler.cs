@@ -67,6 +67,16 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
                 throw new NotFoundException("Mã số nhân viên: " + command.MaSoNhanVien + " không tồn tại");
             }
 
+            var duplicateEntity = await _quaTrinhNhanSuRepository.AnyAsync(x => x.PhongBanID == command.PhongBanID
+                                                                            && x.ChucVuID == command.ChucVuID
+                                                                            && x.ChucDanhID == command.ChucDanhID
+                                                                            && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
+                                                                            && x.NguoiXoaID == null);
+            if (duplicateEntity)
+            {
+                throw new DuplicateNameException("Đã tồn tại quá trình làm việc được nhập của nhân viên này");
+            }
+
             QuaTrinhNhanSuEntity entity = new QuaTrinhNhanSuEntity()
             {
                 LoaiQuaTrinhID = command.LoaiQuaTrinhID,

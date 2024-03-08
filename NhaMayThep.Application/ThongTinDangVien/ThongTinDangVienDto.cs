@@ -20,17 +20,25 @@ namespace NhaMayThep.Application.ThongTinDangVien
 
         public string ID { get; set; }
         public string HoVaTen { get; set; }
+        public string DonViCongTac { get; set; }
+        public string ChucVuDang { get; set; }
+        public string TrinhDoChinhTri { get; set; }
         public DateTime NgayVaoDang { get; set; }
         public string CapDangVien { get; set; }
 
-        public static ThongTinDangVienDto Create(string id, string hoVaTen, DateTime ngayVaoDang, string capDangVien)
+
+        public static ThongTinDangVienDto Create(string id, string hoVaTen, DateTime ngayVaoDang, string capDangVien, string donViCongTac, string chucVuDang, string trinhDoChinhTri)
         {
             return new ThongTinDangVienDto
             {
                ID = id,
-                HoVaTen = hoVaTen,
+               HoVaTen = hoVaTen,
+               DonViCongTac = donViCongTac,
+               ChucVuDang = chucVuDang,
+               TrinhDoChinhTri = trinhDoChinhTri,
                NgayVaoDang = ngayVaoDang,
                CapDangVien = capDangVien,
+                
             };
         }
 
@@ -38,6 +46,9 @@ namespace NhaMayThep.Application.ThongTinDangVien
         {
             profile.CreateMap<ThongTinDangVienEntity, ThongTinDangVienDto>()
                 .ForMember(dest => dest.HoVaTen, opt => opt.MapFrom(src => src.NhanVien.HoVaTen));
+
+            profile.CreateMap<ThongTinDangVienEntity, ThongTinDangVienDto>()
+                .ForMember(dest => dest.DonViCongTac, opt => opt.MapFrom(src => src.DonViCongTac.Name));
         }
     }
 }
