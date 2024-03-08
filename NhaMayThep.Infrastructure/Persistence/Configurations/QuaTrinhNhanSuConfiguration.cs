@@ -9,9 +9,9 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<QuaTrinhNhanSuEntity> builder)
         {
             builder.HasOne(x => x.ChucVu)
-                 .WithOne()
-                 .HasForeignKey<QuaTrinhNhanSuEntity>(x => x.ChucVuID)
-                 .OnDelete(DeleteBehavior.Restrict);
+                .WithMany()
+                .HasForeignKey(x => x.ChucVuID)
+                .OnDelete(DeleteBehavior.Restrict);
 
         }
     }

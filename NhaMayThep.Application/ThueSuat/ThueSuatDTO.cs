@@ -16,30 +16,36 @@ namespace NhaMayThep.Application.ThueSuat
         public int ID {  get; set; }
         public string Name {  get; set; }
         public int BacThue { get; set; }
-        public decimal ThuNhapTinhThueTrenNam { get; set; }
-        public decimal ThuNhapTinhThueTrenThang { get; set; }
+        public decimal DauThuNhapTinhThueTrenNam { get; set; }
+        public decimal CuoiThuNhapTinhThueTrenNam { get; set; }
+        public decimal DauThuNhapTinhThueTrenThang { get; set; }
+        public decimal CuoiThuNhapTinhThueTrenThang { get; set; }
         public double PhanTramThueSuat { get; set; }
         public ThueSuatDTO() { }
-        public ThueSuatDTO(int ID, string Name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, double phanTramThueSuat)
+        public ThueSuatDTO(int ID, string Name, int bacThue, decimal dauThuNhapTinhThueTrenNam, decimal cuoiThuNhapTinhThueTrenNam, decimal dauthuNhapTinhThueTrenThang, decimal cuoithuNhapTinhThueTrenThang, double phanTramThueSuat)
         {
             this.ID = ID;
             this.Name = Name;
             this.BacThue = bacThue;
-            this.ThuNhapTinhThueTrenNam = thuNhapTinhThueTrenNam;
-            this.ThuNhapTinhThueTrenThang = thuNhapTinhThueTrenThang;
+            this.DauThuNhapTinhThueTrenNam = dauThuNhapTinhThueTrenNam;
+            this.CuoiThuNhapTinhThueTrenNam = cuoiThuNhapTinhThueTrenNam;
+            this.DauThuNhapTinhThueTrenThang = dauthuNhapTinhThueTrenThang;
+            this.CuoiThuNhapTinhThueTrenThang = cuoithuNhapTinhThueTrenThang;
             this.PhanTramThueSuat = phanTramThueSuat;
         }
 
 
-        public static ThueSuatDTO Create(int id, string Name, int bacThue, decimal thuNhapTinhThueTrenNam, decimal thuNhapTinhThueTrenThang, double phanTramThueSuat)
+        public static ThueSuatDTO Create(int id, string Name, int bacThue, decimal dauThuNhapTinhThueTrenNam, decimal cuoiThuNhapTinhThueTrenNam, decimal dauthuNhapTinhThueTrenThang, decimal cuoithuNhapTinhThueTrenThang, double phanTramThueSuat)
         {
             return new ThueSuatDTO
             {
                 ID = id,
                 Name = Name,
                 BacThue = bacThue,
-                ThuNhapTinhThueTrenNam = thuNhapTinhThueTrenNam,
-                ThuNhapTinhThueTrenThang = thuNhapTinhThueTrenThang,
+                DauThuNhapTinhThueTrenNam = dauThuNhapTinhThueTrenNam,
+                CuoiThuNhapTinhThueTrenNam = cuoiThuNhapTinhThueTrenNam,
+                DauThuNhapTinhThueTrenThang = dauthuNhapTinhThueTrenThang,
+                CuoiThuNhapTinhThueTrenThang = cuoithuNhapTinhThueTrenThang,
                 PhanTramThueSuat = phanTramThueSuat,
             };
         }

@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac
 
             var checkDuplication = await _donViCongTacRepository.AnyAsync(x => x.Name == request.Name && x.NgayXoa == null, cancellationToken);
             if (checkDuplication)
-                throw new Exception("Tên đơn vị công tác đã tồn tại");
+                throw new NotFoundException("Tên đơn vị công tác đã tồn tại");
 
             donViCongTac.Name = request.Name;
             donViCongTac.NguoiCapNhatID = _currentUserService.UserId;

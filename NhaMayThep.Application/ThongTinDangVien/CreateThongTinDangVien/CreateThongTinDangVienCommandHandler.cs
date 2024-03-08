@@ -6,6 +6,7 @@ using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
+using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -18,11 +19,13 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
     {
         private IThongTinDangVienRepository _thongTinDangVienRepository;
         private INhanVienRepository _nhanVienRepository;
+        private IDonViCongTacRepository _donViCongTacRepository;
         private readonly ICurrentUserService _currentUserService;
-        public CreateThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService)
+        public CreateThongTinDangVienCommandHandler(IThongTinDangVienRepository thongTinDangVienRepository, INhanVienRepository nhanVienRepository, IDonViCongTacRepository donViCongTacRepository, ICurrentUserService currentUserService)
         {
             _thongTinDangVienRepository = thongTinDangVienRepository;
             _nhanVienRepository = nhanVienRepository;
+            _donViCongTacRepository = donViCongTacRepository;
             _currentUserService = currentUserService;
         }
         public async Task<string> Handle(CreateThongTinDangVienCommand request, CancellationToken cancellationToken)
@@ -35,9 +38,16 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
             if (!nhanVien)
                 throw new NotFoundException("Không tìm thấy Nhân Viên");
 
+            var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            if (!donViCongTac)
+                throw new NotFoundException("Không tìm thấy Đơn Vị Công Tác");
+
             var thongTinDangVien = new ThongTinDangVienEntity()
             {
                 NhanVienID =request.NhanVienID,
+                DonViCongTacID = request.DonViCongTacID,
+                ChucVuDang = request.ChucVuDang,
+                TrinhDoChinhTri = request.TrinhDoChinhTri,
                 NgayVaoDang = request.NgayVaoDang,
                 CapDangVien = request.CapDangVien,
                 NguoiTaoID = _currentUserService.UserId,

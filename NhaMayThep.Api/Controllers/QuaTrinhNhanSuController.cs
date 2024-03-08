@@ -14,6 +14,9 @@ using NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
 using System.Net.Mime;
+using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
+using NhaMayThep.Application.NhanVien;
+using NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -117,6 +120,20 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<QuaTrinhNhanSuDto>>>> GetPagination([FromQuery] GetQuaTrinhNhanSuByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("qua-trinh-nhan-su/filter-qua-trinh-nhan-su")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<QuaTrinhNhanSuDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<QuaTrinhNhanSuDto>>>> FilterQuaTrinhNhanSu(
+            [FromQuery] FilterQuaTrinhNhanSuQuery query,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
