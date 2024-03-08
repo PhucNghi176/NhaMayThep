@@ -22,11 +22,10 @@ namespace NhaMayThep.Application.HopDong.UpdateNgayKetThucHopDongCommand
 
         public async Task<string> Handle(UpdateNgayKetThucHopDongCommand command, CancellationToken cancellationToken)
         {
-            var hopDong = await _hopDongRepository.FindAsync(x => x.ID == command.Id, cancellationToken);
+            var hopDong = await _hopDongRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (hopDong == null)
                 return "Cập nhật ngày kết thúc thất bại";
             hopDong.NgayKetThuc = DateTime.Now;
-            hopDong.ThoiHanHopDong = (int)((hopDong.NgayKetThuc - hopDong.NgayKy).Value.Days / 30.436875);
             hopDong.NguoiCapNhatID = _currentUserService.UserId;
             hopDong.NgayCapNhatCuoi = DateTime.Now;
             _hopDongRepository.Update(hopDong);

@@ -123,6 +123,21 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         //    var result = await _mediator.Send(query, cancellationToken);
         //    return Ok(result);
         //}
+
+        [HttpPut("hop-dong/thay-doi-ngay-ket-thuc")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<HopDongDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> UpdateNgayKetThuc([FromBody] UpdateNgayKetThucHopDongCommand command, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(result);
+        }
+
         [HttpGet]
         [Route("hop-dong/filter-hop-dong")]
         [Produces(MediaTypeNames.Application.Json)]
