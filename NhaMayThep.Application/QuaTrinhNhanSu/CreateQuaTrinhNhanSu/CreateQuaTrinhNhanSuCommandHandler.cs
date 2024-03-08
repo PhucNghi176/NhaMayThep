@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 
         public async Task<string> Handle(CreateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null);
+            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null, cancellationToken);
             if (existPhongBan == false)
             {
                 throw new NotFoundException("ID phòng ban: " + command.PhongBanID + " không tồn tại");
@@ -65,6 +65,16 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
             if (existNhanVien == false)
             {
                 throw new NotFoundException("Mã số nhân viên: " + command.MaSoNhanVien + " không tồn tại");
+            }
+
+            var duplicateEntity = await _quaTrinhNhanSuRepository.AnyAsync(x => x.PhongBanID == command.PhongBanID
+                                                                            && x.ChucVuID == command.ChucVuID
+                                                                            && x.ChucDanhID == command.ChucDanhID
+                                                                            && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
+                                                                            && x.NguoiXoaID == null);
+            if (duplicateEntity)
+            {
+                throw new DuplicateNameException("Đã tồn tại quá trình làm việc được nhập của nhân viên này");
             }
 
             QuaTrinhNhanSuEntity entity = new QuaTrinhNhanSuEntity()

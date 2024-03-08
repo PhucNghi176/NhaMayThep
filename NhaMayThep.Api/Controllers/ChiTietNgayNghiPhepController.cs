@@ -13,7 +13,6 @@ using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 using NhaMayThep.Application.ChiTietNgayNghiPhep;
 using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.ChiTietDangVien.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -99,7 +98,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ChiTietNgayNghiPhepDto>>>> GetPagination([FromQuery] GetChiTietDangVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<ChiTietNgayNghiPhepDto>>>> GetPagination([FromQuery] GetAllChiTietNghiPhepQuery query, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
