@@ -36,9 +36,5 @@ namespace NhaMapThep.Domain.Entities
         public virtual CapBacLuongEntity CapBacLuong { get; set; }
         public required string PhuCapID { get; set; }
         public string? GhiChu { get; set; }
-
-
-
-
     }
 }

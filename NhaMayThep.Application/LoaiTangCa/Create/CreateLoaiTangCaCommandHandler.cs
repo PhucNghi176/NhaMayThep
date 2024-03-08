@@ -46,7 +46,7 @@ namespace NhaMayThep.Application.LoaiTangCa.Create
 
             };
             _repository.Add(loaiTangCaEntity);
-            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Loại Tăng Ca thành công" : "Tạo Loại Tăng Ca thất bại";
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Loại  Tăng Ca thành công" : "Tạo Loại Tăng Ca thất bại";
 
 
         }
