@@ -32,6 +32,7 @@
 
   <ItemGroup>
     <Folder Include="Persistence\Configurations\Mapping\" />
+    <Folder Include="Trigger\" />
   </ItemGroup>
 
 </Project>
