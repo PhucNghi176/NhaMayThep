@@ -66,6 +66,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
             entity.ChucVuID = command.ChucVuID;
             entity.LoaiQuaTrinhID = command.LoaiQuaTrinhID;
             entity.GhiChu = command.GhiChu;
+            entity.NgayBatDau = command.NgayBatDau;
             entity.NgayKetThuc = command.NgayKetThuc;
             entity.PhongBanID = command.PhongBanID;
             _quaTrinhNhanSuRepository.Update(entity);           

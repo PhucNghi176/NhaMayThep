@@ -29,7 +29,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
                 .NotNull().WithMessage("PhongBanID is require");
 
             RuleFor(v => v.NgayKetThuc)
-                .GreaterThan(DateTime.Now).WithMessage("NgayKetThuc is not valid");
+                .GreaterThan(x => x.NgayBatDau).WithMessage("NgayKetThuc is not valid");
         }
     }
 }
