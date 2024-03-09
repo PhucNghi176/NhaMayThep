@@ -4,6 +4,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
+using System.Data;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
 {
@@ -14,14 +15,17 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
         IChucDanhRepository _chucDanhRepository;
         IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSu;
         IPhongBanRepository _phongBanRepository;
+        INhanVienRepository _nhanVienRepository;
         ICurrentUserService _currentUserService;
         public UpdateQuaTrinhNhanSuCommandHandler(IQuaTrinhNhanSuRepository quaTrinhNhanSuRepository
             , IChucVuRepository chucVuRepository
             , IChucDanhRepository chucDanhRepository
             , IThongTinQuaTrinhNhanSuRepository thongTinQuaTrinhNhanSuRepository
             , IPhongBanRepository phongBanRepository
+            , INhanVienRepository nhanVienRepository
             , ICurrentUserService currentUserService)
         {
+            _nhanVienRepository = nhanVienRepository;
             _currentUserService = currentUserService;
             _chucVuRepository = chucVuRepository;
             _chucDanhRepository = chucDanhRepository;
@@ -60,6 +64,19 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
             {
                 throw new NotFoundException("ID loại quá trình: " + command.LoaiQuaTrinhID + " không tồn tại");
             }
+
+            var isExistNhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == entity.MaSoNhanVien, cancellationToken);
+            var duplicateEntity = await _quaTrinhNhanSuRepository.AnyAsync(x => x.PhongBanID == command.PhongBanID
+                                                                            && x.ChucVuID == command.ChucVuID
+                                                                            && x.ChucDanhID == command.ChucDanhID
+                                                                            && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
+                                                                            && isExistNhanVien
+                                                                            && x.NgayXoa == null);
+            if (duplicateEntity)
+            {
+                throw new DuplicateNameException("Đã tồn tại quá trình làm việc được nhập của nhân viên này");
+            }
+
             entity.NguoiCapNhatID = _currentUserService.UserId;
             entity.NgayCapNhatCuoi = DateTime.UtcNow;
             entity.ChucDanhID = command.ChucDanhID;
