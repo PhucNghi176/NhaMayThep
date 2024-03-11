@@ -26,6 +26,10 @@ namespace NhaMayThep.Application.LoaiHoaDon.Update
             {
                 throw new NotFoundException("Loại Hóa Đơn không tồn tại");
             }
+            if (loaiHoaDon.Name.Equals(request.Name))
+            {
+                throw new DuplicationException("Loại Hóa Đơn Này Đã Tồn Tại");
+            }
             loaiHoaDon.NguoiCapNhatID = _currentUserService.UserId;
             loaiHoaDon.Name = request.Name;
             loaiHoaDon.NgayCapNhat = DateTime.Now;
