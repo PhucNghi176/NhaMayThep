@@ -167,7 +167,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send<PagedResult<ChiTietBaoHiemDto>>(query, cancellationToken);
             return Ok(new JsonResponse<PagedResult<ChiTietBaoHiemDto>>(result));
         }
-        [HttpGet("chi-tiet-bao-hiem/filter-by-ho-ten-nhan-vie")]
+        [HttpGet("chi-tiet-bao-hiem/filter-by-ho-ten-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<List<ChiTietBaoHiemDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Application.Common.Models;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
@@ -35,28 +36,9 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
 
             var filter = resultQuery.Where(x => 
                 array.All(y => x.NhanVien.HoVaTen.Replace(" ", "").ToLower().Contains(y.ToString())));
-            var tasks = filter.Select(async x =>
-            {
-                var nhanvien = await _nhanvienRepository.FindAsync(_ => _.ID.Equals(x.MaSoNhanVien), cancellationToken);
-                var baohiem = await _baohiemRepository.FindAsync(_ => _.ID == x.LoaiBaoHiem, cancellationToken);
-                if (nhanvien != null && baohiem != null)
-                {
-                    return x.MapToChiTietBaoHiemDto(_mapper, nhanvien.HoVaTen, baohiem.Name);
-                }
-                else
-                {
-                    return x.MapToChiTietBaoHiemDto(_mapper, null, null);
-                }
-            });
-            var mappedResults = await Task.WhenAll(tasks);
-            if(mappedResults != null)
-            {
-                return mappedResults.ToList();
-            }
-            else
-            {
-                return new List<ChiTietBaoHiemDto>(){ };
-            }
+            var nhanviens = await _nhanvienRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.HoVaTen, cancellationToken);
+            var baohiems = await _baohiemRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
+            return filter.MapToChiTietBaoHiemDtoList(_mapper, nhanviens, baohiems);
         }
     }
 }

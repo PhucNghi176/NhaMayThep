@@ -15,7 +15,6 @@ using NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCan
 using System.Net.Mime;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
 using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByPagination;
 using NhaMayThep.Application.ThongTinCongDoan.GetAll;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPaginationDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination;
@@ -196,20 +195,6 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
-        }
-
-        [HttpGet("thong-tin-giam-tru-gia-canh/phan-trang")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> GetPagination([FromQuery] GetThongTinGiamTruGiaCanhByPaginationQuery query, CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(query, cancellationToken);
-            return Ok(result);
         }
     }
 }

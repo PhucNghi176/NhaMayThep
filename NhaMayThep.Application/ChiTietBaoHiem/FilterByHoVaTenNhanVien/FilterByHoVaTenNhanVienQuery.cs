@@ -11,15 +11,10 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
     public class FilterByHoVaTenNhanVienQuery : IRequest<List<ChiTietBaoHiemDto>>, IRequest
     {
         public FilterByHoVaTenNhanVienQuery() { }
-        public FilterByHoVaTenNhanVienQuery(string hoVaTen, int pageNumber, int pageSize)
+        public FilterByHoVaTenNhanVienQuery(string hoVaTen)
         {
             HoVaTen = hoVaTen;
-            PageSize = pageSize;
-            PageNumber = pageNumber;
         }
-
         public string HoVaTen { get;set; }
-        public int PageNumber { get; set; }
-        public int PageSize { get; set; }
     }
 }
