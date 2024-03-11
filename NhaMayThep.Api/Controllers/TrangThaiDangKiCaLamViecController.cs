@@ -13,15 +13,14 @@ using NhaMayThep.Application.TrangThaiDangKiCaLamViec.GetTrangThaiDangKiCaLamVie
 
 namespace NhaMayThep.Api.Controllers
 {
-    public class TrangThaiDangKiCaLamViecController
-    {
+    
         [ApiController]
         [Authorize]
-        public class LoaiHoaDonController : ControllerBase
+        public class TrangThaiDangKiCaLamViecController : ControllerBase
         {
             private readonly ISender _mediator;
 
-            public LoaiHoaDonController(ISender mediator)
+            public TrangThaiDangKiCaLamViecController(ISender mediator)
             {
                 _mediator = mediator;
             }
@@ -95,5 +94,5 @@ namespace NhaMayThep.Api.Controllers
                 return Ok(new JsonResponse<TrangThaiDangKiCaLamViecDTO>(result));
             }
         }
-    }
+    
 }
