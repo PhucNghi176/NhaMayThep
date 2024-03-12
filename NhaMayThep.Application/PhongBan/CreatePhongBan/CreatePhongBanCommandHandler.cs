@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
         }
         public async Task<string> Handle(CreatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            var existName = await _phongBanRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
+            var existName = await _phongBanRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null, cancellationToken);
             if (existName == true)
             {
                 throw new DuplicationException("Tên phòng ban: " + command.Name + " đã tồn tại");

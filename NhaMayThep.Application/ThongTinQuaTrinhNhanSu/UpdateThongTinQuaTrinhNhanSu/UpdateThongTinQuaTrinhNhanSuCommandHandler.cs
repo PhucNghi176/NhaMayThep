@@ -13,8 +13,8 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.UpdateThongTinQuaTrinhNh
 {
     public class UpdateThongTinQuaTrinhNhanSuCommandHandler : IRequestHandler<UpdateThongTinQuaTrinhNhanSuCommand, string>
     {
-        IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSuRepository;
-        ICurrentUserService _currentUserService;
+        private readonly IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSuRepository;
+        private readonly ICurrentUserService _currentUserService;
         public UpdateThongTinQuaTrinhNhanSuCommandHandler(ICurrentUserService currentUserService, IThongTinQuaTrinhNhanSuRepository thongTinQuaTrinhNhanSuRepository)
         {
             _currentUserService = currentUserService;
@@ -22,12 +22,12 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.UpdateThongTinQuaTrinhNh
         }
         public async Task<string> Handle(UpdateThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException("ID: " + command.ID + " không tồn tại");
             }
-            var existName = await _thongTinQuaTrinhNhanSuRepository.AnyAsync(x => x.Name == command.Name && x.ID != command.ID && x.NguoiXoaID == null);
+            var existName = await _thongTinQuaTrinhNhanSuRepository.AnyAsync(x => x.Name == command.Name && x.ID != command.ID && x.NguoiXoaID == null, cancellationToken);
             if (existName == true)
             {
                 throw new DuplicateNameException("Thông tin quá trình nhân sự: " + command.Name + " đã tồn tại");

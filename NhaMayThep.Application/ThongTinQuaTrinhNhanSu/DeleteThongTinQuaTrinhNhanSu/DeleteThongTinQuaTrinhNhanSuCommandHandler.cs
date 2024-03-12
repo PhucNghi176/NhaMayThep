@@ -12,8 +12,8 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.DeleteThongTinQuaTrinhNh
 {
     public class DeleteThongTinQuaTrinhNhanSuCommandHandler : IRequestHandler<DeleteThongTinQuaTrinhNhanSuCommand, string>
     {
-        IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSuRepository;
-        ICurrentUserService _currentUserService;
+        private readonly IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSuRepository;
+        private readonly ICurrentUserService _currentUserService;
         public DeleteThongTinQuaTrinhNhanSuCommandHandler(ICurrentUserService currentUserService, IThongTinQuaTrinhNhanSuRepository thongTinQuaTrinhNhanSuRepository)
         {
             _currentUserService = currentUserService;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.DeleteThongTinQuaTrinhNh
         }
         public async Task<string> Handle(DeleteThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var entity = await _thongTinQuaTrinhNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException("Thông tin quá trình nhân sự không tồn tại");
