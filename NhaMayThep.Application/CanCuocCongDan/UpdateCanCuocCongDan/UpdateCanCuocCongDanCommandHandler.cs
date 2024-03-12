@@ -24,7 +24,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 
             CanCuocCongDan.HoVaTen = request.HoVaTen;
             CanCuocCongDan.NgaySinh = request.NgaySinh;
-            CanCuocCongDan.GioiTinh = (bool)request.GioiTinh;
+            CanCuocCongDan.GioiTinh = request.GioiTinh;
             CanCuocCongDan.QuocTich = request.QuocTich;
             CanCuocCongDan.QueQuan = request.QueQuan;
             CanCuocCongDan.DiaChiThuongTru = request.DiaChiThuongTru;

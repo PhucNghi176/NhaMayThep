@@ -38,7 +38,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
                 NhanVienID = request.NhanVienID,
                 HoVaTen = request.HoVaTen,
                 NgaySinh = request.NgaySinh,
-                GioiTinh = (bool)request.GioiTinh,
+                GioiTinh = request.GioiTinh,
                 QuocTich = request.QuocTich,
                 QueQuan = request.QueQuan,
                 DiaChiThuongTru = request.DiaChiThuongTru,

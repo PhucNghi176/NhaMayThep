@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
         public string CanCuocCongDan { get; set; }
         public string HoVaTen { get; set; }
         public DateTime NgaySinh { get; set; }
-        public bool? GioiTinh { get; set; } = false;
+        public bool GioiTinh { get; set; } = false;
         public string QuocTich { get; set; }
         public string QueQuan { get; set; }
         public string DiaChiThuongTru { get; set; }
