@@ -33,6 +33,7 @@
   <ItemGroup>
     <Folder Include="Migrations\" />
     <Folder Include="Persistence\Configurations\Mapping\" />
+    <Folder Include="Trigger\" />
   </ItemGroup>
 
 </Project>

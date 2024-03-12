@@ -96,7 +96,7 @@ namespace NhaMayThep.Api.Controllers
         //    return Ok(new JsonResponse<NhanVienDto>(result));
         //}
         [HttpGet]
-        [Route("nhan-vien/get-nhanvienID")]
+        [Route("nhan-vien/get-nhanvienEmail")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
