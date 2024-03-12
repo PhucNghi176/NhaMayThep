@@ -18,12 +18,10 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 
         public async Task<string> Handle(UpdateCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var CanCuocCongDanNhanVien = await _canCuocCongDanRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
-            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null, cancellationToken);
-            if (CanCuocCongDan is null)
-            {
-                throw new NotFoundException($"Khong Tim Thay CanCuocCongDan {request.CanCuocCongDan}");
-            }
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken) ?? throw new NotFoundException("Nhân Viên Không Có Cân Cước Công Dân");
+            var IsExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NhanVienID != request.NhanVienID && x.NgayXoa == null, cancellationToken);
+            if (IsExsisted) { throw new DuplicationException("Căn Cước Công Dân này đã tồn tại "); }
+
             CanCuocCongDan.HoVaTen = request.HoVaTen;
             CanCuocCongDan.NgaySinh = request.NgaySinh;
             CanCuocCongDan.GioiTinh = request.GioiTinh;
