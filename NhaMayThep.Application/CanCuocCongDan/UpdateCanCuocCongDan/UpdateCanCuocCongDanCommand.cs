@@ -5,7 +5,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 {
     public class UpdateCanCuocCongDanCommand : IRequest<string>, ICommand
     {
-        public UpdateCanCuocCongDanCommand(string canCuocCongDan, string hoVaTen, DateTime ngaySinh, bool gioiTinh, string quocTich, string queQuan, string diaChiThuongTru, DateTime ngayCap, string noiCap, string danToc, string tonGiao, string nhanVienID)
+        public UpdateCanCuocCongDanCommand(string canCuocCongDan, string hoVaTen, DateTime ngaySinh, bool gioiTinh, string quocTich, string queQuan, string diaChiThuongTru, DateTime ngayCap, string noiCap, string danToc, string tonGiao, string CanCuocCongDanID)
         {
 
             CanCuocCongDan = canCuocCongDan;
@@ -19,10 +19,10 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
             NoiCap = noiCap;
             DanToc = danToc;
             TonGiao = tonGiao;
-            NhanVienID = nhanVienID;
+            this.CanCuocCongDanID = CanCuocCongDanID;
         }
 
-        public string NhanVienID { get; set; }
+        public string CanCuocCongDanID { get; set; }
         public string CanCuocCongDan { get; set; }
         public string HoVaTen { get; set; }
         public DateTime NgaySinh { get; set; }
