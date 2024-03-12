@@ -17,6 +17,7 @@ using System.Net.Mime;
 using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
 using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu;
+using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -73,27 +74,13 @@ namespace NhaMayThep.Api.Controllers
             return result == null ? NotFound() : Ok(new JsonResponse<QuaTrinhNhanSuDto>(result));
         }
 
-        [HttpPut("qua-trinh-nhan-su/{id}")]
-        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status204NoContent)]
+        [HttpPut("qua-trinh-nhan-su")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<string>>> Update(
-            [FromRoute] string id,
-            [FromBody] UpdateQuaTrinhNhanSuCommand command,
-            CancellationToken cancellationToken = default)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Update(UpdateQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            if (command.ID == default)
-            {
-                command.ID = id;
-            }
-            if (id != command.ID)
-            {
-                return BadRequest();
-            }
-
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
