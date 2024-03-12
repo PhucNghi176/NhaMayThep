@@ -72,7 +72,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
                                                                             && x.ChucDanhID == command.ChucDanhID
                                                                             && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
                                                                             && x.MaSoNhanVien == command.MaSoNhanVien
-                                                                            && x.NgayXoa == null);
+                                                                            
                                                                             && x.NguoiXoaID == null, cancellationToken);
             if (duplicateEntity)
             {
