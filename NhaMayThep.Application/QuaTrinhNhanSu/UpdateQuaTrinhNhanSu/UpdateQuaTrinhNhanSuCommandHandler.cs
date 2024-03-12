@@ -10,13 +10,13 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
 {
     public class UpdateQuaTrinhNhanSuCommandHandler : IRequestHandler<UpdateQuaTrinhNhanSuCommand, string>
     {
-        IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
-        IChucVuRepository _chucVuRepository;
-        IChucDanhRepository _chucDanhRepository;
-        IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSu;
-        IPhongBanRepository _phongBanRepository;
-        INhanVienRepository _nhanVienRepository;
-        ICurrentUserService _currentUserService;
+        private readonly IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
+        private readonly IChucVuRepository _chucVuRepository;
+        private readonly IChucDanhRepository _chucDanhRepository;
+        private readonly IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSu;
+        private readonly IPhongBanRepository _phongBanRepository;
+        private readonly INhanVienRepository _nhanVienRepository;
+        private readonly ICurrentUserService _currentUserService;
         public UpdateQuaTrinhNhanSuCommandHandler(IQuaTrinhNhanSuRepository quaTrinhNhanSuRepository
             , IChucVuRepository chucVuRepository
             , IChucDanhRepository chucDanhRepository
@@ -41,25 +41,25 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
                 throw new NotFoundException("Quá trình nhân viên: " + command.ID + " không tồn tại");
             }
 
-            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null);
+            var existPhongBan = await _phongBanRepository.AnyAsync(x => x.ID == command.PhongBanID && x.NguoiXoaID == null, cancellationToken);
             if (existPhongBan == false)
             {
                 throw new NotFoundException("ID phòng ban: " + command.PhongBanID + " không tồn tại");
             }
 
-            var existChucVu = await _chucVuRepository.AnyAsync(x => x.ID == command.ChucVuID && x.NguoiXoaID == null);
+            var existChucVu = await _chucVuRepository.AnyAsync(x => x.ID == command.ChucVuID && x.NguoiXoaID == null, cancellationToken);
             if (existChucVu == false)
             {
                 throw new NotFoundException("ID chức vụ: " + command.ChucVuID + " không tồn tại");
             }
 
-            var existChucDanh = await _chucDanhRepository.AnyAsync(x => x.ID == command.ChucDanhID && x.NguoiXoaID == null);
+            var existChucDanh = await _chucDanhRepository.AnyAsync(x => x.ID == command.ChucDanhID && x.NguoiXoaID == null, cancellationToken);
             if (existChucDanh == false)
             {
                 throw new NotFoundException("ID chức danh: " + command.ChucDanhID + " không tồn tại");
             }
 
-            var existLoaiQuaTrinh = await _thongTinQuaTrinhNhanSu.AnyAsync(x => x.ID == command.LoaiQuaTrinhID && x.NguoiXoaID == null);
+            var existLoaiQuaTrinh = await _thongTinQuaTrinhNhanSu.AnyAsync(x => x.ID == command.LoaiQuaTrinhID && x.NguoiXoaID == null, cancellationToken);
             if (existLoaiQuaTrinh == false)
             {
                 throw new NotFoundException("ID loại quá trình: " + command.LoaiQuaTrinhID + " không tồn tại");
@@ -71,7 +71,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
                                                                             && x.ChucDanhID == command.ChucDanhID
                                                                             && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
                                                                             && isExistNhanVien
-                                                                            && x.NgayXoa == null);
+                                                                            && x.NgayXoa == null, cancellationToken);
             if (duplicateEntity)
             {
                 throw new DuplicateNameException("Đã tồn tại quá trình làm việc được nhập của nhân viên này");

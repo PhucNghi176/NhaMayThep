@@ -16,7 +16,7 @@ namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
         }
         public async Task<PhongBanDto> Handle(GetPhongBanQuery request, CancellationToken cancellationToken)
         {
-            var existID = await _phongBanRepository.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null);
+            var existID = await _phongBanRepository.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null, cancellationToken);
             if (existID == null)
             {
                 throw new NotFoundException("ID: " + request.ID + " không tồn tại");

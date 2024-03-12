@@ -12,8 +12,8 @@ namespace NhaMayThep.Application.MucSanPham.Delete
 {
     public class DeleteMucSanPhamCommandHandler : IRequestHandler<DeleteMucSanPhamCommand, string>
     {
-        ICurrentUserService _currentUserService;
-        IMucSanPhamRepository _mucSanPhamRepository;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMucSanPhamRepository _mucSanPhamRepository;
         public DeleteMucSanPhamCommandHandler(ICurrentUserService currentUserService, IMucSanPhamRepository mucSanPhamRepository)
         {
             _currentUserService = currentUserService;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.MucSanPham.Delete
         }
         public async Task<string> Handle(DeleteMucSanPhamCommand command, CancellationToken cancellationToken)
         {
-            var existEntity = await _mucSanPhamRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var existEntity = await _mucSanPhamRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null, cancellationToken);
             if (existEntity == null)
             {
                 throw new NotFoundException("ID không tồn tại");
