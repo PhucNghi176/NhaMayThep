@@ -7,7 +7,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 {
     public class UpdateCanCuocCongDanCommandHandler : IRequestHandler<UpdateCanCuocCongDanCommand, string>
     {
-        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;      
+        private readonly ICanCuocCongDanRepository _canCuocCongDanRepository;
         private readonly ICurrentUserService _currentUserService;
 
         public UpdateCanCuocCongDanCommandHandler(ICanCuocCongDanRepository canCuocCongDanRepository, ICurrentUserService currentUserService)
@@ -18,11 +18,9 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 
         public async Task<string> Handle(UpdateCanCuocCongDanCommand request, CancellationToken cancellationToken)
         {
-            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null);
-            if (CanCuocCongDan is null)
-            {
-                throw new NotFoundException($"Khong Tim Thay CanCuocCongDan {request.CanCuocCongDan}");
-            }
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAsync(x => x.ID == request.CanCuocCongDanID && x.NgayXoa == null, cancellationToken) ?? throw new NotFoundException("Nhân Viên Không Có Cân Cước Công Dân");
+
+            CanCuocCongDan.CanCuocCongDan = request.CanCuocCongDan;
             CanCuocCongDan.HoVaTen = request.HoVaTen;
             CanCuocCongDan.NgaySinh = request.NgaySinh;
             CanCuocCongDan.GioiTinh = request.GioiTinh;

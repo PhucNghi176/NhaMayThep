@@ -13,8 +13,8 @@ namespace NhaMayThep.Application.MucSanPham.Update
 {
     public class UpdateMucSanPhamCommandHandler : IRequestHandler<UpdateMucSanPhamCommand, string>
     {
-        ICurrentUserService _currentUserService;
-        IMucSanPhamRepository _mucSanPhamRepository;
+        private readonly ICurrentUserService _currentUserService;
+        private readonly IMucSanPhamRepository _mucSanPhamRepository;
         public UpdateMucSanPhamCommandHandler(ICurrentUserService currentUserService, IMucSanPhamRepository mucSanPhamRepository)
         {
             _currentUserService = currentUserService;
@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.MucSanPham.Update
 
         public async Task<string> Handle(UpdateMucSanPhamCommand command, CancellationToken cancellationToken)
         {
-            var existEntity = await _mucSanPhamRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
+            var existEntity = await _mucSanPhamRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null, cancellationToken);
             if (existEntity == null)
             {
                 throw new NotFoundException("ID không tồn tại");

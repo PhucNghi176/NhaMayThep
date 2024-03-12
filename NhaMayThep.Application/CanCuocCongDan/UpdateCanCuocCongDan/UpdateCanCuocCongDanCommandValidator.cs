@@ -28,8 +28,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
                 .NotEmpty().WithMessage("Ngày sinh không để trống");
             RuleFor(c => c.NgaySinh)
                    .Must(CheckAge).WithMessage("Ngày sinh không hợp lệ");
-            RuleFor(c => c.GioiTinh)
-                .NotEmpty().WithMessage("Giới tính không để trống");
+            
             RuleFor(c => c.QueQuan)
                 .NotEmpty().WithMessage("Quên quán không để trống");
             RuleFor(c => c.DiaChiThuongTru)

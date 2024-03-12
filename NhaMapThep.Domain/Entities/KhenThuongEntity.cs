@@ -20,6 +20,7 @@ namespace NhaMapThep.Domain.Entities
         public virtual ChinhSachNhanSuEntity ChinhSachNhanSu { get; set; }
         public string TenDotKhenThuong { get; set; }
         public DateTime NgayKhenThuong { get; set; }
+        [Column(TypeName = "decimal(18,4)")]
         public decimal TongThuong { get; set; }
     }
 }

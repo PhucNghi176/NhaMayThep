@@ -14,9 +14,9 @@ namespace NhaMayThep.Application.TangCa.Create
 {
     public class CreateTangCaCommandHandler : IRequestHandler<CreateTangCaCommand, string>
     {
-        private ITangCaRepository _TangCaRepository;
-        private INhanVienRepository _nhanVienRepository;
-        private ILoaiTangCaRepository _loaiTangCaRepository;
+        private readonly ITangCaRepository _TangCaRepository;
+        private readonly INhanVienRepository _nhanVienRepository;
+        private readonly ILoaiTangCaRepository _loaiTangCaRepository;
         private readonly ICurrentUserService _currentUserService;
         public CreateTangCaCommandHandler(ITangCaRepository TangCaRepository, INhanVienRepository nhanVienRepository, IMucSanPhamRepository mucSanPhamRepository, ICurrentUserService currentUserService, ILoaiTangCaRepository loaiTangCaRepository)
         {

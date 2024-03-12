@@ -14,8 +14,8 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNh
 {
     public class CreateThongTinQuaTrinhNhanSuCommandHandler : IRequestHandler<CreateThongTinQuaTrinhNhanSuCommand, string>
     {
-        IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSuRepository;
-        ICurrentUserService _currentUserService;
+        private readonly IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSuRepository;
+        private readonly ICurrentUserService _currentUserService;
         public CreateThongTinQuaTrinhNhanSuCommandHandler(ICurrentUserService currentUserService, IThongTinQuaTrinhNhanSuRepository thongTinQuaTrinhNhanSuRepository)
         {
             _currentUserService = currentUserService;
@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNh
         }
         public async Task<string> Handle(CreateThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            var existName = await _thongTinQuaTrinhNhanSuRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null);
+            var existName = await _thongTinQuaTrinhNhanSuRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null, cancellationToken);
             if(existName == true)
             {
                 throw new DuplicationException("Thông tin quá trình nhân sự: " + command.Name + " đã tồn tại");

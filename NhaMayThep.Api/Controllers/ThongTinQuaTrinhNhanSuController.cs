@@ -20,6 +20,7 @@ using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetByPagination;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetAllThongTinQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -76,29 +77,18 @@ namespace NhaMayThep.Api.Controllers
             return result != null ? Ok(new JsonResponse<ThongTinQuaTrinhNhanSuDto>(result)) : NotFound();
         }
 
-        [HttpPut("thong-tin-qua-trinh-nhan-su/{id}")]
-        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [HttpPut("thong-tin-qua-trinh-nhan-su")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<bool>> Update(
-            [FromRoute] int id,
-            [FromBody] UpdateThongTinQuaTrinhNhanSuCommand command,
-            CancellationToken cancellationToken = default)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Update(UpdateThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
-            if (command.ID == default)
-            {
-                command.ID = id;
-            }
-            if (id != command.ID)
-            {
-                return BadRequest();
-            }
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+
+
         [HttpDelete("thong-tin-qua-trinh-nhan-su/{id}")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

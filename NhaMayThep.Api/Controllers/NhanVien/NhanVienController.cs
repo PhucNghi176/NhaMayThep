@@ -20,11 +20,11 @@ using NhaMayThep.Application.NhanVien.GetNhanVienTest;
 using NhaMayThep.Application.NhanVien.Test.TestTaoNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
 using Humanizer;
-using NhaMapThep.Application.Common.Pagination;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
 using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
+using NhaMayThep.Application.NhanVien.CreateNewNhanVienByExcel;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -96,7 +96,7 @@ namespace NhaMayThep.Api.Controllers
         //    return Ok(new JsonResponse<NhanVienDto>(result));
         //}
         [HttpGet]
-        [Route("nhan-vien/get-nhanvienID")]
+        [Route("nhan-vien/get-nhanvienEmail")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -224,6 +224,18 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpPost("nhan-vien/file")]
+        [Produces("application/json")]
+        [Consumes("multipart/form-data")]
+        [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> ReadFiles(IFormFile[] file, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(new CreateNewNhanVienByExcelCommand(file), cancellationToken);
             return Ok(result);
         }
     }

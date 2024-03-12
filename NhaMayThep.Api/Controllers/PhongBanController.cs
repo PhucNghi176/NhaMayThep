@@ -14,6 +14,7 @@ using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.PhongBan.GetAllPhongBan;
 using NhaMayThep.Application.PhongBan.GetByPagination;
+using NhaMayThep.Application.LoaiNghiPhep.Update;
 
 
 namespace NhaMayThep.Api.Controllers
@@ -71,29 +72,17 @@ namespace NhaMayThep.Api.Controllers
             return result != null ? Ok(new JsonResponse<List<PhongBanDto>>(result)) : NotFound();
         }
 
-        [HttpPut("phong-ban/{id}")]
-        [ProducesResponseType(typeof(bool), StatusCodes.Status200OK)]
+        [HttpPut("phong-ban")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(StatusCodes.Status404NotFound)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<bool>> Update(
-            [FromRoute] int id,
-            [FromBody] UpdatePhongBanCommand command,
-            CancellationToken cancellationToken = default)
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<string>>> Update(UpdatePhongBanCommand command, CancellationToken cancellationToken)
         {
-            if (command.ID == default)
-            {
-                command.ID = id;
-            }
-            if (id != command.ID)
-            {
-                return BadRequest();
-            }
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
+
         [HttpDelete("phong-ban/{id}")]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

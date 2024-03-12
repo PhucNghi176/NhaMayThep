@@ -23,19 +23,30 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Update
             var lnp = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (lnp == null)
             {
-                throw new NotFoundException("LoaiNghiPhep với id không tìm thấy");
+                throw new NotFoundException("LoaiNghiPhep với ID không tìm thấy.");
             }
-            if(lnp.NgayXoa != null)
+
+            if (lnp.NgayXoa != null)
             {
-                throw new NotFoundException("Loại nghỉ phép này đã bị xóa rồi");
+                throw new NotFoundException("LoaiNghiPhep này đã bị xóa.");
             }
-            lnp.ID = request.Id;
+
+            // Check if another LoaiNghiPhep with the same name (but a different ID) exists
+            var existingWithName = await _repository.FindAllAsync(x => x.Name.ToLower() == request.Name.ToLower() && x.ID != request.Id && x.NgayXoa == null, cancellationToken);
+            if (existingWithName.Any())
+            {
+                // If such an entity exists, throw a duplication exception or return a message indicating the name is already taken.
+                throw new DuplicationException($"Loại Nghỉ Phép với tên này  '{request.Name}' đã có sẵn.");
+            }
+
+            // Proceed with updating the LoaiNghiPhep if no duplicates are found
             lnp.Name = request.Name ?? lnp.Name;
             _repository.Update(lnp);
+
             if (await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
-                return "Cập nhật thành công";
+                return "Update thành công.";
             else
-                return "Cập nhật thất bại";
+                return "Update thất bại.";
         }
     }
 }
