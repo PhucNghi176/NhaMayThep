@@ -38,6 +38,7 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
         public TimeSpan SoGioTangCa { get; set; }
 
         [Required]
+        [Column(TypeName = "decimal(18,4)")]
         public decimal HeSoLuongTangCa { get; set; }
         [Required]
         public int TrangThaiDuyet { get; set; }

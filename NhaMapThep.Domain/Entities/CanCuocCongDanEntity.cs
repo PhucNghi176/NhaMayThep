@@ -11,7 +11,7 @@ namespace NhaMapThep.Domain.Entities
         public required string CanCuocCongDan { get; set; }
         public required string NhanVienID { get; set; }
         [ForeignKey(nameof(NhanVienID))]
-        public virtual ICollection<NhanVienEntity>? NhanVien { get; set; }
+        public virtual NhanVienEntity NhanVien { get; set; }
         public required string HoVaTen { get; set; }
         public required DateTime NgaySinh { get; set; }
         public required bool GioiTinh { get; set; }

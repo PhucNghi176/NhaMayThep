@@ -21,11 +21,11 @@ namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
     [Authorize]
-    public class CanCuocCongCanController : ControllerBase
+    public class CanCuocCongDanController : ControllerBase
     {
         private readonly IMediator _mediator;
 
-        public CanCuocCongCanController(IMediator mediator, ICurrentUserService currentUserService)
+        public CanCuocCongDanController(IMediator mediator, ICurrentUserService currentUserService)
         {
             _mediator = mediator;
 
