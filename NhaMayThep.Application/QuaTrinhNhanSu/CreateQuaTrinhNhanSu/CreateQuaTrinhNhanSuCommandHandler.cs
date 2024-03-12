@@ -72,8 +72,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
                                                                             && x.ChucDanhID == command.ChucDanhID
                                                                             && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
                                                                             && x.MaSoNhanVien == command.MaSoNhanVien
-                                                                            
-                                                                            && x.NguoiXoaID == null, cancellationToken);
+                                                                            && x.NgayXoa == null, cancellationToken);
             if (duplicateEntity)
             {
                 throw new DuplicationException("Đã tồn tại quá trình làm việc được nhập của nhân viên này");

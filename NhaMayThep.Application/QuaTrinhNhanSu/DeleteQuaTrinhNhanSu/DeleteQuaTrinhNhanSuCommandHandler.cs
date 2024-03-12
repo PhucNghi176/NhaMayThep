@@ -14,8 +14,8 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu
 {
     public class DeleteQuaTrinhNhanSuCommandHandler : IRequestHandler<DeleteQuaTrinhNhanSuCommand, string>
     {
-        IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
-        ICurrentUserService _currentUserService;
+        private readonly IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
+        private readonly ICurrentUserService _currentUserService;
         public DeleteQuaTrinhNhanSuCommandHandler(IQuaTrinhNhanSuRepository quaTrinhNhanSuRepository, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;

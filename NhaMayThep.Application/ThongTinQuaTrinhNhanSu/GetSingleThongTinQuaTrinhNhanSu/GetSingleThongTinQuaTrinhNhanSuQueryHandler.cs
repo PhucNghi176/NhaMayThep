@@ -11,8 +11,8 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrin
 {
     public class GetSingleThongTinQuaTrinhNhanSuQueryHandler : IRequestHandler<GetSingleThongTinQuaTrinhNhanSuQuery, ThongTinQuaTrinhNhanSuDto>
     {
-        IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSu;
-        IMapper _mapper;
+        private readonly IThongTinQuaTrinhNhanSuRepository _thongTinQuaTrinhNhanSu;
+        private readonly IMapper _mapper;
         public GetSingleThongTinQuaTrinhNhanSuQueryHandler(IMapper mapper, IThongTinQuaTrinhNhanSuRepository thongTinQuaTrinhNhanSuRepository)
         {
             _mapper = mapper;
@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrin
         }
         public async Task<ThongTinQuaTrinhNhanSuDto> Handle(GetSingleThongTinQuaTrinhNhanSuQuery request, CancellationToken cancellationToken)
         {
-            var entity = await _thongTinQuaTrinhNhanSu.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null);
+            var entity = await _thongTinQuaTrinhNhanSu.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null, cancellationToken);
             return entity.MapToThongTinQuaTrinhNhanSuDto(_mapper);
         }
     }

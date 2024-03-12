@@ -12,8 +12,8 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu
 {
     public class GetAllQuaTrinhNhanSuQueryHandler : IRequestHandler<GetAllQuaTrinhNhanSuQuery, List<QuaTrinhNhanSuDto>>
     {
-        IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
-        IMapper _mapper;
+        private readonly IQuaTrinhNhanSuRepository _quaTrinhNhanSuRepository;
+        private readonly IMapper _mapper;
         public GetAllQuaTrinhNhanSuQueryHandler(IQuaTrinhNhanSuRepository quaTrinhNhanSuRepository, IMapper mapper)
         {
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;

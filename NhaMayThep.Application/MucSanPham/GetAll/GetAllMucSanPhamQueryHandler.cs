@@ -12,8 +12,8 @@ namespace NhaMayThep.Application.MucSanPham.GetAll
 {
     public class GetAllMucSanPhamQueryHandler : IRequestHandler<GetAllMucSanPhamQuery, List<MucSanPhamDto>>
     {
-        IMucSanPhamRepository _mucSanPhamRepository;
-        IMapper _mapper;
+        private readonly IMucSanPhamRepository _mucSanPhamRepository;
+        private readonly IMapper _mapper;
         public GetAllMucSanPhamQueryHandler(IMucSanPhamRepository mucSanPhamRepository, IMapper mapper)
         {
             _mucSanPhamRepository = mucSanPhamRepository;
