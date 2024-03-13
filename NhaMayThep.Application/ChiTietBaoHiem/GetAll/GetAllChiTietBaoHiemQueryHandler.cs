@@ -37,34 +37,9 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAll
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào");
             }
-            var timer = new Stopwatch();
-
-            timer.Start();
-            var tasks = result.Select(async x =>
-            {
-                var nhanvien = await _nhanvienRepository.FindAsync(_ => _.ID.Equals(x.MaSoNhanVien) ,cancellationToken);
-                var baohiem = await _baohiemRepository.FindAsync(_ => _.ID == x.LoaiBaoHiem, cancellationToken);
-                if(nhanvien  != null && baohiem != null)
-                {
-                   return x.MapToChiTietBaoHiemDto(_mapper, nhanvien.HoVaTen, baohiem.Name);
-                }
-                else
-                {
-                   return x.MapToChiTietBaoHiemDto(_mapper, null, null);
-                }
-            });
-            var mappedResults = await Task.WhenAll(tasks);
-            timer.Stop();
-            Console.Write("Elapsed Time 1: " + timer.Elapsed);
-            timer.Reset();
-            timer.Start();
             var nhanviens = await _nhanvienRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.HoVaTen, cancellationToken);
             var baohiems = await _baohiemRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
-            result.MapToChiTietBaoHiemDtoList(_mapper, nhanviens, baohiems);
-            timer.Stop();
-            Console.Write("Elapsed Time 2: " + timer.Elapsed);
-
-            return mappedResults.ToList();
+            return result.MapToChiTietBaoHiemDtoList(_mapper, nhanviens, baohiems);
         }
     }
 }

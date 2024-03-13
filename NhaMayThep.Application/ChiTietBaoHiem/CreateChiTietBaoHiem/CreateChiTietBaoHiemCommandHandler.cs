@@ -58,6 +58,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem
                 NgayKetThuc = request.NgayKetThuc,
                 NhanVien = nhanvien,
                 BaoHiem = baohiem,
+                NoiCap = request.NoiCap,
                 NguoiTaoID = _currentUser.UserId,
                 NgayTao = DateTime.Now,
             };
