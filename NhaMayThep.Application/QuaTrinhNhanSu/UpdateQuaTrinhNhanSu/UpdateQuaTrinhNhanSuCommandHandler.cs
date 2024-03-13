@@ -70,11 +70,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
                                                                             && x.ChucVuID == command.ChucVuID
                                                                             && x.ChucDanhID == command.ChucDanhID
                                                                             && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
-                                                                            && isExistNhanVien
+                                                                            && isExistNhanVien                                                                          
                                                                             && x.NgayXoa == null, cancellationToken);
             if (duplicateEntity)
             {
-                throw new DuplicateNameException("Đã tồn tại quá trình làm việc được nhập của nhân viên này");
+                throw new DuplicationException("Nhân viên cần cập nhật đã có quá trình này");
             }
 
             entity.NguoiCapNhatID = _currentUserService.UserId;
