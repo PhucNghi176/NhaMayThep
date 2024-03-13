@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
             RuleFor(x => x.Loai)
                 .NotEmpty().WithMessage("Loai is Required")
                 .Must(x => x == "TangLuong" || x == "GiamLuong")
-                .WithMessage("Invalid value for Loai. It should be either TangLuong or GiamLuong"); ;
+                .WithMessage("Nhập liệu không hợp lệ, Nên là Tăng Lương hoặc Giám Lương"); ;
 
             RuleFor(x => x.LuongCu)
                 .NotEmpty().WithMessage("Luong Cu is Required")

@@ -38,14 +38,14 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
 
             if (nhanvien == null)
             {
-                return "Mã Nhân Viên ko tồn tại";
+                return "Mã Nhân Viên không tồn tại";
             }
 
             var hopdong = await _hopDongRepository.FindAsync(x => x.ID == request.MaSoHopDong, cancellationToken);
 
             if (hopdong == null)
             {
-                return "Mã Nhân Viên ko tồn tại";
+                return "Mã Nhân Viên không tồn tại";
             }
 
 
