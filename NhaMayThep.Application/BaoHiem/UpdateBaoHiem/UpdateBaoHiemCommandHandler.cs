@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.BaoHiem.UpdateBaoHiem
         }
         public async Task<string> Handle(UpdateBaoHiemCommand command, CancellationToken cancellationToken)
         {
-            var duplicate = await _baoHiemRepository.AnyAsync(x => x.Name == command.TenLoaiBaoHiem && x.NgayXoa == null, cancellationToken);
+            var duplicate = await _baoHiemRepository.AnyAsync(x => x.ID != command.Id && x.Name == command.TenLoaiBaoHiem && x.NgayXoa == null, cancellationToken);
             if (duplicate)
                 throw new NotFoundException("Đã có tên bảo hiểm này trong hệ thống");
 

@@ -38,26 +38,15 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPaginationDeleted
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào bị xóa");
             }
-            var tasks = result.Select(async x =>
-            {
-                var nhanvien = await _nhanvienRepository.FindAsync(_ => _.ID.Equals(x.MaSoNhanVien), cancellationToken);
-                var baohiem = await _baohiemRepository.FindAsync(_ => _.ID == x.LoaiBaoHiem, cancellationToken);
-                if (nhanvien != null && baohiem != null)
-                {
-                    return x.MapToChiTietBaoHiemDto(_mapper, nhanvien.HoVaTen, baohiem.Name);
-                }
-                else
-                {
-                    return x.MapToChiTietBaoHiemDto(_mapper, null, null);
-                }
-            });
-            var mappedResults = await Task.WhenAll(tasks);
+            var nhanviens = await _nhanvienRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.HoVaTen, cancellationToken);
+            var baohiems = await _baohiemRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
+            var data = result.MapToChiTietBaoHiemDtoList(_mapper, nhanviens, baohiems);
             return PagedResult<ChiTietBaoHiemDto>.Create(
                totalCount: result.TotalCount,
                pageCount: result.PageCount,
                pageSize: result.PageSize,
                pageNumber: result.PageNo,
-               data: mappedResults.ToList());
+               data: data.ToList());
         }
     }
 }

@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Repositories
 {
-    public interface IChiTietBaoHiemRepository: IEFRepository<ChiTietBaoHiemEntity, ChiTietBaoHiemEntity>
-    {
-    }
+    public interface IChiTietBaoHiemRepository : IEFRepository<ChiTietBaoHiemEntity, ChiTietBaoHiemEntity>
+    {    }
 }
