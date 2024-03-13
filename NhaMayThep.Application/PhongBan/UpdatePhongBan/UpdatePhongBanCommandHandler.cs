@@ -28,7 +28,7 @@ namespace NhaMayThep.Application.PhongBan.UpdatePhongBan
             var otherE = await _phongBanRepository.AnyAsync(x => x.ID != command.ID && x.Name == command.Name && x.NguoiXoaID == null, cancellationToken);
             if (otherE == true)
             {
-                throw new DuplicateNameException("Tên phòng ban: " + command.Name + " đã tồn tại");
+                throw new DuplicationException("Tên phòng ban: " + command.Name + " đã tồn tại");
             }
 
             entity.Name = command.Name;
