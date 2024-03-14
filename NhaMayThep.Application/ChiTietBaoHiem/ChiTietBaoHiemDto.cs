@@ -16,13 +16,15 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
     public class ChiTietBaoHiemDto : IMapFrom<ChiTietBaoHiemEntity>
     {
         public string Id { get; set; } = null!;
+        public string? MaSoNhanVien { get; set; }
         public string NhanVien { get; set; } = null!;
+        public int LoaiBaoHiem { get; set; }
         public string BaoHiem { get; set; } = null!;
         public string? NgayHieuLuc { get; set; }
         public string? NgayKetThuc { get; set; }
         public string? NoiCap { get; set; }
         public static ChiTietBaoHiemDto CreateChiTietBaoHiem(string id, string nhanvien, string baohiem, DateTime ngayheuluc, DateTime ngayketthuc
-            ,string noicap)
+            ,string noicap, string masonhanvien, int loaibaohiem)
         {
             return new ChiTietBaoHiemDto
             {
@@ -31,7 +33,9 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
                 BaoHiem = baohiem,
                 NgayHieuLuc = ngayheuluc.ToString("dd/MM/yyyy - HH:mm:ss"),
                 NgayKetThuc = ngayketthuc.ToString("dd/MM/yyyy - HH:mm:ss"),
-                NoiCap = noicap
+                NoiCap = noicap,
+                MaSoNhanVien= masonhanvien,
+                LoaiBaoHiem= loaibaohiem
             };
         }
         public void Mapping(Profile profile)

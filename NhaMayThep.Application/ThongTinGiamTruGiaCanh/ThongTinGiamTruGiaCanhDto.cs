@@ -7,7 +7,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
     public class ThongTinGiamTruGiaCanhDto : IMapFrom<ThongTinGiamTruGiaCanhEntity>
     {
         public string Id { get; set; } = null!;
+        public string? NhanVienID { get; set; }
         public string NhanVien { get; set; } = null!;
+        public int? MaGiamTruID { get; set; }
         public string ThongTinGiamTru { get; set; } = null!;
         public string DiaChiLienLac { get; set; } = null!;
         public string QuanHeVoiNhanVien { get; set; } = null!;
@@ -21,6 +23,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
             string diachi,
             string quanhevoinhanvien,
             string cancuoccongdan,
+            string nhanvienid,
+            int magiamtruid,
             DateTime ngayxacnhan)
         {
             return new ThongTinGiamTruGiaCanhDto
@@ -31,7 +35,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
                 DiaChiLienLac = diachi,
                 QuanHeVoiNhanVien = quanhevoinhanvien,
                 CanCuocCongDan = cancuoccongdan,
-                NgayXacNhanPhuThuoc = ngayxacnhan
+                NgayXacNhanPhuThuoc = ngayxacnhan,
+                NhanVienID = nhanvienid,
+                MaGiamTruID= magiamtruid
             };
         }
 
