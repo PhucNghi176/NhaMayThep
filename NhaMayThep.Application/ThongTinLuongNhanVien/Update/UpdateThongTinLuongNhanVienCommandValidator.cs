@@ -16,30 +16,27 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
 
         private void ConfigureValidationRules()
         {
-            RuleFor(x => x.Id)
-                .NotEmpty().WithMessage("ID is Required");
-
             RuleFor(x => x.MaSoNhanVien)
-                .NotEmpty().WithMessage("Ma So Nhan Vien is Required");
+                .NotEmpty().WithMessage("Mã Số Nhân Viên Không Được Để Trống");
 
             RuleFor(x => x.MaSoHopDong)
-                .NotEmpty().WithMessage("Ma So Hop Dong is Required");
+                .NotEmpty().WithMessage("Mã Số Hợp Đồng Không Được Để Trống");
 
             RuleFor(x => x.Loai)
-                .NotEmpty().WithMessage("Loai is Required")
+                .NotEmpty().WithMessage("Loại Không Được Để Trống")
                 .Must(x => x == "TangLuong" || x == "GiamLuong")
-                .WithMessage("Invalid value for Loai. It should be either TangLuong or GiamLuong"); ;
+                .WithMessage("Nhập liệu không hợp lệ, Nên là Tăng Lương hoặc Giám Lương"); ;
 
             RuleFor(x => x.LuongCu)
-                .NotEmpty().WithMessage("Luong Cu is Required")
-                .GreaterThan(0).WithMessage("Luong Cu must be greater than 0");
+                .NotEmpty().WithMessage("Lương Cũ Không Được Để Trống")
+                .GreaterThan(0).WithMessage("Lương Cũ must be greater than 0");
 
             RuleFor(x => x.LuongMoi)
-                .NotEmpty().WithMessage("Luong Hien Tai is Required")
-                .GreaterThan(0).WithMessage("Luong Hien Tai must be greater than 0");
+                .NotEmpty().WithMessage("Lương Hiện Tại Không Được Để Trống")
+                .GreaterThan(0).WithMessage("Lương Hiện Tại must be greater than 0");
 
             RuleFor(x => x.NgayHieuLuc)
-                .NotEmpty().WithMessage("Ngay Hien Luc is Required");
+                .NotEmpty().WithMessage("Ngày Hiệu Lực Không Được Để Trống");
 
         }
     }
