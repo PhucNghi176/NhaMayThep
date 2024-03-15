@@ -23,7 +23,7 @@ namespace NhaMayThep.Application.KhenThuong.GetAllKhenThuong
         public async Task<List<KhenThuongDTO>> Handle(GetAllKhenThuongQuery request, CancellationToken cancellationToken)
         {
             var khenthuong = await this._repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
-            if (khenthuong == null) 
+            if (khenthuong.Count() == 0) 
                 throw new NotFoundException("Không tìm thấy bất kỳ khen thưởng nào.");
             return khenthuong.MapToKhenThuongDTOList(_mapper).ToList();
         }
