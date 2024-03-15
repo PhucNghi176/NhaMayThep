@@ -36,6 +36,11 @@ namespace NhaMayThep.Application.PhuCapNhanVien.UpdatePhuCapNhanVien
             {
                 throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
+            var checkDuplication = await _phuCapNhanVienRepository.AnyAsync(x => x.PhuCap.Equals(request.PhuCap), cancellationToken);
+            if (checkDuplication)
+            {
+                throw new DuplicationException("Phụ Cấp này đã tồn tại");
+            }
             phuCapNhanVien.NguoiCapNhatID = _currentUserService.UserId;
             phuCapNhanVien.NgayCapNhat = DateTime.Now;
             phuCapNhanVien.PhuCap = request.PhuCap;
