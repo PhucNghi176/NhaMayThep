@@ -28,10 +28,6 @@ namespace NhaMayThep.Application.PhuCapNhanVien.CreatePhuCapNhanVien
             if (!nhanVien)
                 throw new NotFoundException("Nhân viên này không tồn tại");
 
-            var checkDuplicatoion = await _phuCapNhanVienRepository.AnyAsync(x => x.MaSoNhanVien.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (checkDuplicatoion)
-                throw new DuplicationException("Phụ cấp nhân viên của nhân viên này đã tồn tại");
-
             var phuCapNhanVien = new PhuCapNhanVienEntity()
             {
                 NguoiTaoID = _currentUserService.UserId,
