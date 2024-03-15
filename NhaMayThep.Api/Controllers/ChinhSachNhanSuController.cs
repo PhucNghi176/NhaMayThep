@@ -2,13 +2,6 @@
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.MucSanPham.Create;
-using NhaMayThep.Application.MucSanPham.Delete;
-using NhaMayThep.Application.MucSanPham.GetAll;
-using NhaMayThep.Application.MucSanPham.GetById;
-using NhaMayThep.Application.MucSanPham.GetByPagination;
-using NhaMayThep.Application.MucSanPham.Update;
-using NhaMayThep.Application.MucSanPham;
 using System.Net.Mime;
 using NhaMayThep.Application.ChinhSachNhanSu;
 using NhaMayThep.Application.ChinhSachNhanSu.Create;
@@ -17,6 +10,7 @@ using NhaMayThep.Application.ChinhSachNhanSu.Update;
 using NhaMayThep.Application.ChinhSachNhanSu.Delete;
 using NhaMayThep.Application.ChinhSachNhanSu.GetAll;
 using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.ChinhSachNhanSu.FilterChinhSachNhanSu;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -107,6 +101,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(new DeleteChinhSachNhanSuCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet]
+        [Route("chinh-sach-nhan-su/filter-chinh-sach-nhan-su")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ChinhSachNhanSuDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ChinhSachNhanSuDto>>>> FilterChinhSachNhanSu(
+            [FromQuery] FilterChinhSachNhanSuQuery query,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
