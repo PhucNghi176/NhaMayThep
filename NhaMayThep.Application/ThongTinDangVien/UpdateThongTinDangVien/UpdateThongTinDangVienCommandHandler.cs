@@ -34,13 +34,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         {
             
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Đảng Viên");
 
-            var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID == request.NhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (!nhanVien)
-                throw new NotFoundException("Không tìm thấy Nhân Viên");
 
             var donViCongTac = await _donViCongTacRepository.AnyAsync(x => x.ID == request.DonViCongTacID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!donViCongTac)
