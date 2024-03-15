@@ -13,15 +13,17 @@ namespace NhaMayThep.Application.CapBacLuong
     {
         public CapBacLuongDto() { }
         public int Id { get; set; }
-        public string TenCapBac { get; set; }
+        public string Name { get; set; }
         public float HeSoLuong { get; set; }
-        public static CapBacLuongDto CreateCapBacLuong(int id, string tenCapBac, float heSoLuong)
+        public string TrinhDo { get; set; }
+        public static CapBacLuongDto CreateCapBacLuong(int id, string name, float heSoLuong, string trinhDo)
         {
             return new CapBacLuongDto()
             {
                 Id = id,
-                TenCapBac = tenCapBac,
-                HeSoLuong = heSoLuong
+                Name = name,
+                HeSoLuong = heSoLuong,
+                TrinhDo = trinhDo
             };
         }
 
