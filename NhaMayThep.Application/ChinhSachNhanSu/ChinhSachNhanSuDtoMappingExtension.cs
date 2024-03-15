@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.MucSanPham;
+using NhaMayThep.Application.QuaTrinhNhanSu;
 using System;
 using System.Collections.Generic;
 using System.Linq;
