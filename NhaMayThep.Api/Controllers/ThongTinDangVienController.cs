@@ -8,6 +8,8 @@ using NhaMayThep.Application.DonViCongTac;
 using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac;
 using NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac;
+using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
+using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.ThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien;
@@ -16,6 +18,7 @@ using NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.GetByPagination;
 using NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien;
 using System.Net.Mime;
+using NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -69,7 +72,7 @@ namespace NhaMayThep.Api.Controllers
         {
 
             var result = await _mediator.Send(new GetByNhanVienIDThongTinDangVienCommand(nhanVienID), cancellationToken);
-            return Ok(new JsonResponse<ThongTinDangVienDto>(result));
+            return Ok(new JsonResponse<List<ThongTinDangVienDto>>(result));
         }
 
         [HttpPut("thong-tin-dang-vien")]
@@ -112,6 +115,20 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<ThongTinDangVienDto>>>> GetPagination([FromQuery] GetThongTinDangVienByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("thong-tin-dang-vien/filter-thong-tin-dang-vien")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinDangVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinDangVienDto>>>> FilterNhanVien(
+            [FromQuery] FilterThongTinDangVienQuery query,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
