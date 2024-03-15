@@ -2,12 +2,14 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.PhuCapNhanVien;
 using NhaMayThep.Application.PhuCapNhanVien.CreatePhuCapNhanVien;
 using NhaMayThep.Application.PhuCapNhanVien.DeletePhuCapNhanVien;
 using NhaMayThep.Application.PhuCapNhanVien.GetAll;
 using NhaMayThep.Application.PhuCapNhanVien.UpdatePhuCapNhanVien;
 using System.Net.Mime;
+using NhaMayThep.Application.PhuCapNhanVien.FilterPhuCapNhanVien;
 
 namespace NhaMayThep.Api.Controllers.PhuCapNhanVien
 {
@@ -77,6 +79,20 @@ namespace NhaMayThep.Api.Controllers.PhuCapNhanVien
         {
             var result = await _mediator.Send(new DeletePhuCapNhanVienCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+        [HttpGet]
+        [Route("phu-cap-nhan-vien/filter-phu-cap-nhan-vien")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<PhuCapNhanVienDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<PhuCapNhanVienDto>>>> FilterPhuCapNhanVien(
+            [FromQuery] FilterPhuCapNhanVienQuery query,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

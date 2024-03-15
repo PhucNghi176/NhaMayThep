@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.PhuCapNhanVien.CreatePhuCapNhanVien
             var nhanVien = await _nhanVienRepository.AnyAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (!nhanVien)
                 throw new NotFoundException("Nhân viên này không tồn tại");
-            var checkDuplicatoion = await _phuCapNhanVienRepository.AnyAsync(x => x.Name == request.TenPhuCap && x.NgayXoa == null, cancellationToken);
+            var checkDuplicatoion = await _phuCapNhanVienRepository.AnyAsync(x => x.PhuCap == request.PhuCap && x.NgayXoa == null, cancellationToken);
             if (checkDuplicatoion)
                 throw new DuplicationException("Phụ cấp nhân viên đã tồn tại");
 
@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.PhuCapNhanVien.CreatePhuCapNhanVien
                 NgayTao = DateTime.Now,
                 MaSoNhanVien = request.MaSoNhanVien,
                 PhuCap = request.PhuCap,
-                Name = request.TenPhuCap
+                Name = request.Name
             };
 
             _phuCapNhanVienRepository.Add(phuCapNhanVien);
