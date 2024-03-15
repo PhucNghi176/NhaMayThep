@@ -45,6 +45,7 @@ namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
             var khenthuong = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (khenthuong == null)
                 throw new NotFoundException($"Không tìm thấy khen thưởng với ID : {request.ID} hoặc khen thưởng này đã bị xóa.");
+            khenthuong.TenDotKhenThuong = request.TenDotKhenThuong ?? khenthuong.TenDotKhenThuong;
             khenthuong.NguoiCapNhatID = this._currentUserService.UserId;
             khenthuong.NgayCapNhatCuoi = DateTime.UtcNow;
             khenthuong.MaSoNhanVien = request.MaSoNhanVien ?? khenthuong.MaSoNhanVien;

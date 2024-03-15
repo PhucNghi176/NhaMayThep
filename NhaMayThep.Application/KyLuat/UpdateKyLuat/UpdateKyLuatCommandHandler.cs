@@ -38,13 +38,17 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
                 if (nhanvien == null)
                     throw new NotFoundException($"Mã số nhân viên : {request.MaNhanVien} không tồn tại hoặc đã xóa.");
             }
-            var chinhsach = await this._chinhsach.FindAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
-            if (chinhsach == null)
-                throw new NotFoundException($"Chính sách nhân sự với ID : {request.ChinhSachNhanSuID} không tồn tại hoặc đã xóa.");
+            if (request.ChinhSachNhanSuID != null)
+            {
+                var chinhsach = await this._chinhsach.FindAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
+                if (chinhsach == null)
+                    throw new NotFoundException($"Không tìm thấy chính sách nhân sự với ID : {request.ChinhSachNhanSuID} hoặc chính sách nhân sự này đã bị xóa.");
+            }
             var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null,cancellationToken);
             if (kyluat == null)
                 throw new NotFoundException($"Không tìm thấy trường hợp kỷ luật với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
             kyluat.NguoiCapNhatID = this._currentUserService.UserId;
+            kyluat.TenDotKyLuat = request.TenDotKyLuat ?? kyluat.TenDotKyLuat;
             kyluat.NgayCapNhatCuoi = DateTime.UtcNow;
             kyluat.TongPhat = request.TongPhat;
             kyluat.ChinhSachNhanSuID = request.ChinhSachNhanSuID;
