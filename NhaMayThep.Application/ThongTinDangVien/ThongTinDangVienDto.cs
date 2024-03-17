@@ -45,10 +45,10 @@ namespace NhaMayThep.Application.ThongTinDangVien
         public void Mapping(Profile profile)
         {
             profile.CreateMap<ThongTinDangVienEntity, ThongTinDangVienDto>()
-                .ForMember(dest => dest.HoVaTen, opt => opt.MapFrom(src => src.NhanVien.HoVaTen));
-
-            profile.CreateMap<ThongTinDangVienEntity, ThongTinDangVienDto>()
+                .ForMember(dest => dest.HoVaTen, opt => opt.MapFrom(src => src.NhanVien.HoVaTen))
                 .ForMember(dest => dest.DonViCongTac, opt => opt.MapFrom(src => src.DonViCongTac.Name));
+
+                
         }
     }
 }

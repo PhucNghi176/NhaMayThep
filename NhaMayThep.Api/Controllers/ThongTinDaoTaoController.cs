@@ -14,6 +14,7 @@ using NhaMayThep.Application.ThongTinDaoTao.Update;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinDaoTao.GetByPagination;
 using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.ThongTinDaoTao.FillterThongTinDaoTao;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -118,6 +119,20 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<ThongTinDaoTaoDto>>>> GetPagination([FromQuery] GetThongTinDaoTaoByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("thong-tin-dao-tao/filter-thong-tin-dao-tao")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinDaoTaoDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinDaoTaoDto>>>> FilterThongTinDaoTao(
+            [FromQuery] FilterThongTinDaoTaoQuery query,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

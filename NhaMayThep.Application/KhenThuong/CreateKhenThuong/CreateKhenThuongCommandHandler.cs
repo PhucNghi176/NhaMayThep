@@ -45,6 +45,7 @@ namespace NhaMayThep.Application.KhenThuong.CreateKhenThuong
                 TongThuong = request.TongThuong,
                 NgayTao = DateTime.UtcNow,
                 NguoiTaoID = this._currentUserService.UserId,
+                TenDotKhenThuong = request.TenDotKhenThuong,
             };
             this._repository.Add(khenthuong);
             await this._repository.UnitOfWork.SaveChangesAsync();

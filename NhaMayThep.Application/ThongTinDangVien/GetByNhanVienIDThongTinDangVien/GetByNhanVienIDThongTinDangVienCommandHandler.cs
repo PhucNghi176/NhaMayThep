@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVien
 {
-    public class GetByNhanVienIDThongTinDangVienCommandHandler : IRequestHandler<GetByNhanVienIDThongTinDangVienCommand, ThongTinDangVienDto>
+    public class GetByNhanVienIDThongTinDangVienCommandHandler : IRequestHandler<GetByNhanVienIDThongTinDangVienCommand, List<ThongTinDangVienDto>>
     {
         private readonly IThongTinDangVienRepository _thongTinDangVienRepository;
         private readonly IMapper _mapper;
@@ -22,14 +22,14 @@ namespace NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVie
             _mapper = mapper;
         }
 
-        public async Task<ThongTinDangVienDto> Handle(GetByNhanVienIDThongTinDangVienCommand request, CancellationToken cancellationToken)
+        public async Task<List<ThongTinDangVienDto>> Handle(GetByNhanVienIDThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
 
-            var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
+            var thongTinDangVien = await _thongTinDangVienRepository.FindAllAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
             if(thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Thông Tin Đảng Viên");
 
-            return thongTinDangVien.MapToThongTinDangVienDto(_mapper);
+            return thongTinDangVien.MapToThongTinDangVienDtoList(_mapper);
         }
     }
 }

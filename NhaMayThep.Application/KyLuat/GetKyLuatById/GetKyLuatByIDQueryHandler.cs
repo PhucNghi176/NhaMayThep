@@ -14,6 +14,12 @@ namespace NhaMayThep.Application.KyLuat.GetKyLuatById
     {
         private readonly IKyLuatRepository _repository;
         private readonly IMapper _mapper;
+        public GetKyLuatByIDQueryHandler(IKyLuatRepository repository, IMapper mapper)
+        {
+            _repository = repository;
+            _mapper = mapper;
+        }
+        public GetKyLuatByIDQueryHandler() { }
         public async Task<KyLuatDTO> Handle(GetKyLuatByIDQuery request, CancellationToken cancellationToken)
         {
             var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null , cancellationToken);

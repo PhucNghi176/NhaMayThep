@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMayThep.Application.NghiPhep.Update;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.NghiPhep.FilterNghiPhep;
 
 namespace NhaMapThep.Api.Controllers
 {
@@ -99,6 +101,20 @@ namespace NhaMapThep.Api.Controllers
         {
             var result = await _mediator.Send(new GetAllQuery(), cancellationToken);
             return new JsonResponse<List<NghiPhepDto>>(result);
+        }
+
+        [HttpGet]
+        [Route("nghi-phep/filter-nghi-phep")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<NghiPhepDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<NghiPhepDto>>>> FilterNghiPhep(
+            [FromQuery] FilterNghiPhepQuery query,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
