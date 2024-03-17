@@ -167,15 +167,15 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send<PagedResult<ChiTietBaoHiemDto>>(query, cancellationToken);
             return Ok(new JsonResponse<PagedResult<ChiTietBaoHiemDto>>(result));
         }
-        [HttpGet("chi-tiet-bao-hiem/filter-by-ho-ten-nhan-vien")]
+        [HttpGet("chi-tiet-bao-hiem/filter-chi-tiet-bao-hiem")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<PagedResult<ChiTietBaoHiemDto>>), StatusCodes.Status201Created)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ChiTietBaoHiemDto>>>> FilterByHoVaTen(
-          [FromQuery] FilterByHoVaTenNhanVienQuery query,
+        public async Task<ActionResult<JsonResponse<PagedResult<ChiTietBaoHiemDto>>>> FilterChiTietBaoHiem(
+          [FromQuery] FilterChiTietBaoHiemQuery query,
          CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send<PagedResult<ChiTietBaoHiemDto>>(query, cancellationToken);

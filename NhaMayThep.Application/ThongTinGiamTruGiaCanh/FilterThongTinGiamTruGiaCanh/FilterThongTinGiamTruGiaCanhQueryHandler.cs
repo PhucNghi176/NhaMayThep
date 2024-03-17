@@ -18,6 +18,8 @@ using Microsoft.EntityFrameworkCore;
 using NinjaNye.SearchExtensions;
 using System.Linq.Expressions;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMapThep.Application.Common.Models;
+using NhaMayThep.Application.ThongTinCongDoan;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh
 {
@@ -78,7 +80,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
                         thongtingiamtru => thongtingiamtru.CanCuocCongDan,
                         cancuoc => cancuoc.CanCuocCongDan,
                         (thongtingiamtru, cancuoc) => new { ThongTinGiamTru = thongtingiamtru, CanCuoc = cancuoc })
-                    .Where(x => x.CanCuoc.CanCuocCongDan.Equals(request.CanCuocCongDan))
+                    .Where(x => x.CanCuoc.CanCuocCongDan == request.CanCuocCongDan)
                     .Select(x => x.ThongTinGiamTru);
                 }
                 if(request.NgayTao.HasValue)
@@ -97,12 +99,20 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
             {
                 throw new NotFoundException("Không tìm thấy thông tin phù hợp yêu cầu");
             }
-            Expression<Func<ThongTinGiamTruEntity, bool>> optionsGiamTru = 
+            //need to confirm
+            //Expression<Func<ThongTinGiamTruEntity, bool>> optionsGiamTru = 
+            //    query => giamtrugiacanh.Select(x => x.MaGiamTruID)
+            //    .Any(x => query.ID == x) && !query.NgayXoa.HasValue;
+            //Expression<Func<NhanVienEntity, bool>> optionsNhanVien = 
+            //    query => giamtrugiacanh.Select(x => x.NhanVienID)
+            //    .Any(x => query.ID == x) && !query.NgayXoa.HasValue;
+
+            Expression<Func<ThongTinGiamTruEntity, bool>> optionsGiamTru =
                 query => giamtrugiacanh.Select(x => x.MaGiamTruID)
-                .Any(x => query.ID == x && string.IsNullOrEmpty(query.NguoiXoaID) && !query.NgayXoa.HasValue);
-            Expression<Func<NhanVienEntity, bool>> optionsNhanVien = 
+                .Any(x => query.ID == x);
+            Expression<Func<NhanVienEntity, bool>> optionsNhanVien =
                 query => giamtrugiacanh.Select(x => x.NhanVienID)
-                .Any(x => query.ID == x && string.IsNullOrEmpty(query.NguoiXoaID) && !query.NgayXoa.HasValue);
+                .Any(x => query.ID == x);
 
             var thongtingiamtrus = await _thongtingiamtruRepository
               .FindAllToDictionaryAsync(optionsGiamTru, x => x.ID, x => x.Name, cancellationToken);
@@ -111,10 +121,16 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
 
             var results = giamtrugiacanh.MapToThongTinGiamTruGiaCanhDtoList(_mapper, nhanviens, thongtingiamtrus);
 
-            return giamtrugiacanh.MapToPagedResult(
-                x => x.MapToThongTinGiamTruGiaCanhDto(_mapper,
-                nhanviens.FirstOrDefault(y=> y.Key == x.NhanVienID).Value.ToString(),
-                thongtingiamtrus.FirstOrDefault(y=> y.Key == x.MaGiamTruID).Value.ToString()));
+            //return giamtrugiacanh.MapToPagedResult(
+            //    x => x.MapToThongTinGiamTruGiaCanhDto(_mapper,
+            //    nhanviens.FirstOrDefault(y=> y.Key == x.NhanVienID).Value.ToString() ??"Trống",
+            //    thongtingiamtrus.FirstOrDefault(y=> y.Key == x.MaGiamTruID).Value.ToString() ??"Trống"));
+            return PagedResult<ThongTinGiamTruGiaCanhDto>.Create(
+                totalCount: giamtrugiacanh.TotalCount,
+                pageCount: giamtrugiacanh.PageCount,
+                pageSize: giamtrugiacanh.PageSize,
+                pageNumber: giamtrugiacanh.PageNo,
+                data: results);
         }
     }
 }

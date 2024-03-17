@@ -11,11 +11,12 @@ namespace NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan
     {
         public FilterThongTinCongDoanQueryValidator()
         {
-            RuleFor(x => x.PageSize).NotEmpty()
+            RuleFor(x => x.PageSize)
+                .NotEmpty()
                    .NotNull()
                    .WithMessage("PageSize không được null hoặc để trống");
-
-            RuleFor(x => x.PageNumber).NotEmpty()
+            RuleFor(x => x.PageNumber)
+                .NotEmpty()
                 .NotNull()
                 .WithMessage("PageNumber không được null hoặc để trống");
         }

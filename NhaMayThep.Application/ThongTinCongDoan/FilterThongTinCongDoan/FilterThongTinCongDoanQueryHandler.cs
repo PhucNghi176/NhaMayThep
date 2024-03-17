@@ -8,6 +8,7 @@ using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMayThep.Infrastructure.Persistence;
+using NinjaNye.SearchExtensions;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -51,12 +52,11 @@ namespace NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan
                 }
                 if (!string.IsNullOrEmpty(request.TenNhanVien))
                 {
-                    var employeeName = request.TenNhanVien.Replace(" ", "");
                     query = query.Join(_context.NhanVien,
                         thongtincongdoan => thongtincongdoan.NhanVienID,
                         nhanvien => nhanvien.ID,
                         (thongtincongdoan, nhanvien) => new { ConDoan = thongtincongdoan, NhanVien = nhanvien })
-                    .Where(x => x.NhanVien.HoVaTen.Contains(employeeName))
+                    .Search(x=> x.NhanVien.HoVaTen).Containing(request.TenNhanVien)
                     .Select(x => x.ConDoan);
                 }
                 if (request.NgayGiaNhap.HasValue)
@@ -71,16 +71,26 @@ namespace NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan
             {
                 throw new NotFoundException("Không tìm thấy thông tin công đoàn nào phù hợp với yêu cầu");
             }
-            Expression<Func<NhanVienEntity, bool>> optionsNhanVien = 
-                query => listResult.Select(x=> x.NhanVienID)
-                .Any(x => query.ID == x && string.IsNullOrEmpty(query.NguoiXoaID) && !query.NgayXoa.HasValue);
+            //need to confirm
+            //Expression<Func<NhanVienEntity, bool>> optionsNhanVien = 
+            //    query => listResult.Select(x=> x.NhanVienID)
+            //    .Any(x => query.ID == x) && !query.NgayXoa.HasValue;
+            Expression<Func<NhanVienEntity, bool>> optionsNhanVien =
+                query => listResult.Select(x => x.NhanVienID)
+                .Any(x => query.ID == x);
 
             var listNhanVien = await _nhanvienRepository.FindAllToDictionaryAsync(optionsNhanVien, x => x.ID, x => x.HoVaTen, cancellationToken);
 
             var result = listResult.MapToThongTinCongDoanDtoList(_mapper, listNhanVien);
 
-            return listResult.MapToPagedResult(x => x.MapToThongTinCongDoanDto(_mapper,
-                listNhanVien.FirstOrDefault(y => y.Key.Equals(x.NhanVienID)).Value.ToString() ?? "Trống")); 
+            return PagedResult<ThongTinCongDoanDto>.Create(
+                totalCount: listResult.TotalCount,
+                pageCount: listResult.PageCount,
+                pageSize: listResult.PageSize,
+                pageNumber: listResult.PageNo,
+                data: result);
+            //return listResult.MapToPagedResult(x => x.MapToThongTinCongDoanDto(_mapper,
+            //    listNhanVien.FirstOrDefault(y => y.Key == x.NhanVienID).Value.ToString() ?? "")); 
         }
     }
 }

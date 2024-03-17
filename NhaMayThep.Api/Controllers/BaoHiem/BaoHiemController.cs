@@ -6,6 +6,7 @@ using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.BaoHiem;
 using NhaMayThep.Application.BaoHiem.CreateNewBaoHiem;
+using NhaMayThep.Application.BaoHiem.FilterBaoHiem;
 using NhaMayThep.Application.BaoHiem.GetAllBaoHiem;
 using NhaMayThep.Application.BaoHiem.GetBaoHiemById;
 using NhaMayThep.Application.BaoHiem.GetPaginationBaoHiem;
@@ -107,6 +108,21 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<JsonResponse<PagedResult<BaoHiemDto>>>> GetPagination([FromQuery] GetBaoHiemByPagination query, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+        [HttpGet("bao-hiem/filter-bao-hiem")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<BaoHiemDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<BaoHiemDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<BaoHiemDto>>>> FilterBaoHiem(
+            [FromQuery] FilterBaoHiemQuery query, 
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<PagedResult<BaoHiemDto>>(query, cancellationToken);
             return Ok(result);
         }
     }

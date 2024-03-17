@@ -24,8 +24,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
             int magiamtru,
             string? tengiamtru,
             string? cancuoc,
-            DateTime ngayphuthuoc,
-            DateTime ngaytao)
+            DateTime? ngayphuthuoc,
+            DateTime? ngaytao)
         {
             PageSize = pagesize;
             PageNumber = pagenumber;

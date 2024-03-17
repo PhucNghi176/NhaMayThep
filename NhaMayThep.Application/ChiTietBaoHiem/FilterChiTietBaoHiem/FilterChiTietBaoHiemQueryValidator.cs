@@ -5,11 +5,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh
+namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
 {
-    public class FilterThongTinGiamTruGiaCanhQueryValidator: AbstractValidator<FilterThongTinGiamTruGiaCanhQuery>
+    public class FilterChiTietBaoHiemQueryValidator: AbstractValidator<FilterChiTietBaoHiemQuery>
     {
-        public FilterThongTinGiamTruGiaCanhQueryValidator()
+        public FilterChiTietBaoHiemQueryValidator()
         {
             RuleFor(x => x.PageNumber)
                 .NotNull()

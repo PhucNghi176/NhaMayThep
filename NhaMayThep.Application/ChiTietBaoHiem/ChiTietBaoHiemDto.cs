@@ -20,22 +20,24 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
         public string NhanVien { get; set; } = null!;
         public int LoaiBaoHiem { get; set; }
         public string BaoHiem { get; set; } = null!;
-        public string? NgayHieuLuc { get; set; }
-        public string? NgayKetThuc { get; set; }
+        public string? PhanTramBaoHiem { get; set; }
+        public DateTime? NgayHieuLuc { get; set; }
+        public DateTime? NgayKetThuc { get; set; }
         public string? NoiCap { get; set; }
         public static ChiTietBaoHiemDto CreateChiTietBaoHiem(string id, string nhanvien, string baohiem, DateTime ngayheuluc, DateTime ngayketthuc
-            ,string noicap, string masonhanvien, int loaibaohiem)
+            ,string noicap, string masonhanvien, int loaibaohiem, string phantrambaohiem)
         {
             return new ChiTietBaoHiemDto
             {
                 Id = id,
                 NhanVien = nhanvien,
                 BaoHiem = baohiem,
-                NgayHieuLuc = ngayheuluc.ToString("dd/MM/yyyy - HH:mm:ss"),
-                NgayKetThuc = ngayketthuc.ToString("dd/MM/yyyy - HH:mm:ss"),
+                NgayHieuLuc = ngayheuluc,
+                NgayKetThuc = ngayketthuc,
                 NoiCap = noicap,
                 MaSoNhanVien= masonhanvien,
-                LoaiBaoHiem= loaibaohiem
+                LoaiBaoHiem= loaibaohiem,
+                PhanTramBaoHiem = phantrambaohiem
             };
         }
         public void Mapping(Profile profile)
