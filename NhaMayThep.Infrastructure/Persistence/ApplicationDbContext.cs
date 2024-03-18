@@ -41,10 +41,10 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
     public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
     public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
-    public DbSet<ThongTinCongTyEntity> ThongTinCongTy {  get; set; }
-    public DbSet<ThueSuatEntity> ThueSuat {  get; set; }
-    public DbSet<MucSanPhamEntity> MucSanPham {  get; set; }
-    public DbSet<BaoHiemEntity> BaoHiem {  get; set; }
+    public DbSet<ThongTinCongTyEntity> ThongTinCongTy { get; set; }
+    public DbSet<ThueSuatEntity> ThueSuat { get; set; }
+    public DbSet<MucSanPhamEntity> MucSanPham { get; set; }
+    public DbSet<BaoHiemEntity> BaoHiem { get; set; }
     public DbSet<ChiTietBaoHiemEntity> ChiTietBaoHiem { get; set; }
     public DbSet<BaoHiemNhanVienEntity> BaoHiemNhanVien { get; set; }
     public DbSet<PhuCapEntity> PhuCap { get; set; }
@@ -52,14 +52,24 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     public DbSet<MaDangKiCaLamEntity> MaDangKiCaLam { get; set; }
     public DbSet<TrangThaiDangKiCaLamViecEntity> TrangThaiDangKiCaLamViec { get; set; }
     public DbSet<LuongThoiGianEntity> LuongThoiGian { get; set; }
-    public DbSet<DangKiCaLamEntity> DangKiCaLam { get; set; }   
+    public DbSet<DangKiCaLamEntity> DangKiCaLam { get; set; }
     public DbSet<DangKiTangCaEntity> DangKiTangCa { get; set; }
     public DbSet<ThongTinCapDangVienEntity> ThongTinCapDangVien { get; set; }
     public DbSet<ThongTinTrinhDoChinhTriEntity> ThongTinTrinhDoChinhTri { get; set; }
     public DbSet<ThongTinChucVuDangEntity> ThongTinChucVuDang { get; set; }
-    public DbSet<KyLuatEntity> KyLuat {  get; set; }
+    public DbSet<KyLuatEntity> KyLuat { get; set; }
     public DbSet<KhenThuongEntity> khenThuongs { get; set; }
-    public DbSet<KhaiBaoTangLuongEntity> khaiBaoTangLuongs { get; set; }
+    public DbSet<KhaiBaoTangLuongEntity> KhaiBaoTangLuongs { get; set; }
+    public DbSet<LoaiTangCaEntity> LoaiTangCas { get; set; }
+    public DbSet<LuongCongNhatEntity> LuongCongNhats { get; set; }
+    public DbSet<LuongSanPhamEntity> LuongSanPhams { get; set; }
+    public DbSet<PhiCongDoanEntity> PhiCongDoans { get; set; }
+    public DbSet<PhuCapCongDoanEntity> PhuCapCongDoans { get; set; }
+    public DbSet<TangCaEntity> TangCas { get; set; }
+    public DbSet<NghiPhepEntity> NghiPheps { get; set; }
+
+
+
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
@@ -104,6 +114,6 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     private void ConfigureModel(ModelBuilder modelBuilder)
     {
 
-       
+
     }
 }
