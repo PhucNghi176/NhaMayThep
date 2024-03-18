@@ -13,7 +13,7 @@ namespace NhaMayThep.Application.KhenThuong
     public class KhenThuongDTO : IMapFrom<KhenThuongEntity>
     {
         public string MaSoNhanVien { get; set; }
-
+        public string ID {  get; set; }
         public int ChinhSachNhanSuID { get; set; }
         public string TenDotKhenThuong { get; set; }
         public DateTime NgayKhenThuong { get; set; }

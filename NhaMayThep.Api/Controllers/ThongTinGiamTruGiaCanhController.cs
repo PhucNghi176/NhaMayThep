@@ -18,6 +18,7 @@ using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinCongDoan.GetAll;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPaginationDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -195,6 +196,20 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<List<ThongTinGiamTruGiaCanhDto>>(result));
+        }
+        [HttpGet("thong-tin-giam-tru-gia-canh/filter-thong-tin-giam-tru-gia-canh")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>>> FilterThongTinGiamTruGiaCanh(
+          [FromQuery] FilterThongTinGiamTruGiaCanhQuery query,
+          CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(new JsonResponse<PagedResult<ThongTinGiamTruGiaCanhDto>>(result));
         }
     }
 }

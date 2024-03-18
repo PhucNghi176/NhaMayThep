@@ -12,7 +12,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
     {
         public UpdateThongTinDangVienCommandValidator()
         {
-            RuleFor(x => x.NhanVienID)
+            RuleFor(x => x.ID)
                .NotEmpty().WithMessage("ID không được để trống.");
 
             RuleFor(x => x.DonViCongTacID)

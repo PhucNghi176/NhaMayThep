@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVien
 {
-    public class GetByNhanVienIDThongTinDangVienCommand : IRequest<ThongTinDangVienDto>
+    public class GetByNhanVienIDThongTinDangVienCommand : IRequest<List<ThongTinDangVienDto>>
     {
         public GetByNhanVienIDThongTinDangVienCommand(string nhanVienID)
         {
