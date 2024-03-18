@@ -23,6 +23,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
             var dto = mapper.Map<ChiTietBaoHiemDto>(entity);
             dto.NhanVien = nhanvien ?? "Trống";
             dto.BaoHiem = baohiem ?? "Trống";
+            dto.PhanTramBaoHiem = entity.BaoHiem.PhanTramKhauTru.ToString() ?? null;
             return dto;
         }
         public static List<ChiTietBaoHiemDto> MapToChiTietBaoHiemDtoList(this IEnumerable<ChiTietBaoHiemEntity> entities, IMapper mapper, Dictionary<string, string> nhanvien, Dictionary<int, string> baohiem)

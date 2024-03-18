@@ -7,6 +7,7 @@ using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinCongDoan;
 using NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan;
 using NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan;
+using NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan;
 using NhaMayThep.Application.ThongTinCongDoan.GetAll;
 using NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted;
 using NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPaginition;
@@ -209,6 +210,21 @@ namespace NhaMayThep.Api.Controllers
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
+        }
+        [HttpGet("thong-tin-cong-doan/filter-thong-tin-cong-doan")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinCongDoanDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<ThongTinCongDoanDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<ThongTinCongDoanDto>>>> FilterThongTinCongDoan(
+            [FromQuery] FilterThongTinCongDoanQuery query, 
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send<PagedResult<ThongTinCongDoanDto>>(query, cancellationToken);
+            return Ok(new JsonResponse<PagedResult<ThongTinCongDoanDto>>(result));
         }
     }
 }
