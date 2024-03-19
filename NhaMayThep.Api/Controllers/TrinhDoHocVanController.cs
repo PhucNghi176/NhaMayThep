@@ -13,6 +13,7 @@ using NhaMayThep.Application.TrinhDoHocVan.GetAll;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
 using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.TrinhDoHocVan.FilterTrinhDoHocVan;
 
 namespace CleanArchitecture.Api.Controllers
 {
@@ -118,6 +119,20 @@ namespace CleanArchitecture.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<TrinhDoHocVanDto>>>> GetPagination([FromQuery] GetTrinhDoHocVanByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("trinh-do-hoc-van/filter-trinh-do-hoc-van")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<TrinhDoHocVanDto>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<TrinhDoHocVanDto>>>> FilterTrinhDoHocVan(
+            [FromQuery] FilterTrinhDoHocVanQuery query,
+            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

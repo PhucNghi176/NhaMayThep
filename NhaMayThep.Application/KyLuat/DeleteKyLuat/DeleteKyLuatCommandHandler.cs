@@ -15,6 +15,13 @@ namespace NhaMayThep.Application.KyLuat.DeleteKyLuat
         private readonly IKyLuatRepository _repository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
+        public DeleteKyLuatCommandHandler(IKyLuatRepository repository, IMapper mapper, ICurrentUserService currentUserService)
+        {
+            _repository = repository;
+            _mapper = mapper;
+            _currentUserService = currentUserService;
+        }
+        public DeleteKyLuatCommandHandler() { }
         public async Task<string> Handle(DeleteKyLuatCommand request, CancellationToken cancellationToken)
         {
             var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);

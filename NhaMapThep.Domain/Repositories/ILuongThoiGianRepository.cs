@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Repositories
 {
-    public interface ILuongThoiGianRepository : IEFRepository<LuongThoiGianEntity, LuongThoiGianEntity>,
-        IRepository<LuongThoiGianEntity>
+    public interface ILuongThoiGianRepository : IEFRepository<LuongThoiGianEntity, LuongThoiGianEntity>
     {
 
     }

@@ -35,6 +35,7 @@ namespace NhaMayThep.Application.LuongThoiGian.CreateLuongThoiGian
             var luongThoiGian = new LuongThoiGianEntity()
             {
                 NguoiTaoID = _currentUserService.UserId,
+                NgayTao = DateTime.Now,
                 MaSoNhanVien = request.MaSoNhanVien,
                 MaLuongThoiGian = request.MaLuongThoiGian,
                 LuongNam = request.LuongNam,
