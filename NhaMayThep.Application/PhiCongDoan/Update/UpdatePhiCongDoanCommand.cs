@@ -11,17 +11,19 @@ namespace NhaMayThep.Application.PhiCongDoan.Update
 {
     public class UpdatePhiCongDoanCommand : IRequest<string>, ICommand
     {
-        public UpdatePhiCongDoanCommand(string id, string maSoNhanVien, double phanTramDongBH, decimal luongDongBH)
+        public UpdatePhiCongDoanCommand(string id, string maSoNhanVien, double phanTramLuongDongBH, decimal luongDongBH)
         {
-            ID = id;
+            Id = id;
             MaSoNhanVien = maSoNhanVien;
-                PhanTramLuongDongBH = phanTramDongBH;
+            PhanTramLuongDongBH = phanTramLuongDongBH;
             LuongDongBH = luongDongBH;
         }
-        public string ID { get; set; }
-        public required string MaSoNhanVien { get; set; }
+
+        public string Id { get; set; }
+        public string MaSoNhanVien { get; set; }
         public double PhanTramLuongDongBH { get; set; }
 
         public decimal LuongDongBH { get; set; }
     }
+
 }

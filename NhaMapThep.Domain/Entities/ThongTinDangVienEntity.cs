@@ -13,9 +13,15 @@ namespace NhaMapThep.Domain.Entities
         public int DonViCongTacID { get; set; }
         [ForeignKey(nameof(DonViCongTacID))]
         public virtual DonViCongTacEntity DonViCongTac { get; set; }
-        public required string ChucVuDang { get; set; }
-        public required string TrinhDoChinhTri { get; set; }
+        public required int ChucVuDang { get; set; }
+        [ForeignKey(nameof(ChucVuDang))]
+        public virtual ThongTinChucVuDangEntity ThongTinChucVuDang { get; set; }
+        public required int TrinhDoChinhTri { get; set; }
+        [ForeignKey(nameof(TrinhDoChinhTri))]
+        public virtual ThongTinTrinhDoChinhTriEntity ThongTinTrinhDoChinhTri { get; set; }
         public DateTime NgayVaoDang { get; set; }
-        public string CapDangVien { get; set; }
+        public int CapDangVien { get; set; }
+        [ForeignKey(nameof(CapDangVien))]
+        public virtual ThongTinCapDangVienEntity ThongTinCapDangVien { get; set; }
     }
 }

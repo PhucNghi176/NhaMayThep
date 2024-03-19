@@ -11,7 +11,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 {
     public class UpdateThongTinDangVienCommand : IRequest<string>, ICommand
     {
-        public UpdateThongTinDangVienCommand(string id, int donViCongTacId, string chucVuDang, string trinhDoChinhTri, DateTime ngayVaoDang, string capDangVien)
+        public UpdateThongTinDangVienCommand(string id, int donViCongTacId, int chucVuDang, int trinhDoChinhTri, DateTime ngayVaoDang, int capDangVien)
         {
             ID = id;
             DonViCongTacID = donViCongTacId;
@@ -23,9 +23,9 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 
         public string ID { get; set; }
         public int DonViCongTacID { get; set; }
-        public string ChucVuDang { get; set; }
-        public string TrinhDoChinhTri { get; set; }
+        public int ChucVuDang { get; set; }
+        public int TrinhDoChinhTri { get; set; }
         public DateTime NgayVaoDang { get; set; }
-        public string CapDangVien { get; set; }
+        public int CapDangVien { get; set; }
     }
 }

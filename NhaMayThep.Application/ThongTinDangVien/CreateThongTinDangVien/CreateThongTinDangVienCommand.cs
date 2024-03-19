@@ -10,7 +10,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
 {
     public class CreateThongTinDangVienCommand : IRequest<string>, ICommand
     {
-        public CreateThongTinDangVienCommand(string nhanVienId, int donViCongTacId, string chucVuDang, string trinhDoChinhTri, DateTime ngayVaoDang, string capDangVien )
+        public CreateThongTinDangVienCommand(string nhanVienId, int donViCongTacId, int chucVuDang, int trinhDoChinhTri, DateTime ngayVaoDang, int capDangVien )
         {
             NhanVienID = nhanVienId;
             DonViCongTacID = donViCongTacId;
@@ -22,10 +22,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
 
         public string NhanVienID { get; set; }
         public int DonViCongTacID { get; set; }
-        public string ChucVuDang { get; set; }
-        public string TrinhDoChinhTri { get; set; }
+        public int ChucVuDang { get; set; }
+        public int TrinhDoChinhTri { get; set; }
         public DateTime NgayVaoDang { get; set; }
-        public string CapDangVien { get; set; }
+        public int CapDangVien { get; set; }
 
 
     }
