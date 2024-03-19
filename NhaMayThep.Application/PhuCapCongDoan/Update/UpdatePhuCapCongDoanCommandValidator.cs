@@ -17,6 +17,9 @@ namespace NhaMayThep.Application.PhuCapCongDoan.Update
 
         private void ConfigureValidationRules()
         {
+            RuleFor(x => x.ID)
+                .NotNull().WithMessage("ID không được để trống");
+
             RuleFor(v => v.SoLuongDoanVien)
                 .NotNull().WithMessage("SoLuongDoanVien không được trống")
                 .GreaterThan(0).WithMessage("SoLuongDoanVien phải lớn hơn 0");

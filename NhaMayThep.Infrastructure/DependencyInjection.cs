@@ -80,6 +80,8 @@ public static class DependencyInjection
         services.AddTransient<IDangKiTangCaRepository, DangKiTangCaRepository>();
         services.AddTransient<IPhuCapNhanVienRepository, PhuCapNhanVienRepository>();
         services.AddTransient<IThongTinLuongNhanVienRepository,ThongTinLuongNhanVienRepository>();
+        
+
         return services;
     }
 }
