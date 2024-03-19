@@ -13,17 +13,17 @@ namespace NhaMayThep.Application.TangCa.Create
         public CreateTangCaCommandValidator()
         {
             RuleFor(x => x.SoSanPhamLamThem)
-                .NotEmpty().WithMessage("SoSanPhamLamThem không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("SoSanPhamLamThem phải lớn hoặc bằng 0");
+                .NotNull().WithMessage("SoSanPhamLamThem không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("SoSanPhamLamThem phải lớn hoặc bằng 0");
             RuleFor(x => x.SoGioLamThem)
-                .NotEmpty().WithMessage("SoGioLamThem không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("SoSanPhamLamThem phải lớn hoặc bằng 0");
+                .NotNull().WithMessage("SoGioLamThem không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("SoSanPhamLamThem phải lớn hoặc bằng 0");
             RuleFor(x => x.LuongSanPham)
-                .NotEmpty().WithMessage("LuongSanPham không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("LuongSanPham phải lớn hoặc bằng 0");
+                .NotNull().WithMessage("LuongSanPham không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("LuongSanPham phải lớn hoặc bằng 0");
             RuleFor(x => x.LuongCongNhat)
-                .NotEmpty().WithMessage("LuongCongNhat không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("LuongCongNhat phải lớn hoặc bằng 0");
+                .NotNull().WithMessage("LuongCongNhat không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("LuongCongNhat phải lớn hoặc bằng 0");
         }
     }
 }

@@ -43,7 +43,7 @@ namespace NhaMayThep.Application.LoaiTangCa.Create
             {
                 NguoiTaoID = _currentUserService?.UserId,
                 Name = request.Name,
-
+                NgayTao = DateTime.Today
             };
             _repository.Add(loaiTangCaEntity);
             return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Loại  Tăng Ca thành công" : "Tạo Loại Tăng Ca thất bại";
