@@ -14,13 +14,13 @@ namespace NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
         public int? DonViCongTacID { get; set; }
-        public string? ChucVuDang { get; set; }
-        public string? TrinhDoChinhTri { get; set; }
+        public int? ChucVuDang { get; set; }
+        public int? TrinhDoChinhTri { get; set; }
         public DateTime? NgayVaoDang { get; set; }
-        public string? CapDangVien { get; set; }
+        public int? CapDangVien { get; set; }
 
         public FilterThongTinDangVienQuery() { }
-        public FilterThongTinDangVienQuery(int no, int pageSize , int donViCongTacID, string chucVuDang, string trinhDoChinhTri, DateTime ngayVaoDang, string capDangVien)
+        public FilterThongTinDangVienQuery(int no, int pageSize , int donViCongTacID, int chucVuDang, int trinhDoChinhTri, DateTime ngayVaoDang, int capDangVien)
         {
             PageNumber = no;
             PageSize = pageSize;
