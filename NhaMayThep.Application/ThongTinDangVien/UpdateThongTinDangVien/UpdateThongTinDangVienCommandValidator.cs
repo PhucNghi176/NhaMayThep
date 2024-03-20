@@ -23,6 +23,12 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 
             RuleFor(x => x.CapDangVien)
                 .NotEmpty().WithMessage("CapDangVien không được để trống.");
+
+            RuleFor(x => x.ChucVuDang)
+               .NotEmpty().WithMessage("ChucVuDang không được để trống.");
+
+            RuleFor(x => x.TrinhDoChinhTri)
+                .NotEmpty().WithMessage("TrinhDoChinhTri không được để trống.");
         }
     }
 }

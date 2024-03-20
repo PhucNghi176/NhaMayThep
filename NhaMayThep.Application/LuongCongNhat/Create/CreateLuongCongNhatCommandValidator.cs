@@ -17,16 +17,16 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
 
 
             RuleFor(x => x.SoGioLam)
-                .NotEmpty().WithMessage("SoGioLam không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("SoGioLam phải lớn 0");
+                .NotNull().WithMessage("SoGioLam không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("SoGioLam phải lớn 0");
 
             RuleFor(x => x.Luong1Gio)
-                .NotEmpty().WithMessage("CapDangVien không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("Luong1Gio phải lớn 0"); ;
+                .NotNull().WithMessage("Luong1Gio không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("Luong1Gio phải lớn 0"); 
 
             RuleFor(x => x.TongLuong)
-                .NotEmpty().WithMessage("TongLuong không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("TongLuong phải lớn 0"); ;
+                .NotNull().WithMessage("TongLuong không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("TongLuong phải lớn 0"); 
         }
     }
 }

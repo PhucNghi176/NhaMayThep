@@ -17,15 +17,15 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 
 
             RuleFor(x => x.SoSanPhamLam)
-                .NotEmpty().WithMessage("SoSanPhamLam không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("SoSanPhamLam phải lớn hoặc bằng 0");
+                .NotNull().WithMessage("SoSanPhamLam không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("SoSanPhamLam phải lớn hoặc bằng 0");
 
             RuleFor(x => x.MucSanPhamID)
-                .NotEmpty().WithMessage("MucSanPhamID không được để trống.");
+                .NotNull().WithMessage("MucSanPhamID không được để trống.");
 
             RuleFor(x => x.TongLuong)
-                .NotEmpty().WithMessage("TongLuong không được để trống.")
-                .LessThanOrEqualTo(0).WithMessage("TongLuong phải lớn 0");
+                .NotNull().WithMessage("TongLuong không được để trống.")
+                .GreaterThanOrEqualTo(0).WithMessage("TongLuong phải lớn 0");
         }
     }
 }

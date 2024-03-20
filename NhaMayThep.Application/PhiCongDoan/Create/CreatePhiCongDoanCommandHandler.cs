@@ -1,9 +1,10 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
+using NhaMayThep.Application.PhiCongDoan.Create;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -37,10 +38,11 @@ namespace NhaMayThep.Application.PhiCongDoan.Create
 
             var PhiCongDoan = new PhiCongDoanEntity()
             {
+
                 MaSoNhanVien = nhanVien.ID,
-                NhanVien = nhanVien,
-                PhanTramLuongDongBH = request.PhanTramLuongDongBH,
                 LuongDongBH = request.LuongDongBH,
+                PhanTramLuongDongBH = request.PhanTramLuongDongBH,
+
                 NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Today
             };

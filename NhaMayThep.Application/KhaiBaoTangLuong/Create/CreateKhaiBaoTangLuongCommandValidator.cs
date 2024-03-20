@@ -24,14 +24,14 @@ namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 
 
                 RuleFor(x => x.PhanTramTang)
-                    .NotEmpty().WithMessage("PhanTramTang không được để trống.")
-                    .LessThanOrEqualTo(0).WithMessage("PhanTramTang phải lớn 0");
+                    .NotNull().WithMessage("PhanTramTang không được để trống.")
+                    .GreaterThanOrEqualTo(0).WithMessage("PhanTramTang phải lớn 0");
 
                 RuleFor(x => x.NgayApDung)
-                    .NotEmpty().WithMessage("NgayApDung không được để trống.");
+                    .NotNull().WithMessage("NgayApDung không được để trống.");
 
                 RuleFor(x => x.LyDo)
-                    .NotEmpty().WithMessage("LyDo không được để trống.");
+                    .NotNull().WithMessage("LyDo không được để trống.");
             }
         }
     }

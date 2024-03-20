@@ -34,9 +34,9 @@ namespace NhaMayThep.Application.PhiCongDoan.Update
                     throw new NotFoundException($"Mã số nhân viên : {request.MaSoNhanVien} không tồn tại hoặc đã xóa.");
             }
 
-            var PhiCongDoan = await _PhiCongDoanRepository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            var PhiCongDoan = await _PhiCongDoanRepository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
             if (PhiCongDoan == null)
-                throw new NotFoundException($"Không tìm thấy Phí Công Đoàn với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
+                throw new NotFoundException($"Không tìm thấy Phí Công Đoàn với ID : {request.Id} hoặc trường hợp này đã bị xóa.");
 
             PhiCongDoan.LuongDongBH = request.LuongDongBH;
             PhiCongDoan.PhanTramLuongDongBH = request.PhanTramLuongDongBH;

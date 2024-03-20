@@ -22,13 +22,13 @@ namespace NhaMayThep.Application.PhiCongDoan
 
         public decimal LuongDongBH { get; set; }
 
-        public static PhiCongDoanDto Create(string id, string maSoNhanVien, double phanTramDongBH, decimal luongDongBH)
+        public static PhiCongDoanDto Create(string id, string maSoNhanVien, double phanTramLuongDongBH, decimal luongDongBH)
         {
             return new PhiCongDoanDto
             {
                 ID = id,
                 MaSoNhanVien = maSoNhanVien,
-                PhanTramLuongDongBH = phanTramDongBH,
+                PhanTramLuongDongBH = phanTramLuongDongBH,
                 LuongDongBH = luongDongBH,
             };
         }
