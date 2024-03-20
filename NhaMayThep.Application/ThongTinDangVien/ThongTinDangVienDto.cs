@@ -21,6 +21,7 @@ namespace NhaMayThep.Application.ThongTinDangVien
         public string ID { get; set; }
         public string HoVaTen { get; set; }
         public string DonViCongTac { get; set; }
+        public int DonViCongTacID { get; set; }
         public int ChucVuDangID { get; set; }
         public string ChucVuDang { get; set; }
         public int TrinhDoChinhTriID { get; set; }
