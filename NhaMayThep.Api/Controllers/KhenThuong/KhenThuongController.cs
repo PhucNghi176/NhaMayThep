@@ -12,7 +12,10 @@ using NhaMayThep.Application.KhenThuong.GetAllKhenThuong;
 using NhaMayThep.Application.KhenThuong.GetByPagination;
 using NhaMayThep.Application.KhenThuong.GetKhenThuongById;
 using NhaMayThep.Application.KhenThuong.UpdateKhenThuong;
+using NhaMayThep.Application.KyLuat.FilterKyLuat;
+using NhaMayThep.Application.KyLuat;
 using System.Net.Mime;
+using NhaMayThep.Application.KhenThuong.FilterKhenThuong;
 
 namespace NhaMayThep.Api.Controllers.KhenThuong
 {
@@ -109,6 +112,20 @@ namespace NhaMayThep.Api.Controllers.KhenThuong
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<KhenThuongDTO>>>> GetPagination([FromQuery] GetKhenThuongByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("khen-thuong/filter-khen-thuong")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<KyLuatDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<KyLuatDTO>>>> FilterKhenThuong(
+        [FromQuery] FilterKhenThuongQuery query,
+        CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
