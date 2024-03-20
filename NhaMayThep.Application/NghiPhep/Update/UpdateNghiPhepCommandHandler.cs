@@ -16,12 +16,14 @@ namespace NhaMayThep.Application.NghiPhep.Update
         private readonly INghiPhepRepository _nghiPhepRepository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
+        private readonly ILoaiNghiPhepRepository _loaiNghiPhepRepository;
 
-        public UpdateNghiPhepCommandHandler(INghiPhepRepository nghiPhepRepository, IMapper mapper, ICurrentUserService currentUserService)
+        public UpdateNghiPhepCommandHandler(INghiPhepRepository nghiPhepRepository, IMapper mapper, ICurrentUserService currentUserService, ILoaiNghiPhepRepository loaiNghiPhepRepository)
         {
             _nghiPhepRepository = nghiPhepRepository;
             _mapper = mapper;
             _currentUserService = currentUserService;
+            _loaiNghiPhepRepository = loaiNghiPhepRepository;
         }
 
         public async Task<string> Handle(UpdateNghiPhepCommand request, CancellationToken cancellationToken)
@@ -30,6 +32,11 @@ namespace NhaMayThep.Application.NghiPhep.Update
             if (nghiPhep == null)
             {
                 throw new NotFoundException("Không tìm thấy hoặc bản ghi Nghỉ Phép đã bị xóa trước đó!");
+            }
+            var loaiNghiPhep = await _loaiNghiPhepRepository.FindAsync(x => x.ID == request.LoaiNghiPhepId, cancellationToken);
+            if (loaiNghiPhep == null)
+            {
+                throw new NotFoundException("Loại nghỉ phép không tồn tại!");
             }
 
             nghiPhep.LuongNghiPhep = request.LuongNghiPhep;

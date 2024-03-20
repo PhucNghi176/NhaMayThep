@@ -5,6 +5,8 @@ using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Application.Common.Security;
+using NhaMayThep.Application.HopDong.FilterHopDong;
+using NhaMayThep.Application.HopDong;
 using NhaMayThep.Application.KyLuat;
 using NhaMayThep.Application.KyLuat.CreateKyLuat;
 using NhaMayThep.Application.KyLuat.DeleteKyLuat;
@@ -14,6 +16,7 @@ using NhaMayThep.Application.KyLuat.GetKyLuatById;
 using NhaMayThep.Application.KyLuat.UpdateKyLuat;
 using System.Net.Mime;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NhaMayThep.Application.KyLuat.FilterKyLuat;
 
 namespace NhaMayThep.Api.Controllers.KyLuat
 {
@@ -108,6 +111,20 @@ namespace NhaMayThep.Api.Controllers.KyLuat
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<KyLuatDTO>>>> GetPagination([FromQuery] GetKyLuatByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+
+        [HttpGet]
+        [Route("ky-luat/filter-ky-luat")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<KyLuatDTO>>), StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<KyLuatDTO>>>> FilterKyLuat(
+        [FromQuery] FilterKyLuatQuery query,
+        CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

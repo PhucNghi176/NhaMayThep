@@ -145,8 +145,8 @@ namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<HopDongDto>>>> FilterNhanVien(
-    [FromQuery] FilterHopDongQuery query,
-    CancellationToken cancellationToken = default)
+        [FromQuery] FilterHopDongQuery query,
+        CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

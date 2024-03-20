@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace NhaMapThep.Domain.Entities
 {
     [Table("BaoHiemNhanVien")]
-    public class BaoHiemNhanVienEntity : BangMaGocEntity
+    public class BaoHiemNhanVienEntity : Entity
     {
         public required string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
