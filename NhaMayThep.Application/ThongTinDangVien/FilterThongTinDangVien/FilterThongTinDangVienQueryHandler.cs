@@ -45,21 +45,21 @@ namespace NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien
                 {
                     query = query.Where(x => x.DonViCongTacID.Equals(request.DonViCongTacID));
                 }
-                if (request.ChucVuDang != 0)
+                if (request.ChucVuDangID != 0)
                 {
-                    query = query.Where(x => x.ChucVuDang.Equals(request.ChucVuDang));
+                    query = query.Where(x => x.ChucVuDang.Equals(request.ChucVuDangID));
                 }
-                if (request.TrinhDoChinhTri != 0)
+                if (request.TrinhDoChinhTriID != 0)
                 {
-                    query = query.Where(x => x.TrinhDoChinhTri.Equals(request.TrinhDoChinhTri));
+                    query = query.Where(x => x.TrinhDoChinhTri.Equals(request.TrinhDoChinhTriID));
                 }
                 if (request.NgayVaoDang.HasValue)
                 {
                     query = query.Where(x => x.NgayVaoDang.Date == request.NgayVaoDang.Value.Date);
                 }
-                if (request.CapDangVien != 0)
+                if (request.CapDangVienID != 0)
                 {
-                    query = query.Where(x => x.CapDangVien.Equals(request.CapDangVien));
+                    query = query.Where(x => x.CapDangVien.Equals(request.CapDangVienID));
                 }
                 return query;
             };
