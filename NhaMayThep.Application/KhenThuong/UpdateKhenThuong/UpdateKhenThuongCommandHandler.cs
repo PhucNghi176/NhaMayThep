@@ -47,6 +47,7 @@ namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
                 throw new NotFoundException($"Không tìm thấy khen thưởng với ID : {request.ID} hoặc khen thưởng này đã bị xóa.");
             khenthuong.TenDotKhenThuong = request.TenDotKhenThuong ?? khenthuong.TenDotKhenThuong;
             khenthuong.NguoiCapNhatID = this._currentUserService.UserId;
+            khenthuong.TongThuong = request.TongThuong;
             khenthuong.NgayCapNhatCuoi = DateTime.UtcNow;
             khenthuong.MaSoNhanVien = request.MaSoNhanVien ?? khenthuong.MaSoNhanVien;
             khenthuong.ChinhSachNhanSuID = request.ChinhSachNhanSuID;
