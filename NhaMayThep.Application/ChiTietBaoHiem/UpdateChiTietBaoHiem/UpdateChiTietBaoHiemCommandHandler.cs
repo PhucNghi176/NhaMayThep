@@ -30,7 +30,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem
         }
         public async Task<string> Handle(UpdateChiTietBaoHiemCommand request, CancellationToken cancellationToken)
         {
-            var checkEntityExists = await _chitietbaohiemRepository.FindAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
+            var checkEntityExists = await _chitietbaohiemRepository.FindAsync(x => x.ID == request.Id && x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
             if(checkEntityExists == null)
             {
                 throw new NotFoundException($"Không tồn tại chi tiết bảo hiểm với Id '{request.Id}'");
