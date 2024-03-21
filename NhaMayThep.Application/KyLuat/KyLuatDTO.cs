@@ -31,6 +31,7 @@ namespace NhaMayThep.Application.KyLuat
         */
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
+        public string tenNhanVien { get; set; } 
         public int ChinhSachNhanSuID { get; set; }
         public string TenDotKyLuat { get; set; }
         public DateTime NgayKiLuat { get; set; }
