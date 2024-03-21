@@ -60,9 +60,9 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
                 }
                 if (!string.IsNullOrEmpty(request.MaSoNhanVien))
                 {
-                    query = query.Join(_context.NhanVien,                       
+                    query = query.Join(_context.NhanVien,
+                        quaTrinhNhanSu => quaTrinhNhanSu.MaSoNhanVien,
                         nhanVien => nhanVien.ID,
-                        quaTrinhNhanSu => quaTrinhNhanSu.ID,
                         (quaTrinhNhanSu, nhanVien) => new { QuaTrinhNhanSu = quaTrinhNhanSu, NhanVien = nhanVien })
                     .Where(x => x.NhanVien.ID.Contains(request.MaSoNhanVien) && x.NhanVien.NguoiXoaID == null)
                     .Select(x => x.QuaTrinhNhanSu);
