@@ -9,6 +9,7 @@ using NhaMayThep.Application.LichSuCongTacNhanVien.Create;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Delete;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetAll;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien;
+using NhaMayThep.Application.LichSuCongTacNhanVien.GetByPagination;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
 using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 using System.Net.Mime;
@@ -114,7 +115,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>>> GetPagination([FromQuery] GetLichSuNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>>> GetPagination([FromQuery] GetLichSuCongTacNhanVienByPaginationQuery query, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

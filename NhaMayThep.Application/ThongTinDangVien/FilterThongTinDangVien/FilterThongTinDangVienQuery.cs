@@ -13,11 +13,11 @@ namespace NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien
     {
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public int? DonViCongTacID { get; set; }
-        public int? ChucVuDang { get; set; }
-        public int? TrinhDoChinhTri { get; set; }
+        public int? DonViCongTacID { get; set; }=0;
+        public int? ChucVuDangID { get; set; } = 0;
+        public int? TrinhDoChinhTriID { get; set; } = 0;
         public DateTime? NgayVaoDang { get; set; }
-        public int? CapDangVien { get; set; }
+        public int? CapDangVienID { get; set; } = 0;
 
         public FilterThongTinDangVienQuery() { }
         public FilterThongTinDangVienQuery(int no, int pageSize , int donViCongTacID, int chucVuDang, int trinhDoChinhTri, DateTime ngayVaoDang, int capDangVien)
@@ -25,10 +25,10 @@ namespace NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien
             PageNumber = no;
             PageSize = pageSize;
             this.DonViCongTacID = donViCongTacID;
-            ChucVuDang = chucVuDang;
-            TrinhDoChinhTri = trinhDoChinhTri;
+            ChucVuDangID = chucVuDang;
+            TrinhDoChinhTriID = trinhDoChinhTri;
             NgayVaoDang = ngayVaoDang;
-            CapDangVien = capDangVien;
+            CapDangVienID = capDangVien;
         }
     }
 }
