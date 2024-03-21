@@ -93,7 +93,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
             }
 
             var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
-                x => x.NgayXoa == null && result.Select(r => r.MaSoNhanVien).Equals(x.ID),
+                x => x.NgayXoa == null && result.Select(r => r.MaSoNhanVien).Contains(x.ID),
                 x => x.ID,
                 x => x.HoVaTen,
                 cancellationToken);
