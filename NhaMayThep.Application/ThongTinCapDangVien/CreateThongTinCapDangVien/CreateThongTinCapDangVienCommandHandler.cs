@@ -25,8 +25,7 @@ namespace NhaMayThep.Application.ThongTinCapDangVien.CreateThongTinCapDangVien
 
             var thongTinCapDangVien = new ThongTinCapDangVienEntity()
             {
-                Name = request.TenCapDangVien,
-                CapDangVien = request.CapDangVien
+                Name = request.TenCapDangVien
             };
 
             _thongTinCapDangVienRepository.Add(thongTinCapDangVien);

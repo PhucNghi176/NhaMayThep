@@ -12,7 +12,7 @@ using NhaMayThep.Infrastructure.Persistence;
 namespace NhaMayThep.Infrastructure.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    [Migration("20240314232627_v")]
+    [Migration("20240321234617_v")]
     partial class v
     {
         /// <inheritdoc />
@@ -713,10 +713,6 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
 
-                    b.Property<string>("CapDangVien")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)")
@@ -790,10 +786,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                         .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ID"));
-
-                    b.Property<string>("ChucVuDang")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("Name")
                         .IsRequired()
@@ -1006,9 +998,6 @@ namespace NhaMayThep.Infrastructure.Migrations
 
                     b.Property<string>("NguoiXoaID")
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("TrinhDoChinhTri")
-                        .HasColumnType("int");
 
                     b.HasKey("ID")
                         .HasName("MaTrinhDoChinhTri");

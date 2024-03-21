@@ -33,7 +33,6 @@ namespace NhaMayThep.Application.ThongTinCapDangVien.UpdateThongTinCapDangVien
                 throw new DuplicationException("Tên cấp đảng viên đã tồn tại");
 
             thongTinCapDangVien.Name = request.TenCapDangVien;
-            thongTinCapDangVien.CapDangVien = request.CapDangVien;
             thongTinCapDangVien.NguoiCapNhatID = _currentUserService.UserId;
             thongTinCapDangVien.NgayCapNhat = DateTime.Now;
             _thongTinCapDangVienRepository.Update(thongTinCapDangVien);

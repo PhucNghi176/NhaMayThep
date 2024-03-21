@@ -244,7 +244,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    CapDangVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenCapDangVien = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -302,7 +301,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    ChucVuDang = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     TenChucVuDang = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
@@ -429,7 +427,6 @@ namespace NhaMayThep.Infrastructure.Migrations
                 {
                     ID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    TrinhDoChinhTri = table.Column<int>(type: "int", nullable: false),
                     TenTrinhDoChinhTri = table.Column<string>(type: "nvarchar(max)", nullable: false),
                     NguoiTaoID = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     NgayTao = table.Column<DateTime>(type: "datetime2", nullable: true),
