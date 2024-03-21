@@ -92,7 +92,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
                 throw new NotFoundException("Không tìm thấy quá trình nhân sự nào.");
             }
 
-            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.HoVaTen, cancellationToken);
+            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
+                x => x.NgayXoa == null && result.Select(r => r.MaSoNhanVien).Equals(x.ID),
+                x => x.ID,
+                x => x.HoVaTen,
+                cancellationToken);
             var loaiQuaTrinh = await _loaiQuaTrinh.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var phongBan = await _phongBan.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var chucVu = await _chucVu.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);

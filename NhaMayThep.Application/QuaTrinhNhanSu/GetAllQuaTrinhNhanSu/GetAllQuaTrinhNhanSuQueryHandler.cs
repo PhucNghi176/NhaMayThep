@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Application.Common.Models;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
@@ -43,7 +44,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu
             {
                 throw new NotFoundException("Không tìm thấy bất kỳ QuaTrinhNhanSu nào");
             }
-            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.HoVaTen, cancellationToken);
+            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
+                x => x.NgayXoa == null && entity.Select(r => r.MaSoNhanVien).Equals(x.ID),
+                x => x.ID,
+                x => x.HoVaTen,
+                cancellationToken);
             var loaiQuaTrinh = await _loaiQuaTrinh.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var phongBan = await _phongBan.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var chucVu = await _chucVu.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);

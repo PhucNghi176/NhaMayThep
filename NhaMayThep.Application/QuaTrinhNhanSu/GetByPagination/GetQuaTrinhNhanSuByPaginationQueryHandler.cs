@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Application.Common.Pagination;
+using NhaMapThep.Domain.Entities.Base;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
@@ -38,7 +39,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetByPagination
         public async Task<PagedResult<QuaTrinhNhanSuDto>> Handle(GetQuaTrinhNhanSuByPaginationQuery query, CancellationToken cancellationToken)
         {           
             var list = await _quaTrinhNhanSuRepository.FindAllAsync(x => x.NgayXoa == null, query.PageNumber, query.PageSize, cancellationToken);
-            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.HoVaTen, cancellationToken);
+            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
+                x => x.NgayXoa == null && list.Select(r => r.MaSoNhanVien).Equals(x.ID),
+                x => x.ID,
+                x => x.HoVaTen,
+                cancellationToken);
             var loaiQuaTrinh = await _loaiQuaTrinh.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var phongBan = await _phongBan.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var chucVu = await _chucVu.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
