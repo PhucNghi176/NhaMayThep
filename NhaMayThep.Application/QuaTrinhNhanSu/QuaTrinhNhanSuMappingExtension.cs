@@ -12,9 +12,10 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu
         public static List<QuaTrinhNhanSuDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<QuaTrinhNhanSuEntity> projectFrom, IMapper mapper)
             => projectFrom.Select(x => x.MapToQuaTrinhNhanSuDto(mapper)).ToList();
 
-        public static QuaTrinhNhanSuDto MapToQuaTrinhNhanSuDto(this QuaTrinhNhanSuEntity entity, IMapper mapper, string loaiQuaTrinh, string phongBan, string chucVu, string chucDanh)
+        public static QuaTrinhNhanSuDto MapToQuaTrinhNhanSuDto(this QuaTrinhNhanSuEntity entity, IMapper mapper, string loaiQuaTrinh, string phongBan, string chucVu, string chucDanh, string hoVaTen)
         {
             var dto = mapper.Map<QuaTrinhNhanSuDto>(entity);
+            dto.HoVaTen = hoVaTen;
             dto.LoaiQuaTrinh = loaiQuaTrinh;
             dto.PhongBan = phongBan;
             dto.ChucVu = chucVu;
@@ -22,13 +23,14 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu
             return dto;
         }
 
-        public static List<QuaTrinhNhanSuDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<QuaTrinhNhanSuEntity> entities, IMapper mapper, Dictionary<int, string> loaiQuaTrinh, Dictionary<int, string> phongBan, Dictionary<int, string> chucVu, Dictionary<int, string> chucDanh)
+        public static List<QuaTrinhNhanSuDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<QuaTrinhNhanSuEntity> entities, IMapper mapper, Dictionary<int, string> loaiQuaTrinh, Dictionary<int, string> phongBan, Dictionary<int, string> chucVu, Dictionary<int, string> chucDanh, Dictionary<string, string> hoVaTen)
             => entities.Select(x =>
-            x.MapToQuaTrinhNhanSuDto(mapper,
+            x.MapToQuaTrinhNhanSuDto(mapper,               
                 loaiQuaTrinh.ContainsKey(x.LoaiQuaTrinhID) ? loaiQuaTrinh[x.LoaiQuaTrinhID] : "Lỗi",
                 phongBan.ContainsKey(x.PhongBanID) ? phongBan[x.PhongBanID] : "Lỗi",
                 chucVu.ContainsKey(x.ChucVuID) ? chucVu[x.ChucVuID] : "Lỗi",
-                chucDanh.ContainsKey(x.ChucDanhID) ? chucDanh[x.ChucDanhID] : "Lỗi"               
+                chucDanh.ContainsKey(x.ChucDanhID) ? chucDanh[x.ChucDanhID] : "Lỗi" ,
+                hoVaTen.ContainsKey(x.MaSoNhanVien) ? hoVaTen[x.MaSoNhanVien] : "Lỗi"
             )).ToList();
     }
 }

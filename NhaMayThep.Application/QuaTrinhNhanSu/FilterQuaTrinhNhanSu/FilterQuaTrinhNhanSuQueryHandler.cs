@@ -26,11 +26,14 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
         private readonly IPhongBanRepository _phongBan;
         private readonly IChucDanhRepository _chucDanh;
         private readonly IChucVuRepository _chucVu;
+        private readonly INhanVienRepository _nhanVienRepository;
 
         public FilterQuaTrinhNhanSuQueryHandler(IQuaTrinhNhanSuRepository quaTrinhNhanSuRepository, IMapper mapper, ApplicationDbContext context
-            ,IThongTinQuaTrinhNhanSuRepository loaiQuaTrinh, IPhongBanRepository phongBan, IChucVuRepository chucVu, IChucDanhRepository chucDanh)
+            ,IThongTinQuaTrinhNhanSuRepository loaiQuaTrinh, IPhongBanRepository phongBan, IChucVuRepository chucVu, IChucDanhRepository chucDanh
+            ,INhanVienRepository nhanVienRepository)
         {
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
+            _nhanVienRepository = nhanVienRepository;
             _mapper = mapper;
             _context = context;
             _loaiQuaTrinh = loaiQuaTrinh;
@@ -89,6 +92,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
                 throw new NotFoundException("Không tìm thấy quá trình nhân sự nào.");
             }
 
+            var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
+                x => x.NgayXoa == null && result.Select(r => r.MaSoNhanVien).Equals(x.ID),
+                x => x.ID,
+                x => x.HoVaTen,
+                cancellationToken);
             var loaiQuaTrinh = await _loaiQuaTrinh.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var phongBan = await _phongBan.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var chucVu = await _chucVu.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
@@ -98,7 +106,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
                 pageCount: result.PageCount,
                 pageSize: result.PageSize,
                 pageNumber: result.PageNo,
-                data: result.MapToQuaTrinhNhanSuDtoList(_mapper, loaiQuaTrinh, phongBan, chucVu, chucDanh));
+                data: result.MapToQuaTrinhNhanSuDtoList(_mapper, loaiQuaTrinh, phongBan, chucVu, chucDanh, hoVaTen));
         }
     }
 }
