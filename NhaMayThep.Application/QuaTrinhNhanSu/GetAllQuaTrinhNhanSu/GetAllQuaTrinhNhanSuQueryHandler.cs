@@ -45,7 +45,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu
                 throw new NotFoundException("Không tìm thấy bất kỳ QuaTrinhNhanSu nào");
             }
             var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
-                x => x.NgayXoa == null && entity.Select(r => r.MaSoNhanVien).Equals(x.ID),
+                x => x.NgayXoa == null && entity.Select(r => r.MaSoNhanVien).Contains(x.ID),
                 x => x.ID,
                 x => x.HoVaTen,
                 cancellationToken);

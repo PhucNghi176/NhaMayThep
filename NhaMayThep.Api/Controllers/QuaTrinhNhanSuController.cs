@@ -22,7 +22,7 @@ using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    //[Authorize]
     public class QuaTrinhNhanSuController : ControllerBase
     {
         private readonly ISender _mediator;
