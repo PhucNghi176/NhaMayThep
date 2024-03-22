@@ -11,11 +11,9 @@ namespace NhaMayThep.Application.ThongTinTrinhDoChinhTri.CreateThongTinTrinhDoCh
     public class CreateThongTinTrinhDoChinhTriCommand : IRequest<string>, ICommand
     {
         public string TenTrinhDoChinhTri { get; set; }
-        public int TrinhDoChinhTri { get; set; }
-        public CreateThongTinTrinhDoChinhTriCommand(string tenTrinhDoChinhTri, int trinhDoChinhTri)
+        public CreateThongTinTrinhDoChinhTriCommand(string tenTrinhDoChinhTri)
         {
             TenTrinhDoChinhTri = tenTrinhDoChinhTri;
-            TrinhDoChinhTri = trinhDoChinhTri;
         }
     }
 }

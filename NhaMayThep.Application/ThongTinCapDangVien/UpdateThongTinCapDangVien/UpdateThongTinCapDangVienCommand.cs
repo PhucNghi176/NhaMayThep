@@ -11,12 +11,10 @@ namespace NhaMayThep.Application.ThongTinCapDangVien.UpdateThongTinCapDangVien
     {
         public int Id { get; set; }
         public string TenCapDangVien { get; set; }
-        public string CapDangVien { get; set; }
-        public UpdateThongTinCapDangVienCommand(int id, string tenCapDangVien, string capDangVien)
+        public UpdateThongTinCapDangVienCommand(int id, string tenCapDangVien)
         {
             Id = id;
             TenCapDangVien = tenCapDangVien;
-            CapDangVien = capDangVien;
         }
     }
 }

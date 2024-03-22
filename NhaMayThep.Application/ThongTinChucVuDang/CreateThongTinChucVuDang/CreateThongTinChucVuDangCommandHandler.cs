@@ -25,8 +25,7 @@ namespace NhaMayThep.Application.ThongTinChucVuDang.CreateThongTinChucVuDang
 
             var thongTinChucVuDang = new ThongTinChucVuDangEntity()
             {
-                Name = request.TenChucVuDang,
-                ChucVuDang = request.ChucVuDang
+                Name = request.TenChucVuDang
             };
 
             _thongTinChucVuDangRepository.Add(thongTinChucVuDang);

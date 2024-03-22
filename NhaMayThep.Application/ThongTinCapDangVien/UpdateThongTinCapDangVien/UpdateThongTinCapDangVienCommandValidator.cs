@@ -17,9 +17,6 @@ namespace NhaMayThep.Application.ThongTinCapDangVien.UpdateThongTinCapDangVien
             RuleFor(x => x.TenCapDangVien)
                 .NotEmpty().WithMessage("Tên cấp đảng viên không được để trống")
                 .NotNull().WithMessage("Tên cấp đảng viên không được rỗng");
-            RuleFor(x => x.CapDangVien)
-                .NotEmpty().WithMessage("Thông tin cấp đảng viên không được để trống")
-                .NotNull().WithMessage("Thông tin cấp đảng viên không được rỗng");
         }
     }
 }

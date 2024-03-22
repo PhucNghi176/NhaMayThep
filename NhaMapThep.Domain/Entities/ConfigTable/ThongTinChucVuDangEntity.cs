@@ -11,6 +11,5 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     [Table("ThongTinChucVuDang")]
     public class ThongTinChucVuDangEntity : BangMaGocEntity
     {
-        public required string ChucVuDang {  get; set; }
     }
 }
