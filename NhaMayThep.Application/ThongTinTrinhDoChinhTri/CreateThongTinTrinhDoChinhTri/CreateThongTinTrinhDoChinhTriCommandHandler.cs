@@ -25,8 +25,7 @@ namespace NhaMayThep.Application.ThongTinTrinhDoChinhTri.CreateThongTinTrinhDoCh
 
             var thongTinTrinhDoChinhTri = new ThongTinTrinhDoChinhTriEntity()
             {
-                Name = request.TenTrinhDoChinhTri,
-                TrinhDoChinhTri = request.TrinhDoChinhTri
+                Name = request.TenTrinhDoChinhTri
             };
 
             _thongTinTrinhDoChinhTriRepository.Add(thongTinTrinhDoChinhTri);
