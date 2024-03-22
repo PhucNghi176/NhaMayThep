@@ -36,8 +36,7 @@ namespace NhaMayThep.Application.PhuCapNhanVien.CreatePhuCapNhanVien
                 NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Now,
                 MaSoNhanVien = request.MaSoNhanVien,
-                PhuCap = request.PhuCap,
-                Name = request.Name
+                PhuCap = request.PhuCap
             };
 
             _phuCapNhanVienRepository.Add(phuCapNhanVien);
