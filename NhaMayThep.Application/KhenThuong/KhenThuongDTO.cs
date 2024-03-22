@@ -16,6 +16,7 @@ namespace NhaMayThep.Application.KhenThuong
         public string TenNhanVien { get; set; }
         public string ID {  get; set; }
         public int ChinhSachNhanSuID { get; set; }
+        public string ChinhSachNhanSu {  get; set; }
         public string TenDotKhenThuong { get; set; }
         public DateTime NgayKhenThuong { get; set; }
         public decimal TongThuong { get; set; }

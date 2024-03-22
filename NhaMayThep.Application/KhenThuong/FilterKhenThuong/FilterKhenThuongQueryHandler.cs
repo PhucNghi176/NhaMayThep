@@ -44,7 +44,7 @@ namespace NhaMayThep.Application.KhenThuong.FilterKhenThuong
                 }
                 if (request.ChinhSachNhanSuID != 0)
                 {
-                    query = query.Where(x => x.ChinhSachNhanSu.Equals(request.ChinhSachNhanSuID));
+                    query = query.Where(x => x.ChinhSachNhanSuID.Equals(request.ChinhSachNhanSuID));
                 }
                 if (!string.IsNullOrEmpty(request.TenDotKhenThuong))
                 {
@@ -52,7 +52,17 @@ namespace NhaMayThep.Application.KhenThuong.FilterKhenThuong
                 }
                 if (request.NgayKhenThuong != null)
                 {
-                    query = query.Where(x => x.NgayKhenThuong.Equals(request.NgayKhenThuong));
+                    string format = "dd, MM, yyyy";
+                    DateTime parsed;
+                    if (DateTime.TryParseExact(request.NgayKhenThuong, format, System.Globalization.CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.None, out parsed))
+                    {
+                        query = query.Where(x => x.NgayKhenThuong.Date.Equals(parsed));
+                    }
+                    else
+                    {
+                        throw new FormatException("Sai format ngày, tháng, năm");
+                    }
+                    
                 }
                 if (request.TongThuong != 0)
                 {
@@ -64,12 +74,19 @@ namespace NhaMayThep.Application.KhenThuong.FilterKhenThuong
             var result = await _repository.FindAllAsync(request.PageNumber, request.PageSize, queryOptions, cancellationToken);
             if (!result.Any())
                 throw new NotFoundException("Không tìm thấy thông tin Khen Thưởng.");
+            var tenNhanVien = await _nhanVienRepository.FindAllToDictionaryAsync(
+               x => x.NgayXoa == null && result.Select(r => r.MaSoNhanVien).Contains(x.ID),
+               x => x.ID,
+               x => x.HoVaTen,
+               cancellationToken);
+            var chinhSachNhanSu = await _chinhSachNhanSuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
+
             return PagedResult<KhenThuongDTO>.Create(
                 totalCount: result.TotalCount,
                 pageCount: result.PageCount,
                 pageSize: result.PageSize,
                 pageNumber: result.PageNo,
-                data: result.MapToKhenThuongDTOList(_mapper));
+                data: result.MapToKhenThuongDTOList(_mapper, chinhSachNhanSu, tenNhanVien));
         }
 
     }
