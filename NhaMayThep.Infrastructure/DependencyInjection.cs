@@ -81,6 +81,8 @@ public static class DependencyInjection
         services.AddTransient<IPhuCapNhanVienRepository, PhuCapNhanVienRepository>();
         services.AddTransient<IThongTinLuongNhanVienRepository,ThongTinLuongNhanVienRepository>();
         services.AddTransient<IBaoHiemNhanVienRepository, BaoHiemNhanVienRepository>();
+        services.AddTransient<IBangLuongRepository, BangLuongRepository>();
+        services.AddTransient<IGiamTruNhanVienRepository, GiamTruNhanVienRepository>();
 
         return services;
     }
