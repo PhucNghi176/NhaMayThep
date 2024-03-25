@@ -16,18 +16,13 @@ jobs:
     steps:
         - name: Checkout repository
           uses: actions/checkout@v2
-
-        - name: Grant write permission to appsettings.json file
-          run: chmod +w NhaMayThep.Api/appsettings.json
-        - name: Grant write permission appsettings.Development.json file
-          run: chmod +w NhaMayThep.Api/appsettings.Development.json
-                  
+  
         - name: update appsetting.json
           run: |
-            echo "${{ secrets.APPSETTING }}" > NhaMayThep.Api/appsettings.json
+            echo "${{ secrets.APPSETTING }}" | sed 's/;/\\;/g' > NhaMayThep.Api/appsettings.json
         - name: update appsetting.Development.json 
           run: |
-            echo "${{ secrets.APPSETTING_DEVELOPMENT }}" > NhaMayThep.Api/appsettings.Development.json
+            echo "${{ secrets.APPSETTING_DEVELOPMENT }}" | sed 's/;/\\;/g' > NhaMayThep.Api/appsettings.Development.json
           
         - name: Login to Docker Hub
           run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
