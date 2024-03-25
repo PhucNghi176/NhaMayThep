@@ -23,9 +23,9 @@ jobs:
           run: chmod +w NhaMayThep.Api/appsettings.Development.json
                   
         - name: update appsetting.json
-          run: echo "${{ secrets.APPSETTING }}" > NhaMayThep.Api/appsettings.json
+          run: echo ${{ secrets.APPSETTING }} > NhaMayThep.Api/appsettings.json
         - name: update appsetting.Development.json 
-          run: echo "${{ secrets.APPSETTING_DEVELOPMENT }}" > NhaMayThep.Api/appsettings.Development.json
+          run: echo ${{ secrets.APPSETTING_DEVELOPMENT }} > NhaMayThep.Api/appsettings.Development.json
           
         - name: Login to Docker Hub
           run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
