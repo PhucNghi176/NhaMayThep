@@ -16,6 +16,11 @@ jobs:
     steps:
         - name: Checkout repository
           uses: actions/checkout@v2
+
+        - name: Grant write permission to appsettings.json file
+          run: chmod +w NhaMayThep.Api/appsettings.json
+        - name: Grant write permission appsettings.Development.json file
+          run: chmod +w NhaMayThep/NhaMayThep.Api/appsettings.Development.json
                   
         - name: update appsetting.json
           run: echo "${{ secrets.APPSETTING }}" > NhaMayThep.Api/appsettings.json
