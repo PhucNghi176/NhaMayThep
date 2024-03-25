@@ -16,7 +16,12 @@ jobs:
     steps:
         - name: Checkout repository
           uses: actions/checkout@v2
-        
+                  
+        - name: update appsetting.json
+          run: echo "${{ secrets.APPSETTING }}" > NhaMayThep.Api/appsettings.json
+        - name: update appsetting.Development.json 
+          run: echo "${{ secrets.APPSETTING_DEVELOPMENT }}" > NhaMayThep/NhaMayThep.Api/appsettings.Development.json
+          
         - name: Login to Docker Hub
           run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
         
@@ -43,7 +48,7 @@ jobs:
           docker rmi ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}} || true
           
           docker pull ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
-          docker run -d -p 8070:80 --name ${{secrets.DOCKER_IMAGE}}-backend-api -v pdf:/app/uploads ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
+          docker run -d -p ${{secrets.APP_PORT}}:80 --name ${{secrets.DOCKER_IMAGE}}-backend-api -v pdf:/app/uploads ${{secrets.DOCKER_USERNAME}}/${{secrets.DOCKER_IMAGE}}:latest
           "
       # if [ "${{ github.event_name }}" == "pull_request" ] && [ "${{ github.event.action }}" == "closed" ] && [ "${{ github.event.pull_request.base.ref }}" == "main" ]; then
       # fi
