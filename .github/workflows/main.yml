@@ -19,10 +19,10 @@ jobs:
   
         - name: update appsetting.json
           run: |
-            echo "${{ secrets.APPSETTING }}" | sed 's/;/\\;/g' > NhaMayThep.Api/appsettings.json
+            echo "${{ secrets.APPSETTING }}" | awk '{gsub(/;/,"__semicolon__")}1' | tr -d '\n' | sed 's/__semicolon__;/;/g' > NhaMayThep.Api/appsettings.json
         - name: update appsetting.Development.json 
           run: |
-            echo "${{ secrets.APPSETTING_DEVELOPMENT }}" | sed 's/;/\\;/g' > NhaMayThep.Api/appsettings.Development.json
+            echo "${{ secrets.APPSETTING_DEVELOPMENT }}" | awk '{gsub(/;/,"__semicolon__")}1' | tr -d '\n' | sed 's/__semicolon__;/;/g' > NhaMayThep.Api/appsettings.Development.json
           
         - name: Login to Docker Hub
           run: docker login -u ${{secrets.DOCKER_USERNAME}} -p ${{secrets.DOCKER_PASSWORD}}
