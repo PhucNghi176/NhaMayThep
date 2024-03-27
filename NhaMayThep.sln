@@ -19,6 +19,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Application", "N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Api", "NhaMayThep.Api\NhaMayThep.Api.csproj", "{88CC32CD-C359-41C6-99C4-D8414CE63DD8}"
 EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "TestProject1", "TestProject1\TestProject1.csproj", "{815FDCA1-FD26-4F39-BEB9-D7CACD2A1CEA}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -41,6 +43,10 @@ Global
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{815FDCA1-FD26-4F39-BEB9-D7CACD2A1CEA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{815FDCA1-FD26-4F39-BEB9-D7CACD2A1CEA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{815FDCA1-FD26-4F39-BEB9-D7CACD2A1CEA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{815FDCA1-FD26-4F39-BEB9-D7CACD2A1CEA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
