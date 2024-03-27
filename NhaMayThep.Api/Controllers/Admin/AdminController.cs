@@ -20,6 +20,7 @@ namespace NhaMayThep.Api.Controllers.Admin
             _meditar = meditar;
         }
         [HttpPost]
+        [AllowAnonymous]
         [Route("admin")]
         public async Task<ActionResult> CreateAdminAccount([FromBody] CreateAdminAccountCommand command, CancellationToken cancellationToken = default)
         {
