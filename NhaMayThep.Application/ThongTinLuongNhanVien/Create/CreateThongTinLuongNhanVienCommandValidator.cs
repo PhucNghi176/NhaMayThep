@@ -29,11 +29,18 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
 
             RuleFor(x => x.LuongCu)
                 .NotEmpty().WithMessage("Lương Cũ Không Được Để Trống")
-                .GreaterThan(0).WithMessage("Lương Cũ must be greater than 0");
+                .GreaterThan(0).WithMessage("Lương Cũ phải lớn hơn 0");
 
             RuleFor(x => x.LuongMoi)
                 .NotEmpty().WithMessage("Lương Hiện Tại Không Được Để Trống")
-                .GreaterThan(0).WithMessage("Lương Hiện Tại must be greater than 0");
+                .GreaterThan(0).WithMessage("Lương Hiện Tại phải lớn hơn 0")
+                .When(x => x.Loai == "TangLuong")
+                .GreaterThan(x => x.LuongCu).WithMessage("Lương Hiện Tại phải lớn hơn Lương Cũ");
+
+            RuleFor(x => x.LuongCu)
+                .GreaterThanOrEqualTo(x => x.LuongMoi)
+                .When(x => x.Loai == "GiamLuong")
+                .WithMessage("Lương Cũ phải lớn hơn hoặc bằng Lương Hiện Tại");
 
             RuleFor(x => x.NgayHieuLuc)
                 .NotEmpty().WithMessage("Ngày Hiệu Lực Không Được Để Trống");

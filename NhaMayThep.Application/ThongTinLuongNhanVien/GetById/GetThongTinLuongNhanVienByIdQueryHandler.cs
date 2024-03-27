@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetById
             var thongtin = await _thongTinLuongNhanVienRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (thongtin is null || thongtin.NgayXoa.HasValue)
             {
-                throw new NotFoundException("Trạng Thái không tìm thấy hoặc đã bị xóa");
+                throw new NotFoundException("Thông Tin không tìm thấy hoặc đã bị xóa");
             }
             return thongtin.MapToThongTinLuongNhanVienDTO(_mapper);
         }
