@@ -12,11 +12,11 @@ namespace NhaMayThep.Application.LuongSanPham.Update
 {
     public class UpdateLuongSanPhamCommand : IRequest<string>, ICommand
     {
-        public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPham, string mucSanPhamID, decimal tongLuong)
+        public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPhamLam, string mucSanPhamID, decimal tongLuong)
         {
             ID = id;
             MaSoNhanVien = maSoNhanVien;
-            SoSanPhamLam = soSanPham;
+            SoSanPhamLam = soSanPhamLam;
             MucSanPhamID = mucSanPhamID;
             TongLuong = tongLuong;
         }
