@@ -48,7 +48,7 @@ namespace NhaMapThep.Domain.Entities
 
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongBaoHiem { get; set; }
-        [Column(TypeName = "decimal(18, 4)")]
+
         public required string PhuCapCongDoanID { get; set; }
         [ForeignKey(nameof(PhuCapCongDoanID))]
         public virtual PhuCapCongDoanEntity PhuCapCongDoan { get; set; }
