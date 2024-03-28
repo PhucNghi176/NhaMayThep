@@ -17,14 +17,12 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Create
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly IMaDangKiCaLamRepository _maDangKiCaLamRepository;
-        public readonly IMapper _mapper;
 
-        public CreateMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository, IMapper mapper,
+        public CreateMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository,
             ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _maDangKiCaLamRepository = maDangKiCaLamRepository;
-            _mapper = mapper;
         }
 
         public async Task<string> Handle(CreateMaDangKiCaLamCommand request, CancellationToken cancellationToken)

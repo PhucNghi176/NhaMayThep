@@ -14,14 +14,11 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.GetAll
 {
     public class GetAllMaDangKiCaLamHandler : IRequestHandler<GetAllMaDangKiCaLamQuery, List<MaDangKiCaLamViecDTO>>
     {
-        private readonly ICurrentUserService _currentUserService;
         public readonly IMaDangKiCaLamRepository _maDangKiCaLamRepository;
         public readonly IMapper _mapper;
 
-        public GetAllMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository, IMapper mapper,
-            ICurrentUserService currentUserService)
+        public GetAllMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository, IMapper mapper)
         {
-            _currentUserService = currentUserService;
             _maDangKiCaLamRepository = maDangKiCaLamRepository;
             _mapper = mapper;
         }

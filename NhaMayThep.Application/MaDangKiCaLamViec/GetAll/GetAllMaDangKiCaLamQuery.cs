@@ -1,4 +1,5 @@
 ﻿using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.MaDangKiCaLamViec.GetAll
 {
-    public class GetAllMaDangKiCaLamQuery : IRequest<List<MaDangKiCaLamViecDTO>>
+    public class GetAllMaDangKiCaLamQuery : IRequest<List<MaDangKiCaLamViecDTO>>, IQuery
     {
         public GetAllMaDangKiCaLamQuery() { }
     }

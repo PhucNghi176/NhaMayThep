@@ -1,4 +1,4 @@
-﻿using AutoMapper;
+﻿
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
@@ -17,14 +17,11 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Update
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly IMaDangKiCaLamRepository _maDangKiCaLamRepository;
-        public readonly IMapper _mapper;
 
-        public UpdateMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository, IMapper mapper,
-            ICurrentUserService currentUserService)
+        public UpdateMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _maDangKiCaLamRepository = maDangKiCaLamRepository;
-            _mapper = mapper;
         }
 
         public async Task<string> Handle(UpdateMaDangKiCaLamCommand request, CancellationToken cancellationToken)

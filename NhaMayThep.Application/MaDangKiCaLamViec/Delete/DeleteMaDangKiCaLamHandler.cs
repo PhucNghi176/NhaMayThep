@@ -1,10 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.MaDangKiCaLamViec.Create;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,14 +14,12 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Delete
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly IMaDangKiCaLamRepository _maDangKiCaLamRepository;
-        public readonly IMapper _mapper;
 
-        public DeleteMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository, IMapper mapper,
+        public DeleteMaDangKiCaLamHandler(IMaDangKiCaLamRepository maDangKiCaLamRepository,
             ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _maDangKiCaLamRepository = maDangKiCaLamRepository;
-            _mapper = mapper;
         }
 
         public async Task<string> Handle(DeleteMaDangKiCaLamCommand request, CancellationToken cancellationToken)
