@@ -19,8 +19,6 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Application", "N
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "NhaMayThep.Api", "NhaMayThep.Api\NhaMayThep.Api.csproj", "{88CC32CD-C359-41C6-99C4-D8414CE63DD8}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "NhaMayThep.UnitTest", "LichSuNghiPhepTests\NhaMayThep.UnitTest.csproj", "{0E4E4D68-B749-4C67-8E9B-41A43338263F}"
-EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,10 +41,6 @@ Global
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8}.Release|Any CPU.Build.0 = Release|Any CPU
-		{0E4E4D68-B749-4C67-8E9B-41A43338263F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{0E4E4D68-B749-4C67-8E9B-41A43338263F}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{0E4E4D68-B749-4C67-8E9B-41A43338263F}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{0E4E4D68-B749-4C67-8E9B-41A43338263F}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -56,7 +50,6 @@ Global
 		{7FF9E521-E917-4A3F-8480-CC028426694C} = {4E65B1D9-D3F8-4995-9C24-812003061E01}
 		{82681108-62EA-4757-AC62-42D3807B4156} = {27B8C831-4EB5-4A06-A355-4E29EA8E3B03}
 		{88CC32CD-C359-41C6-99C4-D8414CE63DD8} = {5E2F783B-CA49-4EA8-9DA6-564660DB8BA8}
-		{0E4E4D68-B749-4C67-8E9B-41A43338263F} = {27B8C831-4EB5-4A06-A355-4E29EA8E3B03}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {7B01E103-230D-4D72-A69E-FBF666248FBA}
