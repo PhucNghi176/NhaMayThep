@@ -26,7 +26,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
             RuleFor(cmd => cmd.NgayBatDau)
                 .NotEmpty().WithMessage("Start Date không được để trống.")
-                .GreaterThanOrEqualTo(DateTime.Now.Date).WithMessage("Start Date không thể trong quá khứ .");
 
             RuleFor(cmd => cmd.NgayKetThuc)
                 .NotEmpty().WithMessage("End Date không được để trống.")
