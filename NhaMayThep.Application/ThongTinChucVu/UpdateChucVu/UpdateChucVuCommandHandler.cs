@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.UpdateChucVu
         {
             var duplicate = await _chucVuRepository.AnyAsync(x => x.Name == command.Name && x.NgayXoa == null, cancellationToken);
             if (duplicate)
-                throw new NotFoundException("Đã có tên chức vụ này trong hệ thống");
+                throw new DuplicationException("Đã có tên chức vụ này trong hệ thống");
 
             var result = await _chucVuRepository.FindAsync(x => x.ID == command.Id && x.NgayXoa == null, cancellationToken);
             if (result == null)

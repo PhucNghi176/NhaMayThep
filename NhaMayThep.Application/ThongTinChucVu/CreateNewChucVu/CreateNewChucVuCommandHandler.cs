@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu
         {
             var isExisted = await _chucVuRepository.AnyAsync(x => x.Name == command.TenChucVu && x.NgayXoa == null, cancellationToken);
             if (isExisted)
-                throw new NotFoundException("Chức vụ này đã tồn tại");
+                throw new DuplicationException("Chức vụ này đã tồn tại");
             var add = new ThongTinChucVuEntity()
             {
                 Name = command.TenChucVu
