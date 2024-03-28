@@ -14,6 +14,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep
         public DateTime NgayKetThuc { get; set; }
         public string LyDo { get; set; }
         public string NguoiDuyet { get; set; }
+        public string TenNguoiDuyet { get; set; }
         public string TenNhanVien { get; set; }
         public string TenLoaiNghiPhep { get; set; }
         public string TenNguoiDuyet { get; set; }
