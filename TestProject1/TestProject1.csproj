@@ -25,10 +25,4 @@
     <ProjectReference Include="..\NhaMayThep.Infrastructure\NhaMayThep.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="LoaiCongTacTest\" />
-    <Folder Include="LichSuCongTacNhanVienTest\" />
-    <Folder Include="HoaDonCongTacNhanVienTest\" />
-  </ItemGroup>
-
 </Project>
