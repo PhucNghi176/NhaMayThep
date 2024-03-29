@@ -14,11 +14,9 @@ namespace NhaMayThep.Application.CapBacLuong.CreateCapBacLuong
     public class CreateCapBacLuongCommandHandler : IRequestHandler<CreateCapBacLuongCommand, string>
     {
         private readonly ICapBacLuongRepository _capBacLuongRepository;
-        private readonly ICurrentUserService _currentUserService;
-        public CreateCapBacLuongCommandHandler(ICapBacLuongRepository capBacLuongRepository, ICurrentUserService currentUserService)
+        public CreateCapBacLuongCommandHandler(ICapBacLuongRepository capBacLuongRepository)
         {
             _capBacLuongRepository = capBacLuongRepository;
-            _currentUserService = currentUserService;
         }
         public async Task<string> Handle(CreateCapBacLuongCommand request, CancellationToken cancellationToken)
         {
@@ -30,9 +28,7 @@ namespace NhaMayThep.Application.CapBacLuong.CreateCapBacLuong
             {
                 Name = request.TenCapBac,
                 HeSoLuong = request.HeSoLuong,
-                TrinhDo = request.TrinhDo,
-                NguoiTaoID = _currentUserService.UserId,
-                NgayTao = DateTime.Now
+                TrinhDo = request.TrinhDo
             };
 
             _capBacLuongRepository.Add(capBacLuong);

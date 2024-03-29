@@ -16,10 +16,7 @@ namespace NhaMayThep.Application.CapBacLuong.CreateCapBacLuong
                 .NotNull().WithMessage("Tên cấp bậc không được để rỗng.");
             RuleFor(x => x.HeSoLuong)
                 .NotEmpty().WithMessage("Hệ số lương không được để trống.")
-                .NotNull().WithMessage("Hệ số lương không được để rỗng.");
-            RuleFor(x => x.TrinhDo)
-                .NotEmpty().WithMessage("Trình độ không được để trống.")
-                .NotNull().WithMessage("Trình độ không được để rỗng.");
+                .NotNull().WithMessage("Hệ số lương không được để rỗng."); ;
         }
     }
 }
