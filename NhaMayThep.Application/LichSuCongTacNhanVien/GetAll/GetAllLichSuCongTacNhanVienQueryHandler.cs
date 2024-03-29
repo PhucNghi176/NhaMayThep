@@ -2,7 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.LoaiCongTac;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetAll
 {
@@ -23,10 +22,6 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetAll
             if (list == null)
             {
                 throw new NotFoundException("Danh Sách Rỗng");
-            }
-            foreach(var item in list)
-            {
-                item.LoaiCongTac.MapToLoaiCongTacDto(_mapper);
             }
             return list.MapToLichSuCongTacNhanVienDtoList(_mapper);
         }

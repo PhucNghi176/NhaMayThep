@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using System;
@@ -23,11 +22,14 @@ namespace NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh
         public async Task<List<ChucDanhDto>> Handle(GetAllChucDanhQuery query, CancellationToken cancellationToken)
         {
             var list = await _chucDanhRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
-            if(list == null)
+            List<ChucDanhDto> result = new List<ChucDanhDto>();
+            foreach (var item in list)
             {
-                throw new NotFoundException("Không tìm thấy chức vụ");
+                if (item.NgayXoa != null)
+                    continue;
+                var add = item.MapToChucDanhDto(_mapper);
+                result.Add(add);
             }
-            var result = list.MapToListChucDanhDto(_mapper);
             return result;
         }
     }
