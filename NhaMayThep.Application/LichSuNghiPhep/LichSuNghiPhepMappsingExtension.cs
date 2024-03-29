@@ -20,25 +20,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep
         }
         public static List<LichSuNghiPhepDto> MapToLichSuNghiPhepDtoList(this IEnumerable<LichSuNghiPhepNhanVienEntity> projectFrom, IMapper mapper)
            => projectFrom.Select(x => x.MapToLichSuNghiPhepDto(mapper)).ToList();
-
-        public static LichSuNghiPhepDto MapToLichSuNghiPhepDto(
-            this LichSuNghiPhepNhanVienEntity entity,
-            IMapper mapper,
-            string nhanvien,
-            string loainghipheps)
-        {
-            var dto = mapper.Map<LichSuNghiPhepDto>(entity);
-            dto.NhanVien = nhanvien;
-            dto.LoaiNghiPhep = loainghipheps;
-            return dto;
-        }
-        public static List<LichSuNghiPhepDto> MapToLichSuNghiPhepDtoList(
-            this IEnumerable<LichSuNghiPhepNhanVienEntity> entities,
-            IMapper mapper,
-            Dictionary<string, string> nhanviens,
-            Dictionary<int, string> loainghipheps)
-            => entities.Select(x => x.MapToLichSuNghiPhepDto(mapper,
-                nhanviens.ContainsKey(x.MaSoNhanVien) ? nhanviens[x.ID] : "Trống",
-                loainghipheps.ContainsKey(x.LoaiNghiPhepID) ? loainghipheps[x.LoaiNghiPhepID] : "Trống")).ToList();
+        
     }
 }

@@ -16,7 +16,7 @@ using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
-using NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep;
+using NhaMayThep.Application.LichSuNghiPhep.Filter;
 
 namespace NhaMayThep.Api.Controllers
 {
