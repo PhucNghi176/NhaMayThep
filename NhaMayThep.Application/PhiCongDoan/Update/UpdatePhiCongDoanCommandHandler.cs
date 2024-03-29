@@ -38,6 +38,11 @@ namespace NhaMayThep.Application.PhiCongDoan.Update
             if (PhiCongDoan == null)
                 throw new NotFoundException($"Không tìm thấy Phí Công Đoàn với ID : {request.Id} hoặc trường hợp này đã bị xóa.");
 
+            var checkDuplication = await _PhiCongDoanRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.ID != request.Id && x.NgayXoa == null, cancellationToken: cancellationToken);
+            if (checkDuplication != null)
+                throw new NotFoundException("Nhan Vien co ID: " + request.MaSoNhanVien + "da ton tai Phi Cong Doan");
+
+
             PhiCongDoan.LuongDongBH = request.LuongDongBH;
             PhiCongDoan.PhanTramLuongDongBH = request.PhanTramLuongDongBH;
             PhiCongDoan.NguoiCapNhatID = _currentUserService.UserId;

@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.ThongTinChucVu.GetAllChucVu
@@ -17,9 +16,14 @@ namespace NhaMayThep.Application.ThongTinChucVu.GetAllChucVu
         public async Task<List<ChucVuDto>> Handle(GetAllChucVuQuery query, CancellationToken cancellationToken)
         {
             var list = await _chucVuRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
-            if (list == null || list.Count < 0)
-                throw new NotFoundException("Không tìm thấy thông tin chức vụ");
-            var result = list.MapToChucVuDtoList(_mapper);
+            List<ChucVuDto> result = new List<ChucVuDto>();
+            foreach (var item in list)
+            {
+                if (item.NgayXoa != null)
+                    continue;
+                var add = item.MapToChucVuDto(_mapper);
+                result.Add(add);
+            }
             return result;
         }
     }

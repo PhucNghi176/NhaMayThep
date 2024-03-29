@@ -2,7 +2,6 @@
 using MediatR;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.LoaiCongTac;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,10 +22,6 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetByPagination
         public async Task<PagedResult<LichSuCongTacNhanVienDto>> Handle(GetLichSuCongTacNhanVienByPaginationQuery query, CancellationToken cancellationToken)
         {
             var list = await _lichSuCongTacNhanVienRepository.FindAllAsync(x => x.NgayXoa == null, query.PageNumber, query.PageSize, cancellationToken);
-            foreach(var item in list)
-            {
-                item.LoaiCongTac.MapToLoaiCongTacDto(_mapper);
-            }
             return PagedResult<LichSuCongTacNhanVienDto>.Create
                 (
                 totalCount: list.TotalCount,

@@ -20,7 +20,7 @@ namespace NhaMayThep.Api.Controllers
 {
     
     [ApiController]
-    //[Authorize]
+    [Authorize]
     public class LichSuCongTacNhanVienController : ControllerBase
     {
         private readonly ISender _mediator;
