@@ -2,6 +2,7 @@
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.LoaiCongTac;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien
 {
@@ -12,13 +13,13 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
 
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
-        public LoaiCongTacEntity LoaiCongTac { get; set; }
+        public LoaiCongTacDto LoaiCongTac { get; set; }
         public DateTime NgayBatDau { get; set; }
         public DateTime? NgayKetThuc { get; set; }
         public string NoiCongTac { get; set; }
         public string LyDo { get; set; }
 
-        public static LichSuCongTacNhanVienDto Create(string id, string maSoNhanVien, LoaiCongTacEntity loaiCongTac, DateTime ngaybatdau,
+        public static LichSuCongTacNhanVienDto Create(string id, string maSoNhanVien, LoaiCongTacDto loaiCongTac, DateTime ngaybatdau,
             DateTime? ngayKetThuc, string noiCongTac, string Lydo)
         {
             return new LichSuCongTacNhanVienDto()
