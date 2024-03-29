@@ -35,11 +35,13 @@ namespace NhaMayThep.UnitTest.ThongTinChucVuUnitTest
         {
             var expectedData = new List<ThongTinChucVuEntity>
             {
-                new() {
+                new() 
+                {
                     ID = 1,
                     Name = "Test1"
                 },
-                new() {
+                new() 
+                {
                     ID = 2,
                     Name = "Test2"
                 }
