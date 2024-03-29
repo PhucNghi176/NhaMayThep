@@ -48,26 +48,36 @@ namespace NhaMayThep.Application.UnitTests.LichSuNghiPhep
                 NgayBatDau = DateTime.Now.AddDays(-10),
                 NgayKetThuc = DateTime.Now.AddDays(-5),
                 LyDo = "Valid reason for leave",
-                NguoiDuyet = "validNguoiDuyetId"
+                NguoiDuyet = "validNguoiDuyetId",
+                NgayXoa = null // Ensure this is initially null to simulate an entity that hasn't been deleted yet
             };
 
             var expectedDto = new LichSuNghiPhepDto { Id = command.Id };
 
+            // Ensure the FindAsync method is correctly mocked to return the entity when the provided condition matches
             _lichSuNghiPhepRepositoryMock.Setup(r => r.FindAsync(
-                It.Is<Expression<Func<LichSuNghiPhepNhanVienEntity, bool>>>(expr => expr.Compile()(lichSuNghiPhep)),
+                It.IsAny<Expression<Func<LichSuNghiPhepNhanVienEntity, bool>>>(),
                 It.IsAny<CancellationToken>()
             )).ReturnsAsync(lichSuNghiPhep);
 
+            // Mock the behavior of the mapper to return the expected DTO
             _mapperMock.Setup(m => m.Map<LichSuNghiPhepDto>(lichSuNghiPhep)).Returns(expectedDto);
+
+            // Mock the UnitOfWork.SaveChangesAsync to simulate the saving changes behavior
+            // Since it's returning Task<int>, let's simulate a successful operation by returning 1
+            _lichSuNghiPhepRepositoryMock.Setup(r => r.UnitOfWork.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
             // Act
             var result = await _handler.Handle(command, CancellationToken.None);
 
             // Assert
             Assert.AreEqual(expectedDto, result);
-            _lichSuNghiPhepRepositoryMock.Verify(r => r.Update(lichSuNghiPhep), Times.Once);
+            // Verify that the entity was updated (soft deleted) by checking if NgayXoa is set
+            _lichSuNghiPhepRepositoryMock.Verify(r => r.Update(It.Is<LichSuNghiPhepNhanVienEntity>(e => e.NgayXoa != null)), Times.Once);
+            // Verify that changes were indeed saved
             _lichSuNghiPhepRepositoryMock.Verify(r => r.UnitOfWork.SaveChangesAsync(CancellationToken.None), Times.Once);
         }
+
 
         [Test]
         public void Handle_LichSuNghiPhepDoesNotExist_ShouldThrowNotFoundException()
