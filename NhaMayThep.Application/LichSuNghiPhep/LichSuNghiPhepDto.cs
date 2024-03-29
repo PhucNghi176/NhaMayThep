@@ -15,7 +15,9 @@ namespace NhaMayThep.Application.LichSuNghiPhep
         public string Id { get; set; }
 
         public string MaSoNhanVien { get; set; }
+        public string NhanVien { get; set; } = null!;
         public int LoaiNghiPhepID { get; set; }
+        public string LoaiNghiPhep { get; set; } = null!;
         public DateTime NgayBatDau { get; set; }
         public DateTime NgayKetThuc { get; set; }
         public string LyDo { get; set; }
