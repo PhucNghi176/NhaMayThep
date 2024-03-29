@@ -42,9 +42,13 @@ namespace NhaMayThep.Application.LuongSanPham.Update
             if (LuongSanPham == null)
                 throw new NotFoundException($"Không tìm thấy Lương Sản Phẩm với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
 
-            var MucSanPham = await _mucSanPhamRepository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
+            var MucSanPham = await _mucSanPhamRepository.FindAsync(x => x.ID.Equals(request.MucSanPhamID) && x.NgayXoa == null, cancellationToken);
             if (MucSanPham == null)
-                throw new NotFoundException($"Không tìm thấy Mức Sản Phẩm với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
+                throw new NotFoundException($"Không tìm thấy Mức Sản Phẩm với ID : {request.MucSanPhamID} hoặc trường hợp này đã bị xóa.");
+
+            var checkDuplication = await _LuongSanPhamRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.ID != request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
+            if (checkDuplication != null)
+                throw new NotFoundException("Nhan Vien co ID: " + request.MaSoNhanVien + "da ton tai Luong San Pham");
 
             LuongSanPham.SoSanPhamLam = request.SoSanPhamLam;
             LuongSanPham.MucSanPhamID = request.MucSanPhamID;
