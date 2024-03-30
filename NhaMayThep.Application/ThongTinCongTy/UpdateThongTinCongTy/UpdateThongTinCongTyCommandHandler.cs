@@ -3,7 +3,7 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy;
+using NhaMayThep.Infrastructure.Repositories;
 
 namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
 {
@@ -26,6 +26,9 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
             {
                 throw new NotFoundException("Thông tin công ty không tồn tại hoặc đã bị vô hiệu hóa");
             }
+            var checkDuplicatoion = await _thongTinCongTyRepository.AnyAsync(x => x.MaDoanhNghiep == request.MaDoanhNghiep && x.NgayXoa == null, cancellationToken);
+            if (checkDuplicatoion)
+                throw new DuplicationException("Thông tin công ty đã tồn tại");
             thongTinCongTy.NguoiCapNhatID = _currentUserService.UserId;
             thongTinCongTy.NgayCapNhatCuoi = DateTime.Now;
             thongTinCongTy.MaDoanhNghiep = request.MaDoanhNghiep;
