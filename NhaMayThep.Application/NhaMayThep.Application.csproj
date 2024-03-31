@@ -30,6 +30,13 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\Delete\" />
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\GetAll\" />
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\GetAllPagination\" />
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\GetAllDeleted\" />
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\GetAllDeletedPagination\" />
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\Restore\" />
+    <Folder Include="BaoHiemNhanVienChiTietBaoHiem\Update\" />
     <Folder Include="HoaDonCongTacNhanVien\Delete\" />
     <Folder Include="HoaDonCongTacNhanVien\Update\" />
   </ItemGroup>

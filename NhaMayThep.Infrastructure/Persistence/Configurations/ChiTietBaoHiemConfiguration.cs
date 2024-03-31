@@ -14,7 +14,7 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
         public void Configure(EntityTypeBuilder<ChiTietBaoHiemEntity> builder)
         {
             builder.HasKey(x => x.ID)
-                .HasName("MaSo");
+                .HasName("MaBHCT");
         }
     }
 }
