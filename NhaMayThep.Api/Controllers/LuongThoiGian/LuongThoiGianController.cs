@@ -2,9 +2,11 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LuongThoiGian;
 using NhaMayThep.Application.LuongThoiGian.CreateLuongThoiGian;
 using NhaMayThep.Application.LuongThoiGian.DeleteLuongThoiGian;
+using NhaMayThep.Application.LuongThoiGian.Filter;
 using NhaMayThep.Application.LuongThoiGian.GetAll;
 using NhaMayThep.Application.LuongThoiGian.UpdateLuongThoiGian;
 using System.Net.Mime;
@@ -77,6 +79,22 @@ namespace NhaMayThep.Api.Controllers.LuongThoiGian
         {
             var result = await _mediator.Send(new DeleteLuongThoiGianCommand(id: id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
+        }
+
+
+        [HttpGet("luong-thoi-gian/filter")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LuongThoiGianDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<PagedResult<PagedResult<LuongThoiGianDto>>>> Filter(
+            [FromQuery] FilterLuongThoiGIanQuery query, 
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }

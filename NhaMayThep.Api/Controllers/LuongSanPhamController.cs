@@ -11,6 +11,8 @@ using NhaMayThep.Application.LuongSanPham;
 using System.Net.Mime;
 using NhaMayThep.Application.LuongSanPham.GetId;
 using NhaMayThep.Application.LuongSanPham;
+using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.LuongSanPham.Filter;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -96,6 +98,19 @@ namespace NhaMayThep.Api.Controllers
             var query = new GetLuongSanPhamByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return new JsonResponse<LuongSanPhamDto>(result);
+        }
+
+        [HttpGet("luong-san-pham/filter")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<LuongSanPhamDto>>>> Filter(
+            [FromQuery] FilterLuongSanPhamQuery query,
+            CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
         }
     }
 }
