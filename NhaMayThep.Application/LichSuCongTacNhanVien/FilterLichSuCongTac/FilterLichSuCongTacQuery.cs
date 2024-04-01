@@ -31,6 +31,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
         public int PageNumber {  get; set; }
         public int PageSize { get; set; }
         public string? MaSoNhanVien {  get; set; }
+        public string? HoVaTen {  get; set; }
         public string? LoaiCongTac {  get; set; }
         public DateTime? NgayBatDau {  get; set; }
         public DateTime? NgayKetThuc {  get; set; }

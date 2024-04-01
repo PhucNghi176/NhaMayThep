@@ -13,6 +13,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
 
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
+        public string HoVaTen { get; set; }
         public LoaiCongTacDto LoaiCongTac { get; set; }
         public DateTime NgayBatDau { get; set; }
         public DateTime? NgayKetThuc { get; set; }
