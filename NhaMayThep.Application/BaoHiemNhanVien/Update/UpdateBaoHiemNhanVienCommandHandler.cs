@@ -60,12 +60,11 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Update
             baoHiemNhanVien.BaoHiem = request.BaoHiem;
             baoHiemNhanVien.NguoiCapNhatID = _currentUserService.UserId;
             baoHiemNhanVien.NgayCapNhatCuoi = DateTime.Now;
-           
+
             _baoHiemNhanVienRepository.Update(baoHiemNhanVien);
-            if (await _baoHiemNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
-                return "Cập nhật thành công!";
-            else
-                return "Cập nhật thất bại!";
+            await _baoHiemNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+
+            return "Cập nhật thành công!";
         }
     }
 }
