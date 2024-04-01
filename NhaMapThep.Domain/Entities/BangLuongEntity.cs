@@ -42,7 +42,7 @@ namespace NhaMapThep.Domain.Entities
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongDongBH { get; set; }
 
-        public required string BaoHiemNhanVienID { get; set; }
+        public required int BaoHiemNhanVienID { get; set; }
         [ForeignKey(nameof(BaoHiemNhanVienID))]
         public virtual BaoHiemNhanVienEntity BaoHiemNhanVien { get; set; }
 
