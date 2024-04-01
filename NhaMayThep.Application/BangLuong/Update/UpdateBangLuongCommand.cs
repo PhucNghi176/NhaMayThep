@@ -11,7 +11,7 @@ namespace NhaMayThep.Application.BangLuong.Update
     public class UpdateBangLuongCommand : IRequest<string>, ICommand
     {
         public UpdateBangLuongCommand(string id, string maSoNhanVien, DateTime ngayKhaiBao, decimal luongNghiPhep, decimal luongTangCa, string khenThuongId, string kyLuatId, decimal luongCoBan,
-                                          string phuCapNhanVienId, decimal tongNhanCoDinh, double ngayCong, decimal tongThuNhap, decimal luongDongBH, string baoHiemNhanVienId, decimal tongBaoHiem, string phuCapCongDoanId,
+                                          string phuCapNhanVienId, decimal tongNhanCoDinh, double ngayCong, decimal tongThuNhap, decimal luongDongBH, int baoHiemNhanVienId, decimal tongBaoHiem, string phuCapCongDoanId,
                                           string giamTruNhanVienId, decimal tamUng, decimal luongThucLanh)
         {
             ID = id;
@@ -48,7 +48,7 @@ namespace NhaMayThep.Application.BangLuong.Update
         public double NgayCong { get; set; }
         public decimal TongThuNhap { get; set; }
         public decimal LuongDongBH { get; set; }
-        public string BaoHiemNhanVienID { get; set; }
+        public int BaoHiemNhanVienID { get; set; }
         public decimal TongBaoHiem { get; set; }
         public string PhuCapCongDoanID { get; set; }
         public string GiamTruNhanVienID { get; set; }

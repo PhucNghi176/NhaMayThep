@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetByIdDeleted
             {
                 throw new NotFoundException($"Không tìm thấy chi tiết bảo hiểm với Id '{request.Id}' bị xóa");
             }
-            return checkExistsEntity.MapToChiTietBaoHiemDto(_mapper, checkExistsEntity.NhanVien.HoVaTen, checkExistsEntity.BaoHiem.Name); ;
+            return checkExistsEntity.MapToChiTietBaoHiemDto(_mapper,checkExistsEntity.BaoHiem.Name); ;
         }
     }
 }

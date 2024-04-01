@@ -16,26 +16,22 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
     public class ChiTietBaoHiemDto : IMapFrom<ChiTietBaoHiemEntity>
     {
         public string Id { get; set; } = null!;
-        public string? MaSoNhanVien { get; set; }
-        public string NhanVien { get; set; } = null!;
         public int LoaiBaoHiem { get; set; }
         public string BaoHiem { get; set; } = null!;
         public string? PhanTramBaoHiem { get; set; }
         public DateTime? NgayHieuLuc { get; set; }
         public DateTime? NgayKetThuc { get; set; }
         public string? NoiCap { get; set; }
-        public static ChiTietBaoHiemDto CreateChiTietBaoHiem(string id, string nhanvien, string baohiem, DateTime ngayheuluc, DateTime ngayketthuc
-            ,string noicap, string masonhanvien, int loaibaohiem, string phantrambaohiem)
+        public static ChiTietBaoHiemDto CreateChiTietBaoHiem(string id, string baohiem, DateTime ngayheuluc, DateTime ngayketthuc
+            ,string noicap, int loaibaohiem, string phantrambaohiem)
         {
             return new ChiTietBaoHiemDto
             {
                 Id = id,
-                NhanVien = nhanvien,
                 BaoHiem = baohiem,
                 NgayHieuLuc = ngayheuluc,
                 NgayKetThuc = ngayketthuc,
                 NoiCap = noicap,
-                MaSoNhanVien= masonhanvien,
                 LoaiBaoHiem= loaibaohiem,
                 PhanTramBaoHiem = phantrambaohiem
             };

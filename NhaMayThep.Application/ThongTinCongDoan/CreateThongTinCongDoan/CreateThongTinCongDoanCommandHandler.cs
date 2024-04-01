@@ -32,7 +32,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan
                      .FindAsync(x => x.NhanVienID.Equals(request.NhanVienID), cancellationToken);
             if (thongtincongdoan != null)
             {
-                throw new NotFoundException($"Thông tin công đoàn đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
+                throw new DuplicationException($"Thông tin công đoàn đã tồn tại hoặc đã bị vô hiệu hóa trước đó");
             }
             var thongtincongdoanNew = new ThongTinCongDoanEntity
             {
