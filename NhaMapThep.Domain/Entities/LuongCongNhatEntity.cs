@@ -17,7 +17,8 @@ namespace NhaMapThep.Domain.Entities
         public double SoGioLam { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal Luong1Gio { get; set; }
+        public DateTime NgayKhaiBao { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public decimal TongLuong {  get; set; }
+        public decimal TongLuong { get; set; }
     }
 }

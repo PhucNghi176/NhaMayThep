@@ -53,6 +53,7 @@ namespace NhaMayThep.Application.LuongSanPham.Update
             LuongSanPham.SoSanPhamLam = request.SoSanPhamLam;
             LuongSanPham.MucSanPhamID = request.MucSanPhamID;
             LuongSanPham.TongLuong = request.TongLuong;
+            LuongSanPham.NgayKhaiBao = request.NgayKhaiBao;
             LuongSanPham.NguoiCapNhatID = _currentUserService.UserId;
             LuongSanPham.NgayCapNhatCuoi = DateTime.Now;
 
