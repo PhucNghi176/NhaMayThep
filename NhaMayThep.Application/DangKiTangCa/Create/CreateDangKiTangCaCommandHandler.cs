@@ -60,7 +60,6 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
             };
 
             _repository.Add(dangKiTangCa);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Dang Tang Ca thành công" : "Dang Tang Ca  thất bại";
         }
     }
