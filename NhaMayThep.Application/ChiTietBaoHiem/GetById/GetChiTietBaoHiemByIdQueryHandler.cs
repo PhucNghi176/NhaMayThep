@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetById
             {
                 throw new NotFoundException($"Không tìm thấy chi tiết bảo hiểm với Id '{request.Id}'");
             }
-            return checkExistsEntity.MapToChiTietBaoHiemDto(_mapper, checkExistsEntity.NhanVien.HoVaTen, checkExistsEntity.BaoHiem.Name);
+            return checkExistsEntity.MapToChiTietBaoHiemDto(_mapper, checkExistsEntity.BaoHiem.Name);
         }
     }
 }

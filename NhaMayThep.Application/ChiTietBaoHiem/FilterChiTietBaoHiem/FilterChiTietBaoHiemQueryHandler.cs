@@ -60,19 +60,6 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
                     .Search(x=> x.Baohiem.Name).Containing(request.TenBaohiem)
                     .Select(x => x.ChiTietBaoHiem);
                 }
-                if (!string.IsNullOrEmpty(request.MaNhanVien))
-                {
-                    query = query.Where(x => x.MaSoNhanVien.Equals(request.MaNhanVien));
-                }
-                if (!string.IsNullOrEmpty(request.TenNhanVien))
-                {
-                    query = query.Join(_context.NhanVien,
-                        chitietbaohiem=> chitietbaohiem.MaSoNhanVien,
-                        nhanvien=> nhanvien.ID,
-                        (chitietbaohiem, nhanvien)=> new {ChiTietBaoHiem= chitietbaohiem, Nhanvien= nhanvien})
-                    .Search(x => x.Nhanvien.HoVaTen).Containing(request.TenNhanVien)
-                    .Select(x=> x.ChiTietBaoHiem);
-                }
                 if (request.NgayHieuLuc.HasValue || request.NgayHieuLuc != null)
                 {
                     query = query.Where(x => x.NgayHieuLuc == request.NgayHieuLuc);
@@ -89,30 +76,12 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
             {
                 throw new NotFoundException("Không tìm thấy thông tin phù hợp yêu cầu");
             }
-
-            //need to confirm
-            //Expression<Func<NhanVienEntity, bool>> optionsNhanvien = 
-            //    query => listResult.Select(x => x.MaSoNhanVien)
-            //    .Any(x => query.ID == x) && !query.NgayXoa.HasValue;
-            //Expression<Func<BaoHiemEntity, bool>> optionsBaohiem =
-            //    query => listResult.Select(x => x.LoaiBaoHiem)
-            //    .Any(x => query.ID == x) && !query.NgayXoa.HasValue;
-            Expression<Func<NhanVienEntity, bool>> optionsNhanvien =
-                query => listResult.Select(x => x.MaSoNhanVien)
-                .Any(x => query.ID == x);
             Expression<Func<BaoHiemEntity, bool>> optionsBaohiem =
                 query => listResult.Select(x => x.LoaiBaoHiem)
                 .Any(x => query.ID == x);
-
-            var nhanvien = await _nhanvienRepository
-                .FindAllToDictionaryAsync(optionsNhanvien , x => x.ID, x => x.HoVaTen, cancellationToken);
             var baohiem = await _baohiemRepository
                 .FindAllToDictionaryAsync(optionsBaohiem, x => x.ID, x => x.Name, cancellationToken);
-
-            //return listResult.MapToPagedResult(x => x.MapToChiTietBaoHiemDto(_mapper,
-            //                    nhanvien.FirstOrDefault(y => y.Key == x.MaSoNhanVien).Value.ToString() ?? "",
-            //                    baohiem.FirstOrDefault(y=> y.Key == x.LoaiBaoHiem).Value.ToString()));
-            var results = listResult.MapToChiTietBaoHiemDtoList(_mapper, nhanvien, baohiem);
+            var results = listResult.MapToChiTietBaoHiemDtoList(_mapper, baohiem);
 
             return PagedResult<ChiTietBaoHiemDto>.Create(
                 totalCount: listResult.TotalCount,

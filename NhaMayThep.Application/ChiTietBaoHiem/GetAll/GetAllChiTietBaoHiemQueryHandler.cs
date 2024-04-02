@@ -37,9 +37,8 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAll
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào");
             }
-            var nhanviens = await _nhanvienRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.HoVaTen, cancellationToken);
             var baohiems = await _baohiemRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
-            return result.MapToChiTietBaoHiemDtoList(_mapper, nhanviens, baohiems);
+            return result.MapToChiTietBaoHiemDtoList(_mapper, baohiems);
         }
     }
 }
