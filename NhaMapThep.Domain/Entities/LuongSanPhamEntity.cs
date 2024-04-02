@@ -20,6 +20,7 @@ namespace NhaMapThep.Domain.Entities
         public required string MucSanPhamID { get; set; }
         [ForeignKey(nameof(MucSanPhamID))]
         public virtual MucSanPhamEntity MucSanPham { get; set; }
+        public DateTime NgayKhaiBao { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongLuong { get; set; }
     }
