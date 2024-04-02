@@ -21,8 +21,9 @@ namespace NhaMayThep.Application.LuongSanPham
         public int SoSanPhamLam { get; set; }
         public string MucSanPhamID { get; set; }
         public decimal TongLuong { get; set; }
+        public DateTime NgayKhaiBao { get; set; }
 
-        public static LuongSanPhamDto Create(string id, string maSoNhanVien, int soSanPhamLam, string mucSanPhamId, decimal tongLuong)
+        public static LuongSanPhamDto Create(string id, string maSoNhanVien, int soSanPhamLam, string mucSanPhamId, decimal tongLuong, DateTime ngayKhaiBao)
         {
             return new LuongSanPhamDto
             {
@@ -30,7 +31,8 @@ namespace NhaMayThep.Application.LuongSanPham
                 MaSoNhanVien = maSoNhanVien,
                 SoSanPhamLam = soSanPhamLam,
                 MucSanPhamID = mucSanPhamId,
-                TongLuong = tongLuong
+                TongLuong = tongLuong,
+                NgayKhaiBao = ngayKhaiBao
             };
         }
 

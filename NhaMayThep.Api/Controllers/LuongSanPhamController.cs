@@ -18,7 +18,6 @@ namespace NhaMayThep.Api.Controllers
 {
 
     [ApiController]
-    [Authorize]
     public class LuongSanPhamController : ControllerBase
     {
         private readonly ISender _mediator;
