@@ -5,6 +5,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.CapBacLuong.CreateCapBacLuong;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.MaDangKiCaLamViec.Create;
+using NuGet.Frameworks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -48,13 +49,14 @@ namespace NhaMayThep.UnitTest.MaDangKiCaLam
             _maDangKiCaLamRepositoryMock.Setup(x => x.FindAsync(It.IsAny<Expression<Func<MaDangKiCaLamEntity, bool>>>(), It.IsAny<CancellationToken>()))
                 .ReturnsAsync((MaDangKiCaLamEntity)null);
 
+            _maDangKiCaLamRepositoryMock.Setup(repo => repo.Add(It.IsAny<MaDangKiCaLamEntity>()));
             _maDangKiCaLamRepositoryMock.Setup(x => x.UnitOfWork.SaveChangesAsync(It.IsAny<CancellationToken>())).ReturnsAsync(1);
 
             // Act
             var actualResult = await _handlerMock.Handle(command, CancellationToken.None);
 
             // Assert
-            Assert.AreEqual(expectedResult, actualResult);
+            Assert.That(actualResult, Is.EqualTo(expectedResult));
             _maDangKiCaLamRepositoryMock.Verify(x => x.Add(It.IsAny<MaDangKiCaLamEntity>()), Times.Once);
             _maDangKiCaLamRepositoryMock.Verify(x => x.UnitOfWork.SaveChangesAsync(CancellationToken.None), Times.Once);
         }

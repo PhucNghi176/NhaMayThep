@@ -17,14 +17,12 @@ namespace NhaMayThep.Application.TrangThaiDangKiCaLamViec.UpdateTrangThaiDangKiC
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly ITrangThaiDangKiCaLamViecRepository _trangThaiDangKiCaLamViecRepository;
-        public readonly IMapper _mapper;
 
-        public UpdateTrangThaiDangKiCaLamViecHandler(ITrangThaiDangKiCaLamViecRepository trangThaiDangKiCaLamViecRepository, IMapper mapper,
+        public UpdateTrangThaiDangKiCaLamViecHandler(ITrangThaiDangKiCaLamViecRepository trangThaiDangKiCaLamViecRepository,
             ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _trangThaiDangKiCaLamViecRepository = trangThaiDangKiCaLamViecRepository;
-            _mapper = mapper;
         }
 
         public async Task<string> Handle(UpdateTrangThaiDangKiCaLamViecCommand request, CancellationToken cancellationToken)

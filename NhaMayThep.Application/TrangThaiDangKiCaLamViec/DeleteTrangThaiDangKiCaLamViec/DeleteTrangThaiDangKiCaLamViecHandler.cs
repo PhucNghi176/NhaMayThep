@@ -17,14 +17,12 @@ namespace NhaMayThep.Application.TrangThaiDangKiCaLamViec.DeleteTrangThaiDangKiC
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly ITrangThaiDangKiCaLamViecRepository _trangThaiDangKiCaLamViecRepository;
-        public readonly IMapper _mapper;
 
-        public DeleteTrangThaiDangKiCaLamViecHandler(ITrangThaiDangKiCaLamViecRepository trangThaiDangKiCaLamViecRepository, IMapper mapper,
+        public DeleteTrangThaiDangKiCaLamViecHandler(ITrangThaiDangKiCaLamViecRepository trangThaiDangKiCaLamViecRepository, 
             ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _trangThaiDangKiCaLamViecRepository = trangThaiDangKiCaLamViecRepository;
-            _mapper = mapper;
         }
 
         public async Task<string> Handle(DeleteTrangThaiDangKiCaLamViecCommand request, CancellationToken cancellationToken)

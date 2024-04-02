@@ -15,13 +15,11 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.GetAll
 {
     public class GetAllThongTinLuongNhanVienQueryHandler : IRequestHandler<GetAllThongTinLuongNhanVienQuery, List<ThongTinLuongNhanVienDTO>>
     {
-        private readonly ICurrentUserService _currentUserService;
         private readonly IThongTinLuongNhanVienRepository _thongTinLuongNhanVienRepository;
         private readonly IMapper _mapper;
 
-        public GetAllThongTinLuongNhanVienQueryHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, IMapper mapper, ICurrentUserService currentUserService)
+        public GetAllThongTinLuongNhanVienQueryHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, IMapper mapper)
         {
-            _currentUserService = currentUserService;
             _thongTinLuongNhanVienRepository = thongTinLuongNhanVienRepository;
             _mapper = mapper;
         }

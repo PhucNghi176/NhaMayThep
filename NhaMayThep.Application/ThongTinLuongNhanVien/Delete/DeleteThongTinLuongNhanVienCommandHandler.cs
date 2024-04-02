@@ -16,39 +16,28 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Delete
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly IThongTinLuongNhanVienRepository _thongTinLuongNhanVienRepository;
-        private readonly INhanVienRepository _nhanVienRepository;
-        private readonly IMapper _mapper;
 
-        public DeleteThongTinLuongNhanVienCommandHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, IMapper mapper, INhanVienRepository nhanVienRepository, ICurrentUserService currentUserService)
+        public DeleteThongTinLuongNhanVienCommandHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _thongTinLuongNhanVienRepository = thongTinLuongNhanVienRepository;
-            _nhanVienRepository = nhanVienRepository;
-            _mapper = mapper;
         }
 
 
         public async Task<string> Handle(DeleteThongTinLuongNhanVienCommand request, CancellationToken cancellationToken)
         {
-
-            var k = await _thongTinLuongNhanVienRepository.FindAllAsync(cancellationToken);
-
-            if (k == null)
-            {
-                throw new NotFoundException("Danh sách trống");
-            }
             var thongtin = await _thongTinLuongNhanVienRepository.FindAsync(x => x.ID == request.Id, cancellationToken);
 
             if (thongtin is null || thongtin.NgayXoa.HasValue)
             {
-                return "Xóa Thất Bại";
+                throw new NotFoundException("Thông Tin Không Tìm Thấy Hoặc Đã Bị Xóa");
             }
 
             thongtin.NguoiXoaID = _currentUserService.UserId;
             thongtin.NgayXoa = DateTime.Now;
 
             _thongTinLuongNhanVienRepository.Update(thongtin);
-            return await _thongTinLuongNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa thành công" : "Xóa thất bại";
+            return await _thongTinLuongNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Thành Công" : "Xóa Thất Bại";
         }
     }
 }

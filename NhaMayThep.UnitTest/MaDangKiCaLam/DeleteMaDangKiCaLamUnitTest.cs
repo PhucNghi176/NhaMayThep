@@ -54,7 +54,7 @@ namespace NhaMayThep.UnitTest.MaDangKiCaLam
             Assert.AreEqual(expected, result);
             _maDangKiCaLamRepositoryMock.Verify(repo => repo.Update(It.IsAny<MaDangKiCaLamEntity>()), Times.Once);
             _maDangKiCaLamRepositoryMock.Verify(repo => repo.UnitOfWork.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
-            Assert.AreEqual("SomeUserId", data.NguoiXoaID); // Ensuring correct user ID set
+            Assert.That(data.NguoiXoaID, Is.EqualTo("SomeUserId")); // Ensuring correct user ID set
             Assert.NotNull(data.NgayXoa); 
         }
 

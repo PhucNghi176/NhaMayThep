@@ -19,30 +19,28 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
         private readonly IThongTinLuongNhanVienRepository _thongTinLuongNhanVienRepository;
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly IHopDongRepository _hopDongRepository;
-        private readonly IMapper _mapper;
 
-        public CreateThongTinLuongNhanVienCommandHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, IMapper mapper, INhanVienRepository nhanVienRepository, IHopDongRepository hopDongRepository, ICurrentUserService currentUserService)
+        public CreateThongTinLuongNhanVienCommandHandler(IThongTinLuongNhanVienRepository thongTinLuongNhanVienRepository, INhanVienRepository nhanVienRepository, IHopDongRepository hopDongRepository, ICurrentUserService currentUserService)
         {
             _currentUserService = currentUserService;
             _thongTinLuongNhanVienRepository = thongTinLuongNhanVienRepository;
             _nhanVienRepository = nhanVienRepository;
             _hopDongRepository = hopDongRepository;
-            _mapper = mapper;
         }
 
 
         public async Task<string> Handle(CreateThongTinLuongNhanVienCommand request, CancellationToken cancellationToken)
         {
-            var nhanvien = await _nhanVienRepository.FindAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
+            bool nhanvienExist = await _nhanVienRepository.AnyAsync(x => x.ID == request.MaSoNhanVien, cancellationToken);
 
-            if (nhanvien == null)
+            if (!nhanvienExist)
             {
                 return "Mã Nhân Viên không tồn tại";
             }
 
-            var hopdong = await _hopDongRepository.FindAsync(x => x.ID == request.MaSoHopDong, cancellationToken);
+            bool hopdongExist = await _hopDongRepository.AnyAsync(x => x.ID == request.MaSoHopDong, cancellationToken);
 
-            if (hopdong == null)
+            if (!hopdongExist)
             {
                 return "Mã Hợp Đồng không tồn tại";
             }
@@ -70,7 +68,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
             };
 
             _thongTinLuongNhanVienRepository.Add(k);
-            return await _thongTinLuongNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo mới thành công" : "Tạo mới thất bại";
+            return await _thongTinLuongNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo Mới Thành Công" : "Tạo Mới Thất Bại";
         }
     }
 }
