@@ -13,16 +13,13 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
     {
         public FilterLichSuCongTacQuery() { }
 
-        public FilterLichSuCongTacQuery(int pageSize, int pageNumber) 
-        { 
+
+        public FilterLichSuCongTacQuery(int pageNumber, int pageSize, string? maSoNhanVien, int? loaiCongTacID, DateTime? ngayBatDau, DateTime? ngayKetThuc, string? noiCongTac)
+        {
             PageNumber = pageNumber;
             PageSize = pageSize;
-        }
-
-        public FilterLichSuCongTacQuery(int pageNumber, int pageSize, string? maSoNhanVien, string? loaiCongTac, DateTime? ngayBatDau, DateTime? ngayKetThuc, string? noiCongTac) : this(pageNumber, pageSize)
-        {
             MaSoNhanVien = maSoNhanVien;
-            LoaiCongTac = loaiCongTac;
+            LoaiCongTacID = loaiCongTacID;
             NgayBatDau = ngayBatDau;
             NgayKetThuc = ngayKetThuc;
             NoiCongTac = noiCongTac;
@@ -32,7 +29,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
         public int PageSize { get; set; }
         public string? MaSoNhanVien {  get; set; }
         public string? HoVaTen {  get; set; }
-        public string? LoaiCongTac {  get; set; }
+        public int? LoaiCongTacID { get; set; } = 0;
         public DateTime? NgayBatDau {  get; set; }
         public DateTime? NgayKetThuc {  get; set; }
         public string? NoiCongTac {  get; set; }
