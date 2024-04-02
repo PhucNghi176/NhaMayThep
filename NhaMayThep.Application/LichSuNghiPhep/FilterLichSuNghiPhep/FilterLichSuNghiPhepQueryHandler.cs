@@ -43,7 +43,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep
                     query = from lichSu in query
                             join nhanVien in _context.NhanVien
                             on lichSu.MaSoNhanVien equals nhanVien.ID
-                            where nhanVien.HoVaTen == request.TenNhanVien // Adjust this condition as needed
+                            where nhanVien.HoVaTen .Contains( request.TenNhanVien) // Adjust this condition as needed
                             select lichSu;
                 }
                 if (request.LoaiNghiPhepID!=0)
