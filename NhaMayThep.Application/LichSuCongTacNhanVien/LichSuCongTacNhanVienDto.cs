@@ -19,8 +19,10 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
         public string NoiCongTac { get; set; }
         public string LyDo { get; set; }
 
+        public string LoaiCongTac { get; set; }
+
         public static LichSuCongTacNhanVienDto Create(string id, string maSoNhanVien, int loaiCongTac, DateTime ngaybatdau,
-            DateTime? ngayKetThuc, string noiCongTac, string Lydo)
+            DateTime? ngayKetThuc, string noiCongTac, string Lydo, string name)
         {
             return new LichSuCongTacNhanVienDto()
             {
@@ -30,7 +32,8 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
                 MaSoNhanVien = maSoNhanVien,
                 LoaiCongTacID = loaiCongTac,
                 NoiCongTac = noiCongTac,
-                LyDo = Lydo
+                LyDo = Lydo,
+                LoaiCongTac = name
             };
         }
 

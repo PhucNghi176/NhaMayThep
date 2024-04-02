@@ -18,12 +18,14 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;
         private readonly IMapper _mapper;
         private readonly INhanVienRepository _nhanVienRepository;
+        private readonly ILoaiCongTacRepository _loaiCongTacRepository;
 
-        public FilterLichSuCongTacQueryHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, IMapper mapper, INhanVienRepository nhanVienRepository)
+        public FilterLichSuCongTacQueryHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, IMapper mapper, INhanVienRepository nhanVienRepository, ILoaiCongTacRepository loaiCongTacRepository)
         {
             _lichSuCongTacNhanVienRepository = lichSuCongTacNhanVienRepository;
             _mapper = mapper;
             _nhanVienRepository = nhanVienRepository;
+            _loaiCongTacRepository = loaiCongTacRepository;
         }
 
         public async Task<PagedResult<LichSuCongTacNhanVienDto>> Handle(FilterLichSuCongTacQuery request, CancellationToken cancellationToken)
@@ -63,7 +65,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
                x => x.HoVaTen,
                cancellationToken);
 
-            
+            var LoaiCongTac = await _loaiCongTacRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name,cancellationToken);
 
            
 
@@ -73,7 +75,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
                 pageCount: list.PageCount,
                 pageSize: list.PageSize,
                 pageNumber: list.PageNo,
-                data: list.MapTolichSuCongTacNhanVienDtoList(_mapper,hoVaTen)
+                data: list.MapTolichSuCongTacNhanVienDtoList(_mapper,hoVaTen,LoaiCongTac)
                 );
         }
     }
