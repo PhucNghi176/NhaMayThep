@@ -53,12 +53,12 @@ namespace NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep
 
                 if (request.NgayBatDau.HasValue)
                 {
-                    query = query.Where(x => x.NgayBatDau >= request.NgayBatDau.Value);
+                    query = query.Where(x => x.NgayBatDau == request.NgayBatDau.Value);
                 }
 
                 if (request.NgayKetThuc.HasValue)
                 {
-                    query = query.Where(x => x.NgayKetThuc <= request.NgayKetThuc.Value);
+                    query = query.Where(x => x.NgayKetThuc == request.NgayKetThuc.Value);
                 }
 
                 if (!string.IsNullOrEmpty(request.LyDo))
