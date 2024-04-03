@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Delete
 {
-    public class DeleteLichSuNghiPhepCommand : IRequest<LichSuNghiPhepDto>, ICommand
+    public class DeleteLichSuNghiPhepCommand : IRequest<string>, ICommand
     {
         public string Id { get; set; }
       

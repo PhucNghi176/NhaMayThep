@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
 {
-    public class DeleteChiTietNgayNghiPhepCommandHandler : IRequestHandler<DeleteChiTietNgayNghiPhepCommand, ChiTietNgayNghiPhepDto>
+    public class DeleteChiTietNgayNghiPhepCommandHandler : IRequestHandler<DeleteChiTietNgayNghiPhepCommand, string>
     {
         private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
@@ -21,7 +21,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             _mapper = mapper;
         }
 
-        public async Task<ChiTietNgayNghiPhepDto> Handle(DeleteChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(DeleteChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -44,7 +44,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             _repo.Update(entity);
             await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ChiTietNgayNghiPhepDto>(entity);
+            return "Xóa chi tiết ngày nghỉ phép thành công";
         }
     }
 }

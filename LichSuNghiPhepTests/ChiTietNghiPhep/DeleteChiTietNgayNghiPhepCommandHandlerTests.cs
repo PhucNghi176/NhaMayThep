@@ -64,7 +64,6 @@ namespace NhaMayThep.Application.UnitTests.ChiTietNgayNghiPhep.Delete
                 It.IsAny<CancellationToken>()
             )).ReturnsAsync(chiTietNgayNghiPhep);
 
-            // Mocking UnitOfWork.SaveChangesAsync to return a completed task with a dummy value of 1
             _repoMock.Setup(r => r.UnitOfWork.SaveChangesAsync(It.IsAny<CancellationToken>()))
                      .ReturnsAsync(1); // Correctly returns a Task<int>
 

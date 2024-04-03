@@ -39,8 +39,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep tạo thành công "));
+            var message = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(message));
         }
 
         [HttpDelete("lich-su-nghi-phep/{id}")]
@@ -52,9 +52,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeleteLichSuNghiPhepCommand(id), cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep xóa thành công "));
+            var message = await _mediator.Send(new DeleteLichSuNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>(message));
         }
+
 
         [HttpPut("lich-su-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -63,9 +64,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep cập nhật thành công"));
+            var message = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(message));
         }
+
 
 
         [HttpGet("lich-su-nghi-phep")]

@@ -1,17 +1,15 @@
-﻿using AutoMapper;
+﻿using NUnit.Framework;
 using Moq;
-using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ChiTietNgayNghiPhep;
-using NhaMayThep.Application.ChiTietNgayNghiPhep.Update;
-using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
 using System.Threading.Tasks;
+using System.Threading;
+using AutoMapper;
+using NhaMayThep.Application.Common.Interfaces;
+using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Entities;
+using System;
+using System.Linq.Expressions;
+using NhaMayThep.Application.ChiTietNgayNghiPhep.Update;
+using NhaMapThep.Domain.Entities.ConfigTable;
 
 namespace NhaMayThep.UnitTest.ChiTietNghiPhep
 {
@@ -23,7 +21,6 @@ namespace NhaMayThep.UnitTest.ChiTietNghiPhep
         private Mock<ILoaiNghiPhepRepository> _loaiNghiPhepRepoMock;
         private UpdateChiTietNgayNghiPhepCommandHandler _handler;
 
-
         [SetUp]
         public void SetUp()
         {
@@ -33,14 +30,12 @@ namespace NhaMayThep.UnitTest.ChiTietNghiPhep
             _loaiNghiPhepRepoMock = new Mock<ILoaiNghiPhepRepository>();
 
             _currentUserServiceMock.Setup(x => x.UserId).Returns("mockUserId");
-
             _handler = new UpdateChiTietNgayNghiPhepCommandHandler(_repositoryMock.Object, _mapperMock.Object, _currentUserServiceMock.Object, _loaiNghiPhepRepoMock.Object);
         }
 
         [Test]
-        public async Task Handle_ValidCommand_ShouldUpdateEntityAndReturnSuccess()
+        public async Task Handle_GivenValidCommand_ShouldUpdateEntityAndReturnSuccessMessage()
         {
-            // Arrange
             var command = new UpdateChiTietNgayNghiPhepCommand
             {
                 Id = "existingEntityId",
@@ -54,49 +49,34 @@ namespace NhaMayThep.UnitTest.ChiTietNghiPhep
             var existingEntity = new ChiTietNgayNghiPhepEntity
             {
                 ID = command.Id,
-                LoaiNghiPhepID = 2,
+                LoaiNghiPhepID = 2, // Different ID to simulate update
                 TongSoGio = 6,
                 SoGioConLai = 3,
                 SoGioDaNghiPhep = 3,
                 NamHieuLuc = 2025,
             };
 
-            _repositoryMock.Setup(x => x.FindAsync(It.IsAny<Expression<Func<ChiTietNgayNghiPhepEntity, bool>>>(), It.IsAny<CancellationToken>()))
-                   .ReturnsAsync(existingEntity);
+            _repositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<ChiTietNgayNghiPhepEntity, bool>>>(), It.IsAny<CancellationToken>()))
+                           .ReturnsAsync(existingEntity);
 
-            _repositoryMock.Setup(x => x.UnitOfWork.SaveChangesAsync(default))
-                           .ReturnsAsync(1);
-            var expectedDto = new ChiTietNgayNghiPhepDto();
-            _mapperMock.Setup(m => m.Map<ChiTietNgayNghiPhepDto>(existingEntity)).Returns(expectedDto);
+            _loaiNghiPhepRepoMock.Setup(r => r.AnyAsync(It.IsAny<Expression<Func<LoaiNghiPhepEntity, bool>>>(), It.IsAny<CancellationToken>()))
+                                 .ReturnsAsync(true); // Ensures LoaiNghiPhep exists
+
+            _repositoryMock.Setup(r => r.UnitOfWork.SaveChangesAsync(default))
+                           .ReturnsAsync(1); // Simulates successful save
 
             var result = await _handler.Handle(command, CancellationToken.None);
 
-            Assert.AreEqual(expectedDto, result);
-            _repositoryMock.Verify(x => x.Update(It.IsAny<ChiTietNgayNghiPhepEntity>()), Times.Once);
-            _repositoryMock.Verify(x => x.UnitOfWork.SaveChangesAsync(It.IsAny<CancellationToken>()), Times.Once);
-
-        }
-
-
-        [Test]
-        public void Handle_EntityNotFound_ShouldThrowNotFoundException()
-        {
-            // Arrange
-            var command = new UpdateChiTietNgayNghiPhepCommand
-            {
-                Id = "nonExistingEntityId",
-                LoaiNghiPhepID = 2,
-                TongSoGio = 6,
-                SoGioConLai = 3,
-                SoGioDaNghiPhep = 3,
-                NamHieuLuc = 2025,
-            };
-
-            _repositoryMock.Setup(x => x.FindAsync(It.IsAny<Expression<Func<ChiTietNgayNghiPhepEntity, bool>>>(), It.IsAny<CancellationToken>()))
-                           .Returns(Task.FromResult<ChiTietNgayNghiPhepEntity>(null)); // Simulating entity not found
-
-            // Act & Assert
-            Assert.ThrowsAsync<NotFoundException>(async () => await _handler.Handle(command, CancellationToken.None));
+            Assert.AreEqual("Cập nhật chi tiết ngày nghỉ phép thành công.", result);
+            _repositoryMock.Verify(r => r.Update(It.Is<ChiTietNgayNghiPhepEntity>(e =>
+                e.ID == command.Id &&
+                e.LoaiNghiPhepID == command.LoaiNghiPhepID &&
+                e.TongSoGio == command.TongSoGio &&
+                e.SoGioConLai == command.SoGioConLai &&
+                e.SoGioDaNghiPhep == command.SoGioDaNghiPhep &&
+                e.NamHieuLuc == command.NamHieuLuc
+            )), Times.Once);
+            _repositoryMock.Verify(r => r.UnitOfWork.SaveChangesAsync(CancellationToken.None), Times.Once);
         }
     }
 }

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 {
-    public class UpdateChiTietNgayNghiPhepCommandHandler : IRequestHandler<UpdateChiTietNgayNghiPhepCommand, ChiTietNgayNghiPhepDto>
+    public class UpdateChiTietNgayNghiPhepCommandHandler : IRequestHandler<UpdateChiTietNgayNghiPhepCommand, string>
     {
         private readonly IChiTietNgayNghiPhepRepository _repo;
         private readonly IMapper _mapper;
@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
            _loaiNghiPhepRepo = loaiNghiPhepRepo;
         }
 
-        public async Task<ChiTietNgayNghiPhepDto> Handle(UpdateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(UpdateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
         {
             var userId = _currentUserService.UserId;
             if (string.IsNullOrEmpty(userId))
@@ -59,7 +59,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             _repo.Update(existingLsnp);
             await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-            return _mapper.Map<ChiTietNgayNghiPhepDto>(existingLsnp);
+            return "Cập nhật chi tiết ngày nghỉ phép thành công.";
         }
 
     }

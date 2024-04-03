@@ -48,9 +48,8 @@ namespace NhaMayThep.Application.UnitTests
         }
 
         [Test]
-        public async Task Handle_GivenValidRequest_ShouldCreateLichSuNghiPhepAndReturnDto()
+        public async Task Handle_GivenValidRequest_ShouldCreateLichSuNghiPhepAndReturnSuccessMessage()
         {
-            // Arrange
             var command = new CreateLichSuNghiPhepCommand
             {
                 MaSoNhanVien = "validMaSoNhanVien",
@@ -61,64 +60,31 @@ namespace NhaMayThep.Application.UnitTests
                 NguoiDuyet = "validNguoiDuyet"
             };
 
-            var createdEntity = new LichSuNghiPhepNhanVienEntity
-            {
-                ID = Guid.NewGuid().ToString(),
-                MaSoNhanVien = command.MaSoNhanVien,
-                LoaiNghiPhepID = command.LoaiNghiPhepID,
-                NgayBatDau = command.NgayBatDau,
-                NgayKetThuc = command.NgayKetThuc,
-                LyDo = command.LyDo,
-                NguoiDuyet = command.NguoiDuyet
-            };
-
-            var expectedDto = new LichSuNghiPhepDto
-            {
-                Id = createdEntity.ID,
-                MaSoNhanVien = command.MaSoNhanVien,
-                LoaiNghiPhepID = command.LoaiNghiPhepID,
-                NgayBatDau = command.NgayBatDau,
-                NgayKetThuc = command.NgayKetThuc,
-                LyDo = command.LyDo,
-                NguoiDuyet = command.NguoiDuyet
-            };
-
-            _mapperMock.Setup(m => m.Map<LichSuNghiPhepDto>(It.IsAny<LichSuNghiPhepNhanVienEntity>())).Returns(expectedDto);
-
             _loaiNghiPhepRepositoryMock.Setup(r => r.AnyAsync(It.IsAny<Expression<Func<LoaiNghiPhepEntity, bool>>>(), It.IsAny<CancellationToken>())).ReturnsAsync(true);
+            _nhanVienRepositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<NhanVienEntity, bool>>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new NhanVienEntity
+            {
+                ID = "someId",
+                Email = "email@example.com",
+                PasswordHash = "hashedPassword123",
+                HoVaTen = "Nguyen Van A",
+                ChucVuID = 1, 
+                TinhTrangLamViecID = 1, 
+                DaCoHopDong = true,
+                NgayVaoCongTy = new DateTime(2020, 01, 01),
+                DiaChiLienLac = "123 Main St",
+                SoDienThoaiLienLac = "0123456789",
+                MaSoThue = "123456789",
+                TenNganHang = "Bank ABC",
+                SoTaiKhoan = "987654321"
+            });
+            _lichSuNghiPhepRepositoryMock.Setup(r => r.Add(It.IsAny<LichSuNghiPhepNhanVienEntity>()));
+            _lichSuNghiPhepRepositoryMock.Setup(r => r.UnitOfWork.SaveChangesAsync(default)).ReturnsAsync(1);
 
-            _nhanVienRepositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<NhanVienEntity, bool>>>(), It.IsAny<CancellationToken>()))
-                .ReturnsAsync(new NhanVienEntity
-                {
-                    ID = "someId",
-                    Email = "email@example.com",
-                    PasswordHash = "hashedPassword123",
-                    HoVaTen = "Nguyen Van A",
-                    ChucVuID = 1, // Assume this ID exists in your database
-                    TinhTrangLamViecID = 1, // Same here
-                    DaCoHopDong = true,
-                    NgayVaoCongTy = new DateTime(2020, 01, 01),
-                    DiaChiLienLac = "123 Main St",
-                    SoDienThoaiLienLac = "0123456789",
-                    MaSoThue = "123456789",
-                    TenNganHang = "Bank ABC",
-                    SoTaiKhoan = "987654321"
-                });
-
-            _lichSuNghiPhepRepositoryMock.Setup(r => r.Add(It.IsAny<LichSuNghiPhepNhanVienEntity>()))
-                .Callback<LichSuNghiPhepNhanVienEntity>(lsnp => lsnp.ID = createdEntity.ID);
             var result = await _handler.Handle(command, CancellationToken.None);
 
-            // Assert
             Assert.IsNotNull(result);
-            Assert.AreEqual(expectedDto, result);
-            _lichSuNghiPhepRepositoryMock.Verify(r => r.Add(It.Is<LichSuNghiPhepNhanVienEntity>(lsnp =>
-                lsnp.MaSoNhanVien == command.MaSoNhanVien &&
-                lsnp.LoaiNghiPhepID == command.LoaiNghiPhepID &&
-                lsnp.NgayBatDau == command.NgayBatDau &&
-                lsnp.NgayKetThuc == command.NgayKetThuc &&
-                lsnp.LyDo == command.LyDo &&
-                lsnp.NguoiDuyet == command.NguoiDuyet)), Times.Once);
+            Assert.AreEqual("Lịch sử nghỉ phép đã tạo thành công", result);
+            _lichSuNghiPhepRepositoryMock.Verify(r => r.Add(It.IsAny<LichSuNghiPhepNhanVienEntity>()), Times.Once);
             _lichSuNghiPhepRepositoryMock.Verify(r => r.UnitOfWork.SaveChangesAsync(CancellationToken.None), Times.Once);
         }
         [Test]

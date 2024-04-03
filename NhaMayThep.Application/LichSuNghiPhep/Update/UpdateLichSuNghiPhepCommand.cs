@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Update
 {
-    public class UpdateLichSuNghiPhepCommand : IRequest<LichSuNghiPhepDto>, ICommand
+    public class UpdateLichSuNghiPhepCommand : IRequest<string>, ICommand
     {
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }

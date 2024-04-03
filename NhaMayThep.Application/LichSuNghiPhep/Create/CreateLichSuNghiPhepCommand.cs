@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Create
 {
-    public class CreateLichSuNghiPhepCommand : IRequest<LichSuNghiPhepDto>, ICommand
+    public class CreateLichSuNghiPhepCommand : IRequest<string>, ICommand
     {
         public string MaSoNhanVien { get; set; }
         public int LoaiNghiPhepID { get; set; }

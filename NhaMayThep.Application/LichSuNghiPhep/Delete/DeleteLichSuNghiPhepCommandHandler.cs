@@ -6,7 +6,7 @@ using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.Common.Interfaces;
 using NhaMapThep.Domain.Repositories;
 namespace NhaMayThep.Application.LichSuNghiPhep.Delete;
-public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNghiPhepCommand, LichSuNghiPhepDto>
+public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNghiPhepCommand, string>
 {
     private readonly ILichSuNghiPhepRepository _repo;
     private readonly IMapper _mapper;
@@ -18,7 +18,7 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         _mapper = mapper;
     }
 
-    public async Task<LichSuNghiPhepDto> Handle(DeleteLichSuNghiPhepCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(DeleteLichSuNghiPhepCommand request, CancellationToken cancellationToken)
     {
         var userId = _currentUserService.UserId;
         if (string.IsNullOrEmpty(userId))
@@ -32,15 +32,18 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         }
         if(lsnp.NgayXoa != null)
         {
-            throw new NotFoundException("LichSuNghiPhep này đã bị xóa ");
+            return "LichSuNghiPhep này đã bị xóa trước đó.";
         }
 
         lsnp.NguoiXoaID = userId;
         lsnp.NgayXoa = DateTime.Now;
 
+
         _repo.Update(lsnp);
         await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        return _mapper.Map<LichSuNghiPhepDto>(lsnp);
+        return "Xóa lịch sử nghỉ phép thành công.";
+
+
     }
 }

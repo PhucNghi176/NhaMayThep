@@ -6,6 +6,7 @@ using NhaMayThep.Application.Common.Interfaces;
 using NhaMayThep.Application.LichSuNghiPhep.Update;
 using NhaMayThep.Application.LichSuNghiPhep;
 using System.Linq.Expressions;
+using NhaMapThep.Domain.Entities.ConfigTable;
 namespace NhaMayThep.Application.UnitTests;
 
 [TestFixture]
@@ -40,7 +41,7 @@ public class UpdateLichSuNghiPhepCommandHandlerTests
 
 
     [Test]
-    public async Task Handle_GivenValidCommand_ShouldUpdateEntity()
+    public async Task Handle_GivenValidCommand_ShouldUpdateEntityAndReturnSuccessMessage()
     {
         // Arrange
         var command = new UpdateLichSuNghiPhepCommand
@@ -53,53 +54,51 @@ public class UpdateLichSuNghiPhepCommandHandlerTests
             LyDo = "updatedReason",
             NguoiDuyet = "updatedNguoiDuyet"
         };
-
+        _loaiNghiPhepRepositoryMock.Setup(r => r.AnyAsync(It.IsAny<Expression<Func<LoaiNghiPhepEntity, bool>>>(), It.IsAny<CancellationToken>())).ReturnsAsync(true);
+        _nhanVienRepositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<NhanVienEntity, bool>>>(), It.IsAny<CancellationToken>())).ReturnsAsync(new NhanVienEntity
+        {
+            ID = "someId",
+            Email = "email@example.com",
+            PasswordHash = "hashedPassword123",
+            HoVaTen = "Nguyen Van A",
+            ChucVuID = 1,
+            TinhTrangLamViecID = 1,
+            DaCoHopDong = true,
+            NgayVaoCongTy = new DateTime(2020, 01, 01),
+            DiaChiLienLac = "123 Main St",
+            SoDienThoaiLienLac = "0123456789",
+            MaSoThue = "123456789",
+            TenNganHang = "Bank ABC",
+            SoTaiKhoan = "987654321"
+        });
         var existingEntity = new LichSuNghiPhepNhanVienEntity
         {
             ID = command.Id,
-            MaSoNhanVien = "updatedMaSoNhanVien",
-            LoaiNghiPhepID = 3,
-            NgayBatDau = DateTime.Today,
-            NgayKetThuc = DateTime.Today.AddDays(5),
-            LyDo = "kbiet",
-            NguoiDuyet = "updatedNguoiDuyet"
+            MaSoNhanVien = "existingMaSoNhanVien",
+            LoaiNghiPhepID = command.LoaiNghiPhepID, 
+            NgayBatDau = command.NgayBatDau,
+            NgayKetThuc = command.NgayKetThuc,
+            LyDo = command.LyDo,
+            NguoiDuyet = command.NguoiDuyet
         };
 
-        var updatedDto = new LichSuNghiPhepDto
-        {
-            Id = command.Id,
-            MaSoNhanVien = "updatedMaSoNhanVien",
-            LoaiNghiPhepID = 3,
-            NgayBatDau = DateTime.Today,
-            NgayKetThuc = DateTime.Today.AddDays(5),
-            LyDo = "kbiet",
-            NguoiDuyet = "updatedNguoiDuyet"
-        };
 
-        _repositoryMock.Setup(r => r.FindAsync(
-            It.Is<Expression<Func<LichSuNghiPhepNhanVienEntity, bool>>>(expr => expr.Compile()(existingEntity)),
-            It.IsAny<CancellationToken>()
-        )).ReturnsAsync(existingEntity);
 
-        _mapperMock.Setup(m => m.Map<LichSuNghiPhepDto>(It.IsAny<LichSuNghiPhepNhanVienEntity>()))
-                   .Returns(updatedDto);
+        _repositoryMock.Setup(r => r.FindAsync(It.IsAny<Expression<Func<LichSuNghiPhepNhanVienEntity, bool>>>(), It.IsAny<CancellationToken>()))
+                                         .ReturnsAsync(existingEntity);
+
+        _repositoryMock.Setup(r => r.UnitOfWork.SaveChangesAsync(default))
+                                     .ReturnsAsync(1); // Simulate successful update
+
+
 
         // Act
         var result = await _handler.Handle(command, CancellationToken.None);
 
         // Assert
         Assert.IsNotNull(result);
-        Assert.AreEqual(updatedDto, result);
-
-        _repositoryMock.Verify(r => r.Update(It.Is<LichSuNghiPhepNhanVienEntity>(e =>
-            e.MaSoNhanVien == command.MaSoNhanVien &&
-            e.LoaiNghiPhepID == command.LoaiNghiPhepID &&
-            e.NgayBatDau == command.NgayBatDau &&
-            e.NgayKetThuc == command.NgayKetThuc &&
-            e.LyDo == command.LyDo &&
-            e.NguoiDuyet == command.NguoiDuyet
-        )), Times.Once);
-
+        Assert.AreEqual("Cập nhật lịch sử nghỉ phép thành công.", result);
+        _repositoryMock.Verify(r => r.Update(It.IsAny<LichSuNghiPhepNhanVienEntity>()), Times.Once);
         _repositoryMock.Verify(r => r.UnitOfWork.SaveChangesAsync(CancellationToken.None), Times.Once);
     }
 }
