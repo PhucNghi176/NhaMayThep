@@ -10,7 +10,7 @@ using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace NhaMayThep.UnitTest.ThongTinTrinhDoChinhTri
+namespace NhaMayThep.UnitTest.ThongTinTrinhDoChinhTriUnitTest
 {
     [TestFixture]
     public class CreateThongTinTrinhDoChinhTriUnitTest

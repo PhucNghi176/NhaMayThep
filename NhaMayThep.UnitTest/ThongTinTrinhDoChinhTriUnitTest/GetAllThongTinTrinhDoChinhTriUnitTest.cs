@@ -11,7 +11,7 @@ using NhaMayThep.Application.ThongTinTrinhDoChinhTri.GetAll;
 using NhaMayThep.Application.ThongTinTrinhDoChinhTri;
 using System.Linq.Expressions;
 
-namespace NhaMayThep.UnitTest.ThongTinTrinhDoChinhTri
+namespace NhaMayThep.UnitTest.ThongTinTrinhDoChinhTriUnitTest
 {
     [TestFixture]
     public class GetAllThongTinTrinhDoChinhTriUnitTest
