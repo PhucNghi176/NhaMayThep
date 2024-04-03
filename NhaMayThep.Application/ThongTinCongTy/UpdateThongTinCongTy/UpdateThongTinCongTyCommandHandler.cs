@@ -26,8 +26,8 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
             {
                 throw new NotFoundException("Thông tin công ty không tồn tại hoặc đã bị vô hiệu hóa");
             }
-            var checkDuplicatoion = await _thongTinCongTyRepository.AnyAsync(x => x.MaDoanhNghiep == request.MaDoanhNghiep && x.NgayXoa == null, cancellationToken);
-            if (checkDuplicatoion)
+            var checkDuplication = await _thongTinCongTyRepository.AnyAsync(x => x.MaDoanhNghiep == request.MaDoanhNghiep && x.NgayXoa == null, cancellationToken);
+            if (checkDuplication)
                 throw new DuplicationException("Thông tin công ty đã tồn tại");
             thongTinCongTy.NguoiCapNhatID = _currentUserService.UserId;
             thongTinCongTy.NgayCapNhatCuoi = DateTime.Now;

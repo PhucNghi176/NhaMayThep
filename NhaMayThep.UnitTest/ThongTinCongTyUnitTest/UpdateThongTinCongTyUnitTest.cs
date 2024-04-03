@@ -171,7 +171,7 @@ namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
         }
 
         [Test]
-        public async Task CapBacLuong_UpdateInvalid_ThrowsDuplicatedException()
+        public async Task ThongTinCongTy_UpdateInvalid_ThrowsDuplicatedException()
         {
             //Arrange
             var data = new ThongTinCongTyEntity

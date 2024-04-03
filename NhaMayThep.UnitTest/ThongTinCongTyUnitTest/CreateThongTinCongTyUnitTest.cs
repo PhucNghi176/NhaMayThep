@@ -15,7 +15,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
 {
     [TestFixture]
-    public class CreateThongTinChucVuUnitTest
+    public class CreateThongTinCongTyUnitTest
     {
         private Mock<IThongTinCongTyRepository> _thongTinCongTyRepositoryMock;
         private Mock<ICurrentUserService> _currentUserService;
@@ -30,7 +30,7 @@ namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
         }
 
         [TestCase("test")]
-        public async Task ThongTinCongTy_CreateWithValidName_ReturnTrue(string name)
+        public async Task ThongTinCongTy_CreateWithValidMaDoanhNghiep_ReturnTrue(string name)
         {
             var expectedResult = "Tạo thành công";
             var data = new ThongTinCongTyEntity
@@ -73,7 +73,7 @@ namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
         }
 
         [TestCase("testDuplication")]
-        public async Task ThongTinCongTy_CreateWithInvalidMaDoanhNghiep_ThrowsException(string name)
+        public async Task ThongTinCongTy_CreateWithInvalidMaDoanhNghiep_ThrowsDuplicatedException(string name)
         {
             var data = new ThongTinCongTyEntity
             {

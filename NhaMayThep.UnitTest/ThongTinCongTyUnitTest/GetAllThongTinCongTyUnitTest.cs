@@ -14,6 +14,7 @@ using static System.Runtime.InteropServices.JavaScript.JSType;
 
 namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
 {
+    [TestFixture]
     public class GetAllThongTinCongTyUnitTest
     {
         private Mock<IMapper> _mapperMock;
@@ -30,7 +31,7 @@ namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
 
 
         [Test]
-        public async Task GetAllQueryHandler_ValidId_ReturnsCapBacLuongDto()
+        public async Task GetAllQueryHandler_ValidId_ReturnsThongTinCongTyDto()
         {
             // Arrange
             var query = new GetAllThongTinCongTyQuery();

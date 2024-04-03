@@ -37,6 +37,11 @@ namespace NhaMayThep.Application.LuongThoiGian.UpdateLuongThoiGian
             {
                 throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
+            var checkDuplication = await _luongThoiGianRepository.AnyAsync(x => x.MaLuongThoiGian.Equals(request.MaLuongThoiGian), cancellationToken);
+            if (checkDuplication)
+            {
+                throw new DuplicationException("Mã lương thời gian đã tồn tại");
+            }
             luongThoiGian.NguoiCapNhatID = _currentUserService.UserId;
             luongThoiGian.NgayCapNhatCuoi = DateTime.Now;
             luongThoiGian.MaLuongThoiGian = request.MaLuongThoiGian;

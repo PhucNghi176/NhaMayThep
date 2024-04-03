@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace NhaMayThep.UnitTest.ThongTinCongTyUnitTest
 {
     [TestFixture]
-    public class DeleteCapBacLuongUnitTest
+    public class DeleteThongTinCongTyUnitTest
     {
         private Mock<ICurrentUserService> _currentUserServiceMock;
         private Mock<IThongTinCongTyRepository> _thongTinCongTyRepositoryMock;
