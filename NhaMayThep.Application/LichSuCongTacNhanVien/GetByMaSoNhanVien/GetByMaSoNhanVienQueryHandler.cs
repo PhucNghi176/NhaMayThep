@@ -31,7 +31,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien
             foreach (var item in list)
                 item.LoaiCongTac.MapToLoaiCongTacDto(_mapper);
 
-            var result = list.MapToLichSuCongTacNhanVienDtoList(_mapper);
+            var result = list.MapTolichSuCongTacNhanVienDtoList(_mapper);
             foreach (var item in result)
             {
                 var nameSearching = await _nhanVienRepository.FindAsync(x => x.ID.Equals(item.MaSoNhanVien), cancellationToken);

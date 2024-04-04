@@ -17,10 +17,12 @@ using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.LichSuNghiPhep.Filter;
+using NhaMapThep.Application.Common.Security;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class LichSuNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -122,7 +124,7 @@ namespace NhaMayThep.Api.Controllers
           CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
-            return Ok(new JsonResponse<PagedResult<LichSuNghiPhepDto>>(result));
+            return Ok(result);
         }
     }
 }
