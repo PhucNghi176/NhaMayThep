@@ -12,15 +12,12 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Delete
     public class DeleteLoaiNghiPhepHandler : IRequestHandler<DeleteLoaiNghiPhepCommand, string>
     {
         private readonly ILoaiNghiPhepRepository _repository;
-        private readonly IMapper _mapper;
-        private readonly INhanVienRepository _hanVienRepository;
+       
         private readonly ICurrentUserService _currentUserService;
 
-        public DeleteLoaiNghiPhepHandler(ILoaiNghiPhepRepository repository, IMapper mapper, INhanVienRepository hanVienRepository, ICurrentUserService currentUserService)
+        public DeleteLoaiNghiPhepHandler(ILoaiNghiPhepRepository repository,  ICurrentUserService currentUserService)
         {
-            _repository = repository;
-            _mapper = mapper;
-            _hanVienRepository = hanVienRepository;
+            _repository = repository;     
             _currentUserService = currentUserService;
         }
 
