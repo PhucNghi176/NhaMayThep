@@ -74,7 +74,7 @@ namespace NhaMayThep.Api.Controllers.PhuCapNhanVien
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(
-           [FromRoute] int id,
+           [FromRoute] string id,
            CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeletePhuCapNhanVienCommand(id: id), cancellationToken);
