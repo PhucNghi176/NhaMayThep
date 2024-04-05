@@ -11,9 +11,6 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem
     {
         public CreateChiTietBaoHiemCommandValidator()
         {
-            RuleFor(x => x.MaSoNhanVien)
-                            .NotEmpty().WithMessage("Mã nhân viên không được để trống")
-                            .NotNull().WithMessage("Mã nhân viên không được rỗng");
             RuleFor(x => x.NgayHieuLuc)
                 .Must(x => x == DateTime.MinValue || x <= DateTime.Now)
                 .WithMessage("Ngày hiệu lực không thể lớn hơn ngày hiện tại");

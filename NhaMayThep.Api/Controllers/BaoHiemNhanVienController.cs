@@ -51,7 +51,7 @@ namespace NhaMapThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> DeleteBaoHiemNhanVien(
-            [FromRoute] string Id,
+            [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteBaoHiemNhanVienCommand(Id), cancellationToken);
@@ -81,7 +81,7 @@ namespace NhaMapThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<BaoHiemNhanVienDto>>> GetBaoHiemNhanVienById(
-            [FromRoute] string id,
+            [FromRoute] int id,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetByIdQuery(id), cancellationToken);

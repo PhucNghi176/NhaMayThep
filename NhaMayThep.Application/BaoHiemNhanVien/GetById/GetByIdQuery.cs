@@ -10,11 +10,11 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.GetById
 {
     public class GetByIdQuery : IRequest<BaoHiemNhanVienDto>, IQuery
     {
-        public GetByIdQuery(string id)
+        public GetByIdQuery(int id)
         {
             Id = id;
         }
 
-        public string Id { get; set; }
+        public int Id { get; set; }
     }
 }

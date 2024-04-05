@@ -35,7 +35,7 @@ namespace NhaMayThep.Application.LoaiTangCa.Create
 
         public async Task<string> Handle(CreateLoaiTangCaCommand request, CancellationToken cancellationToken)
         {
-            var name = await this._loaiTangCaRepository.FindAsync(x => x.ID.Equals(request.Name) && x.NgayXoa == null, cancellationToken);
+            var name = await this._loaiTangCaRepository.FindAsync(x => x.Name.Equals(request.Name) && x.NgayXoa == null, cancellationToken);
             if (name != null)
                 throw new NotFoundException($"Name đã tồn tại");
 

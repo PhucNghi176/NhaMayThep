@@ -30,6 +30,10 @@ namespace NhaMayThep.Application.LuongSanPham.Update
             RuleFor(x => x.TongLuong)
                 .NotNull().WithMessage("TongLuong không được để trống.")
                 .GreaterThanOrEqualTo(0).WithMessage("TongLuong phải lớn 0");
+
+            RuleFor(x => x.NgayKhaiBao)
+                .NotEmpty().WithMessage("Ngày khai báo không được để trống")
+                .NotNull().WithMessage("Ngày khai báo không hợp lệ");
         }
     }
 }
