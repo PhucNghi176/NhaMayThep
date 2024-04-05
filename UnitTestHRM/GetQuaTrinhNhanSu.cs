@@ -12,6 +12,8 @@ using NhaMayThep.Application.QuaTrinhNhanSu;
 using NhaMayThep.Application.CapBacLuong;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.LoaiHoaDon;
+using NhaMapThep.Domain.Common.Exceptions;
+using System.Reflection.Metadata;
 
 namespace UnitTestHRM;
 [TestFixture]
@@ -155,6 +157,23 @@ public class GetQuaTrinhNhanSu
 
         // Assert
         Assert.AreEqual(expectedDto, result);
+
+    }
+
+    [Test]
+    public async Task GetInvalidEntity_QuaTrinhNhanSu()
+    {
+        var query = new GetQuaTrinhNhanSuQuery("hehe");
+
+
+        _quaTrinhNhanSuRepositoryMock.Setup(x => x.FindAsync(It.IsAny<Expression<Func<QuaTrinhNhanSuEntity, bool>>>(), It.IsAny<CancellationToken>()))
+                .ReturnsAsync((QuaTrinhNhanSuEntity)null);
+
+        // Act
+
+
+        // Assert
+        Assert.ThrowsAsync<NotFoundException>(() => _handlerMock.Handle(query, CancellationToken.None));
 
     }
 }
