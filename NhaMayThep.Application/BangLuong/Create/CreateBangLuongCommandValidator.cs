@@ -27,11 +27,6 @@ namespace NhaMayThep.Application.BangLuong.Create
                 .NotNull().WithMessage("LuongTangCa không được để trống.")
                 .GreaterThanOrEqualTo(0).WithMessage("LuongTangCa phải lớn 0");
 
-            RuleFor(x => x.KhenThuongID)
-                .NotNull().WithMessage("KhenThuongID không được để trống.");
-
-            RuleFor(x => x.KyLuatID)
-                .NotNull().WithMessage("KyLuatID không được để trống.");
 
             RuleFor(x => x.LuongCoBan)
                 .NotNull().WithMessage("LuongCoBan không được để trống.")
