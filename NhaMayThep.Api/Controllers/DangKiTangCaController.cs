@@ -91,7 +91,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<DangKiTangCaDto>>> GetById(string id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetByIdQuery { Id = id }, cancellationToken);
+            var result = await _mediator.Send(new GetDangKiTangCaByIdQuery { Id = id }, cancellationToken);
             return Ok(new JsonResponse<DangKiTangCaDto>(result));
         }
 
