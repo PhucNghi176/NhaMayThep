@@ -42,14 +42,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Update
             {
                 throw new NotFoundException("Mã Số Nhân Viên không tồn tại!");
             }
-
-            var baoHiem = await _baoHiemRepository.FindAsync(x => x.ID == request.BaoHiem && x.NgayXoa == null, cancellationToken);
-            if (baoHiem == null)
-            {
-                throw new NotFoundException("Bảo Hiểm không tồn tại!");
-            }
-
-            var existingBaoHiemNhanVien = await _baoHiemNhanVienRepository.AnyAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.BaoHiem == request.BaoHiem && x.ID != request.Id && x.NgayXoa == null, cancellationToken);
+            var existingBaoHiemNhanVien = await _baoHiemNhanVienRepository.AnyAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.ID != request.Id && x.NgayXoa == null, cancellationToken);
 
             if (existingBaoHiemNhanVien)
             {
@@ -57,9 +50,8 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Update
             }
 
             baoHiemNhanVien.MaSoNhanVien = request.MaSoNhanVien;
-            baoHiemNhanVien.BaoHiem = request.BaoHiem;
             baoHiemNhanVien.NguoiCapNhatID = _currentUserService.UserId;
-            baoHiemNhanVien.NgayCapNhatCuoi = DateTime.Now;
+            baoHiemNhanVien.NgayCapNhat = DateTime.Now;
            
             _baoHiemNhanVienRepository.Update(baoHiemNhanVien);
             if (await _baoHiemNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)

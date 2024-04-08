@@ -38,12 +38,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
             }
 
             // Validate NguoiDuyet
-            var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
-            if (nhanvien2 == null)
-            {
-                throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
-            }
-            
+            var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken) ?? throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
             var dangKiTangCa = new DangKiTangCaEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,

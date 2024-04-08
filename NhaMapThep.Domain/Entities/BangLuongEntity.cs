@@ -37,8 +37,6 @@ namespace NhaMapThep.Domain.Entities
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongDongBH { get; set; }
 
-
-
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongBaoHiem { get; set; }
 

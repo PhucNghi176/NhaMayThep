@@ -42,6 +42,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Update
             LuongCongNhat.SoGioLam = request.SoGioLam;
             LuongCongNhat.Luong1Gio = request.Luong1Gio;
             LuongCongNhat.TongLuong = request.TongLuong;
+            LuongCongNhat.NgayKhaiBao = request.NgayKhaiBao;
             LuongCongNhat.NguoiCapNhatID = _currentUserService.UserId;
             LuongCongNhat.NgayCapNhatCuoi = DateTime.Now;
 

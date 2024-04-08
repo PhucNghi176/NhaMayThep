@@ -2,6 +2,7 @@
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.LoaiNghiPhep;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,5 +20,6 @@ namespace NhaMayThep.Application.LichSuNghiPhep
         }
         public static List<LichSuNghiPhepDto> MapToLichSuNghiPhepDtoList(this IEnumerable<LichSuNghiPhepNhanVienEntity> projectFrom, IMapper mapper)
            => projectFrom.Select(x => x.MapToLichSuNghiPhepDto(mapper)).ToList();
+        
     }
 }

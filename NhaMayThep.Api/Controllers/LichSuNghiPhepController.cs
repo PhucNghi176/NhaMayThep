@@ -14,10 +14,15 @@ using Microsoft.AspNetCore.Http;
 using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
+using NhaMayThep.Application.LichSuNghiPhep.Filter;
+using NhaMapThep.Application.Common.Security;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
+    [Authorize]
     public class LichSuNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -103,6 +108,20 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<LichSuNghiPhepDto>>>> GetPagination([FromQuery] GetLichSuNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
+        {
+            var result = await _mediator.Send(query, cancellationToken);
+            return Ok(result);
+        }
+        [HttpGet("lich-su-nghi-phep/filter-lich-su-nghi-phep")]
+        [Produces(MediaTypeNames.Application.Json)]
+        [ProducesResponseType(typeof(JsonResponse<PagedResult<LichSuNghiPhepDto>>), StatusCodes.Status201Created)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
+        [ProducesResponseType(StatusCodes.Status403Forbidden)]
+        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
+        public async Task<ActionResult<JsonResponse<PagedResult<LichSuNghiPhepDto>>>> FilterLichSuNghiPhep(
+          [FromQuery] FilterLichSuNghiPhepQuery query,
+          CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

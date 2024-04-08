@@ -28,6 +28,7 @@ namespace NhaMayThep.Application.LuongCongNhat.Create
         public decimal Luong1Gio { get; set; }
 
         public decimal TongLuong { get; set; }
+        public DateTime NgayKhaiBao { get; set; }
 
     }
 }
