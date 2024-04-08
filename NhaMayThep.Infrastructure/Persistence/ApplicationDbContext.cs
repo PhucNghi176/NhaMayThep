@@ -67,6 +67,7 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     public DbSet<PhuCapCongDoanEntity> PhuCapCongDoans { get; set; }
     public DbSet<TangCaEntity> TangCas { get; set; }
     public DbSet<NghiPhepEntity> NghiPheps { get; set; }
+    public DbSet<BangLuongEntity> BangLuongs { get; set; }
 
 
 

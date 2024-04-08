@@ -44,10 +44,11 @@ namespace NhaMayThep.Application.BangLuong.Create
             var checkDuplicatoion = await _BangLuongRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Bang Luong");
-
+            
             var phuCapCongDoan = await _phuCapCongDoanRepository.FindAsync(x => x.ID == request.PhuCapCongDoanID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (phuCapCongDoan == null)
                 throw new NotFoundException("Phụ Cấp Công Đoàn Id: " + request.PhuCapCongDoanID + " không tìm thấy");
+
 
 
             var giamTruNhanVien = await _giamTruNhanVienRepository.FindAsync(x => x.ID == request.GiamTruNhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
@@ -61,15 +62,14 @@ namespace NhaMayThep.Application.BangLuong.Create
                 NgayKhaiBao = request.NgayKhaiBao,
                 LuongNghiPhep = request.LuongNghiPhep,
                 LuongTangCa = request.LuongTangCa,
-                KhenThuongID = request.KhenThuongID,
-                KyLuatID = request.KyLuatID,
+
                 LuongCoBan = request.LuongCoBan,
-                PhuCapNhanVienID = request.PhuCapNhanVienID,
+
                 TongNhanCoDinh = request.TongNhanCoDinh,
                 NgayCong = request.NgayCong,
                 TongThuNhap = request.TongThuNhap,
                 LuongDongBH = request.LuongDongBH,
-                BaoHiemNhanVienID = request.BaoHiemNhanVienID,
+
                 TongBaoHiem = request.TongBaoHiem,
                 PhuCapCongDoanID = request.PhuCapCongDoanID,
                 GiamTruNhanVienID = request.GiamTruNhanVienID,

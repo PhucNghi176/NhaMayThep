@@ -65,15 +65,14 @@ namespace NhaMayThep.Application.BangLuong.Update
             BangLuong.NgayKhaiBao = request.NgayKhaiBao;
             BangLuong.LuongNghiPhep = request.LuongNghiPhep;
             BangLuong.LuongTangCa = request.LuongTangCa;
-            BangLuong.KhenThuongID = request.KhenThuongID;
-            BangLuong.KyLuatID = request.KyLuatID;
+
             BangLuong.LuongCoBan = request.LuongCoBan;
-            BangLuong.PhuCapNhanVienID = request.PhuCapNhanVienID;
+
             BangLuong.TongNhanCoDinh = request.TongNhanCoDinh;
             BangLuong.NgayCong = request.NgayCong;
             BangLuong.TongThuNhap = request.TongThuNhap;
             BangLuong.LuongDongBH = request.LuongDongBH;
-            BangLuong.BaoHiemNhanVienID = request.BaoHiemNhanVienID;
+
             BangLuong.TongBaoHiem = request.TongBaoHiem;
             BangLuong.PhuCapCongDoanID = request.PhuCapCongDoanID;
             BangLuong.GiamTruNhanVienID = request.GiamTruNhanVienID;

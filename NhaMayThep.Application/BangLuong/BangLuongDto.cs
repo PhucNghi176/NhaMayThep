@@ -21,22 +21,21 @@ namespace NhaMayThep.Application.BangLuong
         public DateTime NgayKhaiBao { get; set; }
         public decimal LuongNghiPhep { get; set; }
         public decimal LuongTangCa { get; set; }
-        public string KhenThuongID { get; set; }
-        public string KyLuatID { get; set; }
+
         public decimal LuongCoBan { get; set; }
-        public string PhuCapNhanVienID { get; set; }
+
         public decimal TongNhanCoDinh { get; set; }
         public double NgayCong { get; set; }
         public decimal TongThuNhap { get; set; }
         public decimal LuongDongBH { get; set; }
-        public string BaoHiemNhanVienID { get; set; }
+
         public decimal TongBaoHiem { get; set; }
         public string PhuCapCongDoanID { get; set; }
         public string GiamTruNhanVienID { get; set; }
         public decimal TamUng { get; set; }
         public decimal LuongThucLanh { get; set; }
-        public static BangLuongDto Create(string id, string maSoNhanVien, DateTime ngayKhaiBao, decimal luongNghiPhep, decimal luongTangCa, string khenThuongId, string kyLuatId, decimal luongCoBan,
-                                          string phuCapNhanVienId, decimal tongNhanCoDinh, double ngayCong, decimal tongThuNhap, decimal luongDongBH, string baoHiemNhanVienId,decimal tongBaoHiem, string phuCapCongDoanId, 
+        public static BangLuongDto Create(string id, string maSoNhanVien, DateTime ngayKhaiBao, decimal luongNghiPhep, decimal luongTangCa, decimal luongCoBan,
+                                          decimal tongNhanCoDinh, double ngayCong, decimal tongThuNhap, decimal luongDongBh,decimal tongBaoHiem, string phuCapCongDoanId, 
                                           string giamTruNhanVienId, decimal tamUng, decimal luongThucLanh)
                                             
         {
@@ -47,15 +46,14 @@ namespace NhaMayThep.Application.BangLuong
                 NgayKhaiBao = ngayKhaiBao,
                 LuongNghiPhep = luongNghiPhep,
                 LuongTangCa = luongTangCa,
-                KhenThuongID = khenThuongId,
-                KyLuatID = kyLuatId,
+
                 LuongCoBan = luongCoBan,
-                PhuCapNhanVienID = phuCapNhanVienId,
+
                 TongNhanCoDinh = tongNhanCoDinh,
                 NgayCong = ngayCong,
                 TongThuNhap = tongThuNhap,
-                LuongDongBH = luongDongBH,
-                BaoHiemNhanVienID = baoHiemNhanVienId,
+                LuongDongBH = luongDongBh,
+
                 TongBaoHiem = tongBaoHiem,
                 PhuCapCongDoanID = phuCapCongDoanId,
                 GiamTruNhanVienID = giamTruNhanVienId,

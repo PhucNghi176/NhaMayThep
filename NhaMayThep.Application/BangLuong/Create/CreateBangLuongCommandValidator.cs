@@ -32,8 +32,7 @@ namespace NhaMayThep.Application.BangLuong.Create
                 .NotNull().WithMessage("LuongCoBan không được để trống.")
                 .GreaterThanOrEqualTo(0).WithMessage("LuongCoBan phải lớn hoặc bằng 0");
 
-            RuleFor(x => x.PhuCapNhanVienID)
-                .NotNull().WithMessage("PhuCapNhanVienID không được để trống.");
+
 
             RuleFor(x => x.TongNhanCoDinh)
                 .NotNull().WithMessage("TongNhanCoDinh không được để trống.")
@@ -51,8 +50,7 @@ namespace NhaMayThep.Application.BangLuong.Create
                 .NotNull().WithMessage("LuongDongBH không được để trống.")
                 .GreaterThanOrEqualTo(0).WithMessage("LuongDongBH phải lớn 0");
 
-            RuleFor(x => x.BaoHiemNhanVienID)
-                .NotNull().WithMessage("BaoHiemNhanVienID không được để trống.");
+
 
             RuleFor(x => x.TongBaoHiem)
                 .NotNull().WithMessage("TongBaoHiem không được để trống.")
