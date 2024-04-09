@@ -44,26 +44,12 @@ namespace NhaMayThep.Application.BangLuong.Create
             var checkDuplicatoion = await _BangLuongRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Bang Luong");
-
-            var khenThuong = await _khenThuongRepository.FindAsync(x => x.ID == request.KhenThuongID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (khenThuong == null)
-                throw new NotFoundException("Khen Thưởng Id: " + request.KhenThuongID + " không tìm thấy");
-
-            var kyLuat = await _kyLuatRepository.FindAsync(x => x.ID == request.KyLuatID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (kyLuat == null)
-                throw new NotFoundException("Kỷ Luật Id: " + request.KyLuatID + " không tìm thấy");
-
-            var phuCapNhanVien = await _phuCapNhanVienRepository.FindAsync(x => x.ID == request.PhuCapNhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (phuCapNhanVien == null)
-                throw new NotFoundException("Phụ Cấp Nhân Viên Id: " + request.PhuCapNhanVienID + " không tìm thấy");
-
+            
             var phuCapCongDoan = await _phuCapCongDoanRepository.FindAsync(x => x.ID == request.PhuCapCongDoanID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (phuCapCongDoan == null)
                 throw new NotFoundException("Phụ Cấp Công Đoàn Id: " + request.PhuCapCongDoanID + " không tìm thấy");
 
-            var baoHiemNhanVien = await _baoHiemNhanVienRepository.FindAsync(x => x.ID == request.BaoHiemNhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
-            if (baoHiemNhanVien == null)
-                throw new NotFoundException("Bảo Hiểm Nhân Viên Id: " + request.BaoHiemNhanVienID + " không tìm thấy");
+
 
             var giamTruNhanVien = await _giamTruNhanVienRepository.FindAsync(x => x.ID == request.GiamTruNhanVienID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (giamTruNhanVien == null)
@@ -76,15 +62,14 @@ namespace NhaMayThep.Application.BangLuong.Create
                 NgayKhaiBao = request.NgayKhaiBao,
                 LuongNghiPhep = request.LuongNghiPhep,
                 LuongTangCa = request.LuongTangCa,
-                KhenThuongID = request.KhenThuongID,
-                KyLuatID = request.KyLuatID,
+
                 LuongCoBan = request.LuongCoBan,
-                PhuCapNhanVienID = request.PhuCapNhanVienID,
+
                 TongNhanCoDinh = request.TongNhanCoDinh,
                 NgayCong = request.NgayCong,
                 TongThuNhap = request.TongThuNhap,
                 LuongDongBH = request.LuongDongBH,
-                BaoHiemNhanVienID = request.BaoHiemNhanVienID,
+
                 TongBaoHiem = request.TongBaoHiem,
                 PhuCapCongDoanID = request.PhuCapCongDoanID,
                 GiamTruNhanVienID = request.GiamTruNhanVienID,
