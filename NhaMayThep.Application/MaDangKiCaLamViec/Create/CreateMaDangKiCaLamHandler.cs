@@ -38,6 +38,8 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Create
             var dangKi = new MaDangKiCaLamEntity()
             {
                 Name = request.Name,
+                ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau,
+                ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc,
                 NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Now,
             };
