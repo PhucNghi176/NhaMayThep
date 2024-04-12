@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
             RuleFor(x => x.Loai)
                 .NotEmpty().WithMessage("Loại Không Được Để Trống")
                 .Must(x => x == "TangLuong" || x == "GiamLuong")
-                .WithMessage("Nhập liệu không hợp lệ, Nên là Tăng Lương hoặc Giám Lương"); ;
+                .WithMessage("Nhập liệu không hợp lệ, Nên là TangLuong hoặc GiamLuong"); ;
 
             RuleFor(x => x.LuongCu)
                 .NotEmpty().WithMessage("Lương Cũ Không Được Để Trống")

@@ -18,7 +18,9 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Create
                 .NotEmpty().WithMessage("ThoiGianCaLamBatDau Không Được Để Trống.");
 
             RuleFor(command => command.ThoiGianCaLamKetThuc)
-                .NotEmpty().WithMessage("ThoiGianCaLamKetThuc Không Được Để Trống.");
+                .NotEmpty().WithMessage("ThoiGianCaLamKetThuc Không Được Để Trống.")
+                .Must((command, ketThuc) => ketThuc > command.ThoiGianCaLamBatDau)
+                .WithMessage("ThoiGianCaLamKetThuc phải lớn hơn ThoiGianCaLamBatDau.");
         }
     }
 }
