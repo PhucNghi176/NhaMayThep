@@ -43,7 +43,9 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
             {
                 throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
             }
-            
+            TimeSpan duration = request.ThoiGianCaLamKetThuc - request.ThoiGianCaLamBatDau;
+
+
             var dangKiTangCa = new DangKiTangCaEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,
@@ -52,7 +54,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
                 LiDoTangCa = request.LiDoTangCa,
                 ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau,
                 ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc,
-                SoGioTangCa = request.SoGioTangCa,
+                SoGioTangCa = duration,
                 HeSoLuongTangCa = request.HeSoLuongTangCa,
                 TrangThaiDuyet = request.TrangThaiDuyet,
                 NguoiDuyet = request.NguoiDuyet,
