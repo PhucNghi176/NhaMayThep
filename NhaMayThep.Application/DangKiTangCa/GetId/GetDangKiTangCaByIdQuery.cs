@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.GetId
 {
-    public class GetByIdQuery : IRequest<DangKiTangCaDto>
+    public class GetDangKiTangCaByIdQuery : IRequest<DangKiTangCaDto>
     {
         public string Id { get; set; }
     }

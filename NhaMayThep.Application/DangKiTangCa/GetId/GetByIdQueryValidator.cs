@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.GetId
 {
-    public class GetByIdQueryValidator : AbstractValidator<GetByIdQuery>
+    public class GetByIdQueryValidator : AbstractValidator<GetDangKiTangCaByIdQuery>
     {
         public GetByIdQueryValidator()
         {

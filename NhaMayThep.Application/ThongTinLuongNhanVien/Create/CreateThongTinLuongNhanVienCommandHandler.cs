@@ -44,7 +44,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Create
 
             if (hopdong == null)
             {
-                return "Mã Hợp Đồng không tồn tại";
+                return "Mã Nhân Viên không tồn tại";
             }
 
             var thongtins = await _thongTinLuongNhanVienRepository.FindAllAsync(cancellationToken);

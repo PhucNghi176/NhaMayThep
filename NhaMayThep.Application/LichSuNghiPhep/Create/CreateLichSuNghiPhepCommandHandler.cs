@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Create
 {
-    public class CreateLichSuNghiPhepCommandHandler : IRequestHandler<CreateLichSuNghiPhepCommand, LichSuNghiPhepDto>
+    public class CreateLichSuNghiPhepCommandHandler : IRequestHandler<CreateLichSuNghiPhepCommand, string>
     {
         private readonly IMapper _mapper;
         private readonly ILichSuNghiPhepRepository _repository;
@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             _currentUserService = currentUserService;
         }
 
-        public async Task<LichSuNghiPhepDto> Handle(CreateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
+        public async Task<string> Handle(CreateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
         {
             // Validate LoaiNghiPhepID
             var loaiNghiPhepExists = await _loaiNghiPhepRepo.AnyAsync(x => x.ID == request.LoaiNghiPhepID, cancellationToken);
@@ -45,7 +45,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
             // Validate NguoiDuyet
             var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
-            if (nhanvien2 == null)
+                if (nhanvien2 == null)
             {
                 throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
             }
@@ -68,7 +68,8 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
 
             _repository.Add(lsnp);
             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return _mapper.Map<LichSuNghiPhepDto>(lsnp);
+
+            return "Lịch sử nghỉ phép đã tạo thành công";
         }
     }
 }

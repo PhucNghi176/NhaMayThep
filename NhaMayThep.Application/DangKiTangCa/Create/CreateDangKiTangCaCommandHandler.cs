@@ -38,7 +38,14 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
             }
 
             // Validate NguoiDuyet
-            var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken) ?? throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
+            var nhanvien2 = await _nhanVienRepository.FindAsync(x => x.ID == request.NguoiDuyet && x.NgayXoa == null, cancellationToken);
+            if (nhanvien2 == null)
+            {
+                throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
+            }
+            TimeSpan duration = request.ThoiGianCaLamKetThuc - request.ThoiGianCaLamBatDau;
+
+
             var dangKiTangCa = new DangKiTangCaEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,
@@ -47,7 +54,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
                 LiDoTangCa = request.LiDoTangCa,
                 ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau,
                 ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc,
-                SoGioTangCa = request.SoGioTangCa,
+                SoGioTangCa = duration,
                 HeSoLuongTangCa = request.HeSoLuongTangCa,
                 TrangThaiDuyet = request.TrangThaiDuyet,
                 NguoiDuyet = request.NguoiDuyet,
@@ -55,8 +62,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Create
             };
 
             _repository.Add(dangKiTangCa);
-            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Dang Tang Ca thành công" : "Dang Tang Ca  thất bại";
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Dang Ki Tang Ca thành công" : "Dang Ki Tang Ca thất bại";
         }
     }
 }

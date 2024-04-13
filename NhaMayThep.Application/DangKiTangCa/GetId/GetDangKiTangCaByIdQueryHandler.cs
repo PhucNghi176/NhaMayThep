@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Queries.GetDangKiTangCaById
 {
-    public class GetDangKiTangCaByIdQueryHandler : IRequestHandler<GetByIdQuery, DangKiTangCaDto>
+    public class GetDangKiTangCaByIdQueryHandler : IRequestHandler<GetDangKiTangCaByIdQuery, DangKiTangCaDto>
     {
         private readonly IMapper _mapper;
         private readonly IDangKiTangCaRepository _repository;
@@ -20,7 +20,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Queries.GetDangKiTangCaById
             _mapper = mapper;
         }
 
-        public async Task<DangKiTangCaDto> Handle(GetByIdQuery request, CancellationToken cancellationToken)
+        public async Task<DangKiTangCaDto> Handle(GetDangKiTangCaByIdQuery request, CancellationToken cancellationToken)
         {
             var entity = await _repository.FindAsync(x => x.ID == request.Id, cancellationToken);
             if (entity == null)

@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-
+using NhaMapThep.Domain.Entities.ConfigTable;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien
 {
@@ -12,17 +12,14 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
 
         public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
-        public string HoVaTen { get; set; }
-        public int LoaiCongTacID { get; set; }
+        public LoaiCongTacEntity LoaiCongTac { get; set; }
         public DateTime NgayBatDau { get; set; }
         public DateTime? NgayKetThuc { get; set; }
         public string NoiCongTac { get; set; }
         public string LyDo { get; set; }
 
-        public string LoaiCongTac { get; set; }
-
-        public static LichSuCongTacNhanVienDto Create(string id, string maSoNhanVien, int loaiCongTac, DateTime ngaybatdau,
-            DateTime? ngayKetThuc, string noiCongTac, string Lydo, string name)
+        public static LichSuCongTacNhanVienDto Create(string id, string maSoNhanVien, LoaiCongTacEntity loaiCongTac, DateTime ngaybatdau,
+            DateTime? ngayKetThuc, string noiCongTac, string Lydo)
         {
             return new LichSuCongTacNhanVienDto()
             {
@@ -30,10 +27,9 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien
                 NgayBatDau = ngaybatdau,
                 NgayKetThuc = ngayKetThuc,
                 MaSoNhanVien = maSoNhanVien,
-                LoaiCongTacID = loaiCongTac,
+                LoaiCongTac = loaiCongTac,
                 NoiCongTac = noiCongTac,
-                LyDo = Lydo,
-                LoaiCongTac = name
+                LyDo = Lydo
             };
         }
 

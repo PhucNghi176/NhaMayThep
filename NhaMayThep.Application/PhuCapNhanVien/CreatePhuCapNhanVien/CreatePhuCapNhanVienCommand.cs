@@ -12,14 +12,15 @@ namespace NhaMayThep.Application.PhuCapNhanVien.CreatePhuCapNhanVien
     {
         public CreatePhuCapNhanVienCommand(
             string maSoNhanVien,
-            int phuCap)
+            int phuCap,
+            string name)
         {
             MaSoNhanVien = maSoNhanVien;
             PhuCap = phuCap;
-
+            Name = name;
         }
         public string MaSoNhanVien { get; set; }
         public int PhuCap { get; set; }
-
+        public string Name { get; set; }
     }
 }

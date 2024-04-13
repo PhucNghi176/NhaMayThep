@@ -11,15 +11,19 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Create
 {
     public class CreateBaoHiemNhanVienCommandHandler : IRequestHandler<CreateBaoHiemNhanVienCommand, string>
     {
+        private readonly IMapper _mapper;
         private readonly IBaoHiemNhanVienRepository _baoHiemNhanVienRepository;
         private readonly ICurrentUserService _currentUserService;
         private readonly INhanVienRepository _nhanVienRepository;
+        private readonly IBaoHiemRepository _baoHiemRepository;
 
-        public CreateBaoHiemNhanVienCommandHandler(ICurrentUserService currentUserService, IBaoHiemNhanVienRepository baoHiemNhanVienRepository, INhanVienRepository nhanVienRepository)
+        public CreateBaoHiemNhanVienCommandHandler(ICurrentUserService currentUserService, IMapper mapper, IBaoHiemNhanVienRepository baoHiemNhanVienRepository, INhanVienRepository nhanVienRepository, IBaoHiemRepository baoHiemRepository)
         {
+            _mapper = mapper;
             _baoHiemNhanVienRepository = baoHiemNhanVienRepository;
             _currentUserService = currentUserService;
             _nhanVienRepository = nhanVienRepository;
+            _baoHiemRepository = baoHiemRepository;
         }
 
         public async Task<string> Handle(CreateBaoHiemNhanVienCommand request, CancellationToken cancellationToken)
@@ -29,7 +33,14 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Create
             {
                 return "Thất Bại! Nhân viên không tồn tại.";
             }
-            var existingBaoHiemNhanVien = await _baoHiemNhanVienRepository.AnyAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken);
+
+            var existingBaoHiem = await _baoHiemRepository.AnyAsync(x => x.ID == request.BaoHiem && x.NgayXoa == null, cancellationToken);
+            if (!existingBaoHiem)
+            {
+                return "Thất Bại! Bảo hiểm không tồn tại.";
+            }
+
+            var existingBaoHiemNhanVien = await _baoHiemNhanVienRepository.AnyAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.BaoHiem == request.BaoHiem && x.NgayXoa == null, cancellationToken);
             if (existingBaoHiemNhanVien)
             {
                 return "Thất Bại! Bảo hiểm đã tồn tại cho nhân viên này.";
@@ -38,9 +49,8 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Create
             var baoHiemNhanVien = new BaoHiemNhanVienEntity
             {
                 MaSoNhanVien = request.MaSoNhanVien,
-                Name = "",
-                NguoiTaoID = _currentUserService.UserId,
-                NgayTao = DateTime.Now
+                BaoHiem = request.BaoHiem,
+                NguoiTaoID = _currentUserService.UserId
             };
 
             _baoHiemNhanVienRepository.Add(baoHiemNhanVien);

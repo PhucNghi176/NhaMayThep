@@ -45,6 +45,8 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckOut
                 dangKiCaLam.GhiChu += " Check-out sớm.";
                 dangKiCaLam.ThoiGianChamCongKetThuc = now;
             }
+
+            _repository.Update(dangKiCaLam);
             return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Check-out thành công" : "Check-out thất bại";
 
            

@@ -17,22 +17,21 @@ namespace NhaMayThep.Application.LuongSanPham
         }
 
         public string ID { get; set; }
-        public string MaSoNhanVien { get; set; }
+        public required string MaSoNhanVien { get; set; }
         public int SoSanPhamLam { get; set; }
-        public string MucSanPhamID { get; set; }
-        public decimal TongLuong { get; set; }
-        public DateTime NgayKhaiBao { get; set; }
+        public required int MucSanPhamID { get; set; }
 
-        public static LuongSanPhamDto Create(string id, string maSoNhanVien, int soSanPhamLam, string mucSanPhamId, decimal tongLuong, DateTime ngayKhaiBao)
+        public decimal TongLuong { get; set; }
+
+        public static LuongSanPhamDto Create(string id, string maSoNhanVien, int soSanPham, int mucSanPhamID, decimal tongLuong)
         {
             return new LuongSanPhamDto
             {
                 ID = id,
                 MaSoNhanVien = maSoNhanVien,
-                SoSanPhamLam = soSanPhamLam,
-                MucSanPhamID = mucSanPhamId,
+                SoSanPhamLam = soSanPham,
+                MucSanPhamID = mucSanPhamID,
                 TongLuong = tongLuong,
-                NgayKhaiBao = ngayKhaiBao
             };
         }
 

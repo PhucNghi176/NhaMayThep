@@ -17,6 +17,8 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
             string? id,
             int mabaohiem,
             string? tenbaohiem,
+            string? manhanvien,
+            string? tennhanvien,
             DateTime? ngayhieuluc,
             DateTime? ngayketthuc)
         {
@@ -25,6 +27,8 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
             Id = id;
             MaBaoHiem = mabaohiem;
             TenBaohiem = tenbaohiem;
+            MaNhanVien = manhanvien;
+            TenNhanVien = tennhanvien; ;
             NgayHieuLuc = ngayhieuluc;
             NgayKetThuc = ngayketthuc;
         }
@@ -33,6 +37,8 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
         public string? Id { get;set; }
         public int MaBaoHiem { get; set; }
         public string? TenBaohiem { get; set; }
+        public string? MaNhanVien { get; set; }
+        public string? TenNhanVien { get; set; }
         public DateTime? NgayHieuLuc { get; set; }
         public DateTime? NgayKetThuc { get; set; }
     }

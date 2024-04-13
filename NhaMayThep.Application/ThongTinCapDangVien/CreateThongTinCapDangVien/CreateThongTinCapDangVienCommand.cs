@@ -11,9 +11,11 @@ namespace NhaMayThep.Application.ThongTinCapDangVien.CreateThongTinCapDangVien
     public class CreateThongTinCapDangVienCommand : IRequest<string>, ICommand
     {
         public string TenCapDangVien {  get; set; }
-        public CreateThongTinCapDangVienCommand(string tenCapDangVien) 
+        public string CapDangVien { get; set; }
+        public CreateThongTinCapDangVienCommand(string capDangVien, string tenCapDangVien) 
         {
             TenCapDangVien = tenCapDangVien;
+            CapDangVien = capDangVien;
         }
     }
 }

@@ -17,12 +17,10 @@ using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.LichSuNghiPhep.Filter;
-using NhaMapThep.Application.Common.Security;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
     public class LichSuNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -41,8 +39,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep tạo thành công "));
+            var message = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(message));
         }
 
         [HttpDelete("lich-su-nghi-phep/{id}")]
@@ -54,9 +52,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(new DeleteLichSuNghiPhepCommand(id), cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep xóa thành công "));
+            var message = await _mediator.Send(new DeleteLichSuNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>(message));
         }
+
 
         [HttpPut("lich-su-nghi-phep")]
         [Produces(MediaTypeNames.Application.Json)]
@@ -65,9 +64,10 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateLichSuNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("Lich Su Nghi Phep cập nhật thành công"));
+            var message = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(message));
         }
+
 
 
         [HttpGet("lich-su-nghi-phep")]
@@ -124,7 +124,7 @@ namespace NhaMayThep.Api.Controllers
           CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
-            return Ok(result);
+            return Ok(new JsonResponse<PagedResult<LichSuNghiPhepDto>>(result));
         }
     }
 }

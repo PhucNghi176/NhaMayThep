@@ -10,11 +10,11 @@ namespace NhaMayThep.Application.PhuCapNhanVien.UpdatePhuCapNhanVien
 {
     public class UpdatePhuCapNhanVienCommand : IRequest<string>, ICommand
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
         public string MaSoNhanVien { get; set; }
         public int PhuCap { get; set; }
         public UpdatePhuCapNhanVienCommand(
-            string id,
+            int id,
             string maSoNhanVien,
             int phuCap)
         {

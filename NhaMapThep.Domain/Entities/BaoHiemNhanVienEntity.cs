@@ -1,4 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -9,11 +10,13 @@ using System.Threading.Tasks;
 namespace NhaMapThep.Domain.Entities
 {
     [Table("BaoHiemNhanVien")]
-    public class BaoHiemNhanVienEntity : BangMaGocEntity
+    public class BaoHiemNhanVienEntity : Entity
     {
         public required string MaSoNhanVien { get; set; }
         [ForeignKey(nameof(MaSoNhanVien))]
-        public virtual NhanVienEntity NhanVien { get; set; } = null!;
-        public virtual ICollection<BaoHiemNhanVienBaoHiemChiTietEntity>? BaoHiemNhanViens { get; set; }
+        public virtual NhanVienEntity NhanVien { get; set; }
+        public required int BaoHiem {  get; set; }
+        [ForeignKey(nameof(BaoHiem))]
+        public virtual ICollection<BaoHiemEntity> BaoHiems { get; set; }
     }
 }

@@ -6,13 +6,15 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Update
 {
     public class UpdateBaoHiemNhanVienCommand : IRequest<string>, ICommand
     {
-        public UpdateBaoHiemNhanVienCommand(int id, string maSoNhanVien)
+        public UpdateBaoHiemNhanVienCommand(string id, string maSoNhanVien, int baoHiem)
         {
             Id = id;
             MaSoNhanVien = maSoNhanVien;
+            BaoHiem = baoHiem;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
+        public int BaoHiem { get; set; }
     }
 }

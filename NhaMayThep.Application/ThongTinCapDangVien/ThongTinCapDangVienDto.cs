@@ -14,12 +14,14 @@ namespace NhaMayThep.Application.ThongTinCapDangVien
         public ThongTinCapDangVienDto() { }
         public int Id { get; set; }
         public string Name { get; set; }
-        public static ThongTinCapDangVienDto CreateThongTinCapDangVien(int id, string name)
+        public string CapDangVien { get; set; }
+        public static ThongTinCapDangVienDto CreateThongTinCapDangVien(int id, string name, string capDangVien)
         {
             return new ThongTinCapDangVienDto()
             {
                 Id = id,
-                Name = name
+                Name = name,
+                CapDangVien = capDangVien
             };
         }
 

@@ -3,12 +3,9 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.LichSuCongTacNhanVien;
 using NhaMayThep.Application.LuongCongNhat;
 using NhaMayThep.Application.LuongCongNhat.Create;
 using NhaMayThep.Application.LuongCongNhat.Delete;
-using NhaMayThep.Application.LuongCongNhat.Filter;
 using NhaMayThep.Application.LuongCongNhat.GetAll;
 using NhaMayThep.Application.LuongCongNhat.GetId;
 using NhaMayThep.Application.LuongCongNhat.Update;
@@ -98,22 +95,6 @@ namespace NhaMayThep.Api.Controllers
             var query = new GetLuongCongNhatByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return new JsonResponse<LuongCongNhatDto>(result);
-        }
-
-        [HttpGet("luong-cong-nhat/filter")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<LuongCongNhatDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<LuongCongNhatDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<LuongCongNhatDto>>>> FilterLuongCongNhat(
-            [FromQuery] FilterLuongCongNhatQuery query, 
-            CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(query, cancellationToken);
-            return Ok(result);
         }
     }
 }

@@ -42,7 +42,7 @@ namespace NhaMayThep.Application.PhuCapNhanVien.UpdatePhuCapNhanVien
                 throw new DuplicationException("Phụ Cấp này đã tồn tại");
             }
             phuCapNhanVien.NguoiCapNhatID = _currentUserService.UserId;
-            phuCapNhanVien.NgayCapNhatCuoi = DateTime.Now;
+            phuCapNhanVien.NgayCapNhat = DateTime.Now;
             phuCapNhanVien.PhuCap = request.PhuCap;
             _phuCapNhanVienRepository.Update(phuCapNhanVien);
             if (await _phuCapNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)

@@ -67,8 +67,6 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     public DbSet<PhuCapCongDoanEntity> PhuCapCongDoans { get; set; }
     public DbSet<TangCaEntity> TangCas { get; set; }
     public DbSet<NghiPhepEntity> NghiPheps { get; set; }
-    public DbSet<BangLuongEntity> BangLuongs { get; set; }
-    public DbSet<BaoHiemNhanVienBaoHiemChiTietEntity> baoHiemNhanVienBaoHiemChiTiets { get; set; }
 
 
 
@@ -111,8 +109,6 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
         modelBuilder.ApplyConfiguration(new ThongTinCapDangVienConfiguration());
         modelBuilder.ApplyConfiguration(new ThongTinChucVuDangConfiguration());
         modelBuilder.ApplyConfiguration(new ThongTinTrinhDoChinhTriConfiguration());
-        modelBuilder.ApplyConfiguration(new BaoHiemNhanVienBaoHiemChiTietConfiguration());
-
         ConfigureModel(modelBuilder);
     }
     private void ConfigureModel(ModelBuilder modelBuilder)

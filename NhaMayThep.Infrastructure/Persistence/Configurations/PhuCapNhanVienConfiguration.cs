@@ -15,8 +15,7 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(x => x.ID)
                 .HasName("MaPCNV");
-
-
+            builder.Ignore(x => x.Name);
         }
     }
 }

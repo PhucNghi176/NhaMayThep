@@ -35,6 +35,19 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem
             {
                 throw new NotFoundException($"Không tồn tại chi tiết bảo hiểm với Id '{request.Id}'");
             }
+            if(request.MaSoNhanVien != null)
+            {
+                var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && !x.NgayXoa.HasValue, cancellationToken);
+                if(nhanvien == null)
+                {
+                    throw new NotFoundException($"Nhân viên với Id '{request.MaSoNhanVien}' không tồn tại");
+                }
+                else
+                {
+                    checkEntityExists.MaSoNhanVien = nhanvien?.ID ?? checkEntityExists.MaSoNhanVien;
+                    checkEntityExists.NhanVien = nhanvien ?? checkEntityExists.NhanVien;
+                }
+            }
             if(request.LoaiBaoHiem != null)
             {
                 var baohiem = await _baohiemRepository.FindAsync(x => x.ID == request.LoaiBaoHiem && !x.NgayXoa.HasValue, cancellationToken);

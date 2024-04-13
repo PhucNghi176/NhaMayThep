@@ -7,11 +7,11 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Delete
 {
     public class DeleteBaoHiemNhanVienCommand : IRequest<string>, ICommand
     {
-        public DeleteBaoHiemNhanVienCommand(int id)
+        public DeleteBaoHiemNhanVienCommand(string id)
         {
             Id = id;
         }
 
-        public int Id { get; set; }
+        public string Id { get; set; }
     }
 }

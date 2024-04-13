@@ -39,8 +39,9 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào");
             }
+            var nhanviens = await _nhanvienRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.HoVaTen, cancellationToken);
             var baohiems = await _baohiemRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
-            var data= result.MapToChiTietBaoHiemDtoList(_mapper, baohiems);
+            var data= result.MapToChiTietBaoHiemDtoList(_mapper, nhanviens, baohiems);
             return PagedResult<ChiTietBaoHiemDto>.Create(
                totalCount: result.TotalCount,
                pageCount: result.PageCount,

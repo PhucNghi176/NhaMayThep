@@ -34,7 +34,7 @@ namespace NhaMayThep.Application.PhiCongDoan.Create
 
             var checkDuplicatoion = await _PhiCongDoanRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
-                throw new NotFoundException("Nhan Vien co ID: " + request.MaSoNhanVien + "da ton tai Phi Cong Doan");
+                throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Phi Cong Doan");
 
             var PhiCongDoan = new PhiCongDoanEntity()
             {

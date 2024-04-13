@@ -12,14 +12,13 @@ namespace NhaMayThep.Application.LuongSanPham.Update
 {
     public class UpdateLuongSanPhamCommand : IRequest<string>, ICommand
     {
-        public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPhamLam, string mucSanPhamID, decimal tongLuong, DateTime ngayKhaiBao)
+        public UpdateLuongSanPhamCommand(string id, string maSoNhanVien, int soSanPham, string mucSanPhamID, decimal tongLuong)
         {
             ID = id;
             MaSoNhanVien = maSoNhanVien;
-            SoSanPhamLam = soSanPhamLam;
+            SoSanPhamLam = soSanPham;
             MucSanPhamID = mucSanPhamID;
             TongLuong = tongLuong;
-            NgayKhaiBao = ngayKhaiBao;
         }
 
         public string ID { get; set; }
@@ -27,6 +26,5 @@ namespace NhaMayThep.Application.LuongSanPham.Update
         public int SoSanPhamLam { get; set; }
         public required string MucSanPhamID { get; set; }
         public decimal TongLuong { get; set; }
-        public DateTime NgayKhaiBao {  get; set; }
     }
 }

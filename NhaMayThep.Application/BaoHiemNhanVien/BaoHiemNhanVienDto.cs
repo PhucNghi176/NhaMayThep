@@ -9,13 +9,15 @@ namespace NhaMayThep.Application.BaoHiemNhanVien
         public BaoHiemNhanVienDto() { }
         public string ID { get; set; }
         public string MaSoNhanVien { get; set; }
+        public int BaoHiem { get; set; }
 
-        public static BaoHiemNhanVienDto CreateBaoHiemNhanVien(string Id, string maSoNhanVien)
+        public static BaoHiemNhanVienDto CreateBaoHiemNhanVien(string Id, string maSoNhanVien, int baoHiem)
         {
             return new BaoHiemNhanVienDto()
             {
                 ID = Id ,
                 MaSoNhanVien = maSoNhanVien,
+                BaoHiem = baoHiem
             };
         }
 

@@ -20,29 +20,32 @@ namespace NhaMapThep.Domain.Entities
         public decimal LuongNghiPhep { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongTangCa {  get; set; }
-
-
-
+        public decimal TongKhenThuong {  get; set; }
+        public decimal TongKiLuat {  get; set; }
 
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongCoBan {  get; set; }
-
+        //public required string PhuCapNhanVienID { get; set; }
+        //[ForeignKey(nameof(PhuCapNhanVienID))]
+        //public virtual PhuCapNhanVienEntity PhuCapNhanVien { get; set; }
 
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongNhanCoDinh { get; set; }
-
-        public double NgayCong {  get; set; }
+        [Column(TypeName = "decimal(18, 4)")]
+        public decimal NgayCong {  get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongThuNhap { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongDongBH { get; set; }
 
+        //public required string BaoHiemNhanVienID { get; set; }
+        //[ForeignKey(nameof(BaoHiemNhanVienID))]
+        //public virtual BaoHiemNhanVienEntity BaoHiemNhanVien { get; set; }
+
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongBaoHiem { get; set; }
-
-        public required string PhuCapCongDoanID { get; set; }
-        [ForeignKey(nameof(PhuCapCongDoanID))]
-        public virtual PhuCapCongDoanEntity PhuCapCongDoan { get; set; }
+        [Column(TypeName = "decimal(18, 4)")]
+        public decimal PhiCongDoan { get; set; }
 
         public required string GiamTruNhanVienID { get; set; }
         [ForeignKey(nameof(GiamTruNhanVienID))]

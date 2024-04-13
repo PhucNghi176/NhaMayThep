@@ -41,8 +41,9 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckIn
                 // Late check-in
                 dangKiCaLam.GhiChu += " Check-in trễ.";
             }
-        
-          
+
+            _repository.Update(dangKiCaLam);
+
 
             return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Check-in thành công" : "Check-in thất bại";
         }

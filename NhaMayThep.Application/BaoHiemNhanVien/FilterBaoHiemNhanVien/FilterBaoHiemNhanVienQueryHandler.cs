@@ -31,8 +31,13 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.FilterBaoHiemNhanVien
                 {
                     query = query.Where(x => x.MaSoNhanVien.Equals(request.MaSoNhanVien));
                 }
+                if (request.BaoHiemID.HasValue && request.BaoHiemID != 0)
+                {
+                    query = query.Where(x => x.BaoHiem == request.BaoHiemID);
+                }
                 return query;
             };
+
             var result = await _repository.FindAllAsync(request.PageNumber, request.PageSize, queryOptions, cancellationToken);
             if (!result.Any())
             {

@@ -24,9 +24,7 @@ namespace NhaMayThep.Application.LuongCongNhat
 
         public decimal TongLuong { get; set; }
 
-        public DateTime NgayKhaiBao {  get; set; }
-
-        public static LuongCongNhatDto Create(string id, string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong, DateTime ngayKhaiBao)
+        public static LuongCongNhatDto Create(string id, string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong)
         {
             return new LuongCongNhatDto
             {
@@ -34,8 +32,7 @@ namespace NhaMayThep.Application.LuongCongNhat
                 MaSoNhanVien = maSoNhanVien,
                 SoGioLam = soGioLam,
                 Luong1Gio = luong1Gio,
-                TongLuong = tongLuong,
-                NgayKhaiBao = ngayKhaiBao
+                TongLuong = tongLuong
             };
         }
 

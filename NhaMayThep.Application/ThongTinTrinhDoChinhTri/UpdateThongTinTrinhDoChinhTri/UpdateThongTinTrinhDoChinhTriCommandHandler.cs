@@ -32,6 +32,7 @@ namespace NhaMayThep.Application.ThongTinTrinhDoChinhTri.UpdateThongTinTrinhDoCh
                 throw new DuplicationException("Tên trình độ chính trị đã tồn tại");
 
             thongTinTrinhDoChinhTri.Name = request.TenTrinhDoChinhTri;
+            thongTinTrinhDoChinhTri.TrinhDoChinhTri = request.TrinhDoChinhTri;
             thongTinTrinhDoChinhTri.NguoiCapNhatID = _currentUserService.UserId;
             thongTinTrinhDoChinhTri.NgayCapNhat = DateTime.Now;
             _thongTinTrinhDoChinhTriRepository.Update(thongTinTrinhDoChinhTri);

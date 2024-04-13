@@ -7,7 +7,7 @@ using NhaMayThep.Application.LichSuNghiPhep.Update;
 using NhaMayThep.Application.LichSuNghiPhep;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Update;
-public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNghiPhepCommand, LichSuNghiPhepDto>
+public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNghiPhepCommand, string>
 {
     private readonly ILichSuNghiPhepRepository _repo;
     private readonly IMapper _mapper;
@@ -24,7 +24,7 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         _loaiNghiPhepRepo = loaiNghiPhepRepository;
     }
 
-    public async Task<LichSuNghiPhepDto> Handle(UpdateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
+    public async Task<string> Handle(UpdateLichSuNghiPhepCommand request, CancellationToken cancellationToken)
     {
         var userId = _currentUserService.UserId;
         if (string.IsNullOrEmpty(userId))
@@ -72,6 +72,6 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         _repo.Update(existingLsnp);
         await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
 
-        return _mapper.Map<LichSuNghiPhepDto>(existingLsnp);
+        return "Cập nhật lịch sử nghỉ phép thành công.";
     }
 }

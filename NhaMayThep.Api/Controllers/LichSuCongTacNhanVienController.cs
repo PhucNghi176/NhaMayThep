@@ -7,10 +7,8 @@ using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LichSuCongTacNhanVien;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Create;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Delete;
-using NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetAll;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien;
-using NhaMayThep.Application.LichSuCongTacNhanVien.GetByPagination;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
 using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 using System.Net.Mime;
@@ -116,23 +114,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>>> GetPagination([FromQuery] GetLichSuCongTacNhanVienByPaginationQuery query, CancellationToken cancellationToken = default)
-        {
-            var result = await _mediator.Send(query, cancellationToken);
-            return Ok(result);
-        }
-
-        [HttpGet("lich-su-cong-tac/filter-lich-su-cong-tac")]
-        [Produces(MediaTypeNames.Application.Json)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>), StatusCodes.Status201Created)]
-        [ProducesResponseType(typeof(JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>), StatusCodes.Status200OK)]
-        [ProducesResponseType(StatusCodes.Status400BadRequest)]
-        [ProducesResponseType(StatusCodes.Status401Unauthorized)]
-        [ProducesResponseType(StatusCodes.Status403Forbidden)]
-        [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>>> Filter(
-            [FromQuery] FilterLichSuCongTacQuery query, 
-            CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>>> GetPagination([FromQuery] GetLichSuNghiPhepByPaginationQuery query, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);

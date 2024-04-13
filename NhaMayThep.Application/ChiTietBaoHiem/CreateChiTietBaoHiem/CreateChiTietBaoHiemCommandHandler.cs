@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
@@ -32,39 +31,32 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem
         }
         public async Task<string> Handle(CreateChiTietBaoHiemCommand request, CancellationToken cancellationToken)
         {
-            Func<IQueryable<ChiTietBaoHiemEntity>, IQueryable<ChiTietBaoHiemEntity>> options = query =>
-            {
-                if(request.LoaiBaoHiem != 0)
-                {
-                    query = query.Where(x => x.LoaiBaoHiem == request.LoaiBaoHiem);
-                }
-                if (!string.IsNullOrEmpty(request.NoiCap))
-                {
-                    query = query.Where(x=> EF.Functions.Like(x.NoiCap!, request.NoiCap));
-                }
-                query = query.Where(x => x.NgayHieuLuc == request.NgayHieuLuc);
-                query = query.Where(x => x.NgayKetThuc == request.NgayKetThuc);
-                return query;
-            };
-            var chechEntityExist = await _chitietbaohiemRepository.FindAsync(options, cancellationToken);
+            var chechEntityExist = await _chitietbaohiemRepository.FindAsync(x => x.MaSoNhanVien.Equals(request.MaSoNhanVien), cancellationToken);
             if (chechEntityExist != null && chechEntityExist.NgayXoa == null)
             {
-                throw new DuplicationException("Đã tồn tại chi tiết bảo hiểm với các nội dung trên");
+                throw new DuplicationException("Nhân viên này đã tồn tại chi tiết bảo hiểm");
             }
             else if (chechEntityExist != null && chechEntityExist.NgayXoa != null)
             {
-                throw new DuplicationException("Đã tồn tại chi tiết bảo hiểm với nội dung trên nhưng đã bị xóa trước đó");
+                throw new DuplicationException("Chi tiết bảo hiểm của nhân viên này đã bị xóa trước đó");
             }
             var baohiem = await _baohiemRepository.FindAsync(x => x.ID.Equals(request.LoaiBaoHiem), cancellationToken);
             if (baohiem == null || baohiem.NgayXoa != null)
             {
                 throw new NotFoundException("Không tồn tại loại bảo hiểm này");
             }
+            var nhanvien = await _nhanvienRepository.FindAsync(x => x.ID.Equals(request.MaSoNhanVien), cancellationToken);
+            if (nhanvien == null || nhanvien.NgayXoa != null)
+            {
+                throw new NotFoundException("Nhân viên không tồn tại");
+            }
             var chitietbaohiem = new ChiTietBaoHiemEntity
             {
+                MaSoNhanVien = request.MaSoNhanVien,
                 LoaiBaoHiem = request.LoaiBaoHiem,
                 NgayHieuLuc = request.NgayHieuLuc,
                 NgayKetThuc = request.NgayKetThuc,
+                NhanVien = nhanvien,
                 BaoHiem = baohiem,
                 NoiCap = request.NoiCap,
                 NguoiTaoID = _currentUser.UserId,

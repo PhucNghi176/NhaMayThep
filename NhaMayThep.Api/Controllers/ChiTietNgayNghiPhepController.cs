@@ -46,9 +46,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            var command = new DeleteChiTietNgayNghiPhepCommand(id); 
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep xóa thành công "));
+            await _mediator.Send(new DeleteChiTietNgayNghiPhepCommand(id), cancellationToken);
+            return Ok(new JsonResponse<string>("Chi tiết ngày nghỉ phép xóa thành công."));
         }
 
 
@@ -58,8 +57,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Update([FromBody] UpdateChiTietNgayNghiPhepCommand command, CancellationToken cancellationToken = default)
         {
-            await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep cập nhật thành công"));
+            var result = await _mediator.Send(command, cancellationToken);
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("chi-tiet-ngay-nghi-phep/getAll")]

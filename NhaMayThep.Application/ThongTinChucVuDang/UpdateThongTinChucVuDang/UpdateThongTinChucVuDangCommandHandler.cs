@@ -32,6 +32,7 @@ namespace NhaMayThep.Application.ThongTinChucVuDang.UpdateThongTinChucVuDang
                 throw new DuplicationException("Tên chức vụ đảng đã tồn tại");
 
             thongTinChucVuDang.Name = request.TenChucVuDang;
+            thongTinChucVuDang.ChucVuDang = request.ChucVuDang;
             thongTinChucVuDang.NguoiCapNhatID = _currentUserService.UserId;
             thongTinChucVuDang.NgayCapNhat = DateTime.Now;
             _thongTinChucVuDangRepository.Update(thongTinChucVuDang);

@@ -12,13 +12,14 @@ namespace NhaMapThep.Domain.Entities
     [Table("ChiTietBaoHiem")]
     public class ChiTietBaoHiemEntity : Entity
     {
+        public required string MaSoNhanVien {  get; set; }
+        [ForeignKey(nameof(MaSoNhanVien))]
+        public required virtual NhanVienEntity NhanVien { get; set; }
         public int LoaiBaoHiem { get; set; }
         [ForeignKey(nameof(LoaiBaoHiem))]
         public required virtual BaoHiemEntity BaoHiem { get; set; }
         public DateTime NgayHieuLuc {  get; set; }
         public DateTime NgayKetThuc { get; set; }
-        public string? NoiCap { get; set; }
-        public virtual ICollection<BaoHiemNhanVienBaoHiemChiTietEntity>? BaoHiemNhanViens { get; set; }
-
+        public string NoiCap { get; set; }
     }
 }

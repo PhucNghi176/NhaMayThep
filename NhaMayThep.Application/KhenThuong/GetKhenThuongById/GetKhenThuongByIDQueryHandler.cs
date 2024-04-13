@@ -14,33 +14,18 @@ namespace NhaMayThep.Application.KhenThuong.GetKhenThuongById
     {
         private readonly IKhenThuongRepository _repository;
         private readonly IMapper _mapper;
-        private readonly INhanVienRepository _nhanVienRepository;
-        public GetKhenThuongByIDQueryHandler(IKhenThuongRepository repository, IMapper mapper, INhanVienRepository nhanVienRepository)
+        public GetKhenThuongByIDQueryHandler(IKhenThuongRepository repository, IMapper mapper)
         {
             _repository = repository;
             _mapper = mapper;
-            _nhanVienRepository = nhanVienRepository;
         }
         public GetKhenThuongByIDQueryHandler() { }
         public async Task<KhenThuongDTO> Handle(GetKhenThuongByIDQuery request, CancellationToken cancellationToken)
         {
             var khenthuong = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (khenthuong == null)
-                throw new NotFoundException($"không tìm thấy khen thưởng với ID : {request.ID} hoặc mục khen thưởng này đã bị xóa.");
-            var nhanvien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(khenthuong.MaSoNhanVien) &&  x.NgayXoa == null, cancellationToken );
-            if (nhanvien == null)
-                throw new NotFoundException($"không tìm thấy nhân viên với ID : {khenthuong.MaSoNhanVien} hoặc nhân viên này đã bị xóa.");
-            KhenThuongDTO result = new KhenThuongDTO()
-            {
-                MaSoNhanVien = khenthuong.MaSoNhanVien,
-                TenNhanVien = nhanvien.HoVaTen,
-                ID = khenthuong.ID,
-                ChinhSachNhanSuID = khenthuong.ChinhSachNhanSuID,
-                TenDotKhenThuong = khenthuong.TenDotKhenThuong,
-                NgayKhenThuong = khenthuong.NgayKhenThuong,
-                TongThuong = khenthuong.TongThuong,
-            };
-            return result;
+                throw new NotFoundException($"không tìm thấy khen thưởng với ID : {request.ID} hoặc nó khen thưởng này đã bị xóa.");
+            return khenthuong.MapToKhenThuongDTO(_mapper);
         }
     }
 }

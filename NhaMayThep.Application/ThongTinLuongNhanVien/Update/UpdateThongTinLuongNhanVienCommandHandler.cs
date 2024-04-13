@@ -45,7 +45,7 @@ namespace NhaMayThep.Application.ThongTinLuongNhanVien.Update
 
             if (hopdong == null)
             {
-                return "Mã Hợp Đồng không tồn tại";
+                return "Mã Nhân Viên không tồn tại";
             }
 
 

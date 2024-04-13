@@ -15,8 +15,6 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations
         {
             builder.HasKey(x => x.ID)
                 .HasName("MaBHNV");
-            builder.Property(x => x.MaSoNhanVien)
-                .HasColumnName("MSNV");
 
         }
     }

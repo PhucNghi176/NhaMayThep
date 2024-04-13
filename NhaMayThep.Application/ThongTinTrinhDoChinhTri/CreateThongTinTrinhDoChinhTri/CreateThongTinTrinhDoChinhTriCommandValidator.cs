@@ -14,6 +14,9 @@ namespace NhaMayThep.Application.ThongTinTrinhDoChinhTri.CreateThongTinTrinhDoCh
             RuleFor(x => x.TenTrinhDoChinhTri)
                 .NotEmpty().WithMessage("Tên trình độ chính trị không được để trống.")
                 .NotNull().WithMessage("Tên trình độ chính trị không được để rỗng.");
+            RuleFor(x => x.TrinhDoChinhTri)
+                .NotEmpty().WithMessage("Trình độ chính trị không được để trống.")
+                .NotNull().WithMessage("Trình độ chính trị không được để rỗng."); ;
         }
     }
 }

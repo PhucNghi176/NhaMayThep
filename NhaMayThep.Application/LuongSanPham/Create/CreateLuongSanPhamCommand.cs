@@ -13,22 +13,19 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 {
     public class CreateLuongSanPhamCommand : IRequest<string>, ICommand
     {
-        public CreateLuongSanPhamCommand(string maSoNhanVien, int soSanPhamLam, string mucSanPhamId, decimal tongLuong, DateTime ngayKhaiBao)
+        public CreateLuongSanPhamCommand(string maSoNhanVien, int soSanPham, string mucSanPhamID, decimal tongLuong)
         {
 
             MaSoNhanVien = maSoNhanVien;
-            SoSanPhamLam = soSanPhamLam;
-            MucSanPhamID = mucSanPhamId;
+            SoSanPhamLam = soSanPham;
+            MucSanPhamID = mucSanPhamID;
             TongLuong = tongLuong;
-            NgayKhaiBao = ngayKhaiBao;
         }
 
 
-        public string MaSoNhanVien { get; set; }
+        public required string MaSoNhanVien { get; set; }
         public int SoSanPhamLam { get; set; }
-        public string MucSanPhamID { get; set; }
+        public required string MucSanPhamID { get; set; }
         public decimal TongLuong { get; set; }
-        public DateTime NgayKhaiBao {  get; set; }
-
     }
 }

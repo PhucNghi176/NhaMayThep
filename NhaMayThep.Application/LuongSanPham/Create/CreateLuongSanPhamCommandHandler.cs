@@ -52,7 +52,6 @@ namespace NhaMayThep.Application.LuongSanPham.Create
 
                 TongLuong = request.TongLuong,
                 SoSanPhamLam = request.SoSanPhamLam,
-                NgayKhaiBao = request.NgayKhaiBao,
                 NguoiTaoID = _currentUserService.UserId,
                 NgayTao = DateTime.Today
             };

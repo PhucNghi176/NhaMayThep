@@ -63,7 +63,7 @@ namespace NhaMayThep.Application.DangKiCaLam.Create
             };
 
             _repository.Add(dangKiCaLam);
-           return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) >0 ? "Dang Ki Ca Lamthành công" : "Dang Ki Ca Lam thất bại";
+           return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) >0 ? "Dang Ki Ca Lam thành công" : "Dang Ki Ca Lam thất bại";
 
         }
     }
