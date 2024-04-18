@@ -30,6 +30,7 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
         }
         public async Task<string> Handle(CreateHopDongWithExcelCommand command, CancellationToken cancellationToken)
         {
+            List<string> excepions = new();
             var count = 0;
             foreach (var item in command.Files)
             {
@@ -58,18 +59,37 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
                 }
 
                 if (flag)
+                {
+                    var checkDuplication = excepions.Any(x => x.Equals("Thiếu thông tin"));
+                    if (checkDuplication == false)
+                        excepions.Add("Thiếu thông tin");
                     continue;
+                }
 
                 //check this msnv is existance or not
-                var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == Convert.ToString(dataTable.Rows[0][1]) && x.NgayXoa == null, cancellationToken);
-                if (nhanVien == null || nhanVien.DaCoHopDong)
+                var id = Convert.ToString(dataTable.Rows[0][1]);
+                var nhanVien = await _nhanVienRepository.FindAsync(x => x.ID == id && x.NgayXoa == null, cancellationToken);
+                if (nhanVien == null)
+                {
+                    excepions.Add($"Không tìm thấy nhân viên với mã số: {id}");
                     continue;
+                }
+                if (nhanVien.DaCoHopDong)
+                {
+                    excepions.Add($"Nhân viên với mã số {id} đã có hợp đồng");
+                    continue;
+                }
 
                 var ngayKy = Convert.ToDateTime(dataTable.Rows[2][1]);
                 DateTime? ngayKetThuc = Convert.ToString(dataTable.Rows[3][1]) == "" ? null : Convert.ToDateTime(dataTable.Rows[3][1]);
 
                 if (ngayKetThuc != null && ngayKy > ngayKetThuc)
+                {
+                    var checkDuplicate = excepions.Any(x => x.Equals("Ngày kết thúc không được trước ngày ký"));
+                    if (checkDuplicate == false)
+                        excepions.Add("Ngày kết thúc không được trước ngày ký");
                     continue;
+                }
 
                 int? thoiHan = 0;
                 if (ngayKetThuc == null)
@@ -80,7 +100,7 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
                 //creating entity
                 var add = new HopDongEntity()
                 {
-                    NhanVienID = Convert.ToString(dataTable.Rows[0][1]),
+                    NhanVienID = id,
                     LoaiHopDongID = Convert.ToInt32(dataTable.Rows[1][1]),
                     NgayKy = ngayKy,
                     NgayKetThuc = ngayKetThuc,
@@ -101,13 +121,14 @@ namespace NhaMayThep.Application.HopDong.CreateHopDongWithExcel
                 _nhanVienRepository.Update(nhanVien);
                 count++;
             }
+            var errorMessage = string.Join(", ", excepions);
             if (await _hopDongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
             {
 
                 return $"Thêm thành công {count} hợp đồng trên tổng số {command.Files.Length} hợp đồng";
             }
             else
-                return "Thêm thất bại";
+                return $"Thêm thất bại {errorMessage}";
         }
     }
 }

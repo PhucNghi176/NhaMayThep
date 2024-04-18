@@ -13,61 +13,61 @@ public class ApplicationDbContext : DbContext, IUnitOfWork
     {
 
     }
-    public virtual DbSet<NhanVienEntity> NhanVien { get; set; }
-    public virtual DbSet<ThongTinChucVuEntity> ChucVu { get; set; }
-    public virtual DbSet<TinhTrangLamViecEntity> TinhTrangLamViec { get; set; }
-    public virtual DbSet<ThongTinGiamTruEntity> ThongTinGiamTru { get; set; }
-    public virtual DbSet<CanCuocCongDanEntity> CanCuocCongDan { get; set; }
-    public virtual DbSet<ThongTinGiamTruGiaCanhEntity> GiamTruGiaCanh { get; set; }
-    public virtual DbSet<LoaiHopDongEntity> LoaiHopDong { get; set; }
-    public virtual DbSet<ThongTinChucDanhEntity> ChucDanh { get; set; }
-    public virtual DbSet<TrinhDoHocVanEntity> TrinhDoHocVan { get; set; }
-    public virtual DbSet<ThongTinDaoTaoEntity> ThongTinDaoTao { get; set; }
-    public virtual DbSet<ThongTinCongDoanEntity> ThongTinCongDoan { get; set; }
-    public virtual DbSet<ThongTinDangVienEntity> ThongTinDangVien { get; set; }
-    public virtual DbSet<ThongTinPhuCapEntity> ThongTinPhuCap { get; set; }
-    public virtual DbSet<DonViCongTacEntity> DonViCongTac { get; set; }
-    public virtual DbSet<CapBacLuongEntity> CapBacLuong { get; set; }
-    public virtual DbSet<HopDongEntity> HopDong { get; set; }
-    public virtual DbSet<PhongBanEntity> PhongBan { get; set; }
-    public virtual DbSet<ThongTinQuaTrinhNhanSuEntity> ThongTinQuaTrinhNhanSu { get; set; }
-    public virtual DbSet<QuaTrinhNhanSuEntity> QuaTrinhNhanSu { get; set; }
-    public virtual DbSet<LoaiNghiPhepEntity> LoaiNghiPhep { get; set; }
-    public virtual DbSet<LichSuNghiPhepNhanVienEntity> LichSuNghiPhepNhanVien { get; set; }
-    public virtual DbSet<LoaiCongTacEntity> LoaiCongTac { get; set; }
-    public virtual DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
-    public virtual DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
-    public virtual DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
-    public virtual DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
-    public virtual DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
-    public virtual DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
-    public virtual DbSet<ThongTinCongTyEntity> ThongTinCongTy { get; set; }
-    public virtual DbSet<ThueSuatEntity> ThueSuat { get; set; }
-    public virtual DbSet<MucSanPhamEntity> MucSanPham { get; set; }
-    public virtual DbSet<BaoHiemEntity> BaoHiem { get; set; }
-    public virtual DbSet<ChiTietBaoHiemEntity> ChiTietBaoHiem { get; set; }
-    public virtual DbSet<BaoHiemNhanVienEntity> BaoHiemNhanVien { get; set; }
-    public virtual DbSet<PhuCapEntity> PhuCap { get; set; }
-    public virtual DbSet<PhuCapNhanVienEntity> PhuCapNhanVien { get; set; }
-    public virtual DbSet<MaDangKiCaLamEntity> MaDangKiCaLam { get; set; }
-    public virtual DbSet<TrangThaiDangKiCaLamViecEntity> TrangThaiDangKiCaLamViec { get; set; }
-    public virtual DbSet<LuongThoiGianEntity> LuongThoiGian { get; set; }
-    public virtual DbSet<DangKiCaLamEntity> DangKiCaLam { get; set; }
-    public virtual DbSet<DangKiTangCaEntity> DangKiTangCa { get; set; }
-    public virtual DbSet<ThongTinCapDangVienEntity> ThongTinCapDangVien { get; set; }
-    public virtual DbSet<ThongTinTrinhDoChinhTriEntity> ThongTinTrinhDoChinhTri { get; set; }
-    public virtual DbSet<ThongTinChucVuDangEntity> ThongTinChucVuDang { get; set; }
-    public virtual DbSet<KyLuatEntity> KyLuat { get; set; }
-    public virtual DbSet<KhenThuongEntity> khenThuongs { get; set; }
-    public virtual DbSet<KhaiBaoTangLuongEntity> KhaiBaoTangLuongs { get; set; }
-    public virtual DbSet<LoaiTangCaEntity> LoaiTangCas { get; set; }
-    public virtual DbSet<LuongCongNhatEntity> LuongCongNhats { get; set; }
-    public virtual DbSet<LuongSanPhamEntity> LuongSanPhams { get; set; }
-    public virtual DbSet<PhiCongDoanEntity> PhiCongDoans { get; set; }
-    public virtual DbSet<PhuCapCongDoanEntity> PhuCapCongDoans { get; set; }
-    public virtual DbSet<TangCaEntity> TangCas { get; set; }
-    public virtual DbSet<NghiPhepEntity> NghiPheps { get; set; }
-    public virtual DbSet<BaoHiemNhanVienBaoHiemChiTietEntity> baoHiemNhanVienBaoHiemChiTiets { get; set; }
+    public DbSet<NhanVienEntity> NhanVien { get; set; }
+    public DbSet<ThongTinChucVuEntity> ChucVu { get; set; }
+    public DbSet<TinhTrangLamViecEntity> TinhTrangLamViec { get; set; }
+    public DbSet<ThongTinGiamTruEntity> ThongTinGiamTru { get; set; }
+    public DbSet<CanCuocCongDanEntity> CanCuocCongDan { get; set; }
+    public DbSet<ThongTinGiamTruGiaCanhEntity> GiamTruGiaCanh { get; set; }
+    public DbSet<LoaiHopDongEntity> LoaiHopDong { get; set; }
+    public DbSet<ThongTinChucDanhEntity> ChucDanh { get; set; }
+    public DbSet<TrinhDoHocVanEntity> TrinhDoHocVan { get; set; }
+    public DbSet<ThongTinDaoTaoEntity> ThongTinDaoTao { get; set; }
+    public DbSet<ThongTinCongDoanEntity> ThongTinCongDoan { get; set; }
+    public DbSet<ThongTinDangVienEntity> ThongTinDangVien { get; set; }
+    public DbSet<ThongTinPhuCapEntity> ThongTinPhuCap { get; set; }
+    public DbSet<DonViCongTacEntity> DonViCongTac { get; set; }
+    public DbSet<CapBacLuongEntity> CapBacLuong { get; set; }
+    public DbSet<HopDongEntity> HopDong { get; set; }
+    public DbSet<PhongBanEntity> PhongBan { get; set; }
+    public DbSet<ThongTinQuaTrinhNhanSuEntity> ThongTinQuaTrinhNhanSu { get; set; }
+    public DbSet<QuaTrinhNhanSuEntity> QuaTrinhNhanSu { get; set; }
+    public DbSet<LoaiNghiPhepEntity> LoaiNghiPhep { get; set; }
+    public DbSet<LichSuNghiPhepNhanVienEntity> LichSuNghiPhepNhanVien { get; set; }
+    public DbSet<LoaiCongTacEntity> LoaiCongTac { get; set; }
+    public DbSet<LichSuCongTacNhanVienEntity> LichSuCongTacNhanVien { get; set; }
+    public DbSet<LoaiHoaDonEntity> LoaiHoaDon { get; set; }
+    public DbSet<HoaDonCongTacNhanVienEntity> HoaDonCongTacNhanVien { get; set; }
+    public DbSet<ChinhSachNhanSuEntity> ChinhSachNhanSu { get; set; }
+    public DbSet<ChiTietNgayNghiPhepEntity> ChiTietNgayNghiPhep { get; set; }
+    public DbSet<ThongTinLuongNhanVienEntity> ThongTinLuongNhanVien { get; set; }
+    public DbSet<ThongTinCongTyEntity> ThongTinCongTy { get; set; }
+    public DbSet<ThueSuatEntity> ThueSuat { get; set; }
+    public DbSet<MucSanPhamEntity> MucSanPham { get; set; }
+    public DbSet<BaoHiemEntity> BaoHiem { get; set; }
+    public DbSet<ChiTietBaoHiemEntity> ChiTietBaoHiem { get; set; }
+    public DbSet<BaoHiemNhanVienEntity> BaoHiemNhanVien { get; set; }
+    public DbSet<PhuCapEntity> PhuCap { get; set; }
+    public DbSet<PhuCapNhanVienEntity> PhuCapNhanVien { get; set; }
+    public DbSet<MaDangKiCaLamEntity> MaDangKiCaLam { get; set; }
+    public DbSet<TrangThaiDangKiCaLamViecEntity> TrangThaiDangKiCaLamViec { get; set; }
+    public DbSet<LuongThoiGianEntity> LuongThoiGian { get; set; }
+    public DbSet<DangKiCaLamEntity> DangKiCaLam { get; set; }
+    public DbSet<DangKiTangCaEntity> DangKiTangCa { get; set; }
+    public DbSet<ThongTinCapDangVienEntity> ThongTinCapDangVien { get; set; }
+    public DbSet<ThongTinTrinhDoChinhTriEntity> ThongTinTrinhDoChinhTri { get; set; }
+    public DbSet<ThongTinChucVuDangEntity> ThongTinChucVuDang { get; set; }
+    public DbSet<KyLuatEntity> KyLuat { get; set; }
+    public DbSet<KhenThuongEntity> khenThuongs { get; set; }
+    public DbSet<KhaiBaoTangLuongEntity> KhaiBaoTangLuongs { get; set; }
+    public DbSet<LoaiTangCaEntity> LoaiTangCas { get; set; }
+    public DbSet<LuongCongNhatEntity> LuongCongNhats { get; set; }
+    public DbSet<LuongSanPhamEntity> LuongSanPhams { get; set; }
+    public DbSet<PhiCongDoanEntity> PhiCongDoans { get; set; }
+    public DbSet<PhuCapCongDoanEntity> PhuCapCongDoans { get; set; }
+    public DbSet<TangCaEntity> TangCas { get; set; }
+    public DbSet<NghiPhepEntity> NghiPheps { get; set; }
+    public DbSet<BaoHiemNhanVienBaoHiemChiTietEntity> baoHiemNhanVienBaoHiemChiTiets { get; set; }
 
 
 
