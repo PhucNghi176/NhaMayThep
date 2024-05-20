@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ThongTinCapDangVien;
 using NhaMayThep.Application.ThongTinCapDangVien.CreateThongTinCapDangVien;
 using NhaMayThep.Application.ThongTinCapDangVien.DeleteThongTinCapDangVien;
@@ -12,7 +12,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThongTinCapDangVien
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinCapDangVienController : ControllerBase
     {
         private readonly ISender _mediator;

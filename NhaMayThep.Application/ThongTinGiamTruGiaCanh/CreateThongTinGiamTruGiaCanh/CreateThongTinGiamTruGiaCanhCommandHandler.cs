@@ -31,12 +31,12 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
         {
             var nhanvien = await _nhanvienRepository
                 .FindAsync(x => x.ID.Equals(request.NhanVienID), cancellationToken);
-            if(nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
+            if (nhanvien == null || (nhanvien.NguoiXoaID != null && nhanvien.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Nhân viên không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var magiamtru = await _thongTinGiamTruRepository.FindAsync(x => x.ID == request.MaGiamTruID);
-            if(magiamtru == null || (magiamtru.NguoiXoaID!= null && magiamtru.NgayXoa.HasValue))
+            if (magiamtru == null || (magiamtru.NguoiXoaID != null && magiamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Mã giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
             }
@@ -75,7 +75,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGia
                 NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc
             };
             _thongTinGiamTruGiaCanhRepository.Add(giamtrugiacanh);
-            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken)>0 ? "Tạo thành công" : "Tạo thất bại";
+            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Tạo thành công" : "Tạo thất bại";
         }
     }
 }

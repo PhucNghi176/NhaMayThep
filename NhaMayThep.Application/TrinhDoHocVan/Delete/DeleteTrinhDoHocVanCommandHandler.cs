@@ -1,8 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMayThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 
@@ -14,7 +11,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan.Delete
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
 
-        public DeleteTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService ,ITrinhDoHocVanRepository trinhDoHocVanRepository, IMapper mapper)
+        public DeleteTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService, ITrinhDoHocVanRepository trinhDoHocVanRepository, IMapper mapper)
         {
             _trinhDoHocVanRepository = trinhDoHocVanRepository;
             _mapper = mapper;

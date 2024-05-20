@@ -1,11 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.PhiCongDoan.Update
 {

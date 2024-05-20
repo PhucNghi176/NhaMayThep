@@ -4,9 +4,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.Create
 {
@@ -53,8 +50,8 @@ namespace NhaMayThep.Application.DangKiCaLam.Create
                 // Initial values for check-in and check-out times
                 ThoiGianChamCongBatDau = null,
                 ThoiGianChamCongKetThuc = null,
-                
-                HeSoNgayCong = 0, 
+
+                HeSoNgayCong = 0,
                 MaSoNguoiQuanLy = request.MaSoNguoiQuanLy,
                 TrangThai = request.TrangThai,
                 GhiChu = request.GhiChu,
@@ -63,7 +60,7 @@ namespace NhaMayThep.Application.DangKiCaLam.Create
             };
 
             _repository.Add(dangKiCaLam);
-           return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) >0 ? "Dang Ki Ca Lamthành công" : "Dang Ki Ca Lam thất bại";
+            return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Dang Ki Ca Lamthành công" : "Dang Ki Ca Lam thất bại";
 
         }
     }

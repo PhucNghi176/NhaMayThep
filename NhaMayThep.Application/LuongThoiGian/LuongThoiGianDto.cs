@@ -1,27 +1,22 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.LuongThoiGian
 {
     public class LuongThoiGianDto : IMapFrom<LuongThoiGianEntity>
     {
-        public string Id {  get; set; }        
+        public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
         public int MaLuongThoiGian { get; set; }
-        public decimal LuongNam {  get; set; }
+        public decimal LuongNam { get; set; }
         public decimal LuongThang { get; set; }
         public decimal LuongTuan { get; set; }
         public decimal LuongNgay { get; set; }
         public decimal LuongGio { get; set; }
         public DateTime NgayApDung { get; set; }
 
-        public static LuongThoiGianDto CreateLuongThoiGian (
+        public static LuongThoiGianDto CreateLuongThoiGian(
             string id,
             string maSoNhanVien,
             int maLuongThoiGian,

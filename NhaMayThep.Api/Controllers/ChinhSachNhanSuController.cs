@@ -1,21 +1,21 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using System.Net.Mime;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ChinhSachNhanSu;
 using NhaMayThep.Application.ChinhSachNhanSu.Create;
+using NhaMayThep.Application.ChinhSachNhanSu.Delete;
+using NhaMayThep.Application.ChinhSachNhanSu.FilterChinhSachNhanSu;
+using NhaMayThep.Application.ChinhSachNhanSu.GetAll;
 using NhaMayThep.Application.ChinhSachNhanSu.GetById;
 using NhaMayThep.Application.ChinhSachNhanSu.Update;
-using NhaMayThep.Application.ChinhSachNhanSu.Delete;
-using NhaMayThep.Application.ChinhSachNhanSu.GetAll;
-using Microsoft.AspNetCore.Authorization;
-using NhaMayThep.Application.ChinhSachNhanSu.FilterChinhSachNhanSu;
+using NhaMayThep.Application.Common.Pagination;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ChinhSachNhanSuController : ControllerBase
     {
         private readonly ISender _mediator;

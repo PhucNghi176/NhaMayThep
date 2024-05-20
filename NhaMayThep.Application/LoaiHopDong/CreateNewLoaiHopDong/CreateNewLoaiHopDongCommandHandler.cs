@@ -1,11 +1,11 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong
 {
-    public class CreateNewLoaiHopDongCommandHandler : IRequestHandler<CreateNewLoaiHopDongCommand, string> 
+    public class CreateNewLoaiHopDongCommandHandler : IRequestHandler<CreateNewLoaiHopDongCommand, string>
 
     {
         private readonly ILoaiHopDongReposity _loaiHopDongRepository;

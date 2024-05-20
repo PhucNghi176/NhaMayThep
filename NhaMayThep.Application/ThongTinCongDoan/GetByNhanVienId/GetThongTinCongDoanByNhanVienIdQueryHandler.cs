@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienId
         public async Task<ThongTinCongDoanDto> Handle(GetThongTinCongDoanByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository
-                .FindAsync(x=> x.NhanVienID.Equals(request.Id) && x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
+                .FindAsync(x => x.NhanVienID.Equals(request.Id) && x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
             if (thongtincongdoan == null || thongtincongdoan.NhanVien.NgayXoa.HasValue && thongtincongdoan.NhanVien.NguoiXoaID != null)
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin công đoàn nào cho nhân viên này");

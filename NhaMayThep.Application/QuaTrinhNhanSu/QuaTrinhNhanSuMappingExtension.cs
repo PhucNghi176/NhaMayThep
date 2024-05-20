@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
-using NhaMayThep.Application.NhanVien;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu
 {
@@ -25,11 +24,11 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu
 
         public static List<QuaTrinhNhanSuDto> MapToQuaTrinhNhanSuDtoList(this IEnumerable<QuaTrinhNhanSuEntity> entities, IMapper mapper, Dictionary<int, string> loaiQuaTrinh, Dictionary<int, string> phongBan, Dictionary<int, string> chucVu, Dictionary<int, string> chucDanh, Dictionary<string, string> hoVaTen)
             => entities.Select(x =>
-            x.MapToQuaTrinhNhanSuDto(mapper,               
+            x.MapToQuaTrinhNhanSuDto(mapper,
                 loaiQuaTrinh.ContainsKey(x.LoaiQuaTrinhID) ? loaiQuaTrinh[x.LoaiQuaTrinhID] : "Lỗi",
                 phongBan.ContainsKey(x.PhongBanID) ? phongBan[x.PhongBanID] : "Lỗi",
                 chucVu.ContainsKey(x.ChucVuID) ? chucVu[x.ChucVuID] : "Lỗi",
-                chucDanh.ContainsKey(x.ChucDanhID) ? chucDanh[x.ChucDanhID] : "Lỗi" ,
+                chucDanh.ContainsKey(x.ChucDanhID) ? chucDanh[x.ChucDanhID] : "Lỗi",
                 hoVaTen.ContainsKey(x.MaSoNhanVien) ? hoVaTen[x.MaSoNhanVien] : "Lỗi"
             )).ToList();
     }

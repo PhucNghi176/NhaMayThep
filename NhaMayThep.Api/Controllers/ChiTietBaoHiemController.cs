@@ -1,27 +1,26 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Net.Mime;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.DeleteChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.FilterChiTietBaoHiem;
 using NhaMayThep.Application.ChiTietBaoHiem.GetAll;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.ChiTietBaoHiem.GetAllDeleted;
 using NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination;
 using NhaMayThep.Application.ChiTietBaoHiem.GetAllPaginationDeleted;
-using NhaMayThep.Application.ChiTietBaoHiem.GetAllDeleted;
-using NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem;
-using NhaMayThep.Application.ChiTietBaoHiem.RestoreChiTietBaoHiem;
-using NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem;
-using NhaMayThep.Application.ChiTietBaoHiem.DeleteChiTietBaoHiem;
 using NhaMayThep.Application.ChiTietBaoHiem.GetById;
 using NhaMayThep.Application.ChiTietBaoHiem.GetByIdDeleted;
-using Asp.Versioning;
-using NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien;
+using NhaMayThep.Application.ChiTietBaoHiem.RestoreChiTietBaoHiem;
+using NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem;
+using NhaMayThep.Application.Common.Pagination;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ChiTietBaoHiemController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -123,7 +122,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<JsonResponse<List<ChiTietBaoHiemDto>>>> GetAll(
           CancellationToken cancellationToken = default)
         {
-                var result = await _mediator.Send<List<ChiTietBaoHiemDto>>(new GetAllChiTietBaoHiemQuery(), cancellationToken);
+            var result = await _mediator.Send<List<ChiTietBaoHiemDto>>(new GetAllChiTietBaoHiemQuery(), cancellationToken);
             return Ok(new JsonResponse<List<ChiTietBaoHiemDto>>(result));
         }
         [HttpGet("chi-tiet-bao-hiem/get-all-deleted")]

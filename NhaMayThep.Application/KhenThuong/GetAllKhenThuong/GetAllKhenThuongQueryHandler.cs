@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KhenThuong.GetAllKhenThuong
 {
@@ -26,7 +21,7 @@ namespace NhaMayThep.Application.KhenThuong.GetAllKhenThuong
         public async Task<List<KhenThuongDTO>> Handle(GetAllKhenThuongQuery request, CancellationToken cancellationToken)
         {
             var khenthuong = await this._repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
-            if (khenthuong.Count() == 0) 
+            if (khenthuong.Count() == 0)
                 throw new NotFoundException("Không tìm thấy bất kỳ khen thưởng nào.");
             List<KhenThuongDTO> final = new List<KhenThuongDTO>();
             foreach (var item in khenthuong)

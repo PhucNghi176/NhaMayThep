@@ -1,14 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMayThep.Application.DonViCongTac;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThongTinDangVien
 {
@@ -35,16 +27,16 @@ namespace NhaMayThep.Application.ThongTinDangVien
         {
             return new ThongTinDangVienDto
             {
-               ID = id,
-               HoVaTen = hoVaTen,
-               DonViCongTac = donViCongTac,
-               ChucVuDangID = chucVuDangID,
-               ChucVuDang = chucVuDang,
-               TrinhDoChinhTriID = trinhDoChinhTriID,
-               TrinhDoChinhTri = trinhDoChinhTri,
-               NgayVaoDang = ngayVaoDang,
-               CapDangVienID = capDangVienID,  
-               CapDangVien = capDangVien
+                ID = id,
+                HoVaTen = hoVaTen,
+                DonViCongTac = donViCongTac,
+                ChucVuDangID = chucVuDangID,
+                ChucVuDang = chucVuDang,
+                TrinhDoChinhTriID = trinhDoChinhTriID,
+                TrinhDoChinhTri = trinhDoChinhTri,
+                NgayVaoDang = ngayVaoDang,
+                CapDangVienID = capDangVienID,
+                CapDangVien = capDangVien
             };
         }
 

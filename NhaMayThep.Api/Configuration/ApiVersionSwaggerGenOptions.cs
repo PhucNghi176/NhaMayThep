@@ -3,7 +3,7 @@ using Microsoft.Extensions.Options;
 using Microsoft.OpenApi.Models;
 using Swashbuckle.AspNetCore.SwaggerGen;
 
-namespace NhaMapThep.Api.Configuration
+namespace NhaMayThep.Api.Configuration
 {
     public class ApiVersionSwaggerGenOptions : IConfigureOptions<SwaggerGenOptions>
     {

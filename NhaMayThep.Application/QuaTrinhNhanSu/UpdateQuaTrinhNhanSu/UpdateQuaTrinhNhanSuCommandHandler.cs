@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Data;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
 {
@@ -70,7 +68,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
                                                                             && x.ChucVuID == command.ChucVuID
                                                                             && x.ChucDanhID == command.ChucDanhID
                                                                             && x.LoaiQuaTrinhID == command.LoaiQuaTrinhID
-                                                                            && isExistNhanVien                                                                          
+                                                                            && isExistNhanVien
                                                                             && x.NgayXoa == null, cancellationToken);
             if (duplicateEntity)
             {
@@ -86,7 +84,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
             entity.NgayBatDau = command.NgayBatDau;
             entity.NgayKetThuc = command.NgayKetThuc;
             entity.PhongBanID = command.PhongBanID;
-            _quaTrinhNhanSuRepository.Update(entity);           
+            _quaTrinhNhanSuRepository.Update(entity);
             return await _quaTrinhNhanSuRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật thành công" : "Cập nhật thất bại";
         }
     }

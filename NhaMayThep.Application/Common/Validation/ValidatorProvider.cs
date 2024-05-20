@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace NhaMapThep.Application.Common.Validation
+namespace NhaMayThep.Application.Common.Validation
 {
     public class ValidatorProvider : IValidatorProvider
     {

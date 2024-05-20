@@ -1,14 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.LuongCongNhat.Filter
 {
@@ -30,11 +25,11 @@ namespace NhaMayThep.Application.LuongCongNhat.Filter
 
                 if (!string.IsNullOrEmpty(request.MaSoNhanVien))
                     query = query.Where(x => x.MaSoNhanVien.Equals(request.MaSoNhanVien));
-                
-                if(request.SoGioLam != null) 
+
+                if (request.SoGioLam != null)
                     query = query.Where(x => x.SoGioLam == request.SoGioLam);
 
-                if(request.Luong1Gio != null)
+                if (request.Luong1Gio != null)
                     query = query.Where(x => x.Luong1Gio == request.Luong1Gio);
 
                 return query;

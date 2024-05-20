@@ -3,9 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
 {
@@ -33,7 +30,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Delete
             {
                 throw new NotFoundException($"ChiTietNgayNghiPhep với ID {request.Id} không tìm thấy.");
             }
-            if(entity.NgayXoa != null)
+            if (entity.NgayXoa != null)
             {
                 throw new NotFoundException("Id này đã xóa rồi ");
             }

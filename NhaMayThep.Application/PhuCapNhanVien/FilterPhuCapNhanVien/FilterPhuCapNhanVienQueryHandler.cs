@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.PhuCapNhanVien.FilterPhuCapNhanVien
 {
@@ -28,7 +22,7 @@ namespace NhaMayThep.Application.PhuCapNhanVien.FilterPhuCapNhanVien
             Func<IQueryable<PhuCapNhanVienEntity>, IQueryable<PhuCapNhanVienEntity>> queryOptions = query =>
             {
                 query = query.Where(x => x.NgayXoa == null);
-                
+
                 if (request.PhuCap != 0)
                 {
                     query = query.Where(x => x.PhuCap.Equals(request.PhuCap));

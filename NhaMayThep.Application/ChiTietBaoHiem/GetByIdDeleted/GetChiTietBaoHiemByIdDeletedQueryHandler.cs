@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetByIdDeleted
 {
@@ -26,7 +21,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetByIdDeleted
             {
                 throw new NotFoundException($"Không tìm thấy chi tiết bảo hiểm với Id '{request.Id}' bị xóa");
             }
-            return checkExistsEntity.MapToChiTietBaoHiemDto(_mapper,checkExistsEntity.BaoHiem.Name); ;
+            return checkExistsEntity.MapToChiTietBaoHiemDto(_mapper, checkExistsEntity.BaoHiem.Name); ;
         }
     }
 }

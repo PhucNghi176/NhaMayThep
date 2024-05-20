@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.LoaiHopDong
 {
@@ -17,7 +17,7 @@ namespace NhaMayThep.Application.LoaiHopDong
         }
 
         public int Id { get; set; }
-        public string Name {  get; set; }
+        public string Name { get; set; }
         public void Mapping(Profile profile)
         {
             profile.CreateMap<LoaiHopDongEntity, LoaiHopDongDto>();

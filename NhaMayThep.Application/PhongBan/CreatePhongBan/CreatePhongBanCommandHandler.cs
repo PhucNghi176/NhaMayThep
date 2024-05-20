@@ -1,10 +1,8 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Data;
 
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
@@ -30,7 +28,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
             {
                 Name = command.Name,
                 NguoiTaoID = _currentUserService.UserId,
-                NgayTao = DateTime.UtcNow              
+                NgayTao = DateTime.UtcNow
             };
             _phongBanRepository.Add(entity);
             return await _phongBanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Thêm thành công" : "Thêm thất bại";

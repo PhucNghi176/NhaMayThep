@@ -2,13 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
@@ -31,7 +24,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien
             if (thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Đảng Viên");
 
-            thongTinDangVien.NguoiXoaID = _currentUserService.UserId; 
+            thongTinDangVien.NguoiXoaID = _currentUserService.UserId;
             thongTinDangVien.NgayXoa = DateTime.Now;
 
             _thongTinDangVienRepository.Update(thongTinDangVien);

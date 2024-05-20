@@ -2,13 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.LoaiTangCa.Update;
-using NhaMayThep.Application.LoaiTangCa;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiTangCa.Update

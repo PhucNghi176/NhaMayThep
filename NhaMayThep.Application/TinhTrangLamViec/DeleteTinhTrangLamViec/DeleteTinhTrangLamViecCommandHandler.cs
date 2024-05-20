@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
 {
@@ -15,7 +10,7 @@ namespace NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec
         private readonly ITinhTrangLamViecRepository _repository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _userservicerepository;
-        public DeleteTinhTrangLamViecCommandHandler(ITinhTrangLamViecRepository repository, IMapper mapper,ICurrentUserService userservicerepository)
+        public DeleteTinhTrangLamViecCommandHandler(ITinhTrangLamViecRepository repository, IMapper mapper, ICurrentUserService userservicerepository)
         {
             _repository = repository;
             _mapper = mapper;

@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.HopDong.UpdateHopDongCommand
         }
         public UpdateHopDongCommand()
         {
-            
+
         }
 
         public string Id { get; set; }

@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities.Base;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.GetByPagination
 {
@@ -37,7 +31,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetByPagination
             _chucDanh = chucDanhRepository;
         }
         public async Task<PagedResult<QuaTrinhNhanSuDto>> Handle(GetQuaTrinhNhanSuByPaginationQuery query, CancellationToken cancellationToken)
-        {           
+        {
             var list = await _quaTrinhNhanSuRepository.FindAllAsync(x => x.NgayXoa == null, query.PageNumber, query.PageSize, cancellationToken);
             var hoVaTen = await _nhanVienRepository.FindAllToDictionaryAsync(
                 x => x.NgayXoa == null && list.Select(r => r.MaSoNhanVien).Contains(x.ID),

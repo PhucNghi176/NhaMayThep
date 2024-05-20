@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetAllPagination
 {
-    public class GetAllThongTinCongDoanPaginationQueryValidator: AbstractValidator<GetAllThongTinCongDoanPaginationQuery>
+    public class GetAllThongTinCongDoanPaginationQueryValidator : AbstractValidator<GetAllThongTinCongDoanPaginationQuery>
     {
         public GetAllThongTinCongDoanPaginationQueryValidator()
         {

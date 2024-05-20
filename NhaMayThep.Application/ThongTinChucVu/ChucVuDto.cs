@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThongTinChucVu
 {
@@ -10,7 +10,7 @@ namespace NhaMayThep.Application.ThongTinChucVu
         public static ChucVuDto Create(int id, string name)
         {
             return new ChucVuDto()
-            {   
+            {
                 Id = id,
                 Name = name,
             };

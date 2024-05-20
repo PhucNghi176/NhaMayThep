@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.LoaiCongTac
 {

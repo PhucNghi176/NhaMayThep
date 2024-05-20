@@ -3,13 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetAll
 {
@@ -20,7 +13,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAll
         private readonly IBaoHiemRepository _baohiemRepository;
         private readonly IMapper _mapper;
         public GetAllChiTietBaoHiemQueryHandler(
-            IChiTietBaoHiemRepository chiTietBaoHiemRepository, 
+            IChiTietBaoHiemRepository chiTietBaoHiemRepository,
             IMapper mapper,
             INhanVienRepository nhanVienRepository,
             IBaoHiemRepository baoHiemRepository)
@@ -33,7 +26,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAll
         public async Task<List<ChiTietBaoHiemDto>> Handle(GetAllChiTietBaoHiemQuery request, CancellationToken cancellationToken)
         {
             var result = await _chitietbaohiemRepository.FindAllAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
-            if(result.Count == 0)
+            if (result.Count == 0)
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào");
             }

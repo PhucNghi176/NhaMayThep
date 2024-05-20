@@ -1,15 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
 {
@@ -18,7 +11,7 @@ namespace NhaMayThep.Application.DonViCongTac.DeleteDonViCongTac
         private IDonViCongTacRepository _donViCongTacRepository;
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
-        
+
         public DeleteDonViCongTacCommandHandler(IDonViCongTacRepository donViCongTacRepository, IMapper mapper, ICurrentUserService currentUserService)
         {
             _donViCongTacRepository = donViCongTacRepository;

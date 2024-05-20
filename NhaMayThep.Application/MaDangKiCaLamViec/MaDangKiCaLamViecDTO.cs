@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.MaDangKiCaLamViec
 {
@@ -27,7 +22,7 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec
         public int Id { get; set; }
         public string Name { get; set; }
         public DateTime ThoiGianCaLamBatDau { get; set; }
-        public DateTime ThoiGianCaLamKetThuc {  get; set; }
+        public DateTime ThoiGianCaLamKetThuc { get; set; }
 
         public void Mapping(Profile profile)
         {

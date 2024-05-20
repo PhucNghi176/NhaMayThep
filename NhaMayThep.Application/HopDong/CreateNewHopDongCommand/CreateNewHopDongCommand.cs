@@ -25,7 +25,7 @@ namespace NhaMayThep.Application.HopDong.CreateNewHopDongCommand
         }
         public CreateNewHopDongCommand()
         {
-            
+
         }
 
         public string MaSoNhanVien { get; set; }

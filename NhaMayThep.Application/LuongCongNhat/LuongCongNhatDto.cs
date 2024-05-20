@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.LuongCongNhat
 {
@@ -24,7 +18,7 @@ namespace NhaMayThep.Application.LuongCongNhat
 
         public decimal TongLuong { get; set; }
 
-        public DateTime NgayKhaiBao {  get; set; }
+        public DateTime NgayKhaiBao { get; set; }
 
         public static LuongCongNhatDto Create(string id, string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong, DateTime ngayKhaiBao)
         {

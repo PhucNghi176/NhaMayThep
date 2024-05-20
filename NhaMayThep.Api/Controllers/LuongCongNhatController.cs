@@ -1,10 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.LichSuCongTacNhanVien;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LuongCongNhat;
 using NhaMayThep.Application.LuongCongNhat.Create;
 using NhaMayThep.Application.LuongCongNhat.Delete;
@@ -18,7 +16,7 @@ namespace NhaMayThep.Api.Controllers
 {
 
     [ApiController]
-    [Authorize]
+    
     public class LuongCongNhatController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -65,7 +63,7 @@ namespace NhaMayThep.Api.Controllers
 
             [FromBody] UpdateLuongCongNhatCommand command,
             CancellationToken cancellationToken = default)
-        { 
+        {
 
 
             var result = await _mediator.Send(command, cancellationToken);
@@ -109,7 +107,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<LuongCongNhatDto>>>> FilterLuongCongNhat(
-            [FromQuery] FilterLuongCongNhatQuery query, 
+            [FromQuery] FilterLuongCongNhatQuery query,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);

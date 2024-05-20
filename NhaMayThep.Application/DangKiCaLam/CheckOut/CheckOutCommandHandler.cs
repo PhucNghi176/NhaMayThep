@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.CheckOut
 {
@@ -47,7 +43,7 @@ namespace NhaMayThep.Application.DangKiCaLam.CheckOut
             }
             return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Check-out thành công" : "Check-out thất bại";
 
-           
+
 
         }
     }

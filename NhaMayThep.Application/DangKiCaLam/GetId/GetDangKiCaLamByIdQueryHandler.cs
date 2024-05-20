@@ -2,10 +2,8 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.DangKiCaLam.Queries.GetDangKiCaLamById
+namespace NhaMayThep.Application.DangKiCaLam.GetId
 {
     public class GetDangKiCaLamByIdQueryHandler : IRequestHandler<GetDangKiCaLamByIdQuery, DangKiCaLamDto>
     {

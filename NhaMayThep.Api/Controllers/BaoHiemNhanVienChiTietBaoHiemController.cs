@@ -1,8 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem;
 using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Create;
 using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Delete;
@@ -12,12 +11,12 @@ using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllDeleted;
 using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllDeletedPagination;
 using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllPagination;
 using NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Restore;
-using NhaMayThep.Application.LuongThoiGian.CreateLuongThoiGian;
+using NhaMayThep.Application.Common.Pagination;
 using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
-    [Authorize]
+    
     public class BaoHiemNhanVienChiTietBaoHiemController : ControllerBase
     {
         private readonly IMediator _mediator;

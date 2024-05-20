@@ -7,7 +7,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiCongTac.Create
 {
-    public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand,string>
+    public class CreateLoaiCongTacCommandHandler : IRequestHandler<CreateLoaiCongTacCommand, string>
     {
         private readonly ICurrentUserService _currentUserService;
         public readonly ILoaiCongTacRepository _loaiCongTacRepository;
@@ -23,8 +23,8 @@ namespace NhaMayThep.Application.LoaiCongTac.Create
 
         public async Task<string> Handle(CreateLoaiCongTacCommand request, CancellationToken cancellationToken)
         {
-            var exist = await _loaiCongTacRepository.FindAsync(x => x.Name == request.Name && !x.NgayXoa.HasValue,cancellationToken);
-            if (exist != null) 
+            var exist = await _loaiCongTacRepository.FindAsync(x => x.Name == request.Name && !x.NgayXoa.HasValue, cancellationToken);
+            if (exist != null)
             {
                 throw new NotFoundException("Loại Công Tác trên đã tồn tại!");
             }

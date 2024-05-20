@@ -1,14 +1,14 @@
 ﻿using Microsoft.AspNetCore.Diagnostics;
 using System.Diagnostics;
 
-namespace CleanArchitecture.Configuration
+namespace NhaMayThep.Api.Configuration
 {
     public static class ProblemDetailsConfiguration
     {
         public static IServiceCollection ConfigureProblemDetails(this IServiceCollection services)
         {
             services.AddProblemDetails(conf => conf.CustomizeProblemDetails = context =>
-            {              
+            {
 
                 if (context.ProblemDetails.Status != 500) { return; }
                 context.ProblemDetails.Title = "Internal Server Error";

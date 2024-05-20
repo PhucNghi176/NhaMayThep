@@ -1,29 +1,28 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.CreateThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGiaCanh;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPaginationDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetById;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByIdDeleted;
+using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCanh;
-using System.Net.Mime;
 using NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGiaCanh;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.ThongTinCongDoan.GetAll;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPaginationDeleted;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinGiamTruGiaCanhController : ControllerBase
     {
         private readonly ISender _mediator;

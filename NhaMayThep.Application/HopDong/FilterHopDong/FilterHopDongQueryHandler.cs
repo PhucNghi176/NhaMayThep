@@ -1,20 +1,11 @@
-﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
-using NhaMayThep.Application.NhanVien;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Entities;
-using AutoMapper;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Persistence;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
-using NhaMayThep.Infrastructure.Repositories;
+using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Infrastructure.Persistence;
 
 namespace NhaMayThep.Application.HopDong.FilterHopDong
 {

@@ -1,15 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMayThep.Application.ThongTinCongDoan;
-using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem
 {
@@ -23,7 +14,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
         public DateTime? NgayKetThuc { get; set; }
         public string? NoiCap { get; set; }
         public static ChiTietBaoHiemDto CreateChiTietBaoHiem(string id, string baohiem, DateTime ngayheuluc, DateTime ngayketthuc
-            ,string noicap, int loaibaohiem, string phantrambaohiem)
+            , string noicap, int loaibaohiem, string phantrambaohiem)
         {
             return new ChiTietBaoHiemDto
             {
@@ -32,7 +23,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
                 NgayHieuLuc = ngayheuluc,
                 NgayKetThuc = ngayketthuc,
                 NoiCap = noicap,
-                LoaiBaoHiem= loaibaohiem,
+                LoaiBaoHiem = loaibaohiem,
                 PhanTramBaoHiem = phantrambaohiem
             };
         }

@@ -1,29 +1,22 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.DonViCongTac;
-using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
-using NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac;
-using NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac;
-using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
-using NhaMayThep.Application.NhanVien;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.DeleteThongTinDangVien;
+using NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVien;
 using NhaMayThep.Application.ThongTinDangVien.GetByPagination;
 using NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien;
 using System.Net.Mime;
-using NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinDangVienController : ControllerBase
     {
         private readonly ISender _mediator;

@@ -31,8 +31,8 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu
             _chucDanh = chucDanhRepository;
         }
         public async Task<QuaTrinhNhanSuDto?> Handle(GetQuaTrinhNhanSuQuery request, CancellationToken cancellationToken)
-        {            
-            var entity = await _quaTrinhNhanSuRepository.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null, cancellationToken); 
+        {
+            var entity = await _quaTrinhNhanSuRepository.FindAsync(x => x.ID == request.ID && x.NguoiXoaID == null, cancellationToken);
             if (entity == null)
             {
                 throw new NotFoundException("Không tìm thấy quaTrinhNhanSu theo ID đã nhập");

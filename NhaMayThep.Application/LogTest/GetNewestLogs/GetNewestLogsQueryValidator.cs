@@ -1,11 +1,6 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.Logs.GetNewestLogs
+namespace NhaMayThep.Application.LogTest.GetNewestLogs
 {
     public class GetNewestLogsQueryValidator : AbstractValidator<GetNewestLogsQuery>
     {

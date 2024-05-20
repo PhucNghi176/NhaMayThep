@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LoaiCongTac;
 using NhaMayThep.Application.LoaiHoaDon;
 using NhaMayThep.Application.LoaiHoaDon.Create;
@@ -11,13 +11,12 @@ using NhaMayThep.Application.LoaiHoaDon.GetAll;
 using NhaMayThep.Application.LoaiHoaDon.GetByPagination;
 using NhaMayThep.Application.LoaiHoaDon.Update;
 using System.Net.Mime;
-using System.Security;
 
 namespace NhaMayThep.Api.Controllers
 {
-    
+
     [ApiController]
-    [Authorize]
+    
     public class LoaiHoaDonController : ControllerBase
     {
         private readonly ISender _mediator;

@@ -1,7 +1,7 @@
 ﻿using HealthChecks.UI.Client;
 using Microsoft.AspNetCore.Diagnostics.HealthChecks;
 
-namespace NhaMapThep.Api.Configuration
+namespace NhaMayThep.Api.Configuration
 {
     public static class HealthChecksConfiguration
     {

@@ -1,15 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LoaiCongTac.GetAll;
-using NhaMayThep.Application.LoaiCongTac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.TrangThaiDangKiCaLamViec.GetAllTrangThaiDangKiCaLamViec

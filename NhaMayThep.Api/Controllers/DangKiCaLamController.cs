@@ -1,24 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Net.Mime;
-using Microsoft.AspNetCore.Http;
-using NhaMayThep.Application.DangKiCaLam.Create;
-using NhaMayThep.Application.DangKiCaLam.Delete;
-using NhaMayThep.Application.DangKiCaLam.Update;
-using NhaMayThep.Application.DangKiCaLam.Queries.GetDangKiCaLamById;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.DangKiCaLam.GetAll;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.DangKiCaLam;
 using NhaMayThep.Application.DangKiCaLam.CheckIn;
 using NhaMayThep.Application.DangKiCaLam.CheckOut;
-using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.DangKiCaLam.Create;
+using NhaMayThep.Application.DangKiCaLam.Delete;
+using NhaMayThep.Application.DangKiCaLam.GetAll;
+using NhaMayThep.Application.DangKiCaLam.GetId;
+using NhaMayThep.Application.DangKiCaLam.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class DangKiCaLamController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -51,7 +48,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create([FromBody] CreateDangKiCaLamCommand command, CancellationToken cancellationToken = default)
         {
-          var result =  await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(command, cancellationToken);
             return new JsonResponse<string>(result);
         }
 
@@ -64,8 +61,8 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-           var result= await _mediator.Send(new DeleteDangKiCaLamCommand(id), cancellationToken);
-             return new JsonResponse<string>(result);
+            var result = await _mediator.Send(new DeleteDangKiCaLamCommand(id), cancellationToken);
+            return new JsonResponse<string>(result);
 
         }
 
@@ -90,7 +87,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<DangKiCaLamDto>>> GetById(string id, CancellationToken cancellationToken = default)
         {
-            var query = new GetDangKiCaLamByIdQuery (id);
+            var query = new GetDangKiCaLamByIdQuery(id);
             var result = await _mediator.Send(query, cancellationToken);
             return Ok(new JsonResponse<DangKiCaLamDto>(result));
         }
@@ -104,7 +101,7 @@ namespace NhaMayThep.Api.Controllers
         {
             var command = new CheckInCommand { Id = id };
             var result = await _mediator.Send(command, cancellationToken);
-            return Ok(new JsonResponse<string>(result)); 
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpPost("CheckOut/{id}")]

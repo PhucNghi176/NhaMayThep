@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Delete
 {
-    public class DeleteLichSuNghiPhepValidator: AbstractValidator<DeleteLichSuNghiPhepCommand>
+    public class DeleteLichSuNghiPhepValidator : AbstractValidator<DeleteLichSuNghiPhepCommand>
 
     {
 
@@ -23,7 +18,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Delete
                 .NotEmpty()
                 .WithMessage("Id không được để trống ");
 
-          
+
         }
     }
 }

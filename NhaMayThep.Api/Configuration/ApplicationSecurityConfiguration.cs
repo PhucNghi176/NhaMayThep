@@ -6,7 +6,7 @@ using NhaMayThep.Application.Common.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Text;
 
-namespace NhaMapThep.Configuration
+namespace NhaMayThep.Api.Configuration
 {
     public static class ApplicationSecurityConfiguration
     {

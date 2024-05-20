@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 
-namespace NhaMapThep.Application.Common.Mappings
+namespace NhaMayThep.Application.Common.Mappings
 {
     interface IMapFrom<T>
     {

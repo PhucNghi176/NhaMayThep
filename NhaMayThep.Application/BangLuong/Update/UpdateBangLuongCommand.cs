@@ -1,9 +1,4 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.BangLuong.Update

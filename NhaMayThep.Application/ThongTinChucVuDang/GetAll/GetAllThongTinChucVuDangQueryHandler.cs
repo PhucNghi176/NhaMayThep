@@ -2,12 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
 
 namespace NhaMayThep.Application.ThongTinChucVuDang.GetAll
 {

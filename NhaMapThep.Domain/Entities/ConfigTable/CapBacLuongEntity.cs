@@ -7,6 +7,6 @@ namespace NhaMapThep.Domain.Entities.ConfigTable
     public class CapBacLuongEntity : BangMaGocEntity
     {
         public required float HeSoLuong { get; set; }
-        public required string TrinhDo {  get; set; }
+        public required string TrinhDo { get; set; }
     }
 }

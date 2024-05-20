@@ -1,12 +1,6 @@
 ﻿using FluentValidation;
-using NhaMayThep.Application.ThongTinCongDoan.GetAll;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPaginition
+namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPagination
 {
     public class GetAllThongTinCongDoanPaginationDeletedQueryValidator : AbstractValidator<GetAllThongTinCongDoanPaginationDeletedQuery>
     {

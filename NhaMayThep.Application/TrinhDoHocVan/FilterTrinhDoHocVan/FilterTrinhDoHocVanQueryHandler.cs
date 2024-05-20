@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.TrinhDoHocVan.FilterTrinhDoHocVan
 {

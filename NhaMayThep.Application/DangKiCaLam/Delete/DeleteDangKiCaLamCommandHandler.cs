@@ -3,9 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.Delete
 {

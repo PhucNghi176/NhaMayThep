@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace NhaMapThep.Application.TrinhDoHocVan.Commands
+namespace NhaMayThep.Application.TrinhDoHocVan.Create
 {
     public class CreateTrinhDoHocVanCommandValidator : AbstractValidator<CreateTrinhDoHocVanCommand>
     {

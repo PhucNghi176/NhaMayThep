@@ -14,7 +14,7 @@ class DeleteChiTietNgayNghiPhepCommandValidator : AbstractValidator<DeleteChiTie
             RuleFor(command => command.Id)
                 .NotEmpty().WithMessage("ID không để trống.");
 
-          
+
         }
     }
 }

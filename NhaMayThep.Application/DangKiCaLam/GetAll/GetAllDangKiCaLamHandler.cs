@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiCaLam.GetAll
 {
-    public class GetAllDangKiCaLamHandler : IRequestHandler<GetAllDangKiCaLamQuery,List<DangKiCaLamDto>>
+    public class GetAllDangKiCaLamHandler : IRequestHandler<GetAllDangKiCaLamQuery, List<DangKiCaLamDto>>
     {
         private readonly IDangKiCaLamRepository _repository;
         private readonly IMapper _mapper;

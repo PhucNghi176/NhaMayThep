@@ -1,21 +1,21 @@
 using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.CreateNewLoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.DeleteLoaiHopDong;
 using NhaMayThep.Application.LoaiHopDong.GetAllLoaiHopDong;
+using NhaMayThep.Application.LoaiHopDong.GetByPagination;
 using NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById;
 using NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong;
 using System.Net.Mime;
-using Microsoft.AspNetCore.Authorization;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.LoaiHopDong.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers.LoaiHopDong
 {
     [ApiController]
-    [Authorize]
+    
     public class LoaiHopDongController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -48,7 +48,7 @@ namespace NhaMayThep.Api.Controllers.LoaiHopDong
         public async Task<ActionResult<JsonResponse<string>>> RemoveLoaiHopDong([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new DeleteLoaiHopDongCommand(id: id), cancellationToken);
-            return  Ok(new JsonResponse<string>(result));
+            return Ok(new JsonResponse<string>(result));
         }
 
         [HttpGet("loai-hop-dong")]

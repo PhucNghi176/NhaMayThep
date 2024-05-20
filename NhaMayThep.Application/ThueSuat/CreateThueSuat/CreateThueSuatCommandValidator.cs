@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThueSuat.CreateThueSuat
 {
     public class CreateThueSuatCommandValidator : AbstractValidator<CreateThueSuatCommand>
     {
-        public CreateThueSuatCommandValidator() 
+        public CreateThueSuatCommandValidator()
         {
             RuleFor(x => x.BacThue)
                 .NotEmpty().NotNull()
@@ -32,6 +27,6 @@ namespace NhaMayThep.Application.ThueSuat.CreateThueSuat
             RuleFor(x => x.PhanTramThueSuat)
                 .GreaterThanOrEqualTo(0).LessThanOrEqualTo(100)
                 .WithMessage("Phần trăm thuế suất phải từ 0 đến 100.");
-        }   
+        }
     }
 }

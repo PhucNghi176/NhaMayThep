@@ -1,16 +1,11 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination
 {
-    public class GetAllPaginationChiTietBaoHiemQuery: IRequest<PagedResult<ChiTietBaoHiemDto>>, IRequest
+    public class GetAllPaginationChiTietBaoHiemQuery : IRequest<PagedResult<ChiTietBaoHiemDto>>, IRequest
     {
-        public GetAllPaginationChiTietBaoHiemQuery() {}
+        public GetAllPaginationChiTietBaoHiemQuery() { }
         public GetAllPaginationChiTietBaoHiemQuery(int pagenumber, int pagesize)
         {
             PageNumber = pagenumber;

@@ -1,6 +1,6 @@
 ﻿using FluentValidation;
 
-namespace NhaMapThep.Application.Common.Validation
+namespace NhaMayThep.Application.Common.Validation
 {
     public interface IValidatorProvider
     {

@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
 using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec
 {

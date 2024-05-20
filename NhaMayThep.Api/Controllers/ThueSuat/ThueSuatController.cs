@@ -1,8 +1,7 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Security;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.ThueSuat;
 using NhaMayThep.Application.ThueSuat.CreateThueSuat;
 using NhaMayThep.Application.ThueSuat.DeleteThueSuat;
@@ -14,7 +13,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThueSuat
 {
     [ApiController]
-    [Authorize]
+    
     public class ThueSuatController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -35,7 +34,7 @@ namespace NhaMayThep.Api.Controllers.ThueSuat
             CancellationToken cancellationToken = default)
         {
             var result = await this._mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(createThueSuat), new {id = result}, new JsonResponse<string>(result));
+            return CreatedAtAction(nameof(createThueSuat), new { id = result }, new JsonResponse<string>(result));
         }
         [HttpGet("ThueSuat/{ID}")]
         [Produces(MediaTypeNames.Application.Json)]

@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using NhaMapThep.Infrastructure.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Infrastructure.Persistence;
 
-namespace NhaMayThep.Infrastructure.Repositories
+namespace NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories
 {
     public class LoaiHopDongRepository : RepositoryBase<LoaiHopDongEntity, LoaiHopDongEntity, ApplicationDbContext>, ILoaiHopDongReposity
     {

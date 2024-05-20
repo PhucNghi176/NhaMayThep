@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
         public async Task<string> Handle(DeleteThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
             var thongtincongdoan = await _thongtinCongDoanRepository
-                .FindAsync(x=> x.ID.Equals(request.Id), cancellationToken);
+                .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
             if (thongtincongdoan == null || (thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa trước đó");
@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan
             thongtincongdoan.NguoiXoaID = _currentUserService.UserId;
             thongtincongdoan.NgayXoa = DateTime.Now;
             _thongtinCongDoanRepository.Update(thongtincongdoan);
-            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken)>0 ? "Xóa thông tin công đoàn thành công": "Xóa thất bại";
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa thông tin công đoàn thành công" : "Xóa thất bại";
         }
     }
 }

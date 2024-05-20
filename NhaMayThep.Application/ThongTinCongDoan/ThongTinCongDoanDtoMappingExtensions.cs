@@ -1,5 +1,5 @@
 ﻿using AutoMapper;
-using NhaMayThep.Infrastructure.Persistence;
+using NhaMapThep.Domain.Entities;
 
 namespace NhaMayThep.Application.ThongTinCongDoan
 {
@@ -13,7 +13,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan
 
         public static ThongTinCongDoanDto MapToThongTinCongDoanDto(this ThongTinCongDoanEntity entity, IMapper mapper, string nhanvien)
         {
-            var dto= mapper.Map<ThongTinCongDoanDto>(entity);
+            var dto = mapper.Map<ThongTinCongDoanDto>(entity);
             dto.NhanVien = nhanvien;
             return dto;
         }

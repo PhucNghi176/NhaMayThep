@@ -1,27 +1,22 @@
-﻿using Humanizer;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Application.Common.Security;
-using NhaMayThep.Application.HopDong.FilterHopDong;
-using NhaMayThep.Application.HopDong;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.KyLuat;
 using NhaMayThep.Application.KyLuat.CreateKyLuat;
 using NhaMayThep.Application.KyLuat.DeleteKyLuat;
+using NhaMayThep.Application.KyLuat.FilterKyLuat;
 using NhaMayThep.Application.KyLuat.GetAllKyLuat;
 using NhaMayThep.Application.KyLuat.GetByPagination;
 using NhaMayThep.Application.KyLuat.GetKyLuatById;
 using NhaMayThep.Application.KyLuat.UpdateKyLuat;
 using System.Net.Mime;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using NhaMayThep.Application.KyLuat.FilterKyLuat;
 
 namespace NhaMayThep.Api.Controllers.KyLuat
 {
     [ApiController]
-    [Authorize]
+    
     public class KyLuatController : ControllerBase
     {
         private readonly ISender _mediator;

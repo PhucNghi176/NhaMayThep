@@ -1,26 +1,16 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using NhaMapThep.Application.Common.Models;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Infrastructure.Persistence;
 using NinjaNye.SearchExtensions;
-using Org.BouncyCastle.Ocsp;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
-namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
+namespace NhaMayThep.Application.ChiTietBaoHiem.FilterChiTietBaoHiem
 {
     public class FilterChiTietBaoHiemQueryHandler : IRequestHandler<FilterChiTietBaoHiemQuery, PagedResult<ChiTietBaoHiemDto>>
     {
@@ -29,8 +19,8 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
         private readonly IBaoHiemRepository _baohiemRepository;
         private readonly IMapper _mapper;
         private readonly ApplicationDbContext _context;
-        public FilterChiTietBaoHiemQueryHandler(INhanVienRepository nhanVienRepository,IChiTietBaoHiemRepository chitietbaohiemRepository,
-            IBaoHiemRepository baoHiemRepository, IMapper mapper,ApplicationDbContext context)
+        public FilterChiTietBaoHiemQueryHandler(INhanVienRepository nhanVienRepository, IChiTietBaoHiemRepository chitietbaohiemRepository,
+            IBaoHiemRepository baoHiemRepository, IMapper mapper, ApplicationDbContext context)
         {
             _baohiemRepository = baoHiemRepository;
             _mapper = mapper;
@@ -47,7 +37,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
                 {
                     query = query.Where(x => x.ID.Equals(request.Id));
                 }
-                if(request.MaBaoHiem != 0)
+                if (request.MaBaoHiem != 0)
                 {
                     query = query.Where(x => x.LoaiBaoHiem == request.MaBaoHiem);
                 }
@@ -57,7 +47,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
                         chitietbaohiem => chitietbaohiem.LoaiBaoHiem,
                         baohiem => baohiem.ID,
                         (chitietbaohiem, baohiem) => new { ChiTietBaoHiem = chitietbaohiem, Baohiem = baohiem })
-                    .Search(x=> x.Baohiem.Name).Containing(request.TenBaohiem)
+                    .Search(x => x.Baohiem.Name).Containing(request.TenBaohiem)
                     .Select(x => x.ChiTietBaoHiem);
                 }
                 if (request.NgayHieuLuc.HasValue || request.NgayHieuLuc != null)
@@ -66,9 +56,9 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
                 }
                 if (request.NgayKetThuc.HasValue || request.NgayKetThuc != null)
                 {
-                    query = query.Where(x=> x.NgayKetThuc == request.NgayKetThuc);
+                    query = query.Where(x => x.NgayKetThuc == request.NgayKetThuc);
                 }
-                return query;       
+                return query;
             };
 
             var listResult = await _chitietbaohiemRepository.FindAllAsync(request.PageNumber, request.PageSize, options, cancellationToken);

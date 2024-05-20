@@ -1,18 +1,11 @@
-﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.KyLuat.FilterKyLuat;
-using NhaMayThep.Application.KyLuat;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Persistence;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Infrastructure.Persistence;
 
 namespace NhaMayThep.Application.KhenThuong.FilterKhenThuong
 {
@@ -62,7 +55,7 @@ namespace NhaMayThep.Application.KhenThuong.FilterKhenThuong
                     {
                         throw new FormatException("Sai format ngày, tháng, năm");
                     }
-                    
+
                 }
                 if (request.TongThuong != 0)
                 {

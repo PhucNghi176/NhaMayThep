@@ -1,16 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.GetNhanVien
 {
@@ -41,7 +33,7 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVien
             var chucVuName = await _chucVuRepository.FindAsync(x => x.ID == nv.ChucVuID && x.NgayXoa == null);
             var tinhTrangLamViec = await _tinhTrangLamViecRepository.FindAsync(x => x.ID == nv.TinhTrangLamViecID && x.NgayXoa == null);
             // map chucvuName to the return object
-            var nvDto = nv.MapToNhanVienDto(_mapper, chucVuName.Name == null ? "Lỗi" : chucVuName.Name, tinhTrangLamViec.Name is null ? "Lỗi" : tinhTrangLamViec.Name,null);
+            var nvDto = nv.MapToNhanVienDto(_mapper, chucVuName.Name == null ? "Lỗi" : chucVuName.Name, tinhTrangLamViec.Name is null ? "Lỗi" : tinhTrangLamViec.Name, null);
             return nvDto;
 
         }

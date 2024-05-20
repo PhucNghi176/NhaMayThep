@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiem.GetAllBaoHiem
 {
@@ -20,7 +15,7 @@ namespace NhaMayThep.Application.BaoHiem.GetAllBaoHiem
         }
         public async Task<List<BaoHiemDto>> Handle(GetAllBaoHiemQuery query, CancellationToken cancellationToken)
         {
-            var list = await _baoHiemRepository.FindAllAsync(x => x.NgayXoa == null ,cancellationToken);
+            var list = await _baoHiemRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             List<BaoHiemDto> result = new List<BaoHiemDto>();
             foreach (var item in list)
             {

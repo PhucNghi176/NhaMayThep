@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
 
 namespace NhaMayThep.Application.DangKiTangCa.Update
 {

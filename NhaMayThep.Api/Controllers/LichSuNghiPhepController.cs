@@ -1,28 +1,22 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.LichSuNghiPhep.Create;
 using NhaMayThep.Application.LichSuNghiPhep.Delete;
+using NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep;
 using NhaMayThep.Application.LichSuNghiPhep.GetAll;
 using NhaMayThep.Application.LichSuNghiPhep.GetByID;
-using NhaMayThep.Application.LichSuNghiPhep.Update;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Net.Mime;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using NhaMayThep.Application.LichSuNghiPhep;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
-using NhaMayThep.Application.LichSuNghiPhep.Filter;
-using NhaMapThep.Application.Common.Security;
+using NhaMayThep.Application.LichSuNghiPhep.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class LichSuNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;

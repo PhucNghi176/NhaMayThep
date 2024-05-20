@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
@@ -12,7 +11,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
         private readonly ICurrentUserService _currentUserService;
         public DeleteHopDongCommandHandler(IHopDongRepository hopdongRepository, ICurrentUserService currentUserService)
         {
-            _hopdongRepository = hopdongRepository; 
+            _hopdongRepository = hopdongRepository;
             _currentUserService = currentUserService;
         }
         public async Task<string> Handle(DeleteHopDongCommand command, CancellationToken cancellationToken)
@@ -25,7 +24,7 @@ namespace NhaMayThep.Application.HopDong.DeleteHopDongCommand
             result.NguoiXoaID = _currentUserService.UserId;
             if (await _hopdongRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 status = "Xóa thành công";
-            else 
+            else
                 status = "Xóa thất bại";
 
             return status;

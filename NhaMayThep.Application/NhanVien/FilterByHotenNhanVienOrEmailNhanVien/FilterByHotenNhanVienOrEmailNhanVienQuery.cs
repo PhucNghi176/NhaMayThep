@@ -1,14 +1,8 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
+namespace NhaMayThep.Application.NhanVien.FilterByHotenNhanVienOrEmailNhanVien
 {
     public class FilterByHotenNhanVienOrEmailNhanVienQuery : IRequest<PagedResult<NhanVienDto>>, IQuery
     {
@@ -19,8 +13,8 @@ namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
         public FilterByHotenNhanVienOrEmailNhanVienQuery(string HoTenHoacEmail, int pageSize, int pageNumber)
         {
             this.HoTenHoacEmail = HoTenHoacEmail;
-            this.PageNumber = pageNumber;
-            this.PageSize = pageSize;
+            PageNumber = pageNumber;
+            PageSize = pageSize;
         }
         public FilterByHotenNhanVienOrEmailNhanVienQuery() { }
     }

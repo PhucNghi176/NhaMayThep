@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LoaiCongTac;
 using NhaMayThep.Application.LoaiCongTac.Create;
 using NhaMayThep.Application.LoaiCongTac.Delete;
@@ -14,7 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class LoaiCongTacController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -34,7 +34,7 @@ namespace NhaMayThep.Api.Controllers
                  [FromBody] CreateLoaiCongTacCommand command,
                  CancellationToken cancellationToken = default)
         {
-           var result = await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(command, cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return Ok(new JsonResponse<string>(result));
         }

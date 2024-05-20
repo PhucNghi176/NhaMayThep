@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
-using NhaMayThep.Application.Common.Exceptions;
-using NhaMayThep.Domain.Repositories;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Application.Common.Interfaces;
+using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Update
 {
@@ -16,7 +13,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Update
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
         private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
-        public UpdateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IThongTinDaoTaoRepository thongTinDaoTaoRepository, IMapper mapper, ITrinhDoHocVanRepository trinhDoHocVanRepository)
+        public UpdateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService, IThongTinDaoTaoRepository thongTinDaoTaoRepository, IMapper mapper, ITrinhDoHocVanRepository trinhDoHocVanRepository)
         {
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
             _mapper = mapper;

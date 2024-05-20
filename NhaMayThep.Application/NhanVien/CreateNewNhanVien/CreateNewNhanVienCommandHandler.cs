@@ -1,13 +1,10 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.Common.Exceptions;
-using System.Net;
 
-namespace NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand
+namespace NhaMayThep.Application.NhanVien.CreateNewNhanVien
 {
     public class CreateNewNhanVienCommandHandler : IRequestHandler<CreateNewNhanVienCommand, string>
     {

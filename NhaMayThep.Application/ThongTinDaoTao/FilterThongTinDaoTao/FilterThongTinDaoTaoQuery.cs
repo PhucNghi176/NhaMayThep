@@ -1,8 +1,7 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using System;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.ThongTinDaoTao.FillterThongTinDaoTao
+namespace NhaMayThep.Application.ThongTinDaoTao.FilterThongTinDaoTao
 {
     public class FilterThongTinDaoTaoQuery : IRequest<PagedResult<ThongTinDaoTaoDto>>
     {

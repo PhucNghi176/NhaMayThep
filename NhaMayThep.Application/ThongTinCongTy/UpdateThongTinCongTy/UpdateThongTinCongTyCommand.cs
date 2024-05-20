@@ -46,6 +46,6 @@ namespace NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy
         public string DonViQuanLi { get; set; }
         public string LoaiHinhDoanhNghiep { get; set; }
         public string TinhTrang { get; set; }
-        public DateTime NgayHoatDong {  get; set; }
+        public DateTime NgayHoatDong { get; set; }
     }
 }

@@ -8,7 +8,7 @@ using Swashbuckle.AspNetCore.SwaggerGen;
 using Swashbuckle.AspNetCore.SwaggerUI;
 using System.Reflection;
 
-namespace NhaMapThep.Api.Configuration
+namespace NhaMayThep.Api.Configuration
 {
     public static class SwashbuckleConfiguration
     {
@@ -20,14 +20,14 @@ namespace NhaMapThep.Api.Configuration
                 {
                     options.SchemaFilter<RequireNonNullablePropertiesSchemaFilter>();
                     options.SupportNonNullableReferenceTypes();
-                     options.CustomSchemaIds(x => x.FullName);
+                    options.CustomSchemaIds(x => x.FullName);
 
-                     var apiXmlFile = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
-                     if (File.Exists(apiXmlFile))
-                     {
-                         options.IncludeXmlComments(apiXmlFile);
-                     }
-                    
+                    var apiXmlFile = Path.Combine(AppContext.BaseDirectory, $"{Assembly.GetExecutingAssembly().GetName().Name}.xml");
+                    if (File.Exists(apiXmlFile))
+                    {
+                        options.IncludeXmlComments(apiXmlFile);
+                    }
+
                     var applicationXmlFile = Path.Combine(AppContext.BaseDirectory, $"{typeof(DependencyInjection).Assembly.GetName().Name}.xml");
                     if (File.Exists(applicationXmlFile))
                     {
@@ -73,7 +73,7 @@ namespace NhaMapThep.Api.Configuration
                     options.DefaultModelsExpandDepth(-1);
                     //options.DefaultModelRendering(ModelRendering.Model);
                     //options.DocExpansion(DocExpansion.List);
-                 //  options.ShowExtensions();
+                    //  options.ShowExtensions();
                     options.EnableFilter(string.Empty);
                     AddSwaggerEndpoints(app, options);
                     options.OAuthScopeSeparator(" ");

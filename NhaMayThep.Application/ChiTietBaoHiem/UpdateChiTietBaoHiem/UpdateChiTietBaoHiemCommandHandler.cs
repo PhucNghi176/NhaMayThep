@@ -3,11 +3,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem
 {
@@ -26,19 +21,19 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem
             _nhanvienRepository = nhanVienRepository;
             _baohiemRepository = baoHiemRepository;
             _chitietbaohiemRepository = chiTietBaoHiemRepository;
-            _currentUser = currentUser; 
+            _currentUser = currentUser;
         }
         public async Task<string> Handle(UpdateChiTietBaoHiemCommand request, CancellationToken cancellationToken)
         {
             var checkEntityExists = await _chitietbaohiemRepository.FindAsync(x => x.ID == request.Id && x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
-            if(checkEntityExists == null)
+            if (checkEntityExists == null)
             {
                 throw new NotFoundException($"Không tồn tại chi tiết bảo hiểm với Id '{request.Id}'");
             }
-            if(request.LoaiBaoHiem != null)
+            if (request.LoaiBaoHiem != null)
             {
                 var baohiem = await _baohiemRepository.FindAsync(x => x.ID == request.LoaiBaoHiem && !x.NgayXoa.HasValue, cancellationToken);
-                if(baohiem == null)
+                if (baohiem == null)
                 {
                     throw new NotFoundException($"Bảo hiểm với Id '{request.LoaiBaoHiem}' không tồn tại");
                 }
@@ -50,11 +45,11 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.UpdateChiTietBaoHiem
             }
             checkEntityExists.NgayHieuLuc = request.NgayHieuLuc ?? checkEntityExists.NgayHieuLuc;
             checkEntityExists.NgayKetThuc = request.NgayKetThuc ?? checkEntityExists.NgayKetThuc;
-            checkEntityExists.NoiCap = request.NoiCap?.Length >0 ? request.NoiCap :checkEntityExists.NoiCap;
+            checkEntityExists.NoiCap = request.NoiCap?.Length > 0 ? request.NoiCap : checkEntityExists.NoiCap;
             checkEntityExists.NgayCapNhatCuoi = DateTime.Now;
             checkEntityExists.NguoiCapNhatID = _currentUser.UserId;
             _chitietbaohiemRepository.Update(checkEntityExists);
-            var result =await _chitietbaohiemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            var result = await _chitietbaohiemRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
             if (result > 0)
             {
                 return "Cập nhật thành công";

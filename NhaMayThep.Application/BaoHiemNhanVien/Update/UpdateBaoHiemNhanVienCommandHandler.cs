@@ -3,13 +3,7 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.Common.Exceptions;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Repositories;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVien.Update
 {
@@ -52,7 +46,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVien.Update
             baoHiemNhanVien.MaSoNhanVien = request.MaSoNhanVien;
             baoHiemNhanVien.NguoiCapNhatID = _currentUserService.UserId;
             baoHiemNhanVien.NgayCapNhat = DateTime.Now;
-           
+
             _baoHiemNhanVienRepository.Update(baoHiemNhanVien);
             if (await _baoHiemNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0)
                 return "Cập nhật thành công!";

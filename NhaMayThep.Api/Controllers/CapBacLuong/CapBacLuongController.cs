@@ -1,7 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.CapBacLuong;
 using NhaMayThep.Application.CapBacLuong.CreateCapBacLuong;
 using NhaMayThep.Application.CapBacLuong.DeleteCapBacLuong;
@@ -12,7 +12,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.CapBacLuong
 {
     [ApiController]
-    [Authorize]
+    
     public class CapBacLuongController : ControllerBase
     {
         private readonly ISender _mediator;

@@ -1,32 +1,27 @@
-﻿using Humanizer;
-using MediatR;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Application.Common.Security;
-using NhaMayThep.Application.ThongTinGiamTru;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.TinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.CreateTinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.DeleteTinhTrangLamViec;
 using NhaMayThep.Application.TinhTrangLamViec.GetAllTinhTrangLamViec;
+using NhaMayThep.Application.TinhTrangLamViec.GetByPagination;
 using NhaMayThep.Application.TinhTrangLamViec.GetTinhTrangLamViecByID;
 using NhaMayThep.Application.TinhTrangLamViec.UpdateTinhTrangLamViec;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Net.Mime;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory.Database;
-using NhaMayThep.Application.TinhTrangLamViec.GetByPagination;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class TinhTrangLamViecController : ControllerBase
     {
         private readonly IMediator _mediator;
         public TinhTrangLamViecController(IMediator mediator)
         {
-            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator)); 
+            _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
         [HttpGet]
         [Route("TinhTrangLamViec")]
@@ -40,7 +35,7 @@ namespace NhaMayThep.Api.Controllers
         public async Task<ActionResult<List<TinhTrangLamViecDTO>>> getAll(
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetAllTinhTrangLamViecQuery(),cancellationToken);
+            var result = await _mediator.Send(new GetAllTinhTrangLamViecQuery(), cancellationToken);
             return Ok(new JsonResponse<List<TinhTrangLamViecDTO>>(result));
         }
         [HttpGet]
@@ -56,7 +51,7 @@ namespace NhaMayThep.Api.Controllers
             [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new GetTinhTrangLamViecByIDQuery(Id),cancellationToken);
+            var result = await _mediator.Send(new GetTinhTrangLamViecByIDQuery(Id), cancellationToken);
             return Ok(new JsonResponse<TinhTrangLamViecDTO>(result));
         }
         [HttpPost]
@@ -72,7 +67,7 @@ namespace NhaMayThep.Api.Controllers
             [FromBody] CreateTinhTrangLamViecCommand command,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(command,cancellationToken);
+            var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
         [HttpPut]

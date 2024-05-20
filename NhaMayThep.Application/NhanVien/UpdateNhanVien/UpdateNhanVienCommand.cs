@@ -1,17 +1,12 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
 {
     public class UpdateNhanVienCommand : IRequest<string>, ICommand
     {
         public UpdateNhanVienCommand() { }
-        public UpdateNhanVienCommand(string id ,string email , string hoVaTen, int chucVuID, int tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChiLienLac, string soDienThoaiLienLac, string maSoThue, string tenNganHang, string soTaiKhoan)
+        public UpdateNhanVienCommand(string id, string email, string hoVaTen, int chucVuID, int tinhTrangLamViecID, DateTime ngayVaoCongTy, string diaChiLienLac, string soDienThoaiLienLac, string maSoThue, string tenNganHang, string soTaiKhoan)
         {
             Id = id;
             Email = email;

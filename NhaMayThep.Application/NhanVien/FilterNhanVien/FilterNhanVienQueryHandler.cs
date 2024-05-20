@@ -1,20 +1,13 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
+namespace NhaMayThep.Application.NhanVien.FilterNhanVien
 {
     public class FilterNhanVienQueryHandler : IRequestHandler<FilterNhanVienQuery, PagedResult<NhanVienDto>>
     {
@@ -76,7 +69,7 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
 
             var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var CanCuocCongDan= await _canCuocCongDanRepository.FindAllToDictionaryAsync(x=>x.NgayXoa == null,x=>x.NhanVienID,x=>x.CanCuocCongDan, cancellationToken); 
+            var CanCuocCongDan = await _canCuocCongDanRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.NhanVienID, x => x.CanCuocCongDan, cancellationToken);
             return PagedResult<NhanVienDto>.Create(
                 totalCount: result.TotalCount,
                 pageCount: result.PageCount,

@@ -1,9 +1,8 @@
-﻿using Humanizer;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LichSuCongTacNhanVien;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Create;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Delete;
@@ -12,15 +11,13 @@ using NhaMayThep.Application.LichSuCongTacNhanVien.GetAll;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetByMaSoNhanVien;
 using NhaMayThep.Application.LichSuCongTacNhanVien.GetByPagination;
 using NhaMayThep.Application.LichSuCongTacNhanVien.Update;
-using NhaMayThep.Application.LichSuNghiPhep.GetByPagination;
 using System.Net.Mime;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NhaMayThep.Api.Controllers
 {
-    
+
     [ApiController]
-    [Authorize]
+    
     public class LichSuCongTacNhanVienController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -131,7 +128,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<LichSuCongTacNhanVienDto>>>> Filter(
-            [FromQuery] FilterLichSuCongTacQuery query, 
+            [FromQuery] FilterLichSuCongTacQuery query,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);

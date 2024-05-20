@@ -1,7 +1,6 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LoaiHopDong.UpdateLoaiHopDong

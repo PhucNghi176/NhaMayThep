@@ -1,10 +1,5 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Filter
 {
@@ -16,13 +11,13 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Filter
         public string? MaBaoHiemChiTiet { get; set; }
         public string? NhanVienId { get; set; }
         public int? LoaiBaoHiem { get; set; }
-        public FilterBaoHiemNhanVienChiTietBaoHiemQuery(){}
+        public FilterBaoHiemNhanVienChiTietBaoHiemQuery() { }
         public FilterBaoHiemNhanVienChiTietBaoHiemQuery(
-            int pageNumber, 
-            int pageSize, 
-            int? maBaoHiemNhanVien, 
-            string? maBaoHiemChiTiet, 
-            string? nhanVienId, 
+            int pageNumber,
+            int pageSize,
+            int? maBaoHiemNhanVien,
+            string? maBaoHiemChiTiet,
+            string? nhanVienId,
             int? loaiBaoHiem)
         {
             PageNumber = pageNumber;

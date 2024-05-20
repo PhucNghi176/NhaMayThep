@@ -2,12 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVien
 {
@@ -26,7 +20,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.GetByNhanVienIDThongTinDangVie
         {
 
             var thongTinDangVien = await _thongTinDangVienRepository.FindAllAsync(x => x.NhanVienID == request.NhanVienID && x.NgayXoa == null, cancellationToken);
-            if(thongTinDangVien == null)
+            if (thongTinDangVien == null)
                 throw new NotFoundException("Không tìm thấy Thông Tin Đảng Viên");
 
             return thongTinDangVien.MapToThongTinDangVienDtoList(_mapper);

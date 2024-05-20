@@ -1,24 +1,22 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Application.LuongSanPham;
 using NhaMayThep.Application.LuongSanPham.Create;
 using NhaMayThep.Application.LuongSanPham.Delete;
-using NhaMayThep.Application.LuongSanPham.GetAll;
-using NhaMayThep.Application.LuongSanPham.Update;
-using NhaMayThep.Application.LuongSanPham;
-using System.Net.Mime;
-using NhaMayThep.Application.LuongSanPham.GetId;
-using NhaMayThep.Application.LuongSanPham;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LuongSanPham.Filter;
+using NhaMayThep.Application.LuongSanPham.GetAll;
+using NhaMayThep.Application.LuongSanPham.GetId;
+using NhaMayThep.Application.LuongSanPham.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
 
     [ApiController]
-    [Authorize]
+    
     public class LuongSanPhamController : ControllerBase
     {
         private readonly ISender _mediator;

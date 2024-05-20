@@ -2,13 +2,8 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.StaticFiles;
 using NhaMapThep.Domain.Common.Exceptions;
-using System;
-using System.IO;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.Logs.DowloadFileLogs
+namespace NhaMayThep.Application.LogTest.DowloadFileLogs
 {
     public class DowloadFileLogsQueryHandler : IRequestHandler<DowloadFileLogsQuery, FileContentResult>
     {

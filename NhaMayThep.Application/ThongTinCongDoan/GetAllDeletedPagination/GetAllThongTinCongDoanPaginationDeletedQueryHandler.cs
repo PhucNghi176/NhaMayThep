@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPaginition
+namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPagination
 {
     public class GetAllThongTinCongDoanPaginationDeletedQueryHandler : IRequestHandler<GetAllThongTinCongDoanPaginationDeletedQuery, PagedResult<ThongTinCongDoanDto>>
     {

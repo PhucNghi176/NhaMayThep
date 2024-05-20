@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
 {
@@ -37,7 +31,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
                 if (!string.IsNullOrEmpty(request.MaSoNhanVien))
                     query = query.Where(x => x.MaSoNhanVien.Contains(request.MaSoNhanVien, StringComparison.Ordinal));
 
-                if (request.LoaiCongTacID!=0)
+                if (request.LoaiCongTacID != 0)
                     query = query.Where(x => x.LoaiCongTacID.Equals(request.LoaiCongTacID));
 
                 if (request.NgayBatDau != null)
@@ -49,7 +43,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
                 if (!string.IsNullOrEmpty(request.NoiCongTac))
                     query = query.Where(x => x.NoiCongTac.Contains(request.NoiCongTac));
 
-                if(!string.IsNullOrEmpty(request.HoVaTen))
+                if (!string.IsNullOrEmpty(request.HoVaTen))
                     query = query.Where(x => x.NhanVien.HoVaTen.Contains(request.HoVaTen));
 
                 return query;
@@ -65,9 +59,9 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
                x => x.HoVaTen,
                cancellationToken);
 
-            var LoaiCongTac = await _loaiCongTacRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name,cancellationToken);
+            var LoaiCongTac = await _loaiCongTacRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
 
-           
+
 
             return PagedResult<LichSuCongTacNhanVienDto>.Create
                 (
@@ -75,7 +69,7 @@ namespace NhaMayThep.Application.LichSuCongTacNhanVien.FilterLichSuCongTac
                 pageCount: list.PageCount,
                 pageSize: list.PageSize,
                 pageNumber: list.PageNo,
-                data: list.MapTolichSuCongTacNhanVienDtoList(_mapper,hoVaTen,LoaiCongTac)
+                data: list.MapTolichSuCongTacNhanVienDtoList(_mapper, hoVaTen, LoaiCongTac)
                 );
         }
     }

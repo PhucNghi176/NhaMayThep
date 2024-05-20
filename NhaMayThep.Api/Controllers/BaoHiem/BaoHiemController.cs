@@ -1,9 +1,7 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.BaoHiem;
 using NhaMayThep.Application.BaoHiem.CreateNewBaoHiem;
 using NhaMayThep.Application.BaoHiem.FilterBaoHiem;
@@ -12,13 +10,14 @@ using NhaMayThep.Application.BaoHiem.GetBaoHiemById;
 using NhaMayThep.Application.BaoHiem.GetPaginationBaoHiem;
 using NhaMayThep.Application.BaoHiem.RemoveBaoHiem;
 using NhaMayThep.Application.BaoHiem.UpdateBaoHiem;
+using NhaMayThep.Application.Common.Pagination;
 using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers.BaoHiem
 {
     [ApiController]
-    [Authorize]
     
+
     public class BaoHiemController : ControllerBase
     {
         private ISender _mediator;
@@ -52,7 +51,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         public async Task<ActionResult<BaoHiemDto>> GetId([FromRoute] int id, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(new GetBaoHiemByIdQuery(id: id), cancellationToken);
-            return Ok(new JsonResponse<BaoHiemDto> (result));
+            return Ok(new JsonResponse<BaoHiemDto>(result));
         }
 
         [HttpPost("bao-hiem")]
@@ -91,7 +90,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<string>> Update([FromBody] UpdateBaoHiemCommand command,CancellationToken cancellationToken = default)
+        public async Task<ActionResult<string>> Update([FromBody] UpdateBaoHiemCommand command, CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
@@ -119,7 +118,7 @@ namespace NhaMayThep.Api.Controllers.BaoHiem
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<BaoHiemDto>>>> FilterBaoHiem(
-            [FromQuery] FilterBaoHiemQuery query, 
+            [FromQuery] FilterBaoHiemQuery query,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send<PagedResult<BaoHiemDto>>(query, cancellationToken);

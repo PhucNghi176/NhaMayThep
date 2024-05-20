@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LoaiNghiPhep;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Delete;
 public class DeleteLoaiNghiPhepCommand : IRequest<string>, ICommand

@@ -1,12 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
-using NhaMayThep.Application.KyLuat;
-using NhaMayThep.Application.QuaTrinhNhanSu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KhenThuong
 {
@@ -22,7 +15,7 @@ namespace NhaMayThep.Application.KhenThuong
         {
             var dto = mapper.Map<KhenThuongDTO>(entity);
             dto.TenNhanVien = tenNhanVien;
-            dto.ChinhSachNhanSu = chinhSachNhanSu;         
+            dto.ChinhSachNhanSu = chinhSachNhanSu;
             return dto;
         }
 
@@ -30,7 +23,7 @@ namespace NhaMayThep.Application.KhenThuong
             => entities.Select(x =>
             x.MapToKhenThuongDTO(mapper,
                 chinhSachNhanSu.ContainsKey(x.ChinhSachNhanSuID) ? chinhSachNhanSu[x.ChinhSachNhanSuID] : "Lỗi",
-                tenNhanVien.ContainsKey(x.MaSoNhanVien) ? tenNhanVien[x.MaSoNhanVien] : "Lỗi"               
+                tenNhanVien.ContainsKey(x.MaSoNhanVien) ? tenNhanVien[x.MaSoNhanVien] : "Lỗi"
             )).ToList();
     }
 }

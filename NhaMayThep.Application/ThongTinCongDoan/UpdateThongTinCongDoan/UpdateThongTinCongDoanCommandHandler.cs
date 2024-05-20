@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
@@ -22,9 +21,9 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
         }
         public async Task<string> Handle(UpdateThongTinCongDoanCommand request, CancellationToken cancellationToken)
         {
-            var thongtincongdoan= await _thongtinCongDoanRepository
+            var thongtincongdoan = await _thongtinCongDoanRepository
                 .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
-            if (thongtincongdoan == null ||(thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue)) 
+            if (thongtincongdoan == null || (thongtincongdoan.NguoiXoaID != null && thongtincongdoan.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin công đoàn không tồn tại hoặc đã bị vô hiệu hóa");
             }
@@ -41,7 +40,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan
             thongtincongdoan.ThuKiCongDoan = request.ThuKyCongDoan;
             thongtincongdoan.NgayGiaNhap = request.NgayGiaNhap ?? thongtincongdoan.NgayGiaNhap;
             _thongtinCongDoanRepository.Update(thongtincongdoan);
-            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken)> 0 ? "Cập nhật thành công": "Cập nhật thất bại";
+            return await _thongtinCongDoanRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật thành công" : "Cập nhật thất bại";
         }
     }
 }

@@ -22,7 +22,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
                 .NotEmpty().WithMessage("Ngày sinh không để trống");
             RuleFor(c => c.NgaySinh)
                    .Must(CheckAge).WithMessage("Ngày sinh không hợp lệ");
-           
+
             RuleFor(c => c.QueQuan)
                 .NotEmpty().WithMessage("Quên quán không để trống");
             RuleFor(c => c.DiaChiThuongTru)

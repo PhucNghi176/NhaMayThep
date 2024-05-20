@@ -3,12 +3,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.BangLuong.Create;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BangLuong.Create
 {
@@ -44,7 +38,7 @@ namespace NhaMayThep.Application.BangLuong.Create
             var checkDuplicatoion = await _BangLuongRepository.FindAsync(x => x.MaSoNhanVien == request.MaSoNhanVien && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (checkDuplicatoion != null)
                 throw new NotFoundException("Nhan Vien" + request.MaSoNhanVien + "da ton tai Bang Luong");
-            
+
             var phuCapCongDoan = await _phuCapCongDoanRepository.FindAsync(x => x.ID == request.PhuCapCongDoanID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (phuCapCongDoan == null)
                 throw new NotFoundException("Phụ Cấp Công Đoàn Id: " + request.PhuCapCongDoanID + " không tìm thấy");

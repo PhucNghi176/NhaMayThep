@@ -1,16 +1,11 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
 {
     public class CreateThongTinDangVienCommand : IRequest<string>, ICommand
     {
-        public CreateThongTinDangVienCommand(string nhanVienId, int donViCongTacId, int chucVuDang, int trinhDoChinhTri, DateTime ngayVaoDang, int capDangVien )
+        public CreateThongTinDangVienCommand(string nhanVienId, int donViCongTacId, int chucVuDang, int trinhDoChinhTri, DateTime ngayVaoDang, int capDangVien)
         {
             NhanVienID = nhanVienId;
             DonViCongTacID = donViCongTacId;

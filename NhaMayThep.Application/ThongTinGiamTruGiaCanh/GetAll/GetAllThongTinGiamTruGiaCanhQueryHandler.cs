@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.ThongTinCongDoan;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll
 {

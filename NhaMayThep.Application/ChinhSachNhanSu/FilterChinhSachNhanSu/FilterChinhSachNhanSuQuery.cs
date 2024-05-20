@@ -1,12 +1,6 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.QuaTrinhNhanSu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.FilterChinhSachNhanSu
 {
@@ -18,7 +12,7 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.FilterChinhSachNhanSu
         public DateTime? NgayHieuLuc { get; set; }
         public FilterChinhSachNhanSuQuery()
         {
-            
+
         }
         public FilterChinhSachNhanSuQuery(int no, int pageSize, string mucDo, DateTime ngayHieuLuc)
         {

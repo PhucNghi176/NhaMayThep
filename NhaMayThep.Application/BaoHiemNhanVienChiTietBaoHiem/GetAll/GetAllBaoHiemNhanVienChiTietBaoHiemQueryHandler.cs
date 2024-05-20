@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAll
 {
@@ -24,7 +19,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAll
         {
             var listExists = await _baohiemNhanVienChiTietRepository
                 .FindAllAsync(x => string.IsNullOrEmpty(x.NguoiXoaID) && !x.NgayXoa.HasValue, cancellationToken);
-            if(listExists.Count() == 0)
+            if (listExists.Count() == 0)
             {
                 throw new NotFoundException("Không tìm thấy bất kỳ bảo hiểm nào");
             }

@@ -5,11 +5,6 @@ using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem
 {
@@ -20,8 +15,8 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem
         private readonly IChiTietBaoHiemRepository _chitietbaohiemRepository;
         private readonly ICurrentUserService _currentUser;
         public CreateChiTietBaoHiemCommandHandler(
-            INhanVienRepository nhanVienRepository, 
-            IBaoHiemRepository baoHiemRepository, 
+            INhanVienRepository nhanVienRepository,
+            IBaoHiemRepository baoHiemRepository,
             IChiTietBaoHiemRepository chitietbaohiemRepository,
             ICurrentUserService currentUser)
         {
@@ -34,13 +29,13 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.CreateChiTietBaoHiem
         {
             Func<IQueryable<ChiTietBaoHiemEntity>, IQueryable<ChiTietBaoHiemEntity>> options = query =>
             {
-                if(request.LoaiBaoHiem != 0)
+                if (request.LoaiBaoHiem != 0)
                 {
                     query = query.Where(x => x.LoaiBaoHiem == request.LoaiBaoHiem);
                 }
                 if (!string.IsNullOrEmpty(request.NoiCap))
                 {
-                    query = query.Where(x=> EF.Functions.Like(x.NoiCap!, request.NoiCap));
+                    query = query.Where(x => EF.Functions.Like(x.NoiCap!, request.NoiCap));
                 }
                 query = query.Where(x => x.NgayHieuLuc == request.NgayHieuLuc);
                 query = query.Where(x => x.NgayKetThuc == request.NgayKetThuc);

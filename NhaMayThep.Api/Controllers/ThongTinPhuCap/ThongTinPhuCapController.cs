@@ -1,10 +1,8 @@
-﻿using Humanizer;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinPhuCap;
 using NhaMayThep.Application.ThongTinPhuCap.CreateNewPhuCap;
 using NhaMayThep.Application.ThongTinPhuCap.DeletePhuCap;
@@ -13,12 +11,11 @@ using NhaMayThep.Application.ThongTinPhuCap.GetByPagination;
 using NhaMayThep.Application.ThongTinPhuCap.GetPhuCapById;
 using NhaMayThep.Application.ThongTinPhuCap.UpdatePhuCap;
 using System.Net.Mime;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 
 namespace NhaMayThep.Api.Controllers.ThongTinPhuCap
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinPhuCapController : ControllerBase
     {
         private readonly ISender _mediator;

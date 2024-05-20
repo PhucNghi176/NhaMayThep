@@ -1,12 +1,6 @@
 ﻿
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.GetHangLoat.GetHangLoatHopDong;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.GetHangLoat.GetHangLoatQuaTrinhNhanSu
 {

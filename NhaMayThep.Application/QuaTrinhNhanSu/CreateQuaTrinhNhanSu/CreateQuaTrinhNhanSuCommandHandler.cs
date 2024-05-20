@@ -1,11 +1,9 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Data;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 {

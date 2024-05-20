@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen
 {
@@ -37,7 +32,7 @@ namespace NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen
             nv.PasswordHash = newPassword;
             _nhanVienRepository.Update(nv);
             var a = await _nhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            return a>0?"Đổi mật khẩu thành công":"Đổi mật khẩu thất bại";
+            return a > 0 ? "Đổi mật khẩu thành công" : "Đổi mật khẩu thất bại";
 
         }
     }

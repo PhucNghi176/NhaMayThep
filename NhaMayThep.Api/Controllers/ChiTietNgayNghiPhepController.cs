@@ -1,18 +1,14 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.ChiTietNgayNghiPhep;
 using NhaMayThep.Application.ChiTietNgayNghiPhep.Create;
 using NhaMayThep.Application.ChiTietNgayNghiPhep.Delete;
-using NhaMayThep.Application.ChiTietNgayNghiPhep.Update;
 using NhaMayThep.Application.ChiTietNgayNghiPhep.GetAll;
 using NhaMayThep.Application.ChiTietNgayNghiPhep.GetById;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Threading.Tasks;
-using System.Threading;
+using NhaMayThep.Application.ChiTietNgayNghiPhep.Update;
+using NhaMayThep.Application.Common.Pagination;
 using System.Net.Mime;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using NhaMayThep.Application.ChiTietNgayNghiPhep;
-using NhaMapThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Api.Controllers
 {
@@ -46,7 +42,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            var command = new DeleteChiTietNgayNghiPhepCommand(id); 
+            var command = new DeleteChiTietNgayNghiPhepCommand(id);
             await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>("ChiTietNgayNghiPhep xóa thành công "));
         }

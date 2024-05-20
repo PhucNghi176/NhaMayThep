@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
 {
@@ -19,9 +14,9 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Create
         public int NamHieuLuc { get; set; }
 
 
-        public CreateChiTietNgayNghiPhepCommand( string nhanVienId, int loaiNghiPhepID, double tongSoGio, double soGioDaNghiPhep, double soGioConLai, int namHieuLuc)
+        public CreateChiTietNgayNghiPhepCommand(string nhanVienId, int loaiNghiPhepID, double tongSoGio, double soGioDaNghiPhep, double soGioConLai, int namHieuLuc)
         {
-            
+
             NhanVienID = nhanVienId;
             LoaiNghiPhepID = loaiNghiPhepID;
             TongSoGio = tongSoGio;

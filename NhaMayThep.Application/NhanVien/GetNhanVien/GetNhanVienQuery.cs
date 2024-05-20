@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.GetNhanVien
 {
@@ -12,7 +7,7 @@ namespace NhaMayThep.Application.NhanVien.GetNhanVien
     {
         public GetNhanVienQuery()
         {
-            
+
         }
         public GetNhanVienQuery(string predicate)
         {

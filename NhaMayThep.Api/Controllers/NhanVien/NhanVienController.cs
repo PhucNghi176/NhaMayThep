@@ -1,36 +1,27 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.Common.Interfaces;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.NhanVien;
 using NhaMayThep.Application.NhanVien.Authenticate.Login;
 using NhaMayThep.Application.NhanVien.ChangePasswordNhanVIen;
-using NhaMayThep.Application.NhanVien.CreateNewNhanVienCommand;
+using NhaMayThep.Application.NhanVien.CreateNewNhanVien;
+using NhaMayThep.Application.NhanVien.CreateNewNhanVienByExcel;
 using NhaMayThep.Application.NhanVien.DeleteNhanVien;
 using NhaMayThep.Application.NhanVien.DeleteNhanVienHangLoat;
-using NhaMayThep.Application.NhanVien.GetAllNhanVien;
-using NhaMayThep.Application.NhanVien.GetAllNhanVienWithoutHopDong;
-using NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail;
-using NhaMayThep.Application.NhanVien.GetNhanVien;
+using NhaMayThep.Application.NhanVien.FilterNhanVien;
 using NhaMayThep.Application.NhanVien.GetNhanVienIDByEmail;
-using NhaMayThep.Application.NhanVien.GetNhanVienTest;
 using NhaMayThep.Application.NhanVien.Test.TestTaoNhanVienHangLoat;
 using NhaMayThep.Application.NhanVien.UpdateNhanVien;
-using Humanizer;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
-using NhaMayThep.Application.NhanVien.GetByPagination;
 using System.Net.Mime;
-using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
-using NhaMayThep.Application.NhanVien.CreateNewNhanVienByExcel;
 
-namespace NhaMayThep.Api.Controllers
+namespace NhaMayThep.Api.Controllers.NhanVien
 {
 
     [ApiController]
-    [Authorize]
+    
     public class NhanVienController : ControllerBase
     {
         private readonly IMediator _mediator;
@@ -212,7 +203,7 @@ namespace NhaMayThep.Api.Controllers
         //    var result = await _mediator.Send(query, cancellationToken);
         //    return Ok(result);
         //}
-        
+
         [HttpGet]
         [Route("nhan-vien/filter-nhan-vien")]
         [Produces(MediaTypeNames.Application.Json)]

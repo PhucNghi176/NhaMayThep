@@ -1,16 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using FluentValidation;
-using NhaMayThep.Application.ThongTinCongDoan.UpdateThongTinCongDoan;
+﻿using FluentValidation;
 
 namespace NhaMayThep.Application.LuongThoiGian.UpdateLuongThoiGian
 {
     public class UpdateLuongThoiGianCommandValidator : AbstractValidator<UpdateLuongThoiGianCommand>
     {
-        public UpdateLuongThoiGianCommandValidator() 
+        public UpdateLuongThoiGianCommandValidator()
         {
             RuleFor(x => x.Id)
                 .NotEmpty().WithMessage("Mã lương thời gian không được để trống")

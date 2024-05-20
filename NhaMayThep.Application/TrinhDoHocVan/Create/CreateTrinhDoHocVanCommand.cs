@@ -1,7 +1,6 @@
 ﻿using MediatR;
-using System;
 
-namespace NhaMapThep.Application.TrinhDoHocVan.Commands
+namespace NhaMayThep.Application.TrinhDoHocVan.Create
 {
     public class CreateTrinhDoHocVanCommand : IRequest<string>
     {

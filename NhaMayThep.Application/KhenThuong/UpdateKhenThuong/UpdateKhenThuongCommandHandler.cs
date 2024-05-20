@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Common.Exceptions;
 
 namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
 {
@@ -30,13 +24,13 @@ namespace NhaMayThep.Application.KhenThuong.UpdateKhenThuong
         public UpdateKhenThuongCommandHandler() { }
         public async Task<string> Handle(UpdateKhenThuongCommand request, CancellationToken cancellationToken)
         {
-            if(request.MaSoNhanVien != null)
+            if (request.MaSoNhanVien != null)
             {
                 var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
                 if (nhanvien == null)
                     throw new NotFoundException($"Không tìm thấy nhân viên với ID : {request.MaSoNhanVien} hoặc nhân viên này đã bị xóa.");
             }
-            if(request.ChinhSachNhanSuID != null)
+            if (request.ChinhSachNhanSuID != null)
             {
                 var chinhsach = await this._chinhsach.FindAsync(x => x.ID.Equals(request.ChinhSachNhanSuID) && x.NgayXoa == null, cancellationToken);
                 if (chinhsach == null)

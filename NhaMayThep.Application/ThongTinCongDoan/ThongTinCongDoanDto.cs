@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
-using NhaMayThep.Infrastructure.Persistence;
+using NhaMapThep.Domain.Entities;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThongTinCongDoan
 {

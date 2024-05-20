@@ -3,8 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LichSuNghiPhep.Update;
-using NhaMayThep.Application.LichSuNghiPhep;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Update;
 public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNghiPhepCommand, LichSuNghiPhepDto>
@@ -66,7 +64,7 @@ public class UpdateLichSuNghiPhepCommandHandler : IRequestHandler<UpdateLichSuNg
         existingLsnp.NgayBatDau = request.NgayBatDau;
         existingLsnp.NgayKetThuc = request.NgayKetThuc;
         existingLsnp.LyDo = request.LyDo;
-        existingLsnp.NguoiDuyet = request.NguoiDuyet;                        
+        existingLsnp.NguoiDuyet = request.NguoiDuyet;
         existingLsnp.NgayCapNhatCuoi = DateTime.UtcNow;
 
         _repo.Update(existingLsnp);

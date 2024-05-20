@@ -1,16 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Authorization.Infrastructure;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinCongDoan;
 using NhaMayThep.Application.ThongTinCongDoan.CreateThongTinCongDoan;
 using NhaMayThep.Application.ThongTinCongDoan.DeleteThongTinCongDoan;
-using NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan;
+using NhaMayThep.Application.ThongTinCongDoan.FilterThongTinCongDoan;
 using NhaMayThep.Application.ThongTinCongDoan.GetAll;
 using NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted;
-using NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPaginition;
+using NhaMayThep.Application.ThongTinCongDoan.GetAllDeletedPagination;
 using NhaMayThep.Application.ThongTinCongDoan.GetAllPagination;
 using NhaMayThep.Application.ThongTinCongDoan.GetById;
 using NhaMayThep.Application.ThongTinCongDoan.GetByIdDeleted;
@@ -24,7 +23,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinCongDoanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -220,7 +219,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<PagedResult<ThongTinCongDoanDto>>>> FilterThongTinCongDoan(
-            [FromQuery] FilterThongTinCongDoanQuery query, 
+            [FromQuery] FilterThongTinCongDoanQuery query,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send<PagedResult<ThongTinCongDoanDto>>(query, cancellationToken);

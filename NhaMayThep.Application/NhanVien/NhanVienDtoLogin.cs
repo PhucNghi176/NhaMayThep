@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.NhanVien
 {
@@ -9,7 +9,7 @@ namespace NhaMayThep.Application.NhanVien
         public void Mapping(Profile profile)
         {
             profile.CreateMap<NhanVienEntity, NhanVienDtoLogin>();
-        }      
+        }
 
         public string Email { get; set; }
         public string ID { get; set; }

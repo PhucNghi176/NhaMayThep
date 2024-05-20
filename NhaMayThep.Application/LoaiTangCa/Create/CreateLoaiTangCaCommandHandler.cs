@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LoaiTangCa.Create;
-using NhaMayThep.Application.LoaiTangCa;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Common.Exceptions;
 
 namespace NhaMayThep.Application.LoaiTangCa.Create
 {

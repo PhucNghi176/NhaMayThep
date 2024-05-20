@@ -1,15 +1,15 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.LogTest.DowloadFileLogs;
+using NhaMayThep.Application.LogTest.GetNewestLogs;
 using System.Net.Mime;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.Logs.GetNewestLogs;
-using NhaMayThep.Application.Logs.DowloadFileLogs;
 
 namespace NhaMayThep.Api.Controllers
 {
 
     [ApiController]
-    //[Authorize]
+    //
     public class LogsController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -27,7 +27,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult> DowloadFile(CancellationToken cancellationToken = default)
         {
-           
+
             var result = await _mediator.Send(new DowloadFileLogsQuery(), cancellationToken);
             //return CreatedAtAction(nameof(GetOrderById), new { id = result }, new JsonResponse<Guid>(result));
             return result;
@@ -39,7 +39,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(string), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult> GetFile(int lineCount,CancellationToken cancellationToken = default)
+        public async Task<ActionResult> GetFile(int lineCount, CancellationToken cancellationToken = default)
         {
 
             var result = await _mediator.Send(new GetNewestLogsQuery(lineCount), cancellationToken);

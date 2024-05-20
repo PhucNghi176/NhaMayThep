@@ -1,18 +1,18 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.ThongTinCongTy;
 using NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy;
 using NhaMayThep.Application.ThongTinCongTy.DeleteThongTinCongTy;
+using NhaMayThep.Application.ThongTinCongTy.GetAll;
 using NhaMayThep.Application.ThongTinCongTy.UpdateThongTinCongTy;
 using System.Net.Mime;
-using NhaMayThep.Application.ThongTinCongTy;
-using NhaMayThep.Application.ThongTinCongTy.GetAll;
 
 namespace NhaMayThep.Api.Controllers.ThongTinCongTy
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinCongTyController : ControllerBase
     {
         private readonly ISender _mediator;

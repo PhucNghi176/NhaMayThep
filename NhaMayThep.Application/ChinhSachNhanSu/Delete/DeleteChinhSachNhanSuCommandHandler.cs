@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.Delete
 {
@@ -22,7 +17,7 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Delete
         public async Task<string> Handle(DeleteChinhSachNhanSuCommand command, CancellationToken cancellationToken)
         {
             var entity = await _chinhSachNhanSuRepository.FindAsync(x => x.ID == command.ID && x.NguoiXoaID == null);
-            if(entity == null)
+            if (entity == null)
             {
                 throw new NotFoundException("ID không tồn tại");
             }

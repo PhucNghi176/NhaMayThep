@@ -9,6 +9,6 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.DeleteThongTinGiamTruGia
         {
             this.Id = id;
         }
-        public string Id { get;set; }
+        public string Id { get; set; }
     }
 }

@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination
 {
-    public class GetAllPaginationChiTietBaoHiemQueryValidator: AbstractValidator<GetAllPaginationChiTietBaoHiemQuery>
+    public class GetAllPaginationChiTietBaoHiemQueryValidator : AbstractValidator<GetAllPaginationChiTietBaoHiemQuery>
     {
-        public GetAllPaginationChiTietBaoHiemQueryValidator() 
+        public GetAllPaginationChiTietBaoHiemQueryValidator()
         {
             RuleFor(x => x.PageNumber)
                 .NotNull()

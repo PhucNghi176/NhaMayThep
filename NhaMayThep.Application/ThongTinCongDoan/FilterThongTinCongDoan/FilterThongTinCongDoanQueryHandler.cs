@@ -1,23 +1,14 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using NhaMapThep.Application.Common.Models;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Infrastructure.Persistence;
 using NinjaNye.SearchExtensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Linq.Expressions;
-using System.Reflection.Metadata.Ecma335;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan
+namespace NhaMayThep.Application.ThongTinCongDoan.FilterThongTinCongDoan
 {
     public class FilterThongTinCongDoanQueryHandler : IRequestHandler<FilterThongTinCongDoanQuery, PagedResult<ThongTinCongDoanDto>>
     {
@@ -44,9 +35,9 @@ namespace NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan
                 query = query.Where(x => string.IsNullOrEmpty(x.NguoiXoaID) && !x.NgayXoa.HasValue);
                 if (!string.IsNullOrEmpty(request.Id))
                 {
-                    query = query.Where(x=> x.ID.Equals(request.Id));
+                    query = query.Where(x => x.ID.Equals(request.Id));
                 }
-                if(!string.IsNullOrEmpty(request.NhanVienId))
+                if (!string.IsNullOrEmpty(request.NhanVienId))
                 {
                     query = query.Where(x => x.NhanVienID.Equals(request.NhanVienId));
                 }
@@ -56,17 +47,17 @@ namespace NhaMayThep.Application.ThongTinCongDoan.FilterThonTinCongDoan
                         thongtincongdoan => thongtincongdoan.NhanVienID,
                         nhanvien => nhanvien.ID,
                         (thongtincongdoan, nhanvien) => new { ConDoan = thongtincongdoan, NhanVien = nhanvien })
-                    .Search(x=> x.NhanVien.HoVaTen).Containing(request.TenNhanVien)
+                    .Search(x => x.NhanVien.HoVaTen).Containing(request.TenNhanVien)
                     .Select(x => x.ConDoan);
                 }
                 if (request.NgayGiaNhap.HasValue)
                 {
-                    query = query.Where(x=> x.NgayGiaNhap == request.NgayGiaNhap);
+                    query = query.Where(x => x.NgayGiaNhap == request.NgayGiaNhap);
                 }
-                    return query;
+                return query;
             };
 
-            var listResult= await _thongtincongdoanRepository.FindAllAsync(request.PageNumber,request.PageSize,options,cancellationToken);
+            var listResult = await _thongtincongdoanRepository.FindAllAsync(request.PageNumber, request.PageSize, options, cancellationToken);
             if (!listResult.Any())
             {
                 throw new NotFoundException("Không tìm thấy thông tin công đoàn nào phù hợp với yêu cầu");

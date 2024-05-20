@@ -1,26 +1,22 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.HopDong;
 using NhaMayThep.Application.HopDong.CreateHopDongWithExcel;
 using NhaMayThep.Application.HopDong.CreateNewHopDongCommand;
 using NhaMayThep.Application.HopDong.DeleteHopDongCommand;
-using NhaMayThep.Application.HopDong.GetAllHopDongQuery;
-using NhaMayThep.Application.HopDong.GetByPagination;
+using NhaMayThep.Application.HopDong.FilterHopDong;
 using NhaMayThep.Application.HopDong.GetHopDongByIdQuery;
 using NhaMayThep.Application.HopDong.UpdateHopDongCommand;
 using NhaMayThep.Application.HopDong.UpdateNgayKetThucHopDongCommand;
 using System.Net.Mime;
-using NhaMayThep.Application.HopDong.FilterHopDong;
 
-namespace NhaMayThep.Api.Controllers.HopDong.HopDongApi
+namespace NhaMayThep.Api.Controllers.HopDong
 {
     [ApiController]
-    [Authorize]
+    
     public class HopDongController : ControllerBase
     {
         private readonly ISender _mediator;

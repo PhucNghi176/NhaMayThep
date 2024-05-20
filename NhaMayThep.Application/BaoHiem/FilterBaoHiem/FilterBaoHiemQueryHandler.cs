@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
 using NinjaNye.SearchExtensions;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiem.FilterBaoHiem
 {
@@ -27,7 +22,7 @@ namespace NhaMayThep.Application.BaoHiem.FilterBaoHiem
             Func<IQueryable<BaoHiemEntity>, IQueryable<BaoHiemEntity>> options = query =>
             {
                 query = query.Where(x => string.IsNullOrEmpty(x.NguoiXoaID) && !x.NgayXoa.HasValue);
-                if(request.Id != 0)
+                if (request.Id != 0)
                 {
                     query = query.Where(x => x.ID == request.Id);
                 }
@@ -35,7 +30,7 @@ namespace NhaMayThep.Application.BaoHiem.FilterBaoHiem
                 {
                     query = query.Search(x => x.Name).Containing(request.Name);
                 }
-                if(request.Discount != 0)
+                if (request.Discount != 0)
                 {
                     query = query.Where(x => x.PhanTramKhauTru == request.Discount);
                 }

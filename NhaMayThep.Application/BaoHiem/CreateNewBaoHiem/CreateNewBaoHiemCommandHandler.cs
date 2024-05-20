@@ -1,11 +1,6 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiem.CreateNewBaoHiem
 {
@@ -19,7 +14,7 @@ namespace NhaMayThep.Application.BaoHiem.CreateNewBaoHiem
         public async Task<string> Handle(CreateNewBaoHiemCommand command, CancellationToken cancellationToken)
         {
             var isExisted = await _baoHiemRepository.AnyAsync(x => x.Name == command.TenLoaiBaoHiem && x.NgayXoa == null, cancellationToken);
-            if(isExisted)
+            if (isExisted)
             {
                 return $"Loại bảo hiểm {command.TenLoaiBaoHiem} đã tồn tại";
             }

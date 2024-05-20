@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienId
         public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetThongTinGiamTruGiaCanhByNhanVienIdQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository
-                .FindAllAsync(x=> x.NhanVienID.Equals(request.Id) && x.NguoiXoaID== null && !x.NgayXoa.HasValue, cancellationToken);
+                .FindAllAsync(x => x.NhanVienID.Equals(request.Id) && x.NguoiXoaID == null && !x.NgayXoa.HasValue, cancellationToken);
             var thongtingiamtrus = await _thongTinGiamTruRepository
                 .FindAllToDictionaryAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
             var nhanviens = await _nhanVienRepository

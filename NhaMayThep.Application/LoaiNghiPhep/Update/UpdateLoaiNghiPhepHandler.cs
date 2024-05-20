@@ -2,7 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Update
 {

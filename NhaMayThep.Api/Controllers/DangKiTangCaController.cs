@@ -1,26 +1,19 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Net.Mime;
-using Microsoft.AspNetCore.Http;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.DangKiTangCa;
 using NhaMayThep.Application.DangKiTangCa.Create;
 using NhaMayThep.Application.DangKiTangCa.Delete;
-using NhaMayThep.Application.DangKiTangCa.Update;
-using NhaMayThep.Application.DangKiTangCa.Queries.GetDangKiTangCaById;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.DangKiTangCa;
-using NhaMayThep.Application.DangKiTangCa.GetId;
-using NhaMayThep.Application.LichSuNghiPhep.GetAll;
-using NhaMayThep.Application.LichSuNghiPhep;
 using NhaMayThep.Application.DangKiTangCa.GetAll;
-using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.DangKiTangCa.GetId;
+using NhaMayThep.Application.DangKiTangCa.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
 
     public class DangKiTangCaController : ControllerBase
     {
@@ -66,7 +59,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Delete(string id, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteDangKiTangCaCommand (id), cancellationToken);
+            var result = await _mediator.Send(new DeleteDangKiTangCaCommand(id), cancellationToken);
             return new JsonResponse<string>(result);
         }
 
@@ -95,6 +88,6 @@ namespace NhaMayThep.Api.Controllers
             return Ok(new JsonResponse<DangKiTangCaDto>(result));
         }
 
-        
+
     }
 }

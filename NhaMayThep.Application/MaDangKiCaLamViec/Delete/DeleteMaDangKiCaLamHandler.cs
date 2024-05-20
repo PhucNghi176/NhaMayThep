@@ -1,15 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.MaDangKiCaLamViec.Create;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.MaDangKiCaLamViec.Delete
 {
@@ -41,7 +33,7 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Delete
             dangKi.NgayXoa = DateTime.Now;
             _maDangKiCaLamRepository.Update(dangKi);
             return await _maDangKiCaLamRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Thành Công" : "Xóa Thất Bại";
-            
+
         }
     }
 }

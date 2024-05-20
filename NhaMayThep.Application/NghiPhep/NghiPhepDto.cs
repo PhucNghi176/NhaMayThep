@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.NghiPhep
 {
@@ -16,11 +15,11 @@ namespace NhaMayThep.Application.NghiPhep
         public int LoaiNghiPhepID { get; set; }
 
 
-        public static NghiPhepDto CreateNghiPhep(string Id ,string maSoNhanVien, decimal luongNghiPhep, decimal khoanTruLuong, double soGioNghiPhep, int loaiNghiPhepID)
+        public static NghiPhepDto CreateNghiPhep(string Id, string maSoNhanVien, decimal luongNghiPhep, decimal khoanTruLuong, double soGioNghiPhep, int loaiNghiPhepID)
         {
             return new NghiPhepDto()
             {
-                ID = Id ,
+                ID = Id,
                 MaSoNhanVien = maSoNhanVien,
                 LuongNghiPhep = luongNghiPhep,
                 KhoanTruLuong = khoanTruLuong,

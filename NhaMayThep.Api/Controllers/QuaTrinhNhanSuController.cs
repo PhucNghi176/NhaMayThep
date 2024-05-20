@@ -1,28 +1,22 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.PhongBan;
-using NhaMayThep.Application.PhongBan.DeletePhongBan;
-using NhaMayThep.Application.PhongBan.GetAllPhongBan;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.QuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.DeleteQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu.GetByPagination;
+using NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetAllQuaTrinhNhanSu;
+using NhaMayThep.Application.QuaTrinhNhanSu.GetByPagination;
 using NhaMayThep.Application.QuaTrinhNhanSu.GetSingleQuaTrinhNhanSu;
 using NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu;
 using System.Net.Mime;
-using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
-using NhaMayThep.Application.NhanVien;
-using NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu;
-using NhaMayThep.Application.PhongBan.UpdatePhongBan;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class QuaTrinhNhanSuController : ControllerBase
     {
         private readonly ISender _mediator;

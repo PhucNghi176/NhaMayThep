@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
@@ -33,8 +32,8 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
                 throw new NotFoundException("Thông tin giảm trừ không tồn tại hoặc đã bị vô hiệu hóa");
             }
             var thongtingiamtru = await _thongTinGiamTruGiaCanhRepository
-                .FindAsync(x => x.ID.Equals(request.Id),cancellationToken);
-            if (thongtingiamtru == null ||(thongtingiamtru.NguoiXoaID != null && thongtingiamtru.NgayXoa.HasValue))
+                .FindAsync(x => x.ID.Equals(request.Id), cancellationToken);
+            if (thongtingiamtru == null || (thongtingiamtru.NguoiXoaID != null && thongtingiamtru.NgayXoa.HasValue))
             {
                 throw new NotFoundException("Thông tin giảm trừ gia cảnh không tồn tại hoặc đã bị vô hiệu hóa");
             }
@@ -57,7 +56,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.UpdateThongTinGiamTruGia
             thongtingiamtru.CanCuocCongDan = cccd.CanCuocCongDan;
             thongtingiamtru.NgayXacNhanPhuThuoc = request.NgayXacNhanPhuThuoc;
             _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken)> 0 ? "Cập nhật thành công" : "Cập nhậ thất bại";
+            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật thành công" : "Cập nhậ thất bại";
         }
     }
 }

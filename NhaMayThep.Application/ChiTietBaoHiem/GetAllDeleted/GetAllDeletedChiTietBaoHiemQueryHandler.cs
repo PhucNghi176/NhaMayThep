@@ -1,18 +1,12 @@
 ﻿using AutoMapper;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using System.Diagnostics;
+using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllDeleted
 {
-    public class GetAllDeletedChiTietBaoHiemQueryHandler: IRequestHandler<GetAllDeletedChiTietBaoHiemQuery, List<ChiTietBaoHiemDto>>
+    public class GetAllDeletedChiTietBaoHiemQueryHandler : IRequestHandler<GetAllDeletedChiTietBaoHiemQuery, List<ChiTietBaoHiemDto>>
     {
         private readonly IChiTietBaoHiemRepository _chitietbaohiemRepository;
         private readonly INhanVienRepository _nhanvienRepository;

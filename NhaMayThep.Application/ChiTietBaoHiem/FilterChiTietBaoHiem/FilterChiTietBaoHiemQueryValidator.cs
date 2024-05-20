@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
+namespace NhaMayThep.Application.ChiTietBaoHiem.FilterChiTietBaoHiem
 {
-    public class FilterChiTietBaoHiemQueryValidator: AbstractValidator<FilterChiTietBaoHiemQuery>
+    public class FilterChiTietBaoHiemQueryValidator : AbstractValidator<FilterChiTietBaoHiemQuery>
     {
         public FilterChiTietBaoHiemQueryValidator()
         {

@@ -1,8 +1,7 @@
-﻿using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.Base;
+﻿using NhaMapThep.Domain.Entities.Base;
 using System.ComponentModel.DataAnnotations.Schema;
 
-namespace NhaMayThep.Infrastructure.Persistence
+namespace NhaMapThep.Domain.Entities
 {
     [Table("ThongTinCongDoan")]
     public class ThongTinCongDoanEntity : Entity

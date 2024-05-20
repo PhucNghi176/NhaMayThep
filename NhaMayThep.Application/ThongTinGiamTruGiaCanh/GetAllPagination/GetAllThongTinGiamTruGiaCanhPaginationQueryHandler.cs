@@ -1,15 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAll;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetAllPagination
 {

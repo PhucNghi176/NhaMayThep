@@ -1,10 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Entities
 {
@@ -17,6 +12,6 @@ namespace NhaMapThep.Domain.Entities
 
         public float PhanTramTang { get; set; }
         public DateTime NgayApDung { get; set; }
-        public string LyDo {  get; set; }
+        public string LyDo { get; set; }
     }
 }

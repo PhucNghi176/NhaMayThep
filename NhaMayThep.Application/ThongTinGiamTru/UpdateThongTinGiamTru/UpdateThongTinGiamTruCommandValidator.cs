@@ -1,18 +1,12 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTru.UpdateThongTinGiamTru
 {
     public class UpdateThongTinGiamTruCommandValidator : AbstractValidator<UpdateThongTinGiamTruCommand>
     {
         private readonly IThongTinGiamTruRepository _repository;
-        public UpdateThongTinGiamTruCommandValidator(IThongTinGiamTruRepository repository) 
+        public UpdateThongTinGiamTruCommandValidator(IThongTinGiamTruRepository repository)
         {
             _repository = repository;
             ConfigureValidationRules();

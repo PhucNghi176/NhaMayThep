@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllDeletedPagination
 {
-    public class GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQueryValidator: AbstractValidator<GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQuery>
+    public class GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQueryValidator : AbstractValidator<GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQuery>
     {
         public GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQueryValidator()
         {

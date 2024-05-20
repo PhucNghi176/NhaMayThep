@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.RestoreThongTinCongDoan
 {
-    public class RestoreThongTinCongDoanCommandValidator: AbstractValidator<RestoreThongTinCongDoanCommand>
+    public class RestoreThongTinCongDoanCommandValidator : AbstractValidator<RestoreThongTinCongDoanCommand>
     {
         public RestoreThongTinCongDoanCommandValidator()
         {

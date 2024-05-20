@@ -1,15 +1,6 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.ComponentModel.DataAnnotations;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMayThep.Application.Common.Interfaces;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh
 {
@@ -18,7 +9,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
         public FilterThongTinGiamTruGiaCanhQuery() { }
         public FilterThongTinGiamTruGiaCanhQuery(
             int pagenumber,
-            int pagesize, 
+            int pagesize,
             string? nhanvienid,
             string? tennhanvien,
             int magiamtru,

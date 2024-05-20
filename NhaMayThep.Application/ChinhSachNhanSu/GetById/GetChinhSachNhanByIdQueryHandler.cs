@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.GetById
 {
@@ -22,7 +17,7 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.GetById
         public async Task<ChinhSachNhanSuDto> Handle(GetChinhSachNhanByIdQuery query, CancellationToken cancellationToken)
         {
             var entity = await _chinhSachNhanSuRepository.FindAsync(x => x.ID == query.ID && x.NguoiXoaID == null);
-            if (entity == null) 
+            if (entity == null)
             {
                 throw new NotFoundException("ID không tồn tại");
             }

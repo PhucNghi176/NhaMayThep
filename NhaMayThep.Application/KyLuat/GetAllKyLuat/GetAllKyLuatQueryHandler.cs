@@ -2,12 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.KhenThuong;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.GetAllKyLuat
 {
@@ -25,8 +19,8 @@ namespace NhaMayThep.Application.KyLuat.GetAllKyLuat
         public GetAllKyLuatQueryHandler() { }
         public async Task<List<KyLuatDTO>> Handle(GetAllKyLuatQuery request, CancellationToken cancellationToken)
         {
-            var kyluat = await this._repository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
-            if(kyluat.Count() == 0) 
+            var kyluat = await this._repository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
+            if (kyluat.Count() == 0)
                 throw new NotFoundException("Không tìm thấy trường hợp kỷ luật nào.");
             List<KyLuatDTO> final = new List<KyLuatDTO>();
             foreach (var item in kyluat)

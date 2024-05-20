@@ -1,31 +1,21 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.PhongBan.CreatePhongBan;
-using NhaMayThep.Application.PhongBan.DeletePhongBan;
-using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
-using NhaMayThep.Application.PhongBan.UpdatePhongBan;
-using NhaMayThep.Application.PhongBan;
-using System.Net.Mime;
 using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.MucSanPham;
 using NhaMayThep.Application.MucSanPham.Create;
-using NhaMayThep.Application.MucSanPham.GetById;
-using NhaMayThep.Application.MucSanPham.Update;
 using NhaMayThep.Application.MucSanPham.Delete;
-using NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetAllThongTinQuaTrinhNhanSu;
-using NhaMayThep.Application.ThongTinQuaTrinhNhanSu;
 using NhaMayThep.Application.MucSanPham.GetAll;
-using Humanizer;
-using NhaMapThep.Application.Common.Pagination;
-using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
+using NhaMayThep.Application.MucSanPham.GetById;
 using NhaMayThep.Application.MucSanPham.GetByPagination;
-using NhaMayThep.Application.LoaiNghiPhep.Update;
+using NhaMayThep.Application.MucSanPham.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class MucSanPhamController : ControllerBase
     {
         private readonly ISender _mediator;

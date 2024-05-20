@@ -1,18 +1,10 @@
-﻿using MediatR;
-using Microsoft.EntityFrameworkCore;
-using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LichSuNghiPhep.Filter;
-using NhaMayThep.Infrastructure.Persistence;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities;
-using System;
-using System.Linq;
-using System.Linq.Expressions;
-using System.Threading;
-using System.Threading.Tasks;
-using AutoMapper;
-using NhaMapThep.Domain.Repositories;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Infrastructure.Persistence;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep
 {
@@ -43,10 +35,10 @@ namespace NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep
                     query = from lichSu in query
                             join nhanVien in _context.NhanVien
                             on lichSu.MaSoNhanVien equals nhanVien.ID
-                            where nhanVien.HoVaTen .Contains( request.TenNhanVien) // Adjust this condition as needed
+                            where nhanVien.HoVaTen.Contains(request.TenNhanVien) // Adjust this condition as needed
                             select lichSu;
                 }
-                if (request.LoaiNghiPhepID!=0)
+                if (request.LoaiNghiPhepID != 0)
                 {
                     query = query.Where(x => x.LoaiNghiPhepID == request.LoaiNghiPhepID.Value);
                 }

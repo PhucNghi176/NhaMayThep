@@ -1,26 +1,23 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Application.LoaiNghiPhep;
 using NhaMayThep.Application.PhongBan;
 using NhaMayThep.Application.PhongBan.CreatePhongBan;
 using NhaMayThep.Application.PhongBan.DeletePhongBan;
-using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
-using NhaMayThep.Application.PhongBan.UpdatePhongBan;
-using Microsoft.AspNetCore.Authorization;
-using System.Net.Mime;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.LoaiNghiPhep;
-using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMayThep.Application.PhongBan.GetAllPhongBan;
 using NhaMayThep.Application.PhongBan.GetByPagination;
-using NhaMayThep.Application.LoaiNghiPhep.Update;
+using NhaMayThep.Application.PhongBan.GetSinglePhongBan;
+using NhaMayThep.Application.PhongBan.UpdatePhongBan;
+using System.Net.Mime;
 
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class PhongBanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -57,7 +54,7 @@ namespace NhaMayThep.Api.Controllers
             var result = await _mediator.Send(new GetPhongBanQuery(id: id), cancellationToken);
             return result != null ? Ok(new JsonResponse<PhongBanDto>(result)) : NotFound();
         }
-        
+
         [HttpGet("phong-ban")]
         [ProducesResponseType(typeof(JsonResponse<List<PhongBanDto>>), StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]

@@ -1,11 +1,6 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.LuongCongNhat.Filter
 {
@@ -28,10 +23,10 @@ namespace NhaMayThep.Application.LuongCongNhat.Filter
             SoGioLam = soGioLam;
         }
 
-        public int PageNo {  get; set; }
-        public int PageSize {  get; set; }
-        public string? MaSoNhanVien {  get; set; }
-        public decimal? Luong1Gio {  get; set; }
-        public double? SoGioLam {  get; set; }
+        public int PageNo { get; set; }
+        public int PageSize { get; set; }
+        public string? MaSoNhanVien { get; set; }
+        public decimal? Luong1Gio { get; set; }
+        public double? SoGioLam { get; set; }
     }
 }

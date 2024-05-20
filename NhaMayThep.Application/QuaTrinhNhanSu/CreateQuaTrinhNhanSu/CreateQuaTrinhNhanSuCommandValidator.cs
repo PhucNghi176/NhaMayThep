@@ -1,15 +1,13 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Repositories;
-using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 {
     public class CreateQuaTrinhNhanSuCommandValidator : AbstractValidator<CreateQuaTrinhNhanSuCommand>
     {
-        
+
         public CreateQuaTrinhNhanSuCommandValidator()
         {
-            ConfigureValidationRules();       
+            ConfigureValidationRules();
         }
         private void ConfigureValidationRules()
         {
@@ -33,6 +31,6 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.CreateQuaTrinhNhanSu
 
             RuleFor(v => v.NgayKetThuc)
                 .GreaterThan(x => x.NgayBatDau).WithMessage("NgayKetThuc can't end before NgayBatDau");
-        }   
+        }
     }
 }

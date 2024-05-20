@@ -1,10 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Application.LichSuNghiPhep.Delete;
-using NhaMayThep.Application.LichSuNghiPhep;
-using NhaMayThep.Application.Common.Interfaces;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 namespace NhaMayThep.Application.LichSuNghiPhep.Delete;
 public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNghiPhepCommand, LichSuNghiPhepDto>
 {
@@ -30,7 +28,7 @@ public class DeleteLichSuNghiPhepCommandHandler : IRequestHandler<DeleteLichSuNg
         {
             throw new NotFoundException($"LichSuNghiPhep với Id  {request.Id} không tìm thấy .");
         }
-        if(lsnp.NgayXoa != null)
+        if (lsnp.NgayXoa != null)
         {
             throw new NotFoundException("LichSuNghiPhep này đã bị xóa ");
         }

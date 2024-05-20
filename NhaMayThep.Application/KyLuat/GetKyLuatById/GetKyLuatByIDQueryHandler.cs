@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.GetKyLuatById
 {
@@ -24,10 +19,10 @@ namespace NhaMayThep.Application.KyLuat.GetKyLuatById
         public GetKyLuatByIDQueryHandler() { }
         public async Task<KyLuatDTO> Handle(GetKyLuatByIDQuery request, CancellationToken cancellationToken)
         {
-            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null , cancellationToken);
+            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.Id) && x.NgayXoa == null, cancellationToken);
             if (kyluat == null)
                 throw new NotFoundException($"Không tìm thấy trường hợp kỷ luật nào với ID : {request.Id} hoặc trường hợp này đã bị xóa.");
-            var nhanvien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(kyluat.MaSoNhanVien) && x.NgayXoa == null , cancellationToken );
+            var nhanvien = await this._nhanVienRepository.FindAsync(x => x.ID.Equals(kyluat.MaSoNhanVien) && x.NgayXoa == null, cancellationToken);
             if (nhanvien == null)
                 throw new NotFoundException($"Không tìm thấy nhân viên nào với ID : {request.Id} hoặc nhân viên này đã bị xóa.");
             KyLuatDTO result = new KyLuatDTO()

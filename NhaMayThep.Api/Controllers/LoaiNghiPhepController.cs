@@ -1,25 +1,21 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using MediatR;
+﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Application.LoaiNghiPhep;
 using NhaMayThep.Application.LoaiNghiPhep.Create;
 using NhaMayThep.Application.LoaiNghiPhep.Delete;
 using NhaMayThep.Application.LoaiNghiPhep.GetAll;
 using NhaMayThep.Application.LoaiNghiPhep.GetById;
-using NhaMayThep.Application.LoaiNghiPhep.Update;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using System.Threading.Tasks;
-using System.Threading;
-using System.Collections.Generic;
-using Microsoft.AspNetCore.Http;
-using System.Net.Mime;
-using NhaMayThep.Application.LoaiNghiPhep;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.LoaiNghiPhep.GetByPagination;
-using Microsoft.AspNetCore.Authorization;
+using NhaMayThep.Application.LoaiNghiPhep.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class LoaiNghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -36,7 +32,7 @@ namespace NhaMayThep.Api.Controllers
         [ProducesResponseType(StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<JsonResponse<string>>> Create(CreateLoaiNghiPhepCommand command, CancellationToken cancellationToken)
         {
-            var result =  await _mediator.Send(command, cancellationToken);
+            var result = await _mediator.Send(command, cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 

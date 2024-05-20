@@ -3,16 +3,10 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.LichSuNghiPhep;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Delete
 {
-    public class DeleteDangKiTangCaHandler : IRequestHandler<DeleteDangKiTangCaCommand,string>
+    public class DeleteDangKiTangCaHandler : IRequestHandler<DeleteDangKiTangCaCommand, string>
     {
         private readonly IDangKiTangCaRepository _repo;
         private readonly IMapper _mapper;
@@ -48,7 +42,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Delete
             lsnp.NgayXoa = DateTime.Now;
 
             _repo.Update(lsnp);
-            
+
             return await _repo.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Xóa Đăng Kí Tăng Ca thành công" : "Xóa Đăng Kí Tăng Ca  thất bại";
         }
     }

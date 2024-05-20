@@ -1,12 +1,5 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Entities;
 
 namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 {

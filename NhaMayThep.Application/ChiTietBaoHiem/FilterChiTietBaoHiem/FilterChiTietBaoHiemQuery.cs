@@ -1,12 +1,7 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
+namespace NhaMayThep.Application.ChiTietBaoHiem.FilterChiTietBaoHiem
 {
     public class FilterChiTietBaoHiemQuery : IRequest<PagedResult<ChiTietBaoHiemDto>>, IRequest
     {
@@ -30,7 +25,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.FilterByHoVaTenNhanVien
         }
         public int PageNumber { get; set; }
         public int PageSize { get; set; }
-        public string? Id { get;set; }
+        public string? Id { get; set; }
         public int MaBaoHiem { get; set; }
         public string? TenBaohiem { get; set; }
         public DateTime? NgayHieuLuc { get; set; }

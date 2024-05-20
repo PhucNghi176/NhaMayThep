@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
+namespace NhaMayThep.Application.NhanVien.FilterNhanVien
 {
     public class FilterNhanVienQuery : IRequest<PagedResult<NhanVienDto>>, IQuery
     {
@@ -17,8 +12,8 @@ namespace NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID
         public int? tinhtranglamviecID { get; set; } = 0;
         public string? Email { get; set; }
         public string? HoVaTen { get; set; }
-        
-        public string? CanCuocCongDan {  get; set; }
+
+        public string? CanCuocCongDan { get; set; }
 
         public FilterNhanVienQuery() { }
         public FilterNhanVienQuery(int no, int pageSize, int chucvuID, int tinhtranglamviecID, string email, string hoVaTen, string? canCuocCongDan)

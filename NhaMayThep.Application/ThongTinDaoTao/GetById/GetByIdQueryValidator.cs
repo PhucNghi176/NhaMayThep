@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NhaMayThep.Application.ThongTinDaoTao.GetById;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.GetById
 {

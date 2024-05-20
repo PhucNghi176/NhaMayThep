@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongThoiGian.CreateLuongThoiGian
 {
@@ -30,7 +25,7 @@ namespace NhaMayThep.Application.LuongThoiGian.CreateLuongThoiGian
             NgayApDung = ngayApDung;
         }
         public string MaSoNhanVien { get; set; }
-        public int MaLuongThoiGian {  get; set; }
+        public int MaLuongThoiGian { get; set; }
         public decimal LuongNam { get; set; }
         public decimal LuongThang { get; set; }
         public decimal LuongTuan { get; set; }

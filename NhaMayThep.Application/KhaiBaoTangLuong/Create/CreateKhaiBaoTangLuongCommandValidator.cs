@@ -1,18 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
+﻿namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
 {
     using FluentValidation;
-    using NhaMayThep.Application.KhaiBaoTangLuong.Create;
-    using System;
-    using System.Collections.Generic;
-    using System.Linq;
-    using System.Text;
-    using System.Threading.Tasks;
 
     namespace NhaMayThep.Application.KhaiBaoTangLuong.Create
     {

@@ -1,19 +1,16 @@
-﻿using System;
-using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 
-namespace NhaMapThep.Application.TrinhDoHocVan.Commands
+namespace NhaMayThep.Application.TrinhDoHocVan.Create
 {
     public class CreateTrinhDoHocVanCommandHandler : IRequestHandler<CreateTrinhDoHocVanCommand, string>
     {
         private readonly ITrinhDoHocVanRepository _repository;
         private readonly ICurrentUserService _currentUserService;
 
-        public CreateTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService ,ITrinhDoHocVanRepository repository)
+        public CreateTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService, ITrinhDoHocVanRepository repository)
         {
             _repository = repository;
             _currentUserService = currentUserService;
@@ -38,7 +35,7 @@ namespace NhaMapThep.Application.TrinhDoHocVan.Commands
             _repository.Add(trinhDoHocVanEntity);
 
 
-             await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            await _repository.UnitOfWork.SaveChangesAsync(cancellationToken);
             return "Tạo Thành Công!";
         }
     }

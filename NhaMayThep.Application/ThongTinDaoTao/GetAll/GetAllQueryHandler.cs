@@ -1,12 +1,7 @@
 ﻿using AutoMapper;
-using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Domain.Repositories;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMayThep.Application.ThongTinDaoTao;
-using NhaMayThep.Application.ThongTinDaoTao.GetAll;
+using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Repositories;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.GetAll
 {
@@ -23,7 +18,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.GetAll
 
         public async Task<List<ThongTinDaoTaoDto>> Handle(GetAllQuery request, CancellationToken cancellationToken)
         {
-            var listThongTinDaoTao = await _thongTinDaoTaoRepository.FindAllAsync(x => x.NgayXoa ==null, cancellationToken);
+            var listThongTinDaoTao = await _thongTinDaoTaoRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             if (listThongTinDaoTao == null || listThongTinDaoTao.Count == 0)
             {
                 throw new NotFoundException("Không có Thông Tin Đào Tạo nào!");

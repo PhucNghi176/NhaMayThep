@@ -1,12 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Update
 {
@@ -39,7 +35,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
                 throw new NotFoundException("DangKiTangCa does not exist or has been deleted.");
             }
 
-           
+
             dangKiTangCa.MaSoNhanVien = request.MaSoNhanVien;
             dangKiTangCa.NgayLamTangCa = request.NgayLamTangCa;
             dangKiTangCa.CaDangKi = request.CaDangKi;
@@ -54,7 +50,7 @@ namespace NhaMayThep.Application.DangKiTangCa.Update
             dangKiTangCa.NgayCapNhatCuoi = DateTime.UtcNow;
 
             _repository.Update(dangKiTangCa);
-           
+
 
             return await _repository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Cập nhật Đăng Kí Tăng Ca thành công" : "Cập nhật Đăng Kí Tăng Ca thất bại";
         }

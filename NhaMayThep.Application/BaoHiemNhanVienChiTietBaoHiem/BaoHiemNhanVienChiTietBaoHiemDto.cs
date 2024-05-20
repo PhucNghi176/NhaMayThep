@@ -1,20 +1,12 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Runtime.CompilerServices;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem
 {
     public class BaoHiemNhanVienChiTietBaoHiemDto : IMapFrom<BaoHiemNhanVienBaoHiemChiTietEntity>
     {
-        public required  int MaBaoHiemNhanVien { get; set; }
+        public required int MaBaoHiemNhanVien { get; set; }
         public string? MaNhanVien { get; set; }
         public string? TenNhanVien { get; set; }
         public required string MaChiTietBaoHiem { get; set; }
@@ -23,8 +15,8 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem
         public DateTime? NgayHieuLuc { get; set; }
         public DateTime? NgayKetThuc { get; set; }
         public string? NoiCap { get; set; }
-        public static BaoHiemNhanVienChiTietBaoHiemDto CreateMapper(int mabaohiemnhanvien, 
-            string? manhanvien, 
+        public static BaoHiemNhanVienChiTietBaoHiemDto CreateMapper(int mabaohiemnhanvien,
+            string? manhanvien,
             string? tennhanvien,
             string machitietbaohiem,
             int? loaibaohiem,

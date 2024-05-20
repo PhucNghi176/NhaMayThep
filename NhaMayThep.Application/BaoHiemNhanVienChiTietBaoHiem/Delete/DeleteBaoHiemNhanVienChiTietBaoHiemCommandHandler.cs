@@ -2,11 +2,6 @@
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Delete
 {
@@ -24,7 +19,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Delete
         {
             var checkExist = await _baohiemNhanVienChiTietRepository
                 .FindAsync(x => x.BHNV == request.MaBHNV && x.BHCT == request.MaCTBH, cancellationToken);
-            if(checkExist == null)
+            if (checkExist == null)
             {
                 throw new NotFoundException("Không tìm thấy");
             }
@@ -35,8 +30,8 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Delete
             checkExist.NguoiXoaID = _currentUser.UserId;
             checkExist.NgayXoa = DateTime.Now;
             _baohiemNhanVienChiTietRepository.Update(checkExist);
-            var result =await _baohiemNhanVienChiTietRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if(result > 0)
+            var result = await _baohiemNhanVienChiTietRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
+            if (result > 0)
             {
                 return "Xóa thành công";
             }

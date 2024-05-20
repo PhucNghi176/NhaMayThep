@@ -1,8 +1,7 @@
-using NhaMayThep.Api;
 using Serilog;
 using Serilog.Events;
 
-namespace NhaMapThep.Api;
+namespace NhaMayThep.Api;
 public static class Program
 {
     public static void Main(string[] args)

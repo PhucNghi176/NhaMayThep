@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KhenThuong.CreateKhenThuong
 {
-    public class CreateKhenThuongCommandValidator :AbstractValidator<CreateKhenThuongCommand>
+    public class CreateKhenThuongCommandValidator : AbstractValidator<CreateKhenThuongCommand>
     {
-        public CreateKhenThuongCommandValidator() 
+        public CreateKhenThuongCommandValidator()
         {
             RuleFor(x => x.MaSoNhanVien)
                 .NotEmpty().NotNull()

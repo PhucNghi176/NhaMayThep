@@ -26,7 +26,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.UpdateQuaTrinhNhanSu
         public string ID { get; set; }
         public int LoaiQuaTrinhID { get; set; }
         public DateTime? NgayKetThuc { get; set; }
-        public DateTime NgayBatDau {  get; set; }
+        public DateTime NgayBatDau { get; set; }
         public int PhongBanID { get; set; }
         public int ChucVuID { get; set; }
         public int ChucDanhID { get; set; }

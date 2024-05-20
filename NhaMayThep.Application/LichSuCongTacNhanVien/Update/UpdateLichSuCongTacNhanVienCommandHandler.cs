@@ -5,7 +5,7 @@ using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.Update
 {
-    public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand,string>
+    public class UpdateLichSuCongTacNhanVienCommandHandler : IRequestHandler<UpdateLichSuCongTacNhanVienCommand, string>
     {
         private readonly ICurrentUserService _currentUserService;
         private readonly ILichSuCongTacNhanVienRepository _lichSuCongTacNhanVienRepository;

@@ -1,14 +1,9 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.Create
 {
-    public class CreateChinhSachNhanSuCommand : IRequest<string>,ICommand
+    public class CreateChinhSachNhanSuCommand : IRequest<string>, ICommand
     {
         public CreateChinhSachNhanSuCommand(string name, string mucDo, DateTime ngayHieuLuc, string noiDung)
         {

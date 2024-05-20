@@ -1,4 +1,4 @@
-﻿using NhaMayThep.Infrastructure.Persistence;
+﻿using NhaMapThep.Domain.Entities;
 
 namespace NhaMapThep.Domain.Repositories
 {

@@ -1,17 +1,10 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Repositories;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.KyLuat.CreateKyLuat
 {
     public class CreateKyLuatCommandValidator : AbstractValidator<CreateKyLuatCommand>
     {
-        public CreateKyLuatCommandValidator() 
+        public CreateKyLuatCommandValidator()
         {
             ConfigureValidasionRules();
         }

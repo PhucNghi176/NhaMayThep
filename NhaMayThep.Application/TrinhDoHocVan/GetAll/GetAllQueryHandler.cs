@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
-using NhaMayThep.Domain.Repositories;
 using MediatR;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMayThep.Application.TrinhDoHocVan;
-using NhaMayThep.Application.TrinhDoHocVan.GetAll;
-using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.TrinhDoHocVan.GetAll
 {

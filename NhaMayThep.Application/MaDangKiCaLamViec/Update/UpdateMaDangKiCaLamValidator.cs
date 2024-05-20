@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.MaDangKiCaLamViec.Update
 {
     public class UpdateMaDangKiCaLamValidator : AbstractValidator<UpdateMaDangKiCaLamCommand>
     {
-        public UpdateMaDangKiCaLamValidator () 
+        public UpdateMaDangKiCaLamValidator()
         {
             RuleFor(command => command.Id)
                 .NotEmpty().WithMessage("Id Không Được Để Trống.");

@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LoaiCongTac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuCongTacNhanVien.GetByPagination
 {

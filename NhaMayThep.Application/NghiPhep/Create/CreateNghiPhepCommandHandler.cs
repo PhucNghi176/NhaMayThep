@@ -1,11 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Domain.Repositories;
 using NhaMapThep.Domain.Entities;
-using System.Threading;
-using System.Threading.Tasks;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.NghiPhep.Create
 {

@@ -1,6 +1,6 @@
 ﻿using NhaMapThep.Domain.Repositories;
 
-namespace NhaMapThep.Application.Common.Pagination
+namespace NhaMayThep.Application.Common.Pagination
 {
     public static class PagedResultMappingExtensions
     {

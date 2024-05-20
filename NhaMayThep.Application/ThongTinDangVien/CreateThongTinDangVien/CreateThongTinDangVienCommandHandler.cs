@@ -1,17 +1,9 @@
 ﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.DonViCongTac.CreateDonViCongTac;
-using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
 {
@@ -59,7 +51,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.CreateThongTinDangVien
 
             var thongTinDangVien = new ThongTinDangVienEntity()
             {
-                NhanVienID =request.NhanVienID,
+                NhanVienID = request.NhanVienID,
                 DonViCongTacID = request.DonViCongTacID,
                 ChucVuDang = request.ChucVuDang,
                 TrinhDoChinhTri = request.TrinhDoChinhTri,

@@ -1,26 +1,20 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.TrangThaiDangKiCaLamViec.CreateTrangThaiDangKiCaLamViec;
-using NhaMayThep.Application.TrangThaiDangKiCaLamViec.DeleteTrangThaiDangKiCaLamViec;
-using NhaMayThep.Application.TrangThaiDangKiCaLamViec.GetAllTrangThaiDangKiCaLamViec;
-using NhaMayThep.Application.TrangThaiDangKiCaLamViec.GetTrangThaiDangKiCaLamViecById;
-using NhaMayThep.Application.TrangThaiDangKiCaLamViec.UpdateTrangThaiDangKiCaLamViec;
-using NhaMayThep.Application.TrangThaiDangKiCaLamViec;
-using System.Net.Mime;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.ThongTinLuongNhanVien;
 using NhaMayThep.Application.ThongTinLuongNhanVien.Create;
-using NhaMayThep.Application.ThongTinLuongNhanVien.Update;
 using NhaMayThep.Application.ThongTinLuongNhanVien.Delete;
 using NhaMayThep.Application.ThongTinLuongNhanVien.GetAll;
-using NhaMayThep.Application.ThongTinLuongNhanVien;
 using NhaMayThep.Application.ThongTinLuongNhanVien.GetById;
+using NhaMayThep.Application.ThongTinLuongNhanVien.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
 
     [ApiController]
-    [Authorize]
+    
     public class ThongTinLuongNhanVienController : ControllerBase
     {
         private readonly ISender _mediator;

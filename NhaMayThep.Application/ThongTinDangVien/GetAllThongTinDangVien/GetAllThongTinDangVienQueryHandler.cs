@@ -1,13 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.DonViCongTac.GetAllDonViCongTac;
-using NhaMayThep.Application.DonViCongTac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinDangVien.GetAllThongTinDangVien
 {

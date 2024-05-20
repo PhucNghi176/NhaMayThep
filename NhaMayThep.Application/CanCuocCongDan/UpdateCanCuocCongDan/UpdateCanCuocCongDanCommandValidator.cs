@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
 {
@@ -28,7 +22,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan
                 .NotEmpty().WithMessage("Ngày sinh không để trống");
             RuleFor(c => c.NgaySinh)
                    .Must(CheckAge).WithMessage("Ngày sinh không hợp lệ");
-            
+
             RuleFor(c => c.QueQuan)
                 .NotEmpty().WithMessage("Quên quán không để trống");
             RuleFor(c => c.DiaChiThuongTru)

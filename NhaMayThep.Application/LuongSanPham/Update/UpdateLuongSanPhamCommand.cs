@@ -1,12 +1,5 @@
 ﻿using MediatR;
-using NhaMayThep.Application.LuongSanPham;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LuongSanPham.Update
 {
@@ -27,6 +20,6 @@ namespace NhaMayThep.Application.LuongSanPham.Update
         public int SoSanPhamLam { get; set; }
         public required string MucSanPhamID { get; set; }
         public decimal TongLuong { get; set; }
-        public DateTime NgayKhaiBao {  get; set; }
+        public DateTime NgayKhaiBao { get; set; }
     }
 }

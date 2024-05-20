@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Restore
 {
-    public class RestoreBaoHiemNhanVienChiTietBaoHiemCommandValidator: AbstractValidator<RestoreBaoHiemNhanVienChiTietBaoHiemCommand>
+    public class RestoreBaoHiemNhanVienChiTietBaoHiemCommandValidator : AbstractValidator<RestoreBaoHiemNhanVienChiTietBaoHiemCommand>
     {
         public RestoreBaoHiemNhanVienChiTietBaoHiemCommandValidator()
         {

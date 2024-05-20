@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using NhaMayThep.Infrastructure.Persistence;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThongTinCongTy
 {
@@ -50,7 +49,7 @@ namespace NhaMayThep.Application.ThongTinCongTy
                 LoaiHinhDoanhNghiep = loaiHinhDoanhNghiep,
                 TinhTrang = tinhTrang,
                 NgayHoatDong = ngayHoatDong,
-        };
+            };
         }
 
         public void Mapping(Profile profile)

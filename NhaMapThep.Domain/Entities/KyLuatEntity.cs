@@ -1,10 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Entities
 {
@@ -17,7 +12,7 @@ namespace NhaMapThep.Domain.Entities
 
         public required int ChinhSachNhanSuID { get; set; }
         [ForeignKey(nameof(ChinhSachNhanSuID))]
-        public virtual ChinhSachNhanSuEntity  ChinhSachNhanSu { get; set; }
+        public virtual ChinhSachNhanSuEntity ChinhSachNhanSu { get; set; }
         public string TenDotKyLuat { get; set; }
         public DateTime NgayKiLuat { get; set; }
         [Column(TypeName = "decimal(18,4)")]

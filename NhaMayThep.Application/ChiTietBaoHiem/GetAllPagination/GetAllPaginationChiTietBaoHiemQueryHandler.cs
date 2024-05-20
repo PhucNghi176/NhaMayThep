@@ -1,16 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMayThep.Application.ThongTinGiamTruGiaCanh;
 using NhaMapThep.Domain.Common.Exceptions;
-using System.Diagnostics;
+using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination
 {
@@ -34,13 +27,13 @@ namespace NhaMayThep.Application.ChiTietBaoHiem.GetAllPagination
         public async Task<PagedResult<ChiTietBaoHiemDto>> Handle(GetAllPaginationChiTietBaoHiemQuery request, CancellationToken cancellationToken)
         {
             var result = await _chitietbaohiemRepository.FindAllAsync(x
-                => x.NguoiXoaID == null && !x.NgayXoa.HasValue, request.PageNumber,request.PageSize,cancellationToken);
+                => x.NguoiXoaID == null && !x.NgayXoa.HasValue, request.PageNumber, request.PageSize, cancellationToken);
             if (!result.Any())
             {
                 throw new NotFoundException("Không tồn tại bất kỳ chi tiết bảo hiểm nào");
             }
             var baohiems = await _baohiemRepository.FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
-            var data= result.MapToChiTietBaoHiemDtoList(_mapper, baohiems);
+            var data = result.MapToChiTietBaoHiemDtoList(_mapper, baohiems);
             return PagedResult<ChiTietBaoHiemDto>.Create(
                totalCount: result.TotalCount,
                pageCount: result.PageCount,

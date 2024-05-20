@@ -1,6 +1,6 @@
 ﻿using Asp.Versioning;
 
-namespace NhaMapThep.Api.Configuration
+namespace NhaMayThep.Api.Configuration
 {
     public static class ApiVersioningConfiguration
     {

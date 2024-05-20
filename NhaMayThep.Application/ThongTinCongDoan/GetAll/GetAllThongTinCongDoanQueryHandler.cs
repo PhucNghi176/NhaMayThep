@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 
@@ -23,10 +22,10 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetAll
         public async Task<List<ThongTinCongDoanDto>> Handle(GetAllThongTinCongDoanQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoans = await _thongtinCongDoanRepository
-                .FindAllAsync(x=> !x.NgayXoa.HasValue && x.NguoiXoaID == null ,cancellationToken);
+                .FindAllAsync(x => !x.NgayXoa.HasValue && x.NguoiXoaID == null, cancellationToken);
             var nhanviens = await _nhanVienRepository
-                .FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue && x.NguoiXoaID == null, x=> x.ID, x=> x.HoVaTen, cancellationToken);
-            if(thongtincongdoans == null || !thongtincongdoans.Any())
+                .FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue && x.NguoiXoaID == null, x => x.ID, x => x.HoVaTen, cancellationToken);
+            if (thongtincongdoans == null || !thongtincongdoans.Any())
             {
                 throw new NotFoundException("Không tồn tại bất kì thông tin công đoàn nào");
             }

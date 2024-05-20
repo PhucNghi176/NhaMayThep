@@ -1,9 +1,8 @@
 using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinChucVu;
 using NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu;
 using NhaMayThep.Application.ThongTinChucVu.DeleteChucVu;
@@ -16,7 +15,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.ThongTinChucVu
 {
     [ApiController]
-    [Authorize]
+    
     public class ChucVuController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -102,9 +101,9 @@ namespace NhaMayThep.Api.Controllers.ThongTinChucVu
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
-        public async Task<ActionResult<JsonResponse<PagedResult<ChucVuDto>>>> GetPagination([FromQuery] GetChucVuByPaginationQuery query,CancellationToken cancellationToken = default)
+        public async Task<ActionResult<JsonResponse<PagedResult<ChucVuDto>>>> GetPagination([FromQuery] GetChucVuByPaginationQuery query, CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(query, cancellationToken); 
+            var result = await _mediator.Send(query, cancellationToken);
             return Ok(result);
         }
 

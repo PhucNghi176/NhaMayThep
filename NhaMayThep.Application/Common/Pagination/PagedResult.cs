@@ -1,4 +1,4 @@
-﻿namespace NhaMapThep.Application.Common.Pagination
+﻿namespace NhaMayThep.Application.Common.Pagination
 {
     public class PagedResult<T>
     {

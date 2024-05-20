@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById
 {
@@ -18,7 +18,7 @@ namespace NhaMayThep.Application.LoaiHopDong.GetLoaiHopDongById
         {
             var result = await _loaiHopDongReposity.FindAsync(x => x.ID == query.Id && x.NgayXoa == null, cancellationToken);
             if (result == null || result.NgayXoa != null)
-                    throw new NotFoundException($"Không tìm thấy loại hợp đồng với id: {query.Id}");
+                throw new NotFoundException($"Không tìm thấy loại hợp đồng với id: {query.Id}");
             return result.MapToLoaiHopDongDto(_mapper);
         }
     }

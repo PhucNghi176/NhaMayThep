@@ -1,11 +1,6 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
 {

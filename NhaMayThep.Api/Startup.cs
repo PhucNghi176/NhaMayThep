@@ -1,7 +1,4 @@
-﻿using Asp.Versioning;
-using CleanArchitecture.Configuration;
-using NhaMapThep.Api.Configuration;
-using NhaMapThep.Configuration;
+﻿using NhaMayThep.Api.Configuration;
 using NhaMayThep.Api.Filters;
 using NhaMayThep.Application;
 using NhaMayThep.Infrastructure;

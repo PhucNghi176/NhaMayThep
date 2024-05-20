@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.NghiPhep;
-using NhaMayThep.Application.NghiPhep.GetById;
-using NhaMayThep.Domain.Repositories;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NghiPhep.GetById
 {

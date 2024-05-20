@@ -1,5 +1,3 @@
-
-﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 
@@ -8,7 +6,7 @@ using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.ThongTinChucVu.CreateNewChucVu
 {
-    public class CreateNewChucVuCommandHandler : IRequestHandler<CreateNewChucVuCommand, string> 
+    public class CreateNewChucVuCommandHandler : IRequestHandler<CreateNewChucVuCommand, string>
 
     {
         private readonly IChucVuRepository _chucVuRepository;

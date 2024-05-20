@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.TrinhDoHocVan
 {
@@ -10,7 +10,7 @@ namespace NhaMayThep.Application.TrinhDoHocVan
 
         public int Id { get; set; }
         public string tenTrinhDo { get; set; }
-        
+
 
 
         public void Mapping(Profile profile)

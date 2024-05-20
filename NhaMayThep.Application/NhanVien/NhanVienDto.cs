@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.NhanVien
 {
@@ -40,8 +35,8 @@ namespace NhaMayThep.Application.NhanVien
         }
 
 
-        public string ChucVu {  get; set; }
-        public string TinhTrangLamViec {  get; set; }
+        public string ChucVu { get; set; }
+        public string TinhTrangLamViec { get; set; }
         public string ID { get; set; }
         public string Email { get; set; }
         public string HoVaTen { get; set; }
@@ -55,6 +50,6 @@ namespace NhaMayThep.Application.NhanVien
         public string TenNganHang { get; set; }
         public string SoNguoiPhuThuoc { get; set; }
 
-        public string? CanCuocCongDan {  get; set; }
+        public string? CanCuocCongDan { get; set; }
     }
 }

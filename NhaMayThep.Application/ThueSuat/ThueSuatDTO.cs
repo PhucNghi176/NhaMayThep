@@ -1,20 +1,13 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMayThep.Application.TinhTrangLamViec;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThueSuat
 {
     public class ThueSuatDTO : IMapFrom<ThueSuatEntity>
     {
-        public int ID {  get; set; }
-        public string Name {  get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
         public int BacThue { get; set; }
         public decimal DauThuNhapTinhThueTrenNam { get; set; }
         public decimal CuoiThuNhapTinhThueTrenNam { get; set; }

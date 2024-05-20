@@ -1,14 +1,9 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.DangKiTangCa.Create
 {
-    public class CreateDangKiTangCaCommand : IRequest<string>,ICommand
+    public class CreateDangKiTangCaCommand : IRequest<string>, ICommand
     {
         public string MaSoNhanVien { get; set; }
         public DateTime NgayLamTangCa { get; set; }

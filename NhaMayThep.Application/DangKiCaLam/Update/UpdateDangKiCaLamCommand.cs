@@ -5,7 +5,7 @@ namespace NhaMayThep.Application.DangKiCaLam.Update
 {
     public class UpdateDangKiCaLamCommand : IRequest<string>, ICommand
     {
-        public string Id { get; set; }  
+        public string Id { get; set; }
         public string MaSoNhanVien { get; set; }
         public DateTime NgayDangKi { get; set; }
         public int CaDangKi { get; set; }

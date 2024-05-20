@@ -1,14 +1,9 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllDeletedPagination
 {
-    public class GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQuery: IRequest<PagedResult<BaoHiemNhanVienChiTietBaoHiemDto>>
+    public class GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQuery : IRequest<PagedResult<BaoHiemNhanVienChiTietBaoHiemDto>>
     {
         public GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQuery() { }
         public GetAllDeletedBaoHiemNhanVienChiTietBaoHiemPaginationQuery(int pagenumber, int pagesize)

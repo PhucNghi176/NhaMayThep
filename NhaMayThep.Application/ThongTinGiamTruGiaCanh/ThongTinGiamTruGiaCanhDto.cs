@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
 {
@@ -37,7 +37,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh
                 CanCuocCongDan = cancuoccongdan,
                 NgayXacNhanPhuThuoc = ngayxacnhan,
                 NhanVienID = nhanvienid,
-                MaGiamTruID= magiamtruid
+                MaGiamTruID = magiamtruid
             };
         }
 

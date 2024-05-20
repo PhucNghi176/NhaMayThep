@@ -1,6 +1,6 @@
 ﻿using MediatR;
 
-namespace NhaMayThep.Application.DangKiCaLam.Queries.GetDangKiCaLamById
+namespace NhaMayThep.Application.DangKiCaLam.GetId
 {
     public class GetDangKiCaLamByIdQuery : IRequest<DangKiCaLamDto>
     {

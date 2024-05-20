@@ -1,10 +1,5 @@
 ﻿using FluentValidation;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.Create
 {
@@ -23,9 +18,9 @@ namespace NhaMayThep.Application.LoaiNghiPhep.Create
             RuleFor(command => command.Name)
             .NotEmpty().WithMessage("Tên không để trống")
             .MaximumLength(100).WithMessage("Tên không vượt quá 100 chữ.");
-          
+
         }
 
-      
+
     }
 }

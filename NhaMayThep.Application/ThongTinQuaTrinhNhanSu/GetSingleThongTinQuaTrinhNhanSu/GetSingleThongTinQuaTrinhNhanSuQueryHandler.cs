@@ -1,11 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrinhNhanSu
 {
@@ -16,7 +11,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.GetSingleThongTinQuaTrin
         public GetSingleThongTinQuaTrinhNhanSuQueryHandler(IMapper mapper, IThongTinQuaTrinhNhanSuRepository thongTinQuaTrinhNhanSuRepository)
         {
             _mapper = mapper;
-            _thongTinQuaTrinhNhanSu = thongTinQuaTrinhNhanSuRepository;   
+            _thongTinQuaTrinhNhanSu = thongTinQuaTrinhNhanSuRepository;
         }
         public async Task<ThongTinQuaTrinhNhanSuDto> Handle(GetSingleThongTinQuaTrinhNhanSuQuery request, CancellationToken cancellationToken)
         {

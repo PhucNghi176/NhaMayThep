@@ -1,9 +1,4 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.Create
 {
@@ -24,7 +19,7 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Create
 
             RuleFor(v => v.NgayHieuLuc)
                 .NotNull().WithMessage("NgayHieuLuc không được trống");
-                
+
         }
     }
 }

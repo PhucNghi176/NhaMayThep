@@ -1,10 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Entities
 {
@@ -19,19 +14,19 @@ namespace NhaMapThep.Domain.Entities
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongNghiPhep { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public decimal LuongTangCa {  get; set; }
+        public decimal LuongTangCa { get; set; }
 
 
 
 
         [Column(TypeName = "decimal(18, 4)")]
-        public decimal LuongCoBan {  get; set; }
+        public decimal LuongCoBan { get; set; }
 
 
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongNhanCoDinh { get; set; }
 
-        public double NgayCong {  get; set; }
+        public double NgayCong { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal TongThuNhap { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
@@ -49,7 +44,7 @@ namespace NhaMapThep.Domain.Entities
         public virtual GiamTruNhanVienEntity GiamTruNhanVien { get; set; }
 
         [Column(TypeName = "decimal(18, 4)")]
-        public decimal TamUng {  get; set; }
+        public decimal TamUng { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public decimal LuongThucLanh { get; set; }
     }

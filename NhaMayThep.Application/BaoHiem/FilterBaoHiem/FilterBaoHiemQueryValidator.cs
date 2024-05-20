@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiem.FilterBaoHiem
 {
-    public class FilterBaoHiemQueryValidator: AbstractValidator<FilterBaoHiemQuery>
+    public class FilterBaoHiemQueryValidator : AbstractValidator<FilterBaoHiemQuery>
     {
-        public FilterBaoHiemQueryValidator() 
+        public FilterBaoHiemQueryValidator()
         {
             RuleFor(x => x.PageSize)
                 .NotNull()

@@ -1,15 +1,10 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
 {
     public class UpdateNhanVienCommandValidator : AbstractValidator<UpdateNhanVienCommand>
     {
-        public UpdateNhanVienCommandValidator() 
+        public UpdateNhanVienCommandValidator()
         {
             Configure();
         }
@@ -35,7 +30,7 @@ namespace NhaMayThep.Application.NhanVien.UpdateNhanVien
                 .NotNull().WithMessage("Tên ngân hàng không hợp lệ");
             RuleFor(x => x.SoTaiKhoan).NotEmpty()
                 .NotNull().WithMessage("Số tài khoản không hợp lệ");
-            
+
         }
     }
 }

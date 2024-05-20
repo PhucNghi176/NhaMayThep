@@ -1,25 +1,14 @@
-﻿using MediatR;
-using Microsoft.IdentityModel.Tokens;
-using NhaMapThep.Application.Common.Pagination;
+﻿using AutoMapper;
+using MediatR;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Infrastructure.Persistence;
-using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
-using NhaMayThep.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Common.Exceptions;
-using AutoMapper;
-using Microsoft.EntityFrameworkCore;
 using NinjaNye.SearchExtensions;
 using System.Linq.Expressions;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMapThep.Application.Common.Models;
-using NhaMayThep.Application.ThongTinCongDoan;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGiaCanh
 {
@@ -34,7 +23,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
             INhanVienRepository nhanVienRepository,
             IThongTinGiamTruRepository thongTinGiamTru,
             IThongTinGiamTruGiaCanhRepository thongTinGiamTruGiaCanh,
-            ApplicationDbContext context, 
+            ApplicationDbContext context,
             IMapper mapper)
         {
             _thongtingiamtruRepository = thongTinGiamTru;
@@ -65,7 +54,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
                 {
                     query = query.Where(x => x.MaGiamTruID == request.MaGiamTruID);
                 }
-                if(!string.IsNullOrEmpty(request.TenGiamTru))
+                if (!string.IsNullOrEmpty(request.TenGiamTru))
                 {
                     query = query.Join(_context.ThongTinGiamTru,
                             thongtingiamtru => thongtingiamtru.MaGiamTruID,
@@ -83,9 +72,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.FilterThongTinGiamTruGia
                     .Where(x => x.CanCuoc.CanCuocCongDan == request.CanCuocCongDan)
                     .Select(x => x.ThongTinGiamTru);
                 }
-                if(request.NgayTao.HasValue)
+                if (request.NgayTao.HasValue)
                 {
-                    query = query.Where(x=> x.NgayTao == request.NgayTao);
+                    query = query.Where(x => x.NgayTao == request.NgayTao);
                 }
                 if (request.NgayXacNhanPhuThuoc.HasValue)
                 {

@@ -1,9 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Repositories;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using System.Threading;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.GetAll
 {

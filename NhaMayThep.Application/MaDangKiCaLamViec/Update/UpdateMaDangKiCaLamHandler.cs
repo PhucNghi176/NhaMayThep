@@ -1,15 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.MaDangKiCaLamViec.Create;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.MaDangKiCaLamViec.Update
 {
@@ -34,7 +27,7 @@ namespace NhaMayThep.Application.MaDangKiCaLamViec.Update
             {
                 throw new NotFoundException("Loại Đăng Kí trên Không Tồn Tại");
             }
-            
+
             dangKi.Name = request.Name;
             dangKi.ThoiGianCaLamBatDau = request.ThoiGianCaLamBatDau;
             dangKi.ThoiGianCaLamKetThuc = request.ThoiGianCaLamKetThuc;

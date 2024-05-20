@@ -1,23 +1,18 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Entities.ConfigTable
 {
     [Table("ThueSuat")]
     public class ThueSuatEntity : BangMaGocEntity
     {
-        public required int BacThue {  get; set; }
+        public required int BacThue { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public required decimal DauThuNhapTinhThueTrenNam {  get; set; }
+        public required decimal DauThuNhapTinhThueTrenNam { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public required decimal CuoiThuNhapTinhThueTrenNam { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
-        public required decimal DauThuNhapTinhThueTrenThang {  get; set; }
+        public required decimal DauThuNhapTinhThueTrenThang { get; set; }
         [Column(TypeName = "decimal(18, 4)")]
         public required decimal CuoiThuNhapTinhThueTrenThang { get; set; }
         [Column(TypeName = "decimal(18, 4)")]

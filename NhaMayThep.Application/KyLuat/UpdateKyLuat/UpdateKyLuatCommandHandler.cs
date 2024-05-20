@@ -1,14 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
@@ -32,7 +25,7 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
         public UpdateKyLuatCommandHandler() { }
         public async Task<string> Handle(UpdateKyLuatCommand request, CancellationToken cancellationToken)
         {
-            if(request.MaNhanVien != null)
+            if (request.MaNhanVien != null)
             {
                 var nhanvien = await this._nhanvien.FindAsync(x => x.ID.Equals(request.MaNhanVien) && x.NgayXoa == null, cancellationToken);
                 if (nhanvien == null)
@@ -44,7 +37,7 @@ namespace NhaMayThep.Application.KyLuat.UpdateKyLuat
                 if (chinhsach == null)
                     throw new NotFoundException($"Không tìm thấy chính sách nhân sự với ID : {request.ChinhSachNhanSuID} hoặc chính sách nhân sự này đã bị xóa.");
             }
-            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null,cancellationToken);
+            var kyluat = await this._repository.FindAsync(x => x.ID.Equals(request.ID) && x.NgayXoa == null, cancellationToken);
             if (kyluat == null)
                 throw new NotFoundException($"Không tìm thấy trường hợp kỷ luật với ID : {request.ID} hoặc trường hợp này đã bị xóa.");
             kyluat.NguoiCapNhatID = this._currentUserService.UserId;

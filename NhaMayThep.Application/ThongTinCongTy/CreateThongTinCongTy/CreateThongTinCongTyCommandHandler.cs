@@ -19,7 +19,7 @@ namespace NhaMayThep.Application.ThongTinCongTy.CreateThongTinCongTy
         {
             var checkDuplicatoion = await _thongTinCongTyRepository.AnyAsync(x => x.MaDoanhNghiep == request.MaDoanhNghiep, cancellationToken: cancellationToken);
             if (checkDuplicatoion)
-                throw new DuplicationException ("Thông Tin Công Ty đã tồn tại");
+                throw new DuplicationException("Thông Tin Công Ty đã tồn tại");
 
             var thongTinCongTy = new ThongTinCongTyEntity()
             {

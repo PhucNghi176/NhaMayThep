@@ -1,17 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.DonViCongTac.UpdateDonViCongTac;
-using NhaMayThep.Application.DonViCongTac;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
 
 namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
 {
@@ -38,7 +30,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
         }
         public async Task<string> Handle(UpdateThongTinDangVienCommand request, CancellationToken cancellationToken)
         {
-            
+
 
             var thongTinDangVien = await _thongTinDangVienRepository.FindAsync(x => x.ID == request.ID && x.NgayXoa == null, cancellationToken: cancellationToken);
             if (thongTinDangVien == null)
@@ -65,7 +57,7 @@ namespace NhaMayThep.Application.ThongTinDangVien.UpdateThongTinDangVien
             thongTinDangVien.ChucVuDang = request.ChucVuDang;
             thongTinDangVien.TrinhDoChinhTri = request.TrinhDoChinhTri;
             thongTinDangVien.NgayVaoDang = request.NgayVaoDang;
-            thongTinDangVien.CapDangVien = request.CapDangVien ;
+            thongTinDangVien.CapDangVien = request.CapDangVien;
             thongTinDangVien.NguoiCapNhatID = _currentUserService.UserId;
             thongTinDangVien.NgayCapNhatCuoi = DateTime.Now;
 

@@ -3,11 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted
 {
@@ -31,7 +26,7 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.GetByNhanVienIdDeleted
         public async Task<List<ThongTinGiamTruGiaCanhDto>> Handle(GetThongTinGiamTruGiaCanhByNhanVienIdDeletedQuery request, CancellationToken cancellationToken)
         {
             var giamtrugiacanhs = await _thongTinGiamTruGiaCanhRepository
-                .FindAllAsync(x => x.NhanVienID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue,cancellationToken);
+                .FindAllAsync(x => x.NhanVienID.Equals(request.Id) && x.NguoiXoaID != null && x.NgayXoa.HasValue, cancellationToken);
             var thongtingiamtrus = await _thongTinGiamTruRepository
                 .FindAllToDictionaryAsync(x => x.NguoiXoaID == null && !x.NgayXoa.HasValue, x => x.ID, x => x.Name, cancellationToken);
             var nhanviens = await _nhanVienRepository

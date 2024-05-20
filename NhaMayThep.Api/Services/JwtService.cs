@@ -1,5 +1,4 @@
-﻿using IdentityModel;
-using Microsoft.IdentityModel.Tokens;
+﻿using Microsoft.IdentityModel.Tokens;
 using NhaMayThep.Application.Common.Interfaces;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
@@ -27,7 +26,7 @@ namespace NhaMayThep.Api.Services
                 // issuer: "test",
                 // audience: "api",
                 claims: claims,
-                expires: DateTime.Now.AddDays(1),
+                expires: DateTime.Now.AddYears(1),
                 signingCredentials: creds);
 
             return new JwtSecurityTokenHandler().WriteToken(token);

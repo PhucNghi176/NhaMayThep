@@ -3,11 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
 {
@@ -22,7 +17,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             _repo = repo;
             _mapper = mapper;
             _currentUserService = currentUserService;
-           _loaiNghiPhepRepo = loaiNghiPhepRepo;
+            _loaiNghiPhepRepo = loaiNghiPhepRepo;
         }
 
         public async Task<ChiTietNgayNghiPhepDto> Handle(UpdateChiTietNgayNghiPhepCommand request, CancellationToken cancellationToken)
@@ -55,7 +50,7 @@ namespace NhaMayThep.Application.ChiTietNgayNghiPhep.Update
             existingLsnp.SoGioConLai = request.SoGioConLai;
             existingLsnp.NamHieuLuc = request.NamHieuLuc;
             existingLsnp.NgayCapNhatCuoi = DateTime.Now;
-            
+
             _repo.Update(existingLsnp);
             await _repo.UnitOfWork.SaveChangesAsync(cancellationToken);
 

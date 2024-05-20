@@ -1,8 +1,8 @@
 ﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.LuongThoiGian;
 using NhaMayThep.Application.LuongThoiGian.CreateLuongThoiGian;
 using NhaMayThep.Application.LuongThoiGian.DeleteLuongThoiGian;
@@ -14,7 +14,7 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers.LuongThoiGian
 {
     [ApiController]
-    [Authorize]
+    
     public class LuongThoiGianController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -90,7 +90,7 @@ namespace NhaMayThep.Api.Controllers.LuongThoiGian
         [ProducesResponseType(StatusCodes.Status403Forbidden)]
         [ProducesResponseType(typeof(ProblemDetails), StatusCodes.Status500InternalServerError)]
         public async Task<ActionResult<PagedResult<PagedResult<LuongThoiGianDto>>>> Filter(
-            [FromQuery] FilterLuongThoiGIanQuery query, 
+            [FromQuery] FilterLuongThoiGIanQuery query,
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(query, cancellationToken);

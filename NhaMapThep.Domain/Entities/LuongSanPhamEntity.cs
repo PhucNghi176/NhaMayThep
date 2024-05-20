@@ -1,11 +1,5 @@
 ﻿using NhaMapThep.Domain.Entities.Base;
-using NhaMapThep.Domain.Entities.ConfigTable;
-using System;
-using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Entities
 {
@@ -16,7 +10,7 @@ namespace NhaMapThep.Domain.Entities
         [ForeignKey(nameof(MaSoNhanVien))]
         public virtual NhanVienEntity NhanVien { get; set; }
 
-        public int SoSanPhamLam {  get; set; }
+        public int SoSanPhamLam { get; set; }
         public required string MucSanPhamID { get; set; }
         [ForeignKey(nameof(MucSanPhamID))]
         public virtual MucSanPhamEntity MucSanPham { get; set; }

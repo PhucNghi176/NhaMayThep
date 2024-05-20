@@ -1,10 +1,4 @@
 ﻿using FluentValidation;
-using NhaMayThep.Application.CapBacLuong.CreateCapBacLuong;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCapDangVien.CreateThongTinCapDangVien
 {

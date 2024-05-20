@@ -1,12 +1,6 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMayThep.Application.NhanVien;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
 {
@@ -23,7 +17,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
         public int? ChucVuID { get; set; } = 0;
         public int? ChucDanhID { get; set; } = 0;
         public FilterQuaTrinhNhanSuQuery() { }
-        public FilterQuaTrinhNhanSuQuery(int no, int pageSize, DateTime ngayTao, string maSoNhanVien, 
+        public FilterQuaTrinhNhanSuQuery(int no, int pageSize, DateTime ngayTao, string maSoNhanVien,
             int loaiQuaTrinhID, DateTime ngayBatDau, DateTime ngayKetThuc, int phongBanID, int chucVuID, int chucDanhID)
         {
             PageNumber = no;

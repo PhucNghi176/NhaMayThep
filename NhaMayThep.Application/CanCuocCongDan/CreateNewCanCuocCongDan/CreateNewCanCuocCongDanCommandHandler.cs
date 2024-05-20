@@ -27,7 +27,7 @@ namespace NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan
             {
                 throw new DuplicationException("Nhân Viên đã có Căn Cước Công Dân");
             }
-            isExsisted = await _canCuocCongDanRepository.AnyAsync(x=>x.CanCuocCongDan==request.CanCuocCongDan&&x.NgayXoa==null, cancellationToken);
+            isExsisted = await _canCuocCongDanRepository.AnyAsync(x => x.CanCuocCongDan == request.CanCuocCongDan && x.NgayXoa == null, cancellationToken);
             if (isExsisted)
             {
                 throw new DuplicationException("Mã số Căn Cước Công Dân này đã tồn tại");

@@ -3,11 +3,6 @@ using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGiaCanh
 {
@@ -36,9 +31,9 @@ namespace NhaMayThep.Application.ThongTinGiamTruGiaCanh.RestoreThongTinGiamTruGi
             thongtingiamtru.NguoiXoaID = null;
             thongtingiamtru.NgayXoa = null;
             thongtingiamtru.NguoiCapNhatID = _currentUserService.UserId;
-            thongtingiamtru.NgayCapNhatCuoi= DateTime.Now;
+            thongtingiamtru.NgayCapNhatCuoi = DateTime.Now;
             _thongTinGiamTruGiaCanhRepository.Update(thongtingiamtru);
-            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken)> 0 ? "Phục hồi thành công" : "Phục hồi thất bại";
+            return await _thongTinGiamTruGiaCanhRepository.UnitOfWork.SaveChangesAsync(cancellationToken) > 0 ? "Phục hồi thành công" : "Phục hồi thất bại";
         }
     }
 }

@@ -1,13 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllPagination
 {
@@ -23,9 +18,9 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.GetAllPagination
 
         public async Task<PagedResult<BaoHiemNhanVienChiTietBaoHiemDto>> Handle(GetAllBaoHiemNhanVienChiTietbaoHiemPaginationQuery request, CancellationToken cancellationToken)
         {
-            var listExists= await _baohiemNhanVienChiTietRepository
-                .FindAllAsync(x=> string.IsNullOrEmpty(x.NguoiXoaID) && !x.NgayXoa.HasValue, request.PageNumber, request.PageSize, cancellationToken);
-            if(listExists.Count() == 0)
+            var listExists = await _baohiemNhanVienChiTietRepository
+                .FindAllAsync(x => string.IsNullOrEmpty(x.NguoiXoaID) && !x.NgayXoa.HasValue, request.PageNumber, request.PageSize, cancellationToken);
+            if (listExists.Count() == 0)
             {
                 throw new NotFoundException("Không tìm thấy bất kỳ bảo hiểm nào");
             }

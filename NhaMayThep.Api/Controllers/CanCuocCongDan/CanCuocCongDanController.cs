@@ -1,26 +1,22 @@
-﻿using IdentityModel;
-using MediatR;
+﻿using MediatR;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Api.Controllers.ResponseTypes;
 using NhaMayThep.Application.CanCuocCongDan;
 using NhaMayThep.Application.CanCuocCongDan.CreateNewCanCuocCongDan;
 using NhaMayThep.Application.CanCuocCongDan.DeleteCanCuocCongDan;
 using NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanById;
-using NhaMayThep.Application.CanCuocCongDan.GetPagination;
 using NhaMayThep.Application.CanCuocCongDan.GetCanCuocCongDanByNhanVienID;
+using NhaMayThep.Application.CanCuocCongDan.GetPagination;
 using NhaMayThep.Application.CanCuocCongDan.UpdateCanCuocCongDan;
 using NhaMayThep.Application.Common.Interfaces;
+using NhaMayThep.Application.Common.Pagination;
 using System.Net.Mime;
-using System.Security.Claims;
 
-namespace NhaMayThep.Api.Controllers
+namespace NhaMayThep.Api.Controllers.CanCuocCongDan
 {
     [ApiController]
-    [Authorize]
+    
     public class CanCuocCongDanController : ControllerBase
     {
         private readonly IMediator _mediator;

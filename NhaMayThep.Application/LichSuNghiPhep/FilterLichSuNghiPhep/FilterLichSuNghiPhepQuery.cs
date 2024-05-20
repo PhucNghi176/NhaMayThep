@@ -1,13 +1,8 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.LichSuNghiPhep.Filter
+namespace NhaMayThep.Application.LichSuNghiPhep.FilterLichSuNghiPhep
 {
     public class FilterLichSuNghiPhepQuery : IRequest<PagedResult<LichSuNghiPhepDto>>, IQuery
     {
@@ -39,7 +34,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Filter
             this.NgayKetThuc = NgayKetThuc;
             this.TenNguoiDuyet = TenNguoiDuyet;
             this.TenNhanVien = TenNhanVien;
-            this.LyDo=LyDo;
+            this.LyDo = LyDo;
         }
 
     }

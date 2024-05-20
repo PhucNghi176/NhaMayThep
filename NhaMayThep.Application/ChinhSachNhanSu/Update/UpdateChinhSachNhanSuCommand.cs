@@ -1,10 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.Update
 {
@@ -18,10 +13,10 @@ namespace NhaMayThep.Application.ChinhSachNhanSu.Update
             NgayHieuLuc = ngayHieuLuc;
             NoiDung = noiDung;
         }
-        public int ID {  get; set; }
-        public string Name {  get; set; }
-        public string MucDo {  get; set; }
-        public DateTime NgayHieuLuc {  get; set; }
-        public string? NoiDung {  get; set; }
+        public int ID { get; set; }
+        public string Name { get; set; }
+        public string MucDo { get; set; }
+        public DateTime NgayHieuLuc { get; set; }
+        public string? NoiDung { get; set; }
     }
 }

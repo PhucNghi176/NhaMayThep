@@ -1,25 +1,22 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMayThep.Application.ThongTinDaoTao.Delete;
-using NhaMayThep.Application.ThongTinDaoTao;
-using System.Net.Mime;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMayThep.Application.ThongTinDaoTao.GetById;
-using NhaMayThep.Application.ThongTinDaoTao.GetAll;
-using NhaMayThep.Application.ThongTinDaoTao.Create;
-using NhaMayThep.Application.ThongTinDaoTao.Update;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.ThongTinDaoTao.GetByPagination;
 using Microsoft.AspNetCore.Authorization;
-using NhaMayThep.Application.ThongTinDaoTao.FillterThongTinDaoTao;
+using Microsoft.AspNetCore.Mvc;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Application.ThongTinDaoTao;
+using NhaMayThep.Application.ThongTinDaoTao.Create;
+using NhaMayThep.Application.ThongTinDaoTao.Delete;
+using NhaMayThep.Application.ThongTinDaoTao.FilterThongTinDaoTao;
+using NhaMayThep.Application.ThongTinDaoTao.GetAll;
+using NhaMayThep.Application.ThongTinDaoTao.GetById;
+using NhaMayThep.Application.ThongTinDaoTao.GetByPagination;
+using NhaMayThep.Application.ThongTinDaoTao.Update;
+using System.Net.Mime;
 
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinDaoTaoController : ControllerBase
     {
         private readonly ISender _mediator;

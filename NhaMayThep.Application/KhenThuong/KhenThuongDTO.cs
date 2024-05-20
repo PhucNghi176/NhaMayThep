@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel.DataAnnotations.Schema;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.KhenThuong
 {
@@ -14,16 +8,16 @@ namespace NhaMayThep.Application.KhenThuong
     {
         public string MaSoNhanVien { get; set; }
         public string TenNhanVien { get; set; }
-        public string ID {  get; set; }
+        public string ID { get; set; }
         public int ChinhSachNhanSuID { get; set; }
-        public string ChinhSachNhanSu {  get; set; }
+        public string ChinhSachNhanSu { get; set; }
         public string TenDotKhenThuong { get; set; }
         public DateTime NgayKhenThuong { get; set; }
         public decimal TongThuong { get; set; }
         public KhenThuongDTO() { }
 
         public void Mapping(Profile profile)
-        {   
+        {
             profile.CreateMap<KhenThuongEntity, KhenThuongDTO>();
         }
     }

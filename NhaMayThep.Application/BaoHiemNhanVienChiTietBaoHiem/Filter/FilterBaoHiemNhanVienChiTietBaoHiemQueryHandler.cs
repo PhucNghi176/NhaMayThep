@@ -1,15 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Filter
 {
@@ -32,7 +27,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Filter
             Func<IQueryable<BaoHiemNhanVienBaoHiemChiTietEntity>, IQueryable<BaoHiemNhanVienBaoHiemChiTietEntity>> options = query =>
             {
                 query = query.Where(x => string.IsNullOrEmpty(x.NguoiXoaID) && !x.NgayXoa.HasValue);
-                if(request.MaBaoHiemNhanVien != null)
+                if (request.MaBaoHiemNhanVien != null)
                 {
                     query = query.Where(x => x.BHNV == request.MaBaoHiemNhanVien);
                 }
@@ -63,7 +58,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Filter
 
             var listExists = await _baohiemNhanVienChiTienRepository
                 .FindAllAsync(request.PageNumber, request.PageSize, options, cancellationToken);
-            if(listExists.Count() == 0)
+            if (listExists.Count() == 0)
             {
                 throw new NotFoundException("Không tìm thấy bảo hiểm nào theo yêu cầu");
             }

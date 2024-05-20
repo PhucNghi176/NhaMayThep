@@ -1,15 +1,9 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.Logs.GetNewestLogs
+namespace NhaMayThep.Application.LogTest.GetNewestLogs
 {
-    public class GetNewestLogsQuery:IRequest<List<string>>,IQuery
+    public class GetNewestLogsQuery : IRequest<List<string>>, IQuery
     {
         public GetNewestLogsQuery() { }
 

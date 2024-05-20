@@ -1,24 +1,23 @@
 ﻿
 using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.TrinhDoHocVan.Commands;
-using NhaMayThep.Application.TrinhDoHocVan.Delete;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.TrinhDoHocVan;
+using NhaMayThep.Application.TrinhDoHocVan.Create;
+using NhaMayThep.Application.TrinhDoHocVan.Delete;
+using NhaMayThep.Application.TrinhDoHocVan.FilterTrinhDoHocVan;
+using NhaMayThep.Application.TrinhDoHocVan.GetAll;
+using NhaMayThep.Application.TrinhDoHocVan.GetById;
+using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
+using NhaMayThep.Application.TrinhDoHocVan.Update;
 using System.Net.Mime;
 
-using NhaMayThep.Application.TrinhDoHocVan.GetById;
-using NhaMayThep.Application.TrinhDoHocVan.GetAll;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.TrinhDoHocVan.GetByPagination;
-using Microsoft.AspNetCore.Authorization;
-using NhaMayThep.Application.TrinhDoHocVan.FilterTrinhDoHocVan;
-
-namespace CleanArchitecture.Api.Controllers
+namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class TrinhDoHocVanController : ControllerBase
     {
         private readonly ISender _mediator;
@@ -27,7 +26,7 @@ namespace CleanArchitecture.Api.Controllers
         {
             _mediator = mediator;
         }
-        
+
         [HttpPost("trinh-do-hoc-van")]
         [Produces(MediaTypeNames.Application.Json)]
         [ProducesResponseType(typeof(JsonResponse<string>), StatusCodes.Status201Created)]

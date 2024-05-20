@@ -1,4 +1,4 @@
-﻿namespace NhaMapThep.Application.Common.Models
+﻿namespace NhaMayThep.Application.Common.Models
 {
     public class Result
     {

@@ -1,8 +1,8 @@
 ﻿using MediatR;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Application.Common.Security;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.ThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.CreateThongTinGiamTru;
 using NhaMayThep.Application.ThongTinGiamTru.DeleteThongTinGiamTru;
@@ -15,11 +15,11 @@ using System.Net.Mime;
 namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class ThongTinGiamTruController : ControllerBase
     {
         private readonly IMediator _mediator;
-        public ThongTinGiamTruController(IMediator mediator) 
+        public ThongTinGiamTruController(IMediator mediator)
         {
             _mediator = mediator ?? throw new ArgumentNullException(nameof(mediator));
         }
@@ -68,7 +68,7 @@ namespace NhaMayThep.Api.Controllers
             CancellationToken cancellationToken = default)
         {
             var result = await _mediator.Send(command, cancellationToken);
-            return CreatedAtAction(nameof(CreateNewThongTinGiamTru), new { id = result}, new JsonResponse<string>(result));
+            return CreatedAtAction(nameof(CreateNewThongTinGiamTru), new { id = result }, new JsonResponse<string>(result));
         }
         [HttpPut]
         [Route("Thong-Tin-Giam-Tru")]
@@ -100,7 +100,7 @@ namespace NhaMayThep.Api.Controllers
             [FromRoute] int Id,
             CancellationToken cancellationToken = default)
         {
-            var result = await _mediator.Send(new DeleteThongTinGiamTruCommand(Id),cancellationToken);
+            var result = await _mediator.Send(new DeleteThongTinGiamTruCommand(Id), cancellationToken);
             return Ok(new JsonResponse<string>(result));
         }
 

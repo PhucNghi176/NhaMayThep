@@ -1,6 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Repositories;
-using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.PhongBan.CreatePhongBan
 {
@@ -14,7 +12,7 @@ namespace NhaMayThep.Application.PhongBan.CreatePhongBan
         private void ConfigureValidationRules()
         {
             RuleFor(v => v.Name)
-                .NotEmpty().WithMessage("Name is require");            
+                .NotEmpty().WithMessage("Name is require");
         }
     }
 }

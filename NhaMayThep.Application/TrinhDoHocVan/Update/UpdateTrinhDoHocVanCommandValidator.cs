@@ -1,7 +1,7 @@
 ﻿using FluentValidation;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 
-namespace NhaMapThep.Application.TrinhDoHocVan.Commands
+namespace NhaMayThep.Application.TrinhDoHocVan.Update
 {
     public class UpdateTrinhDoHocVanCommandValidator : AbstractValidator<UpdateTrinhDoHocVanCommand>
     {

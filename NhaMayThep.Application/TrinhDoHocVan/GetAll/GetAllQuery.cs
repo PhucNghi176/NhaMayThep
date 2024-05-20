@@ -1,6 +1,5 @@
 ﻿using MediatR;
 using NhaMayThep.Application.Common.Interfaces;
-using System.Collections.Generic;
 
 namespace NhaMayThep.Application.TrinhDoHocVan.GetAll
 {

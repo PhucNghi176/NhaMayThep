@@ -1,13 +1,8 @@
 ﻿using FluentValidation;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetByNhanVienIdDeleted
 {
-    public class GetThongTinCongDoanByNhanVienIdDeletedQueryValidator: AbstractValidator<GetThongTinCongDoanByNhanVienIdDeletedQuery>
+    public class GetThongTinCongDoanByNhanVienIdDeletedQueryValidator : AbstractValidator<GetThongTinCongDoanByNhanVienIdDeletedQuery>
     {
         public GetThongTinCongDoanByNhanVienIdDeletedQueryValidator()
         {

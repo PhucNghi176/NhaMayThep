@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.BaoHiemNhanVien
 {
@@ -14,7 +14,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVien
         {
             return new BaoHiemNhanVienDto()
             {
-                ID = Id ,
+                ID = Id,
                 MaSoNhanVien = maSoNhanVien,
             };
         }

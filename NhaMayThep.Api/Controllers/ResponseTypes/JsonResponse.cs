@@ -1,4 +1,4 @@
-﻿namespace NhaMapThep.Api.Controllers.ResponseTypes
+﻿namespace NhaMayThep.Api.Controllers.ResponseTypes
 {
     /// <summary>
     /// Implicit wrapping of types that serialize to non-complex values.

@@ -1,14 +1,8 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
 {
@@ -32,7 +26,7 @@ namespace NhaMayThep.Application.NhanVien.GetAllNhanVien
             var list = await _nhanvienRepository.FindAllAsync(_ => _.NgayXoa == null, request.PageNumber, request.PageSize, cancellationToken);
             var chucvu = await _chucVuRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
             var tinhtranglamviec = await _tinhTrangLamViecRepository.FindAllToDictionaryAsync(x => x.NgayXoa == null, x => x.ID, x => x.Name, cancellationToken);
-            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec,null);
+            var returnList = list.MapToNhanVienDtoList(_mapper, chucvu, tinhtranglamviec, null);
 
             return PagedResult<NhanVienDto>.Create(totalCount: list.TotalCount,
                                pageCount: list.PageCount,

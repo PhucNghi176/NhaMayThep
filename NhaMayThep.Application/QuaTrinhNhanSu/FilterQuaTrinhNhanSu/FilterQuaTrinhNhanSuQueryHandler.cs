@@ -1,19 +1,12 @@
-﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
-using NhaMayThep.Application.NhanVien;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Repositories;
-using AutoMapper;
+﻿using AutoMapper;
+using MediatR;
 using Microsoft.EntityFrameworkCore;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Infrastructure.Persistence;
+using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
+using NhaMayThep.Infrastructure.Persistence;
 
 namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
 {
@@ -29,8 +22,8 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
         private readonly INhanVienRepository _nhanVienRepository;
 
         public FilterQuaTrinhNhanSuQueryHandler(IQuaTrinhNhanSuRepository quaTrinhNhanSuRepository, IMapper mapper, ApplicationDbContext context
-            ,IThongTinQuaTrinhNhanSuRepository loaiQuaTrinh, IPhongBanRepository phongBan, IChucVuRepository chucVu, IChucDanhRepository chucDanh
-            ,INhanVienRepository nhanVienRepository)
+            , IThongTinQuaTrinhNhanSuRepository loaiQuaTrinh, IPhongBanRepository phongBan, IChucVuRepository chucVu, IChucDanhRepository chucDanh
+            , INhanVienRepository nhanVienRepository)
         {
             _quaTrinhNhanSuRepository = quaTrinhNhanSuRepository;
             _nhanVienRepository = nhanVienRepository;
@@ -82,7 +75,7 @@ namespace NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu
                 if (request.PhongBanID != 0)
                 {
                     query = query.Where(x => x.PhongBanID.Equals(request.PhongBanID));
-                }               
+                }
                 return query;
             };
 

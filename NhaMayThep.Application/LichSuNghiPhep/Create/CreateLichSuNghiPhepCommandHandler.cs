@@ -4,9 +4,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.Create
 {
@@ -49,11 +46,11 @@ namespace NhaMayThep.Application.LichSuNghiPhep.Create
             {
                 throw new NotFoundException("Nguoi Duyet không tồn tại hoặc đã bị xóa.");
             }
-            if(nhanVien.NgayXoa != null)
+            if (nhanVien.NgayXoa != null)
             {
                 throw new NotFoundException("This user has been deleted");
             }
-           
+
 
             var lsnp = new LichSuNghiPhepNhanVienEntity
             {

@@ -1,18 +1,12 @@
 ﻿using AutoMapper;
-using NhaMayThep.Domain.Repositories;
-using NhaMapThep.Domain.Entities;
-using NhaMapThep.Domain.Entities.Base;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Application.ThongTinDaoTao.Create;
-using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 
 
-namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
+namespace NhaMayThep.Application.ThongTinDaoTao.Create
 {
     public class CreateThongTinDaoTaoCommandHandler : IRequestHandler<CreateThongTinDaoTaoCommand, string>
     {
@@ -22,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
         private readonly INhanVienRepository _nhanVienRepository;
         private readonly ITrinhDoHocVanRepository _trinhDoHocVanRepository;
 
-        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository, INhanVienRepository nhanVienRepository)
+        public CreateThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService, IMapper mapper, IThongTinDaoTaoRepository thongTinDaoTaoRepository, ITrinhDoHocVanRepository trinhDoHocVanRepository, INhanVienRepository nhanVienRepository)
         {
             _mapper = mapper;
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
@@ -43,7 +37,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.CreateThongTinDaoTao
             {
                 return "Thất Bại! MaTrinhDoHocVanID không hợp lệ.";
             }
-            var existingThongTinDaoTao = await _thongTinDaoTaoRepository.AnyAsync(x => x.NhanVienID == request.NhanVienId && x.NgayXoa == null,  cancellationToken);
+            var existingThongTinDaoTao = await _thongTinDaoTaoRepository.AnyAsync(x => x.NhanVienID == request.NhanVienId && x.NgayXoa == null, cancellationToken);
             if (existingThongTinDaoTao)
             {
                 return "Thất Bại! Nhân viên đã có trình độ đào tạo.";

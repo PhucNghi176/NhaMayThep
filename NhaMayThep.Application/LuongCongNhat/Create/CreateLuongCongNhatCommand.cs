@@ -1,18 +1,11 @@
 ﻿using MediatR;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMayThep.Application.Common.Interfaces;
-using NhaMapThep.Domain.Entities;
-using System.ComponentModel.DataAnnotations.Schema;
 
 namespace NhaMayThep.Application.LuongCongNhat.Create
 {
     public class CreateLuongCongNhatCommand : IRequest<string>, ICommand
     {
-        public CreateLuongCongNhatCommand( string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong)
+        public CreateLuongCongNhatCommand(string maSoNhanVien, double soGioLam, decimal luong1Gio, decimal tongLuong)
         {
 
             MaSoNhanVien = maSoNhanVien;

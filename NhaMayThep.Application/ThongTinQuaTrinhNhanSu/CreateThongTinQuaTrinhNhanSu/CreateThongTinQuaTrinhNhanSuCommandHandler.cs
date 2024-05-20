@@ -3,12 +3,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNhanSu
 {
@@ -24,7 +18,7 @@ namespace NhaMayThep.Application.ThongTinQuaTrinhNhanSu.CreateThongTinQuaTrinhNh
         public async Task<string> Handle(CreateThongTinQuaTrinhNhanSuCommand command, CancellationToken cancellationToken)
         {
             var existName = await _thongTinQuaTrinhNhanSuRepository.AnyAsync(x => x.Name == command.Name && x.NguoiXoaID == null, cancellationToken);
-            if(existName == true)
+            if (existName == true)
             {
                 throw new DuplicationException("Thông tin quá trình nhân sự: " + command.Name + " đã tồn tại");
             }

@@ -1,5 +1,4 @@
 ﻿using MediatR;
-using System;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.TrinhDoHocVan.Delete

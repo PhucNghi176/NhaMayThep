@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.ThongTinDaoTao
 {
@@ -17,7 +16,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao
         public int TrinhDoVanHoa { get; set; }
 
 
-        public static ThongTinDaoTaoDto CreateThongTinDaoTao(string Id ,string nhanVienId, int maTrinhDoHocVanId, string tenTruong, string chuyenNganh, DateTime namTotNghiep, int trinhDoVanHoa)
+        public static ThongTinDaoTaoDto CreateThongTinDaoTao(string Id, string nhanVienId, int maTrinhDoHocVanId, string tenTruong, string chuyenNganh, DateTime namTotNghiep, int trinhDoVanHoa)
         {
             return new ThongTinDaoTaoDto()
             {

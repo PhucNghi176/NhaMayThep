@@ -1,12 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh
 {
@@ -21,7 +15,7 @@ namespace NhaMayThep.Application.ThongTinChucDanh.GetAllChucDanh
         }
         public async Task<List<ChucDanhDto>> Handle(GetAllChucDanhQuery query, CancellationToken cancellationToken)
         {
-            var list = await _chucDanhRepository.FindAllAsync(x => x.NgayXoa == null,cancellationToken);
+            var list = await _chucDanhRepository.FindAllAsync(x => x.NgayXoa == null, cancellationToken);
             List<ChucDanhDto> result = new List<ChucDanhDto>();
             foreach (var item in list)
             {

@@ -1,7 +1,5 @@
-﻿using NhaMayThep.Application.Common.Interfaces;
-using MediatR;
-using System;
-using System.Text.Json.Serialization;
+﻿using MediatR;
+using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Update
 {

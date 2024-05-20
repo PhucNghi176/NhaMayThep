@@ -3,10 +3,9 @@ using AutoMapper.QueryableExtensions;
 using Microsoft.EntityFrameworkCore;
 using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Repositories;
 using System.Linq.Expressions;
 
-namespace NhaMapThep.Infrastructure.Repositories
+namespace NhaMayThep.Infrastructure.Repositories
 {
     public class RepositoryBase<TDomain, TPersistence, TDbContext> : IEFRepository<TDomain, TPersistence>
        where TDbContext : DbContext, IUnitOfWork
@@ -253,7 +252,7 @@ namespace NhaMapThep.Infrastructure.Repositories
             var queryable = QueryInternal(queryOptions);
             var projection = queryable.ProjectTo<TProjection>(_mapper.ConfigurationProvider);
             return await projection.FirstOrDefaultAsync(cancellationToken);
-        }    
+        }
         public async Task<Dictionary<TKey, TValue>> FindAllToDictionaryAsync<TKey, TValue>(
             Expression<Func<TPersistence, bool>> filterExpression,
             Expression<Func<TPersistence, TKey>> keySelector,

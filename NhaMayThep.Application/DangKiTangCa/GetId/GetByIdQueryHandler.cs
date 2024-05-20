@@ -1,13 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities.ConfigTable;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.DangKiTangCa.GetId;
-using System.Threading;
-using System.Threading.Tasks;
 
-namespace NhaMayThep.Application.DangKiTangCa.Queries.GetDangKiTangCaById
+namespace NhaMayThep.Application.DangKiTangCa.GetId
 {
     public class GetDangKiTangCaByIdQueryHandler : IRequestHandler<GetByIdQuery, DangKiTangCaDto>
     {

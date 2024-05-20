@@ -1,5 +1,5 @@
 ﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.BaoHiemNhanVien.FilterBaoHiemNhanVien
 {

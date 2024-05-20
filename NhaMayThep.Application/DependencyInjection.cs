@@ -1,8 +1,8 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using NhaMapThep.Application.Common.Validation;
 using NhaMayThep.Application.Common.Behaviours;
+using NhaMayThep.Application.Common.Validation;
 using System.Reflection;
 
 namespace NhaMayThep.Application

@@ -1,17 +1,9 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Common.Interfaces;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.ThongTinDaoTao.FillterThongTinDaoTao;
-using NhaMayThep.Domain.Repositories;
-using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Linq;
-using System.Threading;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.FilterThongTinDaoTao
 {

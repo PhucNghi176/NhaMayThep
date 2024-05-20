@@ -1,17 +1,9 @@
-﻿using MediatR;
-using NhaMapThep.Application.Common.Pagination;
-using NhaMayThep.Application.QuaTrinhNhanSu.FilterQuaTrinhNhanSu;
-using NhaMayThep.Application.QuaTrinhNhanSu;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
-using NhaMayThep.Infrastructure.Persistence;
-using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMapThep.Domain.Entities;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Entities;
+using NhaMapThep.Domain.Repositories.ConfigTable;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ChinhSachNhanSu.FilterChinhSachNhanSu
 {

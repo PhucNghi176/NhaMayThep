@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using NhaMayThep.Domain.Repositories;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMayThep.Application.ThongTinDaoTao;
-using NhaMayThep.Application.ThongTinDaoTao.GetById;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Repositories;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.GetById
 {

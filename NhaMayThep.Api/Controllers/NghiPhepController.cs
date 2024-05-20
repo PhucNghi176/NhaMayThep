@@ -1,25 +1,21 @@
 ﻿using MediatR;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using NhaMapThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Api.Controllers.ResponseTypes;
+using NhaMayThep.Application.Common.Pagination;
 using NhaMayThep.Application.NghiPhep;
 using NhaMayThep.Application.NghiPhep.Create;
 using NhaMayThep.Application.NghiPhep.Delete;
-using NhaMayThep.Application.NghiPhep.GetById;
-using NhaMayThep.Application.NghiPhep.GetAll;
-using System.Net.Mime;
-using System.Threading;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Authorization;
-using NhaMapThep.Domain.Common.Exceptions;
-using NhaMayThep.Application.NghiPhep.Update;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMayThep.Application.NghiPhep.FilterNghiPhep;
+using NhaMayThep.Application.NghiPhep.GetAll;
+using NhaMayThep.Application.NghiPhep.GetById;
+using NhaMayThep.Application.NghiPhep.Update;
+using System.Net.Mime;
 
-namespace NhaMapThep.Api.Controllers
+namespace NhaMayThep.Api.Controllers
 {
     [ApiController]
-    [Authorize]
+    
     public class NghiPhepController : ControllerBase
     {
         private readonly ISender _mediator;

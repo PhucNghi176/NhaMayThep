@@ -1,12 +1,5 @@
-﻿using MediatR;
-using NhaMayThep.Application.LichSuNghiPhep.GetAll;
-using NhaMayThep.Application.LichSuNghiPhep;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using AutoMapper;
+﻿using AutoMapper;
+using MediatR;
 using NhaMapThep.Domain.Repositories;
 
 namespace NhaMayThep.Application.DangKiTangCa.GetAll

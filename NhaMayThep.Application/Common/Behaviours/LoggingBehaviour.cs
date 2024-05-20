@@ -2,7 +2,7 @@
 using Microsoft.Extensions.Logging;
 using NhaMayThep.Application.Common.Interfaces;
 
-namespace NhaMapThep.Application.Common.Behaviours
+namespace NhaMayThep.Application.Common.Behaviours
 {
     public class LoggingBehaviour<TRequest> : IRequestPreProcessor<TRequest>
          where TRequest : notnull

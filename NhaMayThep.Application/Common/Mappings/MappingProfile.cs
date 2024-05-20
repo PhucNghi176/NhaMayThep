@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using System.Reflection;
 
-namespace NhaMapThep.Application.Common.Mappings
+namespace NhaMayThep.Application.Common.Mappings
 {
     public class MappingProfile : Profile
     {

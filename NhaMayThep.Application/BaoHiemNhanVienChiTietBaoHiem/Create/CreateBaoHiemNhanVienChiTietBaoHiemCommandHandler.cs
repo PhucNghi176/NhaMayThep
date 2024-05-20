@@ -3,11 +3,6 @@ using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Create
 {
@@ -17,8 +12,8 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Create
         private readonly IChiTietBaoHiemRepository _chitietBaoHiemRepository;
         private readonly IBaoHiemNhanVienBaoHiemChiTietRepository _baohiemNhanVienChiTietRepository;
         private readonly ICurrentUserService _currentUser;
-        public CreateBaoHiemNhanVienChiTietBaoHiemCommandHandler(IBaoHiemNhanVienRepository baohiemNhanVienRepository, 
-            IChiTietBaoHiemRepository chitietBaoHiemRepository, 
+        public CreateBaoHiemNhanVienChiTietBaoHiemCommandHandler(IBaoHiemNhanVienRepository baohiemNhanVienRepository,
+            IChiTietBaoHiemRepository chitietBaoHiemRepository,
             IBaoHiemNhanVienBaoHiemChiTietRepository baohiemNhanVienChiTietRepository,
             ICurrentUserService currentUser)
         {
@@ -30,9 +25,9 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Create
 
         public async Task<string> Handle(CreateBaoHiemNhanVienChiTietBaoHiemCommand request, CancellationToken cancellationToken)
         {
-            var checkExist= await _baohiemNhanVienChiTietRepository
-                .FindAsync(x=> x.BHNV == request.MaBHNV && x.BHCT == request.MaCTBH, cancellationToken);
-            if(checkExist != null)
+            var checkExist = await _baohiemNhanVienChiTietRepository
+                .FindAsync(x => x.BHNV == request.MaBHNV && x.BHCT == request.MaCTBH, cancellationToken);
+            if (checkExist != null)
             {
                 if (checkExist.NgayXoa.HasValue && !string.IsNullOrEmpty(checkExist.NguoiXoaID))
                 {
@@ -66,7 +61,7 @@ namespace NhaMayThep.Application.BaoHiemNhanVienChiTietBaoHiem.Create
             };
             _baohiemNhanVienChiTietRepository.Add(entity);
             var result = await _baohiemNhanVienChiTietRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
-            if(result> 0)
+            if (result > 0)
             {
                 return "Tạo thành công";
             }

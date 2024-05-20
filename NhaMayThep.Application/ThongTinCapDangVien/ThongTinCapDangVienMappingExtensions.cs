@@ -1,11 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities.ConfigTable;
-using NhaMayThep.Application.CapBacLuong;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCapDangVien
 {

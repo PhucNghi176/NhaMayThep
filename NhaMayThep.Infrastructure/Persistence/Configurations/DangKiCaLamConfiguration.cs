@@ -2,13 +2,13 @@
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using NhaMapThep.Domain.Entities.ConfigTable;
 
-namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
+namespace NhaMayThep.Infrastructure.Persistence.Configurations
 {
     public class DangKiCaLamConfiguration : IEntityTypeConfiguration<DangKiCaLamEntity>
     {
         public void Configure(EntityTypeBuilder<DangKiCaLamEntity> builder)
         {
-      
+
 
             builder.Property(x => x.MaSoNhanVien)
                 .IsRequired()
@@ -52,22 +52,22 @@ namespace NhaMayThep.Infrastructure.Persistence.Configurations.ConfigTable
             builder.HasOne(x => x.NhanVien)
                 .WithMany()
                 .HasForeignKey(x => x.MaSoNhanVien)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.MaDangKiCaLam)
                 .WithMany()
                 .HasForeignKey(x => x.CaDangKi)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.NguoiQuanLy)
                 .WithMany()
                 .HasForeignKey(x => x.MaSoNguoiQuanLy)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
 
             builder.HasOne(x => x.TrangThaiDangKiCaLamViec)
                 .WithMany()
                 .HasForeignKey(x => x.TrangThai)
-                .OnDelete(DeleteBehavior.Restrict); 
+                .OnDelete(DeleteBehavior.Restrict);
         }
     }
 }

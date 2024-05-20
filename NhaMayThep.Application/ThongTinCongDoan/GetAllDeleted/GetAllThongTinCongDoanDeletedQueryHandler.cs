@@ -1,13 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted
 {
@@ -28,7 +22,7 @@ namespace NhaMayThep.Application.ThongTinCongDoan.GetAllDeleted
         public async Task<List<ThongTinCongDoanDto>> Handle(GetAllThongTinCongDoanDeletedQuery request, CancellationToken cancellationToken)
         {
             var thongtincongdoans = await _thongtinCongDoanRepository
-                .FindAllAsync(x => x.NgayXoa.HasValue && x.NguoiXoaID != null,cancellationToken);
+                .FindAllAsync(x => x.NgayXoa.HasValue && x.NguoiXoaID != null, cancellationToken);
             var nhanviens = await _nhanVienRepository
                 .FindAllToDictionaryAsync(x => !x.NgayXoa.HasValue && x.NguoiXoaID == null, x => x.ID, x => x.HoVaTen, cancellationToken);
             if (thongtincongdoans == null || !thongtincongdoans.Any())

@@ -2,11 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LoaiNghiPhep.GetById
 {
@@ -30,7 +25,7 @@ namespace NhaMayThep.Application.LoaiNghiPhep.GetById
                 throw new NotFoundException("LoaiNghiPhep Không tồn tại");
 
             }
-            if(lnp.NgayXoa != null)
+            if (lnp.NgayXoa != null)
             {
                 throw new NotFoundException("LoaiNghiPhep đã bị xóa");
             }

@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
+using NhaMayThep.Application.Common.Mappings;
 
 
 namespace NhaMayThep.Application.BangLuong
@@ -30,9 +30,9 @@ namespace NhaMayThep.Application.BangLuong
         public decimal TamUng { get; set; }
         public decimal LuongThucLanh { get; set; }
         public static BangLuongDto Create(string id, string maSoNhanVien, DateTime ngayKhaiBao, decimal luongNghiPhep, decimal luongTangCa, decimal luongCoBan,
-                                          decimal tongNhanCoDinh, double ngayCong, decimal tongThuNhap, decimal luongDongBh,decimal tongBaoHiem, string phuCapCongDoanId, 
+                                          decimal tongNhanCoDinh, double ngayCong, decimal tongThuNhap, decimal luongDongBh, decimal tongBaoHiem, string phuCapCongDoanId,
                                           string giamTruNhanVienId, decimal tamUng, decimal luongThucLanh)
-                                            
+
         {
             return new BangLuongDto
             {

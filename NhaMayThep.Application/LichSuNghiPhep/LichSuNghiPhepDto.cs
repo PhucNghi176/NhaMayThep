@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
-using NhaMapThep.Application.Common.Mappings;
 using NhaMapThep.Domain.Entities;
-using System;
+using NhaMayThep.Application.Common.Mappings;
 
 namespace NhaMayThep.Application.LichSuNghiPhep
 {

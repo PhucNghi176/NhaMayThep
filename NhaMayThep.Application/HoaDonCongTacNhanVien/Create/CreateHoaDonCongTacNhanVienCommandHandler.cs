@@ -14,7 +14,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
         private readonly IHoaDonCongTacNhanVienRepository _hoaDonCongTacNhanVienRepository;
         private readonly ICurrentUserService _currentUserService;
 
-        public CreateHoaDonCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository, 
+        public CreateHoaDonCongTacNhanVienCommandHandler(ILichSuCongTacNhanVienRepository lichSuCongTacNhanVienRepository,
             ILoaiHoaDonRepository loaiHoaDonRepository, IHoaDonCongTacNhanVienRepository hoaDonCongTacNhanVienRepository,
             ICurrentUserService currentUserService)
         {
@@ -27,12 +27,12 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
         public async Task<string> Handle(CreateHoaDonCongTacNhanVienCommand request, CancellationToken cancellationToken)
         {
             var lichsucongtac = await _lichSuCongTacNhanVienRepository.FindAsync(x => x.ID == request.LichSuCongTacID, cancellationToken);
-            if(lichsucongtac == null || lichsucongtac.NgayXoa.HasValue) 
+            if (lichsucongtac == null || lichsucongtac.NgayXoa.HasValue)
             {
                 throw new NotFoundException("lich sử công tác trên không tồn tại");
             }
             var loaihoadon = await _loaiHoaDonRepository.FindAsync(x => x.ID == request.LoaiHoaDonID, cancellationToken);
-            if(loaihoadon == null || loaihoadon.NgayXoa.HasValue) 
+            if (loaihoadon == null || loaihoadon.NgayXoa.HasValue)
             {
                 throw new NotFoundException("Loại Hóa Đơn không tồn tại");
             }
@@ -41,7 +41,8 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
             {
                 throw new NotFoundException("Chỉ chấp nhận tệp tin PDF.");
             }
-            var hoaDon = new HoaDonCongTacNhanVienEntity() {
+            var hoaDon = new HoaDonCongTacNhanVienEntity()
+            {
                 LichSuCongTacID = request.LichSuCongTacID,
                 LoaiHoaDonID = request.LoaiHoaDonID,
                 NguoiTaoID = _currentUserService.UserId,
@@ -50,7 +51,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
             var exist = await _hoaDonCongTacNhanVienRepository.AnyAsync(x => x.DuongDanFile == hoaDon.DuongDanFile, cancellationToken);
             if (exist)
             {
-                return "Filepath đã tồn tại"; 
+                return "Filepath đã tồn tại";
             }
             _hoaDonCongTacNhanVienRepository.Add(hoaDon);
             await _hoaDonCongTacNhanVienRepository.UnitOfWork.SaveChangesAsync(cancellationToken);
@@ -68,7 +69,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
                 //lấy năm hiện tại
                 string currentYear = DateTime.Now.Year.ToString();
                 //Lấy tháng hiện tại
-                string currentMonth = DateTime.Now.Month.ToString();    
+                string currentMonth = DateTime.Now.Month.ToString();
                 // Lấy ngày và tháng từ thời điểm hiện tại
                 string currentDate = DateTime.Now.ToString("yyyyMMdd");
 
@@ -77,7 +78,7 @@ namespace NhaMayThep.Application.HoaDonCongTacNhanVien.Create
 
                 // Đường dẫn đến thư mục lưu trữ tệp tin
                 string directoryPath = Path.Combine(Directory.GetCurrentDirectory(), $"uploads/{savePlace}/{currentYear}/{currentMonth}");
-                
+
                 // Kiểm tra xem thư mục lưu trữ có tồn tại hay không, nếu không thì tạo mới
                 if (!Directory.Exists(directoryPath))
                 {

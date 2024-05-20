@@ -1,21 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using Microsoft.EntityFrameworkCore;
-using NhaMapThep.Application.Common.Pagination;
+using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
-using NhaMayThep.Application.NhanVien;
-using NhaMayThep.Application.NhanVien.FillterByChucVuIDOrTinhTrangLamViecID;
-using NhaMayThep.Infrastructure.Persistence;
-using NhaMayThep.Infrastructure.Repositories.ConfigTableRepositories;
-using NhaMayThep.Infrastructure.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using NhaMapThep.Domain.Common.Exceptions;
+using NhaMayThep.Application.Common.Pagination;
 
 namespace NhaMayThep.Application.ThongTinDangVien.FilterThongTinDangVien
 {

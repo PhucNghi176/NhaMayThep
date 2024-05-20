@@ -1,5 +1,4 @@
 ﻿using FluentValidation;
-using NhaMapThep.Domain.Repositories.ConfigTable;
 
 namespace NhaMayThep.Application.PhongBan.GetSinglePhongBan
 {

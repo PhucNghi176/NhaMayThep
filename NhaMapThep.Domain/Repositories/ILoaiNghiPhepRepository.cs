@@ -1,7 +1,4 @@
 ﻿using NhaMapThep.Domain.Entities.ConfigTable;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMapThep.Domain.Repositories
 {

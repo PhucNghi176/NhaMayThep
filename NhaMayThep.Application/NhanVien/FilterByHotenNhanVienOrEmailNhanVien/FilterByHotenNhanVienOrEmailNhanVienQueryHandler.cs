@@ -1,18 +1,10 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Application.Common.Models;
-using NhaMapThep.Application.Common.Pagination;
 using NhaMapThep.Domain.Common.Exceptions;
-using NhaMapThep.Domain.Entities;
 using NhaMapThep.Domain.Repositories;
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using NhaMayThep.Application.Common.Pagination;
 
-namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
+namespace NhaMayThep.Application.NhanVien.FilterByHotenNhanVienOrEmailNhanVien
 {
     public class FilterByHotenNhanVienOrEmailNhanVienQueryHandler : IRequestHandler<FilterByHotenNhanVienOrEmailNhanVienQuery, PagedResult<NhanVienDto>>
     {
@@ -26,7 +18,7 @@ namespace NhaMayThep.Application.NhanVien.GetHoTenNhanVienByEmail
         public FilterByHotenNhanVienOrEmailNhanVienQueryHandler() { }
         public async Task<PagedResult<NhanVienDto>> Handle(FilterByHotenNhanVienOrEmailNhanVienQuery request, CancellationToken cancellationToken)
         {
-            var result = await this._repository.FindAllAsync(x => (x.Email.Contains(request.HoTenHoacEmail) && x.NgayXoa == null) || (x.HoVaTen.Contains(request.HoTenHoacEmail) && x.NgayXoa == null), request.PageNumber, request.PageSize, cancellationToken);
+            var result = await _repository.FindAllAsync(x => x.Email.Contains(request.HoTenHoacEmail) && x.NgayXoa == null || x.HoVaTen.Contains(request.HoTenHoacEmail) && x.NgayXoa == null, request.PageNumber, request.PageSize, cancellationToken);
             if (result == null)
                 throw new NotFoundException("Không tìm thấy nhân viên");
             var list = result.MapToNhanVienDtoList(_mapper);

@@ -1,14 +1,7 @@
 ﻿using AutoMapper;
 using MediatR;
-using NhaMapThep.Domain.Repositories;
-using NhaMayThep.Application.KhaiBaoTangLuong.GetAll;
-using NhaMayThep.Application.KhaiBaoTangLuong;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using NhaMapThep.Domain.Common.Exceptions;
+using NhaMapThep.Domain.Repositories;
 
 namespace NhaMayThep.Application.KhaiBaoTangLuong.GetAll
 {

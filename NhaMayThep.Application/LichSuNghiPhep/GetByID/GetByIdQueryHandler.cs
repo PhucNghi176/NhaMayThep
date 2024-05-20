@@ -2,8 +2,6 @@
 using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
 {
@@ -26,7 +24,7 @@ namespace NhaMayThep.Application.LichSuNghiPhep.GetByID
             {
                 throw new NotFoundException($"LichSuNghiPhep với Id: {request.Id} không tìm thấy .");
             }
-            if(lsnp.NgayXoa != null)
+            if (lsnp.NgayXoa != null)
             {
                 throw new NotFoundException($"LichSuNghiPhep với Id  {request.Id} đã xóa");
             }

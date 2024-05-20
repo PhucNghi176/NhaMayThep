@@ -1,12 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
-using NhaMayThep.Application.ThongTinCongDoan;
-using NhaMayThep.Infrastructure.Persistence;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace NhaMayThep.Application.ChiTietBaoHiem
 {
@@ -26,7 +19,7 @@ namespace NhaMayThep.Application.ChiTietBaoHiem
             return dto;
         }
         public static List<ChiTietBaoHiemDto> MapToChiTietBaoHiemDtoList(this IEnumerable<ChiTietBaoHiemEntity> entities, IMapper mapper, Dictionary<int, string> baohiem)
-           => entities.Select(x => x.MapToChiTietBaoHiemDto(mapper, 
+           => entities.Select(x => x.MapToChiTietBaoHiemDto(mapper,
                baohiem.ContainsKey(x.LoaiBaoHiem) ? baohiem[x.LoaiBaoHiem] : "Trống")).ToList();
     }
 }

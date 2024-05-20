@@ -1,8 +1,6 @@
 ﻿using AutoMapper;
 using MediatR;
-using System.Threading;
-using System.Threading.Tasks;
-using NhaMayThep.Domain.Repositories;
+using NhaMapThep.Domain.Repositories;
 using NhaMayThep.Application.Common.Interfaces;
 
 namespace NhaMayThep.Application.ThongTinDaoTao.Delete
@@ -13,7 +11,7 @@ namespace NhaMayThep.Application.ThongTinDaoTao.Delete
         private readonly IMapper _mapper;
         private readonly ICurrentUserService _currentUserService;
 
-        public DeleteThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService ,IThongTinDaoTaoRepository thongTinDaoTaoRepository, IMapper mapper)
+        public DeleteThongTinDaoTaoCommandHandler(ICurrentUserService currentUserService, IThongTinDaoTaoRepository thongTinDaoTaoRepository, IMapper mapper)
         {
             _thongTinDaoTaoRepository = thongTinDaoTaoRepository;
             _mapper = mapper;

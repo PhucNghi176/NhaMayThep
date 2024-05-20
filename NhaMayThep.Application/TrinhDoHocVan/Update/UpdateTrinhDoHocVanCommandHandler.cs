@@ -1,17 +1,15 @@
-﻿using System.Threading;
-using System.Threading.Tasks;
-using MediatR;
+﻿using MediatR;
 using NhaMapThep.Domain.Common.Exceptions;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 using NhaMayThep.Application.Common.Interfaces;
 
-namespace NhaMapThep.Application.TrinhDoHocVan.Commands
+namespace NhaMayThep.Application.TrinhDoHocVan.Update
 {
     public class UpdateTrinhDoHocVanCommandHandler : IRequestHandler<UpdateTrinhDoHocVanCommand>
     {
         private readonly ITrinhDoHocVanRepository _repository;
         private readonly ICurrentUserService _currentUserService;
-        public UpdateTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService ,ITrinhDoHocVanRepository repository)
+        public UpdateTrinhDoHocVanCommandHandler(ICurrentUserService currentUserService, ITrinhDoHocVanRepository repository)
         {
             _repository = repository;
             _currentUserService = currentUserService;

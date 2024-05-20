@@ -1,6 +1,5 @@
 ﻿using AutoMapper;
 using MediatR;
-using Newtonsoft.Json;
 using NhaMapThep.Domain.Repositories;
 using NhaMapThep.Domain.Repositories.ConfigTable;
 

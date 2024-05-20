@@ -1,7 +1,5 @@
 ﻿using AutoMapper;
 using NhaMapThep.Domain.Entities;
-using System.Collections.Generic;
-using System.Linq;
 
 namespace NhaMayThep.Application.ThongTinDaoTao
 {
